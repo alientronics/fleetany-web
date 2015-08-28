@@ -1,0 +1,13 @@
+{
+    "name": "alientronics/tpms-dashboard",
+    "description": "TPMS Dashboard",
+    "keywords": ["PHP","TPMS", "Dashboard"],
+    "require": {
+        "php": ">=5.4.0",
+        "ext-xml": "*"
+    },
+    "recommend": {
+        "ext-zip": "*",
+        "ext-gd2": "*"
+    }
+}
