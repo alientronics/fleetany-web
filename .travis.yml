@@ -1,0 +1,31 @@
+language: php
+php:
+  - 5.4
+
+before_script:
+  - composer install
+  ## PHP_CodeSniffer
+  - pyrus install pear/PHP_CodeSniffer
+  - phpenv rehash
+  ## PHP Copy/Paste Detector
+  - curl -o phpcpd.phar https://phar.phpunit.de/phpcpd.phar
+  ## PHP Mess Detector
+  - pear config-set preferred_state beta
+  - printf "\n" | pecl install imagick
+  - pear channel-discover pear.phpmd.org
+  - pear channel-discover pear.pdepend.org
+  - pear install --alldeps phpmd/PHP_PMD
+  - phpenv rehash
+  ## PHPLOC
+  - curl -o phploc.phar https://phar.phpunit.de/phploc.phar
+
+script:
+  - phpunit --stderr --configuration phpunit.xml
+  ## PHP_CodeSniffer
+  - phpcs --standard=PSR2 --extensions=php $PWD/app
+  ## PHP Copy/Paste Detector
+  - php phpcpd.phar --verbose $PWD/app
+  ## PHP Mess Detector
+  - phpmd $PWD/app text codesize,unusedcode,naming,design
+  ## PHPLOC
+  - php phploc.phar $PWD/app
