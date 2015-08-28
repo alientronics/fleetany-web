@@ -1,11 +1,13 @@
 language: php
+
+sudo: false
+
 php:
   - 5.4
 
 before_script:
   ## Composer
-  - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install
+  - composer self-update
   ## PHP_CodeSniffer
   - pyrus install pear/PHP_CodeSniffer
   - phpenv rehash
@@ -21,10 +23,14 @@ before_script:
   ## PHPLOC
   - curl -o phploc.phar https://phar.phpunit.de/phploc.phar
 
+install:
+  - composer install --prefer-source
+  - composer require --dev squizlabs/php_codesniffer
+
 script:
   - phpunit --stderr --configuration phpunit.xml
   ## PHP_CodeSniffer
-  - phpcs --report=summary --extensions=php --standard=PSR2 -n -s ./app
+  - vendor/bin/phpcs --standard=psr2 src/
   ## PHP Copy/Paste Detector
   - php phpcpd.phar --verbose $PWD/app
   ## PHP Mess Detector
