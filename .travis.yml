@@ -30,7 +30,7 @@ install:
 script:
   - phpunit --stderr --configuration phpunit.xml
   ## PHP_CodeSniffer
-  - vendor/bin/phpcs --standard=psr2 src/
+  - vendor/bin/phpcs --standard=psr2 app/
   ## PHP Copy/Paste Detector
   - php phpcpd.phar --verbose $PWD/app
   ## PHP Mess Detector
