@@ -24,7 +24,7 @@ before_script:
 script:
   - phpunit --stderr --configuration phpunit.xml
   ## PHP_CodeSniffer
-  - phpcs --standard=PSR2 --extensions=php /app
+  - phpcs --report=summary --extensions=php --standard=PSR2 ./app
   ## PHP Copy/Paste Detector
   - php phpcpd.phar --verbose $PWD/app
   ## PHP Mess Detector
