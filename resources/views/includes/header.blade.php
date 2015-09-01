@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="{{URL::asset("/")}}"><img src='{{URL::asset('images/alientronics.jpg')}}' height='20'></a>
+        <a class="navbar-brand" href="{{URL::asset("/")}}"><img src='{{URL::asset('images/alientronics.png')}}' height='20'></a>
     </div>
     <ul class="nav navbar-top-links navbar-right">
         @if (Auth::check())

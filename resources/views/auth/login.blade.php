@@ -5,7 +5,7 @@
             <div class="col-md-4 col-md-offset-4">
                 <div class="login-panel panel panel-primary">
                     <div class="panel-heading">
-                        <img src='{{URL::asset('images/alientronics.jpg')}}' height='20'>
+                        <img src='{{URL::asset('images/alientronics.png')}}' height='40'>
                         <div class="pull-right">
                                 <h3 class="panel-title">{{Lang::get('general.PleaseSignIn')}}</h3>
                         </div>
