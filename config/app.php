@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => 'http://localhost/alientronics',
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'pt-br',
 
     /*
     |--------------------------------------------------------------------------
@@ -136,9 +136,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-		Prettus\Repository\Providers\RepositoryServiceProvider::class,
-		DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
-		"Kodeine\Acl\AclServiceProvider",
 
         /*
          * Application Service Providers...
@@ -146,6 +143,11 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Illuminate\Html\HtmlServiceProvider::class,
+		App\Providers\FormMacroServiceProvider::class,
+		Prettus\Repository\Providers\RepositoryServiceProvider::class,
+		DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
+		"Kodeine\Acl\AclServiceProvider",
 
     ],
 
@@ -194,6 +196,8 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+		'Form'      => Illuminate\Html\FormFacade::class,
+        'HTML'      => Illuminate\Html\HtmlFacade::class,
 		'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
 
     ],

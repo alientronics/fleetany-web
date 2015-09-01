@@ -7,6 +7,7 @@
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
+		"illuminate/html": "5.0.*",
 		"prettus/l5-repository": "dev-master",
 		"davejamesmiller/laravel-breadcrumbs": "dev-master",
 		"prettus/laravel-validation": "1.1.*",
