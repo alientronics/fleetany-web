@@ -21,3 +21,11 @@ script:
   - vendor/bin/phpcpd --verbose app/
   - vendor/bin/phpmd app/ text codesize,unusedcode,naming,design
   - vendor/bin/phploc app/
+
+notifications:
+  email:
+    recipients:
+      - felipe@alientronics.com.br
+      - henrique.dias@alientronics.com.br
+    on_success: change
+    on_failure: always

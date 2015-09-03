@@ -4,16 +4,16 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-
 /**
  * Class MacroServiceProvider
  * @package App\Providers
  */
-class FormMacroServiceProvider extends ServiceProvider {
+class FormMacroServiceProvider extends ServiceProvider
+{
     
     
     /**
-     * 
+     *
      */
     public function boot()
     {
@@ -21,10 +21,10 @@ class FormMacroServiceProvider extends ServiceProvider {
     }
     
     /**
-     * 
+     *
      */
-    public function register() {
+    public function register()
+    {
 
     }
 }
-

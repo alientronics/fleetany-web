@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\View;
 class HomeController extends Controller
 {
     
-    public function __construct() 
+    public function __construct()
     {
         $this->middleware('auth', ['only' => ['index']]);
     }
@@ -25,7 +25,8 @@ class HomeController extends Controller
         return View::make('welcome');
     }
 
-    public function contact() {
+    public function contact()
+    {
         return View::make('home.contact');
     }
 }
