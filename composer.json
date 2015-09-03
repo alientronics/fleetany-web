@@ -18,7 +18,11 @@
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.0",
-        "phpspec/phpspec": "~2.1"
+        "phpspec/phpspec": "~2.1",
+        "squizlabs/php_codesniffer": "dev-master",
+        "phploc/phploc": "dev-master",
+        "sebastian/phpcpd": "dev-master",
+        "phpmd/phpmd": "dev-master"
     },
     "autoload": {
         "classmap": [
