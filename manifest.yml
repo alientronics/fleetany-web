@@ -1,0 +1,9 @@
+---
+applications:
+- name: tpms-dashboard
+  memory: 128M 
+  instances: 1
+  path: ./public
+  buildpack: https://github.com/cloudfoundry/php-buildpack.git
+  services:
+  - mysql-db

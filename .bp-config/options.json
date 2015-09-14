@@ -1,0 +1,7 @@
+{
+	 "ADMIN_EMAIL": "henrique.dias@alientronics.com.br",
+     "PHP_VERSION": "{PHP_55_LATEST}",
+     "COMPOSER_VENDOR_DIR": "./vendor",
+     "WEBDIR": "./public",
+     "PHP_EXTENSIONS": [ "mysqli", "bz2", "zlib", "openssl", "fpm", "tokenizer", "curl", "mcrypt", "mbstring", "pdo", "pdo_mysql"]
+}
