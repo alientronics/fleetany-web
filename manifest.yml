@@ -4,7 +4,8 @@ applications:
   memory: 128M 
   instances: 1
   path: ./public
-  buildpack: https://github.com/cloudfoundry/php-buildpack#v4.0.0
+  stack: cflinuxfs2
+  buildpack: https://github.com/cloudfoundry/php-buildpack
   services:
   - mysql-db
   env:
