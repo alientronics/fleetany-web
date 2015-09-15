@@ -7,7 +7,7 @@ applications:
   path: ./
   stack: cflinuxfs2
   buildpack: https://github.com/cloudfoundry/php-buildpack
-  services
+  services:
   - mysql-db
   env:
     BP_DEBUG: "True"
