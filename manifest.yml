@@ -3,10 +3,9 @@ applications:
 - name: tpms-dashboard
   memory: 128M 
   instances: 1
-  path: ./public
+  host: tpms-1234
+  path: ./
   stack: cflinuxfs2
   buildpack: https://github.com/cloudfoundry/php-buildpack
-  services:
-  - mysql-db
   env:
     BP_DEBUG: "True"
