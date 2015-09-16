@@ -9,7 +9,8 @@ use Prettus\Repository\Traits\TransformableTrait;
 class ModelSensor extends Model implements Transformable
 {
     use TransformableTrait;
-
+    public $timestamps = false;
+    
     protected $fillable = ['name', 'version'];
 
 }

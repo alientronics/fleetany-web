@@ -2,48 +2,39 @@
 @extends('layouts.edit')
 
 @section('title')
-<h1>{{Lang::get("general.City")}}</h1>
+<h1>{{Lang::get("general.ModelSensor")}}</h1>
 @stop
 
 @section('sub-title')
-@if ($city->id)
-{{$city->name}}
+@if ($modelsensor->id)
+{{$modelsensor->name}}
 @else
-{{Lang::get("general.newcity")}}
+{{Lang::get("general.newmodelsensor")}}
 @endif
 @stop
 
-@section('breadcrumbs', Breadcrumbs::render('city.edit', $city))
+@section('breadcrumbs', Breadcrumbs::render('modelsensor.edit', $modelsensor))
 
 @section('edit')
 
-@if (!$city->id)
-{!! Form::open(array('route' => 'city.store')) !!}
+@if (!$modelsensor->id)
+{!! Form::open(array('route' => 'modelsensor.store')) !!}
 @else
-{!! Form::model('$city', [
+{!! Form::model('$modelsensor', [
         'method'=>'PUT',
-        'route' => ['city.update',$city->id]
+        'route' => ['modelsensor.update',$modelsensor->id]
     ]) !!}
 @endif
     <div class="form-group col-lg-12">
         {!!Form::label('name', Lang::get('general.name'))!!}
-        {!!Form::text('name', $city->name, array('class' => 'form-control'))!!}
+        {!!Form::text('name', $modelsensor->name, array('class' => 'form-control'))!!}
     </div>
 
-    <div class="form-group col-lg-6">
-        {!!Form::label('state_id', Lang::get('general.State'))!!}
-        {!!Form::select('state_id', $states, $city->state_id,
-            array('class'=>'form-control')
-        )!!}
+    <div class="form-group col-lg-12">
+        {!!Form::label('version', Lang::get('general.Version'))!!}
+        {!!Form::text('version', $modelsensor->version, array('class' => 'form-control'))!!}
     </div>
 
-
-    <div class="form-group col-lg-6">
-        {!!Form::label('country_id', Lang::get('general.Country'))!!}
-        {!!Form::select('country_id', $countries, $city->country_id,
-            array('class'=>'form-control')
-        )!!}
-    </div>
 
     <button type="submit" class="btn btn-primary">{{Lang::get('general.Submit')}}</button>
     <button type="reset" class="btn btn-primary">{{Lang::get('general.Reset')}}</button>

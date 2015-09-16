@@ -30,7 +30,10 @@ return [
     
 
     // modelsensor
-    "ModelSensors"   => "Modelo de Sensores"
+    "ModelSensors"   => "Modelo de Sensores",
+    "ModelSensor"    => "Modelo de Sensor",
+    "Version"        => "Versão",
+    "newmodelsensor" => "Novo Modelo de Sensor",
 ];
 
 

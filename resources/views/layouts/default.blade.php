@@ -45,7 +45,7 @@
     <script src="{{URL::asset('js/jquery.min.js')}}"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="{{URL::asset('js/bootstrap.min.js')}}"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="{{URL::asset('js/metisMenu.min.js')}}"></script>

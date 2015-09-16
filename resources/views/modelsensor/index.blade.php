@@ -31,13 +31,7 @@
         <tr>
             <td><a href="{{route('modelsensor.edit', $modelsensor->id)}}">{{$modelsensor->id}}</a></td>
             <td><a href="{{route('modelsensor.edit', $modelsensor->id)}}">{{$modelsensor->name}}</a></td>
-            <td>
-                @if($modelsensor->state() != null)
-                <a href="{{route('modelsensor.edit', $modelsensor->id)}}">
-                {{$modelsensor->state->name}}
-                </a>
-                @endif
-            </td>
+            <td><a href="{{route('modelsensor.edit', $modelsensor->id)}}">{{$modelsensor->version}}</a></td>
             <td>
                 {!!Form::delete(route('modelsensor.destroy',$modelsensor->id))!!}
             </td>

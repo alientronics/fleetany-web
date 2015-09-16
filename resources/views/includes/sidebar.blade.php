@@ -14,6 +14,7 @@
                 <li><a href="{{URL::to('company')}}">{{Lang::get('menu.Companies')}}</a>
                 <li><a href="{{URL::to('person')}}">{{Lang::get('menu.Persons')}}</a>
                 </li>
+                <li><a href="{{URL::to('modelsensor')}}">{{Lang::get('menu.ModelSensor')}}</a>
             </ul>
             </a>
         </li>

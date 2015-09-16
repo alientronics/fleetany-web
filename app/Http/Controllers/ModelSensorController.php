@@ -113,7 +113,7 @@ class ModelSensorController extends Controller
             $this->repository->update(Input::all(), $id);
             Session::flash('message', Lang::get('general.succefullupdate', 
                        ['table'=> Lang::get('general.ModelSensor')]));
-            return Redirect::to('field');
+            return Redirect::to('modelsensor');
          }
          catch (ValidatorException $e) {
             return Redirect::back()->withInput()
