@@ -7,7 +7,9 @@
 <title>Alientronics</title>
 <link rel="shortcut icon" href="favicon.ico">
 <!-- load bootstrap from a cdn -->
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<!--link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"-->
+<!--link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"-->
+{!! HTML::style('css/bootstrap.min.css') !!}
+{!! HTML::style('css/font-awesome.min.css') !!}
 {!! HTML::style('css/metisMenu.min.css') !!}
 {!! HTML::style('css/sb-admin-2.css') !!}
