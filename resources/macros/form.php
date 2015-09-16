@@ -96,3 +96,15 @@ Form::macro('selectLang', function($name, $list = array(), $selected = null,
     
     return Form::select($name, $list, $selected, $options);
 });
+
+Form::macro('actions', function($attributes = array()) {  
+  
+    if(isset($attributes['new'])) {
+        $actions['new'] = sprintf("<a href='%s'>
+            <button type='button' class='btn btn-primary btn-sm '>
+            <i class='icon wb-plus'> </i>%s</button></a>", 
+                $attributes['new'], Lang::get("general.New"));
+    }
+        
+    return implode("",$actions);
+});

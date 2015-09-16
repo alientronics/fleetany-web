@@ -33,3 +33,21 @@ Breadcrumbs::register('person.edit', function($breadcrumbs, $person = null)
         $breadcrumbs->push(Lang::get("general.New"), route('person.edit'));
     }
 }); 
+
+// Home > ModelSensor
+Breadcrumbs::register('modelsensor', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(Lang::get("menu.ModelSensor"), route('modelsensor.index'));
+});
+
+Breadcrumbs::register('modelsensor.edit', function($breadcrumbs, $modelsensor = null)
+{
+    $breadcrumbs->parent('modelsensor');
+    if($modelsensor->id) {
+        $breadcrumbs->push($modelsensor->name, route('modelsensor.edit', $modelsensor->id));
+    }
+    else {
+        $breadcrumbs->push(Lang::get("general.New"), route('modelsensor.edit'));
+    }
+});

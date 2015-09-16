@@ -16,6 +16,7 @@ Route::get('home', 'HomeController@index');
 Route::resource('/contact', 'HomeController@contact');
 
 route::resource('user', 'UsersController');
+Route::resource('modelsensor', 'ModelSensorController');
 
 Route::get('profile', 'UsersController@showProfile');
 

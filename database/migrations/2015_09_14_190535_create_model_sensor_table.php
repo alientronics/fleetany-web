@@ -15,7 +15,7 @@ class CreateModelSensorTable extends Migration
         Schema::create('model_sensors', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->index();
-            $table->string('version')->index();
+            $table->string('version');
         });
     }
 
