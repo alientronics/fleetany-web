@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-
 
 class UsersController extends Controller
 {
@@ -26,7 +24,7 @@ class UsersController extends Controller
 
         $request->session()->flash('flash_message', 'Altera&ccedil;&otilde;es salvas com sucesso!');
 
-		return redirect()->back();
+        return redirect()->back();
     }
 
     public function showProfile()
