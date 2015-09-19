@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', true),
+    'debug' => env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://tpms-1234.mybluemix.net',
+    'url' => 'http://localhost/alientronics',
 
     /*
     |--------------------------------------------------------------------------
@@ -148,6 +148,7 @@ return [
 		Prettus\Repository\Providers\RepositoryServiceProvider::class,
 		DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
 		"Kodeine\Acl\AclServiceProvider",
+    	'Illuminate\Html\HtmlServiceProvider',
 
     ],
 
@@ -199,6 +200,8 @@ return [
 		'Form'      => Illuminate\Html\FormFacade::class,
         'HTML'      => Illuminate\Html\HtmlFacade::class,
 		'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+    	'Form'      => 'Illuminate\Html\FormFacade',
+    	'Html'      => 'Illuminate\Html\HtmlFacade',
 
     ],
 

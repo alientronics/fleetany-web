@@ -2,39 +2,33 @@
 
 @section('content')
 
+@if(Session::has('flash_message'))
+    <div class="alert alert-success">
+        {{ Session::get('flash_message') }}
+    </div>
+@endif
+
 <h1>Perfil</h1>
 <p class="lead">Exemplo da p&aacute;gina de perfil.</p>
 <hr>
 
-<form id="ProfileForm" class="form-horizontal">
+{!! Form::model($user, [
+    'method' => 'PATCH',
+    'route' => ['user.update', $user->id]
+]) !!}
 
-    <div class="form-group">
-        <label class="col-xs-3 control-label">Nome</label>
-        <div class="col-xs-5">
-            <input type="text" class="form-control" name="name" />
-        </div>
-    </div>
+<div class="form-group">
+    {!! Form::label('name', 'Nome:', ['class' => 'control-label']) !!}
+    {!! Form::text('name', null, ['class' => 'form-control']) !!}
+</div>
 
-    <div class="form-group">
-        <label class="col-xs-3 control-label">Email</label>
-        <div class="col-xs-5">
-            <input type="text" class="form-control" name="email" />
-        </div>
-    </div>
-    
-    <div class="form-group">
-        <label class="col-xs-3 control-label">Criado em: </label>
-    </div>
-    
-    <div class="form-group">
-        <label class="col-xs-3 control-label">&Uacute;ltima modifica&ccedil;&atilde;o em: </label>
-    </div>
+<div class="form-group">
+    {!! Form::label('email', 'Email:', ['class' => 'control-label']) !!}
+    {!! Form::text('email', null, ['class' => 'form-control']) !!}
+</div>
 
-    <div class="form-group">
-        <div class="col-xs-9 col-xs-offset-3">
-            <button type="submit" class="btn btn-primary" name="send" value="Send">Enviar</button>
-        </div>
-    </div>
-</form>
+{!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
+
+{!! Form::close() !!}
 
 @stop
