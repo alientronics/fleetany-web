@@ -9,7 +9,7 @@ services:
   - mysql
 
 env:
-  - VCAP_SERVICES="{'cleardb': [{'credentials': {'username': 'root', 'name': 'tpms', 'hostname': '127.0.0.1', 'password': ''}}]}"
+  - VCAP_SERVICES="{'cleardb':[{'credentials':{'username':'root','name':'tpms','hostname':'127.0.0.1','password':''}}]}"
 
 before_install:
   - composer self-update
