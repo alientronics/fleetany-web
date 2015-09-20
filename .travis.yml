@@ -5,6 +5,12 @@ sudo: false
 php:
   - 5.5
 
+services:
+  - mysql
+
+env:
+  - VCAP_SERVICES="{'cleardb': [{'credentials': {'username': 'root', 'name': 'tpms', 'hostname': '127.0.0.1', 'password': ''}}]}"
+
 before_install:
   - composer self-update
 
@@ -14,6 +20,10 @@ install:
   - composer require --dev phploc/phploc
   - composer require --dev sebastian/phpcpd
   - composer require --dev phpmd/phpmd
+
+before_script:
+  - mysql -e 'create database tpms;'
+  - php artisan migrate:refresh --seed --force
 
 script:
   - phpunit --stderr --configuration phpunit.xml
