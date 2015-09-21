@@ -12,11 +12,12 @@ before_install:
   - composer self-update
 
 install:
-  - composer install --prefer-source
+  - composer update
+  - composer install --dev --prefer-source --no-interaction
 
 before_script:
   - mysql -e 'create database tpms;'
-  - mv .travis.env .env
+  - mv .env.travis .env
   - php artisan migrate:refresh --seed --force
 
 script:
