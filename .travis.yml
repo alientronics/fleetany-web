@@ -20,7 +20,7 @@ before_script:
   - php artisan migrate:refresh --seed --force
 
 script:
-  - phpunit --stderr --configuration phpunit.xml
+  - phpunit --stderr --configuration phpunit.xml --debug
   - vendor/bin/phpcs --standard=psr2 app/
   - vendor/bin/phpcpd --verbose app/
   - vendor/bin/phpmd app/ text codesize,unusedcode,naming,design
