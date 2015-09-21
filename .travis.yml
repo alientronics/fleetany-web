@@ -12,7 +12,6 @@ before_install:
   - composer self-update
 
 install:
-  - composer update
   - composer install --dev --prefer-source --no-interaction
 
 before_script:
