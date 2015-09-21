@@ -57,10 +57,10 @@ return [
 
         'mysql' => [
             'driver'    => 'mysql',
-            'host'     => $sqlCreds['hostname'],
-            'database' => $sqlCreds['name'],
-            'username' => $sqlCreds['username'],
-            'password' => $sqlCreds['password'],
+            'host'     => env('DB_HOST', $sqlCreds['hostname']),
+            'database' => env('DB_DATABASE', $sqlCreds['name']),
+            'username' => env('DB_USERNAME', $sqlCreds['username']),
+            'password' => env('DB_PASSWORD', $sqlCreds['password']),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => '',
@@ -69,10 +69,10 @@ return [
 
         'pgsql' => [
             'driver'   => 'pgsql',
-            'host'     => $sqlCreds['hostname'],
-            'database' => $sqlCreds['name'],
-            'username' => $sqlCreds['username'],
-            'password' => $sqlCreds['password'],
+            'host'     => env('DB_HOST', 'localhost'),
+            'database' => env('DB_DATABASE', 'forge'),
+            'username' => env('DB_USERNAME', 'forge'),
+            'password' => env('DB_PASSWORD', ''),
             'charset'  => 'utf8',
             'prefix'   => '',
             'schema'   => 'public',
