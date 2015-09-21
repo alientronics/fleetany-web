@@ -13,14 +13,10 @@ before_install:
 
 install:
   - composer install --prefer-source
-  - composer require --dev squizlabs/php_codesniffer
-  - composer require --dev phploc/phploc
-  - composer require --dev sebastian/phpcpd
-  - composer require --dev phpmd/phpmd
 
 before_script:
   - mysql -e 'create database tpms;'
-  - mv travis.env .env
+  - mv .travis.env .env
   - php artisan migrate:refresh --seed --force
 
 script:
