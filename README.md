@@ -4,6 +4,8 @@ tpms-dashboard
 A TPMS Dashboard for IoT monitoring system
 
 [![Build Status](https://travis-ci.org/alientronics/tpms-dashboard.png?branch=master)](https://travis-ci.org/alientronics/tpms-dashboard)
+[![Code Climate](https://codeclimate.com/github/alientronics/tpms-dashboard/badges/gpa.svg)](https://codeclimate.com/github/alientronics/tpms-dashboard)
+[![Test Coverage](https://codeclimate.com/github/alientronics/tpms-dashboard/badges/coverage.svg)](https://codeclimate.com/github/alientronics/tpms-dashboard/coverage)
 
 Installation
 ------------
