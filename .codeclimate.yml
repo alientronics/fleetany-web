@@ -1,0 +1,6 @@
+languages:
+   PHP: true
+ratings:
+   paths:
+   - app/**
+   - "**.php"
