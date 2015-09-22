@@ -4,3 +4,7 @@ ratings:
    paths:
    - app/**
    - "**.php"
+exclude_paths:
+- "bootstrap/*"
+- "config/*"
+- "database/*"
