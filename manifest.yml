@@ -1,4 +1,9 @@
 ---
+declared-services:
+  mysql-db:
+    label: cleardb
+    plan: spark
+
 applications:
 - name: tpms-dashboard
   memory: 128M 
@@ -6,8 +11,6 @@ applications:
   random-route: true
   path: ./
   stack: cflinuxfs2
-  buildpack: https://github.com/cloudfoundry/php-buildpack
+  buildpack: php_buildpack
   services:
   - mysql-db
-  env:
-    BP_DEBUG: "True"
