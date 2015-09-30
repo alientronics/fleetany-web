@@ -20,7 +20,7 @@ return [
    
     "success_create" => "Sucesso em criar ",
     "areyousure"     => "Voc&ecirc; tem certeza",
-    "deletedregister"   => "Registro exluído.",
+    "deletedregister"   => "Registro excluído.",
     "RememberMe"     => "Lembre-me",
     "PleaseSignIn"   => "Por favor autentique-se",
     "SelectState"    => "Selecione um Estado",
@@ -34,6 +34,11 @@ return [
     "ModelSensor"    => "Modelo de Sensor",
     "Version"        => "Versão",
     "newmodelsensor" => "Novo Modelo de Sensor",
+    
+    // modelmonitor
+    "ModelMonitors"   => "Modelo de Monitores",
+    "ModelMonitor"    => "Modelo de Monitor",
+    "newmodelmonitor" => "Novo Modelo de Monitor",
 ];
 
 

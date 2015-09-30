@@ -10,5 +10,5 @@ return [
     'Contact'       => "Contato",
     
     'ModelSensor'   => "Modelo de Sensor",
-   
+    'ModelMonitor'   => "Modelo de Monitor",  
 ];

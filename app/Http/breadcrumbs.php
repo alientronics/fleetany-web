@@ -51,3 +51,21 @@ Breadcrumbs::register('modelsensor.edit', function($breadcrumbs, $modelsensor = 
         $breadcrumbs->push(Lang::get("general.New"), route('modelsensor.edit'));
     }
 });
+
+// Home > modelMonitors
+Breadcrumbs::register('modelmonitor', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(Lang::get("menu.ModelMonitor"), route('modelmonitor.index'));
+});
+
+Breadcrumbs::register('modelmonitor.edit', function($breadcrumbs, $modelmonitor = null)
+{
+    $breadcrumbs->parent('modelmonitor');
+    if($modelmonitor->id) {
+        $breadcrumbs->push($modelmonitor->name, route('modelmonitor.edit', $modelmonitor->id));
+    }
+    else {
+        $breadcrumbs->push(Lang::get("general.New"), route('modelmonitor.edit'));
+    }
+});
