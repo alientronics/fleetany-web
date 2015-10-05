@@ -39,6 +39,14 @@ return [
     "ModelMonitors"   => "Modelo de Monitores",
     "ModelMonitor"    => "Modelo de Monitor",
     "newmodelmonitor" => "Novo Modelo de Monitor",
+    
+    // modelvehicle
+    "ModelVehicles"   => "Modelo de Veiculos",
+    "ModelVehicle"    => "Modelo de Veiculo",
+    "newmodelvehicle" => "Novo Modelo de Veículo",
+    "type_vehicle_id" => "Tipo de Veículo",
+    "year"            => "Ano",
+    "number_of_wheels"=> "Número de Rodas"
 ];
 
 

@@ -19,6 +19,7 @@ route::resource('user', 'UsersController');
 Route::resource('modelsensor', 'ModelSensorController');
 Route::resource('modelmonitor', 'ModelMonitorController');
 Route::resource('modelvehicle', 'ModelVehicleController');
+Route::resource('typevehicle', 'TypeVehicleController');
 Route::get('profile', 'UsersController@showProfile');
 Route::bind('users', function($value, $route) {
     return App\User::whereId($value)->first();

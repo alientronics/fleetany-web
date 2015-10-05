@@ -23,7 +23,7 @@
         <tr>
             <th>{{Lang::get("general.id")}}</th>
             <th>{{Lang::get("general.name")}}</th>
-            <th>{{Lang::get("general.version")}}</th>
+            <th>{{Lang::get("general.Version")}}</th>
             <th>{{Lang::get("general.Actions")}}</th>
         </tr>
     </thead>

@@ -6,15 +6,12 @@ Breadcrumbs::register('home', function($breadcrumbs)
     $breadcrumbs->push('Home', route('home'));
 });
 
-
 // Home > About
 Breadcrumbs::register('about', function($breadcrumbs)
 {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('About', route('about'));
 });
-
-
 
 // Home > Person
 Breadcrumbs::register('person', function($breadcrumbs)
@@ -52,7 +49,7 @@ Breadcrumbs::register('modelsensor.edit', function($breadcrumbs, $modelsensor = 
     }
 });
 
-// Home > modelMonitors
+// Home > modelMonitor
 Breadcrumbs::register('modelmonitor', function($breadcrumbs)
 {
     $breadcrumbs->parent('home');
@@ -67,5 +64,23 @@ Breadcrumbs::register('modelmonitor.edit', function($breadcrumbs, $modelmonitor 
     }
     else {
         $breadcrumbs->push(Lang::get("general.New"), route('modelmonitor.edit'));
+    }
+});
+
+// Home > modelVehicle
+Breadcrumbs::register('modelvehicle', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(Lang::get("menu.ModelVehicle"), route('modelvehicle.index'));
+});
+
+Breadcrumbs::register('modelvehicle.edit', function($breadcrumbs, $modelvehicle = null)
+{
+    $breadcrumbs->parent('modelvehicle');
+    if($modelvehicle->id) {
+        $breadcrumbs->push($modelvehicle->name, route('modelvehicle.edit', $modelvehicle->id));
+    }
+    else {
+        $breadcrumbs->push(Lang::get("general.New"), route('modelvehicle.edit'));
     }
 });
