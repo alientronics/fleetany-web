@@ -88,3 +88,23 @@ Breadcrumbs::register('modelvehicle.edit', function ($breadcrumbs, $modelvehicle
         $breadcrumbs->push(Lang::get("general.New"), route('modelvehicle.edit'));
     }
 });
+
+// Home > modelTire
+Breadcrumbs::register('modeltire', function ($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(Lang::get("menu.ModelTire"), route('modeltire.index'));
+});
+
+Breadcrumbs::register('modeltire.edit', function ($breadcrumbs, $modeltire = null)
+{
+    $breadcrumbs->parent('modeltire');
+    if ($modeltire->id) 
+    {
+        $breadcrumbs->push($modeltire->name, route('modeltire.edit', $modeltire->id));
+    }
+    else 
+    {
+        $breadcrumbs->push(Lang::get("general.New"), route('modeltire.edit'));
+    }
+});
