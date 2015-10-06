@@ -20,13 +20,13 @@ use Prettus\Validator\Exceptions\ValidatorException;
 class ModelMonitorController extends Controller
 {
 
-     protected $repository;
-     public function __construct(ModelMonitorRepositoryEloquent $repository) 
-{
-    $this->middleware('auth');
-    //$this->middleware('acl');
-    $this->repository = $repository;
-}
+    protected $repository;
+    public function __construct(ModelMonitorRepositoryEloquent $repository)
+    {
+        $this->middleware('auth');
+        //$this->middleware('acl');
+        $this->repository = $repository;
+    }
 
     /**
      * Display a listing of the resource.
@@ -36,10 +36,10 @@ class ModelMonitorController extends Controller
     public function index()
     {
         $modelmonitors = $this->repository->all();
-        if(Request::isJson()) {
+        if(Request::isJson()) 
+        {
             return $modelmonitors;
         }
-
         return View::make("modelmonitor.index", compact('modelmonitors'));
     }
 
@@ -52,7 +52,6 @@ class ModelMonitorController extends Controller
     {
         $modelmonitor = new ModelMonitor();
         return view("modelmonitor.edit", compact('modelmonitor'));
-        //
     }
 
     /**
@@ -63,13 +62,16 @@ class ModelMonitorController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        try 
+        {
             $this->repository->validator();
             $this->repository->create( Input::all() );
             Session::flash('message', Lang::get('general.succefullcreate', 
                   ['table'=> Lang::get('general.ModelMonitor')]));
             return Redirect::to('modelmonitor');
-        } catch (ValidatorException $e) {
+        } 
+        catch (ValidatorException $e) 
+        {
             return Redirect::back()->withInput()
                    ->with('errors',  $e->getMessageBag());
         }
@@ -108,17 +110,19 @@ class ModelMonitorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
+        try 
+        {
             $this->repository->validator();
             $this->repository->update(Input::all(), $id);
             Session::flash('message', Lang::get('general.succefullupdate', 
                        ['table'=> Lang::get('general.ModelMonitor')]));
             return Redirect::to('modelmonitor');
-         }
-         catch (ValidatorException $e) {
+        }
+        catch (ValidatorException $e) 
+        {
             return Redirect::back()->withInput()
                     ->with('errors',  $e->getMessageBag());
-         }
+        }
     }
 
     /**
@@ -130,11 +134,11 @@ class ModelMonitorController extends Controller
     public function destroy($id)
     {
         Log::info('Delete field: '.$id);
-        if($this->repository->find($id)) {
+        if($this->repository->find($id)) 
+        {
             $this->repository->delete($id);
             Session::flash('message', Lang::get("general.deletedregister"));
-         }
-
+        }
         return Redirect::to('modelmonitor');
     }
 }

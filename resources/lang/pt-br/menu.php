@@ -12,4 +12,5 @@ return [
     'ModelSensor'   => "Modelo de Sensor",
     'ModelMonitor'   => "Modelo de Monitor",  
     'ModelVehicle'   => "Modelo de Veiculo",  
+    'ModelTire' => "Modelo de Pneus"
 ];
