@@ -19,8 +19,7 @@ use Illuminate\Support\Facades\View;
 use Prettus\Validator\Exceptions\ValidatorException;
 
 class ModelSensorController extends Controller
-{
-    
+{    
     protected $repository;
     
     public function __construct(ModelSensorRepositoryEloquent $repository) 
@@ -37,7 +36,8 @@ class ModelSensorController extends Controller
     public function index()
     {
         $modelsensors = $this->repository->all();
-        if(Request::isJson()) {
+        if (Request::isJson()) 
+        {
             return $modelsensors;
         }
 
@@ -63,13 +63,16 @@ class ModelSensorController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        try 
+        {
             $this->repository->validator();
             $this->repository->create( Input::all() );
             Session::flash('message', Lang::get('general.succefullcreate', 
                   ['table'=> Lang::get('general.ModelSensor')]));
             return Redirect::to('modelsensor');
-        } catch (ValidatorException $e) {
+        }
+        catch (ValidatorException $e) 
+        {
             return Redirect::back()->withInput()
                    ->with('errors',  $e->getMessageBag());
         }
@@ -108,17 +111,19 @@ class ModelSensorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
+        try 
+        {
             $this->repository->validator();
             $this->repository->update(Input::all(), $id);
             Session::flash('message', Lang::get('general.succefullupdate', 
                        ['table'=> Lang::get('general.ModelSensor')]));
             return Redirect::to('modelsensor');
-         }
-         catch (ValidatorException $e) {
+        }
+        catch (ValidatorException $e) 
+        {
             return Redirect::back()->withInput()
                     ->with('errors',  $e->getMessageBag());
-         }
+        }
     }
 
     /**
@@ -130,10 +135,11 @@ class ModelSensorController extends Controller
     public function destroy($id)
     {
         Log::info('Delete field: '.$id);
-        if($this->repository->find($id)) {
+        if ($this->repository->find($id)) 
+        {
             $this->repository->delete($id);
             Session::flash('message', Lang::get("general.deletedregister"));
-         }
+        }
 
         return Redirect::to('modelsensor');
     }

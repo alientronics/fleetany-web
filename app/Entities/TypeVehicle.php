@@ -11,5 +11,4 @@ class TypeVehicle extends Model implements Transformable
     use TransformableTrait;
 
     protected $fillable = ['name'];
-
 }

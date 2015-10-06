@@ -37,10 +37,10 @@ class ModelVehicleController extends Controller
     {
         $modelvehicles = $this->repository->all();
         $typevehicle = TypeVehicle::lists('name','id');
-        if(Request::isJson()) {
+        if (Request::isJson()) 
+        {
             return $modelvehicles;
         }
-
         return View::make("modelvehicle.index", compact('modelvehicles','typevehicle'));        //
     }
 
@@ -65,13 +65,16 @@ class ModelVehicleController extends Controller
      */
     public function store(Request $request)
     {
-        try {
+        try 
+        {
             $this->repository->validator();
             $this->repository->create( Input::all() );
             Session::flash('message', Lang::get('general.succefullcreate', 
                   ['table'=> Lang::get('general.ModelVehicle')]));
             return Redirect::to('modelvehicle');
-        } catch (ValidatorException $e) {
+        } 
+        catch (ValidatorException $e) 
+        {
             return Redirect::back()->withInput()
                    ->with('errors',  $e->getMessageBag());
         }
@@ -112,17 +115,19 @@ class ModelVehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try {
+        try 
+        {
             $this->repository->validator();
             $this->repository->update(Input::all(), $id);
             Session::flash('message', Lang::get('general.succefullupdate', 
                        ['table'=> Lang::get('general.ModelVehicle')]));
             return Redirect::to('modelvehicle');
-         }
-         catch (ValidatorException $e) {
+        }
+        catch (ValidatorException $e) 
+        {
             return Redirect::back()->withInput()
                     ->with('errors',  $e->getMessageBag());
-         }
+        }
     }
 
     /**
@@ -134,11 +139,11 @@ class ModelVehicleController extends Controller
     public function destroy($id)
     {
         Log::info('Delete field: '.$id);
-        if($this->repository->find($id)) {
+        if ($this->repository->find($id)) 
+        {
             $this->repository->delete($id);
             Session::flash('message', Lang::get("general.deletedregister"));
-         }
-
+        }
         return Redirect::to('modelvehicle');
     }
 }
