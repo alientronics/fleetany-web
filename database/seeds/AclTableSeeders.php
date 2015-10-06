@@ -21,7 +21,10 @@ class AclTableSeeder extends Seeder
             'description' => 'Administrador geral do sistema'
             ]);
         
-        $user = User::find(1);
-        $user->assignRole($roleAdmin);
+        $user = User::first();
+        if ($user) {
+        	$user->assignRole($roleAdmin);
+    	}
+
     }
 }

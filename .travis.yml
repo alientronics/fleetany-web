@@ -3,21 +3,39 @@ language: php
 sudo: false
 
 php:
-  - 5.4
+  - 5.5
+
+services:
+  - mysql
+
+addons:
+  code_climate:
+    repo_token: e9e10e52d244c104fa21620f341e7d72f338e4b58fb9cd604adf41f01f415804
 
 before_install:
   - composer self-update
 
 install:
-  - composer install --prefer-source
-  - composer require --dev squizlabs/php_codesniffer
-  - composer require --dev phploc/phploc
-  - composer require --dev sebastian/phpcpd
-  - composer require --dev phpmd/phpmd
+  - composer install --prefer-source --no-interaction
+
+before_script:
+  - mysql -e 'create database tpms;'
+  - mv .env.travis .env
+  - php artisan migrate:refresh --seed --force
 
 script:
-  - phpunit --stderr --configuration phpunit.xml
+  - phpunit --stderr --configuration phpunit.xml --debug
+  - phpunit --coverage-clover build/logs/clover.xml
+  - ./vendor/bin/test-reporter
   - vendor/bin/phpcs --standard=psr2 app/
   - vendor/bin/phpcpd --verbose app/
   - vendor/bin/phpmd app/ text codesize,unusedcode,naming,design
   - vendor/bin/phploc app/
+
+notifications:
+  email:
+    recipients:
+      - felipe@alientronics.com.br
+      - henrique.dias@alientronics.com.br
+    on_success: change
+    on_failure: always

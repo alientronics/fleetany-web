@@ -1,0 +1,16 @@
+---
+declared-services:
+  mysql-db:
+    label: cleardb
+    plan: spark
+
+applications:
+- name: tpms-dashboard
+  memory: 128M 
+  instances: 1
+  random-route: true
+  path: ./
+  stack: cflinuxfs2
+  buildpack: php_buildpack
+  services:
+  - mysql-db

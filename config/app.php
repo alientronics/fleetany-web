@@ -78,7 +78,7 @@ return [
     |
     */
 
-    'key' => env('APP_KEY', 'SomeRandomString'),
+    'key' => env('APP_KEY', 'TKdB4X8D7RVvOTscjZ19FYB0yqF8KYs1'),
 
     'cipher' => 'AES-256-CBC',
 
@@ -148,6 +148,7 @@ return [
 		Prettus\Repository\Providers\RepositoryServiceProvider::class,
 		DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
 		"Kodeine\Acl\AclServiceProvider",
+    	'Illuminate\Html\HtmlServiceProvider',
 
     ],
 
@@ -199,6 +200,8 @@ return [
 		'Form'      => Illuminate\Html\FormFacade::class,
         'HTML'      => Illuminate\Html\HtmlFacade::class,
 		'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
+    	'Form'      => 'Illuminate\Html\FormFacade',
+    	'Html'      => 'Illuminate\Html\HtmlFacade',
 
     ],
 
