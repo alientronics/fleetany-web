@@ -13,6 +13,16 @@ use App\Entities\ModelTire;
  */
 class ModelTireRepositoryEloquent extends BaseRepository implements ModelTireRepository
 {
+    
+    /**
+     * Specify validator rules
+     * @var array
+     */
+    protected $rules = [
+        'name'      => 'min:3|alpha_num|required',
+        //'year'   => 'digits:4|required',
+        //'number_of_wheels'   => 'between:1,2|required'       
+        ];    
     /**
      * Specify Model class name
      *

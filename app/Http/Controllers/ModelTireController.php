@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Repositories\ModelVehicleRepositoryEloquent;
+use App\Repositories\ModelTireRepositoryEloquent;
 use App\Entities\ModelTire;
 use Log;
 use Input;
