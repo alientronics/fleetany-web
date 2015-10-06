@@ -105,6 +105,6 @@ Breadcrumbs::register('modeltire.edit', function ($breadcrumbs, $modeltire = nul
     }
     else 
     {
-        $breadcrumbs->push(Lang::get("general.New"), route('modeltire.edit'));
+        $breadcrumbs->push(Lang::get("general.New"), route('modelttire.edit'));
     }
 });

@@ -2,13 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Repositories\ModelVehicleRepositoryEloquent;
+use App\Entities\ModelTire;
+use Log;
+use Input;
+use Lang;
+use Session;
+use Redirect;
+use Response;
+use Illuminate\Support\Facades\View;
+use Prettus\Validator\Exceptions\ValidatorException;
 
 class ModelTireController extends Controller
 {
+    
+    protected $repository;
+    
+    public function __construct(ModelTireRepositoryEloquent $repository) 
+    {
+        $this->middleware('auth');
+        $this->repository = $repository;
+    }  
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +33,12 @@ class ModelTireController extends Controller
      */
     public function index()
     {
-        //
+        $modeltires = $this->repository->all();
+        if (Request::isJson()) 
+        {
+            return $modeltires;
+        }
+        return View::make("modeltire.index", compact('modeltires'));
     }
 
     /**
@@ -26,7 +48,8 @@ class ModelTireController extends Controller
      */
     public function create()
     {
-        //
+        $modeltire = new ModelTire();
+        return view("modeltire.edit", compact('modeltire'));
     }
 
     /**
@@ -37,7 +60,19 @@ class ModelTireController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try 
+        {
+            $this->repository->validator();
+            $this->repository->create( Input::all() );
+            Session::flash('message', Lang::get('general.succefullcreate', 
+                  ['table'=> Lang::get('general.ModelTire')]));
+            return Redirect::to('modeltire');
+        } 
+        catch (ValidatorException $e) 
+        {
+            return Redirect::back()->withInput()
+                   ->with('errors',  $e->getMessageBag());
+        }
     }
 
     /**
@@ -48,7 +83,8 @@ class ModelTireController extends Controller
      */
     public function show($id)
     {
-        //
+        $modeltire= $this->repository->find($id);
+        return View::make("modeltire.show", compact('modeltire'));
     }
 
     /**
@@ -59,7 +95,8 @@ class ModelTireController extends Controller
      */
     public function edit($id)
     {
-        //
+        $modeltire = $this->repository->find($id);
+        return View::make("modeltire.edit", compact('modeltire'));
     }
 
     /**
@@ -71,7 +108,19 @@ class ModelTireController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try 
+        {
+            $this->repository->validator();
+            $this->repository->update(Input::all(), $id);
+            Session::flash('message', Lang::get('general.succefullupdate', 
+                       ['table'=> Lang::get('general.ModelTire')]));
+            return Redirect::to('modeltire');
+        }
+        catch (ValidatorException $e) 
+        {
+            return Redirect::back()->withInput()
+                    ->with('errors',  $e->getMessageBag());
+        }
     }
 
     /**
@@ -82,6 +131,12 @@ class ModelTireController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Log::info('Delete field: '.$id);
+        if ($this->repository->find($id)) 
+        {
+            $this->repository->delete($id);
+            Session::flash('message', Lang::get("general.deletedregister"));
+        }
+        return Redirect::to('modeltire');
     }
 }
