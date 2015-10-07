@@ -21,6 +21,7 @@ return [
     "success_create" => "Sucesso em criar ",
     "areyousure"     => "Voc&ecirc; tem certeza",
     "deletedregister"   => "Registro excluído.",
+    "notdeletedregister" => "Há registros na tabela :tabela",
     "RememberMe"     => "Lembre-me",
     "PleaseSignIn"   => "Por favor autentique-se",
     "SelectState"    => "Selecione um Estado",

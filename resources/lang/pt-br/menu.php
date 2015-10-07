@@ -6,6 +6,7 @@ return [
     'Company'       => 'Empresa',
     'Reports'       => 'Relatórios',
     'Settings'      => 'Configurações',
+    'Person'        => 'Pessoas',
 
     'UserProfile'   => "Perfil",
     'Contact'       => "Contato",
