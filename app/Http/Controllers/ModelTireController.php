@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Repositories\ModelVehicleRepositoryEloquent;
-use App\Entities\ModelVehicle;
-use App\Entities\TypeVehicle;
+use App\Repositories\ModelTireRepositoryEloquent;
+use App\Entities\ModelTire;
 use Log;
 use Input;
 use Lang;
@@ -18,16 +16,16 @@ use Response;
 use Illuminate\Support\Facades\View;
 use Prettus\Validator\Exceptions\ValidatorException;
 
-class ModelVehicleController extends Controller
+class ModelTireController extends Controller
 {
-
+    
     protected $repository;
     
-    public function __construct(ModelVehicleRepositoryEloquent $repository) 
+    public function __construct(ModelTireRepositoryEloquent $repository) 
     {
         $this->middleware('auth');
         $this->repository = $repository;
-    }    
+    }  
     /**
      * Display a listing of the resource.
      *
@@ -35,13 +33,12 @@ class ModelVehicleController extends Controller
      */
     public function index()
     {
-        $modelvehicles = $this->repository->all();
-        $typevehicle = TypeVehicle::lists('name','id');
+        $modeltires = $this->repository->all();
         if (Request::isJson()) 
         {
-            return $modelvehicles;
+            return $modeltires;
         }
-        return View::make("modelvehicle.index", compact('modelvehicles','typevehicle'));        //
+        return View::make("modeltire.index", compact('modeltires'));
     }
 
     /**
@@ -51,10 +48,8 @@ class ModelVehicleController extends Controller
      */
     public function create()
     {
-        $modelvehicle = new ModelVehicle();
-        //$typevehicle = TypeVehicle::all();
-        $typevehicle = TypeVehicle::lists('name','id');
-        return view("modelvehicle.edit", compact('modelvehicle','typevehicle'));
+        $modeltire = new ModelTire();
+        return view("modeltire.edit", compact('modeltire'));
     }
 
     /**
@@ -70,8 +65,8 @@ class ModelVehicleController extends Controller
             $this->repository->validator();
             $this->repository->create( Input::all() );
             Session::flash('message', Lang::get('general.succefullcreate', 
-                  ['table'=> Lang::get('general.ModelVehicle')]));
-            return Redirect::to('modelvehicle');
+                  ['table'=> Lang::get('general.ModelTire')]));
+            return Redirect::to('modeltire');
         } 
         catch (ValidatorException $e) 
         {
@@ -88,9 +83,8 @@ class ModelVehicleController extends Controller
      */
     public function show($id)
     {
-        $modelvehicle= $this->repository->find($id);
-        $typevehicle = TypeVehicle::lists('name','id');
-        return View::make("modelvehicle.show", compact('modelvehicle','typevehicle'));
+        $modeltire= $this->repository->find($id);
+        return View::make("modeltire.show", compact('modeltire'));
     }
 
     /**
@@ -101,9 +95,8 @@ class ModelVehicleController extends Controller
      */
     public function edit($id)
     {
-        $modelvehicle = $this->repository->find($id);
-        $typevehicle = TypeVehicle::lists('name','id');
-        return View::make("modelvehicle.edit", compact('modelvehicle','typevehicle'));
+        $modeltire = $this->repository->find($id);
+        return View::make("modeltire.edit", compact('modeltire'));
     }
 
     /**
@@ -120,8 +113,8 @@ class ModelVehicleController extends Controller
             $this->repository->validator();
             $this->repository->update(Input::all(), $id);
             Session::flash('message', Lang::get('general.succefullupdate', 
-                       ['table'=> Lang::get('general.ModelVehicle')]));
-            return Redirect::to('modelvehicle');
+                       ['table'=> Lang::get('general.ModelTire')]));
+            return Redirect::to('modeltire');
         }
         catch (ValidatorException $e) 
         {
@@ -144,6 +137,6 @@ class ModelVehicleController extends Controller
             $this->repository->delete($id);
             Session::flash('message', Lang::get("general.deletedregister"));
         }
-        return Redirect::to('modelvehicle');
+        return Redirect::to('modeltire');
     }
 }

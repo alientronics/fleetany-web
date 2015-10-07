@@ -4,23 +4,15 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\TypeVehicleRepository;
-use App\Entities\TypeVehicle;
+use App\Repositories\ModelTireControllerRepository;
+use App\Entities\ModelTireController;
 
 /**
- * Class TypeVehicleRepositoryEloquent
+ * Class ModelTireControllerRepositoryEloquent
  * @package namespace App\Repositories;
  */
-class TypeVehicleRepositoryEloquent extends BaseRepository implements TypeVehicleRepository
+class ModelTireControllerRepositoryEloquent extends BaseRepository implements ModelTireControllerRepository
 {
-    
-    /**
-     * Specify validator rules
-     * @var array
-     */
-    protected $rules = [
-        'name'      => 'min:3|alpha_num|required',
-        ];
     /**
      * Specify Model class name
      *
@@ -28,7 +20,7 @@ class TypeVehicleRepositoryEloquent extends BaseRepository implements TypeVehicl
      */
     public function model()
     {
-        return TypeVehicle::class;
+        return ModelTireController::class;
     }
 
     /**

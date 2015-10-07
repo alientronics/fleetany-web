@@ -22,7 +22,6 @@ class ModelVehicleRepositoryEloquent extends BaseRepository implements ModelVehi
         'name'      => 'min:3|alpha_num|required',
         'year'   => 'digits:4|required',
         'number_of_wheels'   => 'between:1,2|required'
-        
         ];
     
     /**

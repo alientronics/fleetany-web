@@ -12,5 +12,4 @@ class ModelMonitor extends Model implements Transformable
     public $timestamps = false;
 
     protected $fillable = ['name', 'version'];
-
 }
