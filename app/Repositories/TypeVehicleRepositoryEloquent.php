@@ -13,6 +13,14 @@ use App\Entities\TypeVehicle;
  */
 class TypeVehicleRepositoryEloquent extends BaseRepository implements TypeVehicleRepository
 {
+    
+    /**
+     * Specify validator rules
+     * @var array
+     */
+    protected $rules = [
+        'name'      => 'min:3|alpha_num|required',
+        ];
     /**
      * Specify Model class name
      *

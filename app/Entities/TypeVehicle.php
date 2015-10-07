@@ -9,6 +9,12 @@ use Prettus\Repository\Traits\TransformableTrait;
 class TypeVehicle extends Model implements Transformable
 {
     use TransformableTrait;
+    public $timestamps = false;
 
     protected $fillable = ['name'];
+    
+    public function model_vehicle()
+    {
+        return $this->hasMany("App\Entities\ModelVehicle");
+    }
 }
