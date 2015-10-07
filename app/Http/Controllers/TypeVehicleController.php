@@ -140,7 +140,7 @@ class TypeVehicleController extends Controller
         {
             if (\Illuminate\Support\Facades\DB::table('model_vehicles')->where('type_vehicle_id',$id)->count() > 0)
             {
-                Session::flash('message', Lang::get("general.notdeletedregister", array("tabela" => Lang::get("general.TypeVehicle"))));
+                Session::flash('danger', Lang::get("general.notdeletedregister", array("tabela" => Lang::get("general.TypeVehicle"))));
             }
             else
             {
