@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+//use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Repositories\ModelVehicleRepositoryEloquent;
-use App\Entities\ModelVehicle;
+use App\Repositories\TypeVehicleRepositoryEloquent;
 use App\Entities\TypeVehicle;
+use App\Entities\ModelVehicle;
 use Log;
 use Input;
 use Lang;
@@ -19,6 +20,14 @@ use Prettus\Validator\Exceptions\ValidatorException;
 
 class TypeVehicleController extends Controller
 {
+
+    protected $repository;
+    
+    public function __construct(TypeVehicleRepositoryEloquent $repository) 
+    {
+        $this->middleware('auth');
+        $this->repository = $repository;
+    }    
     /**
      * Display a listing of the resource.
      *
@@ -26,7 +35,12 @@ class TypeVehicleController extends Controller
      */
     public function index()
     {
-        //
+        $typevehicles = $this->repository->all();
+        if (Request::isJson()) 
+        {
+            return $typevehicles;
+        }
+        return View::make("typevehicle.index", compact('typevehicles'));        //
     }
 
     /**
@@ -36,7 +50,8 @@ class TypeVehicleController extends Controller
      */
     public function create()
     {
-        //
+        $typevehicle = new TypeVehicle();
+        return view("typevehicle.edit", compact('typevehicle'));
     }
 
     /**
@@ -47,7 +62,19 @@ class TypeVehicleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try 
+        {
+            $this->repository->validator();
+            $this->repository->create( Input::all() );
+            Session::flash('message', Lang::get('general.succefullcreate', 
+                  ['table'=> Lang::get('general.TypeVehicle')]));
+            return Redirect::to('typevehicle');
+        } 
+        catch (ValidatorException $e) 
+        {
+            return Redirect::back()->withInput()
+                   ->with('errors',  $e->getMessageBag());
+        }
     }
 
     /**
@@ -58,7 +85,8 @@ class TypeVehicleController extends Controller
      */
     public function show($id)
     {
-        //
+        $typevehicle= $this->repository->find($id);
+        return View::make("typevehicle.show", compact('typevehicle'));
     }
 
     /**
@@ -69,7 +97,8 @@ class TypeVehicleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $typevehicle = $this->repository->find($id);
+        return View::make("typevehicle.edit", compact('typevehicle'));
     }
 
     /**
@@ -81,7 +110,19 @@ class TypeVehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try 
+        {
+            $this->repository->validator();
+            $this->repository->update(Input::all(), $id);
+            Session::flash('message', Lang::get('general.succefullupdate', 
+                       ['table'=> Lang::get('general.TypeVehicle')]));
+            return Redirect::to('typevehicle');
+        }
+        catch (ValidatorException $e) 
+        {
+            return Redirect::back()->withInput()
+                    ->with('errors',  $e->getMessageBag());
+        }
     }
 
     /**
@@ -92,6 +133,15 @@ class TypeVehicleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $typevehicle = new TypeVehicle();
+        //$modelvehicle = new ModelVehicle();
+        $modelvehicle = ModelVehicle::lists('id');
+        Log::info('Delete field: '.$id);
+        if ($this->repository->find($id) && $typevehicle->model_vehicle->find('type_vehicle')) 
+        {
+            $this->repository->delete($id);
+            Session::flash('message', Lang::get("general.deletedregister"));
+        }
+        return Redirect::to('typevehicle');
     }
 }

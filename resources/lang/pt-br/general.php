@@ -52,7 +52,6 @@ return [
     "ModelTires"   => "Modelo de Pneus",
     "ModelTire"    => "Modelo de Pneu",
     "newmodeltire" => "Novo Modelo de Pneu",
-    "type_vehicle_id" => "Tipo de Pneu",
     "pressure_ideal" => "Pressão Ideal",
     "pressure_max" => "Pressão Máxima",
     "pressure_min" => "Pressão Mínima",
@@ -62,5 +61,11 @@ return [
     "temp_min" => "Tempo Mínimo",
     "start_diameter" => "Diâmetro Inicial",
     "start_depth" => "Profundidade Inicial",
-    "type_land" => "Tipo de Terreno"
+    "type_land" => "Tipo de Terreno",
+
+    // typevehicle
+    "TypeVehicles"   => "Tipos de Veículos",
+    "TypeVehicle"    => "Tipo de Veículo",
+    "newtypevehicle" => "Novo Tipo de Veículo",    
+    
 ];

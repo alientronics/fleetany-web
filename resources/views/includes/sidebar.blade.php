@@ -15,6 +15,7 @@
                 <span class="fa arrow"></span>
             </a>
             <ul class="nav nav-second-level"> 
+<<<<<<< HEAD
                 <li><a href="{{URL::to('report')}}">{{Lang::get('menu.Vehicle')}}</a></li>
                 <li><a href="{{URL::to('report')}}">{{Lang::get('menu.Tires')}}</a></li>
                 <li><a href="{{URL::to('report')}}">{{Lang::get('menu.Maintenance')}}</a></li>
@@ -34,6 +35,15 @@
                 <li><a href="{{URL::to('modelmonitor')}}">{{Lang::get('menu.ModelMonitor')}}</a></li>
                 <li><a href="{{URL::to('modelsensor')}}">{{Lang::get('menu.ModelSensor')}}</a></li>
             </ul>
+=======
+                <li><a href="{{URL::to('company')}}">{{Lang::get('menu.Companies')}}</a></li>
+                <li><a href="{{URL::to('person')}}">{{Lang::get('menu.Persons')}}</a></li>                
+                <li><a href="{{URL::to('modelsensor')}}">{{Lang::get('menu.ModelSensor')}}</a></li>
+                <li><a href="{{URL::to('modeltire')}}">{{Lang::get('menu.ModelTire')}}</a></li>
+                <li><a href="{{URL::to('modelvehicle')}}">{{Lang::get('menu.ModelVehicle')}}</a></li>                
+                <li><a href="{{URL::to('typevehicle')}}">{{Lang::get('menu.TypeVehicle')}}</a></li>                
+            </ul>
+>>>>>>> ceta/master
         </li>
         @else
         <li><a href="{{URL::asset("auth/login")}}">{{Lang::get('menu.Login')}}</a></li>
