@@ -27,6 +27,7 @@ class TypeVehicleController extends Controller
     {
         $this->middleware('auth');
         $this->repository = $repository;
+       //$mp = new ModelVehicleController(); 
     }    
     /**
      * Display a listing of the resource.
@@ -133,14 +134,15 @@ class TypeVehicleController extends Controller
      */
     public function destroy($id)
     {
-        $typevehicle = new TypeVehicle();
-        //$modelvehicle = new ModelVehicle();
-        $modelvehicle = ModelVehicle::lists('id');
+        $modelvehicle = new ModelVehicle();
         Log::info('Delete field: '.$id);
-        if ($this->repository->find($id) && $typevehicle->model_vehicle->find('type_vehicle')) 
+
+        if ($this->repository->find($id)) 
         {
-            $this->repository->delete($id);
-            Session::flash('message', Lang::get("general.deletedregister"));
+            if ($this->repository->modelvehicle->count()) {
+                $this->repository->delete($id);
+                Session::flash('message', Lang::get("general.deletedregister"));
+            }
         }
         return Redirect::to('typevehicle');
     }
