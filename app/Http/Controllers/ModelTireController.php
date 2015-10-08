@@ -21,11 +21,11 @@ class ModelTireController extends Controller
     
     protected $repository;
     
-    public function __construct(ModelTireRepositoryEloquent $repository) 
+    public function __construct(ModelTireRepositoryEloquent $repository)
     {
         $this->middleware('auth');
         $this->repository = $repository;
-    }  
+    }
     /**
      * Display a listing of the resource.
      *
@@ -59,22 +59,20 @@ class ModelTireController extends Controller
      */
     public function store(Request $request)
     {
-        try 
-        {
+        try {
             $this->repository->validator();
             $this->repository->create(Input::all());
             Session::flash(
-                'message', Lang::get(
-                    'general.succefullcreate', 
+                'message',
+                Lang::get(
+                    'general.succefullcreate',
                     ['table'=> Lang::get('general.ModelTire')]
                 )
             );
             return Redirect::to('modeltire');
-        } 
-        catch (ValidatorException $e) 
-        {
+        } catch (ValidatorException $e) {
             return Redirect::back()->withInput()
-                   ->with('errors',  $e->getMessageBag());
+                   ->with('errors', $e->getMessageBag());
         }
     }
 
@@ -111,22 +109,20 @@ class ModelTireController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try 
-        {
+        try {
             $this->repository->validator();
             $this->repository->update(Input::all(), $id);
             Session::flash(
-                'message', Lang::get(
-                    'general.succefullupdate', 
+                'message',
+                Lang::get(
+                    'general.succefullupdate',
                     ['table'=> Lang::get('general.ModelTire')]
                 )
             );
             return Redirect::to('modeltire');
-        }
-        catch (ValidatorException $e) 
-        {
+        } catch (ValidatorException $e) {
             return Redirect::back()->withInput()
-                    ->with('errors',  $e->getMessageBag());
+                    ->with('errors', $e->getMessageBag());
         }
     }
 
