@@ -4,11 +4,11 @@
     <ul class="nav" id="side-menu">
         @if (Auth::check())
         <li><a href="{{URL::to('/')}}">{{Lang::get('menu.FleetPanel')}}</a></li>
-        <li><a href="#">{{Lang::get('menu.Company')}}</a></li>
-        <li><a href="#">{{Lang::get('menu.Users')}}</a></li>
-        <li><a href="#">{{Lang::get('menu.Monitors')}}</a></li>
-        <li><a href="#">{{Lang::get('menu.Vehicles')}}</a></li>
-        <li><a href="#">{{Lang::get('menu.Fleet')}}</a></li>
+        <li><a href="{{URL::to('company')}}">{{Lang::get('menu.Company')}}</a></li>
+        <li><a href="{{URL::to('users')}}">{{Lang::get('menu.Users')}}</a></li>
+        <li><a href="{{URL::to('modelmonitor')}}">{{Lang::get('menu.Monitors')}}</a></li>
+        <li><a href="{{URL::to('modelvehicle')}}">{{Lang::get('menu.Vehicles')}}</a></li>                
+        <li><a href="{{URL::to('fleets')}}">{{Lang::get('menu.Fleet')}}</a></li>          
         <li>
             <a href="#">
                 {{Lang::get('menu.Reports')}}
@@ -29,7 +29,7 @@
             <ul class="nav nav-second-level"> 
                 <li><a href="{{URL::to('company')}}">{{Lang::get('menu.PlanType')}}</a></li>
                 <li><a href="{{URL::to('person')}}">{{Lang::get('menu.UserProfile')}}</a></li>
-                <li><a href="{{URL::to('modelveichle')}}">{{Lang::get('menu.ModelVehicle')}}</a></li>
+                <li><a href="{{URL::to('modelvehicle')}}">{{Lang::get('menu.ModelVehicle')}}</a></li>
                 <li><a href="{{URL::to('modelmonitor')}}">{{Lang::get('menu.ModelMonitor')}}</a></li>
                 <li><a href="{{URL::to('modelsensor')}}">{{Lang::get('menu.ModelSensor')}}</a></li>
             </ul>

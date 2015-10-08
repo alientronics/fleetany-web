@@ -141,11 +141,14 @@ class TypeVehicleController extends Controller
      */
     public function destroy($id)
     {
-        $modelvehicle = new ModelVehicle();
         Log::info('Delete field: '.$id);
 
         if ($this->repository->find($id)) {
-            if ($this->repository->modelvehicle->count()) {
+            if (\Illuminate\Support\Facades\DB::table('model_vehicles')->where('type_vehicle_id', $id)->count() > 0) {
+                Session::flash('danger', Lang::get("general.notdeletedregister", array("tabela" => Lang::get("general.TypeVehicle"))));
+            }
+            else
+            {
                 $this->repository->delete($id);
                 Session::flash('message', Lang::get("general.deletedregister"));
             }

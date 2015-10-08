@@ -30,7 +30,10 @@
             @endif
             @if (Session::has('message'))
                 <div class="alert alert-info">{{ Session::get('message') }}</div>
-            @endif      
+            @endif   
+            @if (Session::has('danger'))
+                <div class="alert alert-danger">{{ Session::get('danger') }}</div>
+            @endif  
             @yield('content')
         </div>
         <!-- /.container-fluid -->
