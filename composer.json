@@ -12,7 +12,8 @@
 		"davejamesmiller/laravel-breadcrumbs": "dev-master",
 		"prettus/laravel-validation": "1.1.*",
 		"caouecs/laravel4-lang": "~2.0",
-		"kodeine/laravel-acl": "dev-master"
+		"kodeine/laravel-acl": "dev-master",
+        "squizlabs/php_codesniffer": "2.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

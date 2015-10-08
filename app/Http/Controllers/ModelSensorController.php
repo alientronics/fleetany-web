@@ -19,7 +19,8 @@ use Illuminate\Support\Facades\View;
 use Prettus\Validator\Exceptions\ValidatorException;
 
 class ModelSensorController extends Controller
-{    
+{
+    
     protected $repository;
     
     public function __construct(ModelSensorRepositoryEloquent $repository) 
@@ -36,8 +37,7 @@ class ModelSensorController extends Controller
     public function index()
     {
         $modelsensors = $this->repository->all();
-        if (Request::isJson()) 
-        {
+        if (Request::isJson()) {
             return $modelsensors;
         }
 
@@ -58,7 +58,7 @@ class ModelSensorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  Request $request
      * @return Response
      */
     public function store(Request $request)
@@ -66,9 +66,13 @@ class ModelSensorController extends Controller
         try 
         {
             $this->repository->validator();
-            $this->repository->create( Input::all() );
-            Session::flash('message', Lang::get('general.succefullcreate', 
-                  ['table'=> Lang::get('general.ModelSensor')]));
+            $this->repository->create(Input::all());
+            Session::flash(
+                'message', Lang::get(
+                    'general.succefullcreate', 
+                    ['table'=> Lang::get('general.ModelSensor')]
+                )
+            );
             return Redirect::to('modelsensor');
         }
         catch (ValidatorException $e) 
@@ -81,7 +85,7 @@ class ModelSensorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function show($id)
@@ -93,7 +97,7 @@ class ModelSensorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function edit($id)
@@ -105,8 +109,8 @@ class ModelSensorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  Request $request
+     * @param  int     $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -115,8 +119,12 @@ class ModelSensorController extends Controller
         {
             $this->repository->validator();
             $this->repository->update(Input::all(), $id);
-            Session::flash('message', Lang::get('general.succefullupdate', 
-                       ['table'=> Lang::get('general.ModelSensor')]));
+            Session::flash(
+                'message', Lang::get(
+                    'general.succefullupdate', 
+                    ['table'=> Lang::get('general.ModelSensor')]
+                )
+            );
             return Redirect::to('modelsensor');
         }
         catch (ValidatorException $e) 
@@ -129,14 +137,13 @@ class ModelSensorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy($id)
     {
         Log::info('Delete field: '.$id);
-        if ($this->repository->find($id)) 
-        {
+        if ($this->repository->find($id)) {
             $this->repository->delete($id);
             Session::flash('message', Lang::get("general.deletedregister"));
         }

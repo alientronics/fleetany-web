@@ -23,11 +23,15 @@ Route::resource('modeltire', 'ModelTireController');
 Route::resource('typevehicle', 'TypeVehicleController');
 Route::get('profile', 'UsersController@showProfile');
 
-Route::bind('users', function ($value, $route) {
-    return App\User::whereId($value)->first();
-});
+Route::bind(
+    'users', function ($value, $route) {
+        return App\User::whereId($value)->first();
+    }
+);
 
-Route::controllers([
+Route::controllers(
+    [
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController'
-]);
+    ]
+);

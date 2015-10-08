@@ -13,10 +13,12 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($userId);
 
-        $this->validate($request, [
+        $this->validate(
+            $request, [
                 'name' => 'required',
                 'email' => 'required'
-                ]);
+                ]
+        );
 
         $input = $request->all();
 

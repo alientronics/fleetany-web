@@ -36,12 +36,11 @@ class ModelVehicleController extends Controller
     public function index()
     {
         $modelvehicles = $this->repository->all();
-        $typevehicle = TypeVehicle::lists('name','id');
-        if (Request::isJson()) 
-        {
+        $typevehicle = TypeVehicle::lists('name', 'id');
+        if (Request::isJson()) {
             return $modelvehicles;
         }
-        return View::make("modelvehicle.index", compact('modelvehicles','typevehicle'));        //
+        return View::make("modelvehicle.index", compact('modelvehicles', 'typevehicle'));        //
     }
 
     /**
@@ -53,14 +52,14 @@ class ModelVehicleController extends Controller
     {
         $modelvehicle = new ModelVehicle();
         //$typevehicle = TypeVehicle::all();
-        $typevehicle = TypeVehicle::lists('name','id');
-        return view("modelvehicle.edit", compact('modelvehicle','typevehicle'));
+        $typevehicle = TypeVehicle::lists('name', 'id');
+        return view("modelvehicle.edit", compact('modelvehicle', 'typevehicle'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  Request $request
      * @return Response
      */
     public function store(Request $request)
@@ -68,9 +67,13 @@ class ModelVehicleController extends Controller
         try 
         {
             $this->repository->validator();
-            $this->repository->create( Input::all() );
-            Session::flash('message', Lang::get('general.succefullcreate', 
-                  ['table'=> Lang::get('general.ModelVehicle')]));
+            $this->repository->create(Input::all());
+            Session::flash(
+                'message', Lang::get(
+                    'general.succefullcreate', 
+                    ['table'=> Lang::get('general.ModelVehicle')]
+                )
+            );
             return Redirect::to('modelvehicle');
         } 
         catch (ValidatorException $e) 
@@ -83,34 +86,34 @@ class ModelVehicleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function show($id)
     {
         $modelvehicle= $this->repository->find($id);
-        $typevehicle = TypeVehicle::lists('name','id');
-        return View::make("modelvehicle.show", compact('modelvehicle','typevehicle'));
+        $typevehicle = TypeVehicle::lists('name', 'id');
+        return View::make("modelvehicle.show", compact('modelvehicle', 'typevehicle'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function edit($id)
     {
         $modelvehicle = $this->repository->find($id);
-        $typevehicle = TypeVehicle::lists('name','id');
-        return View::make("modelvehicle.edit", compact('modelvehicle','typevehicle'));
+        $typevehicle = TypeVehicle::lists('name', 'id');
+        return View::make("modelvehicle.edit", compact('modelvehicle', 'typevehicle'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  Request $request
+     * @param  int     $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -119,8 +122,12 @@ class ModelVehicleController extends Controller
         {
             $this->repository->validator();
             $this->repository->update(Input::all(), $id);
-            Session::flash('message', Lang::get('general.succefullupdate', 
-                       ['table'=> Lang::get('general.ModelVehicle')]));
+            Session::flash(
+                'message', Lang::get(
+                    'general.succefullupdate', 
+                    ['table'=> Lang::get('general.ModelVehicle')]
+                )
+            );
             return Redirect::to('modelvehicle');
         }
         catch (ValidatorException $e) 
@@ -133,14 +140,13 @@ class ModelVehicleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy($id)
     {
         Log::info('Delete field: '.$id);
-        if ($this->repository->find($id)) 
-        {
+        if ($this->repository->find($id)) {
             $this->repository->delete($id);
             Session::flash('message', Lang::get("general.deletedregister"));
         }
