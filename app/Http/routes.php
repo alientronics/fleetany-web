@@ -21,6 +21,7 @@ Route::resource('modelmonitor', 'ModelMonitorController');
 Route::resource('modelvehicle', 'ModelVehicleController');
 Route::resource('modeltire', 'ModelTireController');
 Route::resource('typevehicle', 'TypeVehicleController');
+Route::resource('user', 'UserController');
 Route::get('profile', 'UsersController@showProfile');
 
 Route::bind('users', function ($value, $route) {

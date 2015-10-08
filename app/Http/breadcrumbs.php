@@ -127,3 +127,24 @@ Breadcrumbs::register('typevehicle.edit', function ($breadcrumbs, $typevehicle =
         $breadcrumbs->push(Lang::get("general.New"), route('typevehicle.edit'));
     }
 });
+
+// Home > user
+
+Breadcrumbs::register('user', function ($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(Lang::get("menu.User"), route('user.index'));
+});
+
+Breadcrumbs::register('user.edit', function ($breadcrumbs, $user = null)
+{
+    $breadcrumbs->parent('user');
+    if ($user->id) 
+    {
+        $breadcrumbs->push($user->name, route('user.edit', $user->id));
+    }
+    else 
+    {
+        $breadcrumbs->push(Lang::get("general.New"), route('user.edit'));
+    }
+});

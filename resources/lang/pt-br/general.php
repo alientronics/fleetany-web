@@ -67,6 +67,14 @@ return [
     // typevehicle
     "TypeVehicles"   => "Tipos de Veículos",
     "TypeVehicle"    => "Tipo de Veículo",
-    "newtypevehicle" => "Novo Tipo de Veículo",    
+    "newtypevehicle" => "Novo Tipo de Veículo",
+    
+    // user
+    "Users"   => "Usuários",
+    "User"    => "Usuário",
+    "newuser" => "Novo Usuário",
+    "password"=> "Senha",
+    "contact_id" => "Contato",
+    "company_id" => "Empresa"
     
 ];

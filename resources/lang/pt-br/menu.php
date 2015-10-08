@@ -34,6 +34,7 @@ return [
     'AuxiliarTables' => "Tabelas Auxiliares",
     'PlanType'      => "Tipos de Planos",
 
-    'TypeVehicle' => "Tipo de Veículo"
+    'TypeVehicle' => "Tipo de Veículo",
+    'User' => "Usuário"
 
 ];
