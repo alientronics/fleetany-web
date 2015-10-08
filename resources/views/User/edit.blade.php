@@ -37,7 +37,7 @@
 
     <div class="form-group col-lg-12">
         {!!Form::label('password', Lang::get('general.password'))!!}
-        {!!Form::text('password', $user->password, array('class' => 'form-control'))!!}
+        {!!Form::password('password', $user->password, array('class' => 'form-control'))!!}
     </div>
 
     <div class="form-group col-lg-12">
