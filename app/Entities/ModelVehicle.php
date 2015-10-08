@@ -13,7 +13,7 @@ class ModelVehicle extends Model implements Transformable
     
     protected $fillable = ['name', 'type_vehicle_id', 'year', 'number_of_wheels'];
 
-    public function type_vehicle() 
+    public function type_vehicle()
     {
         return $this->belongsTo("App\Entities\TypeVehicle");
     }

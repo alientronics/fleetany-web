@@ -13,12 +13,12 @@ class User extends Model implements Transformable
     protected $fillable = ['name', 'email', 'contact_id','company_id','created_at','updated_at'];
     protected $hidden = ['password', 'remember_token'];
 
-    public function contact() 
+    public function contact()
     {
         return $this->belongsTo("App\Entities\TypeVehicle");
     }
 
-    public function company() 
+    public function company()
     {
         return $this->belongsTo("App\Entities\TypeVehicle");
     }

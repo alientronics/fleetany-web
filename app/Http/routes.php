@@ -24,7 +24,8 @@ Route::resource('user', 'UserController');
 Route::get('profile', 'UsersController@showProfile');
 
 Route::bind(
-    'users', function ($value, $route) {
+    'users',
+    function ($value, $route) {
         return App\User::whereId($value)->first();
     }
 );

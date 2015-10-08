@@ -23,12 +23,12 @@ class TypeVehicleController extends Controller
 
     protected $repository;
     
-    public function __construct(TypeVehicleRepositoryEloquent $repository) 
+    public function __construct(TypeVehicleRepositoryEloquent $repository)
     {
         $this->middleware('auth');
         $this->repository = $repository;
-        //$mp = new ModelVehicleController(); 
-    }    
+        //$mp = new ModelVehicleController();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -62,22 +62,20 @@ class TypeVehicleController extends Controller
      */
     public function store(Request $request)
     {
-        try 
-        {
+        try {
             $this->repository->validator();
             $this->repository->create(Input::all());
             Session::flash(
-                'message', Lang::get(
-                    'general.succefullcreate', 
+                'message',
+                Lang::get(
+                    'general.succefullcreate',
                     ['table'=> Lang::get('general.TypeVehicle')]
                 )
             );
             return Redirect::to('typevehicle');
-        } 
-        catch (ValidatorException $e) 
-        {
+        } catch (ValidatorException $e) {
             return Redirect::back()->withInput()
-                   ->with('errors',  $e->getMessageBag());
+                   ->with('errors', $e->getMessageBag());
         }
     }
 
@@ -114,22 +112,20 @@ class TypeVehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        try 
-        {
+        try {
             $this->repository->validator();
             $this->repository->update(Input::all(), $id);
             Session::flash(
-                'message', Lang::get(
-                    'general.succefullupdate', 
+                'message',
+                Lang::get(
+                    'general.succefullupdate',
                     ['table'=> Lang::get('general.TypeVehicle')]
                 )
             );
             return Redirect::to('typevehicle');
-        }
-        catch (ValidatorException $e) 
-        {
+        } catch (ValidatorException $e) {
             return Redirect::back()->withInput()
-                    ->with('errors',  $e->getMessageBag());
+                    ->with('errors', $e->getMessageBag());
         }
     }
 
@@ -145,10 +141,11 @@ class TypeVehicleController extends Controller
 
         if ($this->repository->find($id)) {
             if (\Illuminate\Support\Facades\DB::table('model_vehicles')->where('type_vehicle_id', $id)->count() > 0) {
-                Session::flash('danger', Lang::get("general.notdeletedregister", array("tabela" => Lang::get("general.TypeVehicle"))));
-            }
-            else
-            {
+                Session::flash('danger', Lang::get(
+                    "general.notdeletedregister",
+                    array("tabela" => Lang::get("general.TypeVehicle"))
+                ));
+            } else {
                 $this->repository->delete($id);
                 Session::flash('message', Lang::get("general.deletedregister"));
             }

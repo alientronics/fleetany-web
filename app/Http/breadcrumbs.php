@@ -2,7 +2,8 @@
 
 // Home
 Breadcrumbs::register(
-    'home', function ($breadcrumbs) {
+    'home',
+    function ($breadcrumbs) {
 
         $breadcrumbs->push('Home', route('home'));
     }
@@ -10,7 +11,8 @@ Breadcrumbs::register(
 
 // Home > About
 Breadcrumbs::register(
-    'about', function ($breadcrumbs) {
+    'about',
+    function ($breadcrumbs) {
 
         $breadcrumbs->parent('home');
         $breadcrumbs->push('About', route('about'));
@@ -19,7 +21,8 @@ Breadcrumbs::register(
 
 // Home > Person
 Breadcrumbs::register(
-    'person', function ($breadcrumbs) {
+    'person',
+    function ($breadcrumbs) {
 
         $breadcrumbs->parent('home');
         $breadcrumbs->push(Lang::get("menu.Persons"), route('person.index'));
@@ -27,7 +30,8 @@ Breadcrumbs::register(
 );
 
 Breadcrumbs::register(
-    'person.edit', function ($breadcrumbs, $person = null) {
+    'person.edit',
+    function ($breadcrumbs, $person = null) {
 
         $breadcrumbs->parent('person');
         if ($person->id) {
@@ -40,7 +44,8 @@ Breadcrumbs::register(
 
 // Home > ModelSensor
 Breadcrumbs::register(
-    'modelsensor', function ($breadcrumbs) {
+    'modelsensor',
+    function ($breadcrumbs) {
     
         $breadcrumbs->parent('home');
         $breadcrumbs->push(Lang::get("menu.ModelSensor"), route('modelsensor.index'));
@@ -48,13 +53,13 @@ Breadcrumbs::register(
 );
 
 Breadcrumbs::register(
-    'modelsensor.edit', function ($breadcrumbs, $modelsensor = null) {
+    'modelsensor.edit',
+    function ($breadcrumbs, $modelsensor = null) {
     
         $breadcrumbs->parent('modelsensor');
-        if($modelsensor->id) {
+        if ($modelsensor->id) {
             $breadcrumbs->push($modelsensor->name, route('modelsensor.edit', $modelsensor->id));
-        }
-        else {
+        } else {
             $breadcrumbs->push(Lang::get("general.New"), route('modelsensor.edit'));
         }
     }
@@ -62,7 +67,8 @@ Breadcrumbs::register(
 
 // Home > modelMonitor
 Breadcrumbs::register(
-    'modelmonitor', function ($breadcrumbs) {
+    'modelmonitor',
+    function ($breadcrumbs) {
     
         $breadcrumbs->parent('home');
         $breadcrumbs->push(Lang::get("menu.ModelMonitor"), route('modelmonitor.index'));
@@ -70,14 +76,13 @@ Breadcrumbs::register(
 );
 
 Breadcrumbs::register(
-    'modelmonitor.edit', function ($breadcrumbs, $modelmonitor = null) {
+    'modelmonitor.edit',
+    function ($breadcrumbs, $modelmonitor = null) {
     
         $breadcrumbs->parent('modelmonitor');
         if ($modelmonitor->id) {
             $breadcrumbs->push($modelmonitor->name, route('modelmonitor.edit', $modelmonitor->id));
-        }
-        else 
-        {
+        } else {
             $breadcrumbs->push(Lang::get("general.New"), route('modelmonitor.edit'));
         }
     }
@@ -85,7 +90,8 @@ Breadcrumbs::register(
 
 // Home > modelVehicle
 Breadcrumbs::register(
-    'modelvehicle', function ($breadcrumbs) {
+    'modelvehicle',
+    function ($breadcrumbs) {
     
         $breadcrumbs->parent('home');
         $breadcrumbs->push(Lang::get("menu.ModelVehicle"), route('modelvehicle.index'));
@@ -93,14 +99,13 @@ Breadcrumbs::register(
 );
 
 Breadcrumbs::register(
-    'modelvehicle.edit', function ($breadcrumbs, $modelvehicle = null) {
+    'modelvehicle.edit',
+    function ($breadcrumbs, $modelvehicle = null) {
     
         $breadcrumbs->parent('modelvehicle');
         if ($modelvehicle->id) {
             $breadcrumbs->push($modelvehicle->name, route('modelvehicle.edit', $modelvehicle->id));
-        }
-        else 
-        {
+        } else {
             $breadcrumbs->push(Lang::get("general.New"), route('modelvehicle.edit'));
         }
     }
@@ -108,7 +113,8 @@ Breadcrumbs::register(
 
 // Home > modelTire
 Breadcrumbs::register(
-    'modeltire', function ($breadcrumbs) {
+    'modeltire',
+    function ($breadcrumbs) {
     
         $breadcrumbs->parent('home');
         $breadcrumbs->push(Lang::get("menu.ModelTire"), route('modeltire.index'));
@@ -116,14 +122,13 @@ Breadcrumbs::register(
 );
 
 Breadcrumbs::register(
-    'modeltire.edit', function ($breadcrumbs, $modeltire = null) {
+    'modeltire.edit',
+    function ($breadcrumbs, $modeltire = null) {
     
         $breadcrumbs->parent('modeltire');
         if ($modeltire->id) {
             $breadcrumbs->push($modeltire->name, route('modeltire.edit', $modeltire->id));
-        }
-        else 
-        {
+        } else {
             $breadcrumbs->push(Lang::get("general.New"), route('modeltire.edit'));
         }
     }
@@ -131,7 +136,8 @@ Breadcrumbs::register(
 
 // Home > typeVehicle
 Breadcrumbs::register(
-    'typevehicle', function ($breadcrumbs) {
+    'typevehicle',
+    function ($breadcrumbs) {
     
         $breadcrumbs->parent('home');
         $breadcrumbs->push(Lang::get("menu.TypeVehicle"), route('typevehicle.index'));
@@ -139,43 +145,39 @@ Breadcrumbs::register(
 );
 
 Breadcrumbs::register(
-    'typevehicle.edit', function ($breadcrumbs, $typevehicle = null) 
-    {
+    'typevehicle.edit',
+    function ($breadcrumbs, $typevehicle = null) {
+    
     
         $breadcrumbs->parent('typevehicle');
         if ($typevehicle->id) {
             $breadcrumbs->push($typevehicle->name, route('typevehicle.edit', $typevehicle->id));
-        }
-        else 
-        {
+        } else {
             $breadcrumbs->push(Lang::get("general.New"), route('typevehicle.edit'));
         }
     }
-
 );
 
 // Home > user
 
-Breadcrumbs::register
-        ('user', function ($breadcrumbs) {
+Breadcrumbs::register(
+    'user',
+    function ($breadcrumbs) {
     
-    $breadcrumbs->parent('home');
-    $breadcrumbs->push(Lang::get("menu.User"), route('user.index'));
-});
-
-Breadcrumbs::register
-        ('user.edit', function ($breadcrumbs, $user = null)
-    {
-    $breadcrumbs->parent('user');
-    if ($user->id) 
-    {
-        $breadcrumbs->push($user->name, route('user.edit', $user->id));
-    }
-    else 
-    {
-        $breadcrumbs->push(Lang::get("general.New"), route('user.edit'));
-    }
+            $breadcrumbs->parent('home');
+            $breadcrumbs->push(Lang::get("menu.User"), route('user.index'));
     }
 );
 
-
+Breadcrumbs::register(
+    'user.edit',
+    function ($breadcrumbs, $user = null) {
+    
+            $breadcrumbs->parent('user');
+        if ($user->id) {
+            $breadcrumbs->push($user->name, route('user.edit', $user->id));
+        } else {
+            $breadcrumbs->push(Lang::get("general.New"), route('user.edit'));
+        }
+    }
+);

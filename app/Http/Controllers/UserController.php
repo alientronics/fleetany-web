@@ -26,11 +26,11 @@ class UserController extends Controller
 
     protected $repository;
     
-    public function __construct(UserRepositoryEloquent $repository) 
+    public function __construct(UserRepositoryEloquent $repository)
     {
         $this->middleware('auth');
         $this->repository = $repository;
-    }  
+    }
 
     /**
      * Display a listing of the resource.
@@ -54,22 +54,20 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        try 
-        {
+        try {
             $this->repository->validator();
             $this->repository->create(Input::all());
             Session::flash(
-                'message', Lang::get(
-                    'general.succefullcreate', 
+                'message',
+                Lang::get(
+                    'general.succefullcreate',
                     ['table'=> Lang::get('general.User')]
                 )
             );
             return Redirect::to('user');
-        } 
-        catch (ValidatorException $e) 
-        {
+        } catch (ValidatorException $e) {
             return Redirect::back()->withInput()
-                   ->with('errors',  $e->getMessageBag());
+                   ->with('errors', $e->getMessageBag());
         }
     }
     
@@ -77,7 +75,7 @@ class UserController extends Controller
     {
         $typevehicle= $this->repository->find($id);
         return View::make("user.show", compact('user'));
-    }    
+    }
     
     public function edit($id)
     {
@@ -114,36 +112,31 @@ class UserController extends Controller
     
     public function update(Request $request, $id)
     {
-        try 
-        {
+        try {
             $this->repository->validator();
             $this->repository->update(Input::all(), $id);
             Session::flash(
-                'message', Lang::get(
-                    'general.succefullupdate', 
+                'message',
+                Lang::get(
+                    'general.succefullupdate',
                     ['table'=> Lang::get('general.User')]
                 )
             );
             return Redirect::to('user');
-        }
-        catch (ValidatorException $e) 
-        {
+        } catch (ValidatorException $e) {
             return Redirect::back()->withInput()
-                    ->with('errors',  $e->getMessageBag());
+                    ->with('errors', $e->getMessageBag());
         }
-    }    
+    }
     
     public function destroy($id)
     {
         Log::info('Delete field: '.$id);
 
-        if ($this->repository->find($id)) 
-        {
-
+        if ($this->repository->find($id)) {
             $this->repository->delete($id);
             Session::flash('message', Lang::get("general.deletedregister"));
         }
         return Redirect::to('user');
-    }    
-    
+    }
 }
