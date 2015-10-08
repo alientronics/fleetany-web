@@ -17,7 +17,7 @@ class FormMacroServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        require base_path() . '/resources/macros/form.php';
+        include base_path() . '/resources/macros/form.php';
     }
     
     /**

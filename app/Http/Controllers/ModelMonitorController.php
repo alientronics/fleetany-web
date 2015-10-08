@@ -36,8 +36,7 @@ class ModelMonitorController extends Controller
     public function index()
     {
         $modelmonitors = $this->repository->all();
-        if(Request::isJson()) 
-        {
+        if(Request::isJson()) {
             return $modelmonitors;
         }
         return View::make("modelmonitor.index", compact('modelmonitors'));
@@ -57,7 +56,7 @@ class ModelMonitorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  Request $request
      * @return Response
      */
     public function store(Request $request)
@@ -65,9 +64,13 @@ class ModelMonitorController extends Controller
         try 
         {
             $this->repository->validator();
-            $this->repository->create( Input::all() );
-            Session::flash('message', Lang::get('general.succefullcreate', 
-                  ['table'=> Lang::get('general.ModelMonitor')]));
+            $this->repository->create(Input::all());
+            Session::flash(
+                'message', Lang::get(
+                    'general.succefullcreate', 
+                    ['table'=> Lang::get('general.ModelMonitor')]
+                )
+            );
             return Redirect::to('modelmonitor');
         } 
         catch (ValidatorException $e) 
@@ -80,7 +83,7 @@ class ModelMonitorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function show($id)
@@ -92,7 +95,7 @@ class ModelMonitorController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function edit($id)
@@ -104,8 +107,8 @@ class ModelMonitorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  Request $request
+     * @param  int     $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -114,8 +117,12 @@ class ModelMonitorController extends Controller
         {
             $this->repository->validator();
             $this->repository->update(Input::all(), $id);
-            Session::flash('message', Lang::get('general.succefullupdate', 
-                       ['table'=> Lang::get('general.ModelMonitor')]));
+            Session::flash(
+                'message', Lang::get(
+                    'general.succefullupdate', 
+                    ['table'=> Lang::get('general.ModelMonitor')]
+                )
+            );
             return Redirect::to('modelmonitor');
         }
         catch (ValidatorException $e) 
@@ -128,14 +135,13 @@ class ModelMonitorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy($id)
     {
         Log::info('Delete field: '.$id);
-        if($this->repository->find($id)) 
-        {
+        if($this->repository->find($id)) {
             $this->repository->delete($id);
             Session::flash('message', Lang::get("general.deletedregister"));
         }

@@ -24,7 +24,6 @@
             <th>{{Lang::get("general.id")}}</th>
             <th>{{Lang::get("general.name")}}</th>    
             <th>{{Lang::get("general.email")}}</th>
-            <th>{{Lang::get("general.password")}}</th>
             <th>{{Lang::get("general.contact_id")}}</th>
             <th>{{Lang::get("general.company_id")}}</th>
             <th>{{Lang::get("general.Actions")}}</th>
@@ -35,7 +34,6 @@
             <td><a href="{{route('user.edit', $user->id)}}">{{$user->id}}</a></td>
             <td><a href="{{route('user.edit', $user->id)}}">{{$user->name}}</a></td>
             <td><a href="{{route('user.edit', $user->id)}}">{{$user->email}}</a></td>
-            <td><a href="{{route('user.edit', $user->id)}}">{{$user->password}}</a></td>
             <td><a href="{{route('user.edit', $user->id)}}">{{$user->contact_id}}</a></td>
             <td><a href="{{route('user.edit', $user->id)}}">{{$user->company_id}}</a></td>             
             <td>

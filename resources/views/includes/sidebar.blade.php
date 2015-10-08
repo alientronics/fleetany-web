@@ -5,7 +5,7 @@
         @if (Auth::check())
         <li><a href="{{URL::to('/')}}">{{Lang::get('menu.FleetPanel')}}</a></li>
         <li><a href="{{URL::to('company')}}">{{Lang::get('menu.Company')}}</a></li>
-        <li><a href="{{URL::to('users')}}">{{Lang::get('menu.Users')}}</a></li>
+        <li><a href="{{URL::to('user')}}">{{Lang::get('menu.Users')}}</a></li>
         <li><a href="{{URL::to('modelmonitor')}}">{{Lang::get('menu.Monitors')}}</a></li>
         <li><a href="{{URL::to('modelvehicle')}}">{{Lang::get('menu.Vehicles')}}</a></li>                
         <li><a href="{{URL::to('fleets')}}">{{Lang::get('menu.Fleet')}}</a></li>          

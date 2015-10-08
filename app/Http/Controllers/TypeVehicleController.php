@@ -27,7 +27,7 @@ class TypeVehicleController extends Controller
     {
         $this->middleware('auth');
         $this->repository = $repository;
-       //$mp = new ModelVehicleController(); 
+        //$mp = new ModelVehicleController(); 
     }    
     /**
      * Display a listing of the resource.
@@ -37,8 +37,7 @@ class TypeVehicleController extends Controller
     public function index()
     {
         $typevehicles = $this->repository->all();
-        if (Request::isJson()) 
-        {
+        if (Request::isJson()) {
             return $typevehicles;
         }
         return View::make("typevehicle.index", compact('typevehicles'));        //
@@ -58,7 +57,7 @@ class TypeVehicleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  Request $request
      * @return Response
      */
     public function store(Request $request)
@@ -66,9 +65,13 @@ class TypeVehicleController extends Controller
         try 
         {
             $this->repository->validator();
-            $this->repository->create( Input::all() );
-            Session::flash('message', Lang::get('general.succefullcreate', 
-                  ['table'=> Lang::get('general.TypeVehicle')]));
+            $this->repository->create(Input::all());
+            Session::flash(
+                'message', Lang::get(
+                    'general.succefullcreate', 
+                    ['table'=> Lang::get('general.TypeVehicle')]
+                )
+            );
             return Redirect::to('typevehicle');
         } 
         catch (ValidatorException $e) 
@@ -81,7 +84,7 @@ class TypeVehicleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function show($id)
@@ -93,7 +96,7 @@ class TypeVehicleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function edit($id)
@@ -105,8 +108,8 @@ class TypeVehicleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  Request $request
+     * @param  int     $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -115,8 +118,12 @@ class TypeVehicleController extends Controller
         {
             $this->repository->validator();
             $this->repository->update(Input::all(), $id);
-            Session::flash('message', Lang::get('general.succefullupdate', 
-                       ['table'=> Lang::get('general.TypeVehicle')]));
+            Session::flash(
+                'message', Lang::get(
+                    'general.succefullupdate', 
+                    ['table'=> Lang::get('general.TypeVehicle')]
+                )
+            );
             return Redirect::to('typevehicle');
         }
         catch (ValidatorException $e) 
@@ -129,17 +136,15 @@ class TypeVehicleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy($id)
     {
         Log::info('Delete field: '.$id);
 
-        if ($this->repository->find($id)) 
-        {
-            if (\Illuminate\Support\Facades\DB::table('model_vehicles')->where('type_vehicle_id',$id)->count() > 0)
-            {
+        if ($this->repository->find($id)) {
+            if (\Illuminate\Support\Facades\DB::table('model_vehicles')->where('type_vehicle_id', $id)->count() > 0) {
                 Session::flash('danger', Lang::get("general.notdeletedregister", array("tabela" => Lang::get("general.TypeVehicle"))));
             }
             else

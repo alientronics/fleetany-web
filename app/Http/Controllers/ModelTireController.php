@@ -34,8 +34,7 @@ class ModelTireController extends Controller
     public function index()
     {
         $modeltires = $this->repository->all();
-        if (Request::isJson()) 
-        {
+        if (Request::isJson()) {
             return $modeltires;
         }
         return View::make("modeltire.index", compact('modeltires'));
@@ -55,7 +54,7 @@ class ModelTireController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  Request $request
      * @return Response
      */
     public function store(Request $request)
@@ -63,9 +62,13 @@ class ModelTireController extends Controller
         try 
         {
             $this->repository->validator();
-            $this->repository->create( Input::all() );
-            Session::flash('message', Lang::get('general.succefullcreate', 
-                  ['table'=> Lang::get('general.ModelTire')]));
+            $this->repository->create(Input::all());
+            Session::flash(
+                'message', Lang::get(
+                    'general.succefullcreate', 
+                    ['table'=> Lang::get('general.ModelTire')]
+                )
+            );
             return Redirect::to('modeltire');
         } 
         catch (ValidatorException $e) 
@@ -78,7 +81,7 @@ class ModelTireController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function show($id)
@@ -90,7 +93,7 @@ class ModelTireController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function edit($id)
@@ -102,8 +105,8 @@ class ModelTireController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  Request $request
+     * @param  int     $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -112,8 +115,12 @@ class ModelTireController extends Controller
         {
             $this->repository->validator();
             $this->repository->update(Input::all(), $id);
-            Session::flash('message', Lang::get('general.succefullupdate', 
-                       ['table'=> Lang::get('general.ModelTire')]));
+            Session::flash(
+                'message', Lang::get(
+                    'general.succefullupdate', 
+                    ['table'=> Lang::get('general.ModelTire')]
+                )
+            );
             return Redirect::to('modeltire');
         }
         catch (ValidatorException $e) 
@@ -126,14 +133,13 @@ class ModelTireController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return Response
      */
     public function destroy($id)
     {
         Log::info('Delete field: '.$id);
-        if ($this->repository->find($id)) 
-        {
+        if ($this->repository->find($id)) {
             $this->repository->delete($id);
             Session::flash('message', Lang::get("general.deletedregister"));
         }

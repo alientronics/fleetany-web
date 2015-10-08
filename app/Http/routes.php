@@ -15,7 +15,6 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::get('home', 'HomeController@index');
 Route::resource('/contact', 'HomeController@contact');
 
-route::resource('user', 'UsersController');
 Route::resource('modelsensor', 'ModelSensorController');
 Route::resource('modelmonitor', 'ModelMonitorController');
 Route::resource('modelvehicle', 'ModelVehicleController');
@@ -24,11 +23,15 @@ Route::resource('typevehicle', 'TypeVehicleController');
 Route::resource('user', 'UserController');
 Route::get('profile', 'UsersController@showProfile');
 
-Route::bind('users', function ($value, $route) {
-    return App\User::whereId($value)->first();
-});
+Route::bind(
+    'users', function ($value, $route) {
+        return App\User::whereId($value)->first();
+    }
+);
 
-Route::controllers([
+Route::controllers(
+    [
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController'
-]);
+    ]
+);
