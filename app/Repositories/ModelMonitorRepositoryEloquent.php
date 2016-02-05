@@ -9,6 +9,7 @@ use App\Entities\ModelMonitor;
 
 /**
  * Class ModelMonitorsRepositoryEloquent
+ *
  * @package namespace App\Repositories;
  */
 class ModelMonitorRepositoryEloquent extends BaseRepository implements ModelMonitorRepository
@@ -16,6 +17,7 @@ class ModelMonitorRepositoryEloquent extends BaseRepository implements ModelMoni
 
     /**
      * Specify validator rules
+     *
      * @var array
      */
     protected $rules = [

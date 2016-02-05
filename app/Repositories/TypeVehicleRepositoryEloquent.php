@@ -9,6 +9,7 @@ use App\Entities\TypeVehicle;
 
 /**
  * Class TypeVehicleRepositoryEloquent
+ *
  * @package namespace App\Repositories;
  */
 class TypeVehicleRepositoryEloquent extends BaseRepository implements TypeVehicleRepository
@@ -16,6 +17,7 @@ class TypeVehicleRepositoryEloquent extends BaseRepository implements TypeVehicl
     
     /**
      * Specify validator rules
+     *
      * @var array
      */
     protected $rules = [

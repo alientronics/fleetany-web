@@ -9,6 +9,7 @@ use App\Entities\ModelSensor;
 
 /**
  * Class ModelSensorRepositoryEloquent
+ *
  * @package namespace App\Repositories;
  */
 class ModelSensorRepositoryEloquent extends BaseRepository implements ModelSensorRepository
@@ -16,6 +17,7 @@ class ModelSensorRepositoryEloquent extends BaseRepository implements ModelSenso
     
     /**
      * Specify validator rules
+     *
      * @var array
      */
     protected $rules = [

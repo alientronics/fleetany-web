@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 
 /**
  * Class MacroServiceProvider
+ *
  * @package App\Providers
  */
 class FormMacroServiceProvider extends ServiceProvider

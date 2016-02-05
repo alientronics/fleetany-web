@@ -6,6 +6,7 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 
 /**
  * Interface ModelMonitorsRepository
+ *
  * @package namespace App\Repositories;
  */
 interface ModelMonitorRepository extends RepositoryInterface

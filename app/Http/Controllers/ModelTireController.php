@@ -54,10 +54,9 @@ class ModelTireController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store()
     {
         try {
             $this->repository->validator();
@@ -79,39 +78,38 @@ class ModelTireController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int $idModelTire
      * @return Response
      */
-    public function show($id)
+    public function show($idModelTire)
     {
-        $modeltire= $this->repository->find($id);
+        $modeltire= $this->repository->find($idModelTire);
         return View::make("modeltire.show", compact('modeltire'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int $idModelTire
      * @return Response
      */
-    public function edit($id)
+    public function edit($idModelTire)
     {
-        $modeltire = $this->repository->find($id);
+        $modeltire = $this->repository->find($idModelTire);
         return View::make("modeltire.edit", compact('modeltire'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request $request
-     * @param  int     $id
+     * @param  int $idModelTire
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update($idModelTire)
     {
         try {
             $this->repository->validator();
-            $this->repository->update(Input::all(), $id);
+            $this->repository->update(Input::all(), $idModelTire);
             Session::flash(
                 'message',
                 Lang::get(
@@ -129,14 +127,14 @@ class ModelTireController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int $idModelTire
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($idModelTire)
     {
-        Log::info('Delete field: '.$id);
-        if ($this->repository->find($id)) {
-            $this->repository->delete($id);
+        Log::info('Delete field: '.$idModelTire);
+        if ($this->repository->find($idModelTire)) {
+            $this->repository->delete($idModelTire);
             Session::flash('message', Lang::get("general.deletedregister"));
         }
         return Redirect::to('modeltire');

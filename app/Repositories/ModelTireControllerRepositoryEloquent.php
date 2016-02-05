@@ -9,6 +9,7 @@ use App\Entities\ModelTireController;
 
 /**
  * Class ModelTireControllerRepositoryEloquent
+ *
  * @package namespace App\Repositories;
  */
 class ModelTireControllerRepositoryEloquent extends BaseRepository implements ModelTireControllerRepository

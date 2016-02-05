@@ -9,6 +9,7 @@ use App\Entities\User;
 
 /**
  * Class UserRepositoryEloquent
+ *
  * @package namespace App\Repositories;
  */
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
@@ -16,6 +17,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     
     /**
      * Specify validator rules
+     *
      * @var array
      */
     protected $rules = [

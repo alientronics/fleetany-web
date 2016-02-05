@@ -9,6 +9,7 @@ use App\Entities\ModelVehicle;
 
 /**
  * Class ModelVehiclesRepositoryEloquent
+ *
  * @package namespace App\Repositories;
  */
 class ModelVehicleRepositoryEloquent extends BaseRepository implements ModelVehicleRepository
@@ -16,6 +17,7 @@ class ModelVehicleRepositoryEloquent extends BaseRepository implements ModelVehi
     
     /**
      * Specify validator rules
+     *
      * @var array
      */
     protected $rules = [

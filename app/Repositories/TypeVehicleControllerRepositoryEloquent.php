@@ -9,6 +9,7 @@ use App\Entities\TypeVehicleController;
 
 /**
  * Class TypeVehicleControllerRepositoryEloquent
+ *
  * @package namespace App\Repositories;
  */
 class TypeVehicleControllerRepositoryEloquent extends BaseRepository implements TypeVehicleControllerRepository

@@ -59,10 +59,9 @@ class ModelVehicleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store()
     {
         try {
             $this->repository->validator();
@@ -84,12 +83,12 @@ class ModelVehicleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int $idModelVehicle
      * @return Response
      */
-    public function show($id)
+    public function show($idModelVehicle)
     {
-        $modelvehicle= $this->repository->find($id);
+        $modelvehicle= $this->repository->find($idModelVehicle);
         $typevehicle = TypeVehicle::lists('name', 'id');
         return View::make("modelvehicle.show", compact('modelvehicle', 'typevehicle'));
     }
@@ -97,12 +96,12 @@ class ModelVehicleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int $idModelVehicle
      * @return Response
      */
-    public function edit($id)
+    public function edit($idModelVehicle)
     {
-        $modelvehicle = $this->repository->find($id);
+        $modelvehicle = $this->repository->find($idModelVehicle);
         $typevehicle = TypeVehicle::lists('name', 'id');
         return View::make("modelvehicle.edit", compact('modelvehicle', 'typevehicle'));
     }
@@ -110,15 +109,14 @@ class ModelVehicleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request $request
-     * @param  int     $id
+     * @param  int $idModelVehicle
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update($idModelVehicle)
     {
         try {
             $this->repository->validator();
-            $this->repository->update(Input::all(), $id);
+            $this->repository->update(Input::all(), $idModelVehicle);
             Session::flash(
                 'message',
                 Lang::get(
@@ -136,14 +134,14 @@ class ModelVehicleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int $idModelVehicle
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($idModelVehicle)
     {
-        Log::info('Delete field: '.$id);
-        if ($this->repository->find($id)) {
-            $this->repository->delete($id);
+        Log::info('Delete field: '.$idModelVehicle);
+        if ($this->repository->find($idModelVehicle)) {
+            $this->repository->delete($idModelVehicle);
             Session::flash('message', Lang::get("general.deletedregister"));
         }
         return Redirect::to('modelvehicle');

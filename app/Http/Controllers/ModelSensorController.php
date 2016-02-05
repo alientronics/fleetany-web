@@ -58,10 +58,9 @@ class ModelSensorController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store()
     {
         try {
             $this->repository->validator();
@@ -83,39 +82,38 @@ class ModelSensorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int $idModelSensor
      * @return Response
      */
-    public function show($id)
+    public function show($idModelSensor)
     {
-        $modelsensor= $this->repository->find($id);
+        $modelsensor= $this->repository->find($idModelSensor);
         return View::make("modelsensor.show", compact('modelsensor'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int $idModelSensor
      * @return Response
      */
-    public function edit($id)
+    public function edit($idModelSensor)
     {
-        $modelsensor = $this->repository->find($id);
+        $modelsensor = $this->repository->find($idModelSensor);
         return View::make("modelsensor.edit", compact('modelsensor'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request $request
-     * @param  int     $id
+     * @param  int $idModelSensor
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update($idModelSensor)
     {
         try {
             $this->repository->validator();
-            $this->repository->update(Input::all(), $id);
+            $this->repository->update(Input::all(), $idModelSensor);
             Session::flash(
                 'message',
                 Lang::get(
@@ -133,14 +131,14 @@ class ModelSensorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int $idModelSensor
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($idModelSensor)
     {
-        Log::info('Delete field: '.$id);
-        if ($this->repository->find($id)) {
-            $this->repository->delete($id);
+        Log::info('Delete field: '.$idModelSensor);
+        if ($this->repository->find($idModelSensor)) {
+            $this->repository->delete($idModelSensor);
             Session::flash('message', Lang::get("general.deletedregister"));
         }
 

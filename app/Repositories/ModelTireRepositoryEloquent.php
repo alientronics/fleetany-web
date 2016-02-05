@@ -9,6 +9,7 @@ use App\Entities\ModelTire;
 
 /**
  * Class ModelTireRepositoryEloquent
+ *
  * @package namespace App\Repositories;
  */
 class ModelTireRepositoryEloquent extends BaseRepository implements ModelTireRepository
@@ -16,6 +17,7 @@ class ModelTireRepositoryEloquent extends BaseRepository implements ModelTireRep
     
     /**
      * Specify validator rules
+     *
      * @var array
      */
     protected $rules = [

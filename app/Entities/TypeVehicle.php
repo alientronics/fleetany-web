@@ -13,7 +13,7 @@ class TypeVehicle extends Model implements Transformable
 
     protected $fillable = ['name'];
     
-    public function model_vehicle()
+    public function modelVehicle()
     {
         return $this->hasMany("App\Entities\ModelVehicle");
     }

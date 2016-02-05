@@ -57,10 +57,9 @@ class TypeVehicleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store()
     {
         try {
             $this->repository->validator();
@@ -82,39 +81,38 @@ class TypeVehicleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  int $idTypeVehicle
      * @return Response
      */
-    public function show($id)
+    public function show($idTypeVehicle)
     {
-        $typevehicle= $this->repository->find($id);
+        $typevehicle= $this->repository->find($idTypeVehicle);
         return View::make("typevehicle.show", compact('typevehicle'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param  int $idTypeVehicle
      * @return Response
      */
-    public function edit($id)
+    public function edit($idTypeVehicle)
     {
-        $typevehicle = $this->repository->find($id);
+        $typevehicle = $this->repository->find($idTypeVehicle);
         return View::make("typevehicle.edit", compact('typevehicle'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request $request
-     * @param  int     $id
+     * @param  int $idTypeVehicle
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update($idTypeVehicle)
     {
         try {
             $this->repository->validator();
-            $this->repository->update(Input::all(), $id);
+            $this->repository->update(Input::all(), $idTypeVehicle);
             Session::flash(
                 'message',
                 Lang::get(
@@ -132,21 +130,25 @@ class TypeVehicleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param  int $idTypeVehicle
      * @return Response
      */
-    public function destroy($id)
+    public function destroy($idTypeVehicle)
     {
-        Log::info('Delete field: '.$id);
+        Log::info('Delete field: '.$idTypeVehicle);
 
-        if ($this->repository->find($id)) {
-            if (\Illuminate\Support\Facades\DB::table('model_vehicles')->where('type_vehicle_id', $id)->count() > 0) {
-                Session::flash('danger', Lang::get(
-                    "general.notdeletedregister",
-                    array("tabela" => Lang::get("general.TypeVehicle"))
-                ));
+        if ($this->repository->find($idTypeVehicle)) {
+            if (\Illuminate\Support\Facades\DB::table('model_vehicles')
+                        ->where('type_vehicle_id', $idTypeVehicle)->count() > 0) {
+                Session::flash(
+                    'danger',
+                    Lang::get(
+                        "general.notdeletedregister",
+                        array("tabela" => Lang::get("general.TypeVehicle"))
+                    )
+                );
             } else {
-                $this->repository->delete($id);
+                $this->repository->delete($idTypeVehicle);
                 Session::flash('message', Lang::get("general.deletedregister"));
             }
         }

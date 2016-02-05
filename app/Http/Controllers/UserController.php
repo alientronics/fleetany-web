@@ -52,7 +52,7 @@ class UserController extends Controller
         return view("user.edit", compact('user'));
     }
 
-    public function store(Request $request)
+    public function store()
     {
         try {
             $this->repository->validator();
@@ -71,50 +71,23 @@ class UserController extends Controller
         }
     }
     
-    public function show($id)
+    public function show($idUser)
     {
-        $typevehicle= $this->repository->find($id);
+        $user = $this->repository->find($idUser);
         return View::make("user.show", compact('user'));
     }
     
-    public function edit($id)
+    public function edit($idUser)
     {
-        $typevehicle = $this->repository->find($id);
+        $user = $this->repository->find($idUser);
         return View::make("user.edit", compact('user'));
     }
     
-//    public function update($userId, Request $request)
-//    {
-//        $user = User::findOrFail($userId);
-//
-//        $this->validate(
-//            $request, [
-//                'name' => 'required',
-//                'email' => 'required'
-//                ]
-//        );
-//
-//        $input = $request->all();
-//
-//        $user->fill($input)->save();
-//
-//        $request->session()->flash('flash_message', 'Altera&ccedil;&otilde;es salvas com sucesso!');
-//
-//        return redirect()->back();
-//    }
-//
-//    public function showProfile()
-//    {
-//        $task = User::findOrFail(Auth::id());
-//
-//        return view('profile')->withUser($task);
-//    }
-    
-    public function update(Request $request, $id)
+    public function update($idUser)
     {
         try {
             $this->repository->validator();
-            $this->repository->update(Input::all(), $id);
+            $this->repository->update(Input::all(), $idUser);
             Session::flash(
                 'message',
                 Lang::get(
@@ -129,12 +102,12 @@ class UserController extends Controller
         }
     }
     
-    public function destroy($id)
+    public function destroy($idUser)
     {
-        Log::info('Delete field: '.$id);
+        Log::info('Delete field: '.$idUser);
 
-        if ($this->repository->find($id)) {
-            $this->repository->delete($id);
+        if ($this->repository->find($idUser)) {
+            $this->repository->delete($idUser);
             Session::flash('message', Lang::get("general.deletedregister"));
         }
         return Redirect::to('user');
