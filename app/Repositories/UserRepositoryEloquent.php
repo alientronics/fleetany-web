@@ -21,7 +21,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
      * @var array
      */
     protected $rules = [
-        'name'      => 'min:3|alpha_num|required',
+        'name'      => 'min:3|required',
         ];
     /**
      * Specify Model class name
