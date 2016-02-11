@@ -26,6 +26,6 @@ class CreateModelMonitorsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('model_sensors');
+        Schema::drop('model_monitors');
     }
 }
