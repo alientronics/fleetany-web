@@ -32,6 +32,8 @@
                 <li><a href="{{URL::to('modelvehicle')}}">{{Lang::get('menu.ModelVehicle')}}</a></li>
                 <li><a href="{{URL::to('modelmonitor')}}">{{Lang::get('menu.ModelMonitor')}}</a></li>
                 <li><a href="{{URL::to('modelsensor')}}">{{Lang::get('menu.ModelSensor')}}</a></li>
+                <li><a href="{{URL::to('modeltire')}}">{{Lang::get('menu.ModelTire')}}</a></li>
+                <li><a href="{{URL::to('typevehicle')}}">{{Lang::get('menu.TypeVehicle')}}</a></li>
             </ul>
         </li>
         @else

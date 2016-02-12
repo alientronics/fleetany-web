@@ -48,10 +48,4 @@
 
 @section("script")
 
-$(document).ready(function(){
-    $(document).on('submit', '.delete-form', function(){
-        return confirm("{{Lang::get("general.areyousure")}}");
-    });
-});
-
 @stop

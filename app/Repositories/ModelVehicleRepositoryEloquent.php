@@ -21,7 +21,7 @@ class ModelVehicleRepositoryEloquent extends BaseRepository implements ModelVehi
      * @var array
      */
     protected $rules = [
-        'name'      => 'min:3|alpha_num|required',
+        'name'      => 'min:3|required',
         'year'   => 'digits:4|required',
         'number_of_wheels'   => 'between:1,2|required'
         ];

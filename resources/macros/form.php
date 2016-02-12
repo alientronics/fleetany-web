@@ -14,8 +14,8 @@ Form::macro('delete',function($url, $button_label=null,$form_parameters = array(
     };
          
     if(empty($button_label)) {
-        $button = '<button type="submit" class="btn btn-xs btn-danger ">
-                        <i class="glyphicon  glyphicon-trash"></i>
+        $button = '<button name="delete-button" type="submit" class="btn btn-xs btn-danger ">
+                        <i class="glyphicon  glyphicon-trash"></i> Excluir
                     </button>';
     }
     else {

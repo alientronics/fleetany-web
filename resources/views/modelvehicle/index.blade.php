@@ -33,7 +33,7 @@
         <tr>
             <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->id}}</a></td>
             <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->name}}</a></td>
-            <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->type_vehicle->name}}</a></td>
+            <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->name}}</a></td>
             <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->year}}</a></td>
             <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->number_of_wheels}}</a></td>
             <td>
@@ -53,11 +53,5 @@
 @stop
 
 @section("script")
-
-$(document).ready(function(){
-    $(document).on('submit', '.delete-form', function(){
-        return confirm("{{Lang::get("general.areyousure")}}");
-    });
-});
 
 @stop

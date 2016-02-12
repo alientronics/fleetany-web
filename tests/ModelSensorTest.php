@@ -1,8 +1,5 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
 
 class ModelSensorTest extends TestCase
@@ -33,5 +30,9 @@ class ModelSensorTest extends TestCase
         ;
 
         $this->seeInDatabase('model_sensors', ['name' => 'Nome Sensor Editado', 'version' => '2']);
+        
+        $this->press('Excluir');
+
+        $this->notSeeInDatabase('model_sensors', ['name' => 'Nome Sensor Editado', 'version' => '2']);
     }
 }
