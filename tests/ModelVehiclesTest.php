@@ -21,7 +21,7 @@ class ModelVehicleTest extends TestCase
         
         $this->visit('/modelvehicle/create')
             ->type('Nome Veiculo Teste', 'name')
-            ->select(1, 'type_vehicle_id')
+            ->select($this->crawler->filterXPath("//select[@id='type_vehicle_id']/option[1]")->eq(0)->attr('value'), 'type_vehicle_id')
             ->type('2015', 'year')
             ->type('4', 'number_of_wheels')
             ->press('Enviar')
