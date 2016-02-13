@@ -4,12 +4,7 @@ use App\User;
 
 class ModelTireTest extends TestCase
 {
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-    public function testModelTire()
+    public function testCreate()
     {
         $this->be(User::find(1));
 
@@ -42,9 +37,14 @@ class ModelTireTest extends TestCase
                  'start_depth' => '30,5', 
                  'type_land' => '40'
                 ]);
-        
+    }
+    
+    public function testUpdate()
+    {
+        $this->be(User::find(1));
 
-        $this->click('Nome Pneu Teste')
+        $this->visit('/modeltire')
+            ->click('Nome Pneu Teste')
             ->type('Nome Pneu Editado', 'name')
             ->type('11', 'pressure_ideal')
             ->type('13', 'pressure_max')
@@ -59,22 +59,28 @@ class ModelTireTest extends TestCase
             ->press('Enviar')
             ->seePageIs('/modeltire')
         ;
-
-        $this->seeInDatabase('model_tires', 
-                ['name' => 'Nome Pneu Editado', 
-                 'pressure_ideal' => '11', 
-                 'pressure_max' => '13', 
-                 'pressure_min' => '9', 
-                 'mileage' => '5', 
-                 'temp_ideal' => '51,2', 
-                 'temp_max' => '61,3', 
-                 'temp_min' => '41,4', 
-                 'start_diameter' => '21,5', 
-                 'start_depth' => '31,6', 
-                 'type_land' => '41'
-                ]);
         
-        $this->press('Excluir');
+        $this->seeInDatabase('model_tires',
+            ['name' => 'Nome Pneu Editado',
+                'pressure_ideal' => '11',
+                'pressure_max' => '13',
+                'pressure_min' => '9',
+                'mileage' => '5',
+                'temp_ideal' => '51,2',
+                'temp_max' => '61,3',
+                'temp_min' => '41,4',
+                'start_diameter' => '21,5',
+                'start_depth' => '31,6',
+                'type_land' => '41'
+            ]);
+    }
+    
+    public function testDelete()
+    {
+        $this->be(User::find(1));
+
+        $this->visit('/modeltire')
+            ->press('Excluir');
         
         $this->notSeeInDatabase('model_tires',
             ['name' => 'Nome Pneu Editado',

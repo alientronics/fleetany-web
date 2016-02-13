@@ -4,12 +4,7 @@ use App\User;
 
 class ModelMonitorTest extends TestCase
 {
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-    public function testModelMonitor()
+    public function testCreate()
     {
         $this->be(User::find(1));
 
@@ -21,18 +16,30 @@ class ModelMonitorTest extends TestCase
         ;
         
         $this->seeInDatabase('model_monitors', ['name' => 'Nome Monitor Teste', 'version' => '1']);
+    }
+    
+    public function testUpdate()
+    {
+        $this->be(User::find(1));
         
-        
-        $this->click('Nome Monitor Teste')
+        $this->visit('/modelmonitor')
+            ->click('Nome Monitor Teste')
             ->type('Nome Monitor Editado', 'name')
             ->type(2, 'version')
             ->press('Enviar')
         ;
-
+        
         $this->seeInDatabase('model_monitors', ['name' => 'Nome Monitor Editado', 'version' => '2']);
-
-        $this->press('Excluir');
-
+    }
+    
+    public function testDelete()
+    {
+        $this->be(User::find(1));
+        
+        $this->visit('/modelmonitor')
+            ->press('Excluir');
+    
         $this->notSeeInDatabase('model_monitors', ['name' => 'Nome Monitor Editado', 'version' => '2']);
     }
+
 }

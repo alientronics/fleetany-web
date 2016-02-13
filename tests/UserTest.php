@@ -4,12 +4,7 @@ use App\User;
 
 class UserTest extends TestCase
 {
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-    public function testUser()
+    public function testCreate()
     {
         $this->be(User::find(1));
 
@@ -24,9 +19,14 @@ class UserTest extends TestCase
         ;
         
         $this->seeInDatabase('users', ['name' => 'Nome Usuario Teste', 'email' => 'email@usuario.com']);
-        
-        
-        $this->click('Nome Usuario Teste')
+    }
+    
+    public function testUpdate()
+    {
+        $this->be(User::find(1));
+
+        $this->visit('/user')
+            ->click('Nome Usuario Teste')
             ->type('Nome Usuario Editado', 'name')
             ->type('emaileditado@usuario.com', 'email')
             ->type('654321', 'password')
@@ -34,11 +34,18 @@ class UserTest extends TestCase
             ->type('Empresa Usuario Editado', 'company_id')
             ->press('Enviar')
         ;
-
+        
         $this->seeInDatabase('users', ['name' => 'Nome Usuario Editado', 'email' => 'emaileditado@usuario.com']);
+    }
+    
+    public function testDelete()
+    {
+        $this->be(User::find(1));
 
-        $this->press('Excluir');
-
+        $this->visit('/user')
+            ->press('Excluir');
+        
         $this->notSeeInDatabase('users', ['name' => 'Nome Usuario Editado', 'email' => 'emaileditado@usuario.com']);
     }
+    
 }
