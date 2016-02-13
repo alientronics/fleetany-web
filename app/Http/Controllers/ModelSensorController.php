@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Request;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Repositories\ModelSensorRepositoryEloquent;

@@ -2,13 +2,7 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Http\Request;
-//use App\User;
-//use App\Http\Controllers\Controller;
-//use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Request;
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepositoryEloquent;
 use App\Entities\User;
