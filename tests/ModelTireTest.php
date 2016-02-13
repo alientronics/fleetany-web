@@ -1,13 +1,9 @@
 <?php
 
-use App\User;
-
 class ModelTireTest extends TestCase
 {
     public function testCreate()
     {
-        $this->be(User::find(1));
-
         $this->visit('/modeltire/create')
             ->type('Nome Pneu Teste', 'name')
             ->type('10', 'pressure_ideal')
@@ -41,8 +37,6 @@ class ModelTireTest extends TestCase
     
     public function testUpdate()
     {
-        $this->be(User::find(1));
-
         $this->visit('/modeltire')
             ->click('Nome Pneu Teste')
             ->type('Nome Pneu Editado', 'name')
@@ -77,8 +71,6 @@ class ModelTireTest extends TestCase
     
     public function testDelete()
     {
-        $this->be(User::find(1));
-
         $this->visit('/modeltire')
             ->press('Excluir');
         

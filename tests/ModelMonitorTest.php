@@ -1,13 +1,9 @@
 <?php
 
-use App\User;
-
 class ModelMonitorTest extends TestCase
 {
     public function testCreate()
     {
-        $this->be(User::find(1));
-
         $this->visit('/modelmonitor/create')
             ->type('Nome Monitor Teste', 'name')
             ->type('1', 'version')
@@ -20,8 +16,6 @@ class ModelMonitorTest extends TestCase
     
     public function testUpdate()
     {
-        $this->be(User::find(1));
-        
         $this->visit('/modelmonitor')
             ->click('Nome Monitor Teste')
             ->type('Nome Monitor Editado', 'name')
@@ -34,8 +28,6 @@ class ModelMonitorTest extends TestCase
     
     public function testDelete()
     {
-        $this->be(User::find(1));
-        
         $this->visit('/modelmonitor')
             ->press('Excluir');
     

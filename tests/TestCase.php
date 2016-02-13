@@ -1,5 +1,7 @@
 <?php
 
+use App\User;
+
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     /**
@@ -14,6 +16,13 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      *
      * @return \Illuminate\Foundation\Application
      */
+    
+    public function setUp()
+    {
+        parent::setUp();
+        $this->be(User::find(1));
+    }
+    
     public function createApplication()
     {
         $app = require __DIR__.'/../bootstrap/app.php';

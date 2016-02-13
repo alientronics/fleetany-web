@@ -33,7 +33,7 @@
         <tr>
             <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->id}}</a></td>
             <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->name}}</a></td>
-            <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->name}}</a></td>
+            <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->typeVehicle->name}}</a></td>
             <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->year}}</a></td>
             <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->number_of_wheels}}</a></td>
             <td>

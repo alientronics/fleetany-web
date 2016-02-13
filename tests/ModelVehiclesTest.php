@@ -1,13 +1,9 @@
 <?php
 
-use App\User;
-
 class ModelVehicleTest extends TestCase
 {
     public function testTypeVehicleCreate()
     {
-        $this->be(User::find(1));
-
         $this->visit('/typevehicle/create')
             ->type('Nome Tipo Veiculo Teste', 'name')
             ->press('Enviar')
@@ -19,8 +15,6 @@ class ModelVehicleTest extends TestCase
     
     public function testTypeVehicleUpdate()
     {
-        $this->be(User::find(1));
-
         $this->visit('/typevehicle')
             ->click('Nome Tipo Veiculo Teste')
             ->type('Nome Tipo Veiculo Editado', 'name')
@@ -32,8 +26,6 @@ class ModelVehicleTest extends TestCase
     
     public function testCreate()
     {
-        $this->be(User::find(1));
-
         $this->visit('/modelvehicle/create');
         
         $idOption = $this->crawler->filterXPath("//select[@id='type_vehicle_id']/option[1]")->attr('value');
@@ -56,8 +48,6 @@ class ModelVehicleTest extends TestCase
     
     public function testUpdate() 
     {
-        $this->be(User::find(1));
-        
         $this->visit('/modelvehicle')
             ->click('Nome Veiculo Teste')
             ->type('Nome Veiculo Editado', 'name')
@@ -75,8 +65,6 @@ class ModelVehicleTest extends TestCase
 
     public function testDelete() 
     {
-        $this->be(User::find(1));
-        
         $this->visit('/modelvehicle')
             ->press('Excluir');
         
@@ -89,8 +77,6 @@ class ModelVehicleTest extends TestCase
 
     public function testTypeVehicleDelete() 
     {
-        $this->be(User::find(1));
-        
         $this->visit('/typevehicle')
             ->press('Excluir');
         

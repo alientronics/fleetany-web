@@ -1,13 +1,9 @@
 <?php
 
-use App\User;
-
 class UserTest extends TestCase
 {
     public function testCreate()
     {
-        $this->be(User::find(1));
-
         $this->visit('/user/create')
             ->type('Nome Usuario Teste', 'name')
             ->type('email@usuario.com', 'email')
@@ -23,8 +19,6 @@ class UserTest extends TestCase
     
     public function testUpdate()
     {
-        $this->be(User::find(1));
-
         $this->visit('/user')
             ->click('Nome Usuario Teste')
             ->type('Nome Usuario Editado', 'name')
@@ -40,8 +34,6 @@ class UserTest extends TestCase
     
     public function testDelete()
     {
-        $this->be(User::find(1));
-
         $this->visit('/user')
             ->press('Excluir');
         
