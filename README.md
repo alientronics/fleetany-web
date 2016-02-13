@@ -17,6 +17,6 @@ We have detailed installation instructions in our wiki:
 License
 -------
 
-The code in this repository is released under the GNU AFFERO GENERAL PUBLIC LICENSE.
+The code in this repository is released under the GNU AFFERO GENERAL PUBLIC LICENSE.  A copy can be found in the `LICENSE` file.
 
 Copyright (c) Alientronics, 2015.
