@@ -30,6 +30,7 @@
         </tr>
     </thead>
     @foreach($users as $user) 
+    	@if ($user->id != 1) 
         <tr>
             <td><a href="{{route('user.edit', $user->id)}}">{{$user->id}}</a></td>
             <td><a href="{{route('user.edit', $user->id)}}">{{$user->name}}</a></td>
@@ -40,6 +41,7 @@
                 {!!Form::delete(route('user.destroy',$user->id))!!}
             </td>
         </tr>
+        @endif
     @endforeach
 </table>
 

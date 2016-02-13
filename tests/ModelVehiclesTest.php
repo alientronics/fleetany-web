@@ -19,9 +19,21 @@ class ModelVehicleTest extends TestCase
             ->seePageIs('/typevehicle')
         ;
         
-        $this->visit('/modelvehicle/create')
-            ->type('Nome Veiculo Teste', 'name')
-            ->select($this->crawler->filterXPath("//select[@id='type_vehicle_id']/option[1]")->eq(0)->attr('value'), 'type_vehicle_id')
+        $this->seeInDatabase('type_vehicles', ['name' => 'Nome Tipo Veiculo Teste']);
+        
+        $this->click('Nome Tipo Veiculo Teste')
+            ->type('Nome Tipo Veiculo Editado', 'name')
+            ->press('Enviar')
+        ;
+            
+        $this->seeInDatabase('type_vehicles', ['name' => 'Nome Tipo Veiculo Editado']);
+        
+        $this->visit('/modelvehicle/create');
+        
+        $idOption = $this->crawler->filterXPath("//select[@id='type_vehicle_id']/option[1]")->attr('value');
+
+        $this->type('Nome Veiculo Teste', 'name')
+            ->select($idOption, 'type_vehicle_id')
             ->type('2015', 'year')
             ->type('4', 'number_of_wheels')
             ->press('Enviar')
@@ -30,7 +42,7 @@ class ModelVehicleTest extends TestCase
         
         $this->seeInDatabase('model_vehicles', 
                 ['name' => 'Nome Veiculo Teste', 
-                    'type_vehicle_id' => '1', 
+                    'type_vehicle_id' => $idOption, 
                     'year' => '2015', 
                     'number_of_wheels' => '4'
                 ]);
@@ -44,28 +56,24 @@ class ModelVehicleTest extends TestCase
 
         $this->seeInDatabase('model_vehicles', 
                 ['name' => 'Nome Veiculo Editado', 
-                    'type_vehicle_id' => '1', 
+                    'type_vehicle_id' => $idOption, 
                     'year' => '2016', 
                     'number_of_wheels' => '6'
                 ]);
         
 
-        $this->visit('/typevehicle')->press('Excluir');
         $this->visit('/modelvehicle')->press('Excluir');
-        
-        $this->notSeeInDatabase('model_vehicles',
-            ['name' => 'Nome Veiculo Teste',
-                'type_vehicle_id' => '1',
-                'year' => '2015',
-                'number_of_wheels' => '4'
-            ]);
         
         $this->notSeeInDatabase('model_vehicles', 
                 ['name' => 'Nome Veiculo Editado', 
-                    'type_vehicle_id' => '1', 
+                    'type_vehicle_id' => $idOption, 
                     'year' => '2016', 
                     'number_of_wheels' => '6'
                 ]);
+
+        $this->visit('/typevehicle')->press('Excluir');
+        
+        $this->notSeeInDatabase('type_vehicles', ['name' => 'Nome Tipo Veiculo Editado']);
         
     }
 }
