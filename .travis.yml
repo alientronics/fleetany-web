@@ -11,6 +11,8 @@ services:
 addons:
   code_climate:
     repo_token: e9e10e52d244c104fa21620f341e7d72f338e4b58fb9cd604adf41f01f415804
+  hosts:
+    - dynamodb-local
 
 before_install:
   - composer self-update
@@ -22,6 +24,11 @@ before_script:
   - mysql -e 'create database tpms;'
   - mv .env.travis .env
   - php artisan migrate:refresh --seed --force
+  # Install DynamoDB Local
+  - wget http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.tar.gz -O /tmp/dynamodb_local_latest.tar.gz
+  - tar -xzf /tmp/dynamodb_local_latest.tar.gz -C /tmp
+  - java -Djava.library.path=/tmp/DynamoDBLocal_lib -jar /tmp/DynamoDBLocal.jar -inMemory &
+  - sleep 2
 
 script:
   - phpunit --stderr --configuration phpunit.xml --debug
