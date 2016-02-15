@@ -20,12 +20,12 @@ use Prettus\Validator\Exceptions\ValidatorException;
 class ModelSensorController extends Controller
 {
     
-    protected $repository;
+    protected $sensorRepo;
     
-    public function __construct(ModelSensorRepositoryEloquent $repository)
+    public function __construct(ModelSensorRepositoryEloquent $sensorRepo)
     {
         $this->middleware('auth');
-        $this->repository = $repository;
+        $this->sensorRepo = $sensorRepo;
     }
     
     /**
@@ -35,7 +35,7 @@ class ModelSensorController extends Controller
      */
     public function index()
     {
-        $modelsensors = $this->repository->all();
+        $modelsensors = $this->sensorRepo->all();
         if (Request::isJson()) {
             return $modelsensors;
         }
@@ -62,8 +62,8 @@ class ModelSensorController extends Controller
     public function store()
     {
         try {
-            $this->repository->validator();
-            $this->repository->create(Input::all());
+            $this->sensorRepo->validator();
+            $this->sensorRepo->create(Input::all());
             Session::flash(
                 'message',
                 Lang::get(
@@ -86,7 +86,7 @@ class ModelSensorController extends Controller
      */
     public function show($idModelSensor)
     {
-        $modelsensor= $this->repository->find($idModelSensor);
+        $modelsensor= $this->sensorRepo->find($idModelSensor);
         return View::make("modelsensor.show", compact('modelsensor'));
     }
 
@@ -98,7 +98,7 @@ class ModelSensorController extends Controller
      */
     public function edit($idModelSensor)
     {
-        $modelsensor = $this->repository->find($idModelSensor);
+        $modelsensor = $this->sensorRepo->find($idModelSensor);
         return View::make("modelsensor.edit", compact('modelsensor'));
     }
 
@@ -111,8 +111,8 @@ class ModelSensorController extends Controller
     public function update($idModelSensor)
     {
         try {
-            $this->repository->validator();
-            $this->repository->update(Input::all(), $idModelSensor);
+            $this->sensorRepo->validator();
+            $this->sensorRepo->update(Input::all(), $idModelSensor);
             Session::flash(
                 'message',
                 Lang::get(
@@ -136,8 +136,8 @@ class ModelSensorController extends Controller
     public function destroy($idModelSensor)
     {
         Log::info('Delete field: '.$idModelSensor);
-        if ($this->repository->find($idModelSensor)) {
-            $this->repository->delete($idModelSensor);
+        if ($this->sensorRepo->find($idModelSensor)) {
+            $this->sensorRepo->delete($idModelSensor);
             Session::flash('message', Lang::get("general.deletedregister"));
         }
 

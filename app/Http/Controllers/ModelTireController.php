@@ -18,12 +18,12 @@ use Prettus\Validator\Exceptions\ValidatorException;
 class ModelTireController extends Controller
 {
     
-    protected $repository;
+    protected $tireRepo;
     
-    public function __construct(ModelTireRepositoryEloquent $repository)
+    public function __construct(ModelTireRepositoryEloquent $tireRepo)
     {
         $this->middleware('auth');
-        $this->repository = $repository;
+        $this->tireRepo = $tireRepo;
     }
     /**
      * Display a listing of the resource.
@@ -32,7 +32,7 @@ class ModelTireController extends Controller
      */
     public function index()
     {
-        $modeltires = $this->repository->all();
+        $modeltires = $this->tireRepo->all();
         if (Request::isJson()) {
             return $modeltires;
         }
@@ -58,8 +58,8 @@ class ModelTireController extends Controller
     public function store()
     {
         try {
-            $this->repository->validator();
-            $this->repository->create(Input::all());
+            $this->tireRepo->validator();
+            $this->tireRepo->create(Input::all());
             Session::flash(
                 'message',
                 Lang::get(
@@ -82,7 +82,7 @@ class ModelTireController extends Controller
      */
     public function show($idModelTire)
     {
-        $modeltire= $this->repository->find($idModelTire);
+        $modeltire= $this->tireRepo->find($idModelTire);
         return View::make("modeltire.show", compact('modeltire'));
     }
 
@@ -94,7 +94,7 @@ class ModelTireController extends Controller
      */
     public function edit($idModelTire)
     {
-        $modeltire = $this->repository->find($idModelTire);
+        $modeltire = $this->tireRepo->find($idModelTire);
         return View::make("modeltire.edit", compact('modeltire'));
     }
 
@@ -107,8 +107,8 @@ class ModelTireController extends Controller
     public function update($idModelTire)
     {
         try {
-            $this->repository->validator();
-            $this->repository->update(Input::all(), $idModelTire);
+            $this->tireRepo->validator();
+            $this->tireRepo->update(Input::all(), $idModelTire);
             Session::flash(
                 'message',
                 Lang::get(
@@ -132,8 +132,8 @@ class ModelTireController extends Controller
     public function destroy($idModelTire)
     {
         Log::info('Delete field: '.$idModelTire);
-        if ($this->repository->find($idModelTire)) {
-            $this->repository->delete($idModelTire);
+        if ($this->tireRepo->find($idModelTire)) {
+            $this->tireRepo->delete($idModelTire);
             Session::flash('message', Lang::get("general.deletedregister"));
         }
         return Redirect::to('modeltire');

@@ -21,12 +21,12 @@ use Prettus\Validator\Exceptions\ValidatorException;
 class TypeVehicleController extends Controller
 {
 
-    protected $repository;
+    protected $typeVehicleRepo;
     
-    public function __construct(TypeVehicleRepositoryEloquent $repository)
+    public function __construct(TypeVehicleRepositoryEloquent $typeVehicleRepo)
     {
         $this->middleware('auth');
-        $this->repository = $repository;
+        $this->typeVehicleRepo = $typeVehicleRepo;
         //$mp = new ModelVehicleController();
     }
     /**
@@ -36,7 +36,7 @@ class TypeVehicleController extends Controller
      */
     public function index()
     {
-        $typevehicles = $this->repository->all();
+        $typevehicles = $this->typeVehicleRepo->all();
         if (Request::isJson()) {
             return $typevehicles;
         }
@@ -62,8 +62,8 @@ class TypeVehicleController extends Controller
     public function store()
     {
         try {
-            $this->repository->validator();
-            $this->repository->create(Input::all());
+            $this->typeVehicleRepo->validator();
+            $this->typeVehicleRepo->create(Input::all());
             Session::flash(
                 'message',
                 Lang::get(
@@ -86,7 +86,7 @@ class TypeVehicleController extends Controller
      */
     public function show($idTypeVehicle)
     {
-        $typevehicle= $this->repository->find($idTypeVehicle);
+        $typevehicle= $this->typeVehicleRepo->find($idTypeVehicle);
         return View::make("typevehicle.show", compact('typevehicle'));
     }
 
@@ -98,7 +98,7 @@ class TypeVehicleController extends Controller
      */
     public function edit($idTypeVehicle)
     {
-        $typevehicle = $this->repository->find($idTypeVehicle);
+        $typevehicle = $this->typeVehicleRepo->find($idTypeVehicle);
         return View::make("typevehicle.edit", compact('typevehicle'));
     }
 
@@ -111,8 +111,8 @@ class TypeVehicleController extends Controller
     public function update($idTypeVehicle)
     {
         try {
-            $this->repository->validator();
-            $this->repository->update(Input::all(), $idTypeVehicle);
+            $this->typeVehicleRepo->validator();
+            $this->typeVehicleRepo->update(Input::all(), $idTypeVehicle);
             Session::flash(
                 'message',
                 Lang::get(
@@ -137,7 +137,7 @@ class TypeVehicleController extends Controller
     {
         Log::info('Delete field: '.$idTypeVehicle);
 
-        if ($this->repository->find($idTypeVehicle)) {
+        if ($this->typeVehicleRepo->find($idTypeVehicle)) {
             if (\Illuminate\Support\Facades\DB::table('model_vehicles')
                         ->where('type_vehicle_id', $idTypeVehicle)->count() > 0) {
                 Session::flash(
@@ -148,7 +148,7 @@ class TypeVehicleController extends Controller
                     )
                 );
             } else {
-                $this->repository->delete($idTypeVehicle);
+                $this->typeVehicleRepo->delete($idTypeVehicle);
                 Session::flash('message', Lang::get("general.deletedregister"));
             }
         }

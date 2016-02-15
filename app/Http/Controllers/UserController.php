@@ -18,12 +18,12 @@ use Prettus\Validator\Exceptions\ValidatorException;
 class UserController extends Controller
 {
 
-    protected $repository;
+    protected $userRepo;
     
-    public function __construct(UserRepositoryEloquent $repository)
+    public function __construct(UserRepositoryEloquent $userRepo)
     {
         $this->middleware('auth');
-        $this->repository = $repository;
+        $this->userRepo = $userRepo;
     }
 
     /**
@@ -33,7 +33,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = $this->repository->all();
+        $users = $this->userRepo->all();
         if (Request::isJson()) {
             return $users;
         }
@@ -49,8 +49,8 @@ class UserController extends Controller
     public function store()
     {
         try {
-            $this->repository->validator();
-            $this->repository->create(Input::all());
+            $this->userRepo->validator();
+            $this->userRepo->create(Input::all());
             Session::flash(
                 'message',
                 Lang::get(
@@ -67,21 +67,21 @@ class UserController extends Controller
     
     public function show($idUser)
     {
-        $user = $this->repository->find($idUser);
+        $user = $this->userRepo->find($idUser);
         return View::make("user.show", compact('user'));
     }
     
     public function edit($idUser)
     {
-        $user = $this->repository->find($idUser);
+        $user = $this->userRepo->find($idUser);
         return View::make("user.edit", compact('user'));
     }
     
     public function update($idUser)
     {
         try {
-            $this->repository->validator();
-            $this->repository->update(Input::all(), $idUser);
+            $this->userRepo->validator();
+            $this->userRepo->update(Input::all(), $idUser);
             Session::flash(
                 'message',
                 Lang::get(
@@ -100,8 +100,8 @@ class UserController extends Controller
     {
         Log::info('Delete field: '.$idUser);
 
-        if ($this->repository->find($idUser)) {
-            $this->repository->delete($idUser);
+        if ($this->userRepo->find($idUser)) {
+            $this->userRepo->delete($idUser);
             Session::flash('message', Lang::get("general.deletedregister"));
         }
         return Redirect::to('user');

@@ -18,12 +18,12 @@ use Prettus\Validator\Exceptions\ValidatorException;
 class ModelMonitorController extends Controller
 {
 
-    protected $repository;
-    public function __construct(ModelMonitorRepositoryEloquent $repository)
+    protected $monitorRepo;
+    public function __construct(ModelMonitorRepositoryEloquent $monitorRepo)
     {
         $this->middleware('auth');
         //$this->middleware('acl');
-        $this->repository = $repository;
+        $this->monitorRepo = $monitorRepo;
     }
 
     /**
@@ -33,7 +33,7 @@ class ModelMonitorController extends Controller
      */
     public function index()
     {
-        $modelmonitors = $this->repository->all();
+        $modelmonitors = $this->monitorRepo->all();
         if (Request::isJson()) {
             return $modelmonitors;
         }
@@ -59,8 +59,8 @@ class ModelMonitorController extends Controller
     public function store()
     {
         try {
-            $this->repository->validator();
-            $this->repository->create(Input::all());
+            $this->monitorRepo->validator();
+            $this->monitorRepo->create(Input::all());
             Session::flash(
                 'message',
                 Lang::get(
@@ -83,7 +83,7 @@ class ModelMonitorController extends Controller
      */
     public function show($idMonitor)
     {
-        $modelmonitor= $this->repository->find($idMonitor);
+        $modelmonitor= $this->monitorRepo->find($idMonitor);
         return View::make("modelmonitor.show", compact('modelmonitor'));
     }
 
@@ -95,7 +95,7 @@ class ModelMonitorController extends Controller
      */
     public function edit($idMonitor)
     {
-        $modelmonitor = $this->repository->find($idMonitor);
+        $modelmonitor = $this->monitorRepo->find($idMonitor);
         return View::make("modelmonitor.edit", compact('modelmonitor'));
     }
 
@@ -108,8 +108,8 @@ class ModelMonitorController extends Controller
     public function update($idMonitor)
     {
         try {
-            $this->repository->validator();
-            $this->repository->update(Input::all(), $idMonitor);
+            $this->monitorRepo->validator();
+            $this->monitorRepo->update(Input::all(), $idMonitor);
             Session::flash(
                 'message',
                 Lang::get(
@@ -133,8 +133,8 @@ class ModelMonitorController extends Controller
     public function destroy($idMonitor)
     {
         Log::info('Delete field: '.$idMonitor);
-        if ($this->repository->find($idMonitor)) {
-            $this->repository->delete($idMonitor);
+        if ($this->monitorRepo->find($idMonitor)) {
+            $this->monitorRepo->delete($idMonitor);
             Session::flash('message', Lang::get("general.deletedregister"));
         }
         return Redirect::to('modelmonitor');

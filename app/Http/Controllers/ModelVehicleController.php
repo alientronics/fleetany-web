@@ -21,12 +21,12 @@ use Prettus\Validator\Exceptions\ValidatorException;
 class ModelVehicleController extends Controller
 {
 
-    protected $repository;
+    protected $vehicleRepo;
     
-    public function __construct(ModelVehicleRepositoryEloquent $repository)
+    public function __construct(ModelVehicleRepositoryEloquent $vehicleRepo)
     {
         $this->middleware('auth');
-        $this->repository = $repository;
+        $this->vehicleRepo = $vehicleRepo;
     }
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class ModelVehicleController extends Controller
      */
     public function index()
     {
-        $modelvehicles = $this->repository->all();
+        $modelvehicles = $this->vehicleRepo->all();
         $typevehicle = TypeVehicle::lists('name', 'id');
         if (Request::isJson()) {
             return $modelvehicles;
@@ -64,8 +64,8 @@ class ModelVehicleController extends Controller
     public function store()
     {
         try {
-            $this->repository->validator();
-            $this->repository->create(Input::all());
+            $this->vehicleRepo->validator();
+            $this->vehicleRepo->create(Input::all());
             Session::flash(
                 'message',
                 Lang::get(
@@ -88,7 +88,7 @@ class ModelVehicleController extends Controller
      */
     public function show($idModelVehicle)
     {
-        $modelvehicle= $this->repository->find($idModelVehicle);
+        $modelvehicle= $this->vehicleRepo->find($idModelVehicle);
         $typevehicle = TypeVehicle::lists('name', 'id');
         return View::make("modelvehicle.show", compact('modelvehicle', 'typevehicle'));
     }
@@ -101,7 +101,7 @@ class ModelVehicleController extends Controller
      */
     public function edit($idModelVehicle)
     {
-        $modelvehicle = $this->repository->find($idModelVehicle);
+        $modelvehicle = $this->vehicleRepo->find($idModelVehicle);
         $typevehicle = TypeVehicle::lists('name', 'id');
         return View::make("modelvehicle.edit", compact('modelvehicle', 'typevehicle'));
     }
@@ -115,8 +115,8 @@ class ModelVehicleController extends Controller
     public function update($idModelVehicle)
     {
         try {
-            $this->repository->validator();
-            $this->repository->update(Input::all(), $idModelVehicle);
+            $this->vehicleRepo->validator();
+            $this->vehicleRepo->update(Input::all(), $idModelVehicle);
             Session::flash(
                 'message',
                 Lang::get(
@@ -140,8 +140,8 @@ class ModelVehicleController extends Controller
     public function destroy($idModelVehicle)
     {
         Log::info('Delete field: '.$idModelVehicle);
-        if ($this->repository->find($idModelVehicle)) {
-            $this->repository->delete($idModelVehicle);
+        if ($this->vehicleRepo->find($idModelVehicle)) {
+            $this->vehicleRepo->delete($idModelVehicle);
             Session::flash('message', Lang::get("general.deletedregister"));
         }
         return Redirect::to('modelvehicle');
