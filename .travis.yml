@@ -13,6 +13,7 @@ addons:
     repo_token: e9e10e52d244c104fa21620f341e7d72f338e4b58fb9cd604adf41f01f415804
 
 before_install:
+  - phpenv config-rm xdebug.ini
   - composer self-update
 
 install:
