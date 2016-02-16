@@ -13,7 +13,9 @@
 @endif
 @stop
 
+@if ($modelsensor->id)
 @section('breadcrumbs', Breadcrumbs::render('modelsensor.edit', $modelsensor))
+@endif
 
 @section('edit')
 

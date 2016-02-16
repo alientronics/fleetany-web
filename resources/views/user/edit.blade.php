@@ -13,7 +13,9 @@
 @endif
 @stop
 
+@if ($user->id)
 @section('breadcrumbs', Breadcrumbs::render('user.edit', $user))
+@endif
 
 @section('edit')
 

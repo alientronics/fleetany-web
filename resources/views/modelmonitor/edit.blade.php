@@ -13,7 +13,9 @@
 @endif
 @stop
 
+@if ($modelmonitor->id)
 @section('breadcrumbs', Breadcrumbs::render('modelmonitor.edit', $modelmonitor))
+@endif
 
 @section('edit')
 

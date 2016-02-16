@@ -13,7 +13,9 @@
 @endif
 @stop
 
+@if ($modelvehicle->id)
 @section('breadcrumbs', Breadcrumbs::render('modelvehicle.edit', $modelvehicle))
+@endif
 
 @section('edit')
 
