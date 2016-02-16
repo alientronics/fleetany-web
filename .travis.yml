@@ -18,9 +18,7 @@ before_install:
   - composer self-update
 
 install:
-  - phpenv config-rm xdebug.ini
   - composer install --prefer-source --no-interaction
-  - phpenv config-add xdebug.ini
 
 before_script:
   - mysql -e 'create database tpms;'
