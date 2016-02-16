@@ -141,12 +141,11 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Illuminate\Html\HtmlServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
 		App\Providers\FormMacroServiceProvider::class,
 		Prettus\Repository\Providers\RepositoryServiceProvider::class,
 		DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
 		"Kodeine\Acl\AclServiceProvider",
-    	'Illuminate\Html\HtmlServiceProvider',
 
     ],
 
@@ -198,8 +197,8 @@ return [
 		'Form'      => Illuminate\Html\FormFacade::class,
         'HTML'      => Illuminate\Html\HtmlFacade::class,
 		'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
-    	'Form'      => 'Illuminate\Html\FormFacade',
-    	'Html'      => 'Illuminate\Html\HtmlFacade',
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 
