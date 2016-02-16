@@ -3,3 +3,4 @@
 Homestead.yaml
 .env
 /nbproject/private/
+composer.phar
