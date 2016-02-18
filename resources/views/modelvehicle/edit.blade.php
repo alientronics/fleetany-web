@@ -19,6 +19,8 @@
 
 @section('edit')
 
+@role('administrator') 
+
 @if (!$modelvehicle->id)
 {!! Form::open(array('route' => 'modelvehicle.store')) !!}
 @else
@@ -50,5 +52,11 @@
     <button type="submit" class="btn btn-primary">{{Lang::get('general.Submit')}}</button>
     <button type="reset" class="btn btn-primary">{{Lang::get('general.Reset')}}</button>
 {!! Form::close() !!}
+
+@else
+<div class="alert alert-info">
+	{{Lang::get("general.acessdenied")}}
+</div>
+@endrole
 
 @stop

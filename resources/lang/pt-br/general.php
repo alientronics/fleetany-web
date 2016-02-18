@@ -13,6 +13,7 @@ return [
     "Actions"   => "Ações",
     "Comment"   => "Comentário",
     "norecordsfound"  => "Registros não encontrados",
+    "acessdenied"  => "Voc&ecirc; n&atilde;o tem permiss&atilde;o de acesso para esta p&aacute;gina",
     "succefullcreate" => ":table criado com sucesso",
     "succefullupdate" => ":table atualizado com sucesso",
     "SelectValue"     => "Selecione um valor",

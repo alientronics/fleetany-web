@@ -4,11 +4,22 @@
     <ul class="nav" id="side-menu">
         @if (Auth::check())
         <li><a href="{{URL::to('/')}}">{{Lang::get('menu.FleetPanel')}}</a></li>
+        @role('administrator|gestor|gerente')  
         <li><a href="{{URL::to('company')}}">{{Lang::get('menu.Company')}}</a></li>
+        @endrole  
+        @role('administrator|gestor') 
         <li><a href="{{URL::to('user')}}">{{Lang::get('menu.Users')}}</a></li>
+        @endrole
+        @role('administrator') 
         <li><a href="{{URL::to('modelmonitor')}}">{{Lang::get('menu.Monitors')}}</a></li>
-        <li><a href="{{URL::to('modelvehicle')}}">{{Lang::get('menu.Vehicles')}}</a></li>                
-        <li><a href="{{URL::to('fleets')}}">{{Lang::get('menu.Fleet')}}</a></li>          
+        @endrole
+        @role('administrator') 
+        <li><a href="{{URL::to('modelvehicle')}}">{{Lang::get('menu.Vehicles')}}</a></li> 
+        @endrole               
+        @role('administrator|gestor') 
+        <li><a href="{{URL::to('fleets')}}">{{Lang::get('menu.Fleet')}}</a></li>       
+        @endrole   
+        @role('administrator') 
         <li>
             <a href="#">
                 {{Lang::get('menu.Reports')}}
@@ -36,6 +47,7 @@
                 <li><a href="{{URL::to('typevehicle')}}">{{Lang::get('menu.TypeVehicle')}}</a></li>
             </ul>
         </li>
+        @endrole
         @else
         <li><a href="{{URL::asset("auth/login")}}">{{Lang::get('menu.Login')}}</a></li>
         

@@ -12,11 +12,14 @@
 
 @section('breadcrumbs', Breadcrumbs::render('modeltire'))
 
+@role('administrator') 
 @section('actions')
 {!!Form::actions(array('new' => route("modeltire.create")))!!}
 @stop
+@endrole
 
 @section('table')
+@role('administrator') 
 @if (count($modeltires) > 0)
 <table class='table table-striped table-bordered table-hover'>
     <thead>
@@ -32,8 +35,10 @@
             <th>{{Lang::get("general.temp_min")}}</th>
             <th>{{Lang::get("general.start_diameter")}}</th>
             <th>{{Lang::get("general.start_depth")}}</th>
-            <th>{{Lang::get("general.type_land")}}</th>            
+            <th>{{Lang::get("general.type_land")}}</th>  
+            @permission('delete.admin')          
             <th>{{Lang::get("general.Actions")}}</th>
+            @endpermission
         </tr>
     </thead>
     @foreach($modeltires as $modeltire) 
@@ -50,9 +55,11 @@
             <td><a href="{{route('modeltire.edit', $modeltire->id)}}">{{$modeltire->start_diameter}}</a></td>
             <td><a href="{{route('modeltire.edit', $modeltire->id)}}">{{$modeltire->start_depth}}</a></td>
             <td><a href="{{route('modeltire.edit', $modeltire->id)}}">{{$modeltire->type_land}}</a></td>
+            @permission('delete.admin')
             <td>
                 {!!Form::delete(route('modeltire.destroy',$modeltire->id))!!}
             </td>
+            @endpermission
         </tr>
     @endforeach
 </table>
@@ -63,7 +70,12 @@
     {{Lang::get("general.norecordsfound")}}
 </div>
 @endif
-                           
+@else
+<div class="alert alert-info">
+	{{Lang::get("general.acessdenied")}}
+</div>
+@endrole    
+                  
 @stop
 
 @section("script")

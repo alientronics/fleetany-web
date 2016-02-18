@@ -12,11 +12,14 @@
 
 @section('breadcrumbs', Breadcrumbs::render('user'))
 
+@role('administrator|gestor') 
 @section('actions')
 {!!Form::actions(array('new' => route("user.create")))!!}
 @stop
+@endrole
 
 @section('table')
+@role('administrator|gestor') 
 @if (count($users) > 0)
 <table class='table table-striped table-bordered table-hover'>
     <thead>
@@ -26,7 +29,9 @@
             <th>{{Lang::get("general.email")}}</th>
             <th>{{Lang::get("general.contact_id")}}</th>
             <th>{{Lang::get("general.company_id")}}</th>
+            @permission('delete.admin')
             <th>{{Lang::get("general.Actions")}}</th>
+            @endpermission
         </tr>
     </thead>
     @foreach($users as $user) 
@@ -36,10 +41,12 @@
             <td><a href="{{route('user.edit', $user->id)}}">{{$user->name}}</a></td>
             <td><a href="{{route('user.edit', $user->id)}}">{{$user->email}}</a></td>
             <td><a href="{{route('user.edit', $user->id)}}">{{$user->contact_id}}</a></td>
-            <td><a href="{{route('user.edit', $user->id)}}">{{$user->company_id}}</a></td>             
+            <td><a href="{{route('user.edit', $user->id)}}">{{$user->company_id}}</a></td>   
+            @permission('delete.admin')          
             <td>
                 {!!Form::delete(route('user.destroy',$user->id))!!}
             </td>
+            @endpermission
         </tr>
         @endif
     @endforeach
@@ -51,6 +58,11 @@
     {{Lang::get("general.norecordsfound")}}
 </div>
 @endif
+@else
+<div class="alert alert-info">
+	{{Lang::get("general.acessdenied")}}
+</div>
+@endrole 
                            
 @stop
 

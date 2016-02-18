@@ -12,11 +12,14 @@
 
 @section('breadcrumbs', Breadcrumbs::render('modelvehicle'))
 
+@role('administrator') 
 @section('actions')
 {!!Form::actions(array('new' => route("modelvehicle.create")))!!}
 @stop
+@endrole
 
 @section('table')
+@role('administrator') 
 @if (count($modelvehicles) > 0)
 <table class='table table-striped table-bordered table-hover'>
     <thead>
@@ -26,7 +29,9 @@
             <th>{{Lang::get("general.type_vehicle_id")}}</th>
             <th>{{Lang::get("general.year")}}</th>
             <th>{{Lang::get("general.number_of_wheels")}}</th>
+            @permission('delete.admin')
             <th>{{Lang::get("general.Actions")}}</th>
+            @endpermission
         </tr>
     </thead>
     @foreach($modelvehicles as $modelvehicle) 
@@ -36,9 +41,11 @@
             <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->typeVehicle->name}}</a></td>
             <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->year}}</a></td>
             <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->number_of_wheels}}</a></td>
+            @permission('delete.admin')
             <td>
                 {!!Form::delete(route('modelvehicle.destroy',$modelvehicle->id))!!}
             </td>
+            @endpermission
         </tr>
     @endforeach
 </table>
@@ -49,6 +56,11 @@
     {{Lang::get("general.norecordsfound")}}
 </div>
 @endif
+@else
+<div class="alert alert-info">
+	{{Lang::get("general.acessdenied")}}
+</div>
+@endrole 
                            
 @stop
 
