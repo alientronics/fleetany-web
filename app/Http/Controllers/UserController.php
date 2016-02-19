@@ -14,6 +14,7 @@ use Redirect;
 use Response;
 use Illuminate\Support\Facades\View;
 use Prettus\Validator\Exceptions\ValidatorException;
+use Kodeine\Acl\Models\Eloquent\Role;
 
 class UserController extends Controller
 {
@@ -43,7 +44,13 @@ class UserController extends Controller
     public function create()
     {
         $user = new User();
-        return view("user.edit", compact('user'));
+        $role = Role::lists('name', 'id');
+        
+        $role = $role->transform(function ($item, $key) {
+            return Lang::get('general.'.$item);
+        });
+        
+        return view("user.edit", compact('user', 'role'));
     }
 
     public function store()

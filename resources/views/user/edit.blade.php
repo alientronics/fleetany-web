@@ -45,6 +45,11 @@
     </div>
 
     <div class="form-group col-lg-12">
+        {!!Form::label('role_id', Lang::get('general.role_id'))!!}
+        {!!Form::select('role_id', $role, $user->role_id, array('class' => 'form-control'))!!}
+    </div>
+
+    <div class="form-group col-lg-12">
         {!!Form::label('contact_id', Lang::get('general.contact_id'))!!}
         {!!Form::text('contact_id', $user->contact_id, array('class' => 'form-control'))!!}
     </div>

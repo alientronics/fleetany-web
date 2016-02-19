@@ -17,7 +17,7 @@ class AclTableSeeder extends Seeder
         // Rules
         $role = new Role();
         $roleAdmin = $role->create([
-            'name' => 'Administrador',
+            'name' => 'Administrator',
             'slug' => 'administrator',
             'description' => 'Administrador geral do sistema'
             ]);
@@ -31,7 +31,7 @@ class AclTableSeeder extends Seeder
     	        'update' => true,
     	        'delete' => true
     	    ],
-    	    'description' => 'Administra permissões do administrador do sistema'
+    	    'description' => 'Administra permissoes do administrador do sistema'
     	]);
     	
     	$roleAdmin->assignPermission('admin');
@@ -42,15 +42,8 @@ class AclTableSeeder extends Seeder
     	}
     	
 
-    	$role = new Role();
-    	$roleGestor = $role->create([
-    	    'name' => 'Gestor',
-    	    'slug' => 'gestor',
-    	    'description' => 'Usuário da categoria "Gestor" do sistema'
-    	]);
-    	
     	$permission = new Permission();
-    	$permGestor = $permission->create([
+    	$permExecutive = $permission->create([
     	    'name'        => 'not_admin',
     	    'slug'        => [
     	        'create' => true,
@@ -58,16 +51,54 @@ class AclTableSeeder extends Seeder
     	        'update' => true,
     	        'delete' => false
     	    ],
-    	    'description' => 'Administra permissões das categorias de usuários diferentes de administrador'
+    	    'description' => 'Administra permissoes das categorias de usuarios diferentes de administrador'
     	]);
     	
-    	$roleGestor->assignPermission('not_admin');
+    	$role = new Role();
+    	$roleExecutive = $role->create([
+    	    'name' => 'Executive',
+    	    'slug' => 'executive',
+    	    'description' => 'Usuario da categoria "Executive" do sistema'
+    	]);
+    	
+    	$roleExecutive->assignPermission('not_admin');
     	
     	
     	
+    	$role = new Role();
+    	$roleManager = $role->create([
+    	    'name' => 'Manager',
+    	    'slug' => 'manager',
+    	    'description' => 'Usuario da categoria "Manager" do sistema'
+    	]);
     	
-//     	$user->assignRole($roleTeacher);
+    	$roleManager->assignPermission('not_admin');
     	
+    	
+    	
+    	$role = new Role();
+    	$roleOperational = $role->create([
+    	    'name' => 'Operational',
+    	    'slug' => 'operational',
+    	    'description' => 'Usuario da categoria "Operational" do sistema'
+    	]);
+    	
+    	$roleOperational->assignPermission('not_admin');
+    	
+    	
+    	
+    	$role = new Role();
+    	$roleStaff = $role->create([
+    	    'name' => 'Staff',
+    	    'slug' => 'staff',
+    	    'description' => 'Usuario da categoria "Staff" do sistema'
+    	]);
+    	
+    	$roleStaff->assignPermission('not_admin');
+    	
+
+
+
 //     	Administrador
 //         	Modelo Veículo
 //         	Modelo Monitor
@@ -83,6 +114,7 @@ class AclTableSeeder extends Seeder
 //         	Pressão Padrão (para empresa / modelo veículo)
 //     	Comum
 //     	   Perfil do Usuário
-
+    	
+    	   
     }
 }

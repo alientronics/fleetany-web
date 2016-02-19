@@ -75,7 +75,15 @@ return [
     "User"    => "Usuário",
     "newuser" => "Novo Usuário",
     "password"=> "Senha",
+    "role_id" => "Grupo",
     "contact_id" => "Contato",
-    "company_id" => "Empresa"
+    "company_id" => "Empresa",
+    
+    //Grupos de permissao
+    "Administrator" => "Administrador",
+    "Executive" => "Gestor",
+    "Manager" => "Gerente",
+    "Operational" => "Operacional",
+    "Staff" => "Comum"
     
 ];
