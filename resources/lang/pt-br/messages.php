@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'welcome' => "Bem vindo ao FalkerMap 2"
+    'welcome' => "Bem vindo a Alientronics"
 
 ];
 
