@@ -46,7 +46,7 @@ class UserController extends Controller
         $user = new User();
         $role = Role::lists('name', 'id');
         
-        $role = $role->transform(function ($item, $key) {
+        $role = $role->transform(function ($item) {
             return Lang::get('general.'.$item);
         });
         
@@ -84,7 +84,7 @@ class UserController extends Controller
         $user = $this->userRepo->find($idUser);
         $role = Role::lists('name', 'id');
         
-        $role = $role->transform(function ($item, $key) {
+        $role = $role->transform(function ($item) {
             return Lang::get('general.'.$item);
         });
         return View::make("user.edit", compact('user', 'role'));
@@ -126,11 +126,10 @@ class UserController extends Controller
         $userRoles = array();
         $roles = Role::all()->toArray();
         foreach ($roles as $role) {
-            if($idRole <= $role['id']) {
+            if ($idRole <= $role['id']) {
                 $userRoles[] = $role['id'];
             }
         }
         $user->syncRoles($userRoles);
     }
-    
 }

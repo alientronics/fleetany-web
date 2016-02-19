@@ -35,13 +35,8 @@ class AclTableSeeder extends Seeder
     	]);
     	
     	$roleAdmin->assignPermission('admin');
-
-    	$user = User::first();
-    	if ($user) {
-    	    $user->assignRole($roleAdmin);
-    	}
+    	$userRoles[] = $roleAdmin;
     	
-
     	$permission = new Permission();
     	$permExecutive = $permission->create([
     	    'name'        => 'not_admin',
@@ -62,7 +57,7 @@ class AclTableSeeder extends Seeder
     	]);
     	
     	$roleExecutive->assignPermission('not_admin');
-    	
+    	$userRoles[] = $roleExecutive;
     	
     	
     	$role = new Role();
@@ -73,7 +68,7 @@ class AclTableSeeder extends Seeder
     	]);
     	
     	$roleManager->assignPermission('not_admin');
-    	
+    	$userRoles[] = $roleManager;
     	
     	
     	$role = new Role();
@@ -84,7 +79,7 @@ class AclTableSeeder extends Seeder
     	]);
     	
     	$roleOperational->assignPermission('not_admin');
-    	
+    	$userRoles[] = $roleOperational;
     	
     	
     	$role = new Role();
@@ -95,9 +90,13 @@ class AclTableSeeder extends Seeder
     	]);
     	
     	$roleStaff->assignPermission('not_admin');
-    	
+    	$userRoles[] = $roleStaff;
 
 
+    	$user = User::first();
+    	if ($user) {
+    	    $user->syncRoles($userRoles);
+    	}
 
 //     	Administrador
 //         	Modelo Veículo
