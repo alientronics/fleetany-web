@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepositoryEloquent;
-use App\Entities\User;
+use App\User;
 use Log;
 use Input;
 use Lang;
@@ -58,6 +58,7 @@ class UserController extends Controller
         try {
             $this->userRepo->validator();
             $this->userRepo->create(Input::all());
+            $this->assignRoleToUser(User::all()->last(), Input::get('role_id'));
             Session::flash(
                 'message',
                 Lang::get(
@@ -81,7 +82,12 @@ class UserController extends Controller
     public function edit($idUser)
     {
         $user = $this->userRepo->find($idUser);
-        return View::make("user.edit", compact('user'));
+        $role = Role::lists('name', 'id');
+        
+        $role = $role->transform(function ($item, $key) {
+            return Lang::get('general.'.$item);
+        });
+        return View::make("user.edit", compact('user', 'role'));
     }
     
     public function update($idUser)
@@ -89,6 +95,7 @@ class UserController extends Controller
         try {
             $this->userRepo->validator();
             $this->userRepo->update(Input::all(), $idUser);
+            $this->assignRoleToUser(User::find($idUser), Input::get('role_id'));
             Session::flash(
                 'message',
                 Lang::get(
@@ -113,4 +120,17 @@ class UserController extends Controller
         }
         return Redirect::to('user');
     }
+    
+    public function assignRoleToUser($user, $idRole)
+    {
+        $userRoles = array();
+        $roles = Role::all()->toArray();
+        foreach ($roles as $role) {
+            if($idRole <= $role['id']) {
+                $userRoles[] = $role['id'];
+            }
+        }
+        $user->syncRoles($userRoles);
+    }
+    
 }
