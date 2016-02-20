@@ -12,14 +12,14 @@
 
 @section('breadcrumbs', Breadcrumbs::render('modeltire'))
 
-@role('administrator') 
+@permission('create.modeltire') 
 @section('actions')
 {!!Form::actions(array('new' => route("modeltire.create")))!!}
 @stop
-@endrole
+@endpermission
 
 @section('table')
-@role('administrator') 
+@permission('view.modeltire')  
 @if (count($modeltires) > 0)
 <table class='table table-striped table-bordered table-hover'>
     <thead>
@@ -36,26 +36,26 @@
             <th>{{Lang::get("general.start_diameter")}}</th>
             <th>{{Lang::get("general.start_depth")}}</th>
             <th>{{Lang::get("general.type_land")}}</th>  
-            @permission('delete.admin')          
+            @permission('delete.modeltire')          
             <th>{{Lang::get("general.Actions")}}</th>
             @endpermission
         </tr>
     </thead>
     @foreach($modeltires as $modeltire) 
         <tr>
-            <td><a href="{{route('modeltire.edit', $modeltire->id)}}">{{$modeltire->id}}</a></td>
-            <td><a href="{{route('modeltire.edit', $modeltire->id)}}">{{$modeltire->name}}</a></td>
-            <td><a href="{{route('modeltire.edit', $modeltire->id)}}">{{$modeltire->pressure_ideal}}</a></td>
-            <td><a href="{{route('modeltire.edit', $modeltire->id)}}">{{$modeltire->pressure_max}}</a></td>
-            <td><a href="{{route('modeltire.edit', $modeltire->id)}}">{{$modeltire->pressure_min}}</a></td>
-            <td><a href="{{route('modeltire.edit', $modeltire->id)}}">{{$modeltire->mileage}}</a></td>
-            <td><a href="{{route('modeltire.edit', $modeltire->id)}}">{{$modeltire->temp_ideal}}</a></td>
-            <td><a href="{{route('modeltire.edit', $modeltire->id)}}">{{$modeltire->temp_max}}</a></td>
-            <td><a href="{{route('modeltire.edit', $modeltire->id)}}">{{$modeltire->temp_min}}</a></td>
-            <td><a href="{{route('modeltire.edit', $modeltire->id)}}">{{$modeltire->start_diameter}}</a></td>
-            <td><a href="{{route('modeltire.edit', $modeltire->id)}}">{{$modeltire->start_depth}}</a></td>
-            <td><a href="{{route('modeltire.edit', $modeltire->id)}}">{{$modeltire->type_land}}</a></td>
-            @permission('delete.admin')
+            <td>@permission('update.modeltire')<a href="{{route('modeltire.edit', $modeltire->id)}}">@endpermission{{$modeltire->id}}@permission('update.modeltire')</a>@endpermission</td>
+            <td>@permission('update.modeltire')<a href="{{route('modeltire.edit', $modeltire->id)}}">@endpermission{{$modeltire->name}}@permission('update.modeltire')</a>@endpermission</td>
+            <td>@permission('update.modeltire')<a href="{{route('modeltire.edit', $modeltire->id)}}">@endpermission{{$modeltire->pressure_ideal}}@permission('update.modeltire')</a>@endpermission</td>
+            <td>@permission('update.modeltire')<a href="{{route('modeltire.edit', $modeltire->id)}}">@endpermission{{$modeltire->pressure_max}}@permission('update.modeltire')</a>@endpermission</td>
+            <td>@permission('update.modeltire')<a href="{{route('modeltire.edit', $modeltire->id)}}">@endpermission{{$modeltire->pressure_min}}@permission('update.modeltire')</a>@endpermission</td>
+            <td>@permission('update.modeltire')<a href="{{route('modeltire.edit', $modeltire->id)}}">@endpermission{{$modeltire->mileage}}@permission('update.modeltire')</a>@endpermission</td>
+            <td>@permission('update.modeltire')<a href="{{route('modeltire.edit', $modeltire->id)}}">@endpermission{{$modeltire->temp_ideal}}@permission('update.modeltire')</a>@endpermission</td>
+            <td>@permission('update.modeltire')<a href="{{route('modeltire.edit', $modeltire->id)}}">@endpermission{{$modeltire->temp_max}}@permission('update.modeltire')</a>@endpermission</td>
+            <td>@permission('update.modeltire')<a href="{{route('modeltire.edit', $modeltire->id)}}">@endpermission{{$modeltire->temp_min}}@permission('update.modeltire')</a>@endpermission</td>
+            <td>@permission('update.modeltire')<a href="{{route('modeltire.edit', $modeltire->id)}}">@endpermission{{$modeltire->start_diameter}}@permission('update.modeltire')</a>@endpermission</td>
+            <td>@permission('update.modeltire')<a href="{{route('modeltire.edit', $modeltire->id)}}">@endpermission{{$modeltire->start_depth}}@permission('update.modeltire')</a>@endpermission</td>
+            <td>@permission('update.modeltire')<a href="{{route('modeltire.edit', $modeltire->id)}}">@endpermission{{$modeltire->type_land}}@permission('update.modeltire')</a>@endpermission</td>
+            @permission('delete.modeltire')
             <td>
                 {!!Form::delete(route('modeltire.destroy',$modeltire->id))!!}
             </td>
@@ -74,7 +74,7 @@
 <div class="alert alert-info">
 	{{Lang::get("general.acessdenied")}}
 </div>
-@endrole    
+@endpermission    
                   
 @stop
 

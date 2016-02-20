@@ -15,87 +15,356 @@ class AclTableSeeder extends Seeder
     public function run()
     {
         // Rules
-        $role = new Role();
-        $roleAdmin = $role->create([
+        $roleAdmin = Role::create([
             'name' => 'Administrator',
             'slug' => 'administrator',
             'description' => 'Administrador geral do sistema'
             ]);
         
-    	$permission = new Permission();
-    	$permAdmin = $permission->create([
-    	    'name'        => 'admin',
-    	    'slug'        => [
-    	        'create' => true,
-    	        'view'   => true,
-    	        'update' => true,
-    	        'delete' => true
-    	    ],
-    	    'description' => 'Administra permissoes do administrador do sistema'
-    	]);
-    	
-    	$roleAdmin->assignPermission('admin');
-    	$userRoles[] = $roleAdmin;
-    	
-    	$permission = new Permission();
-    	$permExecutive = $permission->create([
-    	    'name'        => 'not_admin',
-    	    'slug'        => [
-    	        'create' => true,
-    	        'view'   => true,
-    	        'update' => true,
-    	        'delete' => false
-    	    ],
-    	    'description' => 'Administra permissoes das categorias de usuarios diferentes de administrador'
-    	]);
-    	
-    	$role = new Role();
-    	$roleExecutive = $role->create([
-    	    'name' => 'Executive',
-    	    'slug' => 'executive',
-    	    'description' => 'Usuario da categoria "Executive" do sistema'
-    	]);
-    	
-    	$roleExecutive->assignPermission('not_admin');
-    	$userRoles[] = $roleExecutive;
-    	
-    	
-    	$role = new Role();
-    	$roleManager = $role->create([
-    	    'name' => 'Manager',
-    	    'slug' => 'manager',
-    	    'description' => 'Usuario da categoria "Manager" do sistema'
-    	]);
-    	
-    	$roleManager->assignPermission('not_admin');
-    	$userRoles[] = $roleManager;
-    	
-    	
-    	$role = new Role();
-    	$roleOperational = $role->create([
-    	    'name' => 'Operational',
-    	    'slug' => 'operational',
-    	    'description' => 'Usuario da categoria "Operational" do sistema'
-    	]);
-    	
-    	$roleOperational->assignPermission('not_admin');
-    	$userRoles[] = $roleOperational;
-    	
-    	
-    	$role = new Role();
-    	$roleStaff = $role->create([
-    	    'name' => 'Staff',
-    	    'slug' => 'staff',
-    	    'description' => 'Usuario da categoria "Staff" do sistema'
-    	]);
-    	
-    	$roleStaff->assignPermission('not_admin');
-    	$userRoles[] = $roleStaff;
+        $roleExecutive = Role::create([
+            'name' => 'Executive',
+            'slug' => 'executive',
+            'description' => 'Usuario da categoria "Executive" do sistema'
+        ]);
 
+        $roleManager = Role::create([
+            'name' => 'Manager',
+            'slug' => 'manager',
+            'description' => 'Usuario da categoria "Manager" do sistema'
+        ]);
+         
+        $roleOperational = Role::create([
+            'name' => 'Operational',
+            'slug' => 'operational',
+            'description' => 'Usuario da categoria "Operational" do sistema'
+        ]);
+        
+        $roleStaff = Role::create([
+            'name' => 'Staff',
+            'slug' => 'staff',
+            'description' => 'Usuario da categoria "Staff" do sistema'
+        ]);
+         
 
+        //ModelMonitor
+        //Permissions
+        $permModelMonitorStaff = Permission::create([
+            'name'        => 'modelmonitor',
+            'slug'        => [
+                'create' => true,
+                'view'   => true,
+                'update' => true,
+                'delete' => false
+            ],
+            'description' => 'Administra permissoes do modelmonitor para o nivel staff de usuario'
+        ]);
+        
+        $permModelMonitorOperational = Permission::create([
+            'name'        => 'modelmonitor.operational',
+            'slug'        => [],
+            'inherit_id' => $permModelMonitorStaff->getKey(),
+            'description' => 'Administra permissoes do modelmonitor para o nivel operational de usuario'
+        ]);
+        
+        $permModelMonitorManager = Permission::create([
+            'name'        => 'modelmonitor.manager',
+            'slug'        => [],
+            'inherit_id' => $permModelMonitorOperational->getKey(),
+            'description' => 'Administra permissoes do modelmonitor para o nivel manager de usuario'
+        ]);
+        
+        $permModelMonitorExecutive = Permission::create([
+            'name'        => 'modelmonitor.executive',
+            'slug'        => [],
+            'inherit_id' => $permModelMonitorManager->getKey(),
+            'description' => 'Administra permissoes do modelmonitor para o nivel executive de usuario'
+        ]);
+        
+        $permModelMonitorAdmin = Permission::create([
+            'name'        => 'modelmonitor.admin',
+            'slug'        => [
+                'delete' => true
+            ],
+            'inherit_id' => $permModelMonitorExecutive->getKey(),
+            'description' => 'Administra permissoes do modelmonitor para o nivel admin de usuario'
+        ]);
+        
+
+        //Assign permissions to rules
+        $roleStaff->assignPermission($permModelMonitorStaff);
+        $roleOperational->assignPermission($permModelMonitorOperational);
+        $roleManager->assignPermission($permModelMonitorManager);
+        $roleExecutive->assignPermission($permModelMonitorExecutive);
+        $roleAdmin->assignPermission($permModelMonitorAdmin);
+
+        
+        
+
+        //ModelSensor
+        //Permissions
+        $permModelSensorStaff = Permission::create([
+            'name'        => 'modelsensor',
+            'slug'        => [
+                'create' => true,
+                'view'   => true,
+                'update' => true,
+                'delete' => false
+            ],
+            'description' => 'Administra permissoes do modelsensor para o nivel staff de usuario'
+        ]);
+        
+        $permModelSensorOperational = Permission::create([
+            'name'        => 'modelsensor.operational',
+            'slug'        => [],
+            'inherit_id' => $permModelSensorStaff->getKey(),
+            'description' => 'Administra permissoes do modelsensor para o nivel operational de usuario'
+        ]);
+        
+        $permModelSensorManager = Permission::create([
+            'name'        => 'modelsensor.manager',
+            'slug'        => [],
+            'inherit_id' => $permModelSensorOperational->getKey(),
+            'description' => 'Administra permissoes do modelsensor para o nivel manager de usuario'
+        ]);
+        
+        $permModelSensorExecutive = Permission::create([
+            'name'        => 'modelsensor.executive',
+            'slug'        => [],
+            'inherit_id' => $permModelSensorManager->getKey(),
+            'description' => 'Administra permissoes do modelsensor para o nivel executive de usuario'
+        ]);
+        
+        $permModelSensorAdmin = Permission::create([
+            'name'        => 'modelsensor.admin',
+            'slug'        => [
+                'delete' => true
+            ],
+            'inherit_id' => $permModelSensorExecutive->getKey(),
+            'description' => 'Administra permissoes do modelsensor para o nivel admin de usuario'
+        ]);
+        
+        
+        //Assign permissions to rules
+        $roleStaff->assignPermission($permModelSensorStaff);
+        $roleOperational->assignPermission($permModelSensorOperational);
+        $roleManager->assignPermission($permModelSensorManager);
+        $roleExecutive->assignPermission($permModelSensorExecutive);
+        $roleAdmin->assignPermission($permModelSensorAdmin);
+        
+
+        //ModelTire
+        //Permissions
+        $permModelTireStaff = Permission::create([
+            'name'        => 'modeltire',
+            'slug'        => [
+                'create' => true,
+                'view'   => true,
+                'update' => true,
+                'delete' => false
+            ],
+            'description' => 'Administra permissoes do modeltire para o nivel staff de usuario'
+        ]);
+        
+        $permModelTireOperational = Permission::create([
+            'name'        => 'modeltire.operational',
+            'slug'        => [],
+            'inherit_id' => $permModelTireStaff->getKey(),
+            'description' => 'Administra permissoes do modeltire para o nivel operational de usuario'
+        ]);
+        
+        $permModelTireManager = Permission::create([
+            'name'        => 'modeltire.manager',
+            'slug'        => [],
+            'inherit_id' => $permModelTireOperational->getKey(),
+            'description' => 'Administra permissoes do modeltire para o nivel manager de usuario'
+        ]);
+        
+        $permModelTireExecutive = Permission::create([
+            'name'        => 'modeltire.executive',
+            'slug'        => [],
+            'inherit_id' => $permModelTireManager->getKey(),
+            'description' => 'Administra permissoes do modeltire para o nivel executive de usuario'
+        ]);
+        
+        $permModelTireAdmin = Permission::create([
+            'name'        => 'modeltire.admin',
+            'slug'        => [
+                'delete' => true
+            ],
+            'inherit_id' => $permModelTireExecutive->getKey(),
+            'description' => 'Administra permissoes do modeltire para o nivel admin de usuario'
+        ]);
+        
+        
+        //Assign permissions to rules
+        $roleStaff->assignPermission($permModelTireStaff);
+        $roleOperational->assignPermission($permModelTireOperational);
+        $roleManager->assignPermission($permModelTireManager);
+        $roleExecutive->assignPermission($permModelTireExecutive);
+        $roleAdmin->assignPermission($permModelTireAdmin);
+        
+
+        //ModelVehicle
+        //Permissions
+        $permModelVehicleStaff = Permission::create([
+            'name'        => 'modelvehicle',
+            'slug'        => [
+                'create' => true,
+                'view'   => true,
+                'update' => true,
+                'delete' => false
+            ],
+            'description' => 'Administra permissoes do modelvehicle para o nivel staff de usuario'
+        ]);
+        
+        $permModelVehicleOperational = Permission::create([
+            'name'        => 'modelvehicle.operational',
+            'slug'        => [],
+            'inherit_id' => $permModelVehicleStaff->getKey(),
+            'description' => 'Administra permissoes do modelvehicle para o nivel operational de usuario'
+        ]);
+        
+        $permModelVehicleManager = Permission::create([
+            'name'        => 'modelvehicle.manager',
+            'slug'        => [],
+            'inherit_id' => $permModelVehicleOperational->getKey(),
+            'description' => 'Administra permissoes do modelvehicle para o nivel manager de usuario'
+        ]);
+        
+        $permModelVehicleExecutive = Permission::create([
+            'name'        => 'modelvehicle.executive',
+            'slug'        => [],
+            'inherit_id' => $permModelVehicleManager->getKey(),
+            'description' => 'Administra permissoes do modelvehicle para o nivel executive de usuario'
+        ]);
+        
+        $permModelVehicleAdmin = Permission::create([
+            'name'        => 'modelvehicle.admin',
+            'slug'        => [
+                'delete' => true
+            ],
+            'inherit_id' => $permModelVehicleExecutive->getKey(),
+            'description' => 'Administra permissoes do modelvehicle para o nivel admin de usuario'
+        ]);
+        
+        
+        //Assign permissions to rules
+        $roleStaff->assignPermission($permModelVehicleStaff);
+        $roleOperational->assignPermission($permModelVehicleOperational);
+        $roleManager->assignPermission($permModelVehicleManager);
+        $roleExecutive->assignPermission($permModelVehicleExecutive);
+        $roleAdmin->assignPermission($permModelVehicleAdmin);
+        
+
+        //TypeVehicle
+        //Permissions
+        $permTypeVehicleStaff = Permission::create([
+            'name'        => 'typevehicle',
+            'slug'        => [
+                'create' => true,
+                'view'   => true,
+                'update' => true,
+                'delete' => false
+            ],
+            'description' => 'Administra permissoes do typevehicle para o nivel staff de usuario'
+        ]);
+        
+        $permTypeVehicleOperational = Permission::create([
+            'name'        => 'typevehicle.operational',
+            'slug'        => [],
+            'inherit_id' => $permTypeVehicleStaff->getKey(),
+            'description' => 'Administra permissoes do typevehicle para o nivel operational de usuario'
+        ]);
+        
+        $permTypeVehicleManager = Permission::create([
+            'name'        => 'typevehicle.manager',
+            'slug'        => [],
+            'inherit_id' => $permTypeVehicleOperational->getKey(),
+            'description' => 'Administra permissoes do typevehicle para o nivel manager de usuario'
+        ]);
+        
+        $permTypeVehicleExecutive = Permission::create([
+            'name'        => 'typevehicle.executive',
+            'slug'        => [],
+            'inherit_id' => $permTypeVehicleManager->getKey(),
+            'description' => 'Administra permissoes do typevehicle para o nivel executive de usuario'
+        ]);
+        
+        $permTypeVehicleAdmin = Permission::create([
+            'name'        => 'typevehicle.admin',
+            'slug'        => [
+                'delete' => true
+            ],
+            'inherit_id' => $permTypeVehicleExecutive->getKey(),
+            'description' => 'Administra permissoes do typevehicle para o nivel admin de usuario'
+        ]);
+        
+        
+        //Assign permissions to rules
+        $roleStaff->assignPermission($permTypeVehicleStaff);
+        $roleOperational->assignPermission($permTypeVehicleOperational);
+        $roleManager->assignPermission($permTypeVehicleManager);
+        $roleExecutive->assignPermission($permTypeVehicleExecutive);
+        $roleAdmin->assignPermission($permTypeVehicleAdmin);
+        
+
+        //User
+        //Permissions
+        $permUserStaff = Permission::create([
+            'name'        => 'user',
+            'slug'        => [
+                'create' => true,
+                'view'   => true,
+                'update' => true,
+                'delete' => false
+            ],
+            'description' => 'Administra permissoes do user para o nivel staff de usuario'
+        ]);
+        
+        $permUserOperational = Permission::create([
+            'name'        => 'user.operational',
+            'slug'        => [],
+            'inherit_id' => $permUserStaff->getKey(),
+            'description' => 'Administra permissoes do user para o nivel operational de usuario'
+        ]);
+        
+        $permUserManager = Permission::create([
+            'name'        => 'user.manager',
+            'slug'        => [],
+            'inherit_id' => $permUserOperational->getKey(),
+            'description' => 'Administra permissoes do user para o nivel manager de usuario'
+        ]);
+        
+        $permUserExecutive = Permission::create([
+            'name'        => 'user.executive',
+            'slug'        => [],
+            'inherit_id' => $permUserManager->getKey(),
+            'description' => 'Administra permissoes do user para o nivel executive de usuario'
+        ]);
+        
+        $permUserAdmin = Permission::create([
+            'name'        => 'user.admin',
+            'slug'        => [
+                'delete' => true
+            ],
+            'inherit_id' => $permUserExecutive->getKey(),
+            'description' => 'Administra permissoes do user para o nivel admin de usuario'
+        ]);
+        
+        
+        //Assign permissions to rules
+        $roleStaff->assignPermission($permUserStaff);
+        $roleOperational->assignPermission($permUserOperational);
+        $roleManager->assignPermission($permUserManager);
+        $roleExecutive->assignPermission($permUserExecutive);
+        $roleAdmin->assignPermission($permUserAdmin);
+        
+        
+        
+        //Assign role to user
     	$user = User::first();
     	if ($user) {
-    	    $user->syncRoles($userRoles);
+    	    $user->assignRole($roleAdmin);
     	}
 
 //     	Administrador

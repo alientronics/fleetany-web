@@ -12,14 +12,14 @@
 
 @section('breadcrumbs', Breadcrumbs::render('modelsensor'))
 
-@role('administrator') 
+@permission('create.modelmonitor') 
 @section('actions')
 {!!Form::actions(array('new' => route("modelsensor.create")))!!}
 @stop
-@endrole
+@endpermission
 
 @section('table')
-@role('administrator')  
+@permission('view.modelmonitor')  
 @if (count($modelsensors) > 0)
 <table class='table table-striped table-bordered table-hover'>
     <thead>
@@ -27,17 +27,17 @@
             <th>{{Lang::get("general.id")}}</th>
             <th>{{Lang::get("general.name")}}</th>
             <th>{{Lang::get("general.Version")}}</th>
-            @permission('delete.admin')
+            @permission('delete.modelsensor')
             <th>{{Lang::get("general.Actions")}}</th>
             @endpermission
         </tr>
     </thead>
     @foreach($modelsensors as $modelsensor) 
         <tr>
-            <td><a href="{{route('modelsensor.edit', $modelsensor->id)}}">{{$modelsensor->id}}</a></td>
-            <td><a href="{{route('modelsensor.edit', $modelsensor->id)}}">{{$modelsensor->name}}</a></td>
-            <td><a href="{{route('modelsensor.edit', $modelsensor->id)}}">{{$modelsensor->version}}</a></td>
-            @permission('delete.admin')
+            <td>@permission('update.modelsensor')<a href="{{route('modelsensor.edit', $modelsensor->id)}}">@endpermission{{$modelsensor->id}}@permission('update.modelsensor')</a>@endpermission</td>
+            <td>@permission('update.modelsensor')<a href="{{route('modelsensor.edit', $modelsensor->id)}}">@endpermission{{$modelsensor->name}}@permission('update.modelsensor')</a>@endpermission</td>
+            <td>@permission('update.modelsensor')<a href="{{route('modelsensor.edit', $modelsensor->id)}}">@endpermission{{$modelsensor->version}}@permission('update.modelsensor')</a>@endpermission</td>
+            @permission('delete.modelsensor')
             <td>
                 {!!Form::delete(route('modelsensor.destroy',$modelsensor->id))!!}
             </td>
@@ -54,7 +54,7 @@
 <div class="alert alert-info">
     {{Lang::get("general.norecordsfound")}}
 </div>
-@endrole
+@endpermission
                            
 @stop
 

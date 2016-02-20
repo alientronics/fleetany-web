@@ -12,14 +12,14 @@
 
 @section('breadcrumbs', Breadcrumbs::render('modelvehicle'))
 
-@role('administrator') 
+@permission('create.modelvehicle')
 @section('actions')
 {!!Form::actions(array('new' => route("modelvehicle.create")))!!}
 @stop
-@endrole
+@endpermission
 
 @section('table')
-@role('administrator') 
+@permission('view.modelvehicle') 
 @if (count($modelvehicles) > 0)
 <table class='table table-striped table-bordered table-hover'>
     <thead>
@@ -29,19 +29,19 @@
             <th>{{Lang::get("general.type_vehicle_id")}}</th>
             <th>{{Lang::get("general.year")}}</th>
             <th>{{Lang::get("general.number_of_wheels")}}</th>
-            @permission('delete.admin')
+            @permission('delete.modelvehicle')
             <th>{{Lang::get("general.Actions")}}</th>
             @endpermission
         </tr>
     </thead>
     @foreach($modelvehicles as $modelvehicle) 
         <tr>
-            <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->id}}</a></td>
-            <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->name}}</a></td>
-            <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->typeVehicle->name}}</a></td>
-            <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->year}}</a></td>
-            <td><a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">{{$modelvehicle->number_of_wheels}}</a></td>
-            @permission('delete.admin')
+            <td>@permission('update.modelvehicle')<a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">@endpermission{{$modelvehicle->id}}@permission('update.modelvehicle')</a>@endpermission</td>
+            <td>@permission('update.modelvehicle')<a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">@endpermission{{$modelvehicle->name}}@permission('update.modelvehicle')</a>@endpermission</td>
+            <td>@permission('update.modelvehicle')<a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">@endpermission{{$modelvehicle->typeVehicle->name}}@permission('update.modelvehicle')</a>@endpermission</td>
+            <td>@permission('update.modelvehicle')<a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">@endpermission{{$modelvehicle->year}}@permission('update.modelvehicle')</a>@endpermission</td>
+            <td>@permission('update.modelvehicle')<a href="{{route('modelvehicle.edit', $modelvehicle->id)}}">@endpermission{{$modelvehicle->number_of_wheels}}@permission('update.modelvehicle')</a>@endpermission</td>
+            @permission('delete.modelvehicle')
             <td>
                 {!!Form::delete(route('modelvehicle.destroy',$modelvehicle->id))!!}
             </td>
@@ -60,7 +60,7 @@
 <div class="alert alert-info">
 	{{Lang::get("general.acessdenied")}}
 </div>
-@endrole 
+@endpermission 
                            
 @stop
 

@@ -12,30 +12,30 @@
 
 @section('breadcrumbs', Breadcrumbs::render('typevehicle'))
 
-@role('administrator') 
+@permission('create.typevehicle') 
 @section('actions')
 {!!Form::actions(array('new' => route("typevehicle.create")))!!}
 @stop
-@endrole
+@endpermission
 
 @section('table')
-@role('administrator') 
+@permission('view.typevehicle') 
 @if (count($typevehicles) > 0)
 <table class='table table-striped table-bordered table-hover'>
     <thead>
         <tr>
             <th>{{Lang::get("general.id")}}</th>
             <th>{{Lang::get("general.name")}}</th>    
-            @permission('delete.admin') 
+            @permission('delete.typevehicle') 
             <th>{{Lang::get("general.Actions")}}</th>
             @endpermission
         </tr>
     </thead>
     @foreach($typevehicles as $typevehicle) 
         <tr>
-            <td><a href="{{route('typevehicle.edit', $typevehicle->id)}}">{{$typevehicle->id}}</a></td>
-            <td><a href="{{route('typevehicle.edit', $typevehicle->id)}}">{{$typevehicle->name}}</a></td>
-            @permission('delete.admin')
+            <td>@permission('update.typevehicle')<a href="{{route('typevehicle.edit', $typevehicle->id)}}">@endpermission{{$typevehicle->id}}@permission('update.typevehicle')</a>@endpermission</td>
+            <td>@permission('update.typevehicle')<a href="{{route('typevehicle.edit', $typevehicle->id)}}">@endpermission{{$typevehicle->name}}@permission('update.typevehicle')</a>@endpermission</td>
+            @permission('delete.typevehicle')
             <td>
                 {!!Form::delete(route('typevehicle.destroy',$typevehicle->id))!!}
             </td>
@@ -54,7 +54,7 @@
 <div class="alert alert-info">
 	{{Lang::get("general.acessdenied")}}
 </div>
-@endrole 
+@endpermission
                            
 @stop
 

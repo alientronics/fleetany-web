@@ -12,14 +12,14 @@
 
 @section('breadcrumbs', Breadcrumbs::render('user'))
 
-@role('administrator|gestor') 
+@permission('create.user') 
 @section('actions')
 {!!Form::actions(array('new' => route("user.create")))!!}
 @stop
-@endrole
+@endpermission
 
 @section('table')
-@role('administrator|gestor') 
+@permission('view.user')  
 @if (count($users) > 0)
 <table class='table table-striped table-bordered table-hover'>
     <thead>
@@ -29,7 +29,7 @@
             <th>{{Lang::get("general.email")}}</th>
             <th>{{Lang::get("general.contact_id")}}</th>
             <th>{{Lang::get("general.company_id")}}</th>
-            @permission('delete.admin')
+            @permission('delete.user')
             <th>{{Lang::get("general.Actions")}}</th>
             @endpermission
         </tr>
@@ -37,12 +37,12 @@
     @foreach($users as $user) 
     	@if ($user->id != 1) 
         <tr>
-            <td><a href="{{route('user.edit', $user->id)}}">{{$user->id}}</a></td>
-            <td><a href="{{route('user.edit', $user->id)}}">{{$user->name}}</a></td>
-            <td><a href="{{route('user.edit', $user->id)}}">{{$user->email}}</a></td>
-            <td><a href="{{route('user.edit', $user->id)}}">{{$user->contact_id}}</a></td>
-            <td><a href="{{route('user.edit', $user->id)}}">{{$user->company_id}}</a></td>   
-            @permission('delete.admin')          
+            <td>@permission('update.user')<a href="{{route('user.edit', $user->id)}}">@endpermission{{$user->id}}@permission('update.user')</a>@endpermission</td>
+            <td>@permission('update.user')<a href="{{route('user.edit', $user->id)}}">@endpermission{{$user->name}}@permission('update.user')</a>@endpermission</td>
+            <td>@permission('update.user')<a href="{{route('user.edit', $user->id)}}">@endpermission{{$user->email}}@permission('update.user')</a>@endpermission</td>
+            <td>@permission('update.user')<a href="{{route('user.edit', $user->id)}}">@endpermission{{$user->contact_id}}@permission('update.user')</a>@endpermission</td>
+            <td>@permission('update.user')<a href="{{route('user.edit', $user->id)}}">@endpermission{{$user->company_id}}@permission('update.user')</a>@endpermission</td>   
+            @permission('delete.user')          
             <td>
                 {!!Form::delete(route('user.destroy',$user->id))!!}
             </td>
@@ -62,7 +62,7 @@
 <div class="alert alert-info">
 	{{Lang::get("general.acessdenied")}}
 </div>
-@endrole 
+@endpermission
                            
 @stop
 

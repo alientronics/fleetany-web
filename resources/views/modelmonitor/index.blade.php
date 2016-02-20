@@ -12,14 +12,14 @@
 
 @section('breadcrumbs', Breadcrumbs::render('modelmonitor'))
 
-@role('administrator') 
+@permission('create.modelmonitor') 
 @section('actions')
 {!!Form::actions(array('new' => route("modelmonitor.create")))!!}
 @stop
-@endrole
+@endpermission
 
 @section('table')
-@role('administrator') 
+@permission('view.modelmonitor') 
 @if (count($modelmonitors) > 0)
 <table class='table table-striped table-bordered table-hover'>
     <thead>
@@ -27,17 +27,17 @@
             <th>{{Lang::get("general.id")}}</th>
             <th>{{Lang::get("general.name")}}</th>
             <th>{{Lang::get("general.Version")}}</th>
-            @permission('delete.admin')
+            @permission('delete.modelmonitor')
             <th>{{Lang::get("general.Actions")}}</th>
             @endpermission
         </tr>
     </thead>
     @foreach($modelmonitors as $modelmonitor) 
         <tr>
-            <td><a href="{{route('modelmonitor.edit', $modelmonitor->id)}}">{{$modelmonitor->id}}</a></td>
-            <td><a href="{{route('modelmonitor.edit', $modelmonitor->id)}}">{{$modelmonitor->name}}</a></td>
-            <td><a href="{{route('modelmonitor.edit', $modelmonitor->id)}}">{{$modelmonitor->version}}</a></td>
-            @permission('delete.admin')
+            <td>@permission('update.modelmonitor')<a href="{{route('modelmonitor.edit', $modelmonitor->id)}}">@endpermission {{$modelmonitor->id}} @permission('update.modelmonitor')</a>@endpermission </td>
+            <td>@permission('update.modelmonitor')<a href="{{route('modelmonitor.edit', $modelmonitor->id)}}">@endpermission {{$modelmonitor->name}} @permission('update.modelmonitor')</a>@endpermission </td>
+            <td>@permission('update.modelmonitor')<a href="{{route('modelmonitor.edit', $modelmonitor->id)}}">@endpermission {{$modelmonitor->version}} @permission('update.modelmonitor')</a>@endpermission </td>
+            @permission('delete.modelmonitor')
             <td>
                 {!!Form::delete(route('modelmonitor.destroy',$modelmonitor->id))!!}
             </td>
@@ -56,7 +56,7 @@
 <div class="alert alert-info">
 	{{Lang::get("general.acessdenied")}}
 </div>
-@endrole
+@endpermission
                         
 @stop
 
