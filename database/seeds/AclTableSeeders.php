@@ -53,7 +53,7 @@ class AclTableSeeder extends Seeder
             'slug'        => [
                 'create' => true,
                 'view'   => true,
-                'update' => true,
+                'update' => false,
                 'delete' => false
             ],
             'description' => 'Administra permissoes do modelmonitor para o nivel staff de usuario'
@@ -83,6 +83,7 @@ class AclTableSeeder extends Seeder
         $permModelMonitorAdmin = Permission::create([
             'name'        => 'modelmonitor.admin',
             'slug'        => [
+                'update' => true,
                 'delete' => true
             ],
             'inherit_id' => $permModelMonitorExecutive->getKey(),
@@ -107,7 +108,7 @@ class AclTableSeeder extends Seeder
             'slug'        => [
                 'create' => true,
                 'view'   => true,
-                'update' => true,
+                'update' => false,
                 'delete' => false
             ],
             'description' => 'Administra permissoes do modelsensor para o nivel staff de usuario'
@@ -137,6 +138,7 @@ class AclTableSeeder extends Seeder
         $permModelSensorAdmin = Permission::create([
             'name'        => 'modelsensor.admin',
             'slug'        => [
+                'update' => true,
                 'delete' => true
             ],
             'inherit_id' => $permModelSensorExecutive->getKey(),
@@ -159,7 +161,7 @@ class AclTableSeeder extends Seeder
             'slug'        => [
                 'create' => true,
                 'view'   => true,
-                'update' => true,
+                'update' => false,
                 'delete' => false
             ],
             'description' => 'Administra permissoes do modeltire para o nivel staff de usuario'
@@ -189,6 +191,7 @@ class AclTableSeeder extends Seeder
         $permModelTireAdmin = Permission::create([
             'name'        => 'modeltire.admin',
             'slug'        => [
+                'update' => true,
                 'delete' => true
             ],
             'inherit_id' => $permModelTireExecutive->getKey(),
@@ -211,7 +214,7 @@ class AclTableSeeder extends Seeder
             'slug'        => [
                 'create' => true,
                 'view'   => true,
-                'update' => true,
+                'update' => false,
                 'delete' => false
             ],
             'description' => 'Administra permissoes do modelvehicle para o nivel staff de usuario'
@@ -241,6 +244,7 @@ class AclTableSeeder extends Seeder
         $permModelVehicleAdmin = Permission::create([
             'name'        => 'modelvehicle.admin',
             'slug'        => [
+                'update' => true,
                 'delete' => true
             ],
             'inherit_id' => $permModelVehicleExecutive->getKey(),
@@ -263,7 +267,7 @@ class AclTableSeeder extends Seeder
             'slug'        => [
                 'create' => true,
                 'view'   => true,
-                'update' => true,
+                'update' => false,
                 'delete' => false
             ],
             'description' => 'Administra permissoes do typevehicle para o nivel staff de usuario'
@@ -293,6 +297,7 @@ class AclTableSeeder extends Seeder
         $permTypeVehicleAdmin = Permission::create([
             'name'        => 'typevehicle.admin',
             'slug'        => [
+                'update' => true,
                 'delete' => true
             ],
             'inherit_id' => $permTypeVehicleExecutive->getKey(),
@@ -315,7 +320,7 @@ class AclTableSeeder extends Seeder
             'slug'        => [
                 'create' => true,
                 'view'   => true,
-                'update' => true,
+                'update' => false,
                 'delete' => false
             ],
             'description' => 'Administra permissoes do user para o nivel staff de usuario'
@@ -345,6 +350,7 @@ class AclTableSeeder extends Seeder
         $permUserAdmin = Permission::create([
             'name'        => 'user.admin',
             'slug'        => [
+                'update' => true,
                 'delete' => true
             ],
             'inherit_id' => $permUserExecutive->getKey(),

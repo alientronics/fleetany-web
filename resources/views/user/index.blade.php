@@ -35,7 +35,6 @@
         </tr>
     </thead>
     @foreach($users as $user) 
-    	@if ($user->id != 1) 
         <tr>
             <td>@permission('update.user')<a href="{{route('user.edit', $user->id)}}">@endpermission{{$user->id}}@permission('update.user')</a>@endpermission</td>
             <td>@permission('update.user')<a href="{{route('user.edit', $user->id)}}">@endpermission{{$user->name}}@permission('update.user')</a>@endpermission</td>
@@ -48,7 +47,6 @@
             </td>
             @endpermission
         </tr>
-        @endif
     @endforeach
 </table>
 

@@ -57,10 +57,10 @@ return [
 
         'mysql' => [
             'driver'    => 'mysql',
-            'host'     => env('DB_HOST', $sqlCreds['hostname']),
-            'database' => env('DB_DATABASE', $sqlCreds['name']),
-            'username' => env('DB_USERNAME', $sqlCreds['username']),
-            'password' => env('DB_PASSWORD', $sqlCreds['password']),
+            'host'     => env('DB_HOST', 'localhost'),
+            'database' => env('DB_DATABASE', 'alientronics'),
+            'username' => env('DB_USERNAME', 'root'),
+            'password' => env('DB_PASSWORD', ''),
             'charset'   => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix'    => 'tpms_',

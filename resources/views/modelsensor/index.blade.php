@@ -19,7 +19,7 @@
 @endpermission
 
 @section('table')
-@permission('view.modelmonitor')  
+@permission('view.modelsensor')  
 @if (count($modelsensors) > 0)
 <table class='table table-striped table-bordered table-hover'>
     <thead>

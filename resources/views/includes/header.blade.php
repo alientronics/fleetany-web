@@ -13,7 +13,7 @@
         @if (Auth::check())
         <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                <i class="fa fa-user fa-fw"></i> Administrator <i class="fa fa-caret-down"></i>
+                <i class="fa fa-user fa-fw"></i> {{Auth::user()['name']}} <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu dropdown-user">
                 <li><a href="{{URL::asset("profile")}}"><i class="fa fa-user fa-fw"></i> {{Lang::get('menu.UserProfile')}}</a>

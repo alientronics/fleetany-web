@@ -14,7 +14,7 @@ return [
     'Monitors'      => "Monitores",
     'Vehicles'      => "Veículos",
     'Vehicle'       => "Veículo",
-    'Tires'       => "Pnues",
+    'Tires'       => "Pneus",
     'Fleet'         => "Frotas",
     'Maintenance'   => "Manutenção",
     'FleetPanel'    => "Painel de Frota",
