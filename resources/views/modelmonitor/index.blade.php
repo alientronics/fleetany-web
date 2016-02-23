@@ -34,12 +34,17 @@
     </thead>
     @foreach($modelmonitors as $modelmonitor) 
         <tr>
-            <td>@permission('update.modelmonitor')<a href="{{route('modelmonitor.edit', $modelmonitor->id)}}">@endpermission {{$modelmonitor->id}} @permission('update.modelmonitor')</a>@endpermission </td>
-            <td>@permission('update.modelmonitor')<a href="{{route('modelmonitor.edit', $modelmonitor->id)}}">@endpermission {{$modelmonitor->name}} @permission('update.modelmonitor')</a>@endpermission </td>
-            <td>@permission('update.modelmonitor')<a href="{{route('modelmonitor.edit', $modelmonitor->id)}}">@endpermission {{$modelmonitor->version}} @permission('update.modelmonitor')</a>@endpermission </td>
-            @permission('delete.modelmonitor')
+            <td>{{$modelmonitor->id}}</td>
+            <td>{{$modelmonitor->name}}</td>
+            <td>{{$modelmonitor->version}}</td>
+            @permission('delete.modelmonitor|update.modelmonitor')
             <td>
-                {!!Form::delete(route('modelmonitor.destroy',$modelmonitor->id))!!}
+            	@permission('update.modelmonitor')
+                	{!!Form::update(route('modelmonitor.edit',$modelmonitor->id))!!}
+                @endpermission
+            	@permission('delete.modelmonitor')
+                	{!!Form::delete(route('modelmonitor.destroy',$modelmonitor->id))!!}
+                @endpermission
             </td>
             @endpermission
         </tr>

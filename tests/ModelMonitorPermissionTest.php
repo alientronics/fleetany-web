@@ -6,7 +6,7 @@ class ModelMonitorPermissionTest extends TestCase
 {
     public function testViewAdmin()
     {
-        $this->be(User::where('email', 'admin@alientronics.com')->first());
+        $this->be(User::where('email', 'admin@alientronics.com.br')->first());
         
         $this->visit('/')->see('Monitores');
     
@@ -15,9 +15,20 @@ class ModelMonitorPermissionTest extends TestCase
         ;
     }
     
+    public function testViewExecutive()
+    {
+        $this->be(User::where('email', 'executive@alientronics.com.br')->first());
+    
+        $this->visit('/')->see('Monitores', true);
+    
+        $this->visit('/modelmonitor')
+            ->see('de acesso para esta p')
+        ;
+    }
+    
     public function testCreateAdmin()
     {
-        $this->be(User::where('email', 'admin@alientronics.com')->first());
+        $this->be(User::where('email', 'admin@alientronics.com.br')->first());
         
         $this->visit('/modelmonitor')->see('Novo');
         
@@ -31,44 +42,9 @@ class ModelMonitorPermissionTest extends TestCase
         $this->seeInDatabase('model_monitors', ['name' => 'Nome Monitor Teste', 'version' => '1']);
     }
     
-    public function testUpdateAdmin()
-    {
-        $this->be(User::where('email', 'admin@alientronics.com')->first());
-        
-        $this->visit('/modelmonitor')
-            ->click('Nome Monitor Teste')
-            ->type('Nome Monitor Editado', 'name')
-            ->type(2, 'version')
-            ->press('Enviar')
-        ;
-        
-        $this->seeInDatabase('model_monitors', ['name' => 'Nome Monitor Editado', 'version' => '2']);
-    }
-    
-    public function testDeleteAdmin()
-    {
-        $this->be(User::where('email', 'admin@alientronics.com')->first());
-        
-        $this->visit('/modelmonitor')
-            ->press('Excluir');
-    
-        $this->notSeeInDatabase('model_monitors', ['name' => 'Nome Monitor Editado', 'version' => '2']);
-    }
-    
-    public function testViewExecutive()
-    {
-        $this->be(User::where('email', 'executive@alientronics.com')->first());
-    
-        $this->visit('/')->see('Monitores');
-    
-        $this->visit('/modelmonitor')
-            ->see('de acesso para esta p', true)
-        ;
-    }
-    
     public function testCreateExecutive()
     {
-        $this->be(User::where('email', 'executive@alientronics.com')->first());
+        $this->be(User::where('email', 'executive@alientronics.com.br')->first());
     
         $this->visit('/modelmonitor')->see('Novo', true);
     
@@ -77,26 +53,48 @@ class ModelMonitorPermissionTest extends TestCase
         ;
     }
     
+    public function testUpdateAdmin()
+    {
+        $this->be(User::where('email', 'admin@alientronics.com.br')->first());
+        
+        $this->visit('/modelmonitor/'.ModelMonitor::all()->last()['id'].'/edit')
+            ->type('Nome Monitor Editado', 'name')
+            ->type(2, 'version')
+            ->press('Enviar')
+        ;
+        
+        $this->seeInDatabase('model_monitors', ['name' => 'Nome Monitor Editado', 'version' => '2']);
+    }
+    
     public function testUpdateExecutive()
     {
-        $this->be(User::where('email', 'executive@alientronics.com')->first());
+        $this->be(User::where('email', 'executive@alientronics.com.br')->first());
     
         $this->visit('/modelmonitor')
             ->see('Editar', true)
         ;
         
-        $this->visit('/modelmonitor/'.ModelMonitor::all()->last().'/edit')
+        $this->visit('/modelmonitor/'.ModelMonitor::all()->last()['id'].'/edit')
             ->see('de acesso para esta p')
         ;
     }
     
+    public function testDeleteAdmin()
+    {
+        $this->be(User::where('email', 'admin@alientronics.com.br')->first());
+        
+        $this->visit('/modelmonitor')
+            ->press('Excluir');
+    
+        $this->notSeeInDatabase('model_monitors', ['name' => 'Nome Monitor Editado', 'version' => '2']);
+    }
+    
     public function testDeleteExecutive()
     {
-        $this->be(User::where('email', 'executive@alientronics.com')->first());
+        $this->be(User::where('email', 'executive@alientronics.com.br')->first());
     
         $this->visit('/modelmonitor')
             ->see('Excluir', true)
         ;
     }
-    
 }

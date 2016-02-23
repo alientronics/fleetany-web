@@ -52,12 +52,8 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             ->seePageIs('/user')
         ;
     
-        $this->seeInDatabase('users', ['name' => 'Nome Usuario Teste', 'email' => 'executive@alientronics.com.br']);
-        $this->notSeeInDatabase('role_user', ['role_id' => '1', 'user_id' => User::all()->last()['id']]);
+        $this->seeInDatabase('users', ['name' => 'Nome Usuario Executive', 'email' => 'executive@alientronics.com.br']);
         $this->seeInDatabase('role_user', ['role_id' => '2', 'user_id' => User::all()->last()['id']]);
-        $this->seeInDatabase('role_user', ['role_id' => '3', 'user_id' => User::all()->last()['id']]);
-        $this->seeInDatabase('role_user', ['role_id' => '4', 'user_id' => User::all()->last()['id']]);
-        $this->seeInDatabase('role_user', ['role_id' => '5', 'user_id' => User::all()->last()['id']]);
     }
     
     public function createManager()
@@ -77,11 +73,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         ;
     
         $this->seeInDatabase('users', ['name' => 'Nome Usuario Manager', 'email' => 'manager@alientronics.com.br']);
-        $this->notSeeInDatabase('role_user', ['role_id' => '1', 'user_id' => User::all()->last()['id']]);
-        $this->notSeeInDatabase('role_user', ['role_id' => '2', 'user_id' => User::all()->last()['id']]);
         $this->seeInDatabase('role_user', ['role_id' => '3', 'user_id' => User::all()->last()['id']]);
-        $this->seeInDatabase('role_user', ['role_id' => '4', 'user_id' => User::all()->last()['id']]);
-        $this->seeInDatabase('role_user', ['role_id' => '5', 'user_id' => User::all()->last()['id']]);
     }
     
     public function createOperational()
@@ -101,11 +93,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         ;
     
         $this->seeInDatabase('users', ['name' => 'Nome Usuario Operational', 'email' => 'operational@alientronics.com.br']);
-        $this->notSeeInDatabase('role_user', ['role_id' => '1', 'user_id' => User::all()->last()['id']]);
-        $this->notSeeInDatabase('role_user', ['role_id' => '2', 'user_id' => User::all()->last()['id']]);
-        $this->notSeeInDatabase('role_user', ['role_id' => '3', 'user_id' => User::all()->last()['id']]);
         $this->seeInDatabase('role_user', ['role_id' => '4', 'user_id' => User::all()->last()['id']]);
-        $this->seeInDatabase('role_user', ['role_id' => '5', 'user_id' => User::all()->last()['id']]);
     }
     
     public function createStaff()
@@ -125,10 +113,6 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
         ;
     
         $this->seeInDatabase('users', ['name' => 'Nome Usuario Staff', 'email' => 'staff@alientronics.com.br']);
-        $this->notSeeInDatabase('role_user', ['role_id' => '1', 'user_id' => User::all()->last()['id']]);
-        $this->notSeeInDatabase('role_user', ['role_id' => '2', 'user_id' => User::all()->last()['id']]);
-        $this->notSeeInDatabase('role_user', ['role_id' => '3', 'user_id' => User::all()->last()['id']]);
-        $this->notSeeInDatabase('role_user', ['role_id' => '4', 'user_id' => User::all()->last()['id']]);
         $this->seeInDatabase('role_user', ['role_id' => '5', 'user_id' => User::all()->last()['id']]);
     }
 }

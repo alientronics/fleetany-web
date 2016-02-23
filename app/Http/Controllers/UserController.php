@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\UserRepositoryEloquent;
 use App\User;
 use Log;
+use Hash;
 use Input;
 use Lang;
 use Session;
@@ -57,8 +58,9 @@ class UserController extends Controller
     {
         try {
             $this->userRepo->validator();
+            Input::merge(array('password' => Hash::make(Input::get('password'))));
             $this->userRepo->create(Input::all());
-            $this->assignRoleToUser(User::all()->last(), Input::get('role_id'));
+            User::all()->last()->assignRole(Input::get('role_id'));
             Session::flash(
                 'message',
                 Lang::get(
@@ -95,7 +97,7 @@ class UserController extends Controller
         try {
             $this->userRepo->validator();
             $this->userRepo->update(Input::all(), $idUser);
-            $this->assignRoleToUser(User::find($idUser), Input::get('role_id'));
+            User::all()->last()->assignRole(Input::get('role_id'));
             Session::flash(
                 'message',
                 Lang::get(
@@ -119,17 +121,5 @@ class UserController extends Controller
             Session::flash('message', Lang::get("general.deletedregister"));
         }
         return Redirect::to('user');
-    }
-    
-    public function assignRoleToUser($user, $idRole)
-    {
-        $userRoles = array();
-        $roles = Role::all()->toArray();
-        foreach ($roles as $role) {
-            if ($idRole <= $role['id']) {
-                $userRoles[] = $role['id'];
-            }
-        }
-        $user->syncRoles($userRoles);
     }
 }

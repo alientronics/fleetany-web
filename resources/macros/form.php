@@ -1,30 +1,55 @@
 <?php
 
-Form::macro('delete',function($url, $button_label=null,$form_parameters = array(),$button_options=array()){
- 
+Form::macro('update',function($url, $button_label=null,$form_parameters = array(),$button_options=array()){
+
     if(empty($form_parameters)){
         $form_parameters = array(
-            'method'=>'DELETE',
-            'class' =>'delete-form',
+            'method'=>'GET',
+            'class' =>'update-form',
             'url'   =>$url
-            );
+        );
     }else{
         $form_parameters['url'] = $url;
-        $form_parameters['method'] = 'DELETE';
+        $form_parameters['method'] = 'GET';
     };
-         
+     
     if(empty($button_label)) {
-        $button = '<button name="delete-button" type="submit" class="btn btn-xs btn-danger ">
-                        <i class="glyphicon  glyphicon-trash"></i> Excluir
+        $button = '<button type="submit" class="btn btn-xs btn-danger ">
+                        <i class="glyphicon  glyphicon-trash"></i> Editar
                     </button>';
     }
     else {
         $button = Form::submit($button_label, $button_options);
     }
- 
+
     return Form::open($form_parameters) . $button . Form::close();
 });
 
+Form::macro('delete',function($url, $button_label=null,$form_parameters = array(),$button_options=array()){
+
+    if(empty($form_parameters)){
+        $form_parameters = array(
+            'method'=>'DELETE',
+            'class' =>'delete-form',
+            'url'   =>$url
+        );
+    }else{
+        $form_parameters['url'] = $url;
+        $form_parameters['method'] = 'DELETE';
+    };
+     
+    if(empty($button_label)) {
+        $button = '<button name="delete-button" type="submit" class="btn btn-xs btn-danger ">
+                    <i class="glyphicon  glyphicon-trash"></i> Excluir
+                </button>';
+    }
+    else {
+        $button = Form::submit($button_label, $button_options);
+    }
+
+    return Form::open($form_parameters) . $button . Form::close();
+});
+    
 Form::macro('add',function($url, $button_label=null,$form_parameters = array(),$button_options=array()){
  
     if(empty($form_parameters)){

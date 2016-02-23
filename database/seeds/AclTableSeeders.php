@@ -51,8 +51,8 @@ class AclTableSeeder extends Seeder
         $permModelMonitorStaff = Permission::create([
             'name'        => 'modelmonitor',
             'slug'        => [
-                'create' => true,
-                'view'   => true,
+                'create' => false,
+                'view'   => false,
                 'update' => false,
                 'delete' => false
             ],
@@ -83,6 +83,8 @@ class AclTableSeeder extends Seeder
         $permModelMonitorAdmin = Permission::create([
             'name'        => 'modelmonitor.admin',
             'slug'        => [
+                'create' => true,
+                'view'   => true,
                 'update' => true,
                 'delete' => true
             ],
@@ -106,8 +108,8 @@ class AclTableSeeder extends Seeder
         $permModelSensorStaff = Permission::create([
             'name'        => 'modelsensor',
             'slug'        => [
-                'create' => true,
-                'view'   => true,
+                'create' => false,
+                'view'   => false,
                 'update' => false,
                 'delete' => false
             ],
@@ -138,6 +140,8 @@ class AclTableSeeder extends Seeder
         $permModelSensorAdmin = Permission::create([
             'name'        => 'modelsensor.admin',
             'slug'        => [
+                'create' => true,
+                'view'   => true,
                 'update' => true,
                 'delete' => true
             ],
@@ -159,8 +163,8 @@ class AclTableSeeder extends Seeder
         $permModelTireStaff = Permission::create([
             'name'        => 'modeltire',
             'slug'        => [
-                'create' => true,
-                'view'   => true,
+                'create' => false,
+                'view'   => false,
                 'update' => false,
                 'delete' => false
             ],
@@ -191,6 +195,8 @@ class AclTableSeeder extends Seeder
         $permModelTireAdmin = Permission::create([
             'name'        => 'modeltire.admin',
             'slug'        => [
+                'create' => true,
+                'view'   => true,
                 'update' => true,
                 'delete' => true
             ],
@@ -212,8 +218,8 @@ class AclTableSeeder extends Seeder
         $permModelVehicleStaff = Permission::create([
             'name'        => 'modelvehicle',
             'slug'        => [
-                'create' => true,
-                'view'   => true,
+                'create' => false,
+                'view'   => false,
                 'update' => false,
                 'delete' => false
             ],
@@ -244,6 +250,8 @@ class AclTableSeeder extends Seeder
         $permModelVehicleAdmin = Permission::create([
             'name'        => 'modelvehicle.admin',
             'slug'        => [
+                'create' => true,
+                'view'   => true,
                 'update' => true,
                 'delete' => true
             ],
@@ -265,8 +273,8 @@ class AclTableSeeder extends Seeder
         $permTypeVehicleStaff = Permission::create([
             'name'        => 'typevehicle',
             'slug'        => [
-                'create' => true,
-                'view'   => true,
+                'create' => false,
+                'view'   => false,
                 'update' => false,
                 'delete' => false
             ],
@@ -297,6 +305,8 @@ class AclTableSeeder extends Seeder
         $permTypeVehicleAdmin = Permission::create([
             'name'        => 'typevehicle.admin',
             'slug'        => [
+                'create' => true,
+                'view'   => true,
                 'update' => true,
                 'delete' => true
             ],
@@ -318,8 +328,8 @@ class AclTableSeeder extends Seeder
         $permUserStaff = Permission::create([
             'name'        => 'user',
             'slug'        => [
-                'create' => true,
-                'view'   => true,
+                'create' => false,
+                'view'   => false,
                 'update' => false,
                 'delete' => false
             ],
@@ -350,6 +360,8 @@ class AclTableSeeder extends Seeder
         $permUserAdmin = Permission::create([
             'name'        => 'user.admin',
             'slug'        => [
+                'create' => true,
+                'view'   => true,
                 'update' => true,
                 'delete' => true
             ],
