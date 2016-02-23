@@ -96,6 +96,7 @@ class UserController extends Controller
     {
         try {
             $this->userRepo->validator();
+            Input::merge(array('password' => Hash::make(Input::get('password'))));
             $this->userRepo->update(Input::all(), $idUser);
             User::all()->last()->assignRole(Input::get('role_id'));
             Session::flash(
