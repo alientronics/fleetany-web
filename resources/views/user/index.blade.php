@@ -48,7 +48,9 @@
                 @endpermission
                 <br/>
             	@permission('delete.user')
-                	{!!Form::delete(route('user.destroy',$user->id))!!}
+            		@if ($user->id != 1)
+                		{!!Form::delete(route('user.destroy',$user->id))!!}
+                	@endif
                 @endpermission
             </td>
             @endpermission

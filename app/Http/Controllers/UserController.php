@@ -117,7 +117,7 @@ class UserController extends Controller
     {
         Log::info('Delete field: '.$idUser);
 
-        if ($this->userRepo->find($idUser)) {
+        if ($idUser != 1 && $this->userRepo->find($idUser)) {
             $this->userRepo->delete($idUser);
             Session::flash('message', Lang::get("general.deletedregister"));
         }

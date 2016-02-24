@@ -48,7 +48,5 @@ class UserTest extends TestCase
             ->press('Excluir');
         
         $this->notSeeInDatabase('users', ['name' => 'Nome Usuario Editado', 'email' => 'emaileditado@usuario.com']);
-    
     }
-    
 }
