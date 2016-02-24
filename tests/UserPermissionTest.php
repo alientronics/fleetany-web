@@ -2,17 +2,22 @@
 
 use App\User;
 use App\Entities\ModelMonitor;
-class ModelMonitorPermissionTest extends TestCase
+use Illuminate\Support\Facades\DB;
+class UserPermissionTest extends TestCase
 {
     public static function setUpBeforeClass()
     {
-        $obj = new ModelMonitorPermissionTest();
-        $obj->createExecutive();
-        $obj->createManager();
-        $obj->createOperational();
-        $obj->createStaff();
+        parent::setUpBeforeClass();
+        DB::beginTransaction();
     }
-        
+
+    public static function tearDownBeforeClass()
+    {
+        parent::tearDownBeforeClass();
+        DB::beginTransaction();
+    }
+    
+    
     public function testViewAdmin()
     {
         $this->be(User::where('email', 'admin@alientronics.com.br')->first());

@@ -21,10 +21,6 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     {
         parent::setUp();
         $this->be(User::find(1));
-//         $this->createExecutive();
-//         $this->createManager();
-//         $this->createOperational();
-//         $this->createStaff();
     }
     
     public function createApplication()

@@ -29,7 +29,7 @@
             <th>{{Lang::get("general.email")}}</th>
             <th>{{Lang::get("general.contact_id")}}</th>
             <th>{{Lang::get("general.company_id")}}</th>
-            @permission('delete.user')
+            @permission('delete.user|update.user')
             <th>{{Lang::get("general.Actions")}}</th>
             @endpermission
         </tr>
@@ -41,9 +41,14 @@
             <td>@permission('update.user')<a href="{{route('user.edit', $user->id)}}">@endpermission{{$user->email}}@permission('update.user')</a>@endpermission</td>
             <td>@permission('update.user')<a href="{{route('user.edit', $user->id)}}">@endpermission{{$user->contact_id}}@permission('update.user')</a>@endpermission</td>
             <td>@permission('update.user')<a href="{{route('user.edit', $user->id)}}">@endpermission{{$user->company_id}}@permission('update.user')</a>@endpermission</td>   
-            @permission('delete.user')          
+            @permission('delete.user|update.user')
             <td>
-                {!!Form::delete(route('user.destroy',$user->id))!!}
+            	@permission('update.user')
+                	{!!Form::update(route('user.edit',$user->id))!!}
+                @endpermission
+            	@permission('delete.user')
+                	{!!Form::delete(route('user.destroy',$user->id))!!}
+                @endpermission
             </td>
             @endpermission
         </tr>
