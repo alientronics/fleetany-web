@@ -7,8 +7,10 @@
 
 @section('sub-title')
 @if ($user->id)
+{{--*/ $operation = 'update' /*--}}
 {{$user->name}}
 @else
+{{--*/ $operation = 'create' /*--}}
 {{Lang::get("general.newuser")}}
 @endif
 @stop
@@ -19,7 +21,7 @@
 
 @section('edit')
 
-@role('administrator|gestor') 
+@permission($operation.'.user')
 
 @if (!$user->id)
 {!! Form::open(array('route' => 'user.store')) !!}
@@ -67,6 +69,6 @@
 <div class="alert alert-info">
 	{{Lang::get("general.acessdenied")}}
 </div>
-@endrole
+@endpermission
 
 @stop

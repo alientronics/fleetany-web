@@ -1,5 +1,6 @@
 <?php
 
+use App\Entities\ModelMonitor;
 class ModelMonitorTest extends TestCase
 {
     public function testCreate()
@@ -16,8 +17,7 @@ class ModelMonitorTest extends TestCase
     
     public function testUpdate()
     {
-        $this->visit('/modelmonitor')
-            ->click('Nome Monitor Teste')
+        $this->visit('/modelmonitor/'.ModelMonitor::all()->last()['id'].'/edit')
             ->type('Nome Monitor Editado', 'name')
             ->type(2, 'version')
             ->press('Enviar')

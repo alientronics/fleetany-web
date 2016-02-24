@@ -16,7 +16,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
      *
      * @return \Illuminate\Foundation\Application
      */
-    
+
     public function setUp()
     {
         parent::setUp();

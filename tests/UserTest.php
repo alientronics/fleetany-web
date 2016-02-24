@@ -7,7 +7,7 @@ class UserTest extends TestCase
     {
         $this->visit('/user/create');
         
-        $idOption = $this->crawler->filterXPath("//select[@id='role_id']/option[1]")->attr('value');
+        $idOption = $this->crawler->filterXPath("//select[@id='role_id']/option[2]")->attr('value');
         
         $this->type('Nome Usuario Teste', 'name')
             ->type('email@usuario.com', 'email')
@@ -20,17 +20,12 @@ class UserTest extends TestCase
         ;
 
         $this->seeInDatabase('users', ['name' => 'Nome Usuario Teste', 'email' => 'email@usuario.com']);
-        $this->seeInDatabase('role_user', ['role_id' => '1', 'user_id' => User::all()->last()['id']]);
         $this->seeInDatabase('role_user', ['role_id' => '2', 'user_id' => User::all()->last()['id']]);
-        $this->seeInDatabase('role_user', ['role_id' => '3', 'user_id' => User::all()->last()['id']]);
-        $this->seeInDatabase('role_user', ['role_id' => '4', 'user_id' => User::all()->last()['id']]);
-        $this->seeInDatabase('role_user', ['role_id' => '5', 'user_id' => User::all()->last()['id']]);
     }
     
     public function testUpdate()
     {
-        $this->visit('/user')
-            ->click('Nome Usuario Teste');
+        $this->visit('/user/'.User::all()->last()['id'].'/edit');
         
         $idOption = $this->crawler->filterXPath("//select[@id='role_id']/option[3]")->attr('value');
             
@@ -44,11 +39,7 @@ class UserTest extends TestCase
         ;
         
         $this->seeInDatabase('users', ['name' => 'Nome Usuario Editado', 'email' => 'emaileditado@usuario.com']);
-        $this->notSeeInDatabase('role_user', ['role_id' => '1', 'user_id' => User::all()->last()['id']]);
-        $this->notSeeInDatabase('role_user', ['role_id' => '2', 'user_id' => User::all()->last()['id']]);
         $this->seeInDatabase('role_user', ['role_id' => '3', 'user_id' => User::all()->last()['id']]);
-        $this->seeInDatabase('role_user', ['role_id' => '4', 'user_id' => User::all()->last()['id']]);
-        $this->seeInDatabase('role_user', ['role_id' => '5', 'user_id' => User::all()->last()['id']]);
     }
     
     public function testDelete()
@@ -57,6 +48,7 @@ class UserTest extends TestCase
             ->press('Excluir');
         
         $this->notSeeInDatabase('users', ['name' => 'Nome Usuario Editado', 'email' => 'emaileditado@usuario.com']);
+    
     }
     
 }

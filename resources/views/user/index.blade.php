@@ -36,16 +36,17 @@
     </thead>
     @foreach($users as $user) 
         <tr>
-            <td>@permission('update.user')<a href="{{route('user.edit', $user->id)}}">@endpermission{{$user->id}}@permission('update.user')</a>@endpermission</td>
-            <td>@permission('update.user')<a href="{{route('user.edit', $user->id)}}">@endpermission{{$user->name}}@permission('update.user')</a>@endpermission</td>
-            <td>@permission('update.user')<a href="{{route('user.edit', $user->id)}}">@endpermission{{$user->email}}@permission('update.user')</a>@endpermission</td>
-            <td>@permission('update.user')<a href="{{route('user.edit', $user->id)}}">@endpermission{{$user->contact_id}}@permission('update.user')</a>@endpermission</td>
-            <td>@permission('update.user')<a href="{{route('user.edit', $user->id)}}">@endpermission{{$user->company_id}}@permission('update.user')</a>@endpermission</td>   
+            <td>{{$user->id}}</td>
+            <td>{{$user->name}}</td>
+            <td>{{$user->email}}</td>
+            <td>{{$user->contact_id}}</td>
+            <td>{{$user->company_id}}</td>   
             @permission('delete.user|update.user')
             <td>
             	@permission('update.user')
                 	{!!Form::update(route('user.edit',$user->id))!!}
                 @endpermission
+                <br/>
             	@permission('delete.user')
                 	{!!Form::delete(route('user.destroy',$user->id))!!}
                 @endpermission

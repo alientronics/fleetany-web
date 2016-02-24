@@ -2,21 +2,21 @@
 
 use App\User;
 use App\Entities\ModelMonitor;
-use Illuminate\Support\Facades\DB;
 class UserPermissionTest extends TestCase
 {
-    public static function setUpBeforeClass()
+    public function setUp()
     {
-        parent::setUpBeforeClass();
-        DB::beginTransaction();
-    }
-
-    public static function tearDownBeforeClass()
-    {
-        parent::tearDownBeforeClass();
-        DB::beginTransaction();
+        parent::setUp();
+        $this->createExecutive();
+        $this->createManager();
+        $this->createOperational();
+        $this->createStaff();
     }
     
+    public function tearDown()
+    {
+        $deletedRows = User::where('id', '>', 1)->delete();
+    }
     
     public function testViewAdmin()
     {
