@@ -12,8 +12,6 @@ use Input;
 use Lang;
 use Session;
 use Redirect;
-use Response;
-use Illuminate\Support\Facades\View;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Kodeine\Acl\Models\Eloquent\Role;
 
@@ -28,18 +26,13 @@ class UserController extends Controller
         $this->userRepo = $userRepo;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
     public function index()
     {
         $users = $this->userRepo->all();
         if (Request::isJson()) {
             return $users;
         }
-        return View::make("user.index", compact('users'));        //
+        return view("user.index", compact('users'));        //
     }
 
     public function create()
@@ -78,7 +71,7 @@ class UserController extends Controller
     public function show($idUser)
     {
         $user = $this->userRepo->find($idUser);
-        return View::make("user.show", compact('user'));
+        return view("user.show", compact('user'));
     }
     
     public function edit($idUser)
@@ -89,7 +82,7 @@ class UserController extends Controller
         $role = $role->transform(function ($item) {
             return Lang::get('general.'.$item);
         });
-        return View::make("user.edit", compact('user', 'role'));
+        return view("user.edit", compact('user', 'role'));
     }
     
     public function update($idUser)
