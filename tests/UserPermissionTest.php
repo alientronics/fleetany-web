@@ -4,6 +4,12 @@ use App\User;
 
 class UserPermissionTest extends TestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+        $userStaffTest = $this->createStaff();
+    }
+    
     public function testViewAdmin()
     {
         $this->visit('/')->see('Usu&aacute;rios');
@@ -33,8 +39,8 @@ class UserPermissionTest extends TestCase
     
         $idOption = $this->crawler->filterXPath("//select[@id='role_id']/option[5]")->attr('value');
     
-        $this->type('Nome Usuario Staff', 'name')
-            ->type('staff@alientronics.com.br', 'email')
+        $this->type('Nome Usuario Teste', 'name')
+            ->type('teste@alientronics.com.br', 'email')
             ->type('admin', 'password')
             ->select($idOption, 'role_id')
             ->type('Contato Usuario Teste', 'contact_id')
@@ -43,7 +49,7 @@ class UserPermissionTest extends TestCase
             ->seePageIs('/user')
         ;
     
-        $this->seeInDatabase('users', ['name' => 'Nome Usuario Staff', 'email' => 'staff@alientronics.com.br']);
+        $this->seeInDatabase('users', ['name' => 'Nome Usuario Teste', 'email' => 'teste@alientronics.com.br']);
         $this->seeInDatabase('role_user', ['role_id' => '5', 'user_id' => User::all()->last()['id']]);
     }
     
@@ -61,8 +67,6 @@ class UserPermissionTest extends TestCase
     
     public function testUpdateAdmin()
     {
-        $userStaffTest = $this->createStaff();
-        
         $this->visit('/user/'.User::all()->last()['id'].'/edit');
         
         $idOption = $this->crawler->filterXPath("//select[@id='role_id']/option[3]")->attr('value');
@@ -83,8 +87,6 @@ class UserPermissionTest extends TestCase
     
     public function testUpdateExecutive()
     {
-        $userStaffTest = $this->createStaff();
-        
         $user = $this->createExecutive();
         $this->actingAs($user);
         
@@ -99,18 +101,15 @@ class UserPermissionTest extends TestCase
     
     public function testDeleteAdmin()
     {
-        $userStaffTest = $this->createStaff();
-        
-        $this->visit('/user')
-            ->press('Excluir');
-    
-        $this->notSeeInDatabase('users', ['name' => 'Nome Usuario Editado', 'version' => '2']);
+        $this->seeInDatabase('users', ['email' => 'staff@alientronics.com.br']);
+        $this->visit('/user');
+        $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
+        $crawler = $this->click($idOption);
+        $this->notSeeInDatabase('users', ['email' => 'staff@alientronics.com.br']);
     }
     
     public function testDeleteExecutive()
     {
-        $userStaffTest = $this->createStaff();
-        
         $user = $this->createExecutive();
         $this->actingAs($user);
         

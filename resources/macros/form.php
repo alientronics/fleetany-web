@@ -136,7 +136,7 @@ Form::macro('actions', function($attributes = array()) {
 
 Form::macro('buttonLink', function($link, $class, $icon, $title) {  
   
-    return "<a href='$link' class='btn btn-xs btn-$class' title='$title'>
+    return "<a href='$link' class='btn btn-xs btn-$class' title='$title' name='$title'>
             <i class='glyphicon glyphicon-$icon'></i>
             </a>";
 

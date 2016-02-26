@@ -25,6 +25,14 @@ class UserTest extends TestCase
     
     public function testUpdate()
     {
+        $user = factory(App\User::class)->create([
+            'name' => 'Nome Usuario Teste',
+            'email' => 'teste@alientronics.com.br',
+            'password' => 'admin',
+            'contact_id' => 'Contato Usuario Teste',
+            'company_id' => 'Empresa Usuario Teste',
+        ]);
+        
         $this->visit('/user/'.User::all()->last()['id'].'/edit');
         
         $idOption = $this->crawler->filterXPath("//select[@id='role_id']/option[3]")->attr('value');
@@ -44,9 +52,17 @@ class UserTest extends TestCase
     
     public function testDelete()
     {
-        $this->visit('/user')
-            ->press('Excluir');
+        $user = factory(App\User::class)->create([
+            'name' => 'Nome Usuario Teste',
+            'email' => 'teste@alientronics.com.br',
+            'password' => 'admin',
+            'contact_id' => 'Contato Usuario Teste',
+            'company_id' => 'Empresa Usuario Teste',
+        ]);
         
-        $this->notSeeInDatabase('users', ['name' => 'Nome Usuario Editado', 'email' => 'emaileditado@usuario.com']);
+        $this->visit('/user');
+        $linkExcluir = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
+        $crawler = $this->click($linkExcluir);
+        $this->notSeeInDatabase('users', ['name' => 'Nome Usuario Teste', 'email' => 'teste@alientronics.com.br']);
     }
 }
