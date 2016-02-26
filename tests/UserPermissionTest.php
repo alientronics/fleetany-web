@@ -1,12 +1,9 @@
 <?php
 
 use App\User;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserPermissionTest extends TestCase
 {
-    use DatabaseTransactions;
-    
     public function testViewAdmin()
     {
         $this->visit('/')->see('Usu&aacute;rios');
