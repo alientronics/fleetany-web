@@ -34,81 +34,57 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     
     public function createExecutive()
     {
-        $this->visit('/user/create');
+        $user = factory(App\User::class)->create([
+            'name' => 'Nome Usuario Executive',
+            'email' => 'executive@alientronics.com.br',
+            'password' => 'admin',
+            'contact_id' => 'Contato Usuario Teste',
+            'company_id' => 'Empresa Usuario Teste',
+        ]);
     
-        $idOption = $this->crawler->filterXPath("//select[@id='role_id']/option[2]")->attr('value');
-    
-        $this->type('Nome Usuario Executive', 'name')
-            ->type('executive@alientronics.com.br', 'email')
-            ->type('admin', 'password')
-            ->select($idOption, 'role_id')
-            ->type('Contato Usuario Teste', 'contact_id')
-            ->type('Empresa Usuario Teste', 'company_id')
-            ->press('Enviar')
-            ->seePageIs('/user')
-        ;
-    
-        $this->seeInDatabase('users', ['name' => 'Nome Usuario Executive', 'email' => 'executive@alientronics.com.br']);
-        $this->seeInDatabase('role_user', ['role_id' => '2', 'user_id' => User::all()->last()['id']]);
+        $user->assignRole('executive');
+        return $user;
     }
     
     public function createManager()
     {
-        $this->visit('/user/create');
-    
-        $idOption = $this->crawler->filterXPath("//select[@id='role_id']/option[3]")->attr('value');
-    
-        $this->type('Nome Usuario Manager', 'name')
-            ->type('manager@alientronics.com.br', 'email')
-            ->type('admin', 'password')
-            ->select($idOption, 'role_id')
-            ->type('Contato Usuario Teste', 'contact_id')
-            ->type('Empresa Usuario Teste', 'company_id')
-            ->press('Enviar')
-            ->seePageIs('/user')
-        ;
-    
-        $this->seeInDatabase('users', ['name' => 'Nome Usuario Manager', 'email' => 'manager@alientronics.com.br']);
-        $this->seeInDatabase('role_user', ['role_id' => '3', 'user_id' => User::all()->last()['id']]);
+        $user = factory(App\User::class)->create([
+            'name' => 'Nome Usuario Manager',
+            'email' => 'manager@alientronics.com.br',
+            'password' => 'admin',
+            'contact_id' => 'Contato Usuario Teste',
+            'company_id' => 'Empresa Usuario Teste',
+        ]);
+        
+        $user->assignRole('executive');
+        return $user;
     }
     
     public function createOperational()
     {
-        $this->visit('/user/create');
-    
-        $idOption = $this->crawler->filterXPath("//select[@id='role_id']/option[4]")->attr('value');
-    
-        $this->type('Nome Usuario Operational', 'name')
-            ->type('operational@alientronics.com.br', 'email')
-            ->type('admin', 'password')
-            ->select($idOption, 'role_id')
-            ->type('Contato Usuario Teste', 'contact_id')
-            ->type('Empresa Usuario Teste', 'company_id')
-            ->press('Enviar')
-            ->seePageIs('/user')
-        ;
-    
-        $this->seeInDatabase('users', ['name' => 'Nome Usuario Operational', 'email' => 'operational@alientronics.com.br']);
-        $this->seeInDatabase('role_user', ['role_id' => '4', 'user_id' => User::all()->last()['id']]);
+        $user = factory(App\User::class)->create([
+            'name' => 'Nome Usuario Operational',
+            'email' => 'operational@alientronics.com.br',
+            'password' => 'admin',
+            'contact_id' => 'Contato Usuario Teste',
+            'company_id' => 'Empresa Usuario Teste',
+        ]);
+        
+        $user->assignRole('executive');
+        return $user;
     }
     
     public function createStaff()
     {
-        $this->visit('/user/create');
-    
-        $idOption = $this->crawler->filterXPath("//select[@id='role_id']/option[5]")->attr('value');
-    
-        $this->type('Nome Usuario Staff', 'name')
-            ->type('staff@alientronics.com.br', 'email')
-            ->type('admin', 'password')
-            ->select($idOption, 'role_id')
-            ->type('Contato Usuario Teste', 'contact_id')
-            ->type('Empresa Usuario Teste', 'company_id')
-            ->press('Enviar')
-            ->seePageIs('/user')
-        ;
-    
-        $this->seeInDatabase('users', ['name' => 'Nome Usuario Staff', 'email' => 'staff@alientronics.com.br']);
-        $this->seeInDatabase('role_user', ['role_id' => '5', 'user_id' => User::all()->last()['id']]);
+        $user = factory(App\User::class)->create([
+            'name' => 'Nome Usuario Staff',
+            'email' => 'staff@alientronics.com.br',
+            'password' => 'admin',
+            'contact_id' => 'Contato Usuario Teste',
+            'company_id' => 'Empresa Usuario Teste',
+        ]);
+        
+        $user->assignRole('executive');
+        return $user;
     }
 }

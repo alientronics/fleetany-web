@@ -2,112 +2,118 @@
 
 use App\User;
 use App\Entities\ModelMonitor;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 class UserPermissionTest extends TestCase
 {
-    public function setUp()
-    {
-        parent::setUp();
-        $this->createExecutive();
-        $this->createManager();
-        $this->createOperational();
-        $this->createStaff();
-    }
-    
-    public function tearDown()
-    {
-        $deletedRows = User::where('id', '>', 1)->delete();
-    }
+    use DatabaseTransactions;
     
     public function testViewAdmin()
     {
-        $this->be(User::where('email', 'admin@alientronics.com.br')->first());
-        
-        $this->visit('/')->see('Monitores');
+        $this->visit('/')->see('Usuários');
     
-        $this->visit('/modelmonitor')
+        $this->visit('/user')
             ->see('de acesso para esta p', true)
         ;
     }
     
     public function testViewExecutive()
     {
-        $this->be(User::where('email', 'executive@alientronics.com.br')->first());
+        $user = $this->createExecutive();
+        $this->actingAs($user);
     
-        $this->visit('/')->see('Monitores', true);
+        $this->visit('/')->see('Usuários', true);
     
-        $this->visit('/modelmonitor')
+        $this->visit('/user')
             ->see('de acesso para esta p')
         ;
     }
     
     public function testCreateAdmin()
     {
-        $this->be(User::where('email', 'admin@alientronics.com.br')->first());
+        $this->visit('/user')->see('Novo');
         
-        $this->visit('/modelmonitor')->see('Novo');
-        
-        $this->visit('/modelmonitor/create')
-            ->type('Nome Monitor Teste', 'name')
+        $this->visit('/user/create')
+            ->type('Nome Usuario Teste', 'name')
             ->type('1', 'version')
             ->press('Enviar')
-            ->seePageIs('/modelmonitor')
+            ->seePageIs('/user')
         ;
         
-        $this->seeInDatabase('model_monitors', ['name' => 'Nome Monitor Teste', 'version' => '1']);
+        $this->seeInDatabase('users', ['name' => 'Nome Usuarios Teste', 'version' => '1']);
     }
     
     public function testCreateExecutive()
     {
-        $this->be(User::where('email', 'executive@alientronics.com.br')->first());
+        $user = $this->createExecutive();
+        $this->actingAs($user);
+        
+        $this->visit('/user')->see('Novo', true);
     
-        $this->visit('/modelmonitor')->see('Novo', true);
-    
-        $this->visit('/modelmonitor/create')
+        $this->visit('/user/create')
             ->see('de acesso para esta p')
         ;
     }
     
     public function testUpdateAdmin()
     {
-        $this->be(User::where('email', 'admin@alientronics.com.br')->first());
+        $modelMonitor = factory(User::class)->create([
+            'name' => 'Nome Usuario Teste',
+            'version' => 2,
+        ]);
         
-        $this->visit('/modelmonitor/'.ModelMonitor::all()->last()['id'].'/edit')
-            ->type('Nome Monitor Editado', 'name')
+        $this->visit('/user/'.User::all()->last()['id'].'/edit')
+            ->type('Nome Usuario Editado', 'name')
             ->type(2, 'version')
             ->press('Enviar')
         ;
         
-        $this->seeInDatabase('model_monitors', ['name' => 'Nome Monitor Editado', 'version' => '2']);
+        $this->seeInDatabase('users', ['name' => 'Nome Usuario Editado', 'version' => '2']);
     }
     
     public function testUpdateExecutive()
     {
-        $this->be(User::where('email', 'executive@alientronics.com.br')->first());
-    
-        $this->visit('/modelmonitor')
+        $user = $this->createExecutive();
+        $this->actingAs($user);
+        
+        $modelMonitor = factory(User::class)->create([
+            'name' => 'Nome Usuario Teste',
+            'version' => 2,
+        ]);
+        
+        $this->visit('/user')
             ->see('Editar', true)
         ;
         
-        $this->visit('/modelmonitor/'.ModelMonitor::all()->last()['id'].'/edit')
+        $this->visit('/user/'.User::all()->last()['id'].'/edit')
             ->see('de acesso para esta p')
         ;
     }
     
     public function testDeleteAdmin()
     {
-        $this->be(User::where('email', 'admin@alientronics.com.br')->first());
+        $modelMonitor = factory(User::class)->create([
+            'name' => 'Nome Usuario Teste',
+            'version' => 2,
+        ]);
         
-        $this->visit('/modelmonitor')
+        $this->visit('/user')
             ->press('Excluir');
     
-        $this->notSeeInDatabase('model_monitors', ['name' => 'Nome Monitor Editado', 'version' => '2']);
+        $this->notSeeInDatabase('users', ['name' => 'Nome Usuario Editado', 'version' => '2']);
     }
     
     public function testDeleteExecutive()
     {
-        $this->be(User::where('email', 'executive@alientronics.com.br')->first());
-    
-        $this->visit('/modelmonitor')
+        $user = $this->createExecutive();
+        $this->actingAs($user);
+        
+        $modelMonitor = factory(User::class)->create([
+            'name' => 'Nome Usuario Teste',
+            'version' => 2,
+        ]);
+        
+        $this->visit('/user')
             ->see('Excluir', true)
         ;
     }

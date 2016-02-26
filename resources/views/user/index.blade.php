@@ -49,7 +49,7 @@
                 <br/>
             	@permission('delete.user')
             		@if ($user->id != 1)
-                		{!!Form::delete(route('user.destroy',$user->id))!!}
+                		<a href="{{URL::route('user.destroy',$user->id)}}">Excluir</a>
                 	@endif
                 @endpermission
             </td>
