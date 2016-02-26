@@ -56,7 +56,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'company_id' => 'Empresa Usuario Teste',
         ]);
         
-        $user->assignRole('executive');
+        $user->assignRole('manager');
         return $user;
     }
     
@@ -70,7 +70,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'company_id' => 'Empresa Usuario Teste',
         ]);
         
-        $user->assignRole('executive');
+        $user->assignRole('operational');
         return $user;
     }
     
@@ -84,7 +84,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'company_id' => 'Empresa Usuario Teste',
         ]);
         
-        $user->assignRole('executive');
+        $user->assignRole('staff');
         return $user;
     }
 }

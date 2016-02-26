@@ -1,7 +1,6 @@
 <?php
 
 use App\User;
-use App\Entities\ModelMonitor;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UserPermissionTest extends TestCase
@@ -10,7 +9,7 @@ class UserPermissionTest extends TestCase
     
     public function testViewAdmin()
     {
-        $this->visit('/')->see('Usuários');
+        $this->visit('/')->see('Usu&aacute;rios');
     
         $this->visit('/user')
             ->see('de acesso para esta p', true)
@@ -22,7 +21,7 @@ class UserPermissionTest extends TestCase
         $user = $this->createExecutive();
         $this->actingAs($user);
     
-        $this->visit('/')->see('Usuários', true);
+        $this->visit('/')->see('Usu&aacute;rios', true);
     
         $this->visit('/user')
             ->see('de acesso para esta p')
@@ -33,14 +32,22 @@ class UserPermissionTest extends TestCase
     {
         $this->visit('/user')->see('Novo');
         
-        $this->visit('/user/create')
-            ->type('Nome Usuario Teste', 'name')
-            ->type('1', 'version')
+        $this->visit('/user/create');
+    
+        $idOption = $this->crawler->filterXPath("//select[@id='role_id']/option[5]")->attr('value');
+    
+        $this->type('Nome Usuario Staff', 'name')
+            ->type('staff@alientronics.com.br', 'email')
+            ->type('admin', 'password')
+            ->select($idOption, 'role_id')
+            ->type('Contato Usuario Teste', 'contact_id')
+            ->type('Empresa Usuario Teste', 'company_id')
             ->press('Enviar')
             ->seePageIs('/user')
         ;
-        
-        $this->seeInDatabase('users', ['name' => 'Nome Usuarios Teste', 'version' => '1']);
+    
+        $this->seeInDatabase('users', ['name' => 'Nome Usuario Staff', 'email' => 'staff@alientronics.com.br']);
+        $this->seeInDatabase('role_user', ['role_id' => '5', 'user_id' => User::all()->last()['id']]);
     }
     
     public function testCreateExecutive()
@@ -57,29 +64,32 @@ class UserPermissionTest extends TestCase
     
     public function testUpdateAdmin()
     {
-        $modelMonitor = factory(User::class)->create([
-            'name' => 'Nome Usuario Teste',
-            'version' => 2,
-        ]);
+        $userStaffTest = $this->createStaff();
         
-        $this->visit('/user/'.User::all()->last()['id'].'/edit')
-            ->type('Nome Usuario Editado', 'name')
-            ->type(2, 'version')
+        $this->visit('/user/'.User::all()->last()['id'].'/edit');
+        
+        $idOption = $this->crawler->filterXPath("//select[@id='role_id']/option[3]")->attr('value');
+            
+        $this->type('Nome Usuario Editado', 'name')
+            ->type('emaileditado@usuario.com', 'email')
+            ->type('654321', 'password')
+            ->select($idOption, 'role_id')
+            ->type('Contato Usuario Editado', 'contact_id')
+            ->type('Empresa Usuario Editado', 'company_id')
             ->press('Enviar')
         ;
         
-        $this->seeInDatabase('users', ['name' => 'Nome Usuario Editado', 'version' => '2']);
+        $this->seeInDatabase('users', ['name' => 'Nome Usuario Editado', 'email' => 'emaileditado@usuario.com']);
+        $this->seeInDatabase('role_user', ['role_id' => '3', 'user_id' => User::all()->last()['id']]);
+    
     }
     
     public function testUpdateExecutive()
     {
+        $userStaffTest = $this->createStaff();
+        
         $user = $this->createExecutive();
         $this->actingAs($user);
-        
-        $modelMonitor = factory(User::class)->create([
-            'name' => 'Nome Usuario Teste',
-            'version' => 2,
-        ]);
         
         $this->visit('/user')
             ->see('Editar', true)
@@ -92,10 +102,7 @@ class UserPermissionTest extends TestCase
     
     public function testDeleteAdmin()
     {
-        $modelMonitor = factory(User::class)->create([
-            'name' => 'Nome Usuario Teste',
-            'version' => 2,
-        ]);
+        $userStaffTest = $this->createStaff();
         
         $this->visit('/user')
             ->press('Excluir');
@@ -105,13 +112,10 @@ class UserPermissionTest extends TestCase
     
     public function testDeleteExecutive()
     {
+        $userStaffTest = $this->createStaff();
+        
         $user = $this->createExecutive();
         $this->actingAs($user);
-        
-        $modelMonitor = factory(User::class)->create([
-            'name' => 'Nome Usuario Teste',
-            'version' => 2,
-        ]);
         
         $this->visit('/user')
             ->see('Excluir', true)
