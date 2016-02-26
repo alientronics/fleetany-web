@@ -44,12 +44,11 @@
             @permission('delete.user|update.user')
             <td>
             	@permission('update.user')
-                	{!!Form::update(route('user.edit',$user->id))!!}
+                	{!!Form::buttonLink( route('user.edit', $user->id) , 'primary' , 'pencil' , 'Editar' )!!}
                 @endpermission
-                <br/>
             	@permission('delete.user')
             		@if ($user->id != 1)
-                		<a href="{{URL::route('user.destroy',$user->id)}}">Excluir</a>
+                        {!!Form::buttonLink( url('user/destroy',$user->id) , 'danger' , 'trash' , 'Excluir' )!!}
                 	@endif
                 @endpermission
             </td>

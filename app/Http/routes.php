@@ -22,9 +22,7 @@ Route::resource('modeltire', 'ModelTireController');
 Route::resource('typevehicle', 'TypeVehicleController');
 Route::resource('user', 'UserController');
 
-Route::controller('user', 'UserController', [
-    'destroy' => 'user.destroy',
-]);
+Route::get('user/destroy/{id}', 'UserController@destroy');
 
 Route::get('profile', 'UserController@showProfile');
 

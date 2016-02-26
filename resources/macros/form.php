@@ -133,3 +133,12 @@ Form::macro('actions', function($attributes = array()) {
         
     return implode("",$actions);
 });
+
+Form::macro('buttonLink', function($link, $class, $icon, $title) {  
+  
+    return "<a href='$link' class='btn btn-xs btn-$class' title='$title'>
+            <i class='glyphicon glyphicon-$icon'></i>
+            </a>";
+
+});
+
