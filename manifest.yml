@@ -5,7 +5,7 @@ declared-services:
     plan: spark
 
 applications:
-- name: tpms-dashboard
+- name: fleetany-web
   memory: 128M 
   instances: 1
   random-route: true

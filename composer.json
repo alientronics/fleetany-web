@@ -1,7 +1,7 @@
 {
-    "name": "alientronics/tpms-dashboard",
-    "description": "A TPMS Dashboard for IoT monitoring system",
-    "keywords": ["alientronics", "tpms", "dashboard"],
+    "name": "alientronics/fleetany-web",
+    "description": "An open source fleet management web system",
+    "keywords": ["alientronics", "fleetany", "web"],
     "license": "AGPL-3.0",
     "type": "project",
     "require": {
