@@ -10,7 +10,7 @@ services:
 
 addons:
   code_climate:
-    repo_token: e9e10e52d244c104fa21620f341e7d72f338e4b58fb9cd604adf41f01f415804
+    repo_token: 092ba7f552f0aec18fa18d180b608bf786ff5ae6aea0ea9bcaf7ec4204af46bb
   #hosts:
   #  - dynamodb-local
 
