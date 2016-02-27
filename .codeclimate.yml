@@ -1,8 +1,21 @@
-languages:
-   PHP: true
+engines:
+  phpcodesniffer:
+    enabled: true
+  phpmd:
+    enabled: true
+  fixme:
+    enabled: true
+  csslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - php
 ratings:
    paths:
    - app/**
+   - resources/**
    - "**.php"
 exclude_paths:
 - "bootstrap/*"
