@@ -5,8 +5,6 @@ engines:
     enabled: true
   fixme:
     enabled: true
-  csslint:
-    enabled: true
   duplication:
     enabled: true
     config:
