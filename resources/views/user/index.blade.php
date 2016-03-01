@@ -57,6 +57,7 @@
     @endforeach
 </table>
 
+{!! $users->links() !!}
 
 @else
 <div class="alert alert-info">
