@@ -28,24 +28,25 @@ class UserController extends Controller
 
     public function index()
     {
-        $where['name'] = 'Administrator';
-        $users = $this->userRepo->scopeQuery(function($query, $filters){
-                    if(!empty($filters['id_gt']) {
+        $filters=array();
+        $filters['paginate'] = 1;
+        $users = $this->userRepo->scopeQuery(function($query) use ($filters){
+                    if(!empty($filters['id_gt'])) {
                         $query->where('id', '>', $filters['id_gt']);
                     }
-                    if(!empty($filters['id_lt']) {
+                    if(!empty($filters['id_lt'])) {
                         $query->where('id', '<', $filters['id_lt']);
                     }
-                    if(!empty($filters['name']) {
+                    if(!empty($filters['name'])) {
                         $query->where('name', $filters['name']);
                     }
                     return $query;
-                })->paginate(1);
+                })->paginate($filters['paginate']);
                 
         if (Request::isJson()) {
             return $users;
         }
-        $filters=array();
+        
         return view("user.index", compact('users', 'filters'));        //
     }
 
