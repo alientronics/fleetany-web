@@ -35,11 +35,11 @@
 <table class='table table-striped table-bordered table-hover'>
     <thead>
         <tr>
-            <th>{{Lang::get("general.id")}}</th>
-            <th>{{Lang::get("general.name")}}</th>    
-            <th>{{Lang::get("general.email")}}</th>
-            <th>{{Lang::get("general.contact_id")}}</th>
-            <th>{{Lang::get("general.company_id")}}</th>
+            <th class="col-sm-1">{{Lang::get("general.id")}} <i class="fa fa-fw fa-sort"></i></th>
+            <th>{{Lang::get("general.name")}} <i class="fa fa-fw fa-sort"></i></th>    
+            <th>{{Lang::get("general.email")}} <i class="fa fa-fw fa-sort"></i></th>
+            <th>{{Lang::get("general.contact_id")}} <i class="fa fa-fw fa-sort"></i></th>
+            <th>{{Lang::get("general.company_id")}} <i class="fa fa-fw fa-sort"></i></th>
             @permission('delete.user|update.user')
             <th class="col-sm-1">{{Lang::get("general.Actions")}}</th>
             @endpermission
@@ -58,11 +58,13 @@
             	<div class="form-group col-sm-10">
                   <input type="search" class="form-control" placeholder='{{Lang::get("general.email")}}'>
                 </div>
-            </th> <th>
+            </th> 
+            <th>
             	<div class="form-group col-sm-10">
                   <input type="search" class="form-control" placeholder='{{Lang::get("general.contact_id")}}'>
                 </div>
-            </th> <th>
+            </th> 
+            <th>
             	<div class="form-group col-sm-10">
                   <input type="search" class="form-control" placeholder='{{Lang::get("general.company_id")}}'>
                 </div>
