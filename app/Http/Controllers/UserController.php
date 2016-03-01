@@ -26,22 +26,10 @@ class UserController extends Controller
         $this->userRepo = $userRepo;
     }
 
-    public function index()
+    public function index(\Illuminate\Http\Request $request)
     {
         $filters=array();
-        $filters['paginate'] = 1;
-        $users = $this->userRepo->scopeQuery(function($query) use ($filters){
-                    if(!empty($filters['id_gt'])) {
-                        $query->where('id', '>', $filters['id_gt']);
-                    }
-                    if(!empty($filters['id_lt'])) {
-                        $query->where('id', '<', $filters['id_lt']);
-                    }
-                    if(!empty($filters['name'])) {
-                        $query->where('name', $filters['name']);
-                    }
-                    return $query;
-                })->paginate($filters['paginate']);
+        $users = $this->userRepo->results($request->all());
                 
         if (Request::isJson()) {
             return $users;

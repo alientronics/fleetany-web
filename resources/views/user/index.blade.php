@@ -100,7 +100,7 @@
     @endforeach
 </table>
 
-{!! $users->links() !!}
+{!! $users->appends($filters)->links() !!}
 
 @else
 <div class="alert alert-info">
