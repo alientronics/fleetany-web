@@ -30,13 +30,13 @@ class UserController extends Controller
     {
         $where['name'] = 'Administrator';
         $users = $this->userRepo->scopeQuery(function($query, $filters){
-                    if($filters['id_gt']) {
+                    if(!empty($filters['id_gt']) {
                         $query->where('id', '>', $filters['id_gt']);
                     }
-                    if($filters['id_lt']) {
+                    if(!empty($filters['id_lt']) {
                         $query->where('id', '<', $filters['id_lt']);
                     }
-                    if($filters['name']) {
+                    if(!empty($filters['name']) {
                         $query->where('name', $filters['name']);
                     }
                     return $query;
