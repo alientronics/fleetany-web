@@ -22,15 +22,19 @@
 @permission('view.user')  
 @if (count($users) > 0)
 
+<form method="get" id="search">
+
 <div class="form-group col-sm-10">
-<select>
-	<option>10</option>
-	<option>25</option>
-	<option>50</option>
-	<option>100</option>
+<select name="paginate">
+	<option @if ($filters['paginate'] == 10) selected @endif value="10">10</option>
+	<option @if ($filters['paginate'] == 25) selected @endif value="25">25</option>
+	<option @if ($filters['paginate'] == 50) selected @endif value="50">50</option>
+	<option @if ($filters['paginate'] == 100) selected @endif value="100">100</option>
 </select>
 {{Lang::get("general.resultsperpage")}}
 </div>
+
+<input type="submit" value="Pesquisar" />
 
 <table class='table table-striped table-bordered table-hover'>
     <thead>
@@ -44,6 +48,7 @@
             <th class="col-sm-1">{{Lang::get("general.Actions")}}</th>
             @endpermission
         </tr>
+        
         <tr>
             <th>
             	<div class="form-group col-sm-10">
@@ -51,22 +56,22 @@
             </th>
             <th>
             	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" placeholder='{{Lang::get("general.name")}}'>
+                  <input type="search" class="form-control" name="name" value="{{$filters['name']}}" placeholder='{{Lang::get("general.name")}}'>
                 </div>
             </th>    
             <th>
             	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" placeholder='{{Lang::get("general.email")}}'>
+                  <input type="search" class="form-control" name="email" value="{{$filters['email']}}" placeholder='{{Lang::get("general.email")}}'>
                 </div>
             </th> 
             <th>
             	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" placeholder='{{Lang::get("general.contact_id")}}'>
+                  <input type="search" class="form-control" name="contact-id" value="{{$filters['contact-id']}}" placeholder='{{Lang::get("general.contact_id")}}'>
                 </div>
             </th> 
             <th>
             	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" placeholder='{{Lang::get("general.company_id")}}'>
+                  <input type="search" class="form-control" name="company-id" value="{{$filters['company-id']}}" placeholder='{{Lang::get("general.company_id")}}'>
                 </div>
             </th> 
             @permission('delete.user|update.user')
@@ -99,7 +104,7 @@
         </tr>
     @endforeach
 </table>
-
+</form>
 {!! $users->appends($filters)->links() !!}
 
 @else

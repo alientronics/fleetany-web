@@ -20,6 +20,14 @@ class UserController extends Controller
 
     protected $userRepo;
     
+    protected $fields = [
+        'id',
+        'name',
+        'email',
+        'contact-id',
+        'company-id',
+    ];
+    
     public function __construct(UserRepositoryEloquent $userRepo)
     {
         $this->middleware('auth');
@@ -28,8 +36,24 @@ class UserController extends Controller
 
     public function index(\Illuminate\Http\Request $request)
     {
-        $filters=array();
-        $users = $this->userRepo->results($request->all());
+        $filters = $request->all();
+        
+        $filters['paginate'] = empty($filters['paginate']) ? 10 : $filters['paginate'];
+        
+        if(empty($filters['sort'])) {
+            $filters['sort'] = $this->fields[0];
+            $filters['order'] = 'asc';
+        } else {
+            $sort = explode("-", $filters['sort']);
+            $filters['order'] = array_pop($sort);
+            $filters['sort'] = implode("-", $sort);
+            if(!in_array($filters['sort'], $this->fields)){
+                $filters['sort'] = $this->fields[0];
+            }
+        }
+        $filters['sort'] = str_replace("-", "_", $filters['sort']);
+        
+        $users = $this->userRepo->results($filters);
                 
         if (Request::isJson()) {
             return $users;

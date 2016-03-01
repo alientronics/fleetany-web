@@ -10,14 +10,6 @@ use App\Entities\User;
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
 
-    protected $fields = [
-            'id',
-            'name',
-            'email',
-            'contact-id',
-            'company-id',
-        ];
-    
     protected $rules = [
         'name'      => 'min:3|required',
         ];
@@ -34,37 +26,26 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     
     public function results($filters = array())
     {
-        $filters['paginate'] = empty($filters['paginate']) ? 1 : $filters['paginate'];
+        $filters['paginate'] = empty($filters['paginate']) ? 10 : $filters['paginate'];
         
-        if(empty($filters['sort'])) {
-            $filters['sort'] = $this->fields[0];
-            $filters['order'] = 'asc';
-        } else {
-            $sort = explode("-", $filters['sort']);
-            $filters['order'] = array_pop($sort);
-            $filters['sort'] = implode("-", $sort);
-            if(!in_array($filters['sort'], $this->fields)){
-                $filters['sort'] = $this->fields[0];
-            }
-        }
-        $filters['sort'] = str_replace("-", "_", $filters['sort']);
-
         $users = $this->scopeQuery(function($query) use ($filters){
             
             if(!empty($filters['name'])) {
-                $query = $query->where('name', $filters['name']);
+                $query = $query->where('name', 'like', '%'.$filters['name'].'%');
             }
             if(!empty($filters['email'])) {
-                $query = $query->where('email', $filters['email']);
+                $query = $query->where('email', 'like', '%'.$filters['email'].'%');
             }
-            if(!empty($filters['contact_id'])) {
-                $query = $query->where('contact_id', $filters['contact_id']);
+            if(!empty($filters['contact-id'])) {
+                $query = $query->where('contact_id', 'like', '%'.$filters['contact-id'].'%');
             }
-            if(!empty($filters['company_id'])) {
-                $query = $query->where('company_id', $filters['company_id']);
+            if(!empty($filters['company-id'])) {
+                $query = $query->where('company_id', 'like', '%'.$filters['company-id'].'%');
             }
             
-            $query = $query->orderBy($filters['sort'], $filters['order']);
+            if(!empty($filters['sort']) && !empty($filters['order'])) {
+                $query = $query->orderBy($filters['sort'], $filters['order']);
+            }
             
             return $query;
         })->paginate($filters['paginate']);
