@@ -21,6 +21,17 @@
 @section('table')
 @permission('view.user')  
 @if (count($users) > 0)
+
+<div class="form-group col-sm-10">
+<select>
+	<option>10</option>
+	<option>25</option>
+	<option>50</option>
+	<option>100</option>
+</select>
+{{Lang::get("general.resultsperpage")}}
+</div>
+
 <table class='table table-striped table-bordered table-hover'>
     <thead>
         <tr>
@@ -30,7 +41,37 @@
             <th>{{Lang::get("general.contact_id")}}</th>
             <th>{{Lang::get("general.company_id")}}</th>
             @permission('delete.user|update.user')
-            <th>{{Lang::get("general.Actions")}}</th>
+            <th class="col-sm-1">{{Lang::get("general.Actions")}}</th>
+            @endpermission
+        </tr>
+        <tr>
+            <th>
+            	<div class="form-group col-sm-10">
+                </div>
+            </th>
+            <th>
+            	<div class="form-group col-sm-10">
+                  <input type="search" class="form-control" placeholder='{{Lang::get("general.name")}}'>
+                </div>
+            </th>    
+            <th>
+            	<div class="form-group col-sm-10">
+                  <input type="search" class="form-control" placeholder='{{Lang::get("general.email")}}'>
+                </div>
+            </th> <th>
+            	<div class="form-group col-sm-10">
+                  <input type="search" class="form-control" placeholder='{{Lang::get("general.contact_id")}}'>
+                </div>
+            </th> <th>
+            	<div class="form-group col-sm-10">
+                  <input type="search" class="form-control" placeholder='{{Lang::get("general.company_id")}}'>
+                </div>
+            </th> 
+            @permission('delete.user|update.user')
+            <th>
+            	<div class="form-group col-sm-10">
+                </div>
+            </th>
             @endpermission
         </tr>
     </thead>

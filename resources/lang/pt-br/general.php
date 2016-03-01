@@ -17,6 +17,7 @@ return [
     "succefullcreate" => ":table criado com sucesso",
     "succefullupdate" => ":table atualizado com sucesso",
     "SelectValue"     => "Selecione um valor",
+    "resultsperpage"  => "resultados por p&aacute;gina",
    
    
     "success_create" => "Sucesso em criar ",
