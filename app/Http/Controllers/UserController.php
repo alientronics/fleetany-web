@@ -37,14 +37,12 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        
         $objHelper = new HelperRepository();
         $filters = $objHelper->getFilters($request->all(), $this->fields, $request);
         
         $users = $this->userRepo->results($filters);
                 
-        
-        return view("user.index", compact('users', 'filters'));        //
+        return view("user.index", compact('users', 'filters'));
     }
     
     public function create()

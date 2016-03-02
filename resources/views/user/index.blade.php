@@ -35,6 +35,7 @@
 </div>
 
 <input type="submit" value="Pesquisar" />
+<input type="hidden" name="sort" value="{{$filters['sort']}}-{{$filters['order']}}" />
 
 <table class='table table-striped table-bordered table-hover'>
     <thead>
