@@ -26,26 +26,22 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     
     public function results($filters = array())
     {
-        $filters['paginate'] = empty($filters['paginate']) ? 10 : $filters['paginate'];
-        
-        $users = $this->scopeQuery(function($query) use ($filters){
+        $users = $this->scopeQuery(function ($query) use ($filters) {
             
-            if(!empty($filters['name'])) {
+            if (!empty($filters['name'])) {
                 $query = $query->where('name', 'like', '%'.$filters['name'].'%');
             }
-            if(!empty($filters['email'])) {
+            if (!empty($filters['email'])) {
                 $query = $query->where('email', 'like', '%'.$filters['email'].'%');
             }
-            if(!empty($filters['contact-id'])) {
+            if (!empty($filters['contact-id'])) {
                 $query = $query->where('contact_id', 'like', '%'.$filters['contact-id'].'%');
             }
-            if(!empty($filters['company-id'])) {
+            if (!empty($filters['company-id'])) {
                 $query = $query->where('company_id', 'like', '%'.$filters['company-id'].'%');
             }
-            
-            if(!empty($filters['sort']) && !empty($filters['order'])) {
-                $query = $query->orderBy($filters['sort'], $filters['order']);
-            }
+
+            $query = $query->orderBy($filters['sort'], $filters['order']);
             
             return $query;
         })->paginate($filters['paginate']);

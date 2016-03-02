@@ -7,12 +7,7 @@ class HelperRepository
 {
     public function getFilters($form, $fields, Request $request) {
         
-        $filters = array();
-        if(!empty($fields)) {
-            foreach ($fields as $value) {
-                $filters[$value] = empty($form[$value]) ? "" : $form[$value];
-            }
-        }
+        $filters = $this->getFiltersValues($form, $fields);
         $filters['sort_url'] = $filters;
         unset($filters['sort_url']['sort']);
         
@@ -32,8 +27,25 @@ class HelperRepository
             }
         }
         
+        $filters = $this->getFiltersSortUrl($filters, $request);
+        $filters['sort'] = str_replace("-", "_", $filters['sort']);
+
+        return $filters;
+    }
+    
+    private function getFiltersValues($form, $fields) {
+        $filters = array();
+        if(!empty($fields)) {
+            foreach ($fields as $value) {
+                $filters[$value] = empty($form[$value]) ? "" : $form[$value];
+            }
+        }
+        return $filters;
+    }
+    
+    private function getFiltersSortUrl($filters, Request $request) {
         $sortUrl = http_build_query($filters['sort_url']);
-        foreach ($filters['sort_url'] as $key => $value) {
+        foreach(array_keys($filters['sort_url']) as $key) {
             $url = $request->path() . '?' . $sortUrl . "&sort=" . $key;
             if($filters['sort'] == $key && $filters['order'] == 'asc') {
                 $filters['sort_url'][$key] = $url . "-desc";
@@ -46,9 +58,6 @@ class HelperRepository
                 }
             }
         }
-        
-        $filters['sort'] = str_replace("-", "_", $filters['sort']);
-
         return $filters;
     }
 }

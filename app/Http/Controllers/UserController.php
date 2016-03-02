@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Request;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepositoryEloquent;
 use App\User;
@@ -15,6 +14,7 @@ use Redirect;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Kodeine\Acl\Models\Eloquent\Role;
 use App\Repositories\HelperRepository;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -35,7 +35,7 @@ class UserController extends Controller
         $this->userRepo = $userRepo;
     }
 
-    public function index(\Illuminate\Http\Request $request)
+    public function index(Request $request)
     {
         
         $objHelper = new HelperRepository();
@@ -43,9 +43,6 @@ class UserController extends Controller
         
         $users = $this->userRepo->results($filters);
                 
-        if (Request::isJson()) {
-            return $users;
-        }
         
         return view("user.index", compact('users', 'filters'));        //
     }
