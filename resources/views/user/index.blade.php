@@ -39,11 +39,11 @@
 <table class='table table-striped table-bordered table-hover'>
     <thead>
         <tr>
-            <th class="col-sm-1">{{Lang::get("general.id")}} <i class="fa fa-fw fa-sort"></i></th>
-            <th>{{Lang::get("general.name")}} <i class="fa fa-fw fa-sort"></i></th>    
-            <th>{{Lang::get("general.email")}} <i class="fa fa-fw fa-sort"></i></th>
-            <th>{{Lang::get("general.contact_id")}} <i class="fa fa-fw fa-sort"></i></th>
-            <th>{{Lang::get("general.company_id")}} <i class="fa fa-fw fa-sort"></i></th>
+            <th class="col-sm-1"><a href="{{url('/')}}/{{$filters['sort_url']['id']}}">{{Lang::get("general.id")}} <i class="fa fa-fw {{$filters['sort_icon']['id']}}"></i></a></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['name']}}">{{Lang::get("general.name")}} <i class="fa fa-fw {{$filters['sort_icon']['name']}}"></i></a></th>    
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['email']}}">{{Lang::get("general.email")}} <i class="fa fa-fw {{$filters['sort_icon']['email']}}"></i></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['contact-id']}}">{{Lang::get("general.contact_id")}} <i class="fa fa-fw {{$filters['sort_icon']['contact-id']}}"></i></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['company-id']}}">{{Lang::get("general.company_id")}} <i class="fa fa-fw {{$filters['sort_icon']['company-id']}}"></i></th>
             @permission('delete.user|update.user')
             <th class="col-sm-1">{{Lang::get("general.Actions")}}</th>
             @endpermission

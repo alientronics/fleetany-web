@@ -14,6 +14,7 @@ use Session;
 use Redirect;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Kodeine\Acl\Models\Eloquent\Role;
+use App\Repositories\HelperRepository;
 
 class UserController extends Controller
 {
@@ -36,7 +37,9 @@ class UserController extends Controller
 
     public function index(\Illuminate\Http\Request $request)
     {
-        $filters = $this->getFilters($request->all(), $request);
+        
+        $objHelper = new HelperRepository();
+        $filters = $objHelper->getFilters($request->all(), $this->fields, $request);
         
         $users = $this->userRepo->results($filters);
                 
@@ -45,35 +48,6 @@ class UserController extends Controller
         }
         
         return view("user.index", compact('users', 'filters'));        //
-    }
-
-    public function getFilters($form, \Illuminate\Http\Request $request) {
-        
-        $filters = array();
-        if(!empty($this->fields)) {
-            foreach ($this->fields as $value) {
-                $filters[$value] = empty($form[$value]) ? "" : $form[$value];
-            }
-        }
-        
-        $paginate = empty($request->session()->get('paginate')) ? 10 : $request->session()->get('paginate');
-        $filters['paginate'] = empty($form['paginate']) ? $paginate : $form['paginate'];
-        $request->session()->put('paginate', $filters['paginate']);
-        
-        if(empty($form['sort'])) {
-            $filters['sort'] = $this->fields[0];
-            $filters['order'] = 'asc';
-        } else {
-            $sort = explode("-", $form['sort']);
-            $filters['order'] = array_pop($sort);
-            $filters['sort'] = implode("-", $sort);
-            if(!in_array($filters['sort'], $this->fields)){
-                $filters['sort'] = $this->fields[0];
-            }
-        }
-        $filters['sort'] = str_replace("-", "_", $filters['sort']);
-        
-        return $filters;
     }
     
     public function create()
