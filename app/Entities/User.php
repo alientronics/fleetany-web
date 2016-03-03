@@ -10,7 +10,7 @@ class User extends Model implements Transformable
 {
     use TransformableTrait;
 
-    protected $fillable = ['name', 'email', 'contact_id', 'password', 'company_id','created_at','updated_at'];
+    protected $fillable = ['name', 'email', 'locale', 'contact_id', 'password', 'company_id','created_at','updated_at'];
     protected $hidden = ['remember_token'];
 
     public function contact()

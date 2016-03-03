@@ -16,7 +16,8 @@ class UserTableSeeder extends Seeder
         User::create(
                 array(  'name' => 'Administrator',
                         'email' => 'admin@alientronics.com.br',
-                        'password' => Hash::make('admin'))
+                        'password' => Hash::make('admin'),
+                        'locale' => 'pt-br')
             );
        
         
