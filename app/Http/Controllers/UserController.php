@@ -145,8 +145,8 @@ class UserController extends Controller
                 Lang::get(
                     'general.succefullupdate',
                     ['table'=> Lang::get('general.User')]
-                    )
-                );
+                )
+            );
             return Redirect::to('profile');
         } catch (ValidatorException $e) {
             return Redirect::back()->withInput()
