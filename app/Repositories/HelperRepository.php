@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use Illuminate\Http\Request;
+use Kodeine\Acl\Models\Eloquent\Role;
+use Lang;
 
 class HelperRepository
 {
@@ -62,5 +64,13 @@ class HelperRepository
             }
         }
         return $filters;
+    }
+    
+    public function getAvailableRoles() {
+        $role = Role::lists('name', 'id');
+        $role = $role->transform(function ($item) {
+            return Lang::get('general.'.$item);
+        });
+        return $role;
     }
 }

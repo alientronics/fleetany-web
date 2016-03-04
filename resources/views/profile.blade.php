@@ -1,34 +1,56 @@
 @extends('layouts.default')
+@extends('layouts.edit')
 
-@section('content')
+@section('title')
+<h1>{{Lang::get("general.User")}}</h1>
+@stop
 
-@if(Session::has('flash_message'))
-    <div class="alert alert-success">
-        {{ Session::get('flash_message') }}
-    </div>
+@section('sub-title')
+@if ($user->id)
+{{--*/ $operation = 'update' /*--}}
+{{$user->name}}
+@else
+{{--*/ $operation = 'create' /*--}}
+{{Lang::get("general.newuser")}}
+@endif
+@stop
+
+@if ($user->id)
+@section('breadcrumbs', Breadcrumbs::render('user.edit', $user))
 @endif
 
-<h1>Perfil</h1>
-<p class="lead">Exemplo da p&aacute;gina de perfil.</p>
-<hr>
+@section('edit')
 
-{!! Form::model($user, [
-    'method' => 'PATCH',
-    'route' => ['user.update', $user->id]
-]) !!}
+@permission($operation.'.user')
 
-<div class="form-group">
-    {!! Form::label('name', 'Nome:', ['class' => 'control-label']) !!}
-    {!! Form::text('name', null, ['class' => 'form-control']) !!}
-</div>
+{!! Form::model('$user', [
+        'method'=>'PUT',
+        'route' => ['user.update',$user->id]
+    ]) !!}
 
-<div class="form-group">
-    {!! Form::label('email', 'Email:', ['class' => 'control-label']) !!}
-    {!! Form::text('email', null, ['class' => 'form-control']) !!}
-</div>
+    <div class="form-group col-lg-12">
+        {!!Form::label('name', Lang::get('general.name'))!!}
+        {!!Form::text('name', $user->name, array('class' => 'form-control'))!!}
+    </div>
 
-{!! Form::submit('Salvar', ['class' => 'btn btn-primary']) !!}
+    <div class="form-group col-lg-12">
+        {!!Form::label('email', Lang::get('general.email'))!!}
+        {!!Form::text('email', $user->email, array('class' => 'form-control'))!!}
+    </div>
 
+    <div class="form-group col-lg-12">
+        {!!Form::label('locale', Lang::get('general.locale'))!!}
+        {!!Form::select('locale', $locale, $user->locale, array('class' => 'form-control'))!!}
+    </div>
+
+    <button type="submit" class="btn btn-primary">{{Lang::get('general.Submit')}}</button>
+    <button type="reset" class="btn btn-primary">{{Lang::get('general.Reset')}}</button>
 {!! Form::close() !!}
+
+@else
+<div class="alert alert-info">
+	{{Lang::get("general.acessdenied")}}
+</div>
+@endpermission
 
 @stop

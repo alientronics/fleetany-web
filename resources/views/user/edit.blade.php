@@ -52,6 +52,11 @@
     </div>
 
     <div class="form-group col-lg-12">
+        {!!Form::label('locale', Lang::get('general.locale'))!!}
+        {!!Form::select('locale', $locale, $user->locale, array('class' => 'form-control'))!!}
+    </div>
+
+    <div class="form-group col-lg-12">
         {!!Form::label('contact_id', Lang::get('general.contact_id'))!!}
         {!!Form::text('contact_id', $user->contact_id, array('class' => 'form-control'))!!}
     </div>

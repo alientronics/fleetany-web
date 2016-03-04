@@ -12,14 +12,16 @@ use Lang;
 use Session;
 use Redirect;
 use Prettus\Validator\Exceptions\ValidatorException;
-use Kodeine\Acl\Models\Eloquent\Role;
 use App\Repositories\HelperRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
 
     protected $userRepo;
+    
+    protected $locale;
     
     protected $fields = [
         'id',
@@ -33,6 +35,7 @@ class UserController extends Controller
     {
         $this->middleware('auth');
         $this->userRepo = $userRepo;
+        $this->locale = array("en" => Lang::get("general.en"), "pt-br" => Lang::get("general.ptbr"));
     }
 
     public function index(Request $request)
@@ -48,13 +51,10 @@ class UserController extends Controller
     public function create()
     {
         $user = new User();
-        $role = Role::lists('name', 'id');
-        
-        $role = $role->transform(function ($item) {
-            return Lang::get('general.'.$item);
-        });
-        
-        return view("user.edit", compact('user', 'role'));
+        $objHelperRepository = new HelperRepository();
+        $role = $objHelperRepository->getAvailableRoles();
+        $locale = $this->locale;
+        return view("user.edit", compact('user', 'role', 'locale'));
     }
 
     public function store()
@@ -87,12 +87,13 @@ class UserController extends Controller
     public function edit($idUser)
     {
         $user = $this->userRepo->find($idUser);
-        $role = Role::lists('name', 'id');
         
-        $role = $role->transform(function ($item) {
-            return Lang::get('general.'.$item);
-        });
-        return view("user.edit", compact('user', 'role'));
+        $objHelperRepository = new HelperRepository();
+        $role = $objHelperRepository->getAvailableRoles();
+        
+        $locale = $this->locale;
+            
+        return view("user.edit", compact('user', 'role', 'locale'));
     }
     
     public function update($idUser)
@@ -125,5 +126,31 @@ class UserController extends Controller
             Session::flash('message', Lang::get("general.deletedregister"));
         }
         return Redirect::to('user');
+    }
+    
+    public function showProfile()
+    {
+        $user = User::findOrFail(Auth::id());
+        $locale = $this->locale;
+        return view("profile", compact('user', 'locale'));
+    }
+    
+    public function updateProfile($idUser)
+    {
+        try {
+            $this->userRepo->validator();
+            $this->userRepo->update(Input::all(), $idUser);
+            Session::flash(
+                'message',
+                Lang::get(
+                    'general.succefullupdate',
+                    ['table'=> Lang::get('general.User')]
+                    )
+                );
+            return Redirect::to('profile');
+        } catch (ValidatorException $e) {
+            return Redirect::back()->withInput()
+            ->with('errors', $e->getMessageBag());
+        }
     }
 }

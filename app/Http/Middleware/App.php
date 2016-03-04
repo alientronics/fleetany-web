@@ -4,7 +4,8 @@ use Closure;
 use Session;
 use Auth;
 
-class App {
+class App
+{
 
     /**
      * The availables languages.
@@ -22,8 +23,7 @@ class App {
      */
     public function handle($request, Closure $next)
     {
-        if(!Session::has('locale'))
-        {
+        if (!Session::has('locale')) {
             Session::put('locale', Auth::user()['locale']);
         }
 
@@ -31,5 +31,4 @@ class App {
 
         return $next($request);
     }
-
 }

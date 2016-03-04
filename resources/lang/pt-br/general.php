@@ -77,6 +77,7 @@ return [
     "newuser" => "Novo Usuário",
     "password"=> "Senha",
     "role_id" => "Grupo",
+    "locale" => "Idioma",
     "contact_id" => "Contato",
     "company_id" => "Empresa",
     
@@ -85,6 +86,10 @@ return [
     "Executive" => "Gestor",
     "Manager" => "Gerente",
     "Operational" => "Operacional",
-    "Staff" => "Comum"
+    "Staff" => "Comum",
+    
+    //Linguagens
+    "en" => "Ingl&ecirc;s",
+    "ptbr" => "Portugu&ecirc;s"
     
 ];
