@@ -66,7 +66,8 @@ class HelperRepository
         return $filters;
     }
     
-    public function getAvailableRoles() {
+    public function getAvailableRoles() 
+    {
         $role = Role::lists('name', 'id');
         $role = $role->transform(function ($item) {
             return Lang::get('general.'.$item);
