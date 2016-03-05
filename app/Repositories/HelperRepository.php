@@ -79,10 +79,10 @@ class HelperRepository
     public function getAvailableLanguages()
     {
         $languages = array();
-        $directories = File::directories(base_path().'\resources\lang');
+        $directories = File::directories(base_path().DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'lang');
         
         foreach ($directories as $directory) {
-            $lang = explode("\\", $directory);
+            $lang = explode(DIRECTORY_SEPARATOR, $directory);
             $lang = end($lang);
             $languages[$lang] = Lang::get('general.'.$lang);
         }
