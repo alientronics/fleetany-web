@@ -65,4 +65,18 @@ class UserTest extends TestCase
         $crawler = $this->click($linkExcluir);
         $this->notSeeInDatabase('users', ['name' => 'Nome Usuario Teste', 'email' => 'teste@alientronics.com.br']);
     }
+    
+    public function testProfile()
+    {
+        $this->notSeeInDatabase('users', ['name' => 'Administrator2', 'email' => 'admin2@alientronics.com.br', 'locale' => 'en']);
+        
+        $this->visit('/profile');
+        
+        $this->type('Administrator2', 'name')
+            ->type('admin2@alientronics.com.br', 'email')
+            ->select('en', 'locale')
+            ->press('Enviar')
+        ;
+        $this->seeInDatabase('users', ['name' => 'Administrator2', 'email' => 'admin2@alientronics.com.br', 'locale' => 'en']);
+    }
 }
