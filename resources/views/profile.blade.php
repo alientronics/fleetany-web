@@ -21,11 +21,9 @@
 
 @section('edit')
 
-@permission($operation.'.user')
-
 {!! Form::model('$user', [
         'method'=>'PUT',
-        'route' => ['user.update',$user->id]
+        'action' => ['UserController@updateProfile', $user->id ]
     ]) !!}
 
     <div class="form-group col-lg-12">
@@ -46,11 +44,5 @@
     <button type="submit" class="btn btn-primary">{{Lang::get('general.Submit')}}</button>
     <button type="reset" class="btn btn-primary">{{Lang::get('general.Reset')}}</button>
 {!! Form::close() !!}
-
-@else
-<div class="alert alert-info">
-	{{Lang::get("general.acessdenied")}}
-</div>
-@endpermission
 
 @stop

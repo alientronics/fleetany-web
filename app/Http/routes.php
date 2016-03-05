@@ -26,6 +26,8 @@ Route::get('user/destroy/{id}', 'UserController@destroy');
 
 Route::get('profile', 'UserController@showProfile');
 
+Route::put('updateProfile/{id}', 'UserController@updateProfile');
+
 Route::bind(
     'users',
     function ($value, $route) {
