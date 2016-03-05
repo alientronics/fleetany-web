@@ -29,6 +29,12 @@
                             </fieldset>
                        {!! Form::close() !!}
                     </div>
+                    <div class="panel-body">
+                    	<p class="text-center">
+            	            <a href="{{url('/')}}/auth/social/google"><i class="fa fa-google"></i> Google</a> </br></br>
+            	            <a href="{{url('/')}}/auth/social/facebook"><i class="fa fa-facebook"></i> Facebook</a>
+                    	</p>
+                    </div>
                 </div>
             </div>
         </div>

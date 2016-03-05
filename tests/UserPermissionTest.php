@@ -12,7 +12,7 @@ class UserPermissionTest extends TestCase
     
     public function testViewAdmin()
     {
-        $this->visit('/')->see('Usu&aacute;rios');
+        $this->visit('/')->see('user">Usu');
     
         $this->visit('/user')
             ->see('de acesso para esta p', true)

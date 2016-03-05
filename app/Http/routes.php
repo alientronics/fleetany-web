@@ -28,6 +28,11 @@ Route::get('profile', 'UserController@showProfile');
 
 Route::put('updateProfile/{id}', 'UserController@updateProfile');
 
+Route::get('auth/social/{provider}', 'SocialLoginController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'SocialLoginController@handleProviderCallback');
+Route::get('auth/{provider}/callback', 'SocialLoginController@handleProviderCallback');
+Route::get('auth/logout', 'SocialLoginController@getLogout');
+
 Route::bind(
     'users',
     function ($value, $route) {

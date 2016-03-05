@@ -146,6 +146,7 @@ return [
 		Prettus\Repository\Providers\RepositoryServiceProvider::class,
 		DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
 		"Kodeine\Acl\AclServiceProvider",
+        Laravel\Socialite\SocialiteServiceProvider::class,
 
     ],
 
@@ -198,6 +199,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
+        'Socialize' => 'Laravel\Socialite\SocialiteServiceProvider',
 
     ],
 

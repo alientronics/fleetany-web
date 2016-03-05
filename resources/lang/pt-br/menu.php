@@ -35,6 +35,8 @@ return [
     'PlanType'      => "Tipos de Planos",
 
     'TypeVehicle' => "Tipo de Veículo",
-    'User' => "Usuário"
+    'User' => "Usuário",
+    
+    'logout' => 'Logout'
 
 ];

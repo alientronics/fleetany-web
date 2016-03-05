@@ -12,7 +12,8 @@
         "davejamesmiller/laravel-breadcrumbs": "dev-master",
         "prettus/laravel-validation": "1.1.*",
         "caouecs/laravel4-lang": "~2.0",
-        "kodeine/laravel-acl": "dev-master"
+        "kodeine/laravel-acl": "dev-master",
+        "laravel/socialite": "^2.0"
     },
     "require-dev": {
         "symfony/dom-crawler": "~3.0",
