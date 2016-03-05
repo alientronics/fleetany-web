@@ -5,6 +5,7 @@ namespace App\Repositories;
 use Illuminate\Http\Request;
 use Kodeine\Acl\Models\Eloquent\Role;
 use Lang;
+use Illuminate\Support\Facades\File;
 
 class HelperRepository
 {
@@ -73,5 +74,18 @@ class HelperRepository
             return Lang::get('general.'.$item);
         });
         return $role;
+    }
+    
+    public function getAvailableLanguages()
+    {
+        $languages = array();
+        $directories = File::directories(base_path().'\resources\lang');
+        
+        foreach ($directories as $directory) {
+            $lang = explode("\\", $directory);
+            $lang = end($lang);
+            $languages[$lang] = Lang::get('general.'.$lang);
+        }
+        return $languages;
     }
 }

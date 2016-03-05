@@ -90,6 +90,6 @@ return [
     
     //Linguagens
     "en" => "Ingl&ecirc;s",
-    "ptbr" => "Portugu&ecirc;s"
+    "pt-br" => "Portugu&ecirc;s"
     
 ];

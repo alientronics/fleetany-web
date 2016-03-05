@@ -21,8 +21,6 @@ class UserController extends Controller
 
     protected $userRepo;
     
-    protected $locale;
-    
     protected $fields = [
         'id',
         'name',
@@ -35,7 +33,6 @@ class UserController extends Controller
     {
         $this->middleware('auth');
         $this->userRepo = $userRepo;
-        $this->locale = array("en" => Lang::get("general.en"), "pt-br" => Lang::get("general.ptbr"));
     }
 
     public function index(Request $request)
@@ -53,7 +50,7 @@ class UserController extends Controller
         $user = new User();
         $objHelperRepository = new HelperRepository();
         $role = $objHelperRepository->getAvailableRoles();
-        $locale = $this->locale;
+        $locale = $objHelperRepository->getAvailableLanguages();
         return view("user.edit", compact('user', 'role', 'locale'));
     }
 
@@ -90,8 +87,7 @@ class UserController extends Controller
         
         $objHelperRepository = new HelperRepository();
         $role = $objHelperRepository->getAvailableRoles();
-        
-        $locale = $this->locale;
+        $locale = $objHelperRepository->getAvailableLanguages();
             
         return view("user.edit", compact('user', 'role', 'locale'));
     }
@@ -131,7 +127,8 @@ class UserController extends Controller
     public function showProfile()
     {
         $user = User::findOrFail(Auth::id());
-        $locale = $this->locale;
+        $objHelperRepository = new HelperRepository();
+        $locale = $objHelperRepository->getAvailableLanguages();
         return view("profile", compact('user', 'locale'));
     }
     
