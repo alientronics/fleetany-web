@@ -26,15 +26,9 @@ return [
     'Persons'       => 'Pessoas',
 
     
-    'ModelSensor'   => "Modelo de Sensor",
-    'ModelMonitor'   => "Modelo de Monitor",  
-    'ModelVehicle'   => "Modelo de Veiculo",  
-    'ModelTire'    => "Modelo de Pneus",
-
     'AuxiliarTables' => "Tabelas Auxiliares",
     'PlanType'      => "Tipos de Planos",
 
-    'TypeVehicle' => "Tipo de Veículo",
     'User' => "Usuário",
     
     'logout' => 'Logout'

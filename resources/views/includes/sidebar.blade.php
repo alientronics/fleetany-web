@@ -10,12 +10,6 @@
         @permission('view.user') 
         <li><a href="{{URL::to('user')}}">{{Lang::get('menu.Users')}}</a></li>
         @endpermission
-        @permission('view.modelmonitor') 
-        <li><a href="{{URL::to('modelmonitor')}}">{{Lang::get('menu.Monitors')}}</a></li>
-        @endpermission
-        @permission('view.modelvehicle')
-        <li><a href="{{URL::to('modelvehicle')}}">{{Lang::get('menu.Vehicles')}}</a></li> 
-        @endpermission               
         @permission('view.fleet')
         <li><a href="{{URL::to('fleets')}}">{{Lang::get('menu.Fleet')}}</a></li>       
         @endpermission   
@@ -25,12 +19,6 @@
                 <span class="fa arrow"></span>
             </a>
             <ul class="nav nav-second-level">
-        		@permission('view.modelvehicle') 
-                <li><a href="{{URL::to('report')}}">{{Lang::get('menu.Vehicle')}}</a></li>
-                @endpermission
-        		@permission('view.modeltire') 
-                <li><a href="{{URL::to('report')}}">{{Lang::get('menu.Tires')}}</a></li>
-                @endpermission
         		@permission('view.maintenance') 
                 <li><a href="{{URL::to('report')}}">{{Lang::get('menu.Maintenance')}}</a></li>
                 @endpermission
@@ -50,21 +38,6 @@
             	@endpermission
         		@permission('view.userprofile')
                 <li><a href="{{URL::to('person')}}">{{Lang::get('menu.UserProfile')}}</a></li>
-            	@endpermission
-        		@permission('view.modelvehicle')
-                <li><a href="{{URL::to('modelvehicle')}}">{{Lang::get('menu.ModelVehicle')}}</a></li>
-            	@endpermission
-        		@permission('view.modelmonitor')
-                <li><a href="{{URL::to('modelmonitor')}}">{{Lang::get('menu.ModelMonitor')}}</a></li>
-            	@endpermission
-        		@permission('view.modelsensor')
-                <li><a href="{{URL::to('modelsensor')}}">{{Lang::get('menu.ModelSensor')}}</a></li>
-            	@endpermission
-        		@permission('view.modeltire')
-                <li><a href="{{URL::to('modeltire')}}">{{Lang::get('menu.ModelTire')}}</a></li>
-            	@endpermission
-        		@permission('view.typevehicle')
-                <li><a href="{{URL::to('typevehicle')}}">{{Lang::get('menu.TypeVehicle')}}</a></li>
             	@endpermission
             </ul>
         </li>
