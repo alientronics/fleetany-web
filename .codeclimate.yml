@@ -1,8 +1,12 @@
 engines:
   phpcodesniffer:
     enabled: true
+    config:
+      standard: "PSR1,PSR2"
   phpmd:
     enabled: true
+    config:
+      rulesets: "codesize,unusedcode,naming,design"
   fixme:
     enabled: true
   duplication:
