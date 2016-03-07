@@ -25,6 +25,7 @@ return [
     'Operations'    => 'Operações',
     'Persons'       => 'Pessoas',
 
+    'Vehicle'       => 'Ve�culo',
     
     'AuxiliarTables' => "Tabelas Auxiliares",
     'PlanType'      => "Tipos de Planos",

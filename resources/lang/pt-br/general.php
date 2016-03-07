@@ -31,6 +31,11 @@ return [
     "ChoiceStateFirst"   => "Escolha um estado...",
     "InvalidPage"    => "P&aacute;gina Inv&aacute;lida",
     
+    // Vehicle
+    "Vehicle"   => "Veículo",
+    "Vehicles"    => "Veículos",
+    "newvehicle" => "Novo Veículo",
+    
     // user
     "Users"   => "Usu&aacute;rios",
     "User"    => "Usu&aacute;rio",

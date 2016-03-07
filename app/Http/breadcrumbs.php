@@ -42,6 +42,30 @@ Breadcrumbs::register(
     }
 );
 
+// Home > vehicle
+
+Breadcrumbs::register(
+    'vehicle',
+    function ($breadcrumbs) {
+    
+            $breadcrumbs->parent('home');
+            $breadcrumbs->push(Lang::get("menu.Vehicle"), route('vehicle.index'));
+    }
+);
+
+Breadcrumbs::register(
+    'vehicle.edit',
+    function ($breadcrumbs, $vehicle = null) {
+    
+            $breadcrumbs->parent('vehicle');
+        if ($vehicle->id) {
+            $breadcrumbs->push($vehicle->name, route('vehicle.edit', $vehicle->id));
+        } else {
+            $breadcrumbs->push(Lang::get("general.New"), route('vehicle.edit'));
+        }
+    }
+);
+
 // Home > user
 
 Breadcrumbs::register(

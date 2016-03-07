@@ -15,6 +15,7 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::get('home', 'HomeController@index');
 Route::resource('/contact', 'HomeController@contact');
 
+Route::resource('vehicle', 'VehicleController');
 Route::resource('user', 'UserController');
 
 Route::get('user/destroy/{id}', 'UserController@destroy');
