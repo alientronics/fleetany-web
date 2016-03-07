@@ -3,7 +3,7 @@
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
+class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
     use DatabaseTransactions;
     
