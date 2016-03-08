@@ -68,15 +68,15 @@ class UserTest extends TestCase
     
     public function testProfile()
     {
-        $this->notSeeInDatabase('users', ['name' => 'Administrator2', 'email' => 'admin2@alientronics.com.br', 'locale' => 'en']);
+        $this->notSeeInDatabase('users', ['name' => 'Administrator2', 'email' => 'admin2@alientronics.com.br', 'language' => 'en']);
         
         $this->visit('/profile');
         
         $this->type('Administrator2', 'name')
             ->type('admin2@alientronics.com.br', 'email')
-            ->select('en', 'locale')
+            ->select('en', 'language')
             ->press('Enviar')
         ;
-        $this->seeInDatabase('users', ['name' => 'Administrator2', 'email' => 'admin2@alientronics.com.br', 'locale' => 'en']);
+        $this->seeInDatabase('users', ['name' => 'Administrator2', 'email' => 'admin2@alientronics.com.br', 'language' => 'en']);
     }
 }

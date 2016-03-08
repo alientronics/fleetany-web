@@ -41,7 +41,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'name' => 'Nome Usuario Executive',
             'email' => 'executive@alientronics.com.br',
             'password' => 'admin',
-            'locale' => 'pt-br',
+            'language' => 'pt-br',
             'contact_id' => 'Contato Usuario Teste',
             'company_id' => 'Empresa Usuario Teste',
         ]);
@@ -56,7 +56,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'name' => 'Nome Usuario Manager',
             'email' => 'manager@alientronics.com.br',
             'password' => 'admin',
-            'locale' => 'pt-br',
+            'language' => 'pt-br',
             'contact_id' => 'Contato Usuario Teste',
             'company_id' => 'Empresa Usuario Teste',
         ]);
@@ -71,7 +71,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'name' => 'Nome Usuario Operational',
             'email' => 'operational@alientronics.com.br',
             'password' => 'admin',
-            'locale' => 'pt-br',
+            'language' => 'pt-br',
             'contact_id' => 'Contato Usuario Teste',
             'company_id' => 'Empresa Usuario Teste',
         ]);
@@ -86,7 +86,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'name' => 'Nome Usuario Staff',
             'email' => 'staff@alientronics.com.br',
             'password' => 'admin',
-            'locale' => 'pt-br',
+            'language' => 'pt-br',
             'contact_id' => 'Contato Usuario Teste',
             'company_id' => 'Empresa Usuario Teste',
         ]);

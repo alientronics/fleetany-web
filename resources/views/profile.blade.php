@@ -37,8 +37,8 @@
     </div>
 
     <div class="form-group col-lg-12">
-        {!!Form::label('locale', Lang::get('general.locale'))!!}
-        {!!Form::select('locale', $locale, $user->locale, array('class' => 'form-control'))!!}
+        {!!Form::label('language', Lang::get('general.language'))!!}
+        {!!Form::select('language', $language, $user->language, array('class' => 'form-control'))!!}
     </div>
 
     <button type="submit" class="btn btn-primary">{{Lang::get('general.Submit')}}</button>

@@ -23,11 +23,11 @@ class App
      */
     public function handle($request, Closure $next)
     {
-        if (!Session::has('locale')) {
-            Session::put('locale', Auth::user()['locale']);
+        if (!Session::has('language')) {
+            Session::put('language', Auth::user()['language']);
         }
 
-        app()->setLocale(Session::get('locale'));
+        app()->setLocale(Session::get('language'));
 
         return $next($request);
     }

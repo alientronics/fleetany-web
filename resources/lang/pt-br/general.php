@@ -42,7 +42,7 @@ return [
     "newuser" => "Novo Usu&aacute;rio",
     "password"=> "Senha",
     "role_id" => "Grupo",
-    "locale" => "Idioma",
+    "language" => "Idioma",
     "contact_id" => "Contato",
     "company_id" => "Empresa",
     

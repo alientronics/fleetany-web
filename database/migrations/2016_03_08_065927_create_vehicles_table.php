@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+
+class CreateVehiclesTable extends Migration {
+
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('vehicles', function(Blueprint $table)
+		{
+			$table->integer('id', true);
+			$table->integer('company_id')->index('fk_vehicles_companies1_idx');
+			$table->integer('model_vehicle_id')->index('fk_vehicles_models1_idx');
+			$table->string('number')->nullable();
+			$table->integer('initial_miliage')->nullable();
+			$table->integer('actual_miliage')->nullable();
+			$table->decimal('cost');
+			$table->text('description', 65535)->nullable();
+		});
+	}
+
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::drop('vehicles');
+	}
+
+}

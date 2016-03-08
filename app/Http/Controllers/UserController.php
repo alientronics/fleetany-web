@@ -50,8 +50,8 @@ class UserController extends Controller
         $user = new User();
         $objHelperRepository = new HelperRepository();
         $role = $objHelperRepository->getAvailableRoles();
-        $locale = $objHelperRepository->getAvailableLanguages();
-        return view("user.edit", compact('user', 'role', 'locale'));
+        $language = $objHelperRepository->getAvailableLanguages();
+        return view("user.edit", compact('user', 'role', 'language'));
     }
 
     public function store()
@@ -87,9 +87,9 @@ class UserController extends Controller
         
         $objHelperRepository = new HelperRepository();
         $role = $objHelperRepository->getAvailableRoles();
-        $locale = $objHelperRepository->getAvailableLanguages();
+        $language = $objHelperRepository->getAvailableLanguages();
             
-        return view("user.edit", compact('user', 'role', 'locale'));
+        return view("user.edit", compact('user', 'role', 'language'));
     }
     
     public function update($idUser)
@@ -128,8 +128,8 @@ class UserController extends Controller
     {
         $user = User::findOrFail(Auth::id());
         $objHelperRepository = new HelperRepository();
-        $locale = $objHelperRepository->getAvailableLanguages();
-        return view("profile", compact('user', 'locale'));
+        $language = $objHelperRepository->getAvailableLanguages();
+        return view("profile", compact('user', 'language'));
     }
     
     public function updateProfile($idUser)
