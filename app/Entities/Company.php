@@ -36,11 +36,11 @@ class Company extends Model {
         return $this->hasMany(\App\Entities\Type::class, 'company_id', 'id');
     }
 
-    public function users() {
+    public function usersCompany() {
         return $this->hasMany(\App\Entities\User::class, 'company_id', 'id');
     }
 
-    public function users() {
+    public function usersPendingCompany() {
         return $this->hasMany(\App\Entities\User::class, 'pending_company_id', 'id');
     }
 

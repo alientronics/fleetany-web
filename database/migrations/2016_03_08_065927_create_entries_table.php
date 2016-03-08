@@ -23,6 +23,9 @@ class CreateEntriesTable extends Migration {
 			$table->string('entry_number')->nullable();
 			$table->decimal('cost');
 			$table->text('description', 65535)->nullable();
+			$table->timestamps();
+			$table->softDeletes();
+			$table->engine = 'InnoDB';
 		});
 	}
 

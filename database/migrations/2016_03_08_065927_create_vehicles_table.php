@@ -22,6 +22,9 @@ class CreateVehiclesTable extends Migration {
 			$table->integer('actual_miliage')->nullable();
 			$table->decimal('cost');
 			$table->text('description', 65535)->nullable();
+			$table->timestamps();
+			$table->softDeletes();
+			$table->engine = 'InnoDB';
 		});
 	}
 

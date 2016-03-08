@@ -17,6 +17,9 @@ class CreateTypesTable extends Migration {
 			$table->integer('id', true);
 			$table->integer('company_id')->index('fk_types_companies1_idx');
 			$table->string('name');
+			$table->timestamps();
+			$table->softDeletes();
+			$table->engine = 'InnoDB';
 		});
 	}
 

@@ -13,7 +13,8 @@
         "prettus/laravel-validation": "1.1.*",
         "caouecs/laravel4-lang": "~2.0",
         "kodeine/laravel-acl": "dev-master",
-        "laravel/socialite": "^2.0"
+        "laravel/socialite": "^2.0",
+		"doctrine/dbal": "v2.4.2"
     },
     "require-dev": {
         "symfony/dom-crawler": "~3.0",

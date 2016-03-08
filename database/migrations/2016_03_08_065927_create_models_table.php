@@ -19,6 +19,9 @@ class CreateModelsTable extends Migration {
 			$table->integer('model_type_id')->index('fk_models_types1_idx');
 			$table->integer('vendor_id')->nullable()->index('fk_models_contacts1_idx');
 			$table->string('name');
+			$table->timestamps();
+			$table->softDeletes();
+			$table->engine = 'InnoDB';
 		});
 	}
 

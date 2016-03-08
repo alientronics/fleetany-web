@@ -32,11 +32,11 @@ class Contact extends Model {
         return $this->hasMany(\App\Entities\Model::class, 'vendor_id', 'id');
     }
 
-    public function trips() {
+    public function tripsDriver() {
         return $this->hasMany(\App\Entities\Trip::class, 'driver_id', 'id');
     }
 
-    public function trips() {
+    public function tripsVendor() {
         return $this->hasMany(\App\Entities\Trip::class, 'vendor_id', 'id');
     }
 

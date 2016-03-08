@@ -16,7 +16,7 @@ class Trip extends Model {
         return $this->belongsTo(\App\Entities\Company::class, 'company_id', 'id');
     }
 
-    public function contact() {
+    public function contactDriver() {
         return $this->belongsTo(\App\Entities\Contact::class, 'driver_id', 'id');
     }
 
@@ -24,7 +24,7 @@ class Trip extends Model {
         return $this->belongsTo(\App\Entities\Vehicle::class, 'vehicle_id', 'id');
     }
 
-    public function contact() {
+    public function contactVendor() {
         return $this->belongsTo(\App\Entities\Contact::class, 'vendor_id', 'id');
     }
 
