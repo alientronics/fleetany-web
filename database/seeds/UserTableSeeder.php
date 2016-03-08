@@ -17,7 +17,8 @@ class UserTableSeeder extends Seeder
                 array(  'name' => 'Administrator',
                         'email' => 'admin@alientronics.com.br',
                         'password' => Hash::make('admin'),
-                        'language' => 'pt-br')
+                        'language' => 'pt-br',
+                        'contact_id' => 1)
             );
        
         
