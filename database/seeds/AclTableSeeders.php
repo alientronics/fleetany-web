@@ -46,6 +46,61 @@ class AclTableSeeder extends Seeder
         ]);
          
 
+        //Vehicle
+        //Permissions
+        $permVehicleStaff = Permission::create([
+            'name'        => 'vehicle',
+            'slug'        => [
+                'create' => false,
+                'view'   => false,
+                'update' => false,
+                'delete' => false
+            ],
+            'description' => 'Administra permissoes do vehicle para o nivel staff de usuario'
+        ]);
+        
+        $permVehicleOperational = Permission::create([
+            'name'        => 'vehicle.operational',
+            'slug'        => [],
+            'inherit_id' => $permVehicleStaff->getKey(),
+            'description' => 'Administra permissoes do vehicle para o nivel operational de usuario'
+        ]);
+        
+        $permVehicleManager = Permission::create([
+            'name'        => 'vehicle.manager',
+            'slug'        => [],
+            'inherit_id' => $permVehicleOperational->getKey(),
+            'description' => 'Administra permissoes do vehicle para o nivel manager de usuario'
+        ]);
+        
+        $permVehicleExecutive = Permission::create([
+            'name'        => 'vehicle.executive',
+            'slug'        => [],
+            'inherit_id' => $permVehicleManager->getKey(),
+            'description' => 'Administra permissoes do vehicle para o nivel executive de usuario'
+        ]);
+        
+        $permVehicleAdmin = Permission::create([
+            'name'        => 'vehicle.admin',
+            'slug'        => [
+                'create' => true,
+                'view'   => true,
+                'update' => true,
+                'delete' => true
+            ],
+            'inherit_id' => $permVehicleExecutive->getKey(),
+            'description' => 'Administra permissoes do vehicle para o nivel admin de usuario'
+        ]);
+        
+        
+        //Assign permissions to rules
+        $roleStaff->assignPermission($permVehicleStaff);
+        $roleOperational->assignPermission($permVehicleOperational);
+        $roleManager->assignPermission($permVehicleManager);
+        $roleExecutive->assignPermission($permVehicleExecutive);
+        $roleAdmin->assignPermission($permVehicleAdmin);
+        
+
         //User
         //Permissions
         $permUserStaff = Permission::create([

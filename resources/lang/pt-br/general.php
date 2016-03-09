@@ -32,9 +32,15 @@ return [
     "InvalidPage"    => "P&aacute;gina Inv&aacute;lida",
     
     // Vehicle
-    "Vehicle"   => "Veículo",
-    "Vehicles"    => "Veículos",
-    "newvehicle" => "Novo Veículo",
+    "Vehicle"   => "Ve&iacute;culo",
+    "Vehicles"    => "Ve&iacute;culos",
+    "newvehicle" => "Novo Ve&iacute;culo",
+    "model_vehicle_id"=> "Modelo do ve&iacute;culo",
+    "number"=> "N&uacute;mero",
+    "initial_miliage"=> "Quilometragem Inicial",
+    "actual_miliage"=> "Quilometragem Real",
+    "cost"=> "Valor",
+    "description"=> "Descri&ccedil;&atilde;o",
     
     // user
     "Users"   => "Usu&aacute;rios",
