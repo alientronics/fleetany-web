@@ -4,33 +4,31 @@ return [
     'About'         => 'Sobre',
     'Companies'     => 'Empresas',
     'Company'       => 'Empresa',
-    'Reports'       => 'Relatórios',
-    'Settings'      => 'Configurações',
+    'Reports'       => 'Relat&oacute;rios',
+    'Settings'      => 'Configura&ccedil;&atilde;es',
     'Person'        => 'Pessoas',
 
     'UserProfile'   => "Perfil",
     'Contact'       => "Contato",
-    'Users'         => "Usuários",
+    'Users'         => "Usu&aacute;rios",
     'Monitors'      => "Monitores",
-    'Vehicles'      => "Veículos",
-    'Vehicle'       => "Veículo",
+    'Vehicles'      => "Ve&iacute;culos",
+    'Vehicle'       => "Ve&iacute;culo",
     'Tires'       => "Pneus",
     'Fleet'         => "Frotas",
-    'Maintenance'   => "Manutenção",
+    'Maintenance'   => "Manuten&ccedil;&atilde;o",
     'FleetPanel'    => "Painel de Frota",
-    'Efficiency'    => "Eficiência",
+    'Efficiency'    => "Efici&ecirc;ncia",
 
     'UserProfile'   => 'Perfil',
     'Contact'       => 'Contato',
-    'Operations'    => 'Operações',
+    'Operations'    => 'Opera&ccedil;&atilde;es',
     'Persons'       => 'Pessoas',
 
-    'Vehicle'       => 'Ve�culo',
-    
     'AuxiliarTables' => "Tabelas Auxiliares",
     'PlanType'      => "Tipos de Planos",
 
-    'User' => "Usuário",
+    'User' => "Usu&aacute;rio",
     
     'logout' => 'Logout'
 

@@ -11,7 +11,7 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
 {
 
     protected $rules = [
-        'name'      => 'min:3|required',
+        'cost'      => 'min:3|required',
         ];
 
     public function model()
@@ -28,17 +28,14 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
     {
         $vehicles = $this->scopeQuery(function ($query) use ($filters) {
             
-            if (!empty($filters['name'])) {
-                $query = $query->where('name', 'like', '%'.$filters['name'].'%');
+            if (!empty($filters['model-vehicle-id'])) {
+                $query = $query->where('model_vehicle_id', $filters['model-vehicle-id']);
             }
-            if (!empty($filters['email'])) {
-                $query = $query->where('email', 'like', '%'.$filters['email'].'%');
+            if (!empty($filters['number'])) {
+                $query = $query->where('number', $filters['number']);
             }
-            if (!empty($filters['contact-id'])) {
-                $query = $query->where('contact_id', 'like', '%'.$filters['contact-id'].'%');
-            }
-            if (!empty($filters['company-id'])) {
-                $query = $query->where('company_id', 'like', '%'.$filters['company-id'].'%');
+            if (!empty($filters['cost'])) {
+                $query = $query->where('cost', $filters['cost']);
             }
 
             $query = $query->orderBy($filters['sort'], $filters['order']);

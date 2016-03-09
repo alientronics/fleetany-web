@@ -14,7 +14,7 @@ class TypeTableSeeder extends Seeder
     {
         DB::table('types')->delete();
         Type::create(
-                array(  'name' => 'Administrator',
+                array(  'name' => 'vehicle',
                         'company_id' => 1)
             );
        

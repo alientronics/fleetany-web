@@ -33,7 +33,7 @@
 @endif
     <div class="form-group col-lg-12">
         {!!Form::label('company_id', Lang::get('general.company_id'))!!}
-        {!!Form::select('company_id', $role, $vehicle->company_id, array('class' => 'form-control'))!!}
+        {!!Form::select('company_id', $company_id, $vehicle->company_id, array('class' => 'form-control'))!!}
     </div>
 
     <div class="form-group col-lg-12">

@@ -36,7 +36,7 @@ return [
     "Vehicles"    => "Ve&iacute;culos",
     "newvehicle" => "Novo Ve&iacute;culo",
     "model_vehicle_id"=> "Modelo do ve&iacute;culo",
-    "number"=> "N&uacute;mero",
+    "number"=> "Placa",
     "initial_miliage"=> "Quilometragem Inicial",
     "actual_miliage"=> "Quilometragem Real",
     "cost"=> "Valor",

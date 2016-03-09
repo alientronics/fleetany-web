@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Repositories\VehicleRepositoryEloquent;
 use App\Entities\Vehicle;
 use Log;
-use Hash;
 use Input;
 use Lang;
 use Session;
@@ -23,8 +22,9 @@ class VehicleController extends Controller
     
     protected $fields = [
         'id',
-        'company-id',
         'model-vehicle-id',
+        'number',
+        'cost'
     ];
     
     public function __construct(VehicleRepositoryEloquent $vehicleRepo)
@@ -47,19 +47,16 @@ class VehicleController extends Controller
     {
         $vehicle = new Vehicle();
         $objHelperRepository = new HelperRepository();
-        $role = $objHelperRepository->getAvailableRoles();
-        $language = $objHelperRepository->getAvailableLanguages();
-        $model_vehicle_id = $objHelperRepository->getAvailableLanguages();
-        return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 'role', 'language'));
+        $company_id = $objHelperRepository->getCompanies();
+        $model_vehicle_id = $objHelperRepository->getModelVehicles();
+        return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 'company_id'));
     }
 
     public function store()
     {
         try {
             $this->vehicleRepo->validator();
-            Input::merge(array('password' => Hash::make(Input::get('password'))));
             $this->vehicleRepo->create(Input::all());
-            Vehicle::all()->last()->assignRole(Input::get('role_id'));
             Session::flash(
                 'message',
                 Lang::get(
@@ -85,19 +82,17 @@ class VehicleController extends Controller
         $vehicle = $this->vehicleRepo->find($idVehicle);
         
         $objHelperRepository = new HelperRepository();
-        $role = $objHelperRepository->getAvailableRoles();
-        $language = $objHelperRepository->getAvailableLanguages();
+        $company_id = $objHelperRepository->getCompanies();
+        $model_vehicle_id = $objHelperRepository->getModelVehicles();
             
-        return view("vehicle.edit", compact('vehicle', 'role', 'language'));
+        return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 'company_id'));
     }
     
     public function update($idVehicle)
     {
         try {
             $this->vehicleRepo->validator();
-            Input::merge(array('password' => Hash::make(Input::get('password'))));
             $this->vehicleRepo->update(Input::all(), $idVehicle);
-            Vehicle::all()->last()->assignRole(Input::get('role_id'));
             Session::flash(
                 'message',
                 Lang::get(

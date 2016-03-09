@@ -12,6 +12,9 @@
         @endpermission
         @permission('view.fleet')
         <li><a href="{{URL::to('fleets')}}">{{Lang::get('menu.Fleet')}}</a></li>       
+        @endpermission  
+        @permission('view.vehicle')
+        <li><a href="{{URL::to('vehicle')}}">{{Lang::get('menu.Vehicle')}}</a></li>       
         @endpermission   
         <li>
             <a href="#">
