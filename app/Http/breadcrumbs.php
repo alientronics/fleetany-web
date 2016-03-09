@@ -42,6 +42,30 @@ Breadcrumbs::register(
     }
 );
 
+// Home > company
+
+Breadcrumbs::register(
+    'company',
+    function ($breadcrumbs) {
+    
+            $breadcrumbs->parent('home');
+            $breadcrumbs->push(Lang::get("menu.Company"), route('company.index'));
+    }
+);
+
+Breadcrumbs::register(
+    'company.edit',
+    function ($breadcrumbs, $company = null) {
+    
+            $breadcrumbs->parent('company');
+        if ($company->id) {
+            $breadcrumbs->push($company->name, route('company.edit', $company->id));
+        } else {
+            $breadcrumbs->push(Lang::get("general.New"), route('company.edit'));
+        }
+    }
+);
+
 // Home > vehicle
 
 Breadcrumbs::register(

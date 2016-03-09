@@ -89,6 +89,11 @@ class HelperRepository
         return $languages;
     }
     
+    public function getContacts()
+    {
+        return array(1 => 'company');
+    }
+    
     public function getCompanies()
     {
         return array(1 => 'company');

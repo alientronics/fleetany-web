@@ -30,6 +30,15 @@ return [
     "ChoiceCountryFirst" => "Escolha um pa&iacute;s...",
     "ChoiceStateFirst"   => "Escolha um estado...",
     "InvalidPage"    => "P&aacute;gina Inv&aacute;lida",
+
+    // Company
+    "Company"   => "Empresa",
+    "Companies"    => "Empresas",
+    "newcompany" => "Nova Empresa",
+//     "contact_id" => "Nova",
+//     "name" => "Nova",
+//     "measure_units" => "Nova",
+//     "api_token" => "Nova",
     
     // Vehicle
     "Vehicle"   => "Ve&iacute;culo",

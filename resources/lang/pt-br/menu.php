@@ -14,6 +14,8 @@ return [
     'Monitors'      => "Monitores",
     'Vehicles'      => "Ve&iacute;culos",
     'Vehicle'       => "Ve&iacute;culo",
+    'Companies'      => "Empresas",
+    'Company'       => "Empresa",
     'Tires'       => "Pneus",
     'Fleet'         => "Frotas",
     'Maintenance'   => "Manuten&ccedil;&atilde;o",
