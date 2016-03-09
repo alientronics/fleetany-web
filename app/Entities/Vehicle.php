@@ -24,5 +24,9 @@ class Vehicle extends Model {
         return $this->hasMany(\App\Entities\Trip::class, 'vehicle_id', 'id');
     }
 
+    public function entries() {
+        return $this->hasMany(\App\Entities\Entry::class, 'vehicle_id', 'id');
+    }
+
 
 }

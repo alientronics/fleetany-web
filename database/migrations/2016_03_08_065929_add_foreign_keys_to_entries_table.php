@@ -17,6 +17,7 @@ class AddForeignKeysToEntriesTable extends Migration {
 			$table->foreign('company_id', 'fk_entries_companies1')->references('id')->on('companies')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('entry_type_id', 'fk_entries_types1')->references('id')->on('types')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('vendor_id', 'fk_entries_contacts1')->references('id')->on('contacts')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+		    $table->foreign('vehicle_id', 'fk_entries_vehicles1')->references('id')->on('vehicles')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}
 
@@ -33,6 +34,7 @@ class AddForeignKeysToEntriesTable extends Migration {
 			$table->dropForeign('fk_entries_companies1');
 			$table->dropForeign('fk_entries_types1');
 			$table->dropForeign('fk_entries_contacts1');
+			$table->dropForeign('fk_entries_vehicles1');
 		});
 	}
 
