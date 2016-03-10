@@ -12,6 +12,7 @@ class TypeRepositoryEloquent extends BaseRepository implements TypeRepository
 
     protected $rules = [
         'company_id'      => 'required',
+        'entity_key'      => 'required',
         'name'      => 'min:3|required',
         ];
 
@@ -28,9 +29,12 @@ class TypeRepositoryEloquent extends BaseRepository implements TypeRepository
     public function results($filters = array())
     {
         $types = $this->scopeQuery(function ($query) use ($filters) {
-            
+
             if (!empty($filters['company-id'])) {
                 $query = $query->where('company_id', $filters['company-id']);
+            }
+            if (!empty($filters['entity-key'])) {
+                $query = $query->where('entity_key', $filters['entity-key']);
             }
             if (!empty($filters['name'])) {
                 $query = $query->where('name', $filters['name']);

@@ -29,20 +29,19 @@ class CompanyRepositoryEloquent extends BaseRepository implements CompanyReposit
     {
         $companies = $this->scopeQuery(function ($query) use ($filters) {
             
-            if (!empty($filters['contact-id'])) {
-                $query = $query->where('contact_id', $filters['contact-id']);
-            }
+            $query = $query->leftJoin('contacts', 'companies.contact_id', '=', 'contacts.id');
+            
             if (!empty($filters['name'])) {
-                $query = $query->where('name', $filters['name']);
+                $query = $query->where('companies.name', 'like', '%'.$filters['name'].'%');
             }
-            if (!empty($filters['measure-units'])) {
-                $query = $query->where('measure_units', $filters['measure-units']);
+            if (!empty($filters['city'])) {
+                $query = $query->where('contacts.city', 'like', '%'.$filters['city'].'%');
             }
-            if (!empty($filters['api-token'])) {
-                $query = $query->where('api_token', $filters['api-token']);
+            if (!empty($filters['country'])) {
+                $query = $query->where('contacts.country', 'like', '%'.$filters['country'].'%');
             }
 
-            $query = $query->orderBy($filters['sort'], $filters['order']);
+            $query = $query->orderBy('companies.'.$filters['sort'], $filters['order']);
             
             return $query;
         })->paginate($filters['paginate']);

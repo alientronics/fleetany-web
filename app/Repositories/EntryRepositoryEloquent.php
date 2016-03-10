@@ -30,7 +30,16 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
     public function results($filters = array())
     {
         $entries = $this->scopeQuery(function ($query) use ($filters) {
-            
+
+            if (!empty($filters['vehicle-id'])) {
+                $query = $query->where('vehicle_id', $filters['vehicle-id']);
+            }
+            if (!empty($filters['entry-type-id'])) {
+                $query = $query->where('entry_type_id', $filters['entry-type-id']);
+            }
+            if (!empty($filters['datetime-ini'])) {
+                $query = $query->where('datetime_ini', $filters['datetime-ini']);
+            }
             if (!empty($filters['cost'])) {
                 $query = $query->where('cost', $filters['cost']);
             }

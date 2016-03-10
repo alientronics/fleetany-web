@@ -22,10 +22,9 @@ class CompanyController extends Controller
     
     protected $fields = [
         'id',
-        'contact-id',
         'name',
-        'measure-units',
-        'api-token'
+        'city',
+        'country'
     ];
     
     public function __construct(CompanyRepositoryEloquent $companyRepo)

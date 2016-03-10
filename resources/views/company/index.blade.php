@@ -41,10 +41,9 @@
     <thead>
         <tr>
             <th class="col-sm-1"><a href="{{url('/')}}/{{$filters['sort_url']['id']}}">{{Lang::get("general.id")}} <i class="fa fa-fw {{$filters['sort_icon']['id']}}"></i></a></th>
-            <th><a href="{{url('/')}}/{{$filters['sort_url']['contact-id']}}">{{Lang::get("general.contact_id")}} <i class="fa fa-fw {{$filters['sort_icon']['contact-id']}}"></i></th>
             <th><a href="{{url('/')}}/{{$filters['sort_url']['name']}}">{{Lang::get("general.name")}} <i class="fa fa-fw {{$filters['sort_icon']['name']}}"></i></th>
-            <th><a href="{{url('/')}}/{{$filters['sort_url']['measure-units']}}">{{Lang::get("general.measure_units")}} <i class="fa fa-fw {{$filters['sort_icon']['measure-units']}}"></i></th>
-            <th><a href="{{url('/')}}/{{$filters['sort_url']['api-token']}}">{{Lang::get("general.api_token")}} <i class="fa fa-fw {{$filters['sort_icon']['api-token']}}"></i></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['city']}}">{{Lang::get("general.city")}} <i class="fa fa-fw {{$filters['sort_icon']['city']}}"></i></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['country']}}">{{Lang::get("general.country")}} <i class="fa fa-fw {{$filters['sort_icon']['country']}}"></i></th>
             @permission('delete.company|update.company')
             <th class="col-sm-1">{{Lang::get("general.Actions")}}</th>
             @endpermission
@@ -57,22 +56,17 @@
             </th>
             <th>
             	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" name="contact-id" value="{{$filters['contact-id']}}" placeholder='{{Lang::get("general.contact_id")}}'>
-                </div>
-            </th>    
-            <th>
-            	<div class="form-group col-sm-10">
                   <input type="search" class="form-control" name="name" value="{{$filters['name']}}" placeholder='{{Lang::get("general.name")}}'>
                 </div>
             </th>    
             <th>
             	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" name="measure-units" value="{{$filters['measure-units']}}" placeholder='{{Lang::get("general.measure_units")}}'>
+                  <input type="search" class="form-control" name="city" value="{{$filters['city']}}" placeholder='{{Lang::get("general.city")}}'>
                 </div>
             </th> 
             <th>
             	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" name="api-token" value="{{$filters['api-token']}}" placeholder='{{Lang::get("general.api_token")}}'>
+                  <input type="search" class="form-control" name="country" value="{{$filters['country']}}" placeholder='{{Lang::get("general.country")}}'>
                 </div>
             </th> 
             @permission('delete.company|update.company')
@@ -86,10 +80,9 @@
     @foreach($companies as $company) 
         <tr>
             <td>{{$company->id}}</td>
-            <td>{{$company->contact_id}}</td>  
             <td>{{$company->name}}</td>  
-            <td>{{$company->measure_units}}</td>   
-            <td>{{$company->api_token}}</td>   
+            <td>{{$company->city}}</td>   
+            <td>{{$company->country}}</td>   
             @permission('delete.company|update.company')
             <td>
             	@permission('update.company')

@@ -22,7 +22,7 @@ class TypeController extends Controller
     
     protected $fields = [
         'id',
-        'company-id',
+        'entity-key',
         'name'
     ];
     

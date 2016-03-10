@@ -22,7 +22,10 @@ class TripController extends Controller
     
     protected $fields = [
         'id',
-        'description'
+        'vehicle-id',
+        'trip-type-id',
+        'pickup-date',
+        'fuel-cost'
     ];
     
     public function __construct(TripRepositoryEloquent $tripRepo)

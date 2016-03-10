@@ -30,9 +30,6 @@ class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
     {
         $models = $this->scopeQuery(function ($query) use ($filters) {
             
-            if (!empty($filters['company-id'])) {
-                $query = $query->where('company_id', $filters['company-id']);
-            }
             if (!empty($filters['model-type-id'])) {
                 $query = $query->where('model_type_id', $filters['model-type-id']);
             }

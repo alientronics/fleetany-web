@@ -41,6 +41,9 @@
     <thead>
         <tr>
             <th class="col-sm-1"><a href="{{url('/')}}/{{$filters['sort_url']['id']}}">{{Lang::get("general.id")}} <i class="fa fa-fw {{$filters['sort_icon']['id']}}"></i></a></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['vehicle-id']}}">{{Lang::get("general.vehicle_id")}} <i class="fa fa-fw {{$filters['sort_icon']['vehicle-id']}}"></i></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['entry-type-id']}}">{{Lang::get("general.entry_type_id")}} <i class="fa fa-fw {{$filters['sort_icon']['entry-type-id']}}"></i></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['datetime-ini']}}">{{Lang::get("general.datetime_ini")}} <i class="fa fa-fw {{$filters['sort_icon']['datetime-ini']}}"></i></th>
             <th><a href="{{url('/')}}/{{$filters['sort_url']['cost']}}">{{Lang::get("general.cost")}} <i class="fa fa-fw {{$filters['sort_icon']['cost']}}"></i></th>
             @permission('delete.entry|update.entry')
             <th class="col-sm-1">{{Lang::get("general.Actions")}}</th>
@@ -50,6 +53,21 @@
         <tr>
             <th>
             	<div class="form-group col-sm-10">
+                </div>
+            </th>
+            <th>
+            	<div class="form-group col-sm-10">
+                  <input type="search" class="form-control" name="vehicle-id" value="{{$filters['vehicle-id']}}" placeholder='{{Lang::get("general.vehicle_id")}}'>
+                </div>
+            </th>
+            <th>
+            	<div class="form-group col-sm-10">
+                  <input type="search" class="form-control" name="entry-type-id" value="{{$filters['entry-type-id']}}" placeholder='{{Lang::get("general.entry_type_id")}}'>
+                </div>
+            </th>
+            <th>
+            	<div class="form-group col-sm-10">
+                  <input type="search" class="form-control" name="datetime-ini" value="{{$filters['datetime-ini']}}" placeholder='{{Lang::get("general.datetime_ini")}}'>
                 </div>
             </th>
             <th>
@@ -68,6 +86,9 @@
     @foreach($entries as $entry) 
         <tr>
             <td>{{$entry->id}}</td>
+            <td>{{$entry->vehicle_id}}</td> 
+            <td>{{$entry->entry_type_id}}</td> 
+            <td>{{$entry->datetime_ini}}</td> 
             <td>{{$entry->cost}}</td>   
             @permission('delete.entry|update.entry')
             <td>

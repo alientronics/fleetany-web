@@ -22,6 +22,9 @@ class EntryController extends Controller
     
     protected $fields = [
         'id',
+        'vehicle-id',
+        'entry-type-id',
+        'datetime-ini',
         'cost'
     ];
     

@@ -41,7 +41,10 @@
     <thead>
         <tr>
             <th class="col-sm-1"><a href="{{url('/')}}/{{$filters['sort_url']['id']}}">{{Lang::get("general.id")}} <i class="fa fa-fw {{$filters['sort_icon']['id']}}"></i></a></th>
-            <th><a href="{{url('/')}}/{{$filters['sort_url']['description']}}">{{Lang::get("general.description")}} <i class="fa fa-fw {{$filters['sort_icon']['description']}}"></i></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['vehicle-id']}}">{{Lang::get("general.vehicle_id")}} <i class="fa fa-fw {{$filters['sort_icon']['vehicle-id']}}"></i></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['trip-type-id']}}">{{Lang::get("general.trip_type_id")}} <i class="fa fa-fw {{$filters['sort_icon']['trip-type-id']}}"></i></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['pickup-date']}}">{{Lang::get("general.pickup_date")}} <i class="fa fa-fw {{$filters['sort_icon']['pickup-date']}}"></i></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['fuel-cost']}}">{{Lang::get("general.fuel_cost")}} <i class="fa fa-fw {{$filters['sort_icon']['fuel-cost']}}"></i></th>
             @permission('delete.trip|update.trip')
             <th class="col-sm-1">{{Lang::get("general.Actions")}}</th>
             @endpermission
@@ -54,7 +57,22 @@
             </th>
             <th>
             	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" name="description" value="{{$filters['description']}}" placeholder='{{Lang::get("general.description")}}'>
+                  <input type="search" class="form-control" name="vehicle-id" value="{{$filters['vehicle-id']}}" placeholder='{{Lang::get("general.vehicle_id")}}'>
+                </div>
+            </th> 
+            <th>
+            	<div class="form-group col-sm-10">
+                  <input type="search" class="form-control" name="trip-type-id" value="{{$filters['trip-type-id']}}" placeholder='{{Lang::get("general.trip_type_id")}}'>
+                </div>
+            </th> 
+            <th>
+            	<div class="form-group col-sm-10">
+                  <input type="search" class="form-control" name="pickup-date" value="{{$filters['pickup-date']}}" placeholder='{{Lang::get("general.pickup_date")}}'>
+                </div>
+            </th> 
+            <th>
+            	<div class="form-group col-sm-10">
+                  <input type="search" class="form-control" name="fuel-cost" value="{{$filters['fuel-cost']}}" placeholder='{{Lang::get("general.fuel_cost")}}'>
                 </div>
             </th> 
             @permission('delete.trip|update.trip')
@@ -68,7 +86,10 @@
     @foreach($trips as $trip) 
         <tr>
             <td>{{$trip->id}}</td>
-            <td>{{$trip->description}}</td>   
+            <td>{{$trip->vehicle_id}}</td>  
+            <td>{{$trip->trip_type_id}}</td>  
+            <td>{{$trip->pickup_date}}</td>  
+            <td>{{$trip->fuel_cost}}</td>   
             @permission('delete.trip|update.trip')
             <td>
             	@permission('update.trip')

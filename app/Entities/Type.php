@@ -9,7 +9,7 @@ class Type extends Model {
      */
 
     protected $table = 'types';
-    protected $fillable = ['id', 'company_id', 'name'];
+    protected $fillable = ['id', 'entity_key', 'company_id', 'name'];
 
 
     public function company() {

@@ -41,7 +41,7 @@
     <thead>
         <tr>
             <th class="col-sm-1"><a href="{{url('/')}}/{{$filters['sort_url']['id']}}">{{Lang::get("general.id")}} <i class="fa fa-fw {{$filters['sort_icon']['id']}}"></i></a></th>
-            <th><a href="{{url('/')}}/{{$filters['sort_url']['company-id']}}">{{Lang::get("general.company_id")}} <i class="fa fa-fw {{$filters['sort_icon']['company-id']}}"></i></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['entity-key']}}">{{Lang::get("general.entity_key")}} <i class="fa fa-fw {{$filters['sort_icon']['entity-key']}}"></i></th>
             <th><a href="{{url('/')}}/{{$filters['sort_url']['name']}}">{{Lang::get("general.name")}} <i class="fa fa-fw {{$filters['sort_icon']['name']}}"></i></th>
             @permission('delete.type|update.type')
             <th class="col-sm-1">{{Lang::get("general.Actions")}}</th>
@@ -55,7 +55,7 @@
             </th>
             <th>
             	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" name="company-id" value="{{$filters['company-id']}}" placeholder='{{Lang::get("general.company_id")}}'>
+                  <input type="search" class="form-control" name="entity-key" value="{{$filters['entity-key']}}" placeholder='{{Lang::get("general.entity_key")}}'>
                 </div>
             </th>    
             <th>
@@ -74,7 +74,7 @@
     @foreach($types as $type) 
         <tr>
             <td>{{$type->id}}</td>
-            <td>{{$type->company_id}}</td>  
+            <td>{{$type->entity_key}}</td>  
             <td>{{$type->name}}</td>   
             @permission('delete.type|update.type')
             <td>

@@ -33,9 +33,18 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
     public function results($filters = array())
     {
         $trips = $this->scopeQuery(function ($query) use ($filters) {
-            
-            if (!empty($filters['description'])) {
-                $query = $query->where('description', $filters['description']);
+
+            if (!empty($filters['vehicle-id'])) {
+                $query = $query->where('vehicle_id', $filters['vehicle-id']);
+            }
+            if (!empty($filters['trip-type-id'])) {
+                $query = $query->where('trip_type_id', $filters['trip-type-id']);
+            }
+            if (!empty($filters['pickup-date'])) {
+                $query = $query->where('pickup_date', $filters['pickup-date']);
+            }
+            if (!empty($filters['fuel-cost'])) {
+                $query = $query->where('fuel_cost', $filters['fuel-cost']);
             }
 
             $query = $query->orderBy($filters['sort'], $filters['order']);

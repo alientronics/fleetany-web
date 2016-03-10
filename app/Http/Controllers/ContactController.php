@@ -22,9 +22,9 @@ class ContactController extends Controller
     
     protected $fields = [
         'id',
-        'company-id',
+        'name',
         'contact-type-id',
-        'name'
+        'city'
     ];
     
     public function __construct(ContactRepositoryEloquent $contactRepo)

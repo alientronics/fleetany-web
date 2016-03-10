@@ -41,7 +41,6 @@
     <thead>
         <tr>
             <th class="col-sm-1"><a href="{{url('/')}}/{{$filters['sort_url']['id']}}">{{Lang::get("general.id")}} <i class="fa fa-fw {{$filters['sort_icon']['id']}}"></i></a></th>
-            <th><a href="{{url('/')}}/{{$filters['sort_url']['company-id']}}">{{Lang::get("general.company_id")}} <i class="fa fa-fw {{$filters['sort_icon']['company-id']}}"></i></th>
             <th><a href="{{url('/')}}/{{$filters['sort_url']['model-type-id']}}">{{Lang::get("general.model_type_id")}} <i class="fa fa-fw {{$filters['sort_icon']['model-type-id']}}"></i></th>
             <th><a href="{{url('/')}}/{{$filters['sort_url']['vendor-id']}}">{{Lang::get("general.vendor_id")}} <i class="fa fa-fw {{$filters['sort_icon']['vendor-id']}}"></i></th>
             <th><a href="{{url('/')}}/{{$filters['sort_url']['name']}}">{{Lang::get("general.name")}} <i class="fa fa-fw {{$filters['sort_icon']['name']}}"></i></th>
@@ -55,11 +54,6 @@
             	<div class="form-group col-sm-10">
                 </div>
             </th>
-            <th>
-            	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" name="company-id" value="{{$filters['company-id']}}" placeholder='{{Lang::get("general.company_id")}}'>
-                </div>
-            </th>    
             <th>
             	<div class="form-group col-sm-10">
                   <input type="search" class="form-control" name="model-type-id" value="{{$filters['model-type-id']}}" placeholder='{{Lang::get("general.model_type_id")}}'>
@@ -86,7 +80,6 @@
     @foreach($models as $model) 
         <tr>
             <td>{{$model->id}}</td>
-            <td>{{$model->company_id}}</td>  
             <td>{{$model->model_type_id}}</td>  
             <td>{{$model->vendor_id}}</td>   
             <td>{{$model->name}}</td>   

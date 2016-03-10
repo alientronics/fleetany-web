@@ -41,9 +41,9 @@
     <thead>
         <tr>
             <th class="col-sm-1"><a href="{{url('/')}}/{{$filters['sort_url']['id']}}">{{Lang::get("general.id")}} <i class="fa fa-fw {{$filters['sort_icon']['id']}}"></i></a></th>
-            <th><a href="{{url('/')}}/{{$filters['sort_url']['company-id']}}">{{Lang::get("general.company_id")}} <i class="fa fa-fw {{$filters['sort_icon']['company-id']}}"></i></th>
-            <th><a href="{{url('/')}}/{{$filters['sort_url']['contact-type-id']}}">{{Lang::get("general.contact_type_id")}} <i class="fa fa-fw {{$filters['sort_icon']['contact-type-id']}}"></i></th>
             <th><a href="{{url('/')}}/{{$filters['sort_url']['name']}}">{{Lang::get("general.name")}} <i class="fa fa-fw {{$filters['sort_icon']['name']}}"></i></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['contact-type-id']}}">{{Lang::get("general.contact_type_id")}} <i class="fa fa-fw {{$filters['sort_icon']['contact-type-id']}}"></i></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['city']}}">{{Lang::get("general.city")}} <i class="fa fa-fw {{$filters['sort_icon']['city']}}"></i></th>
             @permission('delete.contact|update.contact')
             <th class="col-sm-1">{{Lang::get("general.Actions")}}</th>
             @endpermission
@@ -56,9 +56,9 @@
             </th>
             <th>
             	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" name="company-id" value="{{$filters['company-id']}}" placeholder='{{Lang::get("general.company_id")}}'>
+                  <input type="search" class="form-control" name="name" value="{{$filters['name']}}" placeholder='{{Lang::get("general.name")}}'>
                 </div>
-            </th>    
+            </th> 
             <th>
             	<div class="form-group col-sm-10">
                   <input type="search" class="form-control" name="contact-type-id" value="{{$filters['contact-type-id']}}" placeholder='{{Lang::get("general.contact_type_id")}}'>
@@ -66,9 +66,9 @@
             </th>    
             <th>
             	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" name="name" value="{{$filters['name']}}" placeholder='{{Lang::get("general.name")}}'>
+                  <input type="search" class="form-control" name="city" value="{{$filters['city']}}" placeholder='{{Lang::get("general.city")}}'>
                 </div>
-            </th> 
+            </th>    
             @permission('delete.contact|update.contact')
             <th>
             	<div class="form-group col-sm-10">
@@ -80,9 +80,9 @@
     @foreach($contacts as $contact) 
         <tr>
             <td>{{$contact->id}}</td>
-            <td>{{$contact->company_id}}</td>  
-            <td>{{$contact->contact_type_id}}</td>  
             <td>{{$contact->name}}</td>   
+            <td>{{$contact->contact_type_id}}</td>  
+            <td>{{$contact->city}}</td>  
             @permission('delete.contact|update.contact')
             <td>
             	@permission('update.contact')

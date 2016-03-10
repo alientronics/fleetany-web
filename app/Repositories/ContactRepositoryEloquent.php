@@ -31,14 +31,14 @@ class ContactRepositoryEloquent extends BaseRepository implements ContactReposit
     {
         $contacts = $this->scopeQuery(function ($query) use ($filters) {
             
-            if (!empty($filters['company-id'])) {
-                $query = $query->where('company_id', $filters['company-id']);
+            if (!empty($filters['name'])) {
+                $query = $query->where('name', $filters['name']);
             }
             if (!empty($filters['contact-type-id'])) {
                 $query = $query->where('contact_type_id', $filters['contact-type-id']);
             }
-            if (!empty($filters['name'])) {
-                $query = $query->where('name', $filters['name']);
+            if (!empty($filters['city'])) {
+                $query = $query->where('city', $filters['city']);
             }
 
             $query = $query->orderBy($filters['sort'], $filters['order']);
