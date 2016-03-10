@@ -99,6 +99,16 @@ class HelperRepository
         return array(1 => 'company');
     }
     
+    public function getModelTypes()
+    {
+        return array(1 => 'company');
+    }
+    
+    public function getVendors()
+    {
+        return array(1 => 'company');
+    }
+    
     public function getModelVehicles()
     {
         return array(1 => 'vehicle');

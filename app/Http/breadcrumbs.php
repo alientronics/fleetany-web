@@ -66,6 +66,30 @@ Breadcrumbs::register(
     }
 );
 
+// Home > model
+
+Breadcrumbs::register(
+    'model',
+    function ($breadcrumbs) {
+    
+            $breadcrumbs->parent('home');
+            $breadcrumbs->push(Lang::get("menu.Model"), route('model.index'));
+    }
+);
+
+Breadcrumbs::register(
+    'model.edit',
+    function ($breadcrumbs, $model = null) {
+    
+            $breadcrumbs->parent('model');
+        if ($model->id) {
+            $breadcrumbs->push($model->name, route('model.edit', $model->id));
+        } else {
+            $breadcrumbs->push(Lang::get("general.New"), route('model.edit'));
+        }
+    }
+);
+
 // Home > vehicle
 
 Breadcrumbs::register(

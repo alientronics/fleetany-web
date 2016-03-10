@@ -101,6 +101,61 @@ class AclTableSeeder extends Seeder
         $roleAdmin->assignPermission($permVehicleAdmin);
         
 
+        //Model
+        //Permissions
+        $permModelStaff = Permission::create([
+            'name'        => 'model',
+            'slug'        => [
+                'create' => false,
+                'view'   => false,
+                'update' => false,
+                'delete' => false
+            ],
+            'description' => 'Administra permissoes do model para o nivel staff de usuario'
+        ]);
+        
+        $permModelOperational = Permission::create([
+            'name'        => 'model.operational',
+            'slug'        => [],
+            'inherit_id' => $permModelStaff->getKey(),
+            'description' => 'Administra permissoes do model para o nivel operational de usuario'
+        ]);
+        
+        $permModelManager = Permission::create([
+            'name'        => 'model.manager',
+            'slug'        => [],
+            'inherit_id' => $permModelOperational->getKey(),
+            'description' => 'Administra permissoes do model para o nivel manager de usuario'
+        ]);
+        
+        $permModelExecutive = Permission::create([
+            'name'        => 'model.executive',
+            'slug'        => [],
+            'inherit_id' => $permModelManager->getKey(),
+            'description' => 'Administra permissoes do model para o nivel executive de usuario'
+        ]);
+        
+        $permModelAdmin = Permission::create([
+            'name'        => 'model.admin',
+            'slug'        => [
+                'create' => true,
+                'view'   => true,
+                'update' => true,
+                'delete' => true
+            ],
+            'inherit_id' => $permModelExecutive->getKey(),
+            'description' => 'Administra permissoes do model para o nivel admin de usuario'
+        ]);
+        
+        
+        //Assign permissions to rules
+        $roleStaff->assignPermission($permModelStaff);
+        $roleOperational->assignPermission($permModelOperational);
+        $roleManager->assignPermission($permModelManager);
+        $roleExecutive->assignPermission($permModelExecutive);
+        $roleAdmin->assignPermission($permModelAdmin);
+        
+        
         //Company
         //Permissions
         $permCompanyStaff = Permission::create([
