@@ -114,6 +114,16 @@ class HelperRepository
         return array(1 => 'company');
     }
     
+    public function getTripTypes()
+    {
+        return array(1 => 'company');
+    }
+    
+    public function getDrivers()
+    {
+        return array(1 => 'company');
+    }
+    
     public function getVehicles()
     {
         return array(1 => 'company');

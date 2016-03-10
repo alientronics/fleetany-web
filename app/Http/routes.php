@@ -15,6 +15,7 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::get('home', 'HomeController@index');
 Route::resource('/contact', 'HomeController@contact');
 
+Route::resource('trip', 'TripController');
 Route::resource('entry', 'EntryController');
 Route::resource('contact', 'ContactController');
 Route::resource('type', 'TypeController');
@@ -23,6 +24,7 @@ Route::resource('company', 'CompanyController');
 Route::resource('vehicle', 'VehicleController');
 Route::resource('user', 'UserController');
 
+Route::get('trip/destroy/{id}', 'TripController@destroy');
 Route::get('entry/destroy/{id}', 'EntryController@destroy');
 Route::get('contact/destroy/{id}', 'ContactController@destroy');
 Route::get('type/destroy/{id}', 'TypeController@destroy');

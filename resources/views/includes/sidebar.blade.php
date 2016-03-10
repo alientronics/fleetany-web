@@ -31,6 +31,9 @@
         @permission('view.entry')
         <li><a href="{{URL::to('entry')}}">{{Lang::get('menu.Entries')}}</a></li>       
         @endpermission   
+        @permission('view.trip')
+        <li><a href="{{URL::to('trip')}}">{{Lang::get('menu.Trips')}}</a></li>       
+        @endpermission   
         <li>
             <a href="#">
                 {{Lang::get('menu.Reports')}}

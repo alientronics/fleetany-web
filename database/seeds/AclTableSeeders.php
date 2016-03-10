@@ -99,7 +99,7 @@ class AclTableSeeder extends Seeder
         $roleManager->assignPermission($permVehicleManager);
         $roleExecutive->assignPermission($permVehicleExecutive);
         $roleAdmin->assignPermission($permVehicleAdmin);
-        
+
 
         //Contact
         //Permissions
@@ -154,6 +154,61 @@ class AclTableSeeder extends Seeder
         $roleManager->assignPermission($permContactManager);
         $roleExecutive->assignPermission($permContactExecutive);
         $roleAdmin->assignPermission($permContactAdmin);
+
+
+        //Trip
+        //Permissions
+        $permTripStaff = Permission::create([
+            'name'        => 'trip',
+            'slug'        => [
+                'create' => false,
+                'view'   => false,
+                'update' => false,
+                'delete' => false
+            ],
+            'description' => 'Administra permissoes do trip para o nivel staff de usuario'
+        ]);
+        
+        $permTripOperational = Permission::create([
+            'name'        => 'trip.operational',
+            'slug'        => [],
+            'inherit_id' => $permTripStaff->getKey(),
+            'description' => 'Administra permissoes do trip para o nivel operational de usuario'
+        ]);
+        
+        $permTripManager = Permission::create([
+            'name'        => 'trip.manager',
+            'slug'        => [],
+            'inherit_id' => $permTripOperational->getKey(),
+            'description' => 'Administra permissoes do trip para o nivel manager de usuario'
+        ]);
+        
+        $permTripExecutive = Permission::create([
+            'name'        => 'trip.executive',
+            'slug'        => [],
+            'inherit_id' => $permTripManager->getKey(),
+            'description' => 'Administra permissoes do trip para o nivel executive de usuario'
+        ]);
+        
+        $permTripAdmin = Permission::create([
+            'name'        => 'trip.admin',
+            'slug'        => [
+                'create' => true,
+                'view'   => true,
+                'update' => true,
+                'delete' => true
+            ],
+            'inherit_id' => $permTripExecutive->getKey(),
+            'description' => 'Administra permissoes do trip para o nivel admin de usuario'
+        ]);
+        
+        
+        //Assign permissions to rules
+        $roleStaff->assignPermission($permTripStaff);
+        $roleOperational->assignPermission($permTripOperational);
+        $roleManager->assignPermission($permTripManager);
+        $roleExecutive->assignPermission($permTripExecutive);
+        $roleAdmin->assignPermission($permTripAdmin);
         
 
         //Entry

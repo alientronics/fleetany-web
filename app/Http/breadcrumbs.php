@@ -114,6 +114,30 @@ Breadcrumbs::register(
     }
 );
 
+// Home > trip
+
+Breadcrumbs::register(
+    'trip',
+    function ($breadcrumbs) {
+    
+            $breadcrumbs->parent('home');
+            $breadcrumbs->push(Lang::get("menu.Trip"), route('trip.index'));
+    }
+);
+
+Breadcrumbs::register(
+    'trip.edit',
+    function ($breadcrumbs, $trip = null) {
+    
+            $breadcrumbs->parent('trip');
+        if ($trip->id) {
+            $breadcrumbs->push($trip->name, route('trip.edit', $trip->id));
+        } else {
+            $breadcrumbs->push(Lang::get("general.New"), route('trip.edit'));
+        }
+    }
+);
+
 // Home > model
 
 Breadcrumbs::register(

@@ -45,11 +45,16 @@ return [
     "Contact"   => "Contato",
     "Contacts"    => "Contatos",
     "newcontact" => "Novo Contato",
-    
+
     // Model
     "Model"   => "Modelo",
     "Models"    => "Modelos",
     "newmodel" => "Novo Modelo",
+    
+    // Trip
+    "Trip"   => "Viagem",
+    "Trips"    => "Viagens",
+    "newtrip" => "Nova Viagem",
 
     // Type
     "Type"   => "Tipo",
