@@ -155,6 +155,61 @@ class AclTableSeeder extends Seeder
         $roleExecutive->assignPermission($permModelExecutive);
         $roleAdmin->assignPermission($permModelAdmin);
         
+
+        //Type
+        //Permissions
+        $permTypeStaff = Permission::create([
+            'name'        => 'type',
+            'slug'        => [
+                'create' => false,
+                'view'   => false,
+                'update' => false,
+                'delete' => false
+            ],
+            'description' => 'Administra permissoes do type para o nivel staff de usuario'
+        ]);
+        
+        $permTypeOperational = Permission::create([
+            'name'        => 'type.operational',
+            'slug'        => [],
+            'inherit_id' => $permTypeStaff->getKey(),
+            'description' => 'Administra permissoes do type para o nivel operational de usuario'
+        ]);
+        
+        $permTypeManager = Permission::create([
+            'name'        => 'type.manager',
+            'slug'        => [],
+            'inherit_id' => $permTypeOperational->getKey(),
+            'description' => 'Administra permissoes do type para o nivel manager de usuario'
+        ]);
+        
+        $permTypeExecutive = Permission::create([
+            'name'        => 'type.executive',
+            'slug'        => [],
+            'inherit_id' => $permTypeManager->getKey(),
+            'description' => 'Administra permissoes do type para o nivel executive de usuario'
+        ]);
+        
+        $permTypeAdmin = Permission::create([
+            'name'        => 'type.admin',
+            'slug'        => [
+                'create' => true,
+                'view'   => true,
+                'update' => true,
+                'delete' => true
+            ],
+            'inherit_id' => $permTypeExecutive->getKey(),
+            'description' => 'Administra permissoes do type para o nivel admin de usuario'
+        ]);
+        
+        
+        //Assign permissions to rules
+        $roleStaff->assignPermission($permTypeStaff);
+        $roleOperational->assignPermission($permTypeOperational);
+        $roleManager->assignPermission($permTypeManager);
+        $roleExecutive->assignPermission($permTypeExecutive);
+        $roleAdmin->assignPermission($permTypeAdmin);
+        
         
         //Company
         //Permissions

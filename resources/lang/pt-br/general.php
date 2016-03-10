@@ -40,6 +40,17 @@ return [
 //     "measure_units" => "Nova",
 //     "api_token" => "Nova",
     
+
+    // Model
+    "Model"   => "Modelo",
+    "Models"    => "Modelos",
+    "newmodel" => "Novo Modelo",
+
+    // Type
+    "Type"   => "Tipo",
+    "Types"    => "Tipos",
+    "newtype" => "Novo Tipo",
+    
     // Vehicle
     "Vehicle"   => "Ve&iacute;culo",
     "Vehicles"    => "Ve&iacute;culos",

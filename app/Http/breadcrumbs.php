@@ -90,6 +90,30 @@ Breadcrumbs::register(
     }
 );
 
+// Home > type
+
+Breadcrumbs::register(
+    'type',
+    function ($breadcrumbs) {
+    
+            $breadcrumbs->parent('home');
+            $breadcrumbs->push(Lang::get("menu.Type"), route('type.index'));
+    }
+);
+
+Breadcrumbs::register(
+    'type.edit',
+    function ($breadcrumbs, $type = null) {
+    
+            $breadcrumbs->parent('type');
+        if ($type->id) {
+            $breadcrumbs->push($type->name, route('type.edit', $type->id));
+        } else {
+            $breadcrumbs->push(Lang::get("general.New"), route('type.edit'));
+        }
+    }
+);
+
 // Home > vehicle
 
 Breadcrumbs::register(

@@ -15,11 +15,16 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::get('home', 'HomeController@index');
 Route::resource('/contact', 'HomeController@contact');
 
+Route::resource('type', 'TypeController');
 Route::resource('model', 'ModelController');
 Route::resource('company', 'CompanyController');
 Route::resource('vehicle', 'VehicleController');
 Route::resource('user', 'UserController');
 
+Route::get('type/destroy/{id}', 'TypeController@destroy');
+Route::get('model/destroy/{id}', 'ModelController@destroy');
+Route::get('company/destroy/{id}', 'CompanyController@destroy');
+Route::get('vehicle/destroy/{id}', 'VehicleController@destroy');
 Route::get('user/destroy/{id}', 'UserController@destroy');
 
 Route::get('profile', 'UserController@showProfile');

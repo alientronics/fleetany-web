@@ -4,21 +4,20 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use App\Repositories\ModelRepository;
-use App\Entities\Model;
+use App\Repositories\TypeRepository;
+use App\Entities\Type;
 
-class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
+class TypeRepositoryEloquent extends BaseRepository implements TypeRepository
 {
 
     protected $rules = [
         'company_id'      => 'required',
-        'model_type_id'   => 'required',
         'name'      => 'min:3|required',
         ];
 
     public function model()
     {
-        return Model::class;
+        return Type::class;
     }
 
     public function boot()
@@ -28,16 +27,10 @@ class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
     
     public function results($filters = array())
     {
-        $models = $this->scopeQuery(function ($query) use ($filters) {
+        $types = $this->scopeQuery(function ($query) use ($filters) {
             
             if (!empty($filters['company-id'])) {
                 $query = $query->where('company_id', $filters['company-id']);
-            }
-            if (!empty($filters['model-type-id'])) {
-                $query = $query->where('model_type_id', $filters['model-type-id']);
-            }
-            if (!empty($filters['vendor-id'])) {
-                $query = $query->where('vendor_id', $filters['vendor-id']);
             }
             if (!empty($filters['name'])) {
                 $query = $query->where('name', $filters['name']);
@@ -48,6 +41,6 @@ class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
             return $query;
         })->paginate($filters['paginate']);
         
-        return $models;
+        return $types;
     }
 }

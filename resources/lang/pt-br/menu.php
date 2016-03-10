@@ -16,6 +16,8 @@ return [
     'Vehicle'       => "Ve&iacute;culo",
     'Companies'     => "Empresas",
     'Company'       => "Empresa",
+    'Types'         => "Tipos",
+    'Type'          => "Tipo",
     'Models'        => "Modelos",
     'Model'         => "Modelo",
     'Tires'         => "Pneus",

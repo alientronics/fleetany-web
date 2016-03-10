@@ -11,6 +11,8 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
 {
 
     protected $rules = [
+        'company_id'      => 'required',
+        'model_vehicle_id'   => 'required',
         'cost'      => 'min:3|required',
         ];
 

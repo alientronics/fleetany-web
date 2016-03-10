@@ -21,6 +21,9 @@
         @endpermission  
         @permission('view.model')
         <li><a href="{{URL::to('model')}}">{{Lang::get('menu.Models')}}</a></li>       
+        @endpermission  
+        @permission('view.type')
+        <li><a href="{{URL::to('type')}}">{{Lang::get('menu.Types')}}</a></li>       
         @endpermission   
         <li>
             <a href="#">
