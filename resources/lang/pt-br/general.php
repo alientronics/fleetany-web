@@ -41,6 +41,11 @@ return [
 //     "api_token" => "Nova",
     
 
+    // Contact
+    "Contact"   => "Contato",
+    "Contacts"    => "Contatos",
+    "newcontact" => "Novo Contato",
+    
     // Model
     "Model"   => "Modelo",
     "Models"    => "Modelos",

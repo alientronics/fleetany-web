@@ -66,6 +66,30 @@ Breadcrumbs::register(
     }
 );
 
+// Home > contact
+
+Breadcrumbs::register(
+    'contact',
+    function ($breadcrumbs) {
+    
+            $breadcrumbs->parent('home');
+            $breadcrumbs->push(Lang::get("menu.Contact"), route('contact.index'));
+    }
+);
+
+Breadcrumbs::register(
+    'contact.edit',
+    function ($breadcrumbs, $contact = null) {
+    
+            $breadcrumbs->parent('contact');
+        if ($contact->id) {
+            $breadcrumbs->push($contact->name, route('contact.edit', $contact->id));
+        } else {
+            $breadcrumbs->push(Lang::get("general.New"), route('contact.edit'));
+        }
+    }
+);
+
 // Home > model
 
 Breadcrumbs::register(

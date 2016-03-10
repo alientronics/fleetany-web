@@ -99,6 +99,11 @@ class HelperRepository
         return array(1 => 'company');
     }
     
+    public function getContactTypes()
+    {
+        return array(1 => 'company');
+    }
+    
     public function getModelTypes()
     {
         return array(1 => 'company');

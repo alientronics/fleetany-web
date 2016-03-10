@@ -101,6 +101,61 @@ class AclTableSeeder extends Seeder
         $roleAdmin->assignPermission($permVehicleAdmin);
         
 
+        //Contact
+        //Permissions
+        $permContactStaff = Permission::create([
+            'name'        => 'contact',
+            'slug'        => [
+                'create' => false,
+                'view'   => false,
+                'update' => false,
+                'delete' => false
+            ],
+            'description' => 'Administra permissoes do contact para o nivel staff de usuario'
+        ]);
+        
+        $permContactOperational = Permission::create([
+            'name'        => 'contact.operational',
+            'slug'        => [],
+            'inherit_id' => $permContactStaff->getKey(),
+            'description' => 'Administra permissoes do contact para o nivel operational de usuario'
+        ]);
+        
+        $permContactManager = Permission::create([
+            'name'        => 'contact.manager',
+            'slug'        => [],
+            'inherit_id' => $permContactOperational->getKey(),
+            'description' => 'Administra permissoes do contact para o nivel manager de usuario'
+        ]);
+        
+        $permContactExecutive = Permission::create([
+            'name'        => 'contact.executive',
+            'slug'        => [],
+            'inherit_id' => $permContactManager->getKey(),
+            'description' => 'Administra permissoes do contact para o nivel executive de usuario'
+        ]);
+        
+        $permContactAdmin = Permission::create([
+            'name'        => 'contact.admin',
+            'slug'        => [
+                'create' => true,
+                'view'   => true,
+                'update' => true,
+                'delete' => true
+            ],
+            'inherit_id' => $permContactExecutive->getKey(),
+            'description' => 'Administra permissoes do contact para o nivel admin de usuario'
+        ]);
+        
+        
+        //Assign permissions to rules
+        $roleStaff->assignPermission($permContactStaff);
+        $roleOperational->assignPermission($permContactOperational);
+        $roleManager->assignPermission($permContactManager);
+        $roleExecutive->assignPermission($permContactExecutive);
+        $roleAdmin->assignPermission($permContactAdmin);
+        
+        
         //Model
         //Permissions
         $permModelStaff = Permission::create([

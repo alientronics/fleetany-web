@@ -24,6 +24,9 @@
         @endpermission  
         @permission('view.type')
         <li><a href="{{URL::to('type')}}">{{Lang::get('menu.Types')}}</a></li>       
+        @endpermission  
+        @permission('view.contact')
+        <li><a href="{{URL::to('contact')}}">{{Lang::get('menu.Contacts')}}</a></li>       
         @endpermission   
         <li>
             <a href="#">
