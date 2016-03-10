@@ -52,7 +52,7 @@ class TripController extends Controller
         $driver_id = $objHelperRepository->getDrivers();
         $vehicle_id = $objHelperRepository->getVehicles();
         $vendor_id = $objHelperRepository->getVendors();
-        $trip_type_id = $objHelperRepository->getTripTypes();
+        $trip_type_id = $objHelperRepository->getTypes('trip');
         return view("trip.edit", compact('trip', 'driver_id', 'company_id', 'vehicle_id', 'vendor_id', 'trip_type_id'));
     }
 
@@ -90,7 +90,7 @@ class TripController extends Controller
         $driver_id = $objHelperRepository->getDrivers();
         $vehicle_id = $objHelperRepository->getVehicles();
         $vendor_id = $objHelperRepository->getVendors();
-        $trip_type_id = $objHelperRepository->getTripTypes();
+        $trip_type_id = $objHelperRepository->getTypes('trip');
         
         return view("trip.edit", compact('trip', 'driver_id', 'company_id', 'vehicle_id', 'vendor_id', 'trip_type_id'));
     }

@@ -48,7 +48,7 @@ class ContactController extends Controller
         $contact = new Contact();
         $objHelperRepository = new HelperRepository();
         $company_id = $objHelperRepository->getCompanies();
-        $contact_type_id = $objHelperRepository->getContactTypes();
+        $contact_type_id = $objHelperRepository->getTypes('contact');
         return view("contact.edit", compact('contact', 'contact_type_id', 'company_id'));
     }
 
@@ -83,7 +83,7 @@ class ContactController extends Controller
         
         $objHelperRepository = new HelperRepository();
         $company_id = $objHelperRepository->getCompanies();
-        $contact_type_id = $objHelperRepository->getContactTypes();
+        $contact_type_id = $objHelperRepository->getTypes('contact');
         
         return view("contact.edit", compact('contact', 'contact_type_id', 'company_id'));
     }

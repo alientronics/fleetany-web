@@ -2,11 +2,11 @@
 
 namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as BaseModel;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
-class User extends Model implements Transformable
+class User extends BaseModel implements Transformable
 {
     use TransformableTrait;
 

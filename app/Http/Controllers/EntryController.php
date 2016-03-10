@@ -49,7 +49,7 @@ class EntryController extends Controller
         $entry = new Entry();
         $objHelperRepository = new HelperRepository();
         $company_id = $objHelperRepository->getCompanies();
-        $entry_type_id = $objHelperRepository->getEntryTypes();
+        $entry_type_id = $objHelperRepository->getTypes('entry');
         $vendor_id = $objHelperRepository->getVendors();
         $vehicle_id = $objHelperRepository->getVehicles();
         return view("entry.edit", compact('entry', 'entry_type_id', 'company_id', 'vehicle_id', 'vendor_id'));
@@ -86,7 +86,7 @@ class EntryController extends Controller
         
         $objHelperRepository = new HelperRepository();
         $company_id = $objHelperRepository->getCompanies();
-        $entry_type_id = $objHelperRepository->getEntryTypes();
+        $entry_type_id = $objHelperRepository->getTypes('entry');
         $vendor_id = $objHelperRepository->getVendors();
         $vehicle_id = $objHelperRepository->getVehicles();
         return view("entry.edit", compact('entry', 'entry_type_id', 'company_id', 'vehicle_id', 'vendor_id'));

@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 use Kodeine\Acl\Models\Eloquent\Role;
 use Lang;
 use Illuminate\Support\Facades\File;
+use App\Entities\Contact;
+use App\Entities\Company;
+use App\Entities\Type;
+use App\Entities\Model;
+use App\Entities\Vehicle;
 
 class HelperRepository
 {
@@ -91,51 +96,49 @@ class HelperRepository
     
     public function getContacts()
     {
-        return array(1 => 'company');
+        $contacts = Contact::lists('name', 'id');
+        return $contacts;
     }
     
     public function getCompanies()
     {
-        return array(1 => 'company');
-    }
-    
-    public function getContactTypes()
-    {
-        return array(1 => 'company');
-    }
-    
-    public function getModelTypes()
-    {
-        return array(1 => 'company');
+        $companies = Company::lists('name', 'id');
+        return $companies;
     }
     
     public function getVendors()
     {
-        return array(1 => 'company');
-    }
-    
-    public function getTripTypes()
-    {
-        return array(1 => 'company');
+        $vendors = Contact::join('types', 'contacts.contact_type_id', '=', 'types.id')
+                        ->where('types.entity_key', 'vendor')
+                        ->lists('contacts.name', 'contacts.id');
+        return $vendors;
     }
     
     public function getDrivers()
     {
-        return array(1 => 'company');
+        $drivers = Contact::join('types', 'contacts.contact_type_id', '=', 'types.id')
+                        ->where('types.entity_key', 'driver')
+                        ->lists('contacts.name', 'contacts.id');
+        return $drivers;
     }
     
     public function getVehicles()
     {
-        return array(1 => 'company');
-    }
-    
-    public function getEntryTypes()
-    {
-        return array(1 => 'company');
+        $vehicles = Vehicle::lists('number', 'id');
+        return $vehicles;
     }
     
     public function getModelVehicles()
     {
-        return array(1 => 'vehicle');
+        $modelVehicles = Model::join('types', 'models.model_type_id', '=', 'types.id')
+                        ->where('types.entity_key', 'vehicle')
+                        ->lists('models.name', 'models.id');
+        return $modelVehicles;
+    }
+
+    public function getTypes($type)
+    {
+        $types = Type::where('entity_key', $type)->lists('name', 'id');
+        return $types;
     }
 }
