@@ -155,6 +155,61 @@ class AclTableSeeder extends Seeder
         $roleExecutive->assignPermission($permContactExecutive);
         $roleAdmin->assignPermission($permContactAdmin);
         
+
+        //Entry
+        //Permissions
+        $permEntryStaff = Permission::create([
+            'name'        => 'entry',
+            'slug'        => [
+                'create' => false,
+                'view'   => false,
+                'update' => false,
+                'delete' => false
+            ],
+            'description' => 'Administra permissoes do entry para o nivel staff de usuario'
+        ]);
+        
+        $permEntryOperational = Permission::create([
+            'name'        => 'entry.operational',
+            'slug'        => [],
+            'inherit_id' => $permEntryStaff->getKey(),
+            'description' => 'Administra permissoes do entry para o nivel operational de usuario'
+        ]);
+        
+        $permEntryManager = Permission::create([
+            'name'        => 'entry.manager',
+            'slug'        => [],
+            'inherit_id' => $permEntryOperational->getKey(),
+            'description' => 'Administra permissoes do entry para o nivel manager de usuario'
+        ]);
+        
+        $permEntryExecutive = Permission::create([
+            'name'        => 'entry.executive',
+            'slug'        => [],
+            'inherit_id' => $permEntryManager->getKey(),
+            'description' => 'Administra permissoes do entry para o nivel executive de usuario'
+        ]);
+        
+        $permEntryAdmin = Permission::create([
+            'name'        => 'entry.admin',
+            'slug'        => [
+                'create' => true,
+                'view'   => true,
+                'update' => true,
+                'delete' => true
+            ],
+            'inherit_id' => $permEntryExecutive->getKey(),
+            'description' => 'Administra permissoes do entry para o nivel admin de usuario'
+        ]);
+        
+        
+        //Assign permissions to rules
+        $roleStaff->assignPermission($permEntryStaff);
+        $roleOperational->assignPermission($permEntryOperational);
+        $roleManager->assignPermission($permEntryManager);
+        $roleExecutive->assignPermission($permEntryExecutive);
+        $roleAdmin->assignPermission($permEntryAdmin);
+        
         
         //Model
         //Permissions

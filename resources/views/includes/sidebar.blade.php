@@ -28,6 +28,9 @@
         @permission('view.contact')
         <li><a href="{{URL::to('contact')}}">{{Lang::get('menu.Contacts')}}</a></li>       
         @endpermission   
+        @permission('view.entry')
+        <li><a href="{{URL::to('entry')}}">{{Lang::get('menu.Entries')}}</a></li>       
+        @endpermission   
         <li>
             <a href="#">
                 {{Lang::get('menu.Reports')}}

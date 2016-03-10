@@ -90,6 +90,30 @@ Breadcrumbs::register(
     }
 );
 
+// Home > entry
+
+Breadcrumbs::register(
+    'entry',
+    function ($breadcrumbs) {
+    
+            $breadcrumbs->parent('home');
+            $breadcrumbs->push(Lang::get("menu.Entry"), route('entry.index'));
+    }
+);
+
+Breadcrumbs::register(
+    'entry.edit',
+    function ($breadcrumbs, $entry = null) {
+    
+            $breadcrumbs->parent('entry');
+        if ($entry->id) {
+            $breadcrumbs->push($entry->name, route('entry.edit', $entry->id));
+        } else {
+            $breadcrumbs->push(Lang::get("general.New"), route('entry.edit'));
+        }
+    }
+);
+
 // Home > model
 
 Breadcrumbs::register(
