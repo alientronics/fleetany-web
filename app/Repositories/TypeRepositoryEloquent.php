@@ -30,14 +30,11 @@ class TypeRepositoryEloquent extends BaseRepository implements TypeRepository
     {
         $types = $this->scopeQuery(function ($query) use ($filters) {
 
-            if (!empty($filters['company-id'])) {
-                $query = $query->where('company_id', $filters['company-id']);
-            }
             if (!empty($filters['entity-key'])) {
-                $query = $query->where('entity_key', $filters['entity-key']);
+                $query = $query->where('entity_key', 'like', '%'.$filters['entity-key'].'%');
             }
             if (!empty($filters['name'])) {
-                $query = $query->where('name', $filters['name']);
+                $query = $query->where('name', 'like', '%'.$filters['name'].'%');
             }
 
             $query = $query->orderBy($filters['sort'], $filters['order']);

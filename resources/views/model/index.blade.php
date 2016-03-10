@@ -41,8 +41,8 @@
     <thead>
         <tr>
             <th class="col-sm-1"><a href="{{url('/')}}/{{$filters['sort_url']['id']}}">{{Lang::get("general.id")}} <i class="fa fa-fw {{$filters['sort_icon']['id']}}"></i></a></th>
-            <th><a href="{{url('/')}}/{{$filters['sort_url']['model-type-id']}}">{{Lang::get("general.model_type_id")}} <i class="fa fa-fw {{$filters['sort_icon']['model-type-id']}}"></i></th>
-            <th><a href="{{url('/')}}/{{$filters['sort_url']['vendor-id']}}">{{Lang::get("general.vendor_id")}} <i class="fa fa-fw {{$filters['sort_icon']['vendor-id']}}"></i></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['model-type']}}">{{Lang::get("general.model_type")}} <i class="fa fa-fw {{$filters['sort_icon']['model-type']}}"></i></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['vendor']}}">{{Lang::get("general.vendor")}} <i class="fa fa-fw {{$filters['sort_icon']['vendor']}}"></i></th>
             <th><a href="{{url('/')}}/{{$filters['sort_url']['name']}}">{{Lang::get("general.name")}} <i class="fa fa-fw {{$filters['sort_icon']['name']}}"></i></th>
             @permission('delete.model|update.model')
             <th class="col-sm-1">{{Lang::get("general.Actions")}}</th>
@@ -56,12 +56,12 @@
             </th>
             <th>
             	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" name="model-type-id" value="{{$filters['model-type-id']}}" placeholder='{{Lang::get("general.model_type_id")}}'>
+                  <input type="search" class="form-control" name="model-type" value="{{$filters['model-type']}}" placeholder='{{Lang::get("general.model_type")}}'>
                 </div>
             </th>    
             <th>
             	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" name="vendor-id" value="{{$filters['vendor-id']}}" placeholder='{{Lang::get("general.vendor_id")}}'>
+                  <input type="search" class="form-control" name="vendor" value="{{$filters['vendor']}}" placeholder='{{Lang::get("general.vendor")}}'>
                 </div>
             </th>     
             <th>
@@ -77,21 +77,19 @@
             @endpermission
         </tr>
     </thead>
-    @foreach($models as $model) 
+    @foreach($models as $model)
         <tr>
-            <td>{{$model->id}}</td>
-            <td>{{$model->model_type_id}}</td>  
-            <td>{{$model->vendor_id}}</td>   
-            <td>{{$model->name}}</td>   
+            <td>@if (!empty($model->id)) {{$model->id}} @endif</td>
+            <td>@if (!empty($model->type->name)) {{$model->type->name}} @endif</td>  
+            <td>@if (!empty($model->contact->name)) {{$model->contact->name}} @endif</td>   
+            <td>@if (!empty($model->name)) {{$model->name}} @endif</td>   
             @permission('delete.model|update.model')
             <td>
             	@permission('update.model')
                 	{!!Form::buttonLink( route('model.edit', $model->id) , 'primary' , 'pencil' , 'Editar' )!!}
                 @endpermission
             	@permission('delete.model')
-            		@if ($model->id != 1)
-                        {!!Form::buttonLink( url('model/destroy',$model->id) , 'danger' , 'trash' , 'Excluir' )!!}
-                	@endif
+                    {!!Form::buttonLink( url('model/destroy',$model->id) , 'danger' , 'trash' , 'Excluir' )!!}
                 @endpermission
             </td>
             @endpermission

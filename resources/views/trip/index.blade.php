@@ -41,8 +41,8 @@
     <thead>
         <tr>
             <th class="col-sm-1"><a href="{{url('/')}}/{{$filters['sort_url']['id']}}">{{Lang::get("general.id")}} <i class="fa fa-fw {{$filters['sort_icon']['id']}}"></i></a></th>
-            <th><a href="{{url('/')}}/{{$filters['sort_url']['vehicle-id']}}">{{Lang::get("general.vehicle_id")}} <i class="fa fa-fw {{$filters['sort_icon']['vehicle-id']}}"></i></th>
-            <th><a href="{{url('/')}}/{{$filters['sort_url']['trip-type-id']}}">{{Lang::get("general.trip_type_id")}} <i class="fa fa-fw {{$filters['sort_icon']['trip-type-id']}}"></i></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['vehicle']}}">{{Lang::get("general.vehicle")}} <i class="fa fa-fw {{$filters['sort_icon']['vehicle']}}"></i></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['trip-type']}}">{{Lang::get("general.trip_type")}} <i class="fa fa-fw {{$filters['sort_icon']['trip-type']}}"></i></th>
             <th><a href="{{url('/')}}/{{$filters['sort_url']['pickup-date']}}">{{Lang::get("general.pickup_date")}} <i class="fa fa-fw {{$filters['sort_icon']['pickup-date']}}"></i></th>
             <th><a href="{{url('/')}}/{{$filters['sort_url']['fuel-cost']}}">{{Lang::get("general.fuel_cost")}} <i class="fa fa-fw {{$filters['sort_icon']['fuel-cost']}}"></i></th>
             @permission('delete.trip|update.trip')
@@ -57,12 +57,12 @@
             </th>
             <th>
             	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" name="vehicle-id" value="{{$filters['vehicle-id']}}" placeholder='{{Lang::get("general.vehicle_id")}}'>
+                  <input type="search" class="form-control" name="vehicle" value="{{$filters['vehicle']}}" placeholder='{{Lang::get("general.vehicle")}}'>
                 </div>
             </th> 
             <th>
             	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" name="trip-type-id" value="{{$filters['trip-type-id']}}" placeholder='{{Lang::get("general.trip_type_id")}}'>
+                  <input type="search" class="form-control" name="trip-type" value="{{$filters['trip-type']}}" placeholder='{{Lang::get("general.trip_type")}}'>
                 </div>
             </th> 
             <th>
@@ -85,20 +85,18 @@
     </thead>
     @foreach($trips as $trip) 
         <tr>
-            <td>{{$trip->id}}</td>
-            <td>{{$trip->vehicle_id}}</td>  
-            <td>{{$trip->trip_type_id}}</td>  
-            <td>{{$trip->pickup_date}}</td>  
-            <td>{{$trip->fuel_cost}}</td>   
+            <td>@if (!empty($trip->id)) {{$trip->id}} @endif</td>
+            <td>@if (!empty($trip->vehicle->model->name)) {{$trip->vehicle->model->name}} @endif</td>  
+            <td>@if (!empty($trip->type->name)) {{$trip->type->name}} @endif</td>  
+            <td>@if (!empty($trip->pickup_date)) {{$trip->pickup_date}} @endif</td>  
+            <td>@if (!empty($trip->fuel_cost)) {{$trip->fuel_cost}} @endif</td>   
             @permission('delete.trip|update.trip')
             <td>
             	@permission('update.trip')
                 	{!!Form::buttonLink( route('trip.edit', $trip->id) , 'primary' , 'pencil' , 'Editar' )!!}
                 @endpermission
             	@permission('delete.trip')
-            		@if ($trip->id != 1)
-                        {!!Form::buttonLink( url('trip/destroy',$trip->id) , 'danger' , 'trash' , 'Excluir' )!!}
-                	@endif
+                    {!!Form::buttonLink( url('trip/destroy',$trip->id) , 'danger' , 'trash' , 'Excluir' )!!}
                 @endpermission
             </td>
             @endpermission

@@ -79,19 +79,17 @@
     </thead>
     @foreach($companies as $company) 
         <tr>
-            <td>{{$company->id}}</td>
-            <td>{{$company->name}}</td>  
-            <td>{{$company->city}}</td>   
-            <td>{{$company->country}}</td>   
+            <td>@if (!empty($company->id)) {{$company->id}} @endif</td>
+            <td>@if (!empty($company->name)) {{$company->name}} @endif</td>  
+            <td>@if (!empty($company->city)) {{$company->city}} @endif</td>   
+            <td>@if (!empty($company->country)) {{$company->country}} @endif</td>   
             @permission('delete.company|update.company')
             <td>
             	@permission('update.company')
                 	{!!Form::buttonLink( route('company.edit', $company->id) , 'primary' , 'pencil' , 'Editar' )!!}
                 @endpermission
             	@permission('delete.company')
-            		@if ($company->id != 1)
-                        {!!Form::buttonLink( url('company/destroy',$company->id) , 'danger' , 'trash' , 'Excluir' )!!}
-                	@endif
+                    {!!Form::buttonLink( url('company/destroy',$company->id) , 'danger' , 'trash' , 'Excluir' )!!}
                 @endpermission
             </td>
             @endpermission

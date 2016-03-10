@@ -42,7 +42,7 @@
         <tr>
             <th class="col-sm-1"><a href="{{url('/')}}/{{$filters['sort_url']['id']}}">{{Lang::get("general.id")}} <i class="fa fa-fw {{$filters['sort_icon']['id']}}"></i></a></th>
             <th><a href="{{url('/')}}/{{$filters['sort_url']['name']}}">{{Lang::get("general.name")}} <i class="fa fa-fw {{$filters['sort_icon']['name']}}"></i></th>
-            <th><a href="{{url('/')}}/{{$filters['sort_url']['contact-type-id']}}">{{Lang::get("general.contact_type_id")}} <i class="fa fa-fw {{$filters['sort_icon']['contact-type-id']}}"></i></th>
+            <th><a href="{{url('/')}}/{{$filters['sort_url']['contact-type']}}">{{Lang::get("general.contact_type")}} <i class="fa fa-fw {{$filters['sort_icon']['contact-type']}}"></i></th>
             <th><a href="{{url('/')}}/{{$filters['sort_url']['city']}}">{{Lang::get("general.city")}} <i class="fa fa-fw {{$filters['sort_icon']['city']}}"></i></th>
             @permission('delete.contact|update.contact')
             <th class="col-sm-1">{{Lang::get("general.Actions")}}</th>
@@ -61,7 +61,7 @@
             </th> 
             <th>
             	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" name="contact-type-id" value="{{$filters['contact-type-id']}}" placeholder='{{Lang::get("general.contact_type_id")}}'>
+                  <input type="search" class="form-control" name="contact-type" value="{{$filters['contact-type']}}" placeholder='{{Lang::get("general.contact_type")}}'>
                 </div>
             </th>    
             <th>
@@ -79,19 +79,17 @@
     </thead>
     @foreach($contacts as $contact) 
         <tr>
-            <td>{{$contact->id}}</td>
-            <td>{{$contact->name}}</td>   
-            <td>{{$contact->contact_type_id}}</td>  
-            <td>{{$contact->city}}</td>  
+            <td>@if (!empty($contact->id)) {{$contact->id}} @endif</td>
+            <td>@if (!empty($contact->name)) {{$contact->name}} @endif</td>   
+            <td>@if (!empty($contact->type->name)) {{$contact->type->name}} @endif</td>  
+            <td>@if (!empty($contact->city)) {{$contact->city}} @endif</td>  
             @permission('delete.contact|update.contact')
             <td>
             	@permission('update.contact')
                 	{!!Form::buttonLink( route('contact.edit', $contact->id) , 'primary' , 'pencil' , 'Editar' )!!}
                 @endpermission
             	@permission('delete.contact')
-            		@if ($contact->id != 1)
-                        {!!Form::buttonLink( url('contact/destroy',$contact->id) , 'danger' , 'trash' , 'Excluir' )!!}
-                	@endif
+                    {!!Form::buttonLink( url('contact/destroy',$contact->id) , 'danger' , 'trash' , 'Excluir' )!!}
                 @endpermission
             </td>
             @endpermission

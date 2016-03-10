@@ -22,8 +22,8 @@ class TripController extends Controller
     
     protected $fields = [
         'id',
-        'vehicle-id',
-        'trip-type-id',
+        'vehicle',
+        'trip-type',
         'pickup-date',
         'fuel-cost'
     ];

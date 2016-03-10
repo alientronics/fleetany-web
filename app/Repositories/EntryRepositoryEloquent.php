@@ -31,20 +31,25 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
     {
         $entries = $this->scopeQuery(function ($query) use ($filters) {
 
+            $query = $query->select('entries.*', 'models.name', 'types.name');
+            $query = $query->leftJoin('vehicles', 'entries.vehicle_id', '=', 'vehicles.id');
+            $query = $query->leftJoin('models', 'vehicles.model_vehicle_id', '=', 'models.id');
+            $query = $query->leftJoin('types', 'entries.entry_type_id', '=', 'types.id');
+            
             if (!empty($filters['vehicle-id'])) {
-                $query = $query->where('vehicle_id', $filters['vehicle-id']);
+                $query = $query->where('models.name', 'like', '%'.$filters['vehicle-id'].'%');
             }
             if (!empty($filters['entry-type-id'])) {
-                $query = $query->where('entry_type_id', $filters['entry-type-id']);
+                $query = $query->where('types.name', 'like', '%'.$filters['entry-type-id'].'%');
             }
             if (!empty($filters['datetime-ini'])) {
-                $query = $query->where('datetime_ini', $filters['datetime-ini']);
+                $query = $query->where('entries.datetime_ini', $filters['datetime-ini']);
             }
             if (!empty($filters['cost'])) {
-                $query = $query->where('cost', $filters['cost']);
+                $query = $query->where('entries.cost', $filters['cost']);
             }
 
-            $query = $query->orderBy($filters['sort'], $filters['order']);
+            $query = $query->orderBy('entries.'.$filters['sort'], $filters['order']);
             
             return $query;
         })->paginate($filters['paginate']);

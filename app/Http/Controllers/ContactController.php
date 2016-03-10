@@ -23,7 +23,7 @@ class ContactController extends Controller
     protected $fields = [
         'id',
         'name',
-        'contact-type-id',
+        'contact-type',
         'city'
     ];
     

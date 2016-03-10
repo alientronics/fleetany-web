@@ -22,7 +22,7 @@ class VehicleController extends Controller
     
     protected $fields = [
         'id',
-        'model-vehicle-id',
+        'model-vehicle',
         'number',
         'cost'
     ];

@@ -16,9 +16,6 @@
         @permission('view.vehicle')
         <li><a href="{{URL::to('vehicle')}}">{{Lang::get('menu.Vehicles')}}</a></li>       
         @endpermission
-        @permission('view.company')
-        <li><a href="{{URL::to('company')}}">{{Lang::get('menu.Companies')}}</a></li>       
-        @endpermission  
         @permission('view.model')
         <li><a href="{{URL::to('model')}}">{{Lang::get('menu.Models')}}</a></li>       
         @endpermission  

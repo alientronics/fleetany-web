@@ -29,18 +29,21 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
     public function results($filters = array())
     {
         $vehicles = $this->scopeQuery(function ($query) use ($filters) {
+
+            $query = $query->select('vehicles.*', 'models.name');
+            $query = $query->leftJoin('models', 'vehicles.model_vehicle_id', '=', 'models.id');
             
-            if (!empty($filters['model-vehicle-id'])) {
-                $query = $query->where('model_vehicle_id', $filters['model-vehicle-id']);
+            if (!empty($filters['model-vehicle'])) {
+                $query = $query->where('models.name', 'like', '%'.$filters['model-vehicle'].'%');
             }
             if (!empty($filters['number'])) {
-                $query = $query->where('number', $filters['number']);
+                $query = $query->where('vehicles.number', 'like', '%'.$filters['number'].'%');
             }
             if (!empty($filters['cost'])) {
-                $query = $query->where('cost', $filters['cost']);
+                $query = $query->where('vehicles.cost', 'like', '%'.$filters['cost'].'%');
             }
 
-            $query = $query->orderBy($filters['sort'], $filters['order']);
+            $query = $query->orderBy('vehicles.'.$filters['sort'], $filters['order']);
             
             return $query;
         })->paginate($filters['paginate']);

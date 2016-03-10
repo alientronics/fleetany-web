@@ -22,8 +22,8 @@ class ModelController extends Controller
     
     protected $fields = [
         'id',
-        'model-type-id',
-        'vendor-id',
+        'model-type',
+        'vendor',
         'name'
     ];
     

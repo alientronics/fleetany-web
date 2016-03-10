@@ -73,18 +73,16 @@
     </thead>
     @foreach($types as $type) 
         <tr>
-            <td>{{$type->id}}</td>
-            <td>{{$type->entity_key}}</td>  
-            <td>{{$type->name}}</td>   
+            <td>@if (!empty($type->id)) {{$type->id}} @endif</td>
+            <td>@if (!empty($type->entity_key)) {{$type->entity_key}} @endif</td>  
+            <td>@if (!empty($type->name)) {{$type->name}} @endif</td>   
             @permission('delete.type|update.type')
             <td>
             	@permission('update.type')
                 	{!!Form::buttonLink( route('type.edit', $type->id) , 'primary' , 'pencil' , 'Editar' )!!}
                 @endpermission
             	@permission('delete.type')
-            		@if ($type->id != 1)
-                        {!!Form::buttonLink( url('type/destroy',$type->id) , 'danger' , 'trash' , 'Excluir' )!!}
-                	@endif
+                    {!!Form::buttonLink( url('type/destroy',$type->id) , 'danger' , 'trash' , 'Excluir' )!!}
                 @endpermission
             </td>
             @endpermission

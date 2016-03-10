@@ -34,20 +34,25 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
     {
         $trips = $this->scopeQuery(function ($query) use ($filters) {
 
-            if (!empty($filters['vehicle-id'])) {
-                $query = $query->where('vehicle_id', $filters['vehicle-id']);
+            $query = $query->select('trips.*', 'models.name', 'types.name');
+            $query = $query->leftJoin('vehicles', 'trips.vehicle_id', '=', 'vehicles.id');
+            $query = $query->leftJoin('models', 'vehicles.model_vehicle_id', '=', 'models.id');
+            $query = $query->leftJoin('types', 'trips.trip_type_id', '=', 'types.id');
+            
+            if (!empty($filters['vehicle'])) {
+                $query = $query->where('models.name',  'like', '%'.$filters['vehicle'].'%');
             }
-            if (!empty($filters['trip-type-id'])) {
-                $query = $query->where('trip_type_id', $filters['trip-type-id']);
+            if (!empty($filters['trip-type'])) {
+                $query = $query->where('types.name',  'like', '%'.$filters['trip-type'].'%');
             }
             if (!empty($filters['pickup-date'])) {
-                $query = $query->where('pickup_date', $filters['pickup-date']);
+                $query = $query->where('trips.pickup_date', $filters['pickup-date']);
             }
             if (!empty($filters['fuel-cost'])) {
-                $query = $query->where('fuel_cost', $filters['fuel-cost']);
+                $query = $query->where('trips.fuel_cost', $filters['fuel-cost']);
             }
 
-            $query = $query->orderBy($filters['sort'], $filters['order']);
+            $query = $query->orderBy('trips.'.$filters['sort'], $filters['order']);
             
             return $query;
         })->paginate($filters['paginate']);

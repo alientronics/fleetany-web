@@ -1,8 +1,8 @@
 <?php namespace App\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Model as BaseModel;
 
-class Contact extends Model {
+class Contact extends BaseModel {
 
     /**
      * Generated

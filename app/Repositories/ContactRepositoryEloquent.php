@@ -32,16 +32,17 @@ class ContactRepositoryEloquent extends BaseRepository implements ContactReposit
         $contacts = $this->scopeQuery(function ($query) use ($filters) {
             
             if (!empty($filters['name'])) {
-                $query = $query->where('name', $filters['name']);
+                $query = $query->where('contacts.name', 'like', '%'.$filters['name'].'%');
             }
-            if (!empty($filters['contact-type-id'])) {
-                $query = $query->where('contact_type_id', $filters['contact-type-id']);
+            if (!empty($filters['contact-type'])) {
+                $query = $query->join('types', 'contacts.contact_type_id', '=', 'types.id');
+                $query = $query->where('types.name', 'like', '%'.$filters['contact-type'].'%');
             }
             if (!empty($filters['city'])) {
-                $query = $query->where('city', $filters['city']);
+                $query = $query->where('contacts.city', 'like', '%'.$filters['city'].'%');
             }
 
-            $query = $query->orderBy($filters['sort'], $filters['order']);
+            $query = $query->orderBy('contacts.'.$filters['sort'], $filters['order']);
             
             return $query;
         })->paginate($filters['paginate']);
