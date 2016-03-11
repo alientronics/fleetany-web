@@ -106,22 +106,6 @@ class HelperRepository
         return $companies;
     }
     
-    public function getVendors()
-    {
-        $vendors = Contact::join('types', 'contacts.contact_type_id', '=', 'types.id')
-                        ->where('types.entity_key', 'vendor')
-                        ->lists('contacts.name', 'contacts.id');
-        return $vendors;
-    }
-    
-    public function getDrivers()
-    {
-        $drivers = Contact::join('types', 'contacts.contact_type_id', '=', 'types.id')
-                        ->where('types.entity_key', 'driver')
-                        ->lists('contacts.name', 'contacts.id');
-        return $drivers;
-    }
-    
     public function getVehicles()
     {
         $vehicles = Vehicle::lists('number', 'id');
@@ -136,9 +120,9 @@ class HelperRepository
         return $modelVehicles;
     }
 
-    public function getTypes($type)
+    public function getTypes()
     {
-        $types = Type::where('entity_key', $type)->lists('name', 'id');
+        $types = Type::lists('name', 'id');
         return $types;
     }
 }

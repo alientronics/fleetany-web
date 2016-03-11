@@ -29,7 +29,8 @@ class CompanyRepositoryEloquent extends BaseRepository implements CompanyReposit
     {
         $companies = $this->scopeQuery(function ($query) use ($filters) {
             
-            $query = $query->select('companies.*', 'contacts.city', 'contacts.country')->join('contacts', 'companies.contact_id', '=', 'contacts.id');
+            $query = $query->select('companies.*', 'contacts.city', 'contacts.country')
+                        ->leftJoin('contacts', 'companies.contact_id', '=', 'contacts.id');
             
             if (!empty($filters['name'])) {
                 $query = $query->where('companies.name', 'like', '%'.$filters['name'].'%');

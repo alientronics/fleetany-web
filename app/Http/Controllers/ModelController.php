@@ -48,8 +48,8 @@ class ModelController extends Controller
         $model = new Model();
         $objHelperRepository = new HelperRepository();
         $company_id = $objHelperRepository->getCompanies();
-        $model_type_id = $objHelperRepository->getTypes('model');
-        $vendor_id = $objHelperRepository->getVendors();
+        $model_type_id = $objHelperRepository->getTypes();
+        $vendor_id = $objHelperRepository->getContacts();
         return view("model.edit", compact('model', 'model_type_id', 'company_id', 'vendor_id'));
     }
 
@@ -84,8 +84,8 @@ class ModelController extends Controller
         
         $objHelperRepository = new HelperRepository();
         $company_id = $objHelperRepository->getCompanies();
-        $model_type_id = $objHelperRepository->getTypes('model');
-        $vendor_id = $objHelperRepository->getVendors();
+        $model_type_id = $objHelperRepository->getTypes();
+        $vendor_id = $objHelperRepository->getContacts();
         
         return view("model.edit", compact('model', 'model_type_id', 'company_id', 'vendor_id'));
     }

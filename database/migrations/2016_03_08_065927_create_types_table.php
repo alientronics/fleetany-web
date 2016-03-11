@@ -15,8 +15,10 @@ class CreateTypesTable extends Migration {
 		Schema::create('types', function(Blueprint $table)
 		{
 			$table->integer('id', true);
+			$table->string('entity_key');
 			$table->integer('company_id')->index('fk_types_companies1_idx');
 			$table->string('name');
+// 			$table->primary(['id','entity_key']);
 			$table->timestamps();
 			$table->softDeletes();
 			$table->engine = 'InnoDB';

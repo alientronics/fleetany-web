@@ -49,11 +49,10 @@ class TripController extends Controller
         $trip = new Trip();
         $objHelperRepository = new HelperRepository();
         $company_id = $objHelperRepository->getCompanies();
-        $driver_id = $objHelperRepository->getDrivers();
         $vehicle_id = $objHelperRepository->getVehicles();
-        $vendor_id = $objHelperRepository->getVendors();
-        $trip_type_id = $objHelperRepository->getTypes('trip');
-        return view("trip.edit", compact('trip', 'driver_id', 'company_id', 'vehicle_id', 'vendor_id', 'trip_type_id'));
+        $contacts = $objHelperRepository->getContacts();
+        $trip_type_id = $objHelperRepository->getTypes();
+        return view("trip.edit", compact('trip', 'contacts', 'company_id', 'vehicle_id', 'trip_type_id'));
     }
 
     public function store()
@@ -87,12 +86,10 @@ class TripController extends Controller
         
         $objHelperRepository = new HelperRepository();
         $company_id = $objHelperRepository->getCompanies();
-        $driver_id = $objHelperRepository->getDrivers();
         $vehicle_id = $objHelperRepository->getVehicles();
-        $vendor_id = $objHelperRepository->getVendors();
-        $trip_type_id = $objHelperRepository->getTypes('trip');
-        
-        return view("trip.edit", compact('trip', 'driver_id', 'company_id', 'vehicle_id', 'vendor_id', 'trip_type_id'));
+        $contacts = $objHelperRepository->getContacts();
+        $trip_type_id = $objHelperRepository->getTypes();
+        return view("trip.edit", compact('trip', 'contacts', 'company_id', 'vehicle_id', 'trip_type_id'));
     }
     
     public function update($idTrip)

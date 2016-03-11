@@ -38,7 +38,7 @@
 
     <div class="form-group col-lg-12">
         {!!Form::label('driver_id', Lang::get('general.driver_id'))!!}
-        {!!Form::select('driver_id', $driver_id, $trip->driver_id, array('class' => 'form-control'))!!}
+        {!!Form::select('driver_id', $contacts, $trip->driver_id, array('class' => 'form-control'))!!}
     </div>
 
     <div class="form-group col-lg-12">
@@ -48,7 +48,7 @@
 
     <div class="form-group col-lg-12">
         {!!Form::label('vendor_id', Lang::get('general.vendor_id'))!!}
-        {!!Form::select('vendor_id', $vendor_id, $trip->vendor_id, array('class' => 'form-control'))!!}
+        {!!Form::select('vendor_id', $contacts, $trip->vendor_id, array('class' => 'form-control'))!!}
     </div>
 
     <div class="form-group col-lg-12">
