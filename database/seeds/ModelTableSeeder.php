@@ -15,7 +15,7 @@ class ModelTableSeeder extends Seeder
         DB::table('models')->delete();
         Model::create(
                 array(  'model_type_id' => 2,
-                        'vendor_id' => 1,
+                        'vendor_id' => 2,
                         'name' => 'Palio',
                         'company_id' => 1)
             );

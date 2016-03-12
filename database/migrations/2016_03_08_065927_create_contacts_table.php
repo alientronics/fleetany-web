@@ -23,7 +23,7 @@ class CreateContactsTable extends Migration {
 			$table->string('city')->nullable();
 			$table->string('address')->nullable();
 			$table->string('phone')->nullable();
-			$table->string('license_no');
+			$table->string('license_no')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 			$table->engine = 'InnoDB';

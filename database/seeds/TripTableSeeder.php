@@ -14,19 +14,19 @@ class TripTableSeeder extends Seeder
     {
         DB::table('trips')->delete();
         Trip::create(
-                array(  'driver_id' => 1,
+                array(  'driver_id' => 3,
                         'vehicle_id' => 1,
-                        'vendor_id' => 1,
-                        'trip_type_id' => 1,
+                        'vendor_id' => 2,
+                        'trip_type_id' => 6,
                         'pickup_date' => '2016-01-01',
                         'deliver_date' => '2016-01-01',
-                        'pickup_place' => 1,
-                        'deliver_place' => 1,
-                        'begin_mileage' => 321,
-                        'end_mileage' => 321,
-                        'total_mileage' => 321,
-                        'fuel_cost' => 321,
-                        'fuel_amount' => 321,
+                        'pickup_place' => '1200 First Av',
+                        'deliver_place' => '345 63th St',
+                        'begin_mileage' => 320,
+                        'end_mileage' => 450,
+                        'total_mileage' => 130,
+                        'fuel_cost' => 13.6,
+                        'fuel_amount' => 5,
                         'description' => 'Descricao Trip',
                         'company_id' => 1)
             );

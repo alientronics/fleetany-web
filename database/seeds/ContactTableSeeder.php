@@ -16,12 +16,16 @@ class ContactTableSeeder extends Seeder
         Contact::create(
                 array(  'company_id' => 1,
                         'contact_type_id' => 3,
-                        'name' => 'Vendor Name',
-                        'license_no' => 'license')
+                        'name' => 'Administrator')
             );
         Contact::create(
                 array(  'company_id' => 1,
-                        'contact_type_id' => 3,
+                        'contact_type_id' => 5,
+                        'name' => 'Vendor Name')
+            );
+        Contact::create(
+                array(  'company_id' => 1,
+                        'contact_type_id' => 4,
                         'name' => 'Driver Name',
                         'license_no' => 'license')
             );
