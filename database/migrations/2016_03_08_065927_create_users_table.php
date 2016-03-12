@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration {
 		{
 			$table->integer('id', true);
 			$table->integer('company_id')->nullable()->index('fk_users_companies_idx');
-			$table->integer('contact_id')->index('fk_users_contacts1_idx');
+			$table->integer('contact_id')->nullable()->index('fk_users_contacts1_idx');
 			$table->integer('pending_company_id')->nullable()->index('fk_users_companies1_idx');
 			$table->string('name')->nullable();
 			$table->string('email');
