@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
-class Type extends BaseModel {
+class Type extends BaseModel
+{
 
     /**
      * Generated
@@ -12,25 +13,28 @@ class Type extends BaseModel {
     protected $fillable = ['id', 'entity_key', 'company_id', 'name'];
 
 
-    public function company() {
+    public function company()
+    {
         return $this->belongsTo(\App\Entities\Company::class, 'company_id', 'id');
     }
 
-    public function contacts() {
+    public function contacts()
+    {
         return $this->hasMany(\App\Entities\Contact::class, 'contact_type_id', 'id');
     }
 
-    public function entries() {
+    public function entries()
+    {
         return $this->hasMany(\App\Entities\Entry::class, 'entry_type_id', 'id');
     }
 
-    public function models() {
+    public function models()
+    {
         return $this->hasMany(\App\Entities\Model::class, 'model_type_id', 'id');
     }
 
-    public function trips() {
+    public function trips()
+    {
         return $this->hasMany(\App\Entities\Trip::class, 'trip_type_id', 'id');
     }
-
-
 }

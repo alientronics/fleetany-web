@@ -40,10 +40,10 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
             $query = $query->leftJoin('types', 'trips.trip_type_id', '=', 'types.id');
             
             if (!empty($filters['vehicle'])) {
-                $query = $query->where('models.name',  'like', '%'.$filters['vehicle'].'%');
+                $query = $query->where('models.name', 'like', '%'.$filters['vehicle'].'%');
             }
             if (!empty($filters['trip-type'])) {
-                $query = $query->where('types.name',  'like', '%'.$filters['trip-type'].'%');
+                $query = $query->where('types.name', 'like', '%'.$filters['trip-type'].'%');
             }
             if (!empty($filters['pickup-date'])) {
                 $query = $query->where('trips.pickup_date', $filters['pickup-date']);

@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
-class Company extends BaseModel {
+class Company extends BaseModel
+{
 
     /**
      * Generated
@@ -12,41 +13,48 @@ class Company extends BaseModel {
     protected $fillable = ['id', 'contact_id', 'name', 'measure_units', 'api_token'];
 
 
-    public function contact() {
+    public function contact()
+    {
         return $this->belongsTo(\App\Entities\Contact::class, 'contact_id', 'id');
     }
 
-    public function contacts() {
+    public function contacts()
+    {
         return $this->hasMany(\App\Entities\Contact::class, 'company_id', 'id');
     }
 
-    public function entries() {
+    public function entries()
+    {
         return $this->hasMany(\App\Entities\Entry::class, 'company_id', 'id');
     }
 
-    public function models() {
+    public function models()
+    {
         return $this->hasMany(\App\Entities\Model::class, 'company_id', 'id');
     }
 
-    public function trips() {
+    public function trips()
+    {
         return $this->hasMany(\App\Entities\Trip::class, 'company_id', 'id');
     }
 
-    public function types() {
+    public function types()
+    {
         return $this->hasMany(\App\Entities\Type::class, 'company_id', 'id');
     }
 
-    public function usersCompany() {
+    public function usersCompany()
+    {
         return $this->hasMany(\App\Entities\User::class, 'company_id', 'id');
     }
 
-    public function usersPendingCompany() {
+    public function usersPendingCompany()
+    {
         return $this->hasMany(\App\Entities\User::class, 'pending_company_id', 'id');
     }
 
-    public function vehicles() {
+    public function vehicles()
+    {
         return $this->hasMany(\App\Entities\Vehicle::class, 'company_id', 'id');
     }
-
-
 }

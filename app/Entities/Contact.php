@@ -2,47 +2,56 @@
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
-class Contact extends BaseModel {
+class Contact extends BaseModel
+{
 
     /**
      * Generated
      */
 
     protected $table = 'contacts';
-    protected $fillable = ['id', 'company_id', 'contact_type_id', 'name', 'country', 'state', 'city', 'address', 'phone', 'license_no'];
+    protected $fillable = ['id', 'company_id', 'contact_type_id',
+                            'name', 'country', 'state', 'city',
+                            'address', 'phone', 'license_no'];
 
 
-    public function company() {
+    public function company()
+    {
         return $this->belongsTo(\App\Entities\Company::class, 'company_id', 'id');
     }
 
-    public function type() {
+    public function type()
+    {
         return $this->belongsTo(\App\Entities\Type::class, 'contact_type_id', 'id');
     }
 
-    public function companies() {
+    public function companies()
+    {
         return $this->hasMany(\App\Entities\Company::class, 'contact_id', 'id');
     }
 
-    public function entries() {
+    public function entries()
+    {
         return $this->hasMany(\App\Entities\Entry::class, 'vendor_id', 'id');
     }
 
-    public function models() {
+    public function models()
+    {
         return $this->hasMany(\App\Entities\Model::class, 'vendor_id', 'id');
     }
 
-    public function tripsDriver() {
+    public function tripsDriver()
+    {
         return $this->hasMany(\App\Entities\Trip::class, 'driver_id', 'id');
     }
 
-    public function tripsVendor() {
+    public function tripsVendor()
+    {
         return $this->hasMany(\App\Entities\Trip::class, 'vendor_id', 'id');
     }
 
-    public function users() {
+    public function users()
+    {
         return $this->hasMany(\App\Entities\User::class, 'contact_id', 'id');
     }
-
-
 }

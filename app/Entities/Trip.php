@@ -2,35 +2,43 @@
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
 
-class Trip extends BaseModel {
+class Trip extends BaseModel
+{
 
     /**
      * Generated
      */
 
     protected $table = 'trips';
-    protected $fillable = ['id', 'company_id', 'driver_id', 'vehicle_id', 'vendor_id', 'trip_type_id', 'pickup_date', 'deliver_date', 'pickup_place', 'deliver_place', 'begin_mileage', 'end_mileage', 'total_mileage', 'fuel_cost', 'fuel_amount', 'description'];
+    protected $fillable = ['id', 'company_id', 'driver_id', 'vehicle_id',
+                            'vendor_id', 'trip_type_id', 'pickup_date',
+                            'deliver_date', 'pickup_place', 'deliver_place',
+                            'begin_mileage', 'end_mileage', 'total_mileage',
+                            'fuel_cost', 'fuel_amount', 'description'];
 
 
-    public function company() {
+    public function company()
+    {
         return $this->belongsTo(\App\Entities\Company::class, 'company_id', 'id');
     }
 
-    public function contactDriver() {
+    public function contactDriver()
+    {
         return $this->belongsTo(\App\Entities\Contact::class, 'driver_id', 'id');
     }
 
-    public function vehicle() {
+    public function vehicle()
+    {
         return $this->belongsTo(\App\Entities\Vehicle::class, 'vehicle_id', 'id');
     }
 
-    public function contactVendor() {
+    public function contactVendor()
+    {
         return $this->belongsTo(\App\Entities\Contact::class, 'vendor_id', 'id');
     }
 
-    public function type() {
+    public function type()
+    {
         return $this->belongsTo(\App\Entities\Type::class, 'trip_type_id', 'id');
     }
-
-
 }
