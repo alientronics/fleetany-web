@@ -42,8 +42,8 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'email' => 'executive@alientronics.com.br',
             'password' => 'admin',
             'language' => 'pt-br',
-            'contact_id' => 'Contato Usuario Teste',
-            'company_id' => 'Empresa Usuario Teste',
+            'contact_id' => 1,
+            'company_id' => 1,
         ]);
     
         $user->assignRole('executive');
@@ -57,8 +57,8 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'email' => 'manager@alientronics.com.br',
             'password' => 'admin',
             'language' => 'pt-br',
-            'contact_id' => 'Contato Usuario Teste',
-            'company_id' => 'Empresa Usuario Teste',
+            'contact_id' => 1,
+            'company_id' => 1,
         ]);
         
         $user->assignRole('manager');
@@ -72,8 +72,8 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'email' => 'operational@alientronics.com.br',
             'password' => 'admin',
             'language' => 'pt-br',
-            'contact_id' => 'Contato Usuario Teste',
-            'company_id' => 'Empresa Usuario Teste',
+            'contact_id' => 1,
+            'company_id' => 1,
         ]);
         
         $user->assignRole('operational');
@@ -87,8 +87,8 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             'email' => 'staff@alientronics.com.br',
             'password' => 'admin',
             'language' => 'pt-br',
-            'contact_id' => 'Contato Usuario Teste',
-            'company_id' => 'Empresa Usuario Teste',
+            'contact_id' => 1,
+            'company_id' => 1,
         ]);
         
         $user->assignRole('staff');

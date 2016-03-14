@@ -46,6 +46,11 @@ return [
     "Contacts"    => "Contatos",
     "newcontact" => "Novo Contato",
 
+    // Entry
+    "Entry"   => "Entrada",
+    "Entries"    => "Entradas",
+    "newentry" => "Nova Entrada",
+    
     // Model
     "Model"   => "Modelo",
     "Models"    => "Modelos",

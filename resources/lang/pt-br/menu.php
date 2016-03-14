@@ -20,6 +20,8 @@ return [
     'Contact'       => "Contato",
     'Types'         => "Tipos",
     'Type'          => "Tipo",
+    'Entries'       => "Entradas",
+    'Entry'         => "Entrada",
     'Trips'         => "Viagens",
     'Trip'          => "Viagem",
     'Models'        => "Modelos",

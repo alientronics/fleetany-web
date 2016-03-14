@@ -50,11 +50,6 @@
         {!!Form::label('vehicle_id', Lang::get('general.vehicle_id'))!!}
         {!!Form::select('vehicle_id', $vehicle_id, $entry->vehicle_id, array('class' => 'form-control'))!!}
     </div>
-    
-    <div class="form-group col-lg-12">
-        {!!Form::label('number', Lang::get('general.number'))!!}
-        {!!Form::text('number', $entry->number, array('class' => 'form-control'))!!}
-    </div>
 
     <div class="form-group col-lg-12">
         {!!Form::label('datetime_ini', Lang::get('general.datetime_ini'))!!}

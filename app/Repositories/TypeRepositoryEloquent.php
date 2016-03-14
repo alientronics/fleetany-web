@@ -12,7 +12,6 @@ class TypeRepositoryEloquent extends BaseRepository implements TypeRepository
 
     protected $rules = [
         'company_id'      => 'required',
-        'entity_key'      => 'required',
         'name'      => 'min:3|required',
         ];
 
