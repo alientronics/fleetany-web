@@ -11,8 +11,6 @@ services:
 addons:
   code_climate:
     repo_token: 092ba7f552f0aec18fa18d180b608bf786ff5ae6aea0ea9bcaf7ec4204af46bb
-  #hosts:
-  #  - dynamodb-local
 
 cache: vendor
 
@@ -26,11 +24,6 @@ before_script:
   - mysql -e 'create database fleetany;'
   - mv .env.travis .env
   - php artisan migrate:refresh --seed --force
-  # Install DynamoDB Local
-  #- wget http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.tar.gz -O /tmp/dynamodb_local_latest.tar.gz
-  #- tar -xzf /tmp/dynamodb_local_latest.tar.gz -C /tmp
-  #- java -Djava.library.path=/tmp/DynamoDBLocal_lib -jar /tmp/DynamoDBLocal.jar -inMemory &
-  #- sleep 2
 
 script:
   - phpunit --stderr --configuration phpunit.xml --debug
