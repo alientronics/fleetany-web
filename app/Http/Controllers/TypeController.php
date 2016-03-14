@@ -6,13 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Repositories\TypeRepositoryEloquent;
 use App\Entities\Type;
 use Log;
-use Input;
 use Lang;
-use Session;
-use Redirect;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Repositories\HelperRepository;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TypeController extends Controller
@@ -28,14 +23,15 @@ class TypeController extends Controller
     
     public function __construct(TypeRepositoryEloquent $typeRepo)
     {
+        parent::__construct();
+
         $this->middleware('auth');
         $this->typeRepo = $typeRepo;
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $objHelper = new HelperRepository();
-        $filters = $objHelper->getFilters($request->all(), $this->fields, $request);
+        $filters = $this->helper->getFilters($this->request->all(), $this->fields, $this->request);
         
         $types = $this->typeRepo->results($filters);
                 
@@ -45,8 +41,7 @@ class TypeController extends Controller
     public function create()
     {
         $type = new Type();
-        $objHelperRepository = new HelperRepository();
-        $company_id = $objHelperRepository->getCompanies();
+        $company_id = $this->helper->getCompanies();
         return view("type.edit", compact('type', 'company_id'));
     }
 
@@ -54,17 +49,17 @@ class TypeController extends Controller
     {
         try {
             $this->typeRepo->validator();
-            $this->typeRepo->create(Input::all());
-            Session::flash(
+            $this->typeRepo->create($this->request->all());
+            $this->session->flash(
                 'message',
                 Lang::get(
                     'general.succefullcreate',
                     ['table'=> Lang::get('general.Type')]
                 )
             );
-            return Redirect::to('type');
+            return $this->redirect->to('type');
         } catch (ValidatorException $e) {
-            return Redirect::back()->withInput()
+            return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
         }
     }
@@ -79,8 +74,7 @@ class TypeController extends Controller
     {
         $type = $this->typeRepo->find($idType);
         
-        $objHelperRepository = new HelperRepository();
-        $company_id = $objHelperRepository->getCompanies();
+        $company_id = $this->helper->getCompanies();
             
         return view("type.edit", compact('type', 'company_id'));
     }
@@ -89,17 +83,17 @@ class TypeController extends Controller
     {
         try {
             $this->typeRepo->validator();
-            $this->typeRepo->update(Input::all(), $idType);
-            Session::flash(
+            $this->typeRepo->update($this->request->all(), $idType);
+            $this->session->flash(
                 'message',
                 Lang::get(
                     'general.succefullupdate',
                     ['table'=> Lang::get('general.Type')]
                 )
             );
-            return Redirect::to('type');
+            return $this->redirect->to('type');
         } catch (ValidatorException $e) {
-            return Redirect::back()->withInput()
+            return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());
         }
     }
@@ -110,8 +104,8 @@ class TypeController extends Controller
 
         if ($idType != 1 && $this->typeRepo->find($idType)) {
             $this->typeRepo->delete($idType);
-            Session::flash('message', Lang::get("general.deletedregister"));
+            $this->session->flash('message', Lang::get("general.deletedregister"));
         }
-        return Redirect::to('type');
+        return $this->redirect->to('type');
     }
 }
