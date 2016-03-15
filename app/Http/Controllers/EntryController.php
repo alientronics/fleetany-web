@@ -6,13 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Repositories\EntryRepositoryEloquent;
 use App\Entities\Entry;
 use Log;
-use Input;
 use Lang;
-use Session;
-use Redirect;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Repositories\HelperRepository;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class EntryController extends Controller
@@ -34,10 +29,9 @@ class EntryController extends Controller
         $this->entryRepo = $entryRepo;
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $objHelper = new HelperRepository();
-        $filters = $objHelper->getFilters($request->all(), $this->fields, $request);
+        $filters = $this->helper->getFilters($this->request->all(), $this->fields, $this->request);
         
         $entries = $this->entryRepo->results($filters);
                 
@@ -47,11 +41,10 @@ class EntryController extends Controller
     public function create()
     {
         $entry = new Entry();
-        $objHelperRepository = new HelperRepository();
-        $company_id = $objHelperRepository->getCompanies();
-        $entry_type_id = $objHelperRepository->getTypes();
-        $vendor_id = $objHelperRepository->getContacts();
-        $vehicle_id = $objHelperRepository->getVehicles();
+        $company_id = $this->helper->getCompanies();
+        $entry_type_id = $this->helper->getTypes();
+        $vendor_id = $this->helper->getContacts();
+        $vehicle_id = $this->helper->getVehicles();
         return view("entry.edit", compact('entry', 'entry_type_id', 'company_id', 'vehicle_id', 'vendor_id'));
     }
 
@@ -59,17 +52,17 @@ class EntryController extends Controller
     {
         try {
             $this->entryRepo->validator();
-            $this->entryRepo->create(Input::all());
-            Session::flash(
+            $this->entryRepo->create($this->request->all());
+            $this->session->flash(
                 'message',
                 Lang::get(
                     'general.succefullcreate',
                     ['table'=> Lang::get('general.Entry')]
                 )
             );
-            return Redirect::to('entry');
+            return $this->redirect->to('entry');
         } catch (ValidatorException $e) {
-            return Redirect::back()->withInput()
+            return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
         }
     }
@@ -84,11 +77,10 @@ class EntryController extends Controller
     {
         $entry = $this->entryRepo->find($idEntry);
         
-        $objHelperRepository = new HelperRepository();
-        $company_id = $objHelperRepository->getCompanies();
-        $entry_type_id = $objHelperRepository->getTypes();
-        $vendor_id = $objHelperRepository->getContacts();
-        $vehicle_id = $objHelperRepository->getVehicles();
+        $company_id = $this->helper->getCompanies();
+        $entry_type_id = $this->helper->getTypes();
+        $vendor_id = $this->helper->getContacts();
+        $vehicle_id = $this->helper->getVehicles();
         return view("entry.edit", compact('entry', 'entry_type_id', 'company_id', 'vehicle_id', 'vendor_id'));
     }
     
@@ -96,17 +88,17 @@ class EntryController extends Controller
     {
         try {
             $this->entryRepo->validator();
-            $this->entryRepo->update(Input::all(), $idEntry);
-            Session::flash(
+            $this->entryRepo->update($this->request->all(), $idEntry);
+            $this->session->flash(
                 'message',
                 Lang::get(
                     'general.succefullupdate',
                     ['table'=> Lang::get('general.Entry')]
                 )
             );
-            return Redirect::to('entry');
+            return $this->redirect->to('entry');
         } catch (ValidatorException $e) {
-            return Redirect::back()->withInput()
+            return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());
         }
     }
@@ -117,8 +109,8 @@ class EntryController extends Controller
 
         if ($idEntry != 1 && $this->entryRepo->find($idEntry)) {
             $this->entryRepo->delete($idEntry);
-            Session::flash('message', Lang::get("general.deletedregister"));
+            $this->session->flash('message', Lang::get("general.deletedregister"));
         }
-        return Redirect::to('entry');
+        return $this->redirect->to('entry');
     }
 }

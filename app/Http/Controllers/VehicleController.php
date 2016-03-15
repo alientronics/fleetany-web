@@ -6,13 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Repositories\VehicleRepositoryEloquent;
 use App\Entities\Vehicle;
 use Log;
-use Input;
 use Lang;
-use Session;
-use Redirect;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Repositories\HelperRepository;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class VehicleController extends Controller
@@ -33,10 +28,9 @@ class VehicleController extends Controller
         $this->vehicleRepo = $vehicleRepo;
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $objHelper = new HelperRepository();
-        $filters = $objHelper->getFilters($request->all(), $this->fields, $request);
+        $filters = $this->helper->getFilters($this->request->all(), $this->fields, $this->request);
         
         $vehicles = $this->vehicleRepo->results($filters);
                 
@@ -46,9 +40,8 @@ class VehicleController extends Controller
     public function create()
     {
         $vehicle = new Vehicle();
-        $objHelperRepository = new HelperRepository();
-        $company_id = $objHelperRepository->getCompanies();
-        $model_vehicle_id = $objHelperRepository->getModelVehicles();
+        $company_id = $this->helper->getCompanies();
+        $model_vehicle_id = $this->helper->getModelVehicles();
         return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 'company_id'));
     }
 
@@ -56,17 +49,17 @@ class VehicleController extends Controller
     {
         try {
             $this->vehicleRepo->validator();
-            $this->vehicleRepo->create(Input::all());
-            Session::flash(
+            $this->vehicleRepo->create($this->request->all());
+            $this->session->flash(
                 'message',
                 Lang::get(
                     'general.succefullcreate',
                     ['table'=> Lang::get('general.Vehicle')]
                 )
             );
-            return Redirect::to('vehicle');
+            return $this->redirect->to('vehicle');
         } catch (ValidatorException $e) {
-            return Redirect::back()->withInput()
+            return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
         }
     }
@@ -81,9 +74,8 @@ class VehicleController extends Controller
     {
         $vehicle = $this->vehicleRepo->find($idVehicle);
         
-        $objHelperRepository = new HelperRepository();
-        $company_id = $objHelperRepository->getCompanies();
-        $model_vehicle_id = $objHelperRepository->getModelVehicles();
+        $company_id = $this->helper->getCompanies();
+        $model_vehicle_id = $this->helper->getModelVehicles();
             
         return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 'company_id'));
     }
@@ -92,17 +84,17 @@ class VehicleController extends Controller
     {
         try {
             $this->vehicleRepo->validator();
-            $this->vehicleRepo->update(Input::all(), $idVehicle);
-            Session::flash(
+            $this->vehicleRepo->update($this->request->all(), $idVehicle);
+            $this->session->flash(
                 'message',
                 Lang::get(
                     'general.succefullupdate',
                     ['table'=> Lang::get('general.Vehicle')]
                 )
             );
-            return Redirect::to('vehicle');
+            return $this->redirect->to('vehicle');
         } catch (ValidatorException $e) {
-            return Redirect::back()->withInput()
+            return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());
         }
     }
@@ -113,8 +105,8 @@ class VehicleController extends Controller
 
         if ($idVehicle != 1 && $this->vehicleRepo->find($idVehicle)) {
             $this->vehicleRepo->delete($idVehicle);
-            Session::flash('message', Lang::get("general.deletedregister"));
+            $this->session->flash('message', Lang::get("general.deletedregister"));
         }
-        return Redirect::to('vehicle');
+        return $this->redirect->to('vehicle');
     }
 }

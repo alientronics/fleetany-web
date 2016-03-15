@@ -6,13 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Repositories\TripRepositoryEloquent;
 use App\Entities\Trip;
 use Log;
-use Input;
 use Lang;
-use Session;
-use Redirect;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Repositories\HelperRepository;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class TripController extends Controller
@@ -34,10 +29,9 @@ class TripController extends Controller
         $this->tripRepo = $tripRepo;
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $objHelper = new HelperRepository();
-        $filters = $objHelper->getFilters($request->all(), $this->fields, $request);
+        $filters = $this->helper->getFilters($this->request->all(), $this->fields, $this->request);
         
         $trips = $this->tripRepo->results($filters);
                 
@@ -47,11 +41,10 @@ class TripController extends Controller
     public function create()
     {
         $trip = new Trip();
-        $objHelperRepository = new HelperRepository();
-        $company_id = $objHelperRepository->getCompanies();
-        $vehicle_id = $objHelperRepository->getVehicles();
-        $contacts = $objHelperRepository->getContacts();
-        $trip_type_id = $objHelperRepository->getTypes();
+        $company_id = $this->helper->getCompanies();
+        $vehicle_id = $this->helper->getVehicles();
+        $contacts = $this->helper->getContacts();
+        $trip_type_id = $this->helper->getTypes();
         return view("trip.edit", compact('trip', 'contacts', 'company_id', 'vehicle_id', 'trip_type_id'));
     }
 
@@ -59,17 +52,17 @@ class TripController extends Controller
     {
         try {
             $this->tripRepo->validator();
-            $this->tripRepo->create(Input::all());
-            Session::flash(
+            $this->tripRepo->create($this->request->all());
+            $this->session->flash(
                 'message',
                 Lang::get(
                     'general.succefullcreate',
                     ['table'=> Lang::get('general.Trip')]
                 )
             );
-            return Redirect::to('trip');
+            return $this->redirect->to('trip');
         } catch (ValidatorException $e) {
-            return Redirect::back()->withInput()
+            return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
         }
     }
@@ -84,11 +77,10 @@ class TripController extends Controller
     {
         $trip = $this->tripRepo->find($idTrip);
         
-        $objHelperRepository = new HelperRepository();
-        $company_id = $objHelperRepository->getCompanies();
-        $vehicle_id = $objHelperRepository->getVehicles();
-        $contacts = $objHelperRepository->getContacts();
-        $trip_type_id = $objHelperRepository->getTypes();
+        $company_id = $this->helper->getCompanies();
+        $vehicle_id = $this->helper->getVehicles();
+        $contacts = $this->helper->getContacts();
+        $trip_type_id = $this->helper->getTypes();
         return view("trip.edit", compact('trip', 'contacts', 'company_id', 'vehicle_id', 'trip_type_id'));
     }
     
@@ -96,17 +88,17 @@ class TripController extends Controller
     {
         try {
             $this->tripRepo->validator();
-            $this->tripRepo->update(Input::all(), $idTrip);
-            Session::flash(
+            $this->tripRepo->update($this->request->all(), $idTrip);
+            $this->session->flash(
                 'message',
                 Lang::get(
                     'general.succefullupdate',
                     ['table'=> Lang::get('general.Trip')]
                 )
             );
-            return Redirect::to('trip');
+            return $this->redirect->to('trip');
         } catch (ValidatorException $e) {
-            return Redirect::back()->withInput()
+            return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());
         }
     }
@@ -117,8 +109,8 @@ class TripController extends Controller
 
         if ($idTrip != 1 && $this->tripRepo->find($idTrip)) {
             $this->tripRepo->delete($idTrip);
-            Session::flash('message', Lang::get("general.deletedregister"));
+            $this->session->flash('message', Lang::get("general.deletedregister"));
         }
-        return Redirect::to('trip');
+        return $this->redirect->to('trip');
     }
 }

@@ -6,13 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Repositories\ModelRepositoryEloquent;
 use App\Entities\Model;
 use Log;
-use Input;
 use Lang;
-use Session;
-use Redirect;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Repositories\HelperRepository;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ModelController extends Controller
@@ -33,10 +28,9 @@ class ModelController extends Controller
         $this->modelRepo = $modelRepo;
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $objHelper = new HelperRepository();
-        $filters = $objHelper->getFilters($request->all(), $this->fields, $request);
+        $filters = $this->helper->getFilters($this->request->all(), $this->fields, $this->request);
         
         $models = $this->modelRepo->results($filters);
                 
@@ -46,10 +40,9 @@ class ModelController extends Controller
     public function create()
     {
         $model = new Model();
-        $objHelperRepository = new HelperRepository();
-        $company_id = $objHelperRepository->getCompanies();
-        $model_type_id = $objHelperRepository->getTypes();
-        $vendor_id = $objHelperRepository->getContacts();
+        $company_id = $this->helper->getCompanies();
+        $model_type_id = $this->helper->getTypes();
+        $vendor_id = $this->helper->getContacts();
         return view("model.edit", compact('model', 'model_type_id', 'company_id', 'vendor_id'));
     }
 
@@ -57,17 +50,17 @@ class ModelController extends Controller
     {
         try {
             $this->modelRepo->validator();
-            $this->modelRepo->create(Input::all());
-            Session::flash(
+            $this->modelRepo->create($this->request->all());
+            $this->session->flash(
                 'message',
                 Lang::get(
                     'general.succefullcreate',
                     ['table'=> Lang::get('general.Model')]
                 )
             );
-            return Redirect::to('model');
+            return $this->redirect->to('model');
         } catch (ValidatorException $e) {
-            return Redirect::back()->withInput()
+            return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
         }
     }
@@ -82,10 +75,9 @@ class ModelController extends Controller
     {
         $model = $this->modelRepo->find($idModel);
         
-        $objHelperRepository = new HelperRepository();
-        $company_id = $objHelperRepository->getCompanies();
-        $model_type_id = $objHelperRepository->getTypes();
-        $vendor_id = $objHelperRepository->getContacts();
+        $company_id = $this->helper->getCompanies();
+        $model_type_id = $this->helper->getTypes();
+        $vendor_id = $this->helper->getContacts();
         
         return view("model.edit", compact('model', 'model_type_id', 'company_id', 'vendor_id'));
     }
@@ -94,17 +86,17 @@ class ModelController extends Controller
     {
         try {
             $this->modelRepo->validator();
-            $this->modelRepo->update(Input::all(), $idModel);
-            Session::flash(
+            $this->modelRepo->update($this->request->all(), $idModel);
+            $this->session->flash(
                 'message',
                 Lang::get(
                     'general.succefullupdate',
                     ['table'=> Lang::get('general.Model')]
                 )
             );
-            return Redirect::to('model');
+            return $this->redirect->to('model');
         } catch (ValidatorException $e) {
-            return Redirect::back()->withInput()
+            return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());
         }
     }
@@ -115,8 +107,8 @@ class ModelController extends Controller
 
         if ($idModel != 1 && $this->modelRepo->find($idModel)) {
             $this->modelRepo->delete($idModel);
-            Session::flash('message', Lang::get("general.deletedregister"));
+            $this->session->flash('message', Lang::get("general.deletedregister"));
         }
-        return Redirect::to('model');
+        return $this->redirect->to('model');
     }
 }

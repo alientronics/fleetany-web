@@ -6,13 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Repositories\ContactRepositoryEloquent;
 use App\Entities\Contact;
 use Log;
-use Input;
 use Lang;
-use Session;
-use Redirect;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Repositories\HelperRepository;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
@@ -33,10 +28,9 @@ class ContactController extends Controller
         $this->contactRepo = $contactRepo;
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $objHelper = new HelperRepository();
-        $filters = $objHelper->getFilters($request->all(), $this->fields, $request);
+        $filters = $this->helper->getFilters($this->request->all(), $this->fields, $this->request);
         
         $contacts = $this->contactRepo->results($filters);
                 
@@ -46,9 +40,8 @@ class ContactController extends Controller
     public function create()
     {
         $contact = new Contact();
-        $objHelperRepository = new HelperRepository();
-        $company_id = $objHelperRepository->getCompanies();
-        $contact_type_id = $objHelperRepository->getTypes();
+        $company_id = $this->helper->getCompanies();
+        $contact_type_id = $this->helper->getTypes();
         return view("contact.edit", compact('contact', 'contact_type_id', 'company_id'));
     }
 
@@ -56,17 +49,17 @@ class ContactController extends Controller
     {
         try {
             $this->contactRepo->validator();
-            $this->contactRepo->create(Input::all());
-            Session::flash(
+            $this->contactRepo->create($this->request->all());
+            $this->session->flash(
                 'message',
                 Lang::get(
                     'general.succefullcreate',
                     ['table'=> Lang::get('general.Contact')]
                 )
             );
-            return Redirect::to('contact');
+            return $this->redirect->to('contact');
         } catch (ValidatorException $e) {
-            return Redirect::back()->withInput()
+            return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
         }
     }
@@ -81,9 +74,8 @@ class ContactController extends Controller
     {
         $contact = $this->contactRepo->find($idContact);
         
-        $objHelperRepository = new HelperRepository();
-        $company_id = $objHelperRepository->getCompanies();
-        $contact_type_id = $objHelperRepository->getTypes();
+        $company_id = $this->helper->getCompanies();
+        $contact_type_id = $this->helper->getTypes();
         
         return view("contact.edit", compact('contact', 'contact_type_id', 'company_id'));
     }
@@ -92,17 +84,17 @@ class ContactController extends Controller
     {
         try {
             $this->contactRepo->validator();
-            $this->contactRepo->update(Input::all(), $idContact);
-            Session::flash(
+            $this->contactRepo->update($this->request->all(), $idContact);
+            $this->session->flash(
                 'message',
                 Lang::get(
                     'general.succefullupdate',
                     ['table'=> Lang::get('general.Contact')]
                 )
             );
-            return Redirect::to('contact');
+            return $this->redirect->to('contact');
         } catch (ValidatorException $e) {
-            return Redirect::back()->withInput()
+            return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());
         }
     }
@@ -113,8 +105,8 @@ class ContactController extends Controller
 
         if ($idContact != 1 && $this->contactRepo->find($idContact)) {
             $this->contactRepo->delete($idContact);
-            Session::flash('message', Lang::get("general.deletedregister"));
+            $this->session->flash('message', Lang::get("general.deletedregister"));
         }
-        return Redirect::to('contact');
+        return $this->redirect->to('contact');
     }
 }

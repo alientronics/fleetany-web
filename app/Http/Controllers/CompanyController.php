@@ -6,13 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Repositories\CompanyRepositoryEloquent;
 use App\Entities\Company;
 use Log;
-use Input;
 use Lang;
-use Session;
-use Redirect;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Repositories\HelperRepository;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller
@@ -33,10 +28,9 @@ class CompanyController extends Controller
         $this->companyRepo = $companyRepo;
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $objHelper = new HelperRepository();
-        $filters = $objHelper->getFilters($request->all(), $this->fields, $request);
+        $filters = $this->helper->getFilters($this->request->all(), $this->fields, $this->request);
         
         $companies = $this->companyRepo->results($filters);
                 
@@ -46,8 +40,7 @@ class CompanyController extends Controller
     public function create()
     {
         $company = new Company();
-        $objHelperRepository = new HelperRepository();
-        $contact_id = $objHelperRepository->getContacts();
+        $contact_id = $this->helper->getContacts();
         return view("company.edit", compact('company', 'contact_id'));
     }
 
@@ -55,17 +48,17 @@ class CompanyController extends Controller
     {
         try {
             $this->companyRepo->validator();
-            $this->companyRepo->create(Input::all());
-            Session::flash(
+            $this->companyRepo->create($this->request->all());
+            $this->session->flash(
                 'message',
                 Lang::get(
                     'general.succefullcreate',
                     ['table'=> Lang::get('general.Company')]
                 )
             );
-            return Redirect::to('company');
+            return $this->redirect->to('company');
         } catch (ValidatorException $e) {
-            return Redirect::back()->withInput()
+            return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
         }
     }
@@ -80,8 +73,7 @@ class CompanyController extends Controller
     {
         $company = $this->companyRepo->find($idCompany);
         
-        $objHelperRepository = new HelperRepository();
-        $contact_id = $objHelperRepository->getContacts();
+        $contact_id = $this->helper->getContacts();
         
         return view("company.edit", compact('company', 'contact_id'));
     }
@@ -90,17 +82,17 @@ class CompanyController extends Controller
     {
         try {
             $this->companyRepo->validator();
-            $this->companyRepo->update(Input::all(), $idCompany);
-            Session::flash(
+            $this->companyRepo->update($this->request->all(), $idCompany);
+            $this->session->flash(
                 'message',
                 Lang::get(
                     'general.succefullupdate',
                     ['table'=> Lang::get('general.Company')]
                 )
             );
-            return Redirect::to('company');
+            return $this->redirect->to('company');
         } catch (ValidatorException $e) {
-            return Redirect::back()->withInput()
+            return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());
         }
     }
@@ -111,8 +103,8 @@ class CompanyController extends Controller
 
         if ($idCompany != 1 && $this->companyRepo->find($idCompany)) {
             $this->companyRepo->delete($idCompany);
-            Session::flash('message', Lang::get("general.deletedregister"));
+            $this->session->flash('message', Lang::get("general.deletedregister"));
         }
-        return Redirect::to('company');
+        return $this->redirect->to('company');
     }
 }

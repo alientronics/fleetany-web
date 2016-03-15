@@ -5,15 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepositoryEloquent;
 use App\User;
-use Log;
 use Hash;
 use Input;
+use Log;
 use Lang;
-use Session;
-use Redirect;
 use Prettus\Validator\Exceptions\ValidatorException;
-use App\Repositories\HelperRepository;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -35,10 +31,9 @@ class UserController extends Controller
         $this->userRepo = $userRepo;
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $objHelper = new HelperRepository();
-        $filters = $objHelper->getFilters($request->all(), $this->fields, $request);
+        $filters = $this->helper->getFilters($this->request->all(), $this->fields, $this->request);
         
         $users = $this->userRepo->results($filters);
                 
@@ -48,9 +43,8 @@ class UserController extends Controller
     public function create()
     {
         $user = new User();
-        $objHelperRepository = new HelperRepository();
-        $role = $objHelperRepository->getAvailableRoles();
-        $language = $objHelperRepository->getAvailableLanguages();
+        $role = $this->helper->getAvailableRoles();
+        $language = $this->helper->getAvailableLanguages();
         return view("user.edit", compact('user', 'role', 'language'));
     }
 
@@ -59,18 +53,18 @@ class UserController extends Controller
         try {
             $this->userRepo->validator();
             Input::merge(array('password' => Hash::make(Input::get('password'))));
-            $this->userRepo->create(Input::all());
+            $this->userRepo->create($this->request->all());
             User::all()->last()->assignRole(Input::get('role_id'));
-            Session::flash(
+            $this->session->flash(
                 'message',
                 Lang::get(
                     'general.succefullcreate',
                     ['table'=> Lang::get('general.User')]
                 )
             );
-            return Redirect::to('user');
+            return $this->redirect->to('user');
         } catch (ValidatorException $e) {
-            return Redirect::back()->withInput()
+            return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
         }
     }
@@ -85,9 +79,8 @@ class UserController extends Controller
     {
         $user = $this->userRepo->find($idUser);
         
-        $objHelperRepository = new HelperRepository();
-        $role = $objHelperRepository->getAvailableRoles();
-        $language = $objHelperRepository->getAvailableLanguages();
+        $role = $this->helper->getAvailableRoles();
+        $language = $this->helper->getAvailableLanguages();
             
         return view("user.edit", compact('user', 'role', 'language'));
     }
@@ -97,18 +90,18 @@ class UserController extends Controller
         try {
             $this->userRepo->validator();
             Input::merge(array('password' => Hash::make(Input::get('password'))));
-            $this->userRepo->update(Input::all(), $idUser);
+            $this->userRepo->update($this->request->all(), $idUser);
             User::all()->last()->assignRole(Input::get('role_id'));
-            Session::flash(
+            $this->session->flash(
                 'message',
                 Lang::get(
                     'general.succefullupdate',
                     ['table'=> Lang::get('general.User')]
                 )
             );
-            return Redirect::to('user');
+            return $this->redirect->to('user');
         } catch (ValidatorException $e) {
-            return Redirect::back()->withInput()
+            return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());
         }
     }
@@ -119,16 +112,15 @@ class UserController extends Controller
 
         if ($idUser != 1 && $this->userRepo->find($idUser)) {
             $this->userRepo->delete($idUser);
-            Session::flash('message', Lang::get("general.deletedregister"));
+            $this->session->flash('message', Lang::get("general.deletedregister"));
         }
-        return Redirect::to('user');
+        return $this->redirect->to('user');
     }
     
     public function showProfile()
     {
         $user = User::findOrFail(Auth::id());
-        $objHelperRepository = new HelperRepository();
-        $language = $objHelperRepository->getAvailableLanguages();
+        $language = $this->helper->getAvailableLanguages();
         return view("profile", compact('user', 'language'));
     }
     
@@ -136,17 +128,17 @@ class UserController extends Controller
     {
         try {
             $this->userRepo->validator();
-            $this->userRepo->update(Input::all(), $idUser);
-            Session::flash(
+            $this->userRepo->update($this->request->all(), $idUser);
+            $this->session->flash(
                 'message',
                 Lang::get(
                     'general.succefullupdate',
                     ['table'=> Lang::get('general.User')]
                 )
             );
-            return Redirect::to('profile');
+            return $this->redirect->to('profile');
         } catch (ValidatorException $e) {
-            return Redirect::back()->withInput()
+            return $this->redirect->back()->withInput()
             ->with('errors', $e->getMessageBag());
         }
     }
