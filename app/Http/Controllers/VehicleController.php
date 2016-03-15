@@ -9,6 +9,8 @@ use Log;
 use Lang;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\CompanyRepositoryEloquent;
+use App\Repositories\ModelRepositoryEloquent;
 
 class VehicleController extends Controller
 {
@@ -42,8 +44,8 @@ class VehicleController extends Controller
     public function create()
     {
         $vehicle = new Vehicle();
-        $company_id = $this->helper->getCompanies();
-        $model_vehicle_id = $this->helper->getModelVehicles();
+        $company_id = CompanyRepositoryEloquent::getCompanies();
+        $model_vehicle_id = ModelRepositoryEloquent::getModelVehicles();
         return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 'company_id'));
     }
 
@@ -75,9 +77,9 @@ class VehicleController extends Controller
     public function edit($idVehicle)
     {
         $vehicle = $this->vehicleRepo->find($idVehicle);
-        
-        $company_id = $this->helper->getCompanies();
-        $model_vehicle_id = $this->helper->getModelVehicles();
+
+        $company_id = CompanyRepositoryEloquent::getCompanies();
+        $model_vehicle_id = ModelRepositoryEloquent::getModelVehicles();
             
         return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 'company_id'));
     }

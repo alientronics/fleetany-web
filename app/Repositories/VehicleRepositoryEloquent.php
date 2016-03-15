@@ -50,4 +50,10 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
         
         return $vehicles;
     }
+    
+    public static function getVehicles()
+    {
+        $vehicles = Vehicle::lists('number', 'id');
+        return $vehicles;
+    }
 }

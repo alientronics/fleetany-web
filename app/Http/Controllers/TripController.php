@@ -9,6 +9,10 @@ use Log;
 use Lang;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\CompanyRepositoryEloquent;
+use App\Repositories\VehicleRepositoryEloquent;
+use App\Repositories\ContactRepositoryEloquent;
+use App\Repositories\TypeRepositoryEloquent;
 
 class TripController extends Controller
 {
@@ -43,10 +47,10 @@ class TripController extends Controller
     public function create()
     {
         $trip = new Trip();
-        $company_id = $this->helper->getCompanies();
-        $vehicle_id = $this->helper->getVehicles();
-        $contacts = $this->helper->getContacts();
-        $trip_type_id = $this->helper->getTypes();
+        $company_id = CompanyRepositoryEloquent::getCompanies();
+        $vehicle_id = VehicleRepositoryEloquent::getVehicles();
+        $contacts = ContactRepositoryEloquent::getContacts();
+        $trip_type_id = TypeRepositoryEloquent::getTypes();
         return view("trip.edit", compact('trip', 'contacts', 'company_id', 'vehicle_id', 'trip_type_id'));
     }
 
@@ -78,11 +82,11 @@ class TripController extends Controller
     public function edit($idTrip)
     {
         $trip = $this->tripRepo->find($idTrip);
-        
-        $company_id = $this->helper->getCompanies();
-        $vehicle_id = $this->helper->getVehicles();
-        $contacts = $this->helper->getContacts();
-        $trip_type_id = $this->helper->getTypes();
+
+        $company_id = CompanyRepositoryEloquent::getCompanies();
+        $vehicle_id = VehicleRepositoryEloquent::getVehicles();
+        $contacts = ContactRepositoryEloquent::getContacts();
+        $trip_type_id = TypeRepositoryEloquent::getTypes();
         return view("trip.edit", compact('trip', 'contacts', 'company_id', 'vehicle_id', 'trip_type_id'));
     }
     

@@ -92,30 +92,4 @@ class HelperRepository
         }
         return $languages;
     }
-    
-    public function getCompanies()
-    {
-        $companies = Company::lists('name', 'id');
-        return $companies;
-    }
-    
-    public function getVehicles()
-    {
-        $vehicles = Vehicle::lists('number', 'id');
-        return $vehicles;
-    }
-    
-    public function getModelVehicles()
-    {
-        $modelVehicles = Model::join('types', 'models.model_type_id', '=', 'types.id')
-                        ->where('types.entity_key', 'vehicle')
-                        ->lists('models.name', 'models.id');
-        return $modelVehicles;
-    }
-
-    public function getTypes()
-    {
-        $types = Type::lists('name', 'id');
-        return $types;
-    }
 }

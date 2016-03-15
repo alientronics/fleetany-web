@@ -43,4 +43,10 @@ class TypeRepositoryEloquent extends BaseRepository implements TypeRepository
         
         return $types;
     }
+    
+    public static function getTypes()
+    {
+        $types = Type::lists('name', 'id');
+        return $types;
+    }
 }

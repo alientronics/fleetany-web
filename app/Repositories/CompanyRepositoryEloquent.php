@@ -49,4 +49,10 @@ class CompanyRepositoryEloquent extends BaseRepository implements CompanyReposit
         
         return $companies;
     }
+    
+    public static function getCompanies()
+    {
+        $companies = Company::lists('name', 'id');
+        return $companies;
+    }
 }

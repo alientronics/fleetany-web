@@ -9,6 +9,7 @@ use Log;
 use Lang;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\CompanyRepositoryEloquent;
 
 class TypeController extends Controller
 {
@@ -41,7 +42,7 @@ class TypeController extends Controller
     public function create()
     {
         $type = new Type();
-        $company_id = $this->helper->getCompanies();
+        $company_id = CompanyRepositoryEloquent::getCompanies();
         return view("type.edit", compact('type', 'company_id'));
     }
 
@@ -73,8 +74,8 @@ class TypeController extends Controller
     public function edit($idType)
     {
         $type = $this->typeRepo->find($idType);
-        
-        $company_id = $this->helper->getCompanies();
+
+        $company_id = CompanyRepositoryEloquent::getCompanies();
             
         return view("type.edit", compact('type', 'company_id'));
     }

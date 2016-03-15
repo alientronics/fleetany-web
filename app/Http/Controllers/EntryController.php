@@ -9,6 +9,10 @@ use Log;
 use Lang;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\CompanyRepositoryEloquent;
+use App\Repositories\TypeRepositoryEloquent;
+use App\Repositories\ContactRepositoryEloquent;
+use App\Repositories\VehicleRepositoryEloquent;
 
 class EntryController extends Controller
 {
@@ -43,10 +47,10 @@ class EntryController extends Controller
     public function create()
     {
         $entry = new Entry();
-        $company_id = $this->helper->getCompanies();
-        $entry_type_id = $this->helper->getTypes();
-        $vendor_id = $this->helper->getContacts();
-        $vehicle_id = $this->helper->getVehicles();
+        $company_id = CompanyRepositoryEloquent::getCompanies();
+        $entry_type_id = TypeRepositoryEloquent::getTypes();
+        $vendor_id = ContactRepositoryEloquent::getContacts();
+        $vehicle_id = VehicleRepositoryEloquent::getVehicles();
         return view("entry.edit", compact('entry', 'entry_type_id', 'company_id', 'vehicle_id', 'vendor_id'));
     }
 
@@ -78,11 +82,11 @@ class EntryController extends Controller
     public function edit($idEntry)
     {
         $entry = $this->entryRepo->find($idEntry);
-        
-        $company_id = $this->helper->getCompanies();
-        $entry_type_id = $this->helper->getTypes();
-        $vendor_id = $this->helper->getContacts();
-        $vehicle_id = $this->helper->getVehicles();
+
+        $company_id = CompanyRepositoryEloquent::getCompanies();
+        $entry_type_id = TypeRepositoryEloquent::getTypes();
+        $vendor_id = ContactRepositoryEloquent::getContacts();
+        $vehicle_id = VehicleRepositoryEloquent::getVehicles();
         return view("entry.edit", compact('entry', 'entry_type_id', 'company_id', 'vehicle_id', 'vendor_id'));
     }
     

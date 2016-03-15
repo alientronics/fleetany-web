@@ -9,6 +9,8 @@ use Log;
 use Lang;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\CompanyRepositoryEloquent;
+use App\Repositories\TypeRepositoryEloquent;
 
 class ContactController extends Controller
 {
@@ -42,8 +44,8 @@ class ContactController extends Controller
     public function create()
     {
         $contact = new Contact();
-        $company_id = $this->helper->getCompanies();
-        $contact_type_id = $this->helper->getTypes();
+        $company_id = CompanyRepositoryEloquent::getCompanies();
+        $contact_type_id = TypeRepositoryEloquent::getTypes();
         return view("contact.edit", compact('contact', 'contact_type_id', 'company_id'));
     }
 
@@ -75,9 +77,9 @@ class ContactController extends Controller
     public function edit($idContact)
     {
         $contact = $this->contactRepo->find($idContact);
-        
-        $company_id = $this->helper->getCompanies();
-        $contact_type_id = $this->helper->getTypes();
+
+        $company_id = CompanyRepositoryEloquent::getCompanies();
+        $contact_type_id = TypeRepositoryEloquent::getTypes();
         
         return view("contact.edit", compact('contact', 'contact_type_id', 'company_id'));
     }
