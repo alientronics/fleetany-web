@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Kodeine\Acl\Models\Eloquent\Role;
 use Lang;
 use Illuminate\Support\Facades\File;
-use App\Entities\Contact;
 use App\Entities\Company;
 use App\Entities\Type;
 use App\Entities\Model;
@@ -92,12 +91,6 @@ class HelperRepository
             $languages[$lang] = Lang::get('general.'.$lang);
         }
         return $languages;
-    }
-    
-    public function getContacts()
-    {
-        $contacts = Contact::lists('name', 'id');
-        return $contacts;
     }
     
     public function getCompanies()

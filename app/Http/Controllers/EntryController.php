@@ -24,7 +24,9 @@ class EntryController extends Controller
     ];
     
     public function __construct(EntryRepositoryEloquent $entryRepo)
-    {
+    {   
+        parent::__construct();
+    
         $this->middleware('auth');
         $this->entryRepo = $entryRepo;
     }

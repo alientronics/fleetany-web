@@ -24,6 +24,8 @@ class ContactController extends Controller
     
     public function __construct(ContactRepositoryEloquent $contactRepo)
     {
+        parent::__construct();
+        
         $this->middleware('auth');
         $this->contactRepo = $contactRepo;
     }

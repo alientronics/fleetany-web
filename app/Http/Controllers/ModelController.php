@@ -24,6 +24,8 @@ class ModelController extends Controller
     
     public function __construct(ModelRepositoryEloquent $modelRepo)
     {
+        parent::__construct();
+        
         $this->middleware('auth');
         $this->modelRepo = $modelRepo;
     }

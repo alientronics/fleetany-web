@@ -9,6 +9,7 @@ use Log;
 use Lang;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\ContactRepositoryEloquent;
 
 class CompanyController extends Controller
 {
@@ -24,6 +25,8 @@ class CompanyController extends Controller
     
     public function __construct(CompanyRepositoryEloquent $companyRepo)
     {
+        parent::__construct();
+        
         $this->middleware('auth');
         $this->companyRepo = $companyRepo;
     }
@@ -40,7 +43,7 @@ class CompanyController extends Controller
     public function create()
     {
         $company = new Company();
-        $contact_id = $this->helper->getContacts();
+        $contact_id = ContactRepositoryEloquent::getContacts();
         return view("company.edit", compact('company', 'contact_id'));
     }
 
@@ -73,7 +76,7 @@ class CompanyController extends Controller
     {
         $company = $this->companyRepo->find($idCompany);
         
-        $contact_id = $this->helper->getContacts();
+        $contact_id = ContactRepositoryEloquent::getContacts();
         
         return view("company.edit", compact('company', 'contact_id'));
     }

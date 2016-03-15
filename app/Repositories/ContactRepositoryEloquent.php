@@ -49,4 +49,10 @@ class ContactRepositoryEloquent extends BaseRepository implements ContactReposit
         
         return $contacts;
     }
+    
+    public static function getContacts()
+    {
+        $contacts = Contact::lists('name', 'id');
+        return $contacts;
+    }
 }

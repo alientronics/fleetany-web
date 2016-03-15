@@ -25,6 +25,8 @@ class TripController extends Controller
     
     public function __construct(TripRepositoryEloquent $tripRepo)
     {
+        parent::__construct();
+        
         $this->middleware('auth');
         $this->tripRepo = $tripRepo;
     }

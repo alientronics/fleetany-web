@@ -24,6 +24,8 @@ class VehicleController extends Controller
     
     public function __construct(VehicleRepositoryEloquent $vehicleRepo)
     {
+        parent::__construct();
+        
         $this->middleware('auth');
         $this->vehicleRepo = $vehicleRepo;
     }
