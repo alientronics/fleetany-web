@@ -31,8 +31,8 @@ class UserControllerTest extends TestCase
             ->type('teste@alientronics.com.br', 'email')
             ->type('admin', 'password')
             ->select($idOption, 'role_id')
-            ->type('Contato Usuario Teste', 'contact_id')
-            ->type('Empresa Usuario Teste', 'company_id')
+            ->type('1', 'contact_id')
+            ->type('1', 'company_id')
             ->press('Enviar')
             ->seePageIs('/user')
         ;
@@ -51,8 +51,8 @@ class UserControllerTest extends TestCase
             ->type('emaileditado@usuario.com', 'email')
             ->type('654321', 'password')
             ->select($idOption, 'role_id')
-            ->type('Contato Usuario Editado', 'contact_id')
-            ->type('Empresa Usuario Editado', 'company_id')
+            ->type('1', 'contact_id')
+            ->type('1', 'company_id')
             ->press('Enviar')
         ;
         
