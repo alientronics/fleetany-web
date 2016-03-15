@@ -1,38 +1,48 @@
 <?php
 
 use App\User;
-class UserTest extends TestCase
+
+class UserControllerTest extends TestCase
 {
+    public function setUp()
+    {
+        parent::setUp();
+        $userStaffTest = $this->createStaff();
+    }
+    
+    public function testView()
+    {
+        $this->visit('/')->see('user">Usu');
+    
+        $this->visit('/user')
+            ->see('de acesso para esta p', true)
+        ;
+    }
+    
     public function testCreate()
     {
+        $this->visit('/user')->see('Novo');
+        
         $this->visit('/user/create');
-        
-        $idOption = $this->crawler->filterXPath("//select[@id='role_id']/option[2]")->attr('value');
-        
+    
+        $idOption = $this->crawler->filterXPath("//select[@id='role_id']/option[5]")->attr('value');
+    
         $this->type('Nome Usuario Teste', 'name')
-            ->type('email@usuario.com', 'email')
-            ->type('123456', 'password')
+            ->type('teste@alientronics.com.br', 'email')
+            ->type('admin', 'password')
             ->select($idOption, 'role_id')
             ->type('Contato Usuario Teste', 'contact_id')
             ->type('Empresa Usuario Teste', 'company_id')
             ->press('Enviar')
             ->seePageIs('/user')
         ;
-
-        $this->seeInDatabase('users', ['name' => 'Nome Usuario Teste', 'email' => 'email@usuario.com']);
-        $this->seeInDatabase('role_user', ['role_id' => '2', 'user_id' => User::all()->last()['id']]);
+    
+        $this->seeInDatabase('users', ['name' => 'Nome Usuario Teste', 'email' => 'teste@alientronics.com.br']);
+        $this->seeInDatabase('role_user', ['role_id' => '5', 'user_id' => User::all()->last()['id']]);
     }
     
     public function testUpdate()
     {
-        $user = factory(App\User::class)->create([
-            'name' => 'Nome Usuario Teste',
-            'email' => 'teste@alientronics.com.br',
-            'password' => 'admin',
-            'contact_id' => 'Contato Usuario Teste',
-            'company_id' => 'Empresa Usuario Teste',
-        ]);
-        
         $this->visit('/user/'.User::all()->last()['id'].'/edit');
         
         $idOption = $this->crawler->filterXPath("//select[@id='role_id']/option[3]")->attr('value');
@@ -52,18 +62,11 @@ class UserTest extends TestCase
     
     public function testDelete()
     {
-        $user = factory(App\User::class)->create([
-            'name' => 'Nome Usuario Teste',
-            'email' => 'teste@alientronics.com.br',
-            'password' => 'admin',
-            'contact_id' => 'Contato Usuario Teste',
-            'company_id' => 'Empresa Usuario Teste',
-        ]);
-        
+        $this->seeInDatabase('users', ['email' => 'staff@alientronics.com.br']);
         $this->visit('/user');
-        $linkExcluir = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
-        $crawler = $this->click($linkExcluir);
-        $this->notSeeInDatabase('users', ['name' => 'Nome Usuario Teste', 'email' => 'teste@alientronics.com.br']);
+        $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
+        $crawler = $this->click($idOption);
+        $this->seeIsSoftDeletedInDatabase('users', ['email' => 'staff@alientronics.com.br']);
     }
     
     public function testProfile()
