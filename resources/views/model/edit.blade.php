@@ -37,12 +37,12 @@
     </div>
 
     <div class="form-group col-lg-12">
-        {!!Form::label('model_type_id', Lang::get('general.model_type_id'))!!}
+        {!!Form::label('model_type_id', Lang::get('general.model_type'))!!}
         {!!Form::select('model_type_id', $model_type_id, $model->model_type_id, array('class' => 'form-control'))!!}
     </div>
 
     <div class="form-group col-lg-12">
-        {!!Form::label('vendor_id', Lang::get('general.vendor_id'))!!}
+        {!!Form::label('vendor_id', Lang::get('general.vendor'))!!}
         {!!Form::select('vendor_id', $vendor_id, $model->vendor_id, array('class' => 'form-control'))!!}
     </div>
     

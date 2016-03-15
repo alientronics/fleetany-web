@@ -37,17 +37,17 @@
     </div>
 
     <div class="form-group col-lg-12">
-        {!!Form::label('entry_type_id', Lang::get('general.entry_type_id'))!!}
+        {!!Form::label('entry_type_id', Lang::get('general.entry_type'))!!}
         {!!Form::select('entry_type_id', $entry_type_id, $entry->entry_type_id, array('class' => 'form-control'))!!}
     </div>
 
     <div class="form-group col-lg-12">
-        {!!Form::label('vendor_id', Lang::get('general.vendor_id'))!!}
+        {!!Form::label('vendor_id', Lang::get('general.vendor'))!!}
         {!!Form::select('vendor_id', $vendor_id, $entry->vendor_id, array('class' => 'form-control'))!!}
     </div>
 
     <div class="form-group col-lg-12">
-        {!!Form::label('vehicle_id', Lang::get('general.vehicle_id'))!!}
+        {!!Form::label('vehicle_id', Lang::get('general.vehicle'))!!}
         {!!Form::select('vehicle_id', $vehicle_id, $entry->vehicle_id, array('class' => 'form-control'))!!}
     </div>
 

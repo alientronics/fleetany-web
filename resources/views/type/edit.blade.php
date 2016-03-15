@@ -41,6 +41,11 @@
         {!!Form::text('name', $type->name, array('class' => 'form-control'))!!}
     </div>
 
+    <div class="form-group col-lg-12">
+        {!!Form::label('entity_key', Lang::get('general.entity_key'))!!}
+        {!!Form::text('entity_key', $type->entity_key, array('class' => 'form-control'))!!}
+    </div>
+
     <button type="submit" class="btn btn-primary">{{Lang::get('general.Submit')}}</button>
     <button type="reset" class="btn btn-primary">{{Lang::get('general.Reset')}}</button>
 {!! Form::close() !!}

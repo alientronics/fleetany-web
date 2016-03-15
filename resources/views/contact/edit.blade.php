@@ -37,7 +37,7 @@
     </div>
 
     <div class="form-group col-lg-12">
-        {!!Form::label('contact_type_id', Lang::get('general.contact_type_id'))!!}
+        {!!Form::label('contact_type_id', Lang::get('general.contact_type'))!!}
         {!!Form::select('contact_type_id', $contact_type_id, $contact->contact_type_id, array('class' => 'form-control'))!!}
     </div>
 

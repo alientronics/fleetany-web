@@ -20,11 +20,12 @@ class TypeControllerTest extends TestCase
         $this->visit('/type/create');
     
         $this->type('Nome Tipo', 'name')
+            ->type('Entity Key', 'entity_key')
             ->press('Enviar')
             ->seePageIs('/type')
         ;
     
-        $this->seeInDatabase('types', ['name' => 'Nome Tipo']);
+        $this->seeInDatabase('types', ['name' => 'Nome Tipo', 'entity_key' => 'Entity Key']);
     }
 
     public function testUpdate()
@@ -32,11 +33,12 @@ class TypeControllerTest extends TestCase
         $this->visit('/type/'.Type::all()->last()['id'].'/edit');
         
         $this->type('Nome Tipo Editado', 'name')
+            ->type('Entity Key Editado', 'entity_key')
             ->press('Enviar')
             ->seePageIs('/type')
         ;
         
-        $this->seeInDatabase('types', ['name' => 'Nome Tipo Editado']);
+        $this->seeInDatabase('types', ['name' => 'Nome Tipo Editado', 'entity_key' => 'Entity Key Editado']);
     }
     
     public function testDelete()

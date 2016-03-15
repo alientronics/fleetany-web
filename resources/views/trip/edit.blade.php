@@ -37,22 +37,22 @@
     </div>
 
     <div class="form-group col-lg-12">
-        {!!Form::label('driver_id', Lang::get('general.driver_id'))!!}
+        {!!Form::label('driver_id', Lang::get('general.driver'))!!}
         {!!Form::select('driver_id', $contacts, $trip->driver_id, array('class' => 'form-control'))!!}
     </div>
 
     <div class="form-group col-lg-12">
-        {!!Form::label('vehicle_id', Lang::get('general.vehicle_id'))!!}
+        {!!Form::label('vehicle_id', Lang::get('general.vehicle'))!!}
         {!!Form::select('vehicle_id', $vehicle_id, $trip->vehicle_id, array('class' => 'form-control'))!!}
     </div>
 
     <div class="form-group col-lg-12">
-        {!!Form::label('vendor_id', Lang::get('general.vendor_id'))!!}
+        {!!Form::label('vendor_id', Lang::get('general.vendor'))!!}
         {!!Form::select('vendor_id', $contacts, $trip->vendor_id, array('class' => 'form-control'))!!}
     </div>
 
     <div class="form-group col-lg-12">
-        {!!Form::label('trip_type_id', Lang::get('general.trip_type_id'))!!}
+        {!!Form::label('trip_type_id', Lang::get('general.trip_type'))!!}
         {!!Form::select('trip_type_id', $trip_type_id, $trip->trip_type_id, array('class' => 'form-control'))!!}
     </div>
     

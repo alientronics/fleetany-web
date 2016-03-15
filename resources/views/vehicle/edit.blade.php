@@ -37,7 +37,7 @@
     </div>
 
     <div class="form-group col-lg-12">
-        {!!Form::label('model_vehicle_id', Lang::get('general.model_vehicle_id'))!!}
+        {!!Form::label('model_vehicle_id', Lang::get('general.model_vehicle'))!!}
         {!!Form::select('model_vehicle_id', $model_vehicle_id, $vehicle->model_vehicle_id, array('class' => 'form-control'))!!}
     </div>
     
