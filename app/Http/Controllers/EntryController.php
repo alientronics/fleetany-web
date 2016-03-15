@@ -113,7 +113,7 @@ class EntryController extends Controller
     {
         Log::info('Delete field: '.$idEntry);
 
-        if ($idEntry != 1 && $this->entryRepo->find($idEntry)) {
+        if ($this->entryRepo->find($idEntry)) {
             $this->entryRepo->delete($idEntry);
             $this->session->flash('message', Lang::get("general.deletedregister"));
         }

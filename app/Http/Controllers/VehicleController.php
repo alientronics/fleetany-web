@@ -107,7 +107,7 @@ class VehicleController extends Controller
     {
         Log::info('Delete field: '.$idVehicle);
 
-        if ($idVehicle != 1 && $this->vehicleRepo->find($idVehicle)) {
+        if ($this->vehicleRepo->find($idVehicle)) {
             $this->vehicleRepo->delete($idVehicle);
             $this->session->flash('message', Lang::get("general.deletedregister"));
         }

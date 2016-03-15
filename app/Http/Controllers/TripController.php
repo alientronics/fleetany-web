@@ -113,7 +113,7 @@ class TripController extends Controller
     {
         Log::info('Delete field: '.$idTrip);
 
-        if ($idTrip != 1 && $this->tripRepo->find($idTrip)) {
+        if ($this->tripRepo->find($idTrip)) {
             $this->tripRepo->delete($idTrip);
             $this->session->flash('message', Lang::get("general.deletedregister"));
         }

@@ -1,6 +1,7 @@
 <?php namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Trip extends BaseModel
 {
@@ -9,6 +10,8 @@ class Trip extends BaseModel
      * Generated
      */
 
+    use SoftDeletes;
+    
     protected $table = 'trips';
     protected $fillable = ['id', 'company_id', 'driver_id', 'vehicle_id',
                             'vendor_id', 'trip_type_id', 'pickup_date',

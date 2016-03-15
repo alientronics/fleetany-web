@@ -103,7 +103,7 @@ class TypeController extends Controller
     {
         Log::info('Delete field: '.$idType);
 
-        if ($idType != 1 && $this->typeRepo->find($idType)) {
+        if ($this->typeRepo->find($idType)) {
             $this->typeRepo->delete($idType);
             $this->session->flash('message', Lang::get("general.deletedregister"));
         }

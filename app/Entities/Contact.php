@@ -1,6 +1,7 @@
 <?php namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Contact extends BaseModel
 {
@@ -9,6 +10,8 @@ class Contact extends BaseModel
      * Generated
      */
 
+    use SoftDeletes;
+    
     protected $table = 'contacts';
     protected $fillable = ['id', 'company_id', 'contact_type_id',
                             'name', 'country', 'state', 'city',

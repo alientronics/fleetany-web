@@ -104,7 +104,7 @@ class CompanyController extends Controller
     {
         Log::info('Delete field: '.$idCompany);
 
-        if ($idCompany != 1 && $this->companyRepo->find($idCompany)) {
+        if ($this->companyRepo->find($idCompany)) {
             $this->companyRepo->delete($idCompany);
             $this->session->flash('message', Lang::get("general.deletedregister"));
         }

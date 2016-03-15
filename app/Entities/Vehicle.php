@@ -1,6 +1,7 @@
 <?php namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Vehicle extends BaseModel
 {
@@ -9,6 +10,8 @@ class Vehicle extends BaseModel
      * Generated
      */
 
+    use SoftDeletes;
+    
     protected $table = 'vehicles';
     protected $fillable = ['id', 'company_id', 'model_vehicle_id', 'number',
                             'initial_miliage', 'actual_miliage', 'cost', 'description'];

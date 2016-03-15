@@ -110,7 +110,7 @@ class ModelController extends Controller
     {
         Log::info('Delete field: '.$idModel);
 
-        if ($idModel != 1 && $this->modelRepo->find($idModel)) {
+        if ($this->modelRepo->find($idModel)) {
             $this->modelRepo->delete($idModel);
             $this->session->flash('message', Lang::get("general.deletedregister"));
         }

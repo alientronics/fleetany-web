@@ -1,6 +1,7 @@
 <?php namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Company extends BaseModel
 {
@@ -9,6 +10,8 @@ class Company extends BaseModel
      * Generated
      */
 
+    use SoftDeletes;
+    
     protected $table = 'companies';
     protected $fillable = ['id', 'contact_id', 'name', 'measure_units', 'api_token'];
 

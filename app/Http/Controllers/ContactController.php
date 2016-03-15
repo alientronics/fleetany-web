@@ -107,7 +107,7 @@ class ContactController extends Controller
     {
         Log::info('Delete field: '.$idContact);
 
-        if ($idContact != 1 && $this->contactRepo->find($idContact)) {
+        if ($this->contactRepo->find($idContact)) {
             $this->contactRepo->delete($idContact);
             $this->session->flash('message', Lang::get("general.deletedregister"));
         }
