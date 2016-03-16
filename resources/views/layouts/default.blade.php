@@ -4,21 +4,16 @@
 	@include('includes.head')
 </head>
 <body>
-    <div id="wrapper">
+    <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
         @include('includes.header')
         @include('includes.sidebar')
 
     <!-- Page Content -->
-    <div id="page-wrapper">
-        @yield('breadcrumbs', Breadcrumbs::render('home'))
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    @yield("titles")
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
-            @if( Session::has('errors') )
+      <main class="mdl-layout__content mdl-color--grey-100">
+        <div class="mdl-grid demo-content">
+        
+<!--         	@yield('breadcrumbs', Breadcrumbs::render('home')) -->
+        	@if( Session::has('errors') )
                 <div class="alert alert-danger" role="alert">
                     <ul>
                     @foreach($errors->all() as $error) 
@@ -35,29 +30,13 @@
                 <div class="alert alert-danger">{{ Session::get('danger') }}</div>
             @endif  
             @yield('content')
+            
         </div>
-        <!-- /.container-fluid -->
+      </main>
     </div>
-    <!-- /#page-wrapper -->
-
-  
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
-    <script src="{{URL::asset('js/jquery.min.js')}}"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{URL::asset('js/bootstrap.min.js')}}"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="{{URL::asset('js/metisMenu.min.js')}}"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="{{URL::asset('js/sb-admin-2.js')}}"></script>
-    <script src="{{ asset ("/js/falkermap.js") }}" type="text/javascript"></script>
+    <script src="https://code.getmdl.io/1.1.2/material.min.js"></script>
     <script>
     @yield('script')
     </script>
-</body>
+  </body>
 </html>

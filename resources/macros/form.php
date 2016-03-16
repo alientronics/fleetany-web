@@ -203,12 +203,12 @@ Form::macro(
 Form::macro(
     'buttonLink',
     function ($link, $class, $icon, $title) {
-
+        
         return "<a href='$link'
                     class='btn btn-xs btn-$class' 
                     title='$title' 
                     name='$title'>
-                    <i class='glyphicon glyphicon-$icon'></i>
+                    <i class='material-icons'>$icon</i>
                 </a>";
     }
 );
