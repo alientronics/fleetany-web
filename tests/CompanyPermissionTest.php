@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Acceptance;
+
+use Tests\TestCase;
 use App\Entities\Company;
 
 class CompanyPermissionTest extends TestCase

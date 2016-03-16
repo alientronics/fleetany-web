@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Acceptance;
+
+use Tests\TestCase;
 use App\Entities\Contact;
 
 class ContactControllerTest extends TestCase
@@ -30,8 +33,9 @@ class ContactControllerTest extends TestCase
             ->seePageIs('/contact')
         ;
     
-        $this->seeInDatabase('contacts', 
-                [
+        $this->seeInDatabase(
+            'contacts',
+            [
                     'name' => 'Nome Contato',
                     'country' => 'Brasil',
                     'state' => 'RS',
@@ -39,7 +43,8 @@ class ContactControllerTest extends TestCase
                     'address' => 'Adress',
                     'phone' => '(99) 9999-9999',
                     'license_no' => 'License',
-                ]);
+            ]
+        );
     }
     
     public function testUpdate()
@@ -57,8 +62,9 @@ class ContactControllerTest extends TestCase
             ->seePageIs('/contact')
         ;
     
-        $this->seeInDatabase('contacts', 
-                [
+        $this->seeInDatabase(
+            'contacts',
+            [
                     'name' => 'Nome Contato Editado',
                     'country' => 'Brasil2',
                     'state' => 'RS2',
@@ -66,7 +72,8 @@ class ContactControllerTest extends TestCase
                     'address' => 'Adress2',
                     'phone' => '(99) 9999-9998',
                     'license_no' => 'License2',
-                ]);
+            ]
+        );
     }
     
     public function testDelete()
@@ -74,7 +81,7 @@ class ContactControllerTest extends TestCase
         $this->seeInDatabase('contacts', ['id' => 1]);
         $this->visit('/contact');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
-        $crawler = $this->click($idOption);
+        $this->click($idOption);
         $this->seeIsSoftDeletedInDatabase('contacts', ['id' => 1]);
     }
 }

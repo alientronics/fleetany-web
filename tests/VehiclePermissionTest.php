@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Acceptance;
+
+use Tests\TestCase;
 use App\Entities\Vehicle;
 
 class VehiclePermissionTest extends TestCase

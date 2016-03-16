@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Acceptance;
+
+use Tests\TestCase;
 use App\Entities\Company;
 
 class CompanyControllerTest extends TestCase
@@ -26,7 +29,12 @@ class CompanyControllerTest extends TestCase
             ->seePageIs('/company')
         ;
     
-        $this->seeInDatabase('companies', ['name' => 'Nome Empresa', 'measure_units' => 'measure units', 'api_token' => 'api token']);
+        $this->seeInDatabase(
+            'companies',
+            ['name' => 'Nome Empresa',
+            'measure_units' => 'measure units',
+            'api_token' => 'api token']
+        );
     }
     
     public function testUpdate()
@@ -40,7 +48,12 @@ class CompanyControllerTest extends TestCase
             ->seePageIs('/company')
         ;
         
-        $this->seeInDatabase('companies', ['name' => 'Nome Empresa Editado', 'measure_units' => 'measure units editado', 'api_token' => 'api token editado']);
+        $this->seeInDatabase(
+            'companies',
+            ['name' => 'Nome Empresa Editado',
+            'measure_units' => 'measure units editado',
+            'api_token' => 'api token editado']
+        );
     
     }
     
@@ -49,7 +62,7 @@ class CompanyControllerTest extends TestCase
         $this->seeInDatabase('companies', ['id' => 1]);
         $this->visit('/company');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
-        $crawler = $this->click($idOption);
+        $this->click($idOption);
         $this->seeIsSoftDeletedInDatabase('companies', ['id' => 1]);
     }
 }

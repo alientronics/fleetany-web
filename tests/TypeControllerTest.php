@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Acceptance;
+
+use Tests\TestCase;
 use App\Entities\Type;
 
 class TypeControllerTest extends TestCase
@@ -46,7 +49,7 @@ class TypeControllerTest extends TestCase
         $this->seeInDatabase('types', ['id' => 1]);
         $this->visit('/type');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
-        $crawler = $this->click($idOption);
+        $this->click($idOption);
         $this->seeIsSoftDeletedInDatabase('types', ['id' => 1]);
     }
 }

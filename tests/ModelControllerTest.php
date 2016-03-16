@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Acceptance;
+
+use Tests\TestCase;
 use App\Entities\Model;
 
 class ModelControllerTest extends TestCase
@@ -44,7 +47,7 @@ class ModelControllerTest extends TestCase
         $this->seeInDatabase('models', ['id' => 1]);
         $this->visit('/model');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
-        $crawler = $this->click($idOption);
+        $this->click($idOption);
         $this->seeIsSoftDeletedInDatabase('models', ['id' => 1]);
     }
 }

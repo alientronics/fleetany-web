@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Acceptance;
+
+use Tests\TestCase;
 use App\Entities\Vehicle;
 
 class VehicleControllerTest extends TestCase
@@ -28,14 +31,16 @@ class VehicleControllerTest extends TestCase
             ->seePageIs('/vehicle')
         ;
     
-        $this->seeInDatabase('vehicles', 
-                [
+        $this->seeInDatabase(
+            'vehicles',
+            [
                     'number' => 'IOP-1234',
                     'initial_miliage' => '123',
                     'actual_miliage' => '456',
                     'cost' => '90000',
                     'description' => 'Descricao',
-                ]);
+            ]
+        );
     }
     
     public function testUpdate()
@@ -51,14 +56,16 @@ class VehicleControllerTest extends TestCase
             ->seePageIs('/vehicle')
         ;
     
-        $this->seeInDatabase('vehicles', 
-                [
+        $this->seeInDatabase(
+            'vehicles',
+            [
                     'number' => 'IOP-1235',
                     'initial_miliage' => '125',
                     'actual_miliage' => '455',
                     'cost' => '90005',
                     'description' => 'Descricao2',
-                ]);
+            ]
+        );
     }
     
     public function testDelete()
@@ -66,7 +73,7 @@ class VehicleControllerTest extends TestCase
         $this->seeInDatabase('vehicles', ['id' => 1]);
         $this->visit('/vehicle');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
-        $crawler = $this->click($idOption);
+        $this->click($idOption);
         $this->seeIsSoftDeletedInDatabase('vehicles', ['id' => 1]);
     }
 }

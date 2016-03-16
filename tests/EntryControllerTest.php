@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Acceptance;
+
+use Tests\TestCase;
 use App\Entities\Entry;
 
 class EntryControllerTest extends TestCase
@@ -28,14 +31,16 @@ class EntryControllerTest extends TestCase
             ->seePageIs('/entry')
         ;
     
-        $this->seeInDatabase('entries', 
-                [
+        $this->seeInDatabase(
+            'entries',
+            [
                     'datetime_ini' => '2016-01-01',
                     'datetime_end' => '2016-01-02',
                     'entry_number' => '123',
                     'cost' => '90000',
                     'description' => 'Descricao',
-                ]);
+            ]
+        );
     }
     
     public function testUpdate()
@@ -51,14 +56,16 @@ class EntryControllerTest extends TestCase
             ->seePageIs('/entry')
         ;
     
-        $this->seeInDatabase('entries', 
-                [
+        $this->seeInDatabase(
+            'entries',
+            [
                     'datetime_ini' => '2016-05-01',
                     'datetime_end' => '2016-05-02',
                     'entry_number' => '125',
                     'cost' => '90005',
                     'description' => 'Descricao2',
-                ]);
+            ]
+        );
     }
     
     public function testDelete()
@@ -66,7 +73,7 @@ class EntryControllerTest extends TestCase
         $this->seeInDatabase('entries', ['id' => 1]);
         $this->visit('/entry');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
-        $crawler = $this->click($idOption);
+        $this->click($idOption);
         $this->seeIsSoftDeletedInDatabase('entries', ['id' => 1]);
     }
 }

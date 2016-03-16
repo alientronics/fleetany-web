@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Acceptance;
+
+use Tests\TestCase;
 use App\Entities\Trip;
 
 class TripControllerTest extends TestCase
@@ -33,8 +36,9 @@ class TripControllerTest extends TestCase
             ->seePageIs('/trip')
         ;
     
-        $this->seeInDatabase('trips', 
-                [
+        $this->seeInDatabase(
+            'trips',
+            [
                     'pickup_date' => '2016-01-01',
                     'deliver_date' => '2016-01-02',
                     'pickup_place' => '1200 First Av',
@@ -45,7 +49,8 @@ class TripControllerTest extends TestCase
                     'fuel_cost' => 13.6,
                     'fuel_amount' => 5,
                     'description' => 'Descricao',
-                ]);
+            ]
+        );
     }
 
     public function testUpdate()
@@ -66,7 +71,8 @@ class TripControllerTest extends TestCase
         ->seePageIs('/trip')
         ;
     
-        $this->seeInDatabase('trips',
+        $this->seeInDatabase(
+            'trips',
             [
                 'pickup_date' => '2016-02-01',
                 'deliver_date' => '2016-02-02',
@@ -78,7 +84,8 @@ class TripControllerTest extends TestCase
                 'fuel_cost' => 13.2,
                 'fuel_amount' => 2,
                 'description' => 'Descricao2',
-            ]);
+            ]
+        );
     }
     
     public function testDelete()
@@ -86,7 +93,7 @@ class TripControllerTest extends TestCase
         $this->seeInDatabase('trips', ['id' => 1]);
         $this->visit('/trip');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
-        $crawler = $this->click($idOption);
+        $this->click($idOption);
         $this->seeIsSoftDeletedInDatabase('trips', ['id' => 1]);
     }
 }

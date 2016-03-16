@@ -1,9 +1,12 @@
 <?php
 
+namespace Tests;
+
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
-class TestCase extends Illuminate\Foundation\Testing\TestCase
+class TestCase extends BaseTestCase
 {
     use DatabaseTransactions;
     
@@ -30,7 +33,7 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
     {
         $app = require __DIR__.'/../bootstrap/app.php';
 
-        $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+        $app->make(\Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
         return $app;
     }
@@ -116,8 +119,10 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             ->count();
     
         $this->assertGreaterThan(0, $count, sprintf(
-            'Found unexpected records in database table [%s] that matched attributes [%s].', $table, json_encode($data)
-            ));
+            'Found unexpected records in database table [%s] that matched attributes [%s].',
+            $table,
+            json_encode($data)
+        ));
     
         return $this;
     }
@@ -143,8 +148,10 @@ class TestCase extends Illuminate\Foundation\Testing\TestCase
             ->count();
     
         $this->assertGreaterThan(0, $count, sprintf(
-            'Found unexpected records in database table [%s] that matched attributes [%s].', $table, json_encode($data)
-            ));
+            'Found unexpected records in database table [%s] that matched attributes [%s].',
+            $table,
+            json_encode($data)
+        ));
     
         return $this;
     }

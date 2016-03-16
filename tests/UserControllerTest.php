@@ -1,5 +1,8 @@
 <?php
 
+namespace Tests\Acceptance;
+
+use Tests\TestCase;
 use App\User;
 
 class UserControllerTest extends TestCase
@@ -7,7 +10,7 @@ class UserControllerTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $userStaffTest = $this->createStaff();
+        $this->createStaff();
     }
     
     public function testView()
@@ -65,14 +68,19 @@ class UserControllerTest extends TestCase
         $this->seeInDatabase('users', ['email' => 'staff@alientronics.com.br']);
         $this->visit('/user');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
-        $crawler = $this->click($idOption);
+        $this->click($idOption);
         $this->seeIsSoftDeletedInDatabase('users', ['email' => 'staff@alientronics.com.br']);
     }
     
     public function testProfile()
     {
-        $this->notSeeInDatabase('users', ['name' => 'Administrator2', 'email' => 'admin2@alientronics.com.br', 'language' => 'en']);
-        
+        $this->notSeeInDatabase(
+            'users',
+            ['name' => 'Administrator2',
+            'email' => 'admin2@alientronics.com.br',
+            'language' => 'en']
+        );
+
         $this->visit('/profile');
         
         $this->type('Administrator2', 'name')
@@ -80,6 +88,11 @@ class UserControllerTest extends TestCase
             ->select('en', 'language')
             ->press('Enviar')
         ;
-        $this->seeInDatabase('users', ['name' => 'Administrator2', 'email' => 'admin2@alientronics.com.br', 'language' => 'en']);
+        $this->seeInDatabase(
+            'users',
+            ['name' => 'Administrator2',
+            'email' => 'admin2@alientronics.com.br',
+            'language' => 'en']
+        );
     }
 }
