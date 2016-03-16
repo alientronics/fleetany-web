@@ -11,9 +11,9 @@ class SocialLoginControllerTest extends TestCase
     {
         $user = factory(\App\User::class)->create();
 
-        $mockSocialite = Mockery::mock('Laravel\Socialite\Contracts\Factory');
+        $mockSocialite = \Mockery::mock('Laravel\Socialite\Contracts\Factory');
         $this->app->instance('Laravel\Socialite\Contracts\Factory', $mockSocialite);
-        $mockSocialDriver = Mockery::mock('Laravel\Socialite\Contracts\Provider');
+        $mockSocialDriver = \Mockery::mock('Laravel\Socialite\Contracts\Provider');
 
         $mockSocialite->shouldReceive('driver')->twice()->with('google')->andReturn($mockSocialDriver);
         $mockSocialDriver->shouldReceive('redirect')->once()->andReturn(redirect('/'));
