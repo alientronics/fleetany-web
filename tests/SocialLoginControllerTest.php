@@ -9,7 +9,7 @@ class SocialLoginControllerTest extends TestCase
 
     public function testSocialLogin()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(\App\User::class)->create();
 
         $mockSocialite = Mockery::mock('Laravel\Socialite\Contracts\Factory');
         $this->app->instance('Laravel\Socialite\Contracts\Factory', $mockSocialite);
