@@ -10,27 +10,20 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+    <style type="text/css">
+        .mdl-layout {
+        	align-items: center;
+          justify-content: center;
+        }
+        .mdl-layout__content {
+        	padding: 24px;
+        	flex: none;
+        }
+    </style>
 </head>
 
 <body>
-
-    <div class="container">
-        @yield('content')
-    </div>
-
-    <!-- jQuery -->
-    <script src="{{URL::asset('js/jquery.min.js')}}"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{URL::asset('js/bootstrap.min.js')}}"></script>
-
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="{{URL::asset('js/metisMenu.min.js')}}"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="{{URL::asset('js/sb-admin-2.js')}}"></script>
-
+    @yield('content')
 </body>
 
 </html>

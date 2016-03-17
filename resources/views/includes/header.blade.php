@@ -2,9 +2,7 @@
     <div class="mdl-layout__header-row">
       <span class="mdl-layout-title">Empresa</span>
       <div class="mdl-layout-spacer"></div>
-      
-      <i class="material-icons">add_circle_outline</i>
-      
+
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
         <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
           <i class="material-icons">search</i>

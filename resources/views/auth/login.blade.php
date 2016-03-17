@@ -1,42 +1,38 @@
 @extends('layouts.login')
 
 @section('content')
-<div class="row">
-            <div class="col-md-4 col-md-offset-4">
-                <div class="login-panel panel panel-primary">
-                    <div class="panel-heading">
-                        <img src='{{URL::asset('images/alientronics.png')}}' height='40'>
-                        <div class="pull-right">
-                                <h3 class="panel-title">{{Lang::get('general.PleaseSignIn')}}</h3>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                       {!! Form::open() !!}
-                            <fieldset>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">{{Lang::get("general.RememberMe")}}
-                                    </label>
-                                </div>
-                                <!-- Change this to a button or input when using this as a form -->
-                                <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
-                            </fieldset>
-                       {!! Form::close() !!}
-                    </div>
-                    <div class="panel-body">
-                    	<p class="text-center">
-            	            <a href="{{url('/')}}/auth/social/google"><i class="fa fa-google"></i> Google</a> </br></br>
-            	            <a href="{{url('/')}}/auth/social/facebook"><i class="fa fa-facebook"></i> Facebook</a>
-                    	</p>
-                    </div>
-                </div>
+<div class="mdl-layout mdl-js-layout mdl-color--grey-100">
+	<main class="mdl-layout__content">
+		<div class="mdl-card mdl-shadow--6dp">
+			<img src='{{URL::asset('images/alientronics.png')}}' height='200'>
+			{!! Form::open() !!}
+			<div class="mdl-card__title mdl-color--primary mdl-color-text--white">
+				<h2 class="mdl-card__title-text">{{Lang::get('general.PleaseSignIn')}}</h2>
+			</div>
+	  		<div class="mdl-card__supporting-text">
+					<div class="mdl-textfield mdl-js-textfield">
+						<input class="mdl-textfield__input" type="text" id="email" name="email" />
+						<label class="mdl-textfield__label" for="email">E-mail</label>
+					</div>
+					<div class="mdl-textfield mdl-js-textfield">
+						<input class="mdl-textfield__input" type="password" id="password" name="password" />
+						<label class="mdl-textfield__label" for="password">Password</label>
+					</div>
+					<div class="mdl-textfield mdl-js-textfield">
+    					<input name="remember" type="checkbox" value="Remember Me">{{Lang::get("general.RememberMe")}}
+					</div>
+			</div>
+			<div class="mdl-card__actions mdl-card--border">
+				<button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Log in</button>
+			</div>
+			{!! Form::close() !!}
+			<div class="mdl-card__actions mdl-card--border">
+				<a href="{{url('/')}}/auth/social/google" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">{{Lang::get("general.LoginGoogle")}}</a>
             </div>
-        </div>
+			<div class="mdl-card__actions mdl-card--border">
+				<a href="{{url('/')}}/auth/social/facebook" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">{{Lang::get("general.LoginFacebook")}}</a>
+        	</div>
+		</div>
+	</main>
+</div>
 @endsection
-

@@ -26,7 +26,7 @@
             <th><a href="{{url('/')}}/{{$filters['sort_url']['city']}}">{{Lang::get("general.city")}} <i class="fa fa-fw {{$filters['sort_icon']['city']}}"></i></th>
             <th><a href="{{url('/')}}/{{$filters['sort_url']['country']}}">{{Lang::get("general.country")}} <i class="fa fa-fw {{$filters['sort_icon']['country']}}"></i></th>
             @permission('delete.company|update.company')
-            <th class="col-sm-1">{{Lang::get("general.Actions")}}</th>
+            <th class="col-sm-1">Adicionar <i class="material-icons">add_circle_outline</i></th>
             @endpermission
 		</tr>
 		<tr>
