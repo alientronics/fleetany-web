@@ -67,6 +67,7 @@ html, body {
           justify-content: flex-end;
   padding: 16px;
   height: 151px;
+  background-color: #ffb000;
 }
 .demo-avatar-dropdown {
   display: -webkit-flex;

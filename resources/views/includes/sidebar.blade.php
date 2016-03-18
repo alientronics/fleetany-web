@@ -1,6 +1,9 @@
+<link href='https://fonts.googleapis.com/css?family=Lobster+Two' rel='stylesheet' type='text/css'>
+
+
 <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
     <header class="demo-drawer-header">
-      <img src="images/alientronics.jpg" class="demo-avatar">
+      <span style="font-family: 'Lobster Two', cursive; font-size:36px; padding-bottom: 20px;">Fleetany</span>
       <div class="demo-avatar-dropdown">
         <span>hello@example.com</span>
         <div class="mdl-layout-spacer"></div>
