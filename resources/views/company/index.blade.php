@@ -10,15 +10,15 @@
 
 @permission('create.company') 
 @section('actions')
-<!-- {!!Form::actions(array('new' => route("company.create")))!!} -->
+{!!Form::actions(array('new' => route("company.create")))!!}
 @stop
 @endpermission
 
 @section('content')
 @permission('view.company')  
-@if (count($companies) > 0)
 
 	<table class="mdl-data-table mdl-js-data-table mdl-cell--12-col mdl-shadow--2dp">
+	<form method="get" id="search">
 	  <thead>
 		<tr>
 		  	<th class="col-sm-1"><a href="{{url('/')}}/{{$filters['sort_url']['id']}}">{{Lang::get("general.id")}} <i class="fa fa-fw {{$filters['sort_icon']['id']}}"></i></a></th>
@@ -74,28 +74,14 @@
     @endforeach
 	  </tbody>
 	</table>
-
+	<input type="submit" style="display: none" />
+</form>
 {!! $companies->appends($filters)->links() !!}
 
-@else
-<!-- <div class="alert alert-info"> -->
-<!--     {{Lang::get("general.norecordsfound")}} -->
-<!-- </div> -->
-@endif
-@else
-<!-- <div class="alert alert-info"> -->
-<!-- 	{{Lang::get("general.acessdenied")}} -->
-<!-- </div> -->
 @endpermission
                            
 @stop
 
 @section("script")
-
-<!-- $(document).ready(function(){ -->
-<!--     $(document).on('submit', '.delete-form', function(){ -->
-<!--         return confirm("{{Lang::get("general.areyousure")}}"); -->
-<!--     }); -->
-<!-- }); -->
 
 @stop
