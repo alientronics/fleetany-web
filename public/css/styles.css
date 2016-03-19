@@ -230,3 +230,6 @@ _:-ms-input-placeholder, :root .demo-graph {
   text-align: center;
   margin-bottom: 25px;
 }
+.mdl-textfield {
+    width: auto;
+}
