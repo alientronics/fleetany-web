@@ -34,7 +34,6 @@
         </div>
       </main>
     </div>
-    <script src="https://code.getmdl.io/1.1.2/material.min.js"></script>
     <script>
     @yield('script')
     </script>

@@ -4,7 +4,9 @@
 <div class="mdl-layout mdl-js-layout mdl-color--grey-100">
 	<main class="mdl-layout__content">
 		<div class="mdl-card mdl-shadow--6dp">
-			<img src='{{URL::asset('images/alientronics.png')}}' height='200'>
+			<div class="demo-drawer-header mdl-color--primary">
+				<span id="logo-lettering">fleetany</span>
+			</div>
 			{!! Form::open() !!}
 			<div class="mdl-card__title mdl-color--primary mdl-color-text--white">
 				<h2 class="mdl-card__title-text">{{Lang::get('general.PleaseSignIn')}}</h2>

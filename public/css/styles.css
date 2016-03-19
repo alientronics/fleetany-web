@@ -67,7 +67,6 @@ html, body {
           justify-content: flex-end;
   padding: 16px;
   height: 151px;
-  background-color: #ffb000;
 }
 .demo-avatar-dropdown {
   display: -webkit-flex;
@@ -222,4 +221,12 @@ _:-ms-input-placeholder, :root .demo-graph {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
+}
+#logo-lettering {
+  color: white;
+  font-family: 'Lobster Two', cursive; 
+  font-size: 55px; 
+  padding-bottom: 20px;
+  text-align: center;
+  margin-bottom: 25px;
 }

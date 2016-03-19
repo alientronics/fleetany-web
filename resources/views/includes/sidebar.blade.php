@@ -1,9 +1,6 @@
-<link href='https://fonts.googleapis.com/css?family=Lobster+Two' rel='stylesheet' type='text/css'>
-
-
 <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
-    <header class="demo-drawer-header">
-      <span style="font-family: 'Lobster Two', cursive; font-size:36px; padding-bottom: 20px;">Fleetany</span>
+    <header class="demo-drawer-header mdl-color--primary">
+      <span id="logo-lettering">fleetany</span>
       <div class="demo-avatar-dropdown">
         <span>hello@example.com</span>
         <div class="mdl-layout-spacer"></div>
@@ -12,9 +9,9 @@
           <span class="visuallyhidden">Accounts</span>
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
-          <li class="mdl-menu__item">hello@example.com</li>
-          <li class="mdl-menu__item">info@example.com</li>
-          <li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li>
+          <li class="mdl-menu__item"></li>
+          <li class="mdl-menu__item"><a href="{{URL::to('/profile')}}"><i class="material-icons">person</i>profile</a></li>
+          <li class="mdl-menu__item"><a href="{{URL::to('/auth/logout')}}"><i class="material-icons">exit_to_app</i>log out</a></li>
         </ul>
       </div>
     </header>
