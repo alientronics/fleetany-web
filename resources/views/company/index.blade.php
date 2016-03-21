@@ -29,28 +29,6 @@
             <th class="col-sm-1">Adicionar <i class="material-icons">add_circle_outline</i></th>
             @endpermission
 		</tr>
-		<tr>
-		  <th></th>
-		  <th>
-			<div class="mdl-textfield mdl-js-textfield mdl-cell--8-col">
-				<input class="mdl-textfield__input" type="text" name="name" value="{{$filters['name']}}">
-				<label class="mdl-textfield__label" for="name">{{Lang::get("general.name")}}</label>
-			  </div>
-		  </th>
-		  <th>
-			<div class="mdl-textfield mdl-js-textfield mdl-cell--8-col">
-				<input class="mdl-textfield__input" type="text" name="city" value="{{$filters['city']}}">
-				<label class="mdl-textfield__label" for="city">{{Lang::get("general.city")}}</label>
-			  </div>
-		  </th>
-		  <th>
-			<div class="mdl-textfield mdl-js-textfield mdl-cell--8-col">
-				<input class="mdl-textfield__input" type="text" name="country" value="{{$filters['country']}}">
-				<label class="mdl-textfield__label" for="country">{{Lang::get("general.country")}}</label>
-			  </div>
-		  </th>
-		  <th></th>
-		</tr>
 	  </thead>
 	  <tbody>
 	  
