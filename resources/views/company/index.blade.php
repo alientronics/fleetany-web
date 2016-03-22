@@ -27,7 +27,7 @@
 
 	  <form method="get" id="search">
           <div class="demo-drawer mdl-layout__drawer-right">
-    	    <span class="mdl-layout-title mdl-color--amber mdl-color-text--white">Procurar</span>
+    	    <span class="mdl-layout-title mdl-color--amber mdl-color-text--white">Procurar<span class="mdl-search__div-close"><i class="material-icons">highlight_off</i></span></span>
     	     <div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label mdl-search__div" data-upgraded="eP">
          		{!!Form::text('name', $filters['name'], array('class' => 'mdl-textfield__input mdl-search__input'))!!}
 				{!!Form::label('name', Lang::get('general.name'), array('class' => 'mdl-textfield__label is-dirty'))!!}

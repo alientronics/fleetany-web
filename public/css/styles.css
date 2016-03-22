@@ -321,3 +321,9 @@ _:-ms-input-placeholder, :root .demo-graph {
 	margin-left: 30px; 
 	margin-right: 30px;
 }
+.mdl-search__div-close {
+    float:right; 
+    margin-right: 25px; 
+    margin-top: 5px;
+	cursor: pointer;
+}
