@@ -1,5 +1,5 @@
 window.onload=function(){
-	$(".mdl-button--notifications").click(function() {
+	$(".mdl-button--search").click(function() {
 	  $(".mdl-layout__drawer-right").addClass("active");
 	  $(".mdl-layout__obfuscator-right").addClass("ob-active");
 	});

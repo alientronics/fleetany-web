@@ -21,13 +21,19 @@
       <span class="mdl-layout-title">Empresa</span>
       <div class="mdl-layout-spacer"></div>
 
-      <div class="mdl-button mdl-js-button mdl-button--icon mdl-button--notifications" >
-	    <i class="material-icons">search</i>
+      @permission('create.company')
+      <div class="mdl-button mdl-js-button mdl-button--icon mdl-button--create" >
+    	<a href="{{url('/')}}/company/create"><i class="material-icons">add_circle_outline</i></a>
+      </div>
+      @endpermission
+
+      <div class="mdl-button mdl-js-button mdl-button--icon mdl-button--search" >
+	    <a href="#"><i class="material-icons">search</i></a>
       </div>
 
 	  <form method="get" id="search">
           <div class="demo-drawer mdl-layout__drawer-right">
-    	    <span class="mdl-layout-title mdl-color--amber mdl-color-text--white">Procurar<span class="mdl-search__div-close"><i class="material-icons">highlight_off</i></span></span>
+    	    <span class="mdl-layout-title mdl-color--amber mdl-color-text--white">{{Lang::get('general.Search')}}<span class="mdl-search__div-close"><i class="material-icons">highlight_off</i></span></span>
     	     <div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label mdl-search__div" data-upgraded="eP">
          		{!!Form::text('name', $filters['name'], array('class' => 'mdl-textfield__input mdl-search__input'))!!}
 				{!!Form::label('name', Lang::get('general.name'), array('class' => 'mdl-textfield__label is-dirty'))!!}
@@ -41,7 +47,7 @@
 				{!!Form::label('country', Lang::get('general.country'), array('class' => 'mdl-textfield__label is-dirty'))!!}
     	     </div>
     	     <button type="submit" class="mdl-button mdl-color--amber mdl-color-text--white mdl-js-button mdl-button--raised mdl-button--colored mdl-search__button">
-        		Buscar
+        		{{Lang::get('general.Search')}}
     	     </button>
           </div>
 	  </form>
@@ -61,7 +67,7 @@
             <th><a href="{{url('/')}}/{{$filters['sort_url']['name']}}">{{Lang::get("general.name")}} <i class="fa fa-fw {{$filters['sort_icon']['name']}}"></i></th>
             <th><a href="{{url('/')}}/{{$filters['sort_url']['city']}}">{{Lang::get("general.city")}} <i class="fa fa-fw {{$filters['sort_icon']['city']}}"></i></th>
             <th><a href="{{url('/')}}/{{$filters['sort_url']['country']}}">{{Lang::get("general.country")}} <i class="fa fa-fw {{$filters['sort_icon']['country']}}"></i></th>
-            @permission('delete.company|update.company')
+            @permission('create.company')
             <th class="col-sm-1">Adicionar <i class="material-icons">add_circle_outline</i></th>
             @endpermission
 		</tr>

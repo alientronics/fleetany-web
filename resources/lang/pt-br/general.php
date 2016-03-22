@@ -10,6 +10,7 @@ return [
     "Reset"     => "Limpar",
     "Save"      => "Salvar",
     "New"       => "Novo",
+    "Search"    => "Buscar",
     "Actions"   => "A&ccedil;&otilde;es",
     "Comment"   => "Coment&aacute;rio",
     "norecordsfound"  => "Registros n&atilde;o encontrados",
