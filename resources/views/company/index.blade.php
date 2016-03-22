@@ -58,6 +58,9 @@
 @stop
 
 @section('content')
+
+<div class="mdl-grid demo-content">
+
 @permission('view.company')  
 
 	<table class="mdl-data-table mdl-js-data-table mdl-cell--12-col mdl-shadow--2dp">
@@ -97,7 +100,9 @@
 {!! $companies->appends($filters)->links() !!}
 
 @endpermission
-                           
+     
+</div>
+
 @stop
 
 @section("script")

@@ -1,5 +1,17 @@
 @extends('layouts.default')
 
+@section('header')
+
+<header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title">Empresa</span>
+      <div class="mdl-layout-spacer"></div>
+      <div class="mdl-layout__obfuscator-right"></div>
+    </div>
+</header>
+
+@stop
+
 @section('title')
 <h1>{{Lang::get("general.Vehicles")}}</h1>
 @stop
@@ -22,6 +34,10 @@
 
 @permission($operation.'.company')
 
+<div class="">
+	<section class="demo-section demo-section--textfield demo-page--textfield mdl-upgraded">
+		<div class="demo-preview-block">
+
 @if (!$company->id)
 {!! Form::open(array('route' => 'company.store')) !!}
 @else
@@ -31,9 +47,6 @@
     ]) !!}
 @endif
 
-<div class="styleguide mdl-layout mdl-js-layout mdl-layout--fixed-drawer">
-	<section class="demo-section demo-section--textfield demo-page--textfield mdl-upgraded">
-		<div class="demo-preview-block">
     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('contact_id')) is-invalid is-dirty @endif"">
                 {!!Form::select('contact_id', $contact_id, $company->contact_id, array('class' => 'mdl-textfield__input'))!!}
        			{!!Form::label('contact_id', Lang::get('general.contact_id'), array('class' => 'mdl-textfield__label is-dirty'))!!}
@@ -63,12 +76,12 @@
                   Enviar
                 </button>
 			</div>
+	
+{!! Form::close() !!}
+
 		</div>
 	</section>
 </div>
-	
-	
-{!! Form::close() !!}
 
 @else
 <div class="alert alert-info">

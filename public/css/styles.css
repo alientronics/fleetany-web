@@ -231,7 +231,7 @@ _:-ms-input-placeholder, :root .demo-graph {
   margin-bottom: 25px;
 }
 .mdl-textfield {
-    width: auto;
+    width: 100%;
 }
 .mdl-layout__drawer-right {
     display: -webkit-box;
@@ -326,4 +326,9 @@ _:-ms-input-placeholder, :root .demo-graph {
     margin-right: 25px; 
     margin-top: 5px;
 	cursor: pointer;
+}
+
+.demo-section {
+  margin-left: 24px; 
+  margin-right: 24px; 
 }
