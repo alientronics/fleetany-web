@@ -95,34 +95,36 @@ $(".mdl-layout__obfuscator-right").click(function() {
 
 </script>
 
-<header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
-    <div class="mdl-layout__header-row">
-      <span class="mdl-layout-title">Empresa</span>
-      <div class="mdl-layout-spacer"></div>
-
-      <div class="mdl-button mdl-js-button mdl-button--icon mdl-button--notifications" >
-	    <i class="material-icons">search</i>
-      </div>
-
-      <div class="demo-drawer mdl-layout__drawer-right">
-	    <span class="mdl-layout-title">Procurar</span>
-	     <div class="mdl-textfield mdl-js-textfield mdl-cell--8-col">
-    		<input class="mdl-textfield__input" type="text" name="name" value="{{$filters['name']}}">
-    		<label class="mdl-textfield__label" for="name">{{Lang::get("general.name")}}</label>
-	     </div>
-	     <div class="mdl-textfield mdl-js-textfield mdl-cell--8-col">
-    		<input class="mdl-textfield__input" type="text" name="city" value="{{$filters['city']}}">
-    		<label class="mdl-textfield__label" for="city">{{Lang::get("general.city")}}</label>
-	     </div>
-	     <div class="mdl-textfield mdl-js-textfield mdl-cell--8-col">
-    		<input class="mdl-textfield__input" type="text" name="country" value="{{$filters['country']}}">
-    		<label class="mdl-textfield__label" for="country">{{Lang::get("general.country")}}</label>
-	     </div><br>
-	     <button type="submit" class="mdl-button mdl-color--amber mdl-color-text--white mdl-js-button mdl-button--raised mdl-button--colored">
-    		Buscar
-	     </button>
-      </div>
-      <div class="mdl-layout__obfuscator-right"></div>
-    </div>
-</header>
+<form method="get" id="search">
+    <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">Empresa</span>
+          <div class="mdl-layout-spacer"></div>
+    
+          <div class="mdl-button mdl-js-button mdl-button--icon mdl-button--notifications" >
+    	    <i class="material-icons">search</i>
+          </div>
+    
+          <div class="demo-drawer mdl-layout__drawer-right">
+    	    <span class="mdl-layout-title">Procurar</span>
+    	     <div class="mdl-textfield mdl-js-textfield mdl-cell--8-col">
+        		<input class="mdl-textfield__input" type="text" name="name" value="{{$filters['name']}}">
+        		<label class="mdl-textfield__label" for="name">{{Lang::get("general.name")}}</label>
+    	     </div>
+    	     <div class="mdl-textfield mdl-js-textfield mdl-cell--8-col">
+        		<input class="mdl-textfield__input" type="text" name="city" value="{{$filters['city']}}">
+        		<label class="mdl-textfield__label" for="city">{{Lang::get("general.city")}}</label>
+    	     </div>
+    	     <div class="mdl-textfield mdl-js-textfield mdl-cell--8-col">
+        		<input class="mdl-textfield__input" type="text" name="country" value="{{$filters['country']}}">
+        		<label class="mdl-textfield__label" for="country">{{Lang::get("general.country")}}</label>
+    	     </div><br>
+    	     <button type="submit" class="mdl-button mdl-color--amber mdl-color-text--white mdl-js-button mdl-button--raised mdl-button--colored">
+        		Buscar
+    	     </button>
+          </div>
+          <div class="mdl-layout__obfuscator-right"></div>
+        </div>
+    </header>
+</form>
 

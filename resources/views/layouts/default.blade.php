@@ -5,7 +5,7 @@
 </head>
 <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-        @include('includes.header')
+        @yield('header')
         @include('includes.sidebar')
 
     <!-- Page Content -->
