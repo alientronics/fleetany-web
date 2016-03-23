@@ -26,16 +26,7 @@
 
 @stop
 
-
-@section('filter')
-
-      <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--search">
-	    <i class="material-icons">filter_list</i>
-      </button>
-
-	  @include('company.filter')
-
-@stop
+@include('company.filter')
 
 @section('content')
 
