@@ -1,17 +1,5 @@
 @extends('layouts.default')
 
-@section('header')
-
-<header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
-    <div class="mdl-layout__header-row">
-      <span class="mdl-layout-title">Empresa</span>
-      <div class="mdl-layout-spacer"></div>
-      <div class="mdl-layout__obfuscator-right"></div>
-    </div>
-</header>
-
-@stop
-
 @section('title')
 <h1>{{Lang::get("general.Vehicles")}}</h1>
 @stop
@@ -29,6 +17,12 @@
 @if ($company->id)
 @section('breadcrumbs', Breadcrumbs::render('company.edit', $company))
 @endif
+
+@section('header')
+      
+      <span class="mdl-layout-title">Empresa</span>
+
+@stop
 
 @section('content')
 

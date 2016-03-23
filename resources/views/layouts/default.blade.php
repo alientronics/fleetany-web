@@ -5,7 +5,14 @@
 </head>
 <body>
     <div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-drawer mdl-layout--fixed-header">
-        @yield('header')
+        <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+            <div class="mdl-layout__header-row">
+              @yield('header')
+              <div class="mdl-layout-spacer"></div>
+              @yield('filter')
+              <div class="mdl-layout__obfuscator-right"></div>
+            </div>
+        </header>
         @include('includes.sidebar')
 
     <!-- Page Content -->

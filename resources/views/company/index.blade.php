@@ -16,9 +16,6 @@
 
 @section('header')
 
-<header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
-    <div class="mdl-layout__header-row">
-    
       @permission('create.company')
       <a href="{{url('/')}}/company/create" class="button mdl-add__button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
     	<i class="material-icons">add</i>
@@ -26,7 +23,11 @@
       @endpermission
       
       <span class="mdl-layout-title">Empresa</span>
-      <div class="mdl-layout-spacer"></div>
+
+@stop
+
+
+@section('filter')
 
       <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--search">
 	    <i class="material-icons">filter_list</i>
@@ -52,9 +53,6 @@
     	     </button>
           </div>
 	  </form>
-      <div class="mdl-layout__obfuscator-right"></div>
-    </div>
-</header>
 
 @stop
 
