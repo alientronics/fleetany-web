@@ -14,14 +14,8 @@
 @endif
 @stop
 
-@if ($company->id)
-@section('breadcrumbs', Breadcrumbs::render('company.edit', $company))
-@endif
-
 @section('header')
-      
       <span class="mdl-layout-title">Empresa</span>
-
 @stop
 
 @section('content')
