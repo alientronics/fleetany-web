@@ -327,6 +327,11 @@ _:-ms-input-placeholder, :root .demo-graph {
     margin-top: 5px;
 	cursor: pointer;
 }
+.mdl-add__button {
+	margin-left: -20px;	
+	margin-top: 30px;	
+	margin-right: 30px;
+}
 
 .demo-section {
   margin-left: 24px; 

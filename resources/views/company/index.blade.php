@@ -18,18 +18,19 @@
 
 <header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
     <div class="mdl-layout__header-row">
+    
+      @permission('create.company')
+      <a href="{{url('/')}}/company/create" class="button mdl-add__button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+    	<i class="material-icons">add</i>
+      </a>
+      @endpermission
+      
       <span class="mdl-layout-title">Empresa</span>
       <div class="mdl-layout-spacer"></div>
 
-      @permission('create.company')
-      <div class="mdl-button mdl-js-button mdl-button--icon mdl-button--create" >
-    	<a href="{{url('/')}}/company/create"><i class="material-icons">add_circle_outline</i></a>
-      </div>
-      @endpermission
-
-      <div class="mdl-button mdl-js-button mdl-button--icon mdl-button--search" >
-	    <a href="#"><i class="material-icons">search</i></a>
-      </div>
+      <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-button--search">
+	    <i class="material-icons">filter_list</i>
+      </button>
 
 	  <form method="get" id="search">
           <div class="demo-drawer mdl-layout__drawer-right">
@@ -70,9 +71,7 @@
             <th><a href="{{url('/')}}/{{$filters['sort_url']['name']}}">{{Lang::get("general.name")}} <i class="fa fa-fw {{$filters['sort_icon']['name']}}"></i></th>
             <th><a href="{{url('/')}}/{{$filters['sort_url']['city']}}">{{Lang::get("general.city")}} <i class="fa fa-fw {{$filters['sort_icon']['city']}}"></i></th>
             <th><a href="{{url('/')}}/{{$filters['sort_url']['country']}}">{{Lang::get("general.country")}} <i class="fa fa-fw {{$filters['sort_icon']['country']}}"></i></th>
-            @permission('create.company')
-            <th class="col-sm-1">Adicionar <i class="material-icons">add_circle_outline</i></th>
-            @endpermission
+            <th></th>
 		</tr>
 	  </thead>
 	  <tbody>
