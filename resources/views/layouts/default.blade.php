@@ -17,7 +17,7 @@
 
     <!-- Page Content -->
       <main class="mdl-layout__content mdl-color--grey-100">
-        <div id="demo-snackbar-example" class="mdl-js-snackbar mdl-snackbar">
+        <div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
           <div class="mdl-snackbar__text"></div>
           <button class="mdl-snackbar__action" type="button"></button>
         </div>

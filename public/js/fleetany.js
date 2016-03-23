@@ -13,15 +13,14 @@ window.onload=function(){
 function showSnackBar(message) {
 	(function() {
 	  'use strict';
-	  var snackbarContainer = document.querySelector('#demo-snackbar-example');
-	  var showSnackbarButton = document.querySelector('#demo-show-snackbar');
+	  var snackbarContainer = document.querySelector('#snackbar');
 	  var handler = function(event) {
 	  };
-	  window.addEventListener("load", function() {
+	  $(window).load(function() {
 	    'use strict';
 	    var data = {
 	      message: message,
-	      timeout: 2000,
+	      timeout: 5000,
 //		       actionHandler: handler,
 	      actionText: 'Undo'
 	    };
