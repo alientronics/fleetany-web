@@ -327,6 +327,9 @@ _:-ms-input-placeholder, :root .demo-graph {
     margin-top: 5px;
 	cursor: pointer;
 }
+.mdl-button--search {
+	margin-top: 30px;	
+}
 .mdl-add__button {
 	margin-left: -20px;	
 	margin-top: 30px;	
