@@ -59,14 +59,10 @@ class EntryController extends Controller
         try {
             $this->entryRepo->validator();
             $this->entryRepo->create($this->request->all());
-            $this->session->flash(
-                'message',
-                Lang::get(
-                    'general.succefullcreate',
-                    ['table'=> Lang::get('general.Entry')]
-                )
-            );
-            return $this->redirect->to('entry');
+            return $this->redirect->to('entry')->with('message', Lang::get(
+                                                        'general.succefullcreate',
+                                                        ['table'=> Lang::get('general.Entry')]
+                                                    ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
@@ -95,14 +91,10 @@ class EntryController extends Controller
         try {
             $this->entryRepo->validator();
             $this->entryRepo->update($this->request->all(), $idEntry);
-            $this->session->flash(
-                'message',
-                Lang::get(
-                    'general.succefullupdate',
-                    ['table'=> Lang::get('general.Entry')]
-                )
-            );
-            return $this->redirect->to('entry');
+            return $this->redirect->to('entry')->with('message', Lang::get(
+                                                        'general.succefullupdate',
+                                                        ['table'=> Lang::get('general.Entry')]
+                                                    ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());
@@ -115,8 +107,7 @@ class EntryController extends Controller
 
         if ($this->entryRepo->find($idEntry)) {
             $this->entryRepo->delete($idEntry);
-            $this->session->flash('message', Lang::get("general.deletedregister"));
         }
-        return $this->redirect->to('entry');
+        return $this->redirect->to('entry')->with('message', Lang::get("general.deletedregister"));
     }
 }

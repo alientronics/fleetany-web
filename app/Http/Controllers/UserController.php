@@ -57,14 +57,10 @@ class UserController extends Controller
             Input::merge(array('password' => Hash::make(Input::get('password'))));
             $this->userRepo->create($this->request->all());
             User::all()->last()->assignRole(Input::get('role_id'));
-            $this->session->flash(
-                'message',
-                Lang::get(
-                    'general.succefullcreate',
-                    ['table'=> Lang::get('general.User')]
-                )
-            );
-            return $this->redirect->to('user');
+            return $this->redirect->to('user')->with('message', Lang::get(
+                                                        'general.succefullcreate',
+                                                        ['table'=> Lang::get('general.User')]
+                                                    ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
@@ -94,14 +90,10 @@ class UserController extends Controller
             Input::merge(array('password' => Hash::make(Input::get('password'))));
             $this->userRepo->update($this->request->all(), $idUser);
             User::all()->last()->assignRole(Input::get('role_id'));
-            $this->session->flash(
-                'message',
-                Lang::get(
-                    'general.succefullupdate',
-                    ['table'=> Lang::get('general.User')]
-                )
-            );
-            return $this->redirect->to('user');
+            return $this->redirect->to('user')->with('message', Lang::get(
+                                                        'general.succefullupdate',
+                                                        ['table'=> Lang::get('general.User')]
+                                                    ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());
@@ -114,9 +106,8 @@ class UserController extends Controller
 
         if ($idUser != 1 && $this->userRepo->find($idUser)) {
             $this->userRepo->delete($idUser);
-            $this->session->flash('message', Lang::get("general.deletedregister"));
         }
-        return $this->redirect->to('user');
+        return $this->redirect->to('user')->with('message', Lang::get("general.deletedregister"));
     }
     
     public function showProfile()
@@ -131,14 +122,10 @@ class UserController extends Controller
         try {
             $this->userRepo->validator();
             $this->userRepo->update($this->request->all(), $idUser);
-            $this->session->flash(
-                'message',
-                Lang::get(
-                    'general.succefullupdate',
-                    ['table'=> Lang::get('general.User')]
-                )
-            );
-            return $this->redirect->to('profile');
+            return $this->redirect->to('profile')->with('message', Lang::get(
+                                                        'general.succefullupdate',
+                                                        ['table'=> Lang::get('general.User')]
+                                                    ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
             ->with('errors', $e->getMessageBag());

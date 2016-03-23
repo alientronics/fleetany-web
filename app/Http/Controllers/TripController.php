@@ -59,14 +59,10 @@ class TripController extends Controller
         try {
             $this->tripRepo->validator();
             $this->tripRepo->create($this->request->all());
-            $this->session->flash(
-                'message',
-                Lang::get(
-                    'general.succefullcreate',
-                    ['table'=> Lang::get('general.Trip')]
-                )
-            );
-            return $this->redirect->to('trip');
+            return $this->redirect->to('trip')->with('message', Lang::get(
+                                                        'general.succefullcreate',
+                                                        ['table'=> Lang::get('general.Trip')]
+                                                    ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
@@ -95,14 +91,10 @@ class TripController extends Controller
         try {
             $this->tripRepo->validator();
             $this->tripRepo->update($this->request->all(), $idTrip);
-            $this->session->flash(
-                'message',
-                Lang::get(
-                    'general.succefullupdate',
-                    ['table'=> Lang::get('general.Trip')]
-                )
-            );
-            return $this->redirect->to('trip');
+            return $this->redirect->to('trip')->with('message', Lang::get(
+                                                        'general.succefullupdate',
+                                                        ['table'=> Lang::get('general.Trip')]
+                                                    ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());
@@ -115,8 +107,7 @@ class TripController extends Controller
 
         if ($this->tripRepo->find($idTrip)) {
             $this->tripRepo->delete($idTrip);
-            $this->session->flash('message', Lang::get("general.deletedregister"));
         }
-        return $this->redirect->to('trip');
+        return $this->redirect->to('trip')->with('message', Lang::get("general.deletedregister"));
     }
 }

@@ -54,14 +54,10 @@ class ContactController extends Controller
         try {
             $this->contactRepo->validator();
             $this->contactRepo->create($this->request->all());
-            $this->session->flash(
-                'message',
-                Lang::get(
-                    'general.succefullcreate',
-                    ['table'=> Lang::get('general.Contact')]
-                )
-            );
-            return $this->redirect->to('contact');
+            return $this->redirect->to('contact')->with('message', Lang::get(
+                                                        'general.succefullcreate',
+                                                        ['table'=> Lang::get('general.Contact')]
+                                                    ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
@@ -89,14 +85,10 @@ class ContactController extends Controller
         try {
             $this->contactRepo->validator();
             $this->contactRepo->update($this->request->all(), $idContact);
-            $this->session->flash(
-                'message',
-                Lang::get(
-                    'general.succefullupdate',
-                    ['table'=> Lang::get('general.Contact')]
-                )
-            );
-            return $this->redirect->to('contact');
+            return $this->redirect->to('contact')->with('message', Lang::get(
+                                                        'general.succefullupdate',
+                                                        ['table'=> Lang::get('general.Contact')]
+                                                    ));;
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());
@@ -111,6 +103,6 @@ class ContactController extends Controller
             $this->contactRepo->delete($idContact);
             $this->session->flash('message', Lang::get("general.deletedregister"));
         }
-        return $this->redirect->to('contact');
+        return $this->redirect->to('contact')->with('message', Lang::get("general.deletedregister"));;
     }
 }

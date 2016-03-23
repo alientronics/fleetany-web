@@ -54,14 +54,10 @@ class VehicleController extends Controller
         try {
             $this->vehicleRepo->validator();
             $this->vehicleRepo->create($this->request->all());
-            $this->session->flash(
-                'message',
-                Lang::get(
-                    'general.succefullcreate',
-                    ['table'=> Lang::get('general.Vehicle')]
-                )
-            );
-            return $this->redirect->to('vehicle');
+            return $this->redirect->to('vehicle')->with('message', Lang::get(
+                                                        'general.succefullcreate',
+                                                        ['table'=> Lang::get('general.Vehicle')]
+                                                    ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
@@ -89,14 +85,10 @@ class VehicleController extends Controller
         try {
             $this->vehicleRepo->validator();
             $this->vehicleRepo->update($this->request->all(), $idVehicle);
-            $this->session->flash(
-                'message',
-                Lang::get(
-                    'general.succefullupdate',
-                    ['table'=> Lang::get('general.Vehicle')]
-                )
-            );
-            return $this->redirect->to('vehicle');
+            return $this->redirect->to('vehicle')->with('message', Lang::get(
+                                                        'general.succefullupdate',
+                                                        ['table'=> Lang::get('general.Vehicle')]
+                                                    ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());
@@ -109,8 +101,7 @@ class VehicleController extends Controller
 
         if ($this->vehicleRepo->find($idVehicle)) {
             $this->vehicleRepo->delete($idVehicle);
-            $this->session->flash('message', Lang::get("general.deletedregister"));
         }
-        return $this->redirect->to('vehicle');
+        return $this->redirect->to('vehicle')->with('message', Lang::get("general.deletedregister"));
     }
 }

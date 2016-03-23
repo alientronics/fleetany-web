@@ -56,14 +56,10 @@ class ModelController extends Controller
         try {
             $this->modelRepo->validator();
             $this->modelRepo->create($this->request->all());
-            $this->session->flash(
-                'message',
-                Lang::get(
-                    'general.succefullcreate',
-                    ['table'=> Lang::get('general.Model')]
-                )
-            );
-            return $this->redirect->to('model');
+            return $this->redirect->to('model')->with('message', Lang::get(
+                                                        'general.succefullcreate',
+                                                        ['table'=> Lang::get('general.Model')]
+                                                    ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
@@ -92,14 +88,10 @@ class ModelController extends Controller
         try {
             $this->modelRepo->validator();
             $this->modelRepo->update($this->request->all(), $idModel);
-            $this->session->flash(
-                'message',
-                Lang::get(
-                    'general.succefullupdate',
-                    ['table'=> Lang::get('general.Model')]
-                )
-            );
-            return $this->redirect->to('model');
+            return $this->redirect->to('model')->with('message', Lang::get(
+                                                        'general.succefullupdate',
+                                                        ['table'=> Lang::get('general.Model')]
+                                                    ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());
@@ -112,8 +104,7 @@ class ModelController extends Controller
 
         if ($this->modelRepo->find($idModel)) {
             $this->modelRepo->delete($idModel);
-            $this->session->flash('message', Lang::get("general.deletedregister"));
         }
-        return $this->redirect->to('model');
+        return $this->redirect->to('model')->with('message', Lang::get("general.deletedregister"));
     }
 }

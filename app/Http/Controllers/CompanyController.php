@@ -52,14 +52,10 @@ class CompanyController extends Controller
         try {
             $this->companyRepo->validator();
             $this->companyRepo->create($this->request->all());
-            $this->session->flash(
-                'message',
-                Lang::get(
-                    'general.succefullcreate',
-                    ['table'=> Lang::get('general.Company')]
-                )
-            );
-            return $this->redirect->to('company');
+            return $this->redirect->to('company')->with('message', Lang::get(
+                                                        'general.succefullcreate',
+                                                        ['table'=> Lang::get('general.Company')]
+                                                    ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
@@ -86,14 +82,10 @@ class CompanyController extends Controller
         try {
             $this->companyRepo->validator();
             $this->companyRepo->update($this->request->all(), $idCompany);
-            $this->session->flash(
-                'message',
-                Lang::get(
-                    'general.succefullupdate',
-                    ['table'=> Lang::get('general.Company')]
-                )
-            );
-            return $this->redirect->to('company');
+            return $this->redirect->to('company')->with('message', Lang::get(
+                                                        'general.succefullupdate',
+                                                        ['table'=> Lang::get('general.Company')]
+                                                    ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());
@@ -106,8 +98,7 @@ class CompanyController extends Controller
 
         if ($this->companyRepo->find($idCompany)) {
             $this->companyRepo->delete($idCompany);
-            $this->session->flash('message', Lang::get("general.deletedregister"));
         }
-        return $this->redirect->to('company');
+        return $this->redirect->to('company')->with('message', Lang::get("general.deletedregister"));
     }
 }

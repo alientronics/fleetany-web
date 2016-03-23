@@ -51,14 +51,10 @@ class TypeController extends Controller
         try {
             $this->typeRepo->validator();
             $this->typeRepo->create($this->request->all());
-            $this->session->flash(
-                'message',
-                Lang::get(
-                    'general.succefullcreate',
-                    ['table'=> Lang::get('general.Type')]
-                )
-            );
-            return $this->redirect->to('type');
+            return $this->redirect->to('type')->with('message', Lang::get(
+                                                        'general.succefullcreate',
+                                                        ['table'=> Lang::get('general.Type')]
+                                                    ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
@@ -105,8 +101,7 @@ class TypeController extends Controller
 
         if ($this->typeRepo->find($idType)) {
             $this->typeRepo->delete($idType);
-            $this->session->flash('message', Lang::get("general.deletedregister"));
         }
-        return $this->redirect->to('type');
+        return $this->redirect->to('type')->with('message', Lang::get("general.deletedregister"));
     }
 }

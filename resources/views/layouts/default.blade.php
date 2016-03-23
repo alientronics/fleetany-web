@@ -17,11 +17,22 @@
 
     <!-- Page Content -->
       <main class="mdl-layout__content mdl-color--grey-100">
+        <div id="demo-snackbar-example" class="mdl-js-snackbar mdl-snackbar">
+          <div class="mdl-snackbar__text"></div>
+          <button class="mdl-snackbar__action" type="button"></button>
+        </div>
         @yield('content')
       </main>
     </div>
     <script>
     @yield('script')
     </script>
+    @if (Session::has('message')) 
+    <script>showSnackBar('{{ Session::get('message') }}')</script>
+    @endif 
+    @if (Session::has('danger')) 
+    <script>showSnackBar('{{ Session::get('danger') }}')</script> 
+    @endif
+
   </body>
 </html>
