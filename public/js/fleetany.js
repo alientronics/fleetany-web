@@ -13,7 +13,7 @@ window.onload=function(){
 function showSnackBar(message) {
 	(function() {
 	  'use strict';
-	  var snackbarContainer = document.querySelector('#snackbar');
+	  var snackbarContainer = $('#snackbar')[0];
 	  var handler = function(event) {
 	  };
 	  $(window).load(function() {
