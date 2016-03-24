@@ -1,9 +1,5 @@
 @extends('layouts.default')
 
-@section('title')
-<h1>{{Lang::get("general.Vehicles")}}</h1>
-@stop
-
 @section('sub-title')
 @if ($company->id)
 {{--*/ $operation = 'update' /*--}}
@@ -15,7 +11,7 @@
 @stop
 
 @section('header')
-      <span class="mdl-layout-title">Empresa</span>
+      <span class="mdl-layout-title">{{Lang::get("general.Company")}}</span>
 @stop
 
 @section('content')

@@ -61,12 +61,6 @@ class TypeController extends Controller
         }
     }
     
-    public function show($idType)
-    {
-        $type = $this->typeRepo->find($idType);
-        return view("type.show", compact('type'));
-    }
-    
     public function edit($idType)
     {
         $type = $this->typeRepo->find($idType);

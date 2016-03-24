@@ -22,7 +22,7 @@
       </a>
       @endpermission
       
-      <span class="mdl-layout-title">Empresa</span>
+      <span class="mdl-layout-title">{{Lang::get("general.Company")}}</span>
 
 @stop
 

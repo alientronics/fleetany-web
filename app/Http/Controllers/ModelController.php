@@ -65,13 +65,7 @@ class ModelController extends Controller
                    ->with('errors', $e->getMessageBag());
         }
     }
-    
-    public function show($idModel)
-    {
-        $model = $this->modelRepo->find($idModel);
-        return view("model.show", compact('model'));
-    }
-    
+
     public function edit($idModel)
     {
         $model = $this->modelRepo->find($idModel);

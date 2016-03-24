@@ -69,12 +69,6 @@ class TripController extends Controller
         }
     }
     
-    public function show($idTrip)
-    {
-        $trip = $this->tripRepo->find($idTrip);
-        return view("trip.show", compact('trip'));
-    }
-    
     public function edit($idTrip)
     {
         $trip = $this->tripRepo->find($idTrip);

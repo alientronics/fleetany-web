@@ -64,12 +64,6 @@ class ContactController extends Controller
         }
     }
     
-    public function show($idContact)
-    {
-        $contact = $this->contactRepo->find($idContact);
-        return view("contact.show", compact('contact'));
-    }
-    
     public function edit($idContact)
     {
         $contact = $this->contactRepo->find($idContact);

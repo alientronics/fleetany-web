@@ -62,12 +62,6 @@ class CompanyController extends Controller
         }
     }
     
-    public function show($idCompany)
-    {
-        $company = $this->companyRepo->find($idCompany);
-        return view("company.show", compact('company'));
-    }
-    
     public function edit($idCompany)
     {
         $company = $this->companyRepo->find($idCompany);

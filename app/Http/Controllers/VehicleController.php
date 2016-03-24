@@ -64,12 +64,6 @@ class VehicleController extends Controller
         }
     }
     
-    public function show($idVehicle)
-    {
-        $vehicle = $this->vehicleRepo->find($idVehicle);
-        return view("vehicle.show", compact('vehicle'));
-    }
-    
     public function edit($idVehicle)
     {
         $vehicle = $this->vehicleRepo->find($idVehicle);

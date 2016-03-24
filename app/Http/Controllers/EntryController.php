@@ -69,12 +69,6 @@ class EntryController extends Controller
         }
     }
     
-    public function show($idEntry)
-    {
-        $entry = $this->entryRepo->find($idEntry);
-        return view("entry.show", compact('entry'));
-    }
-    
     public function edit($idEntry)
     {
         $entry = $this->entryRepo->find($idEntry);
