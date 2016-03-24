@@ -207,8 +207,6 @@ Form::macro(
         return "<a href='$link'
                     class='btn btn-xs btn-$class' 
                     title='$title' 
-                    name='$title'>
-                    <i class='material-icons'>$icon</i>
-                </a>";
+                    name='$title'><i class='material-icons'>$icon</i></a>";
     }
 );
