@@ -31,6 +31,7 @@ class HelperRepository
         }
         
         $filters['pagination'] = $filters;
+        $filters['pagination']['sort'] = str_replace("_", "-", $filters['sort']) . "-" . $filters['order'];
         unset($filters['pagination']['paginate']);
         unset($filters['pagination']['sort_url']);
         $filters = $this->getFiltersSortUrl($filters, $request);
