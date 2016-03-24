@@ -1,18 +1,14 @@
 <?php
-
 namespace App\Repositories;
 
 use Illuminate\Http\Request;
 use Kodeine\Acl\Models\Eloquent\Role;
 use Lang;
 use Illuminate\Support\Facades\File;
-use App\Entities\Company;
-use App\Entities\Type;
-use App\Entities\Model;
-use App\Entities\Vehicle;
 
 class HelperRepository
 {
+
     public function getFilters($form, $fields, Request $request)
     {
         $filters = $this->getFiltersValues($form, $fields);
@@ -30,28 +26,28 @@ class HelperRepository
             $sort = explode("-", $form['sort']);
             $filters['order'] = array_pop($sort);
             $filters['sort'] = implode("-", $sort);
-            if (!in_array($filters['sort'], $fields)) {
+            if (! in_array($filters['sort'], $fields)) {
                 $filters['sort'] = $fields[0];
             }
         }
         
         $filters = $this->getFiltersSortUrl($filters, $request);
         $filters['sort'] = str_replace("-", "_", $filters['sort']);
-
+        
         return $filters;
     }
-    
+
     private function getFiltersValues($form, $fields)
     {
         $filters = array();
-        if (!empty($fields)) {
+        if (! empty($fields)) {
             foreach ($fields as $value) {
                 $filters[$value] = empty($form[$value]) ? "" : $form[$value];
             }
         }
         return $filters;
     }
-    
+
     private function getFiltersSortUrl($filters, Request $request)
     {
         $sortUrl = http_build_query($filters['sort_url']);
@@ -70,25 +66,25 @@ class HelperRepository
         }
         return $filters;
     }
-    
+
     public function getAvailableRoles()
     {
         $role = Role::lists('name', 'id');
         $role = $role->transform(function ($item) {
-            return Lang::get('general.'.$item);
+            return Lang::get('general.' . $item);
         });
         return $role;
     }
-    
+
     public function getAvailableLanguages()
     {
         $languages = array();
-        $directories = File::directories(base_path().DIRECTORY_SEPARATOR.'resources'.DIRECTORY_SEPARATOR.'lang');
+        $directories = File::directories(base_path() . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'lang');
         
         foreach ($directories as $directory) {
             $lang = explode(DIRECTORY_SEPARATOR, $directory);
             $lang = end($lang);
-            $languages[$lang] = Lang::get('general.'.$lang);
+            $languages[$lang] = Lang::get('general.' . $lang);
         }
         return $languages;
     }

@@ -64,10 +64,14 @@
             @endpermission
         </tr>
     @endforeach
+    	<tr>
+        	<td colspan="10">
+        		@include('includes.pagination', ['paginator' => $companies]) 
+    		</td>
+    	</tr>
 	  </tbody>
 	</table>
-{!! $companies->appends($filters)->links() !!}
-
+	
 @endpermission
      
 </div>
