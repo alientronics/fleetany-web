@@ -57,9 +57,9 @@ class ModelController extends Controller
             $this->modelRepo->validator();
             $this->modelRepo->create($this->request->all());
             return $this->redirect->to('model')->with('message', Lang::get(
-                                                        'general.succefullcreate',
-                                                        ['table'=> Lang::get('general.Model')]
-                                                    ));
+                'general.succefullcreate',
+                ['table'=> Lang::get('general.Model')]
+            ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
@@ -89,9 +89,9 @@ class ModelController extends Controller
             $this->modelRepo->validator();
             $this->modelRepo->update($this->request->all(), $idModel);
             return $this->redirect->to('model')->with('message', Lang::get(
-                                                        'general.succefullupdate',
-                                                        ['table'=> Lang::get('general.Model')]
-                                                    ));
+                'general.succefullupdate',
+                ['table'=> Lang::get('general.Model')]
+            ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());

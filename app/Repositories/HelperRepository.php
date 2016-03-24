@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\File;
 
 class HelperRepository
 {
-
     public function getFilters($form, $fields, Request $request)
     {
         $filters = $this->getFiltersValues($form, $fields);
@@ -31,9 +30,12 @@ class HelperRepository
             }
         }
         
+        $filters['pagination'] = $filters;
+        unset($filters['pagination']['paginate']);
+        unset($filters['pagination']['sort_url']);
         $filters = $this->getFiltersSortUrl($filters, $request);
         $filters['sort'] = str_replace("-", "_", $filters['sort']);
-        
+
         return $filters;
     }
 
@@ -79,7 +81,8 @@ class HelperRepository
     public function getAvailableLanguages()
     {
         $languages = array();
-        $directories = File::directories(base_path() . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'lang');
+        $directories = File::directories(base_path() . DIRECTORY_SEPARATOR .
+                            'resources' . DIRECTORY_SEPARATOR . 'lang');
         
         foreach ($directories as $directory) {
             $lang = explode(DIRECTORY_SEPARATOR, $directory);

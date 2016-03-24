@@ -60,9 +60,9 @@ class EntryController extends Controller
             $this->entryRepo->validator();
             $this->entryRepo->create($this->request->all());
             return $this->redirect->to('entry')->with('message', Lang::get(
-                                                        'general.succefullcreate',
-                                                        ['table'=> Lang::get('general.Entry')]
-                                                    ));
+                'general.succefullcreate',
+                ['table'=> Lang::get('general.Entry')]
+            ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
@@ -92,9 +92,9 @@ class EntryController extends Controller
             $this->entryRepo->validator();
             $this->entryRepo->update($this->request->all(), $idEntry);
             return $this->redirect->to('entry')->with('message', Lang::get(
-                                                        'general.succefullupdate',
-                                                        ['table'=> Lang::get('general.Entry')]
-                                                    ));
+                'general.succefullupdate',
+                ['table'=> Lang::get('general.Entry')]
+            ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());

@@ -55,9 +55,9 @@ class ContactController extends Controller
             $this->contactRepo->validator();
             $this->contactRepo->create($this->request->all());
             return $this->redirect->to('contact')->with('message', Lang::get(
-                                                        'general.succefullcreate',
-                                                        ['table'=> Lang::get('general.Contact')]
-                                                    ));
+                'general.succefullcreate',
+                ['table'=> Lang::get('general.Contact')]
+            ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
@@ -86,9 +86,10 @@ class ContactController extends Controller
             $this->contactRepo->validator();
             $this->contactRepo->update($this->request->all(), $idContact);
             return $this->redirect->to('contact')->with('message', Lang::get(
-                                                        'general.succefullupdate',
-                                                        ['table'=> Lang::get('general.Contact')]
-                                                    ));;
+                'general.succefullupdate',
+                ['table'=> Lang::get('general.Contact')]
+            ));
+            ;
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());
@@ -103,6 +104,7 @@ class ContactController extends Controller
             $this->contactRepo->delete($idContact);
             $this->session->flash('message', Lang::get("general.deletedregister"));
         }
-        return $this->redirect->to('contact')->with('message', Lang::get("general.deletedregister"));;
+        return $this->redirect->to('contact')->with('message', Lang::get("general.deletedregister"));
+        ;
     }
 }

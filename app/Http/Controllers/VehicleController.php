@@ -55,9 +55,9 @@ class VehicleController extends Controller
             $this->vehicleRepo->validator();
             $this->vehicleRepo->create($this->request->all());
             return $this->redirect->to('vehicle')->with('message', Lang::get(
-                                                        'general.succefullcreate',
-                                                        ['table'=> Lang::get('general.Vehicle')]
-                                                    ));
+                'general.succefullcreate',
+                ['table'=> Lang::get('general.Vehicle')]
+            ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
@@ -86,9 +86,9 @@ class VehicleController extends Controller
             $this->vehicleRepo->validator();
             $this->vehicleRepo->update($this->request->all(), $idVehicle);
             return $this->redirect->to('vehicle')->with('message', Lang::get(
-                                                        'general.succefullupdate',
-                                                        ['table'=> Lang::get('general.Vehicle')]
-                                                    ));
+                'general.succefullupdate',
+                ['table'=> Lang::get('general.Vehicle')]
+            ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());

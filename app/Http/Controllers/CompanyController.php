@@ -53,9 +53,9 @@ class CompanyController extends Controller
             $this->companyRepo->validator();
             $this->companyRepo->create($this->request->all());
             return $this->redirect->to('company')->with('message', Lang::get(
-                                                        'general.succefullcreate',
-                                                        ['table'=> Lang::get('general.Company')]
-                                                    ));
+                'general.succefullcreate',
+                ['table'=> Lang::get('general.Company')]
+            ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
@@ -83,9 +83,9 @@ class CompanyController extends Controller
             $this->companyRepo->validator();
             $this->companyRepo->update($this->request->all(), $idCompany);
             return $this->redirect->to('company')->with('message', Lang::get(
-                                                        'general.succefullupdate',
-                                                        ['table'=> Lang::get('general.Company')]
-                                                    ));
+                'general.succefullupdate',
+                ['table'=> Lang::get('general.Company')]
+            ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());

@@ -52,9 +52,9 @@ class TypeController extends Controller
             $this->typeRepo->validator();
             $this->typeRepo->create($this->request->all());
             return $this->redirect->to('type')->with('message', Lang::get(
-                                                        'general.succefullcreate',
-                                                        ['table'=> Lang::get('general.Type')]
-                                                    ));
+                'general.succefullcreate',
+                ['table'=> Lang::get('general.Type')]
+            ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());

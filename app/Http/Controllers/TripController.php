@@ -60,9 +60,9 @@ class TripController extends Controller
             $this->tripRepo->validator();
             $this->tripRepo->create($this->request->all());
             return $this->redirect->to('trip')->with('message', Lang::get(
-                                                        'general.succefullcreate',
-                                                        ['table'=> Lang::get('general.Trip')]
-                                                    ));
+                'general.succefullcreate',
+                ['table'=> Lang::get('general.Trip')]
+            ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
@@ -92,9 +92,9 @@ class TripController extends Controller
             $this->tripRepo->validator();
             $this->tripRepo->update($this->request->all(), $idTrip);
             return $this->redirect->to('trip')->with('message', Lang::get(
-                                                        'general.succefullupdate',
-                                                        ['table'=> Lang::get('general.Trip')]
-                                                    ));
+                'general.succefullupdate',
+                ['table'=> Lang::get('general.Trip')]
+            ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());

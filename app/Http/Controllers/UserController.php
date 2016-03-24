@@ -58,9 +58,9 @@ class UserController extends Controller
             $this->userRepo->create($this->request->all());
             User::all()->last()->assignRole(Input::get('role_id'));
             return $this->redirect->to('user')->with('message', Lang::get(
-                                                        'general.succefullcreate',
-                                                        ['table'=> Lang::get('general.User')]
-                                                    ));
+                'general.succefullcreate',
+                ['table'=> Lang::get('general.User')]
+            ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
@@ -91,9 +91,9 @@ class UserController extends Controller
             $this->userRepo->update($this->request->all(), $idUser);
             User::all()->last()->assignRole(Input::get('role_id'));
             return $this->redirect->to('user')->with('message', Lang::get(
-                                                        'general.succefullupdate',
-                                                        ['table'=> Lang::get('general.User')]
-                                                    ));
+                'general.succefullupdate',
+                ['table'=> Lang::get('general.User')]
+            ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                     ->with('errors', $e->getMessageBag());
@@ -123,9 +123,9 @@ class UserController extends Controller
             $this->userRepo->validator();
             $this->userRepo->update($this->request->all(), $idUser);
             return $this->redirect->to('profile')->with('message', Lang::get(
-                                                        'general.succefullupdate',
-                                                        ['table'=> Lang::get('general.User')]
-                                                    ));
+                'general.succefullupdate',
+                ['table'=> Lang::get('general.User')]
+            ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
             ->with('errors', $e->getMessageBag());
