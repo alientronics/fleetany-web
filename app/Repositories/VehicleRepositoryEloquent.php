@@ -43,7 +43,12 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
                 $query = $query->where('vehicles.cost', 'like', '%'.$filters['cost'].'%');
             }
 
-            $query = $query->orderBy('vehicles.'.$filters['sort'], $filters['order']);
+            if($filters['sort'] == 'model_vehicle') {
+                $sort = 'models.name';
+            } else {
+                $sort = 'vehicles.'.$filters['sort'];
+            }
+            $query = $query->orderBy($sort, $filters['order']);
             
             return $query;
         })->paginate($filters['paginate']);
