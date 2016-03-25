@@ -1,27 +1,22 @@
 @extends('layouts.default')
-@extends('layouts.edit')
 
-@section('title')
-<h1>{{Lang::get("general.Types")}}</h1>
+@section('header')
+	@if ($type->id)
+	{{--*/ $operation = 'update' /*--}}
+	<span class="mdl-layout-title">{{$type->name}}</span>
+	@else
+	{{--*/ $operation = 'create' /*--}}
+	<span class="mdl-layout-title">{{Lang::get("general.Type")}}</span>
+	@endif
 @stop
 
-@section('sub-title')
-@if ($type->id)
-{{--*/ $operation = 'update' /*--}}
-{{$type->name}}
-@else
-{{--*/ $operation = 'create' /*--}}
-{{Lang::get("general.newtype")}}
-@endif
-@stop
-
-@if ($type->id)
-@section('breadcrumbs', Breadcrumbs::render('type.edit', $type))
-@endif
-
-@section('edit')
+@section('content')
 
 @permission($operation.'.type')
+
+<div class="">
+	<section class="demo-section demo-section--textfield demo-page--textfield mdl-upgraded">
+		<div class="demo-preview-block">
 
 @if (!$type->id)
 {!! Form::open(array('route' => 'type.store')) !!}
@@ -31,24 +26,36 @@
         'route' => ['type.update',$type->id]
     ]) !!}
 @endif
-    <div class="form-group col-lg-12">
-        {!!Form::label('company_id', Lang::get('general.company_id'))!!}
-        {!!Form::select('company_id', $company_id, $type->company_id, array('class' => 'form-control'))!!}
-    </div>
 
-    <div class="form-group col-lg-12">
-        {!!Form::label('name', Lang::get('general.name'))!!}
-        {!!Form::text('name', $type->name, array('class' => 'form-control'))!!}
-    </div>
+    		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('company_id')) is-invalid is-dirty @endif"">
+                {!!Form::select('company_id', $company_id, $type->company_id, array('class' => 'mdl-textfield__input'))!!}
+       			{!!Form::label('company_id', Lang::get('general.company_id'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+            	<span class="mdl-textfield__error">{{ $errors->first('company_id') }}</span>
+            </div>
+			
+			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('name')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		{!!Form::text('name', $type->name, array('class' => 'mdl-textfield__input'))!!}
+				{!!Form::label('name', Lang::get('general.name'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+				<span class="mdl-textfield__error">{{ $errors->first('name') }}</span>
+			</div>
 
-    <div class="form-group col-lg-12">
-        {!!Form::label('entity_key', Lang::get('general.entity_key'))!!}
-        {!!Form::text('entity_key', $type->entity_key, array('class' => 'form-control'))!!}
-    </div>
+			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('entity_key')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		{!!Form::text('entity_key', $type->entity_key, array('class' => 'mdl-textfield__input'))!!}
+				{!!Form::label('entity_key', Lang::get('general.entity_key'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+				<span class="mdl-textfield__error">{{ $errors->first('entity_key') }}</span>
+			</div>
 
-    <button type="submit" class="btn btn-primary">{{Lang::get('general.Submit')}}</button>
-    <button type="reset" class="btn btn-primary">{{Lang::get('general.Reset')}}</button>
+			<div class="mdl-card__actions">
+				<button type="submit" class="mdl-button mdl-color--amber mdl-color-text--white mdl-js-button mdl-button--raised mdl-button--colored">
+                  {{ Lang::get('general.Send') }} 
+                </button>
+			</div>
+	
 {!! Form::close() !!}
+
+		</div>
+	</section>
+</div>
 
 @else
 <div class="alert alert-info">
