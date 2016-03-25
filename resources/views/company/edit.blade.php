@@ -53,7 +53,7 @@
 
 			<div class="mdl-card__actions">
 				<button type="submit" class="mdl-button mdl-color--amber mdl-color-text--white mdl-js-button mdl-button--raised mdl-button--colored">
-                  Enviar
+                  {{ Lang::get('general.Send') }} 
                 </button>
 			</div>
 	

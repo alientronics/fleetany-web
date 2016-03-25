@@ -42,7 +42,13 @@ class CompanyRepositoryEloquent extends BaseRepository implements CompanyReposit
                 $query = $query->where('contacts.country', 'like', '%'.$filters['country'].'%');
             }
 
-            $query = $query->orderBy('companies.'.$filters['sort'], $filters['order']);
+            if($filters['sort'] == 'city' || $filters['sort'] == 'country') {
+                $sort = 'contacts.'.$filters['sort'];
+            } else {
+                $sort = 'companies.'.$filters['sort'];
+            }
+            
+            $query = $query->orderBy($sort, $filters['order']);
             
             return $query;
         })->paginate($filters['paginate']);

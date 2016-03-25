@@ -42,7 +42,13 @@ class ContactRepositoryEloquent extends BaseRepository implements ContactReposit
                 $query = $query->where('contacts.city', 'like', '%'.$filters['city'].'%');
             }
 
-            $query = $query->orderBy('contacts.'.$filters['sort'], $filters['order']);
+            if($filters['sort'] == 'contact_type') {
+                $query = $query->join('types', 'contacts.contact_type_id', '=', 'types.id');
+                $sort = 'types.name';
+            } else {
+                $sort = 'contacts.'.$filters['sort'];
+            }
+            $query = $query->orderBy($sort, $filters['order']);
             
             return $query;
         })->paginate($filters['paginate']);

@@ -11,6 +11,7 @@ return [
     "Save"      => "Salvar",
     "New"       => "Novo",
     "Search"    => "Buscar",
+    "Send"      => "Enviar",
     "Actions"   => "A&ccedil;&otilde;es",
     "Comment"   => "Coment&aacute;rio",
     "norecordsfound"  => "Registros n&atilde;o encontrados",
