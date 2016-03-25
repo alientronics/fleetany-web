@@ -1,17 +1,13 @@
 @extends('layouts.default')
 
-@section('sub-title')
-@if ($company->id)
-{{--*/ $operation = 'update' /*--}}
-{{$company->name}}
-@else
-{{--*/ $operation = 'create' /*--}}
-{{Lang::get("general.newcompany")}}
-@endif
-@stop
-
 @section('header')
-      <span class="mdl-layout-title">{{Lang::get("general.Company")}}</span>
+	@if ($company->id)
+	{{--*/ $operation = 'update' /*--}}
+	<span class="mdl-layout-title">{{$company->name}}</span>
+	@else
+	{{--*/ $operation = 'create' /*--}}
+	<span class="mdl-layout-title">{{Lang::get("general.Company")}}</span>
+	@endif
 @stop
 
 @section('content')

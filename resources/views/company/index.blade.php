@@ -1,19 +1,5 @@
 @extends('layouts.default')
 
-@section("title")
-{{Lang::get("general.States")}}
-@stop
-
-@section("sub-title")
-{{Lang::get("general.Companies")}}
-@stop
-
-@permission('create.company') 
-@section('actions')
-{!!Form::actions(array('new' => route("company.create")))!!}
-@stop
-@endpermission
-
 @section('header')
 
       @permission('create.company')
@@ -75,9 +61,5 @@
 @endpermission
      
 </div>
-
-@stop
-
-@section("script")
 
 @stop
