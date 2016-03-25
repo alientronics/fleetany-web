@@ -45,7 +45,7 @@ class HelperRepository
         $filters = array();
         if (! empty($fields)) {
             foreach ($fields as $value) {
-                $filters[$value] = empty($form[$value]) ? "" : $form[$value];
+                $filters[$value] = empty($form[str_replace("-", "_", $value)]) ? "" : $form[str_replace("-", "_", $value)];
             }
         }
         return $filters;
