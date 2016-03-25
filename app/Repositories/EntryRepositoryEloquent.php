@@ -49,7 +49,14 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
                 $query = $query->where('entries.cost', $filters['cost']);
             }
 
-            $query = $query->orderBy('entries.'.$filters['sort'], $filters['order']);
+            if($filters['sort'] == 'vehicle') {
+                $sort = 'models.name';
+            } else if($filters['sort'] == 'entry_type') {
+                $sort = 'types.name';
+            } else {
+                $sort = 'entries.'.$filters['sort'];
+            }
+            $query = $query->orderBy($sort, $filters['order']);
             
             return $query;
         })->paginate($filters['paginate']);

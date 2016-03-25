@@ -1,130 +1,67 @@
 @extends('layouts.default')
-@extends('layouts.table')
 
+@section('header')
 
-@section("title")
-<h1>{{Lang::get("general.States")}}</h1>
+      @permission('create.entry')
+      <a href="{{url('/')}}/entry/create" class="button mdl-add__button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+    	<i class="material-icons">add</i>
+      </a>
+      @endpermission
+      
+      <span class="mdl-layout-title">{{Lang::get("general.Entry")}}</span>
+
 @stop
 
-@section("sub-title")
-{{Lang::get("general.Entries")}}
-@stop
+@include('entry.filter')
 
-@section('breadcrumbs', Breadcrumbs::render('entry'))
+@section('content')
 
-@permission('create.entry') 
-@section('actions')
-{!!Form::actions(array('new' => route("entry.create")))!!}
-@stop
-@endpermission
+<div class="mdl-grid demo-content">
 
-@section('table')
-@permission('view.entry')  
-@if (count($entries) > 0)
+@permission('view.entry')
 
-<form method="get" id="search">
+    <div class="mdl-cell mdl-cell--12-col mdl-grid">
 
-<div class="form-group col-sm-10">
-<select name="paginate">
-	<option @if ($filters['paginate'] == 10) selected @endif value="10">10</option>
-	<option @if ($filters['paginate'] == 25) selected @endif value="25">25</option>
-	<option @if ($filters['paginate'] == 50) selected @endif value="50">50</option>
-	<option @if ($filters['paginate'] == 100) selected @endif value="100">100</option>
-</select>
-{{Lang::get("general.resultsperpage")}}
-</div>
+    	<table class="mdl-data-table mdl-js-data-table mdl-cell--12-col mdl-shadow--2dp">
+    	  <thead>
+    		<tr>
+    		  	<th class="col-sm-1"><a href="{{url('/')}}/{{$filters['sort_url']['id']}}">{{Lang::get("general.id")}} <i class="fa fa-fw {{$filters['sort_icon']['id']}}"></i></a></th>
+                <th><a href="{{url('/')}}/{{$filters['sort_url']['vehicle']}}">{{Lang::get("general.vehicle")}} <i class="fa fa-fw {{$filters['sort_icon']['vehicle']}}"></i></th>
+                <th><a href="{{url('/')}}/{{$filters['sort_url']['entry-type']}}">{{Lang::get("general.entry_type")}} <i class="fa fa-fw {{$filters['sort_icon']['entry-type']}}"></i></th>
+                <th><a href="{{url('/')}}/{{$filters['sort_url']['datetime-ini']}}">{{Lang::get("general.datetime_ini")}} <i class="fa fa-fw {{$filters['sort_icon']['datetime-ini']}}"></i></th>
+                <th><a href="{{url('/')}}/{{$filters['sort_url']['cost']}}">{{Lang::get("general.cost")}} <i class="fa fa-fw {{$filters['sort_icon']['cost']}}"></i></th>
+                <th></th>
+    		</tr>
+    	  </thead>
+    	  <tbody>
 
-<input type="submit" value="Pesquisar" />
-<input type="hidden" name="sort" value="{{$filters['sort']}}-{{$filters['order']}}" />
-
-<table class='table table-striped table-bordered table-hover'>
-    <thead>
-        <tr>
-            <th class="col-sm-1"><a href="{{url('/')}}/{{$filters['sort_url']['id']}}">{{Lang::get("general.id")}} <i class="fa fa-fw {{$filters['sort_icon']['id']}}"></i></a></th>
-            <th><a href="{{url('/')}}/{{$filters['sort_url']['vehicle']}}">{{Lang::get("general.vehicle")}} <i class="fa fa-fw {{$filters['sort_icon']['vehicle']}}"></i></th>
-            <th><a href="{{url('/')}}/{{$filters['sort_url']['entry-type']}}">{{Lang::get("general.entry_type")}} <i class="fa fa-fw {{$filters['sort_icon']['entry-type']}}"></i></th>
-            <th><a href="{{url('/')}}/{{$filters['sort_url']['datetime-ini']}}">{{Lang::get("general.datetime_ini")}} <i class="fa fa-fw {{$filters['sort_icon']['datetime-ini']}}"></i></th>
-            <th><a href="{{url('/')}}/{{$filters['sort_url']['cost']}}">{{Lang::get("general.cost")}} <i class="fa fa-fw {{$filters['sort_icon']['cost']}}"></i></th>
-            @permission('delete.entry|update.entry')
-            <th class="col-sm-1">{{Lang::get("general.Actions")}}</th>
-            @endpermission
-        </tr>
-        
-        <tr>
-            <th>
-            	<div class="form-group col-sm-10">
-                </div>
-            </th>
-            <th>
-            	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" name="vehicle" value="{{$filters['vehicle']}}" placeholder='{{Lang::get("general.vehicle")}}'>
-                </div>
-            </th>
-            <th>
-            	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" name="entry-type" value="{{$filters['entry-type']}}" placeholder='{{Lang::get("general.entry_type")}}'>
-                </div>
-            </th>
-            <th>
-            	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" name="datetime-ini" value="{{$filters['datetime-ini']}}" placeholder='{{Lang::get("general.datetime_ini")}}'>
-                </div>
-            </th>
-            <th>
-            	<div class="form-group col-sm-10">
-                  <input type="search" class="form-control" name="cost" value="{{$filters['cost']}}" placeholder='{{Lang::get("general.cost")}}'>
-                </div>
-            </th> 
-            @permission('delete.entry|update.entry')
-            <th>
-            	<div class="form-group col-sm-10">
-                </div>
-            </th>
-            @endpermission
-        </tr>
-    </thead>
-    @foreach($entries as $entry) 
-        <tr>
-            <td>@if (!empty($entry->id)) {{$entry->id}} @endif</td>
-            <td>@if (!empty($entry->vehicle->model->name)) {{$entry->vehicle->model->name}} @endif</td> 
-            <td>@if (!empty($entry->type->name)) {{$entry->type->name}} @endif</td> 
-            <td>@if (!empty($entry->datetime_ini)) {{$entry->datetime_ini}} @endif</td> 
-            <td>@if (!empty($entry->cost)) {{$entry->cost}} @endif</td>   
-            @permission('delete.entry|update.entry')
-            <td>
-            	@permission('update.entry')
-                	{!!Form::buttonLink( route('entry.edit', $entry->id) , 'primary' , 'pencil' , 'Editar' )!!}
+	    @foreach($entries as $entry) 
+	    	<tr>
+                <td class="mdl-data-table__cell--non-numeric">@if (!empty($entry->id)) {{$entry->id}} @endif</td>
+                <td>@if (!empty($entry->vehicle->model->name)) {{$entry->vehicle->model->name}} @endif</td>  
+                <td>@if (!empty($entry->type->name)) {{$entry->type->name}} @endif</td>   
+                <td>@if (!empty($entry->datetime_ini)) {{$entry->datetime_ini}} @endif</td> 
+                <td>@if (!empty($entry->cost)) {{$entry->cost}} @endif</td>   
+                @permission('delete.entry|update.entry')
+                <td>
+                	@permission('update.entry')
+                    	{!!Form::buttonLink( route('entry.edit', $entry->id) , 'primary' , 'mode_edit' , 'Editar' )!!}
+                    @endpermission
+                	@permission('delete.entry')
+                        {!!Form::buttonLink( url('entry/destroy',$entry->id) , 'danger' , 'delete' , 'Excluir' )!!}
+                    @endpermission
+                </td>
                 @endpermission
-            	@permission('delete.entry')
-                    {!!Form::buttonLink( url('entry/destroy',$entry->id) , 'danger' , 'trash' , 'Excluir' )!!}
-                @endpermission
-            </td>
-            @endpermission
-        </tr>
-    @endforeach
-</table>
-</form>
-{!! $entries->appends($filters)->links() !!}
+            </tr>
+    	@endforeach
+    		@include('includes.pagination', ['paginator' => $entries->appends($filters['pagination'])]) 
+    	  </tbody>
+    	</table>
 
-@else
-<div class="alert alert-info">
-    {{Lang::get("general.norecordsfound")}}
-</div>
-@endif
-@else
-<div class="alert alert-info">
-	{{Lang::get("general.acessdenied")}}
-</div>
+    </div>
+	
 @endpermission
-                           
-@stop
-
-@section("script")
-
-$(document).ready(function(){
-    $(document).on('submit', '.delete-form', function(){
-        return confirm("{{Lang::get("general.areyousure")}}");
-    });
-});
+     
+</div>
 
 @stop
