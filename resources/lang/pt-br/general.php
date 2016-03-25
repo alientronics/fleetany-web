@@ -77,10 +77,10 @@ return [
     "total_mileage"    => "Quilometragem Total",
     "fuel_amount"    => "Quantidade de Combust&iacute;vel",
     "driver"    => "Motorista",
-//     "pickup_date"    => "Motorista",
-//     "deliver_date"    => "Motorista",
-//     "pickup_place"    => "Motorista",
-//     "deliver_place"    => "Motorista",
+    "pickup_date"    => "Local de Busca",
+    "deliver_date"    => "Data de Entrega",
+    "pickup_place"    => "Data de Busca",
+    "deliver_place"    => "Local de Entrega",
 
     // Type
     "Type"   => "Tipo",
