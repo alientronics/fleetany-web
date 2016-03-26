@@ -59,7 +59,7 @@ class CompanyControllerTest extends TestCase
     
     public function testDelete()
     {
-        $idDelete = Company::all()->last()['id']; 
+        $idDelete = Company::all()->last()['id'];
         $this->seeInDatabase('companies', ['id' => $idDelete]);
         $this->visit('/company');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');

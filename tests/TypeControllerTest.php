@@ -46,7 +46,7 @@ class TypeControllerTest extends TestCase
     
     public function testDelete()
     {
-        $idDelete = Type::all()->last()['id']; 
+        $idDelete = Type::all()->last()['id'];
         $this->seeInDatabase('types', ['id' => $idDelete]);
         $this->visit('/type');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');

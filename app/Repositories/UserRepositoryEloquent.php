@@ -45,9 +45,9 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
                 $query = $query->where('companies.name', 'like', '%'.$filters['company-id'].'%');
             }
 
-            if($filters['sort'] == 'contact_id') {
+            if ($filters['sort'] == 'contact_id') {
                 $sort = 'contacts.name';
-            } else if($filters['sort'] == 'company_id') {
+            } elseif ($filters['sort'] == 'company_id') {
                 $sort = 'companies.name';
             } else {
                 $sort = 'users.'.$filters['sort'];

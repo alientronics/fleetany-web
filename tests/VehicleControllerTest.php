@@ -70,7 +70,7 @@ class VehicleControllerTest extends TestCase
     
     public function testDelete()
     {
-        $idDelete = Vehicle::all()->last()['id']; 
+        $idDelete = Vehicle::all()->last()['id'];
         $this->seeInDatabase('vehicles', ['id' => $idDelete]);
         $this->visit('/vehicle');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');

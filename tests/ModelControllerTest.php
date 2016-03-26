@@ -44,7 +44,7 @@ class ModelControllerTest extends TestCase
     
     public function testDelete()
     {
-        $idDelete = Model::all()->last()['id']; 
+        $idDelete = Model::all()->last()['id'];
         $this->seeInDatabase('models', ['id' => $idDelete]);
         $this->visit('/model');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');

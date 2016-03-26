@@ -44,9 +44,9 @@ class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
                 $query = $query->where('models.name', 'like', '%'.$filters['name'].'%');
             }
 
-            if($filters['sort'] == 'model_type') {
+            if ($filters['sort'] == 'model_type') {
                 $sort = 'types.name';
-            } else if($filters['sort'] == 'vendor') {
+            } elseif ($filters['sort'] == 'vendor') {
                 $sort = 'contacts.name';
             } else {
                 $sort = 'models.'.$filters['sort'];

@@ -78,7 +78,7 @@ class ContactControllerTest extends TestCase
     
     public function testDelete()
     {
-        $idDelete = Contact::all()->last()['id']; 
+        $idDelete = Contact::all()->last()['id'];
         $this->seeInDatabase('contacts', ['id' => $idDelete]);
         $this->visit('/contact');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');

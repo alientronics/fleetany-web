@@ -90,7 +90,7 @@ class TripControllerTest extends TestCase
     
     public function testDelete()
     {
-        $idDelete = Trip::all()->last()['id']; 
+        $idDelete = Trip::all()->last()['id'];
         $this->seeInDatabase('trips', ['id' => $idDelete]);
         $this->visit('/trip');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');

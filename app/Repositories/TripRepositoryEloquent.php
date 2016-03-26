@@ -52,9 +52,9 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
                 $query = $query->where('trips.fuel_cost', $filters['fuel-cost']);
             }
 
-            if($filters['sort'] == 'trip_type') {
+            if ($filters['sort'] == 'trip_type') {
                 $sort = 'types.name';
-            } else if($filters['sort'] == 'vehicle') {
+            } elseif ($filters['sort'] == 'vehicle') {
                 $sort = 'models.name';
             } else {
                 $sort = 'trips.'.$filters['sort'];

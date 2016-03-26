@@ -70,7 +70,7 @@ class EntryControllerTest extends TestCase
     
     public function testDelete()
     {
-        $idDelete = Entry::all()->last()['id']; 
+        $idDelete = Entry::all()->last()['id'];
         $this->seeInDatabase('entries', ['id' => $idDelete]);
         $this->visit('/entry');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
