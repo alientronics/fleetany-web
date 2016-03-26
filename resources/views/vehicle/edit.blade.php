@@ -1,27 +1,22 @@
 @extends('layouts.default')
-@extends('layouts.edit')
 
-@section('title')
-<h1>{{Lang::get("general.Vehicles")}}</h1>
+@section('header')
+	@if ($vehicle->id)
+	{{--*/ $operation = 'update' /*--}}
+	<span class="mdl-layout-title">{{$vehicle->model->name}}</span>
+	@else
+	{{--*/ $operation = 'create' /*--}}
+	<span class="mdl-layout-title">{{Lang::get("general.Vehicle")}}</span>
+	@endif
 @stop
 
-@section('sub-title')
-@if ($vehicle->id)
-{{--*/ $operation = 'update' /*--}}
-{{$vehicle->name}}
-@else
-{{--*/ $operation = 'create' /*--}}
-{{Lang::get("general.newvehicle")}}
-@endif
-@stop
-
-@if ($vehicle->id)
-@section('breadcrumbs', Breadcrumbs::render('vehicle.edit', $vehicle))
-@endif
-
-@section('edit')
+@section('content')
 
 @permission($operation.'.vehicle')
+
+<div class="">
+	<section class="demo-section demo-section--textfield demo-page--textfield mdl-upgraded">
+		<div class="demo-preview-block">
 
 @if (!$vehicle->id)
 {!! Form::open(array('route' => 'vehicle.store')) !!}
@@ -31,44 +26,60 @@
         'route' => ['vehicle.update',$vehicle->id]
     ]) !!}
 @endif
-    <div class="form-group col-lg-12">
-        {!!Form::label('company_id', Lang::get('general.company_id'))!!}
-        {!!Form::select('company_id', $company_id, $vehicle->company_id, array('class' => 'form-control'))!!}
-    </div>
 
-    <div class="form-group col-lg-12">
-        {!!Form::label('model_vehicle_id', Lang::get('general.model_vehicle'))!!}
-        {!!Form::select('model_vehicle_id', $model_vehicle_id, $vehicle->model_vehicle_id, array('class' => 'form-control'))!!}
-    </div>
-    
-    <div class="form-group col-lg-12">
-        {!!Form::label('number', Lang::get('general.number'))!!}
-        {!!Form::text('number', $vehicle->number, array('class' => 'form-control'))!!}
-    </div>
+    		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('company_id')) is-invalid is-dirty @endif"">
+                {!!Form::select('company_id', $company_id, $vehicle->company_id, array('class' => 'mdl-textfield__input'))!!}
+       			{!!Form::label('company_id', Lang::get('general.company_id'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+            	<span class="mdl-textfield__error">{{ $errors->first('company_id') }}</span>
+            </div>
+            
+    		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('model_vehicle_id')) is-invalid is-dirty @endif"">
+                {!!Form::select('model_vehicle_id', $model_vehicle_id, $vehicle->model_vehicle_id, array('class' => 'mdl-textfield__input'))!!}
+       			{!!Form::label('model_vehicle_id', Lang::get('general.model_vehicle'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+            	<span class="mdl-textfield__error">{{ $errors->first('model_vehicle_id') }}</span>
+            </div>
+            
+			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('number')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		{!!Form::text('number', $vehicle->number, array('class' => 'mdl-textfield__input'))!!}
+				{!!Form::label('number', Lang::get('general.number'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+				<span class="mdl-textfield__error">{{ $errors->first('number') }}</span>
+			</div>    
+            
+			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('initial_miliage')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		{!!Form::text('initial_miliage', $vehicle->initial_miliage, array('class' => 'mdl-textfield__input'))!!}
+				{!!Form::label('initial_miliage', Lang::get('general.initial_miliage'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+				<span class="mdl-textfield__error">{{ $errors->first('initial_miliage') }}</span>
+			</div>  
+			
+			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('actual_miliage')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		{!!Form::text('actual_miliage', $vehicle->actual_miliage, array('class' => 'mdl-textfield__input'))!!}
+				{!!Form::label('actual_miliage', Lang::get('general.actual_miliage'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+				<span class="mdl-textfield__error">{{ $errors->first('actual_miliage') }}</span>
+			</div>  
+			
+			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('cost')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		{!!Form::text('cost', $vehicle->cost, array('class' => 'mdl-textfield__input'))!!}
+				{!!Form::label('cost', Lang::get('general.cost'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+				<span class="mdl-textfield__error">{{ $errors->first('cost') }}</span>
+			</div>  
+			
+			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('description')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		{!!Form::text('description', $vehicle->description, array('class' => 'mdl-textfield__input'))!!}
+				{!!Form::label('description', Lang::get('general.description'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+				<span class="mdl-textfield__error">{{ $errors->first('description') }}</span>
+			</div>  			
 
-    <div class="form-group col-lg-12">
-        {!!Form::label('initial_miliage', Lang::get('general.initial_miliage'))!!}
-        {!!Form::text('initial_miliage', $vehicle->initial_miliage, array('class' => 'form-control'))!!}
-    </div>
-
-    <div class="form-group col-lg-12">
-        {!!Form::label('actual_miliage', Lang::get('general.actual_miliage'))!!}
-        {!!Form::text('actual_miliage', $vehicle->actual_miliage, array('class' => 'form-control'))!!}
-    </div>
-
-    <div class="form-group col-lg-12">
-        {!!Form::label('cost', Lang::get('general.cost'))!!}
-        {!!Form::text('cost', $vehicle->cost, array('class' => 'form-control'))!!}
-    </div>
-
-    <div class="form-group col-lg-12">
-        {!!Form::label('description', Lang::get('general.description'))!!}
-        {!!Form::text('description', $vehicle->description, array('class' => 'form-control'))!!}
-    </div>
-
-    <button type="submit" class="btn btn-primary">{{Lang::get('general.Submit')}}</button>
-    <button type="reset" class="btn btn-primary">{{Lang::get('general.Reset')}}</button>
+			<div class="mdl-card__actions">
+				<button type="submit" class="mdl-button mdl-color--amber mdl-color-text--white mdl-js-button mdl-button--raised mdl-button--colored">
+                  {{ Lang::get('general.Send') }} 
+                </button>
+			</div>
+	
 {!! Form::close() !!}
+
+		</div>
+	</section>
+</div>
 
 @else
 <div class="alert alert-info">

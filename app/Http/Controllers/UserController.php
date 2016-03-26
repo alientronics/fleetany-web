@@ -11,6 +11,8 @@ use Log;
 use Lang;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\CompanyRepositoryEloquent;
+use App\Repositories\ContactRepositoryEloquent;
 
 class UserController extends Controller
 {
@@ -47,7 +49,9 @@ class UserController extends Controller
         $user = new User();
         $role = $this->helper->getAvailableRoles();
         $language = $this->helper->getAvailableLanguages();
-        return view("user.edit", compact('user', 'role', 'language'));
+        $companies = CompanyRepositoryEloquent::getCompanies();
+        $contacts = ContactRepositoryEloquent::getContacts();
+        return view("user.edit", compact('user', 'role', 'language', 'companies', 'contacts'));
     }
 
     public function store()
@@ -73,8 +77,10 @@ class UserController extends Controller
         
         $role = $this->helper->getAvailableRoles();
         $language = $this->helper->getAvailableLanguages();
+        $companies = CompanyRepositoryEloquent::getCompanies();
+        $contacts = ContactRepositoryEloquent::getContacts();
             
-        return view("user.edit", compact('user', 'role', 'language'));
+        return view("user.edit", compact('user', 'role', 'language', 'companies', 'contacts'));
     }
     
     public function update($idUser)
