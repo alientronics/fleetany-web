@@ -12,6 +12,8 @@ return [
     "New"       => "Novo",
     "Search"    => "Buscar",
     "Send"      => "Enviar",
+    "Yes"       => "Sim",
+    "No"        => "N&atilde;o",
     "Actions"   => "A&ccedil;&otilde;es",
     "Comment"   => "Coment&aacute;rio",
     "norecordsfound"  => "Registros n&atilde;o encontrados",
@@ -23,7 +25,8 @@ return [
    
    
     "success_create" => "Sucesso em criar ",
-    "areyousure"     => "Voc&ecirc; tem certeza",
+    "areyousure"     => "Voc&ecirc; tem certeza?",
+    "areyousuredelete"     => "Voc&ecirc; tem certeza de que deseja excluir?",
     "deletedregister"   => "Registro excluido.",
     "notdeletedregister" => "H&aacute; registros na tabela :tabela",
     "RememberMe"     => "Lembre-me",

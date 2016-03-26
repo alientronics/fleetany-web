@@ -48,7 +48,8 @@
                     	{!!Form::buttonLink( route('trip.edit', $trip->id) , 'primary' , 'mode_edit' , 'Editar' )!!}
                     @endpermission
                 	@permission('delete.trip')
-                        {!!Form::buttonLink( url('trip/destroy',$trip->id) , 'danger' , 'delete' , 'Excluir' )!!}
+                        {!!Form::buttonLink( url('#') , 'danger show-confirm-operation' , 'delete' , 'Excluir' )!!}
+                    	@include('includes.confirmoperation', ['url' => url('trip/destroy',$trip->id), 'confirm' => Lang::get("general.areyousuredelete")]) 
                     @endpermission
                 </td>
                 @endpermission
