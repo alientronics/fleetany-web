@@ -34,6 +34,7 @@
     	  </thead>
     	  <tbody>
     	  
+    	  @include('includes.confirmoperation', ['confirm' => Lang::get("general.areyousuredelete")]) 
     	  @foreach($companies as $company) 
             <tr>
                 <td class="mdl-data-table__cell--non-numeric">@if (!empty($company->id)) {{$company->id}} @endif</td>
@@ -46,9 +47,8 @@
                     	{!!Form::buttonLink( route('company.edit', $company->id) , 'primary' , 'mode_edit' , 'Editar' )!!}
                     @endpermission
                 	@permission('delete.company')
-                        {!!Form::buttonLink( url('#') , 'danger show-confirm-operation' , 'delete' , 'Excluir' )!!}
-                    	@include('includes.confirmoperation', ['url' => url('company/destroy',$company->id), 'confirm' => Lang::get("general.areyousuredelete")]) 
-                    @endpermission
+                        {!!Form::buttonLink( url('company/destroy',$company->id) , 'danger show-confirm-operation' , 'delete' , 'Excluir' )!!}
+                	@endpermission
                 </td>
                 @endpermission
             </tr>

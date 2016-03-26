@@ -8,6 +8,22 @@ window.onload=function(){
 	  $(".mdl-layout__drawer-right").removeClass("active");
 	  $(".mdl-layout__obfuscator-right").removeClass("ob-active");
 	});
+	
+    var dialog = $('dialog')[0];
+    if (! $('dialog')[0].showModal) {
+      dialogPolyfill.registerDialog(dialog);
+    }
+    $('.show-confirm-operation').click(function(event) {
+        event.preventDefault();
+        $('#url-confirm').val($(this).attr('href'));
+        dialog.showModal();
+    });
+    $('.confirm-operation').click(function(event) {
+    	window.location.href = $('#url-confirm').val();
+      });
+    $('.close').click(function() {
+      dialog.close();
+    });
 }
 
 function showSnackBar(message) {
