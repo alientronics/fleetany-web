@@ -9,16 +9,16 @@ class TripControllerTest extends TestCase
 {
     public function testView()
     {
-        $this->visit('/')->see('trip">Viagens');
+        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/trip">');
     
         $this->visit('/trip')
-        ->see('de acesso para esta p', true)
+            ->see('<i class="material-icons">filter_list</i>')
         ;
     }
     
     public function testCreate()
     {
-        $this->visit('/trip')->see('Novo');
+        $this->visit('/trip')->see('<a href="'.$this->baseUrl.'/trip/create');
         
         $this->visit('/trip/create');
     
@@ -90,10 +90,11 @@ class TripControllerTest extends TestCase
     
     public function testDelete()
     {
-        $this->seeInDatabase('trips', ['id' => 1]);
+        $idDelete = Trip::all()->last()['id']; 
+        $this->seeInDatabase('trips', ['id' => $idDelete]);
         $this->visit('/trip');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
         $this->click($idOption);
-        $this->seeIsSoftDeletedInDatabase('trips', ['id' => 1]);
+        $this->seeIsSoftDeletedInDatabase('trips', ['id' => $idDelete]);
     }
 }

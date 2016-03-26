@@ -16,17 +16,17 @@ class VehiclePermissionTest extends TestCase
     
     public function testViewExecutive()
     {
-        $this->visit('/')->see('vehicle">Ve', true);
-    
+        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/vehicle">', true);
+        
         $this->visit('/vehicle')
-            ->see('de acesso para esta p')
+            ->see('<i class="material-icons">filter_list</i>', true)
         ;
     }
     
     public function testCreateExecutive()
     {
-        $this->visit('/vehicle')->see('Novo', true);
-    
+        $this->visit('/vehicle')->see('<a href="'.$this->baseUrl.'/vehicle/create', true);
+        
         $this->visit('/vehicle/create')
             ->see('de acesso para esta p')
         ;

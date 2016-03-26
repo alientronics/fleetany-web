@@ -15,16 +15,16 @@ class UserControllerTest extends TestCase
     
     public function testView()
     {
-        $this->visit('/')->see('user">Usu');
+        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/user">');
     
         $this->visit('/user')
-            ->see('de acesso para esta p', true)
+            ->see('<i class="material-icons">filter_list</i>')
         ;
     }
     
     public function testCreate()
     {
-        $this->visit('/user')->see('Novo');
+        $this->visit('/user')->see('<a href="'.$this->baseUrl.'/user/create');
         
         $this->visit('/user/create');
     
@@ -65,6 +65,7 @@ class UserControllerTest extends TestCase
     
     public function testDelete()
     {
+        $idDelete = User::all()->last()['id']; 
         $this->seeInDatabase('users', ['email' => 'staff@alientronics.com.br']);
         $this->visit('/user');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');

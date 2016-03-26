@@ -16,17 +16,17 @@ class EntryPermissionTest extends TestCase
     
     public function testViewExecutive()
     {
-        $this->visit('/')->see('entry">Entrada', true);
-    
+        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/entry">', true);
+        
         $this->visit('/entry')
-            ->see('de acesso para esta p')
+            ->see('<i class="material-icons">filter_list</i>', true)
         ;
     }
     
     public function testCreateExecutive()
     {
-        $this->visit('/entry')->see('Novo', true);
-    
+        $this->visit('/entry')->see('<a href="'.$this->baseUrl.'/entry/create', true);
+        
         $this->visit('/entry/create')
             ->see('de acesso para esta p')
         ;

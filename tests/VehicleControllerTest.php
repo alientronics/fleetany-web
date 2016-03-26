@@ -9,16 +9,16 @@ class VehicleControllerTest extends TestCase
 {
     public function testView()
     {
-        $this->visit('/')->see('vehicle">Ve');
+        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/vehicle">');
     
         $this->visit('/vehicle')
-            ->see('de acesso para esta p', true)
+            ->see('<i class="material-icons">filter_list</i>')
         ;
     }
     
     public function testCreate()
     {
-        $this->visit('/vehicle')->see('Novo');
+        $this->visit('/vehicle')->see('<a href="'.$this->baseUrl.'/vehicle/create');
         
         $this->visit('/vehicle/create');
     
@@ -70,10 +70,11 @@ class VehicleControllerTest extends TestCase
     
     public function testDelete()
     {
-        $this->seeInDatabase('vehicles', ['id' => 1]);
+        $idDelete = Vehicle::all()->last()['id']; 
+        $this->seeInDatabase('vehicles', ['id' => $idDelete]);
         $this->visit('/vehicle');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
         $this->click($idOption);
-        $this->seeIsSoftDeletedInDatabase('vehicles', ['id' => 1]);
+        $this->seeIsSoftDeletedInDatabase('vehicles', ['id' => $idDelete]);
     }
 }

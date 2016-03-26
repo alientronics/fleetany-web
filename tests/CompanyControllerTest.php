@@ -9,16 +9,16 @@ class CompanyControllerTest extends TestCase
 {
     public function testView()
     {
-        $this->visit('/')->see('company">Empresa');
+        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/company">');
     
         $this->visit('/company')
-            ->see('de acesso para esta p', true)
+            ->see('<i class="material-icons">filter_list</i>')
         ;
     }
     
     public function testCreate()
     {
-        $this->visit('/company')->see('Novo');
+        $this->visit('/company')->see('<a href="'.$this->baseUrl.'/company/create');
         
         $this->visit('/company/create');
     
@@ -59,10 +59,11 @@ class CompanyControllerTest extends TestCase
     
     public function testDelete()
     {
-        $this->seeInDatabase('companies', ['id' => 1]);
+        $idDelete = Company::all()->last()['id']; 
+        $this->seeInDatabase('companies', ['id' => $idDelete]);
         $this->visit('/company');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
         $this->click($idOption);
-        $this->seeIsSoftDeletedInDatabase('companies', ['id' => 1]);
+        $this->seeIsSoftDeletedInDatabase('companies', ['id' => $idDelete]);
     }
 }

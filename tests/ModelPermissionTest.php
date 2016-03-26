@@ -16,17 +16,17 @@ class ModelPermissionTest extends TestCase
     
     public function testViewExecutive()
     {
-        $this->visit('/')->see('model">Modelos', true);
-    
+        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/model">', true);
+        
         $this->visit('/model')
-            ->see('de acesso para esta p')
+            ->see('<i class="material-icons">filter_list</i>', true)
         ;
     }
     
     public function testCreateExecutive()
     {
-        $this->visit('/model')->see('Novo', true);
-    
+        $this->visit('/model')->see('<a href="'.$this->baseUrl.'/model/create', true);
+        
         $this->visit('/model/create')
             ->see('de acesso para esta p')
         ;

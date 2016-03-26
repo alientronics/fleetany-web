@@ -9,16 +9,16 @@ class TypeControllerTest extends TestCase
 {
     public function testView()
     {
-        $this->visit('/')->see('type">Tipos');
+        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/type">');
     
         $this->visit('/type')
-            ->see('de acesso para esta p', true)
+            ->see('<i class="material-icons">filter_list</i>')
         ;
     }
     
     public function testCreate()
     {
-        $this->visit('/type')->see('Novo');
+        $this->visit('/type')->see('<a href="'.$this->baseUrl.'/type/create');
         
         $this->visit('/type/create');
     
@@ -46,10 +46,11 @@ class TypeControllerTest extends TestCase
     
     public function testDelete()
     {
-        $this->seeInDatabase('types', ['id' => 1]);
+        $idDelete = Type::all()->last()['id']; 
+        $this->seeInDatabase('types', ['id' => $idDelete]);
         $this->visit('/type');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
         $this->click($idOption);
-        $this->seeIsSoftDeletedInDatabase('types', ['id' => 1]);
+        $this->seeIsSoftDeletedInDatabase('types', ['id' => $idDelete]);
     }
 }

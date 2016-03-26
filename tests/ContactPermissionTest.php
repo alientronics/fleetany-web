@@ -16,16 +16,16 @@ class ContactPermissionTest extends TestCase
     
     public function testViewExecutive()
     {
-        $this->visit('/')->see('contact">Contatos', true);
-    
+        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/contact">', true);
+        
         $this->visit('/contact')
-            ->see('de acesso para esta p')
+            ->see('<i class="material-icons">filter_list</i>', true)
         ;
     }
     
     public function testCreateExecutive()
     {
-        $this->visit('/contact')->see('Novo', true);
+        $this->visit('/contact')->see('<a href="'.$this->baseUrl.'/contact/create', true);
     
         $this->visit('/contact/create')
             ->see('de acesso para esta p')

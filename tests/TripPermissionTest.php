@@ -16,17 +16,17 @@ class TripPermissionTest extends TestCase
     
     public function testViewExecutive()
     {
-        $this->visit('/')->see('trip">Viagens', true);
-    
+        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/trip">', true);
+        
         $this->visit('/trip')
-            ->see('de acesso para esta p')
+            ->see('<i class="material-icons">filter_list</i>', true)
         ;
     }
     
     public function testCreateExecutive()
     {
-        $this->visit('/trip')->see('Novo', true);
-    
+        $this->visit('/trip')->see('<a href="'.$this->baseUrl.'/trip/create', true);
+        
         $this->visit('/trip/create')
             ->see('de acesso para esta p')
         ;

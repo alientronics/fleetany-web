@@ -9,16 +9,16 @@ class ContactControllerTest extends TestCase
 {
     public function testView()
     {
-        $this->visit('/')->see('contact">Contatos');
+        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/contact">');
     
         $this->visit('/contact')
-            ->see('de acesso para esta p', true)
+            ->see('<i class="material-icons">filter_list</i>')
         ;
     }
     
     public function testCreate()
     {
-        $this->visit('/contact')->see('Novo');
+        $this->visit('/contact')->see('<a href="'.$this->baseUrl.'/contact/create');
         
         $this->visit('/contact/create');
     
@@ -78,10 +78,11 @@ class ContactControllerTest extends TestCase
     
     public function testDelete()
     {
-        $this->seeInDatabase('contacts', ['id' => 1]);
+        $idDelete = Contact::all()->last()['id']; 
+        $this->seeInDatabase('contacts', ['id' => $idDelete]);
         $this->visit('/contact');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
         $this->click($idOption);
-        $this->seeIsSoftDeletedInDatabase('contacts', ['id' => 1]);
+        $this->seeIsSoftDeletedInDatabase('contacts', ['id' => $idDelete]);
     }
 }

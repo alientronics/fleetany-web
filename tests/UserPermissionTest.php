@@ -16,17 +16,17 @@ class UserPermissionTest extends TestCase
     
     public function testViewExecutive()
     {
-        $this->visit('/')->see('Usu&aacute;rios', true);
-    
+        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/user">', true);
+        
         $this->visit('/user')
-            ->see('de acesso para esta p')
+            ->see('<i class="material-icons">filter_list</i>', true)
         ;
     }
     
     public function testCreateExecutive()
     {
-        $this->visit('/user')->see('Novo', true);
-    
+        $this->visit('/user')->see('<a href="'.$this->baseUrl.'/user/create', true);
+        
         $this->visit('/user/create')
             ->see('de acesso para esta p')
         ;

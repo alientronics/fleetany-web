@@ -16,17 +16,17 @@ class CompanyPermissionTest extends TestCase
     
     public function testViewExecutive()
     {
-        $this->visit('/')->see('company">Empresa', true);
-    
+        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/company">', true);
+        
         $this->visit('/company')
-            ->see('de acesso para esta p')
+            ->see('<i class="material-icons">filter_list</i>', true)
         ;
     }
     
     public function testCreateExecutive()
     {
-        $this->visit('/company')->see('Novo', true);
-    
+        $this->visit('/company')->see('<a href="'.$this->baseUrl.'/company/create', true);
+        
         $this->visit('/company/create')
             ->see('de acesso para esta p')
         ;

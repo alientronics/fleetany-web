@@ -9,16 +9,16 @@ class EntryControllerTest extends TestCase
 {
     public function testView()
     {
-        $this->visit('/')->see('entry">Entrada');
+        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/entry">');
     
         $this->visit('/entry')
-            ->see('de acesso para esta p', true)
+            ->see('<i class="material-icons">filter_list</i>')
         ;
     }
     
     public function testCreate()
     {
-        $this->visit('/entry')->see('Novo');
+        $this->visit('/entry')->see('<a href="'.$this->baseUrl.'/entry/create');
         
         $this->visit('/entry/create');
     
@@ -70,10 +70,11 @@ class EntryControllerTest extends TestCase
     
     public function testDelete()
     {
-        $this->seeInDatabase('entries', ['id' => 1]);
+        $idDelete = Entry::all()->last()['id']; 
+        $this->seeInDatabase('entries', ['id' => $idDelete]);
         $this->visit('/entry');
         $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
         $this->click($idOption);
-        $this->seeIsSoftDeletedInDatabase('entries', ['id' => 1]);
+        $this->seeIsSoftDeletedInDatabase('entries', ['id' => $idDelete]);
     }
 }
