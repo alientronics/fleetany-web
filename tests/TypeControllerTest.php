@@ -48,9 +48,7 @@ class TypeControllerTest extends TestCase
     {
         $idDelete = Type::all()->last()['id'];
         $this->seeInDatabase('types', ['id' => $idDelete]);
-        $this->visit('/type');
-        $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
-        $this->click($idOption);
+        $this->visit('/type/destroy/'.$idDelete);
         $this->seeIsSoftDeletedInDatabase('types', ['id' => $idDelete]);
     }
 }

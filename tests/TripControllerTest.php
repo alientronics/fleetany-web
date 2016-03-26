@@ -92,9 +92,7 @@ class TripControllerTest extends TestCase
     {
         $idDelete = Trip::all()->last()['id'];
         $this->seeInDatabase('trips', ['id' => $idDelete]);
-        $this->visit('/trip');
-        $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
-        $this->click($idOption);
+        $this->visit('/trip/destroy/'.$idDelete);
         $this->seeIsSoftDeletedInDatabase('trips', ['id' => $idDelete]);
     }
 }

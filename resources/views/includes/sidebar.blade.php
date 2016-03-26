@@ -48,10 +48,5 @@
         @else
         	<a class="mdl-navigation__link" href="{{URL::asset("auth/login")}}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>{{Lang::get('menu.Login')}}</a>
         @endif
-        <a class="mdl-navigation__link" href="{{URL::asset("contact")}}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>{{Lang::get('menu.Contact')}}</a>
-        <a class="mdl-navigation__link" href="{{URL::asset("about")}}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>{{Lang::get('menu.About')}}</a>
-      
-      <div class="mdl-layout-spacer"></div>
-      <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
     </nav>
 </div>

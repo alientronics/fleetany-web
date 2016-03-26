@@ -61,9 +61,7 @@ class CompanyControllerTest extends TestCase
     {
         $idDelete = Company::all()->last()['id'];
         $this->seeInDatabase('companies', ['id' => $idDelete]);
-        $this->visit('/company');
-        $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
-        $this->click($idOption);
+        $this->visit('/company/destroy/'.$idDelete);
         $this->seeIsSoftDeletedInDatabase('companies', ['id' => $idDelete]);
     }
 }

@@ -46,9 +46,7 @@ class ModelControllerTest extends TestCase
     {
         $idDelete = Model::all()->last()['id'];
         $this->seeInDatabase('models', ['id' => $idDelete]);
-        $this->visit('/model');
-        $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
-        $this->click($idOption);
+        $this->visit('/model/destroy/'.$idDelete);
         $this->seeIsSoftDeletedInDatabase('models', ['id' => $idDelete]);
     }
 }

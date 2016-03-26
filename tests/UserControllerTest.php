@@ -67,9 +67,7 @@ class UserControllerTest extends TestCase
     {
         $idDelete = User::all()->last()['id'];
         $this->seeInDatabase('users', ['email' => 'staff@alientronics.com.br']);
-        $this->visit('/user');
-        $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
-        $this->click($idOption);
+        $this->visit('/user/destroy/'.$idDelete);
         $this->seeIsSoftDeletedInDatabase('users', ['email' => 'staff@alientronics.com.br']);
     }
     

@@ -72,9 +72,7 @@ class VehicleControllerTest extends TestCase
     {
         $idDelete = Vehicle::all()->last()['id'];
         $this->seeInDatabase('vehicles', ['id' => $idDelete]);
-        $this->visit('/vehicle');
-        $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
-        $this->click($idOption);
+        $this->visit('/vehicle/destroy/'.$idDelete);
         $this->seeIsSoftDeletedInDatabase('vehicles', ['id' => $idDelete]);
     }
 }

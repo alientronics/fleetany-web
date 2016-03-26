@@ -80,9 +80,7 @@ class ContactControllerTest extends TestCase
     {
         $idDelete = Contact::all()->last()['id'];
         $this->seeInDatabase('contacts', ['id' => $idDelete]);
-        $this->visit('/contact');
-        $idOption = $this->crawler->filterXPath("//a[@name='Excluir']")->eq(0)->attr('name');
-        $this->click($idOption);
+        $this->visit('/contact/destroy/'.$idDelete);
         $this->seeIsSoftDeletedInDatabase('contacts', ['id' => $idDelete]);
     }
 }
