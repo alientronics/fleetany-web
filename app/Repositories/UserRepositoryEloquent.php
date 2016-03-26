@@ -28,20 +28,31 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     {
         $users = $this->scopeQuery(function ($query) use ($filters) {
             
+            $query = $query->select('users.*', 'contacts.name', 'companies.name');
+            $query = $query->leftJoin('companies', 'users.company_id', '=', 'companies.id');
+            $query = $query->leftJoin('contacts', 'users.contact_id', '=', 'contacts.id');
+            
             if (!empty($filters['name'])) {
-                $query = $query->where('name', 'like', '%'.$filters['name'].'%');
+                $query = $query->where('users.name', 'like', '%'.$filters['name'].'%');
             }
             if (!empty($filters['email'])) {
-                $query = $query->where('email', 'like', '%'.$filters['email'].'%');
+                $query = $query->where('users.email', 'like', '%'.$filters['email'].'%');
             }
             if (!empty($filters['contact-id'])) {
-                $query = $query->where('contact_id', 'like', '%'.$filters['contact-id'].'%');
+                $query = $query->where('contacts.name', 'like', '%'.$filters['contact-id'].'%');
             }
             if (!empty($filters['company-id'])) {
-                $query = $query->where('company_id', 'like', '%'.$filters['company-id'].'%');
+                $query = $query->where('companies.name', 'like', '%'.$filters['company-id'].'%');
             }
 
-            $query = $query->orderBy($filters['sort'], $filters['order']);
+            if($filters['sort'] == 'contact_id') {
+                $sort = 'contacts.name';
+            } else if($filters['sort'] == 'company_id') {
+                $sort = 'companies.name';
+            } else {
+                $sort = 'users.'.$filters['sort'];
+            }
+            $query = $query->orderBy($sort, $filters['order']);
             
             return $query;
         })->paginate($filters['paginate']);

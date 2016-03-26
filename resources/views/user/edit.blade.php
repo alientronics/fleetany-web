@@ -1,27 +1,22 @@
 @extends('layouts.default')
-@extends('layouts.edit')
 
-@section('title')
-<h1>{{Lang::get("general.User")}}</h1>
+@section('header')
+	@if ($user->id)
+	{{--*/ $operation = 'update' /*--}}
+	<span class="mdl-layout-title">{{$user->name}}</span>
+	@else
+	{{--*/ $operation = 'create' /*--}}
+	<span class="mdl-layout-title">{{Lang::get("general.User")}}</span>
+	@endif
 @stop
 
-@section('sub-title')
-@if ($user->id)
-{{--*/ $operation = 'update' /*--}}
-{{$user->name}}
-@else
-{{--*/ $operation = 'create' /*--}}
-{{Lang::get("general.newuser")}}
-@endif
-@stop
-
-@if ($user->id)
-@section('breadcrumbs', Breadcrumbs::render('user.edit', $user))
-@endif
-
-@section('edit')
+@section('content')
 
 @permission($operation.'.user')
+
+<div class="">
+	<section class="demo-section demo-section--textfield demo-page--textfield mdl-upgraded">
+		<div class="demo-preview-block">
 
 @if (!$user->id)
 {!! Form::open(array('route' => 'user.store')) !!}
@@ -31,44 +26,61 @@
         'route' => ['user.update',$user->id]
     ]) !!}
 @endif
-    <div class="form-group col-lg-12">
-        {!!Form::label('name', Lang::get('general.name'))!!}
-        {!!Form::text('name', $user->name, array('class' => 'form-control'))!!}
-    </div>
 
-    <div class="form-group col-lg-12">
-        {!!Form::label('email', Lang::get('general.email'))!!}
-        {!!Form::text('email', $user->email, array('class' => 'form-control'))!!}
-    </div>
+			
+			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('name')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		{!!Form::text('name', $user->name, array('class' => 'mdl-textfield__input'))!!}
+				{!!Form::label('name', Lang::get('general.name'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+				<span class="mdl-textfield__error">{{ $errors->first('name') }}</span>
+			</div>
+						
+			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('email')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		{!!Form::text('email', $user->email, array('class' => 'mdl-textfield__input'))!!}
+				{!!Form::label('email', Lang::get('general.email'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+				<span class="mdl-textfield__error">{{ $errors->first('email') }}</span>
+			</div>
+						
+			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('password')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		{!!Form::password('password', "", array('class' => 'mdl-textfield__input'))!!}
+				{!!Form::label('password', Lang::get('general.password'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+				<span class="mdl-textfield__error">{{ $errors->first('password') }}</span>
+			</div>
 
-    <div class="form-group col-lg-12">
-        {!!Form::label('password', Lang::get('general.password'))!!}
-        {!!Form::password('password', "", array('class' => 'form-control'))!!}
-    </div>
+    		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('role_id')) is-invalid is-dirty @endif"">
+                {!!Form::select('role_id', $role, $user->role_id, array('class' => 'mdl-textfield__input'))!!}
+       			{!!Form::label('role_id', Lang::get('general.role_id'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+            	<span class="mdl-textfield__error">{{ $errors->first('role_id') }}</span>
+            </div>
 
-    <div class="form-group col-lg-12">
-        {!!Form::label('role_id', Lang::get('general.role_id'))!!}
-        {!!Form::select('role_id', $role, $user->role_id, array('class' => 'form-control'))!!}
-    </div>
+    		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('language')) is-invalid is-dirty @endif"">
+                {!!Form::select('language', $language, $user->language, array('class' => 'mdl-textfield__input'))!!}
+       			{!!Form::label('language', Lang::get('general.language'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+            	<span class="mdl-textfield__error">{{ $errors->first('language') }}</span>
+            </div>
+						
+			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('contact_id')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		{!!Form::text('contact_id', $user->contact_id, array('class' => 'mdl-textfield__input'))!!}
+				{!!Form::label('contact_id', Lang::get('general.contact_id'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+				<span class="mdl-textfield__error">{{ $errors->first('contact_id') }}</span>
+			</div>
+						
+			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('company_id')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		{!!Form::text('company_id', $user->user_id, array('class' => 'mdl-textfield__input'))!!}
+				{!!Form::label('company_id', Lang::get('general.company_id'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+				<span class="mdl-textfield__error">{{ $errors->first('company_id') }}</span>
+			</div>
 
-    <div class="form-group col-lg-12">
-        {!!Form::label('language', Lang::get('general.language'))!!}
-        {!!Form::select('language', $language, $user->language, array('class' => 'form-control'))!!}
-    </div>
-
-    <div class="form-group col-lg-12">
-        {!!Form::label('contact_id', Lang::get('general.contact_id'))!!}
-        {!!Form::text('contact_id', $user->contact_id, array('class' => 'form-control'))!!}
-    </div>
-
-    <div class="form-group col-lg-12">
-        {!!Form::label('company_id', Lang::get('general.company_id'))!!}
-        {!!Form::text('company_id', $user->company_id, array('class' => 'form-control'))!!}
-    </div>
-
-    <button type="submit" class="btn btn-primary">{{Lang::get('general.Submit')}}</button>
-    <button type="reset" class="btn btn-primary">{{Lang::get('general.Reset')}}</button>
+			<div class="mdl-card__actions">
+				<button type="submit" class="mdl-button mdl-color--amber mdl-color-text--white mdl-js-button mdl-button--raised mdl-button--colored">
+                  {{ Lang::get('general.Send') }} 
+                </button>
+			</div>
+	
 {!! Form::close() !!}
+
+		</div>
+	</section>
+</div>
 
 @else
 <div class="alert alert-info">

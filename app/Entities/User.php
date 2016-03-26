@@ -18,11 +18,11 @@ class User extends BaseModel implements Transformable
 
     public function contact()
     {
-        return $this->belongsTo("App\Entities\TypeVehicle");
+        return $this->belongsTo("App\Entities\Contact");
     }
 
     public function company()
     {
-        return $this->belongsTo("App\Entities\TypeVehicle");
+        return $this->belongsTo("App\Entities\Company");
     }
 }
