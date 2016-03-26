@@ -12,13 +12,13 @@
 
 @stop
 
+@permission('view.user') 
+
 @include('user.filter')
 
 @section('content')
 
 <div class="mdl-grid demo-content">
-
-@permission('view.user')  
 
     <div class="mdl-cell mdl-cell--12-col mdl-grid">
 
@@ -63,9 +63,9 @@
     	</table>
 
     </div>
-	
-@endpermission
      
 </div>
 
 @stop
+
+@endpermission
