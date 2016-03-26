@@ -28,7 +28,7 @@ class UserControllerTest extends TestCase
         
         $this->visit('/user/create');
     
-        $idOption = $this->crawler->filterXPath("//select[@id='role_id']/option[5]")->attr('value');
+        $idOption = $this->crawler->filterXPath("//select[@name='role_id']/option[5]")->attr('value');
     
         $this->type('Nome Usuario Teste', 'name')
             ->type('teste@alientronics.com.br', 'email')
@@ -48,7 +48,7 @@ class UserControllerTest extends TestCase
     {
         $this->visit('/user/'.User::all()->last()['id'].'/edit');
         
-        $idOption = $this->crawler->filterXPath("//select[@id='role_id']/option[3]")->attr('value');
+        $idOption = $this->crawler->filterXPath("//select[@name='role_id']/option[3]")->attr('value');
             
         $this->type('Nome Usuario Editado', 'name')
             ->type('emaileditado@usuario.com', 'email')

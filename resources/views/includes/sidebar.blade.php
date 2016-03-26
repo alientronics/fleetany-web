@@ -2,7 +2,7 @@
     <header class="demo-drawer-header mdl-color--primary">
       <span id="logo-lettering">fleetany</span>
       <div class="demo-avatar-dropdown">
-        <span>hello@example.com</span>
+        <span>{{Auth::user()['name']}}</span>
         <div class="mdl-layout-spacer"></div>
         <button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
           <i class="material-icons" role="presentation">arrow_drop_down</i>
