@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use App\User;
+use App\Entities\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
@@ -40,7 +40,7 @@ class TestCase extends BaseTestCase
     
     public function createExecutive()
     {
-        $user = factory(\App\User::class)->create([
+        $user = factory(\App\Entities\User::class)->create([
             'name' => 'Nome Usuario Executive',
             'email' => 'executive@alientronics.com.br',
             'password' => 'admin',
@@ -55,7 +55,7 @@ class TestCase extends BaseTestCase
     
     public function createManager()
     {
-        $user = factory(\App\User::class)->create([
+        $user = factory(\App\Entities\User::class)->create([
             'name' => 'Nome Usuario Manager',
             'email' => 'manager@alientronics.com.br',
             'password' => 'admin',
@@ -70,7 +70,7 @@ class TestCase extends BaseTestCase
     
     public function createOperational()
     {
-        $user = factory(\App\User::class)->create([
+        $user = factory(\App\Entities\User::class)->create([
             'name' => 'Nome Usuario Operational',
             'email' => 'operational@alientronics.com.br',
             'password' => 'admin',
@@ -85,7 +85,7 @@ class TestCase extends BaseTestCase
     
     public function createStaff()
     {
-        $user = factory(\App\User::class)->create([
+        $user = factory(\App\Entities\User::class)->create([
             'name' => 'Nome Usuario Staff',
             'email' => 'staff@alientronics.com.br',
             'password' => 'admin',

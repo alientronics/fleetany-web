@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepositoryEloquent;
-use App\User;
+use App\Entities\User;
 use Hash;
 use Input;
 use Log;

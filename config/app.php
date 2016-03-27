@@ -144,7 +144,6 @@ return [
         Collective\Html\HtmlServiceProvider::class,
 		App\Providers\FormMacroServiceProvider::class,
 		Prettus\Repository\Providers\RepositoryServiceProvider::class,
-		DaveJamesMiller\Breadcrumbs\ServiceProvider::class,
 		"Kodeine\Acl\AclServiceProvider",
         Laravel\Socialite\SocialiteServiceProvider::class,
 

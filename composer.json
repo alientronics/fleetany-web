@@ -9,7 +9,6 @@
         "laravel/framework": "5.2.*",
         "laravelcollective/html": "5.2.*",
         "prettus/l5-repository": "dev-master",
-        "davejamesmiller/laravel-breadcrumbs": "dev-master",
         "prettus/laravel-validation": "1.1.*",
         "caouecs/laravel4-lang": "~2.0",
         "kodeine/laravel-acl": "dev-master",

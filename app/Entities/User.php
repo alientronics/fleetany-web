@@ -7,14 +7,19 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends BaseModel implements Transformable
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Kodeine\Acl\Traits\HasRole;
+
+class User extends BaseModel implements Transformable, AuthenticatableContract, CanResetPasswordContract
 {
-    use TransformableTrait;
-    use SoftDeletes;
+    use Authenticatable, CanResetPassword, HasRole, SoftDeletes, TransformableTrait;
     
     protected $fillable = ['id', 'company_id', 'contact_id', 'pending_company_id',
-                            'name', 'email', 'password', 'language','created_at','updated_at'];
-    protected $hidden = ['remember_token'];
+                            'name', 'email', 'language','created_at','updated_at'];
+    protected $hidden = ['remember_token', 'password'];
 
     public function contact()
     {

@@ -45,7 +45,7 @@ Route::get('auth/logout', 'SocialLoginController@getLogout');
 Route::bind(
     'users',
     function ($value, $route) {
-        return App\User::whereId($value)->first();
+        return App\Entities\User::whereId($value)->first();
     }
 );
 

@@ -3,7 +3,7 @@
 namespace Tests\Acceptance;
 
 use Tests\TestCase;
-use App\User;
+use App\Entities\User;
 
 class UserPermissionTest extends TestCase
 {

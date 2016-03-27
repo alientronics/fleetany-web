@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Kodeine\Acl\Models\Eloquent\Role;
-use App\User;
+use App\Entities\User;
 use Kodeine\Acl\Models\Eloquent\Permission;
 
 class AclTableSeeder extends Seeder
