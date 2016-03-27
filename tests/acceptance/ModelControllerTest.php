@@ -2,10 +2,10 @@
 
 namespace Tests\Acceptance;
 
-use Tests\TestCase;
+use Tests\AcceptanceTestCase;
 use App\Entities\Model;
 
-class ModelControllerTest extends TestCase
+class ModelControllerTest extends AcceptanceTestCase
 {
     public function testView()
     {

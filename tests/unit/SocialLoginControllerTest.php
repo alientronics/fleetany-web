@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
+use Tests\UnitTestCase;
 
-class SocialLoginControllerTest extends TestCase
+class SocialLoginControllerTest extends UnitTestCase
 {
 
     public function testSocialLogin()

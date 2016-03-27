@@ -2,10 +2,10 @@
 
 namespace Tests\Acceptance;
 
-use Tests\TestCase;
+use Tests\AcceptanceTestCase;
 use App\Entities\User;
 
-class UserControllerTest extends TestCase
+class UserControllerTest extends AcceptanceTestCase
 {
     public function setUp()
     {

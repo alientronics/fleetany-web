@@ -6,7 +6,7 @@ use App\Entities\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
-class TestCase extends BaseTestCase
+class AcceptanceTestCase extends BaseTestCase
 {
     use DatabaseTransactions;
     

@@ -2,10 +2,10 @@
 
 namespace Tests\Acceptance;
 
-use Tests\TestCase;
-use App\Entities\Trip;
+use Tests\AcceptanceTestCase;
+use App\Entities\User;
 
-class TripPermissionTest extends TestCase
+class UserPermissionTest extends AcceptanceTestCase
 {
     public function setUp()
     {
@@ -16,36 +16,36 @@ class TripPermissionTest extends TestCase
     
     public function testViewExecutive()
     {
-        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/trip">', true);
+        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/user">', true);
         
-        $this->visit('/trip')
+        $this->visit('/user')
             ->see('<i class="material-icons">filter_list</i>', true)
         ;
     }
     
     public function testCreateExecutive()
     {
-        $this->visit('/trip')->see('<a href="'.$this->baseUrl.'/trip/create', true);
+        $this->visit('/user')->see('<a href="'.$this->baseUrl.'/user/create', true);
         
-        $this->visit('/trip/create')
+        $this->visit('/user/create')
             ->see('de acesso para esta p')
         ;
     }
     
     public function testUpdateExecutive()
     {
-        $this->visit('/trip')
+        $this->visit('/user')
             ->see('Editar', true)
         ;
         
-        $this->visit('/trip/'.Trip::all()->last()['id'].'/edit')
+        $this->visit('/user/'.User::all()->last()['id'].'/edit')
             ->see('de acesso para esta p')
         ;
     }
     
     public function testDeleteExecutive()
     {
-        $this->visit('/trip')
+        $this->visit('/user')
             ->see('Excluir', true)
         ;
     }

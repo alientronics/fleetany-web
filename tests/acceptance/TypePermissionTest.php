@@ -2,10 +2,10 @@
 
 namespace Tests\Acceptance;
 
-use Tests\TestCase;
-use App\Entities\Company;
+use Tests\AcceptanceTestCase;
+use App\Entities\Type;
 
-class CompanyPermissionTest extends TestCase
+class TypePermissionTest extends AcceptanceTestCase
 {
     public function setUp()
     {
@@ -16,36 +16,36 @@ class CompanyPermissionTest extends TestCase
     
     public function testViewExecutive()
     {
-        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/company">', true);
+        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/type">', true);
         
-        $this->visit('/company')
+        $this->visit('/type')
             ->see('<i class="material-icons">filter_list</i>', true)
         ;
     }
     
     public function testCreateExecutive()
     {
-        $this->visit('/company')->see('<a href="'.$this->baseUrl.'/company/create', true);
+        $this->visit('/type')->see('<a href="'.$this->baseUrl.'/type/create', true);
         
-        $this->visit('/company/create')
+        $this->visit('/type/create')
             ->see('de acesso para esta p')
         ;
     }
     
     public function testUpdateExecutive()
     {
-        $this->visit('/company')
+        $this->visit('/type')
             ->see('Editar', true)
         ;
         
-        $this->visit('/company/'.Company::all()->last()['id'].'/edit')
+        $this->visit('/type/'.Type::all()->last()['id'].'/edit')
             ->see('de acesso para esta p')
         ;
     }
     
     public function testDeleteExecutive()
     {
-        $this->visit('/company')
+        $this->visit('/type')
             ->see('Excluir', true)
         ;
     }

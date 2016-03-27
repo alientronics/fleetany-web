@@ -2,10 +2,10 @@
 
 namespace Tests\Acceptance;
 
-use Tests\TestCase;
-use App\Entities\Vehicle;
+use Tests\AcceptanceTestCase;
+use App\Entities\Entry;
 
-class VehiclePermissionTest extends TestCase
+class EntryPermissionTest extends AcceptanceTestCase
 {
     public function setUp()
     {
@@ -16,36 +16,36 @@ class VehiclePermissionTest extends TestCase
     
     public function testViewExecutive()
     {
-        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/vehicle">', true);
+        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/entry">', true);
         
-        $this->visit('/vehicle')
+        $this->visit('/entry')
             ->see('<i class="material-icons">filter_list</i>', true)
         ;
     }
     
     public function testCreateExecutive()
     {
-        $this->visit('/vehicle')->see('<a href="'.$this->baseUrl.'/vehicle/create', true);
+        $this->visit('/entry')->see('<a href="'.$this->baseUrl.'/entry/create', true);
         
-        $this->visit('/vehicle/create')
+        $this->visit('/entry/create')
             ->see('de acesso para esta p')
         ;
     }
     
     public function testUpdateExecutive()
     {
-        $this->visit('/vehicle')
+        $this->visit('/entry')
             ->see('Editar', true)
         ;
         
-        $this->visit('/vehicle/'.Vehicle::all()->last()['id'].'/edit')
+        $this->visit('/entry/'.Entry::all()->last()['id'].'/edit')
             ->see('de acesso para esta p')
         ;
     }
     
     public function testDeleteExecutive()
     {
-        $this->visit('/vehicle')
+        $this->visit('/entry')
             ->see('Excluir', true)
         ;
     }

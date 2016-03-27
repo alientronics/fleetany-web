@@ -2,10 +2,10 @@
 
 namespace Tests\Acceptance;
 
-use Tests\TestCase;
+use Tests\AcceptanceTestCase;
 use App\Entities\Trip;
 
-class TripControllerTest extends TestCase
+class TripControllerTest extends AcceptanceTestCase
 {
     public function testView()
     {
