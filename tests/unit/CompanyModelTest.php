@@ -7,15 +7,14 @@ use Tests\UnitTestCase;
 class CompanyModelTest extends UnitTestCase
 {
 
-	public function testHasContact()
-	{
+    public function testHasContact()
+    {
 
- 		$contact = factory(\App\Entities\Contact::class)->create();
- 		$company = factory(\App\Entities\Company::class)->create([
- 				'contact_id' => $contact->id,
- 			]);
+        $contact = factory(\App\Entities\Contact::class)->create();
+        $company = factory(\App\Entities\Company::class)->create([
+                'contact_id' => $contact->id,
+            ]);
 
-		$this->assertEquals($company->contact->name, $contact->name);
-	}
-
+        $this->assertEquals($company->contact->name, $contact->name);
+    }
 }

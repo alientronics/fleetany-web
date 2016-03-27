@@ -34,5 +34,4 @@ class UnitTestCase extends BaseTestCase
 
         return $app;
     }
-    
 }
