@@ -26,8 +26,7 @@ before_script:
   - php artisan migrate:refresh --seed --force
 
 script:
-  - phpunit --stderr --configuration phpunit.xml --debug
-  - phpunit --coverage-clover build/logs/clover.xml
+  - phpunit --coverage-clover build/logs/clover.xml --stderr --configuration phpunit.xml --debug
   - ./vendor/bin/test-reporter
   - vendor/bin/phpcs --standard=psr2 app/ tests/
   - vendor/bin/phpcpd --verbose app/ tests/
