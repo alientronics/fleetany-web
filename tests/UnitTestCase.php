@@ -2,12 +2,13 @@
 
 namespace Tests;
 
-use App\Entities\User;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class UnitTestCase extends BaseTestCase
 {
-
+    use DatabaseTransactions;
+    
     /**
      * The base URL to use while testing the application.
      *

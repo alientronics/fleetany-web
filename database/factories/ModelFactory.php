@@ -15,6 +15,7 @@ $factory->define(App\Entities\User::class, function ($faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->email,
+        'contact_id' => 1,
         'password' => str_random(10),
         'remember_token' => str_random(10),
     ];
@@ -31,6 +32,48 @@ $factory->define(App\Entities\Contact::class, function ($faker) {
     return [
         'name' => $faker->name,
         'contact_type_id' => 1,
+        'company_id' => 1,
+		'deleted_at' => null,
+    ];
+});
+
+$factory->define(App\Entities\Entry::class, function ($faker) {
+    return [
+        'entry_type_id' => 1,
+        'company_id' => 1,
+		'deleted_at' => null,
+    ];
+});
+
+$factory->define(App\Entities\Model::class, function ($faker) {
+    return [
+        'name' => $faker->name,
+        'model_type_id' => 1,
+        'company_id' => 1,
+		'deleted_at' => null,
+    ];
+});
+
+$factory->define(App\Entities\Trip::class, function ($faker) {
+    return [
+        'vehicle_id' => 1,
+        'trip_type_id' => 1,
+        'company_id' => 1,
+		'deleted_at' => null,
+    ];
+});
+
+$factory->define(App\Entities\Type::class, function ($faker) {
+    return [
+        'name' => $faker->name,
+        'company_id' => 1,
+		'deleted_at' => null,
+    ];
+});
+
+$factory->define(App\Entities\Vehicle::class, function ($faker) {
+    return [
+        'model_vehicle_id' => 1,
         'company_id' => 1,
 		'deleted_at' => null,
     ];
