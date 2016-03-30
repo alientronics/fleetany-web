@@ -94,7 +94,7 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
         $services['in_progress']['result'] = Entry::join('types', 'types.id', '=', 'entries.entry_type_id')
                 ->where('types.name', 'service')
                 ->where('entries.datetime_ini', '<=', Carbon::now())
-                ->where(function($query) {
+                ->where(function ($query) {
                     $query->where('entries.datetime_end', '>', Carbon::now())
                           ->orWhereNull('entries.datetime_end');
                 })

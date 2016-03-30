@@ -8,6 +8,7 @@ use App\Repositories\TripRepository;
 use App\Entities\Trip;
 use Carbon\Carbon;
 use Log;
+
 class TripRepositoryEloquent extends BaseRepository implements TripRepository
 {
 
@@ -94,7 +95,7 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
 
         $trips['in_progress']['color'] = '#3871cf';
         $trips['in_progress']['result'] = Trip::where('trips.pickup_date', '<=', Carbon::now())
-                ->where(function($query) {
+                ->where(function ($query) {
                     $query->where('deliver_date', '>', Carbon::now())
                           ->orWhereNull('deliver_date');
                 })

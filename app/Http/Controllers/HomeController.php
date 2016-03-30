@@ -23,14 +23,19 @@ class HomeController extends Controller
      *
      * @return Response
      */
-    public function index(VehicleRepositoryEloquent $vehicleRepo, EntryRepositoryEloquent $entryRepo, TripRepositoryEloquent $tripRepo)
-    {
+    public function index(
+        VehicleRepositoryEloquent $vehicleRepo,
+        EntryRepositoryEloquent $entryRepo,
+        TripRepositoryEloquent $tripRepo
+    ) {
+    
         $vehiclesStatistics = $vehicleRepo->getVehiclesStatistics();
-        $lastsServiceCostStatistics = $entryRepo->getLastsServiceCostStatistics();
+        $lastsServiceCost = $entryRepo->getLastsServiceCostStatistics();
         $servicesStatistics = $entryRepo->getServicesStatistics();
         $tripsStatistics = $tripRepo->getTripsStatistics();
-        $lastsFuelCostStatistics = $tripRepo->getLastsFuelCostStatistics();
-        return View::make('welcome', ['vehiclesStatistics' => $vehiclesStatistics,
+        $lastsFuelCost = $tripRepo->getLastsFuelCostStatistics();
+        return View::make('welcome', [
+            'vehiclesStatistics' => $vehiclesStatistics,
             'lastsServiceCostStatistics' => $lastsServiceCostStatistics,
             'servicesStatistics' => $servicesStatistics,
             'tripsStatistics' => $tripsStatistics,

@@ -68,7 +68,7 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
         $vehicles['in_use']['color'] = '#3871cf';
         $vehicles['in_use']['result'] = Vehicle::join('trips', 'vehicles.id', '=', 'trips.vehicle_id')
                 ->where('trips.pickup_date', '<=', Carbon::now())
-                ->where(function($query) {
+                ->where(function ($query) {
                     $query->where('deliver_date', '>', Carbon::now())
                           ->orWhereNull('deliver_date');
                 })
@@ -80,7 +80,7 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
                 ->where('types.entity_key', 'vehicle')
                 ->where('types.name', 'repair')
                 ->where('entries.datetime_ini', '<=', Carbon::now())
-                ->where(function($query) {
+                ->where(function ($query) {
                     $query->where('datetime_end', '>', Carbon::now())
                           ->orWhereNull('datetime_end');
                 })
@@ -88,7 +88,8 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
                 ->count();
         
         $vehicles['available']['color'] = '#38cf71';
-        $vehicles['available']['result'] = Vehicle::count() - $vehicles['maintenance']['result'] - $vehicles['in_use']['result'];
+        $vehiclesOff = $vehicles['maintenance']['result'] + $vehicles['in_use']['result'];
+        $vehicles['available']['result'] = Vehicle::count() - $vehiclesOff;
         return $vehicles;
     }
 }
