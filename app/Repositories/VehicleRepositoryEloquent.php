@@ -6,6 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\VehicleRepository;
 use App\Entities\Vehicle;
+use Carbon\Carbon;
 
 class VehicleRepositoryEloquent extends BaseRepository implements VehicleRepository
 {
@@ -59,6 +60,32 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
     public static function getVehicles()
     {
         $vehicles = Vehicle::lists('number', 'id');
+        return $vehicles;
+    }
+    
+    public static function getVehiclesStatistics()
+    {
+        $vehicles['in_use'] = Vehicle::join('trips', 'vehicles.id', '=', 'trips.vehicle_id')
+                ->where('trips.pickup_date', '<=', Carbon::now())
+                ->where(function($query) {
+                    $query->where('deliver_date', '>', Carbon::now())
+                          ->orWhereNull('deliver_date');
+                })
+                ->count();
+                
+        $vehicles['maintenance'] = Vehicle::join('entries', 'vehicles.id', '=', 'entries.vehicle_id')
+                ->join('types', 'types.id', '=', 'entries.entry_type_id')
+                ->where('types.entity_key', 'vehicle')
+                ->where('types.name', 'repair')
+                ->where('entries.datetime_ini', '<=', Carbon::now())
+                ->where(function($query) {
+                    $query->where('datetime_end', '>', Carbon::now())
+                          ->orWhereNull('datetime_end');
+                })
+                ->where('entries.datetime_ini', '<=', Carbon::now())
+                ->count();
+        
+        $vehicles['available'] = Vehicle::count() - $vehicles['maintenance'] - $vehicles['in_use'];
         return $vehicles;
     }
 }

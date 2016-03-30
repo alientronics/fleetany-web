@@ -6,6 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\EntryRepository;
 use App\Entities\Entry;
+use Carbon\Carbon;
 
 class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
 {
@@ -62,5 +63,53 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
         })->paginate($filters['paginate']);
         
         return $entries;
+    }
+    
+    public static function getServiceCostMonthStatistics($month, $year)
+    {
+                
+        $cost = Entry::join('types', 'types.id', '=', 'entries.entry_type_id')
+                ->whereRaw('MONTH(entries.datetime_ini) = ?', $month)
+                ->whereRaw('YEAR(entries.datetime_ini) = ?', $year)
+                ->where('types.name', 'service')
+                ->sum('cost');
+        
+        return $cost;
+    }
+    
+    public static function getLastsServiceCostStatistics()
+    {
+            
+        for ($i = 5; $i <= 0; $i--) {
+            $date = Carbon::now()->subMonths($i);
+            $costs[] = $this->getServiceCostMonthStatistics($date->month, $date->year);
+        }
+        
+        return $costs;
+    }
+    
+    public static function getServicesStatistics()
+    {
+
+
+        $trips['accomplished'] = Entry::join('types', 'types.id', '=', 'entries.entry_type_id')
+                ->where('types.name', 'service')
+                ->where('entries.datetime_end', '<=', Carbon::now())->count();
+
+        $trips['in_progress'] = Entry::join('types', 'types.id', '=', 'entries.entry_type_id')
+                ->where('types.name', 'service')
+                ->where('entries.datetime_ini', '<=', Carbon::now())
+                ->where(function($query) {
+                    $query->where('entries.datetime_end', '>', Carbon::now())
+                          ->orWhereNull('entries.datetime_end');
+                })
+                ->count();
+                
+        $trips['foreseen'] = Entry::join('types', 'types.id', '=', 'entries.entry_type_id')
+                ->where('types.name', 'service')
+                ->where('entries.datetime_ini', '>', Carbon::now())
+                ->count();
+                
+        return $trips;
     }
 }
