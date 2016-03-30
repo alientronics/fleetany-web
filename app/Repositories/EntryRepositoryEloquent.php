@@ -65,38 +65,33 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
         return $entries;
     }
     
-    public static function getServiceCostMonthStatistics($month, $year)
+    public function getServiceCostMonthStatistics($month, $year)
     {
                 
         $cost = Entry::join('types', 'types.id', '=', 'entries.entry_type_id')
-                ->whereRaw('MONTH(entries.datetime_ini) = ?', $month)
-                ->whereRaw('YEAR(entries.datetime_ini) = ?', $year)
+                ->whereRaw('MONTH(entries.datetime_ini) = ?', [$month])
+                ->whereRaw('YEAR(entries.datetime_ini) = ?', [$year])
                 ->where('types.name', 'service')
                 ->sum('cost');
         
         return $cost;
     }
     
-    public static function getLastsServiceCostStatistics()
+    public function getLastsServiceCostStatistics()
     {
-            
-        for ($i = 5; $i <= 0; $i--) {
+        $costs = array();
+        for ($i = 5; $i >= 0; $i--) {
             $date = Carbon::now()->subMonths($i);
-            $costs[] = $this->getServiceCostMonthStatistics($date->month, $date->year);
+            $costs[$date->month] = $this->getServiceCostMonthStatistics($date->month, $date->year);
         }
         
         return $costs;
     }
     
-    public static function getServicesStatistics()
+    public function getServicesStatistics()
     {
-
-
-        $trips['accomplished'] = Entry::join('types', 'types.id', '=', 'entries.entry_type_id')
-                ->where('types.name', 'service')
-                ->where('entries.datetime_end', '<=', Carbon::now())->count();
-
-        $trips['in_progress'] = Entry::join('types', 'types.id', '=', 'entries.entry_type_id')
+        $services['in_progress']['color'] = '#3871cf';
+        $services['in_progress']['result'] = Entry::join('types', 'types.id', '=', 'entries.entry_type_id')
                 ->where('types.name', 'service')
                 ->where('entries.datetime_ini', '<=', Carbon::now())
                 ->where(function($query) {
@@ -105,11 +100,18 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
                 })
                 ->count();
                 
-        $trips['foreseen'] = Entry::join('types', 'types.id', '=', 'entries.entry_type_id')
+        $services['foreseen']['color'] = '#cf7138';
+        $services['foreseen']['result'] = Entry::join('types', 'types.id', '=', 'entries.entry_type_id')
                 ->where('types.name', 'service')
                 ->where('entries.datetime_ini', '>', Carbon::now())
                 ->count();
+           
+        $services['accomplished']['color'] = '#38cf71';
+        $services['accomplished']['result'] = Entry::join('types', 'types.id', '=', 'entries.entry_type_id')
+                ->where('types.name', 'service')
+                ->where('entries.datetime_end', '<=', Carbon::now())->count();
                 
-        return $trips;
+                
+        return $services;
     }
 }

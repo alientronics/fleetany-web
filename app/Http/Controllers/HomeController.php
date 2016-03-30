@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
+use App\Repositories\VehicleRepositoryEloquent;
+use App\Repositories\EntryRepositoryEloquent;
+use App\Repositories\TripRepositoryEloquent;
 
 class HomeController extends Controller
 {
@@ -20,9 +23,19 @@ class HomeController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(VehicleRepositoryEloquent $vehicleRepo, EntryRepositoryEloquent $entryRepo, TripRepositoryEloquent $tripRepo)
     {
-        return View::make('welcome');
+        $vehiclesStatistics = $vehicleRepo->getVehiclesStatistics();
+        $lastsServiceCostStatistics = $entryRepo->getLastsServiceCostStatistics();
+        $servicesStatistics = $entryRepo->getServicesStatistics();
+        $tripsStatistics = $tripRepo->getTripsStatistics();
+        $lastsFuelCostStatistics = $tripRepo->getLastsFuelCostStatistics();
+        return View::make('welcome', ['vehiclesStatistics' => $vehiclesStatistics,
+            'lastsServiceCostStatistics' => $lastsServiceCostStatistics,
+            'servicesStatistics' => $servicesStatistics,
+            'tripsStatistics' => $tripsStatistics,
+            'lastsFuelCostStatistics' => $lastsFuelCostStatistics
+        ]);
     }
 
     public function contact()

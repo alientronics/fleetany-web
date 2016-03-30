@@ -1,0 +1,20 @@
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['bar']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Mes', 'Custo'],
+      @foreach ($statistics as $key => $statistic)
+      ['{{Lang::get("dates.monthShort".$key)}}', {{$statistic}}],
+      @endforeach
+    ]);
+
+    var chart = new google.charts.Bar(document.getElementById('columnchart_material_{{$name}}'));
+
+    chart.draw(data);
+  }
+</script>
+
+<div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-grid">
+    <div id="columnchart_material_{{$name}}" style="width: 900px; height: 500px;"></div>
+</div>

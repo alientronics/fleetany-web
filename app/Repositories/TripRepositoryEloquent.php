@@ -7,7 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\TripRepository;
 use App\Entities\Trip;
 use Carbon\Carbon;
-
+use Log;
 class TripRepositoryEloquent extends BaseRepository implements TripRepository
 {
 
@@ -68,42 +68,44 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
         return $trips;
     }
     
-    public static function getFuelCostMonthStatistics($month, $year)
+    public function getFuelCostMonthStatistics($month, $year)
     {
                 
-        $cost = Trip::whereRaw('MONTH(pickup_date) = ?', $month)
-                ->whereRaw('YEAR(pickup_date) = ?', $year)
+        $cost = Trip::whereRaw('MONTH(pickup_date) = ?', [$month])
+                ->whereRaw('YEAR(pickup_date) = ?', [$year])
                 ->sum('fuel_cost');
         
         return $cost;
     }
     
-    public static function getLastsFuelCostStatistics()
+    public function getLastsFuelCostStatistics()
     {
-            
-        for ($i = 5; $i <= 0; $i--) {
+        $statistics = array();
+        for ($i = 5; $i >= 0; $i--) {
             $date = Carbon::now()->subMonths($i);
-            $costs[] = $this->getFuelCostMonthStatistics($date->month, $date->year);
+            $statistics[$date->month] = $this->getFuelCostMonthStatistics($date->month, $date->year);
         }
         
-        return $costs;
+        return $statistics;
     }
     
-    public static function getTripsStatistics()
+    public function getTripsStatistics()
     {
 
-
-        $trips['accomplished'] = Trip::where('trips.deliver_date', '<=', Carbon::now())->count();
-
-        $trips['in_progress'] = Trip::where('trips.pickup_date', '<=', Carbon::now())
+        $trips['in_progress']['color'] = '#3871cf';
+        $trips['in_progress']['result'] = Trip::where('trips.pickup_date', '<=', Carbon::now())
                 ->where(function($query) {
                     $query->where('deliver_date', '>', Carbon::now())
                           ->orWhereNull('deliver_date');
                 })
                 ->count();
-                
-        $trips['foreseen'] = Trip::where('trips.pickup_date', '>', Carbon::now())->count();
-                
+
+        $trips['foreseen']['color'] = '#cf7138';
+        $trips['foreseen']['result'] = Trip::where('trips.pickup_date', '>', Carbon::now())->count();
+
+        $trips['accomplished']['color'] = '#38cf71';
+        $trips['accomplished']['result'] = Trip::where('trips.deliver_date', '<=', Carbon::now())->count();
+        
         return $trips;
     }
 }
