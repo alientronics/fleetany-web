@@ -1,7 +1,6 @@
 <script type="text/javascript">
-  google.charts.load('current', {'packages':['bar']});
-  google.charts.setOnLoadCallback(drawChart);
-  function drawChart() {
+  google.charts.setOnLoadCallback(drawChart_{{$name}});
+  function drawChart_{{$name}}() {
     var data = google.visualization.arrayToDataTable([
       ['Mes', 'Custo'],
       @foreach ($statistics as $key => $statistic)

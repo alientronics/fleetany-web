@@ -68,9 +68,11 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
     public function getServiceCostMonthStatistics($month, $year)
     {
                 
+        $prefix = \DB::getTablePrefix();
+
         $cost = Entry::join('types', 'types.id', '=', 'entries.entry_type_id')
-                ->whereRaw('MONTH(entries.datetime_ini) = ?', [$month])
-                ->whereRaw('YEAR(entries.datetime_ini) = ?', [$year])
+                ->whereRaw('MONTH('.$prefix.'entries.datetime_ini) = ?', [$month])
+                ->whereRaw('YEAR('.$prefix.'entries.datetime_ini) = ?', [$year])
                 ->where('types.name', 'service')
                 ->sum('cost');
         

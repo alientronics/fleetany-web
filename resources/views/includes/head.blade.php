@@ -24,8 +24,9 @@
 <!--
 <link rel="canonical" href="http://www.example.com/">
 -->
-<script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
-<script src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
+<script type="text/javascript" src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 {!! HTML::script('js/fleetany.js') !!}
 {!! HTML::style('css/style-edit.css') !!}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">

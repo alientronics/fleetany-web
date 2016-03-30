@@ -36,10 +36,10 @@ class HomeController extends Controller
         $lastsFuelCost = $tripRepo->getLastsFuelCostStatistics();
         return View::make('welcome', [
             'vehiclesStatistics' => $vehiclesStatistics,
-            'lastsServiceCostStatistics' => $lastsServiceCostStatistics,
+            'lastsServiceCostStatistics' => $lastsServiceCost,
             'servicesStatistics' => $servicesStatistics,
             'tripsStatistics' => $tripsStatistics,
-            'lastsFuelCostStatistics' => $lastsFuelCostStatistics
+            'lastsFuelCostStatistics' => $lastsFuelCost
         ]);
     }
 
