@@ -6,8 +6,7 @@
   google.charts.load('current', {'packages':['bar']});
 </script>
 
-<div class="mdl-layout mdl-js-layout mdl-color--grey-100">
-	<main class="mdl-layout__content">
+<div class="mdl-grid demo-content">
 	
 		@include ('includes.statistics.cardnumber', ['statistics' => $vehiclesStatistics])
 		
@@ -27,7 +26,6 @@
 														'name' => 'fuel_cost2',  
 		])
 		
-	</main>
 </div>
 
 @endsection

@@ -9,8 +9,13 @@
     ]);
 
     var chart = new google.charts.Bar(document.getElementById('columnchart_material_{{$name}}'));
+    var options = { 
+      legend: {position: 'none'},
+      titlePosition: 'none', axisTitlesPosition: 'none',
+      hAxis: {textPosition: 'none'}, vAxis: {textPosition: 'none'}
+    };    
 
-    chart.draw(data);
+    chart.draw(data, options);
   }
 </script>
 
