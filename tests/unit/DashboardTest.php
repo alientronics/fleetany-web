@@ -8,12 +8,13 @@ use App\Repositories\VehicleRepositoryEloquent;
 use App\Repositories\EntryRepositoryEloquent;
 use App\Repositories\TripRepositoryEloquent;
 
-class VehicleModelTest extends UnitTestCase
+class DashboardModelTest extends UnitTestCase
 {
 
     protected $company_id;
     
-    public function setUp() {
+    public function setUp()
+    {
         
         parent::setUp();
         
@@ -30,7 +31,7 @@ class VehicleModelTest extends UnitTestCase
     public function testVehiclesStatistics()
     {
         $vehicles = array();
-        for($i = 0; $i < 9; $i++) {
+        for ($i = 0; $i < 9; $i++) {
             $vehicles[] = factory(\App\Entities\Vehicle::class)->create([
                 'company_id' => $this->company_id,
             ]);

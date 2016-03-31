@@ -27,13 +27,14 @@ class SocialLoginController extends Controller
     protected $modelRepo;
     protected $vehicleRepo;
     
-    public function __construct(CompanyRepositoryEloquent $companyRepo,
+    public function __construct(
+        CompanyRepositoryEloquent $companyRepo,
         TypeRepositoryEloquent $typeRepo,
         ContactRepositoryEloquent $contactRepo,
         ModelRepositoryEloquent $modelRepo,
         VehicleRepositoryEloquent $vehicleRepo
-        )
-    {
+    ) {
+    
         //$this->middleware('guest', ['except' => 'getLogout']);
         $this->companyRepo = $companyRepo;
         $this->typeRepo = $typeRepo;

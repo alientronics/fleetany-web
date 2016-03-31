@@ -91,7 +91,8 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
         
         $vehicles['available']['color'] = '#38cf71';
         $vehiclesOff = $vehicles['maintenance']['result'] + $vehicles['in_use']['result'];
-        $vehicles['available']['result'] = Vehicle::where('vehicles.company_id', Auth::user()['company_id'])->count() - $vehiclesOff;
+        $vehicles['available']['result'] = Vehicle::where('vehicles.company_id', Auth::user()['company_id'])
+                                            ->count() - $vehiclesOff;
         return $vehicles;
     }
 }
