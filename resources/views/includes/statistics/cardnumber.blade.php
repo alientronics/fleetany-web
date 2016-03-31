@@ -1,4 +1,12 @@
 <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-grid">
+	<div class="mdl-card__actions">
+      <a href="{{$cardLink}}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+        {{$cardTitle}}
+      </a>
+	</div>
+	
+	<div class="mdl-card__actions mdl-card--border"></div>
+  
     @foreach ($statistics as $key => $statistic)
     <svg fill="currentColor" width="200px" height="200px" viewBox="0 0 1 1" class="demo-chart mdl-cell mdl-cell--{{12/count($statistics)}}-col mdl-cell--{{12/count($statistics)}}-col-desktop">
       <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#piechart" mask="url(#piemask)"></use>

@@ -37,6 +37,9 @@ return [
     "InvalidPage"    => "P&aacute;gina Inv&aacute;lida",
 
     // Dashboard
+    "Services"   => "Servi&ccedil;os",
+    "FuelCost"   => "Custos de Combust&iacute;vel",
+    "ServiceCost"   => "Custos de Servi&ccedil;os",
     "Month"   => "Mes",
     "Cost"   => "Custo",
     "in_use" => "Em uso",

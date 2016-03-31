@@ -88,7 +88,7 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
             $statistics[$date->month] = self::getServiceCostMonthStatistics($date->month, $date->year);
         }
         
-        return $statistics;
+        return array_reverse($statistics, true);
     }
     
     public static function getServicesStatistics()

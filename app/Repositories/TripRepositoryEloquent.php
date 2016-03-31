@@ -90,8 +90,8 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
             $date = $date->subMonthNoOverflow();
             $statistics[$date->month] = self::getFuelCostMonthStatistics($date->month, $date->year);
         }
-        
-        return $statistics;
+
+        return array_reverse($statistics, true);
     }
     
     public static function getTripsStatistics()

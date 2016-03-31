@@ -20,5 +20,12 @@
 </script>
 
 <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-grid">
+	<div class="mdl-card__actions">
+      <a href="{{$cardLink}}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+        {{$cardTitle}}
+      </a>
+	</div>
+	
+	<div class="mdl-card__actions mdl-card--border"></div>
     <div id="columnchart_material_{{$name}}" style="width: 900px; height: 500px;"></div>
 </div>
