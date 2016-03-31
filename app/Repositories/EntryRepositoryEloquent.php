@@ -7,6 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\EntryRepository;
 use App\Entities\Entry;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
 {
@@ -90,10 +91,12 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
         return $costs;
     }
     
-    public function getServicesStatistics()
+    public static function getServicesStatistics()
     {
         $services['in_progress']['color'] = '#3871cf';
         $services['in_progress']['result'] = Entry::join('types', 'types.id', '=', 'entries.entry_type_id')
+                ->where('entries.company_id', Auth::user()['company_id'])
+                ->where('types.entity_key', 'entry')
                 ->where('types.name', 'service')
                 ->where('entries.datetime_ini', '<=', Carbon::now())
                 ->where(function ($query) {
@@ -104,12 +107,16 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
                 
         $services['foreseen']['color'] = '#cf7138';
         $services['foreseen']['result'] = Entry::join('types', 'types.id', '=', 'entries.entry_type_id')
+                ->where('entries.company_id', Auth::user()['company_id'])
+                ->where('types.entity_key', 'entry')
                 ->where('types.name', 'service')
                 ->where('entries.datetime_ini', '>', Carbon::now())
                 ->count();
            
         $services['accomplished']['color'] = '#38cf71';
         $services['accomplished']['result'] = Entry::join('types', 'types.id', '=', 'entries.entry_type_id')
+                ->where('entries.company_id', Auth::user()['company_id'])
+                ->where('types.entity_key', 'entry')
                 ->where('types.name', 'service')
                 ->where('entries.datetime_end', '<=', Carbon::now())->count();
                 

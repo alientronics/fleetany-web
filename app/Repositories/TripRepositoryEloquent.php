@@ -8,6 +8,7 @@ use App\Repositories\TripRepository;
 use App\Entities\Trip;
 use Carbon\Carbon;
 use Log;
+use Illuminate\Support\Facades\Auth;
 
 class TripRepositoryEloquent extends BaseRepository implements TripRepository
 {
@@ -90,11 +91,12 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
         return $statistics;
     }
     
-    public function getTripsStatistics()
+    public static function getTripsStatistics()
     {
 
         $trips['in_progress']['color'] = '#3871cf';
         $trips['in_progress']['result'] = Trip::where('trips.pickup_date', '<=', Carbon::now())
+                ->where('trips.company_id', Auth::user()['company_id'])
                 ->where(function ($query) {
                     $query->where('deliver_date', '>', Carbon::now())
                           ->orWhereNull('deliver_date');
@@ -102,10 +104,14 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
                 ->count();
 
         $trips['foreseen']['color'] = '#cf7138';
-        $trips['foreseen']['result'] = Trip::where('trips.pickup_date', '>', Carbon::now())->count();
+        $trips['foreseen']['result'] = Trip::where('trips.pickup_date', '>', Carbon::now())
+                ->where('trips.company_id', Auth::user()['company_id'])
+                ->count();
 
         $trips['accomplished']['color'] = '#38cf71';
-        $trips['accomplished']['result'] = Trip::where('trips.deliver_date', '<=', Carbon::now())->count();
+        $trips['accomplished']['result'] = Trip::where('trips.deliver_date', '<=', Carbon::now())
+                ->where('trips.company_id', Auth::user()['company_id'])
+                ->count();
         
         return $trips;
     }

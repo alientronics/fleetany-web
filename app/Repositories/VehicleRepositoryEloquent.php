@@ -7,6 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\VehicleRepository;
 use App\Entities\Vehicle;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class VehicleRepositoryEloquent extends BaseRepository implements VehicleRepository
 {
@@ -67,6 +68,7 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
     {
         $vehicles['in_use']['color'] = '#3871cf';
         $vehicles['in_use']['result'] = Vehicle::join('trips', 'vehicles.id', '=', 'trips.vehicle_id')
+                ->where('vehicles.company_id', Auth::user()['company_id'])
                 ->where('trips.pickup_date', '<=', Carbon::now())
                 ->where(function ($query) {
                     $query->where('deliver_date', '>', Carbon::now())
@@ -77,6 +79,7 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
         $vehicles['maintenance']['color'] = '#cf7138';
         $vehicles['maintenance']['result'] = Vehicle::join('entries', 'vehicles.id', '=', 'entries.vehicle_id')
                 ->join('types', 'types.id', '=', 'entries.entry_type_id')
+                ->where('vehicles.company_id', Auth::user()['company_id'])
                 ->where('types.entity_key', 'vehicle')
                 ->where('types.name', 'repair')
                 ->where('entries.datetime_ini', '<=', Carbon::now())
@@ -84,12 +87,11 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
                     $query->where('datetime_end', '>', Carbon::now())
                           ->orWhereNull('datetime_end');
                 })
-                ->where('entries.datetime_ini', '<=', Carbon::now())
                 ->count();
         
         $vehicles['available']['color'] = '#38cf71';
         $vehiclesOff = $vehicles['maintenance']['result'] + $vehicles['in_use']['result'];
-        $vehicles['available']['result'] = Vehicle::count() - $vehiclesOff;
+        $vehicles['available']['result'] = Vehicle::where('vehicles.company_id', Auth::user()['company_id'])->count() - $vehiclesOff;
         return $vehicles;
     }
 }
