@@ -70,22 +70,25 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
         return $trips;
     }
     
-    public function getFuelCostMonthStatistics($month, $year)
+    public static function getFuelCostMonthStatistics($month, $year)
     {
-                
-        $cost = Trip::whereRaw('MONTH(pickup_date) = ?', [$month])
-                ->whereRaw('YEAR(pickup_date) = ?', [$year])
+        $prefix = \DB::getTablePrefix();
+        
+        $cost = Trip::whereRaw('MONTH('.$prefix.'trips.pickup_date) = ?', [$month])
+                ->whereRaw('YEAR('.$prefix.'trips.pickup_date) = ?', [$year])
+                ->where('trips.company_id', Auth::user()['company_id'])
                 ->sum('fuel_cost');
         
         return $cost;
     }
     
-    public function getLastsFuelCostStatistics()
+    public static function getLastsFuelCostStatistics()
     {
         $statistics = array();
-        for ($i = 5; $i >= 0; $i--) {
-            $date = Carbon::now()->subMonths($i);
-            $statistics[$date->month] = $this->getFuelCostMonthStatistics($date->month, $date->year);
+        $date = Carbon::now()->addMonthNoOverflow();
+        for ($i = 0; $i < 6; $i++) {
+            $date = $date->subMonthNoOverflow();
+            $statistics[$date->month] = self::getFuelCostMonthStatistics($date->month, $date->year);
         }
         
         return $statistics;
@@ -93,7 +96,6 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
     
     public static function getTripsStatistics()
     {
-
         $trips['in_progress']['color'] = '#3871cf';
         $trips['in_progress']['result'] = Trip::where('trips.pickup_date', '<=', Carbon::now())
                 ->where('trips.company_id', Auth::user()['company_id'])

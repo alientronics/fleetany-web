@@ -66,9 +66,8 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
         return $entries;
     }
     
-    public function getServiceCostMonthStatistics($month, $year)
+    public static function getServiceCostMonthStatistics($month, $year)
     {
-                
         $prefix = \DB::getTablePrefix();
 
         $cost = Entry::join('types', 'types.id', '=', 'entries.entry_type_id')
@@ -80,15 +79,16 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
         return $cost;
     }
     
-    public function getLastsServiceCostStatistics()
+    public static function getLastsServiceCostStatistics()
     {
-        $costs = array();
-        for ($i = 5; $i >= 0; $i--) {
-            $date = Carbon::now()->subMonths($i);
-            $costs[$date->month] = $this->getServiceCostMonthStatistics($date->month, $date->year);
+        $statistics = array();
+        $date = Carbon::now()->addMonthNoOverflow();
+        for ($i = 0; $i < 6; $i++) {
+            $date = $date->subMonthNoOverflow();
+            $statistics[$date->month] = self::getServiceCostMonthStatistics($date->month, $date->year);
         }
         
-        return $costs;
+        return $statistics;
     }
     
     public static function getServicesStatistics()
