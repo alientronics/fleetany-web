@@ -2,7 +2,7 @@
   google.charts.setOnLoadCallback(drawChart_{{$name}});
   function drawChart_{{$name}}() {
     var data = google.visualization.arrayToDataTable([
-      ['Mes', 'Custo'],
+      ['{{Lang::get("general.Month")}}', '{{Lang::get("general.Cost")}}'],
       @foreach ($statistics as $key => $statistic)
       ['{{Lang::get("dates.monthShort".$key)}}', {{$statistic}}],
       @endforeach

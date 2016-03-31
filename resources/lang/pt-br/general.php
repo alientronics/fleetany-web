@@ -36,6 +36,16 @@ return [
     "ChoiceStateFirst"   => "Escolha um estado...",
     "InvalidPage"    => "P&aacute;gina Inv&aacute;lida",
 
+    // Dashboard
+    "Month"   => "Mes",
+    "Cost"   => "Custo",
+    "in_use" => "Em uso",
+    "maintenance" => "Em manuten&ccedil;&atilde;o",
+    "available" => "Dispon&iacute;veis",
+    "in_progress" => "Em andamento",
+    "foreseen" => "Projetados",
+    "accomplished" => "Finalizados",
+    
     // Company
     "Company"   => "Empresa",
     "Companies"    => "Empresas",
