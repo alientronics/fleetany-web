@@ -8,6 +8,11 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\CompanyRepositoryEloquent;
+use App\Repositories\TypeRepositoryEloquent;
+use App\Repositories\ContactRepositoryEloquent;
+use App\Repositories\ModelRepositoryEloquent;
+use App\Repositories\VehicleRepositoryEloquent;
 
 class SocialLoginController extends Controller
 {
@@ -16,9 +21,25 @@ class SocialLoginController extends Controller
     protected $redirectTo = '/';
     protected $redirectAfterLogout = '/';
 
-    public function __construct()
+    protected $companyRepo;
+    protected $typeRepo;
+    protected $contactRepo;
+    protected $modelRepo;
+    protected $vehicleRepo;
+    
+    public function __construct(CompanyRepositoryEloquent $companyRepo,
+        TypeRepositoryEloquent $typeRepo,
+        ContactRepositoryEloquent $contactRepo,
+        ModelRepositoryEloquent $modelRepo,
+        VehicleRepositoryEloquent $vehicleRepo
+        )
     {
         //$this->middleware('guest', ['except' => 'getLogout']);
+        $this->companyRepo = $companyRepo;
+        $this->typeRepo = $typeRepo;
+        $this->contactRepo = $contactRepo;
+        $this->modelRepo = $modelRepo;
+        $this->vehicleRepo = $vehicleRepo;
     }
 
     public function redirectToProvider($provider)
@@ -51,8 +72,11 @@ class SocialLoginController extends Controller
         $newUser = new User([
             'name' => isset($user->name) ? $user->name : $user->nickname,
             'email' => $user->email,
+            'contact_id' => 1,
         ]);
         $newUser->save();
+        
+        $newUser->setUp($this->companyRepo, $this->typeRepo, $this->contactRepo, $this->modelRepo, $this->vehicleRepo);
 
         return $newUser;
     }
