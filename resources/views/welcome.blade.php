@@ -17,13 +17,13 @@
 		@include ('includes.statistics.cardbarchart', ['statistics' => $lastsFuelCostStatistics, 
 														'x_desc' => 'Mes',
 														'y_desc' => 'Custo',
-														'name' => 'fuel_cost1',  
+														'name' => 'fuel_cost',  
 		])
 
-		@include ('includes.statistics.cardbarchart', ['statistics' => $lastsFuelCostStatistics, 
+		@include ('includes.statistics.cardbarchart', ['statistics' => $lastsServiceCostStatistics, 
 														'x_desc' => 'Mes',
 														'y_desc' => 'Custo',
-														'name' => 'fuel_cost2',  
+														'name' => 'service_cost',  
 		])
 		
 </div>
