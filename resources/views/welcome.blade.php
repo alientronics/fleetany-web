@@ -7,7 +7,20 @@
 </script>
 
 <div class="mdl-grid demo-content">
-	
+
+    <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-grid mdl-color--primary">
+    	<div class="mdl-card__actions mdl-color--primary">
+    		<div class="demo-drawer-header mdl-color--primary">
+				<span id="logo-lettering">fleetany</span>
+			</div><div class="demo-drawer-header mdl-color--primary">
+				<span id="welcome-lettering">{{Lang::get('general.Welcome')}}</span>
+			</div>
+			
+    	</div>
+    </div>
+    	
+
+			
 		@include ('includes.statistics.cardnumber', ['statistics' => $vehiclesStatistics,
 										'cardTitle' => Lang::get('general.Vehicles'),
 										'cardLink' => url('/').'/vehicles'
