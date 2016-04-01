@@ -7,14 +7,12 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\TripRepository;
 use App\Entities\Trip;
 use Carbon\Carbon;
-use Log;
 use Illuminate\Support\Facades\Auth;
 
 class TripRepositoryEloquent extends BaseRepository implements TripRepository
 {
 
     protected $rules = [
-        'company_id'    => 'required',
         'vehicle_id'    => 'required',
         'trip_type_id'  => 'required',
         'pickup_date'   => 'required',
@@ -55,6 +53,7 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
                 $query = $query->where('trips.fuel_cost', $filters['fuel-cost']);
             }
 
+            $query = $query->where('trips.company_id', Auth::user()['company_id']);
             if ($filters['sort'] == 'trip_type') {
                 $sort = 'types.name';
             } elseif ($filters['sort'] == 'vehicle') {

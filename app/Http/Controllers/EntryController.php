@@ -58,7 +58,9 @@ class EntryController extends Controller
     {
         try {
             $this->entryRepo->validator();
-            $this->entryRepo->create($this->request->all());
+            $inputs = $this->request->all();
+            $inputs['company_id'] = Auth::user()['company_id'];
+            $this->entryRepo->create($inputs);
             return $this->redirect->to('entry')->with('message', Lang::get(
                 'general.succefullcreate',
                 ['table'=> Lang::get('general.Entry')]
@@ -84,7 +86,9 @@ class EntryController extends Controller
     {
         try {
             $this->entryRepo->validator();
-            $this->entryRepo->update($this->request->all(), $idEntry);
+            $inputs = $this->request->all();
+            $inputs['company_id'] = Auth::user()['company_id'];
+            $this->entryRepo->update($inputs, $idEntry);
             return $this->redirect->to('entry')->with('message', Lang::get(
                 'general.succefullupdate',
                 ['table'=> Lang::get('general.Entry')]

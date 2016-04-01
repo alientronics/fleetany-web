@@ -55,7 +55,9 @@ class ModelController extends Controller
     {
         try {
             $this->modelRepo->validator();
-            $this->modelRepo->create($this->request->all());
+            $inputs = $this->request->all();
+            $inputs['company_id'] = Auth::user()['company_id'];
+            $this->modelRepo->create($inputs);
             return $this->redirect->to('model')->with('message', Lang::get(
                 'general.succefullcreate',
                 ['table'=> Lang::get('general.Model')]
@@ -81,7 +83,9 @@ class ModelController extends Controller
     {
         try {
             $this->modelRepo->validator();
-            $this->modelRepo->update($this->request->all(), $idModel);
+            $inputs = $this->request->all();
+            $inputs['company_id'] = Auth::user()['company_id'];
+            $this->modelRepo->update($inputs, $idModel);
             return $this->redirect->to('model')->with('message', Lang::get(
                 'general.succefullupdate',
                 ['table'=> Lang::get('general.Model')]

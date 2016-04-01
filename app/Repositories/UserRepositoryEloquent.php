@@ -6,6 +6,7 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\UserRepository;
 use App\Entities\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
@@ -44,7 +45,8 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
             if (!empty($filters['company-id'])) {
                 $query = $query->where('companies.name', 'like', '%'.$filters['company-id'].'%');
             }
-
+            
+            $query = $query->where('users.company_id', Auth::user()['company_id']);
             if ($filters['sort'] == 'contact_id') {
                 $sort = 'contacts.name';
             } elseif ($filters['sort'] == 'company_id') {

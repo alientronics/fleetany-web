@@ -58,7 +58,9 @@ class TripController extends Controller
     {
         try {
             $this->tripRepo->validator();
-            $this->tripRepo->create($this->request->all());
+            $inputs = $this->request->all();
+            $inputs['company_id'] = Auth::user()['company_id'];
+            $this->tripRepo->create($inputs);
             return $this->redirect->to('trip')->with('message', Lang::get(
                 'general.succefullcreate',
                 ['table'=> Lang::get('general.Trip')]
@@ -84,7 +86,9 @@ class TripController extends Controller
     {
         try {
             $this->tripRepo->validator();
-            $this->tripRepo->update($this->request->all(), $idTrip);
+            $inputs = $this->request->all();
+            $inputs['company_id'] = Auth::user()['company_id'];
+            $this->tripRepo->update($inputs, $idTrip);
             return $this->redirect->to('trip')->with('message', Lang::get(
                 'general.succefullupdate',
                 ['table'=> Lang::get('general.Trip')]

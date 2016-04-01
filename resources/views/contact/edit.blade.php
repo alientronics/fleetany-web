@@ -27,12 +27,6 @@
     ]) !!}
 @endif
 
-    		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('company_id')) is-invalid is-dirty @endif"">
-                {!!Form::select('company_id', $company_id, $contact->company_id, array('class' => 'mdl-textfield__input'))!!}
-       			{!!Form::label('company_id', Lang::get('general.company_id'), array('class' => 'mdl-textfield__label is-dirty'))!!}
-            	<span class="mdl-textfield__error">{{ $errors->first('company_id') }}</span>
-            </div>
-
     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('contact_type_id')) is-invalid is-dirty @endif"">
                 {!!Form::select('contact_type_id', $contact_type_id, $contact->contact_type_id, array('class' => 'mdl-textfield__input'))!!}
        			{!!Form::label('contact_type_id', Lang::get('general.contact_type'), array('class' => 'mdl-textfield__label is-dirty'))!!}

@@ -6,12 +6,12 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\ContactRepository;
 use App\Entities\Contact;
+use Illuminate\Support\Facades\Auth;
 
 class ContactRepositoryEloquent extends BaseRepository implements ContactRepository
 {
 
     protected $rules = [
-        'company_id'      => 'required',
         'contact_type_id'   => 'required',
         'name'      => 'min:3|required',
         'license_no'  => 'required',
@@ -42,6 +42,7 @@ class ContactRepositoryEloquent extends BaseRepository implements ContactReposit
                 $query = $query->where('contacts.city', 'like', '%'.$filters['city'].'%');
             }
 
+            $query = $query->where('contacts.company_id', Auth::user()['company_id']);
             if ($filters['sort'] == 'contact_type') {
                 $query = $query->join('types', 'contacts.contact_type_id', '=', 'types.id');
                 $sort = 'types.name';

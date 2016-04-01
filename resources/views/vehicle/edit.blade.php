@@ -26,12 +26,6 @@
         'route' => ['vehicle.update',$vehicle->id]
     ]) !!}
 @endif
-
-    		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('company_id')) is-invalid is-dirty @endif"">
-                {!!Form::select('company_id', $company_id, $vehicle->company_id, array('class' => 'mdl-textfield__input'))!!}
-       			{!!Form::label('company_id', Lang::get('general.company_id'), array('class' => 'mdl-textfield__label is-dirty'))!!}
-            	<span class="mdl-textfield__error">{{ $errors->first('company_id') }}</span>
-            </div>
             
     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('model_vehicle_id')) is-invalid is-dirty @endif"">
                 {!!Form::select('model_vehicle_id', $model_vehicle_id, $vehicle->model_vehicle_id, array('class' => 'mdl-textfield__input'))!!}

@@ -6,12 +6,12 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\ModelRepository;
 use App\Entities\Model;
+use Illuminate\Support\Facades\Auth;
 
 class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
 {
 
     protected $rules = [
-        'company_id'      => 'required',
         'model_type_id'   => 'required',
         'name'      => 'min:3|required',
         ];
@@ -44,6 +44,7 @@ class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
                 $query = $query->where('models.name', 'like', '%'.$filters['name'].'%');
             }
 
+            $query = $query->where('models.company_id', Auth::user()['company_id']);
             if ($filters['sort'] == 'model_type') {
                 $sort = 'types.name';
             } elseif ($filters['sort'] == 'vendor') {

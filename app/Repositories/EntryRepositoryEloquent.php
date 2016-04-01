@@ -9,11 +9,11 @@ use App\Entities\Entry;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
+
 class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
 {
 
     protected $rules = [
-        'company_id'      => 'required',
         'entry_type_id'   => 'required',
         'datetime_ini'  => 'min:3|required',
         'cost'      => 'min:3|required',
@@ -51,6 +51,7 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
                 $query = $query->where('entries.cost', $filters['cost']);
             }
 
+            $query = $query->where('entries.company_id', Auth::user()['company_id']);
             if ($filters['sort'] == 'vehicle') {
                 $sort = 'models.name';
             } elseif ($filters['sort'] == 'entry_type') {

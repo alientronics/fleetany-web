@@ -26,12 +26,6 @@
         'route' => ['type.update',$type->id]
     ]) !!}
 @endif
-
-    		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('company_id')) is-invalid is-dirty @endif"">
-                {!!Form::select('company_id', $company_id, $type->company_id, array('class' => 'mdl-textfield__input'))!!}
-       			{!!Form::label('company_id', Lang::get('general.company_id'), array('class' => 'mdl-textfield__label is-dirty'))!!}
-            	<span class="mdl-textfield__error">{{ $errors->first('company_id') }}</span>
-            </div>
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('name')) is-invalid is-dirty @endif"" data-upgraded="eP">
          		{!!Form::text('name', $type->name, array('class' => 'mdl-textfield__input'))!!}

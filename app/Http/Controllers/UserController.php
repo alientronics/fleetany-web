@@ -59,7 +59,9 @@ class UserController extends Controller
         try {
             $this->userRepo->validator();
             Input::merge(array('password' => Hash::make(Input::get('password'))));
-            $this->userRepo->create($this->request->all());
+            $inputs = $this->request->all();
+            $inputs['company_id'] = Auth::user()['company_id'];
+            $this->userRepo->create($inputs);
             User::all()->last()->assignRole(Input::get('role_id'));
             return $this->redirect->to('user')->with('message', Lang::get(
                 'general.succefullcreate',
@@ -88,7 +90,9 @@ class UserController extends Controller
         try {
             $this->userRepo->validator();
             Input::merge(array('password' => Hash::make(Input::get('password'))));
-            $this->userRepo->update($this->request->all(), $idUser);
+            $inputs = $this->request->all();
+            $inputs['company_id'] = Auth::user()['company_id'];
+            $this->userRepo->update($inputs, $idUser);
             User::all()->last()->assignRole(Input::get('role_id'));
             return $this->redirect->to('user')->with('message', Lang::get(
                 'general.succefullupdate',

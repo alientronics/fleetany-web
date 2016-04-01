@@ -13,7 +13,6 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
 {
 
     protected $rules = [
-        'company_id'      => 'required',
         'model_vehicle_id'   => 'required',
         'cost'      => 'min:3|required',
         ];
@@ -45,6 +44,7 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
                 $query = $query->where('vehicles.cost', 'like', '%'.$filters['cost'].'%');
             }
 
+            $query = $query->where('vehicles.company_id', Auth::user()['company_id']);
             if ($filters['sort'] == 'model_vehicle') {
                 $sort = 'models.name';
             } else {

@@ -6,12 +6,12 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\TypeRepository;
 use App\Entities\Type;
+use Illuminate\Support\Facades\Auth;
 
 class TypeRepositoryEloquent extends BaseRepository implements TypeRepository
 {
 
     protected $rules = [
-        'company_id'      => 'required',
         'name'      => 'min:3|required',
         ];
 
@@ -36,6 +36,7 @@ class TypeRepositoryEloquent extends BaseRepository implements TypeRepository
                 $query = $query->where('name', 'like', '%'.$filters['name'].'%');
             }
 
+            $query = $query->where('company_id', Auth::user()['company_id']);
             $query = $query->orderBy($filters['sort'], $filters['order']);
             
             return $query;
