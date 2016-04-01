@@ -115,5 +115,7 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
             'cost' => 50000,
             'description' => 'Generic Vehicle',
             'company_id' => $company->id));
+        
+        $this->syncRoles('administrator');
     }
 }
