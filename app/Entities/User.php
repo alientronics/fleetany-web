@@ -71,6 +71,10 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
             'name' => 'driver',
             'company_id' => $company->id));
     
+        $typeDetail = $typeRepo->create(array('entity_key' => 'contact',
+            'name' => 'detail',
+            'company_id' => $company->id));
+    
         $typeRepo->create(array('entity_key' => 'trip',
             'name' => 'tour',
             'company_id' => $company->id));
@@ -81,7 +85,7 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
 
         $contactRepo = new ContactRepositoryEloquent(new Application);
         $contactUser = $contactRepo->create(array('company_id' => $company->id,
-            'contact_type_id' => 3,
+            'contact_type_id' => $typeDetail->id,
             'name' => $this->name,
             'license_no' => '123456'));
         $this->contact_id = $contactUser->id;
