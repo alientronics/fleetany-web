@@ -23,7 +23,19 @@
 </head>
 
 <body>
+	<div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
+      <div class="mdl-snackbar__text"></div>
+      <button class="mdl-snackbar__action" type="button"></button>
+    </div>
+    
     @yield('content')
+    
+    @if (!empty($errors->first('email'))) 
+      <script>showSnackBar('{{ $errors->first('email') }}')</script> 
+    @endif
+    @if (!empty($errors->first('password'))) 
+      <script>showSnackBar('{{ $errors->first('password') }}')</script> 
+    @endif
 </body>
 
 </html>

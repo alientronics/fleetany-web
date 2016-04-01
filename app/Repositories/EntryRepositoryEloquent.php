@@ -9,7 +9,6 @@ use App\Entities\Entry;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
-
 class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
 {
 
