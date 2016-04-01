@@ -37,7 +37,8 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
         return $this->belongsTo("App\Entities\Company");
     }
     
-    public function setUp() {
+    public function setUp()
+    {
     
         $companyRepo = new CompanyRepositoryEloquent(new Application);
         $company = $companyRepo->create(array('name' => $this->name . ' Inc.', 'api_token' => '123'));

@@ -40,20 +40,60 @@ class UserModelTest extends UnitTestCase
         $user->setUp();
     
         $this->seeInDatabase('companies', ['id' => Company::all()->last()['id'], 'name' => $user->name . ' Inc.']);
-        $this->seeInDatabase('types', ['company_id' => $user->company_id, 'entity_key' => 'entry', 'name' => 'repair']);
-        $this->seeInDatabase('types', ['company_id' => $user->company_id, 'entity_key' => 'entry', 'name' => 'service']);
-        $this->seeInDatabase('types', ['company_id' => $user->company_id, 'entity_key' => 'vehicle', 'name' => 'car']);
-        $this->seeInDatabase('types', ['company_id' => $user->company_id, 'entity_key' => 'vehicle', 'name' => 'truck']);
-        $this->seeInDatabase('types', ['company_id' => $user->company_id, 'entity_key' => 'contact', 'name' => 'vendor']);
-        $this->seeInDatabase('types', ['company_id' => $user->company_id, 'entity_key' => 'contact', 'name' => 'driver']);
-        $this->seeInDatabase('types', ['company_id' => $user->company_id, 'entity_key' => 'trip', 'name' => 'tour']);
-        $this->seeInDatabase('types', ['company_id' => $user->company_id, 'entity_key' => 'trip', 'name' => 'delivery']);
-        $this->seeInDatabase('contacts', ['company_id' => $user->company_id, 'name' => $user->name, 'license_no' => '123456']);
-        $this->seeInDatabase('contacts', ['company_id' => $user->company_id, 'name' => 'Generic Vendor', 'license_no' => '123456']);
-        $this->seeInDatabase('contacts', ['company_id' => $user->company_id, 'name' => 'Generic Driver', 'license_no' => '123456']);
-        $this->seeInDatabase('models', ['company_id' => $user->company_id, 'name' => 'Generic Car']);
-        $this->seeInDatabase('models', ['company_id' => $user->company_id, 'name' => 'Generic Truck']);
-        $this->seeInDatabase('vehicles', ['company_id' => $user->company_id, 'description' => 'Generic Vehicle', 'cost' => 50000]);
+        $this->seeInDatabase('types', ['company_id' => $user->company_id,
+            'entity_key' => 'entry',
+            'name' => 'repair'
+        ]);
+        $this->seeInDatabase('types', ['company_id' => $user->company_id,
+            'entity_key' => 'entry',
+            'name' => 'service'
+        ]);
+        $this->seeInDatabase('types', ['company_id' => $user->company_id,
+            'entity_key' => 'vehicle',
+            'name' => 'car'
+        ]);
+        $this->seeInDatabase('types', ['company_id' => $user->company_id,
+            'entity_key' => 'vehicle',
+            'name' => 'truck'
+        ]);
+        $this->seeInDatabase('types', ['company_id' => $user->company_id,
+            'entity_key' => 'contact',
+            'name' => 'vendor'
+        ]);
+        $this->seeInDatabase('types', ['company_id' => $user->company_id,
+            'entity_key' => 'contact',
+            'name' => 'driver'
+        ]);
+        $this->seeInDatabase('types', ['company_id' => $user->company_id,
+            'entity_key' => 'trip',
+            'name' => 'tour'
+        ]);
+        $this->seeInDatabase('types', ['company_id' => $user->company_id,
+            'entity_key' => 'trip',
+            'name' => 'delivery'
+        ]);
+        $this->seeInDatabase('contacts', ['company_id' => $user->company_id,
+            'name' => $user->name,
+            'license_no' => '123456'
+        ]);
+        $this->seeInDatabase('contacts', ['company_id' => $user->company_id,
+            'name' => 'Generic Vendor',
+            'license_no' => '123456'
+        ]);
+        $this->seeInDatabase('contacts', ['company_id' => $user->company_id,
+            'name' => 'Generic Driver',
+            'license_no' => '123456'
+        ]);
+        $this->seeInDatabase('models', ['company_id' => $user->company_id,
+            'name' => 'Generic Car'
+        ]);
+        $this->seeInDatabase('models', ['company_id' => $user->company_id,
+            'name' => 'Generic Truck'
+        ]);
+        $this->seeInDatabase('vehicles', ['company_id' => $user->company_id,
+            'description' => 'Generic Vehicle',
+            'cost' => 50000
+        ]);
     
     }
 }

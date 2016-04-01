@@ -74,6 +74,7 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
                 ->whereRaw('MONTH('.$prefix.'entries.datetime_ini) = ?', [$month])
                 ->whereRaw('YEAR('.$prefix.'entries.datetime_ini) = ?', [$year])
                 ->where('types.name', 'service')
+                ->where('entries.company_id', Auth::user()['company_id'])
                 ->sum('cost');
         
         return $cost;
