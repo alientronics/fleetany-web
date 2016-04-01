@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model as BaseModel;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Container\Container as Application;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -36,19 +37,15 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
         return $this->belongsTo("App\Entities\Company");
     }
     
-    public function setUp(
-        CompanyRepositoryEloquent $companyRepo,
-        TypeRepositoryEloquent $typeRepo,
-        ContactRepositoryEloquent $contactRepo,
-        ModelRepositoryEloquent $modelRepo,
-        VehicleRepositoryEloquent $vehicleRepo
-    ) {
+    public function setUp() {
     
+        $companyRepo = new CompanyRepositoryEloquent(new Application);
         $company = $companyRepo->create(array('name' => $this->name . ' Inc.', 'api_token' => '123'));
     
         $this->company_id = $company->id;
         $this->save();
         
+        $typeRepo = new TypeRepositoryEloquent(new Application);
         $typeRepo->create(array('entity_key' => 'entry',
             'name' => 'repair',
             'company_id' => $company->id));
@@ -80,7 +77,8 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
         $typeRepo->create(array('entity_key' => 'trip',
             'name' => 'delivery',
             'company_id' => $company->id));
-    
+
+        $contactRepo = new ContactRepositoryEloquent(new Application);
         $contactVendor = $contactRepo->create(array('company_id' => $company->id,
             'contact_type_id' => $typeVendor->id,
             'name' => 'Generic Vendor',
@@ -90,7 +88,8 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
             'contact_type_id' => $typeDriver->id,
             'name' => 'Generic Driver',
             'license_no' => '123456'));
-    
+
+        $modelRepo = new ModelRepositoryEloquent(new Application);
         $modelCar = $modelRepo->create(array('model_type_id' => $typeCar->id,
             'vendor_id' => $contactVendor->id,
             'name' => 'Generic Car',
@@ -100,7 +99,8 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
             'vendor_id' => $contactVendor->id,
             'name' => 'Generic Truck',
             'company_id' => $company->id));
-    
+
+        $vehicleRepo = new VehicleRepositoryEloquent(new Application);
         $vehicleRepo->create(array('model_vehicle_id' => $modelCar->id,
             'number' => 'IOP-1234',
             'initial_miliage' => 123,
