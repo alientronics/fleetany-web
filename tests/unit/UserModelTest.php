@@ -48,6 +48,7 @@ class UserModelTest extends UnitTestCase
         $this->seeInDatabase('types', ['company_id' => $user->company_id, 'entity_key' => 'contact', 'name' => 'driver']);
         $this->seeInDatabase('types', ['company_id' => $user->company_id, 'entity_key' => 'trip', 'name' => 'tour']);
         $this->seeInDatabase('types', ['company_id' => $user->company_id, 'entity_key' => 'trip', 'name' => 'delivery']);
+        $this->seeInDatabase('contacts', ['company_id' => $user->company_id, 'name' => $user->name, 'license_no' => '123456']);
         $this->seeInDatabase('contacts', ['company_id' => $user->company_id, 'name' => 'Generic Vendor', 'license_no' => '123456']);
         $this->seeInDatabase('contacts', ['company_id' => $user->company_id, 'name' => 'Generic Driver', 'license_no' => '123456']);
         $this->seeInDatabase('models', ['company_id' => $user->company_id, 'name' => 'Generic Car']);

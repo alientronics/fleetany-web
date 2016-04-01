@@ -79,6 +79,13 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
             'company_id' => $company->id));
 
         $contactRepo = new ContactRepositoryEloquent(new Application);
+        $contactUser = $contactRepo->create(array('company_id' => $company->id,
+            'contact_type_id' => 3,
+            'name' => $this->name,
+            'license_no' => '123456'));
+        $this->contact_id = $contactUser->id;
+        $this->save();
+
         $contactVendor = $contactRepo->create(array('company_id' => $company->id,
             'contact_type_id' => $typeVendor->id,
             'name' => 'Generic Vendor',
