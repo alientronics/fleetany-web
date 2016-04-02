@@ -41,7 +41,7 @@
 			</div>
 						
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('password')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::password('password', "", array('class' => 'mdl-textfield__input'))!!}
+         		{!!Form::password('password', array('class' => 'mdl-textfield__input'))!!}
 				{!!Form::label('password', Lang::get('general.password'), array('class' => 'mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('password') }}</span>
 			</div>
