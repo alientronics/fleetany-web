@@ -95,4 +95,16 @@ class TripControllerTest extends AcceptanceTestCase
         $this->visit('/trip/destroy/'.$idDelete);
         $this->seeIsSoftDeletedInDatabase('trips', ['id' => $idDelete]);
     }
+    
+    public function testErrors()
+    {
+        $this->visit('/trip/create')
+            ->press('Enviar')
+            ->seePageIs('/trip/create')
+            ->see('de um valor para o campo pickup date.</span>')
+            ->see('de um valor para o campo end mileage.</span>')
+            ->see('de um valor para o campo fuel cost.</span>')
+            ->see('de um valor para o campo fuel amount.</span>')
+        ;
+    }
 }

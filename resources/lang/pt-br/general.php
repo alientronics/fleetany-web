@@ -76,6 +76,8 @@ return [
     "newentry" => "Nova Entrada",
     "entry_type"    => "Tipo de Entrada",
     "entry_number"  => "N&uacute;mero da Entrada",
+    "datetime_ini"  => "Data e hora de In&iacute;cio",
+    "datetime_end"  => "Data e hora de T&eacute;rmino",
     
     // Model
     "Model"   => "Modelo",

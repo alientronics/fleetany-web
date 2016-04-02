@@ -51,4 +51,13 @@ class TypeControllerTest extends AcceptanceTestCase
         $this->visit('/type/destroy/'.$idDelete);
         $this->seeIsSoftDeletedInDatabase('types', ['id' => $idDelete]);
     }
+    
+    public function testErrors()
+    {
+        $this->visit('/type/create')
+            ->press('Enviar')
+            ->seePageIs('/type/create')
+            ->see('de um valor para o campo nome.</span>')
+        ;
+    }
 }

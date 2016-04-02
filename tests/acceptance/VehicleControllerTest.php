@@ -75,4 +75,13 @@ class VehicleControllerTest extends AcceptanceTestCase
         $this->visit('/vehicle/destroy/'.$idDelete);
         $this->seeIsSoftDeletedInDatabase('vehicles', ['id' => $idDelete]);
     }
+    
+    public function testErrors()
+    {
+        $this->visit('/vehicle/create')
+            ->press('Enviar')
+            ->seePageIs('/vehicle/create')
+            ->see('de um valor para o campo cost.</span>')
+        ;
+    }
 }

@@ -83,4 +83,14 @@ class ContactControllerTest extends AcceptanceTestCase
         $this->visit('/contact/destroy/'.$idDelete);
         $this->seeIsSoftDeletedInDatabase('contacts', ['id' => $idDelete]);
     }
+    
+    public function testErrors()
+    {
+        $this->visit('/contact/create')
+            ->press('Enviar')
+            ->seePageIs('/contact/create')
+            ->see('de um valor para o campo nome.</span>')
+            ->see('de um valor para o campo license no.</span>')
+        ;
+    }
 }

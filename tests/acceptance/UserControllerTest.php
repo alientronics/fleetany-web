@@ -94,4 +94,13 @@ class UserControllerTest extends AcceptanceTestCase
             'language' => 'en']
         );
     }
+    
+    public function testErrors()
+    {
+        $this->visit('/user/create')
+            ->press('Enviar')
+            ->seePageIs('/user/create')
+            ->see('de um valor para o campo nome.</span>')
+        ;
+    }
 }

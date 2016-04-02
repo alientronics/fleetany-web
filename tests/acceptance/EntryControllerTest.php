@@ -75,4 +75,14 @@ class EntryControllerTest extends AcceptanceTestCase
         $this->visit('/entry/destroy/'.$idDelete);
         $this->seeIsSoftDeletedInDatabase('entries', ['id' => $idDelete]);
     }
+    
+    public function testErrors()
+    {
+        $this->visit('/entry/create')
+            ->press('Enviar')
+            ->seePageIs('/entry/create')
+            ->see('de um valor para o campo datetime ini.</span>')
+            ->see('de um valor para o campo cost.</span>')
+        ;
+    }
 }

@@ -64,4 +64,14 @@ class CompanyControllerTest extends AcceptanceTestCase
         $this->visit('/company/destroy/'.$idDelete);
         $this->seeIsSoftDeletedInDatabase('companies', ['id' => $idDelete]);
     }
+    
+    public function testErrors()
+    {
+        $this->visit('/company/create')
+            ->press('Enviar')
+            ->seePageIs('/company/create')
+            ->see('de um valor para o campo nome.</span>')
+            ->see('de um valor para o campo api token.</span>')
+        ;
+    }
 }
