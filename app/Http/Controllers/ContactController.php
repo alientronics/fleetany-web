@@ -69,7 +69,8 @@ class ContactController extends Controller
     public function edit($idContact)
     {
         $contact = $this->contactRepo->find($idContact);
-
+        $this->helper->validateRecord($contact);
+        
         $company_id = CompanyRepositoryEloquent::getCompanies();
         $contact_type_id = TypeRepositoryEloquent::getTypes();
         
@@ -79,6 +80,8 @@ class ContactController extends Controller
     public function update($idContact)
     {
         try {
+            $contact = $this->contactRepo->find($idContact);
+            $this->helper->validateRecord($contact);
             $this->contactRepo->validator();
             $inputs = $this->request->all();
             $inputs['company_id'] = Auth::user()['company_id'];
@@ -98,7 +101,9 @@ class ContactController extends Controller
     {
         Log::info('Delete field: '.$idContact);
 
-        if ($this->contactRepo->find($idContact)) {
+        $contact = $this->contactRepo->find($idContact);
+        if ($contact) {
+            $this->helper->validateRecord($contact);
             $this->contactRepo->delete($idContact);
             $this->session->flash('message', Lang::get("general.deletedregister"));
         }

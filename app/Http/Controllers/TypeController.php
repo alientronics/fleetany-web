@@ -66,6 +66,7 @@ class TypeController extends Controller
     public function edit($idType)
     {
         $type = $this->typeRepo->find($idType);
+        $this->helper->validateRecord($type);
 
         $company_id = CompanyRepositoryEloquent::getCompanies();
             
@@ -75,6 +76,8 @@ class TypeController extends Controller
     public function update($idType)
     {
         try {
+            $type = $this->typeRepo->find($idType);
+            $this->helper->validateRecord($type);
             $this->typeRepo->validator();
             $inputs = $this->request->all();
             $inputs['company_id'] = Auth::user()['company_id'];
@@ -97,7 +100,9 @@ class TypeController extends Controller
     {
         Log::info('Delete field: '.$idType);
 
-        if ($this->typeRepo->find($idType)) {
+        $type = $this->typeRepo->find($idType);
+        if ($type) {
+            $this->helper->validateRecord($type);
             $this->typeRepo->delete($idType);
         }
         return $this->redirect->to('type')->with('message', Lang::get("general.deletedregister"));

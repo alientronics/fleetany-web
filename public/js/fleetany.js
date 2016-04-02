@@ -37,7 +37,7 @@ function showSnackBar(message) {
 	  $(window).load(function() {
 	    'use strict';
 	    var data = {
-	      message: message,
+	      message: $('<textarea />').html(message).text(),
 	      timeout: 5000,
 //		       actionHandler: handler,
 	      actionText: 'Undo'

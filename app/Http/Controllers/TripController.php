@@ -74,6 +74,7 @@ class TripController extends Controller
     public function edit($idTrip)
     {
         $trip = $this->tripRepo->find($idTrip);
+        $this->helper->validateRecord($trip);
 
         $company_id = CompanyRepositoryEloquent::getCompanies();
         $vehicle_id = VehicleRepositoryEloquent::getVehicles();
@@ -85,6 +86,8 @@ class TripController extends Controller
     public function update($idTrip)
     {
         try {
+            $trip = $this->tripRepo->find($idTrip);
+            $this->helper->validateRecord($trip);
             $this->tripRepo->validator();
             $inputs = $this->request->all();
             $inputs['company_id'] = Auth::user()['company_id'];
@@ -103,7 +106,9 @@ class TripController extends Controller
     {
         Log::info('Delete field: '.$idTrip);
 
-        if ($this->tripRepo->find($idTrip)) {
+        $trip = $this->tripRepo->find($idTrip);
+        if ($trip) {
+            $this->helper->validateRecord($trip);
             $this->tripRepo->delete($idTrip);
         }
         return $this->redirect->to('trip')->with('message', Lang::get("general.deletedregister"));

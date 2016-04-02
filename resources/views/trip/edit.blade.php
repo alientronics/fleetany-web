@@ -125,7 +125,7 @@
 
 @else
 <div class="alert alert-info">
-	{{Lang::get("general.acessdenied")}}
+	{{Lang::get("general.accessdenied")}}
 </div>
 @endpermission
 

@@ -76,6 +76,7 @@ class UserController extends Controller
     public function edit($idUser)
     {
         $user = $this->userRepo->find($idUser);
+        $this->helper->validateRecord($user);
         
         $role = $this->helper->getAvailableRoles();
         $language = $this->helper->getAvailableLanguages();
@@ -88,6 +89,8 @@ class UserController extends Controller
     public function update($idUser)
     {
         try {
+            $user = $this->userRepo->find($idUser);
+            $this->helper->validateRecord($user);
             $this->userRepo->validator();
             Input::merge(array('password' => Hash::make(Input::get('password'))));
             $inputs = $this->request->all();
@@ -108,7 +111,9 @@ class UserController extends Controller
     {
         Log::info('Delete field: '.$idUser);
 
-        if ($idUser != 1 && $this->userRepo->find($idUser)) {
+        $user = $this->userRepo->find($idUser);
+        if ($idUser != 1 && $user) {
+            $this->helper->validateRecord($user);
             $this->userRepo->delete($idUser);
         }
         return $this->redirect->to('user')->with('message', Lang::get("general.deletedregister"));

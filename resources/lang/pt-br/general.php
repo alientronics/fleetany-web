@@ -18,7 +18,7 @@ return [
     "Actions"   => "A&ccedil;&otilde;es",
     "Comment"   => "Coment&aacute;rio",
     "norecordsfound"  => "Registros n&atilde;o encontrados",
-    "acessdenied"  => "Voc&ecirc; n&atilde;o tem permiss&atilde;o de acesso para esta p&aacute;gina",
+    "accessdenied"  => "Voc&ecirc; n&atilde;o tem permiss&atilde;o de acesso para esta p&aacute;gina",
     "succefullcreate" => ":table criado com sucesso",
     "succefullupdate" => ":table atualizado com sucesso",
     "SelectValue"     => "Selecione um valor",

@@ -5,6 +5,8 @@ use Illuminate\Http\Request;
 use Kodeine\Acl\Models\Eloquent\Role;
 use Lang;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class HelperRepository
 {
@@ -92,5 +94,12 @@ class HelperRepository
             $languages[$lang] = Lang::get('general.' . $lang);
         }
         return $languages;
+    }
+
+    public function validateRecord($record)
+    {
+        if(empty($record) || $record->company_id != Auth::user()['company_id']) {
+            Redirect::to('/')->with('danger', Lang::get('general.accessdenied'))->send();
+        }
     }
 }

@@ -74,6 +74,7 @@ class EntryController extends Controller
     public function edit($idEntry)
     {
         $entry = $this->entryRepo->find($idEntry);
+        $this->helper->validateRecord($entry);
 
         $company_id = CompanyRepositoryEloquent::getCompanies();
         $entry_type_id = TypeRepositoryEloquent::getTypes();
@@ -85,6 +86,8 @@ class EntryController extends Controller
     public function update($idEntry)
     {
         try {
+            $entry = $this->entryRepo->find($idEntry);
+            $this->helper->validateRecord($entry);
             $this->entryRepo->validator();
             $inputs = $this->request->all();
             $inputs['company_id'] = Auth::user()['company_id'];
@@ -103,7 +106,9 @@ class EntryController extends Controller
     {
         Log::info('Delete field: '.$idEntry);
 
-        if ($this->entryRepo->find($idEntry)) {
+        $entry = $this->entryRepo->find($idEntry);
+        if ($entry) {
+            $this->helper->validateRecord($entry);
             $this->entryRepo->delete($idEntry);
         }
         return $this->redirect->to('entry')->with('message', Lang::get("general.deletedregister"));

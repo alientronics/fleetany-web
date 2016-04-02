@@ -69,6 +69,7 @@ class VehicleController extends Controller
     public function edit($idVehicle)
     {
         $vehicle = $this->vehicleRepo->find($idVehicle);
+        $this->helper->validateRecord($vehicle);
 
         $company_id = CompanyRepositoryEloquent::getCompanies();
         $model_vehicle_id = ModelRepositoryEloquent::getModelVehicles();
@@ -79,6 +80,8 @@ class VehicleController extends Controller
     public function update($idVehicle)
     {
         try {
+            $vehicle = $this->vehicleRepo->find($idVehicle);
+            $this->helper->validateRecord($vehicle);
             $this->vehicleRepo->validator();
             $inputs = $this->request->all();
             $inputs['company_id'] = Auth::user()['company_id'];
@@ -97,7 +100,9 @@ class VehicleController extends Controller
     {
         Log::info('Delete field: '.$idVehicle);
 
-        if ($this->vehicleRepo->find($idVehicle)) {
+        $vehicle = $this->vehicleRepo->find($idVehicle);
+        if ($vehicle) {
+            $this->helper->validateRecord($vehicle);
             $this->vehicleRepo->delete($idVehicle);
         }
         return $this->redirect->to('vehicle')->with('message', Lang::get("general.deletedregister"));
