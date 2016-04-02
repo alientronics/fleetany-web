@@ -126,6 +126,8 @@ class UserController extends Controller
         try {
             $this->userRepo->validator();
             $this->userRepo->update($this->request->all(), $idUser);
+            $this->session->put('language', Input::get('language'));
+            app()->setLocale(Input::get('language'));
             return $this->redirect->to('profile')->with('message', Lang::get(
                 'general.succefullupdate',
                 ['table'=> Lang::get('general.User')]
