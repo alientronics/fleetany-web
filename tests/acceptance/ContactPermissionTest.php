@@ -4,6 +4,7 @@ namespace Tests\Acceptance;
 
 use Tests\AcceptanceTestCase;
 use App\Entities\Contact;
+use App\Entities\User;
 
 class ContactPermissionTest extends AcceptanceTestCase
 {
@@ -48,5 +49,18 @@ class ContactPermissionTest extends AcceptanceTestCase
         $this->visit('/contact')
             ->see('Excluir', true)
         ;
+    }
+    
+    public function testAccessDeniedCompany()
+    {
+        $user = factory(\App\Entities\User::class)->create();
+        $user->setUp();
+        $this->actingAs($user);
+
+        $this->visit('/contact/1/edit');
+        $this->see('accessdenied');
+        
+        $this->visit('/contact/destroy/1');
+        $this->see('accessdenied');
     }
 }

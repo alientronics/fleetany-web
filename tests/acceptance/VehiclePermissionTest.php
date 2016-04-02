@@ -49,4 +49,17 @@ class VehiclePermissionTest extends AcceptanceTestCase
             ->see('Excluir', true)
         ;
     }
+    
+    public function testAccessDeniedCompany()
+    {
+        $user = factory(\App\Entities\User::class)->create();
+        $user->setUp();
+        $this->actingAs($user);
+
+        $this->visit('/vehicle/1/edit');
+        $this->see('accessdenied');
+
+        $this->visit('/vehicle/destroy/1');
+        $this->see('accessdenied');
+    }
 }

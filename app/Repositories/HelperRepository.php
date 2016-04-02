@@ -98,7 +98,7 @@ class HelperRepository
 
     public function validateRecord($record)
     {
-        if(empty($record) || $record->company_id != Auth::user()['company_id']) {
+        if (empty($record) || $record->company_id != Auth::user()['company_id']) {
             Redirect::to('/')->with('danger', Lang::get('general.accessdenied'))->send();
         }
     }

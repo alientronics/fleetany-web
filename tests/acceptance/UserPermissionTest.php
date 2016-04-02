@@ -49,4 +49,18 @@ class UserPermissionTest extends AcceptanceTestCase
             ->see('Excluir', true)
         ;
     }
+    
+    public function testAccessDeniedCompany()
+    {
+        $idAccessDenied = User::all()->last()['id'];
+        $user = factory(\App\Entities\User::class)->create();
+        $user->setUp();
+        $this->actingAs($user);
+        
+        $this->visit('/user/'.$idAccessDenied.'/edit');
+        $this->see('accessdenied');
+        
+        $this->visit('/user/destroy/'.$idAccessDenied);
+        $this->see('accessdenied');
+    }
 }
