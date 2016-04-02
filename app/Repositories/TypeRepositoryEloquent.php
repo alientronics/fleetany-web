@@ -47,7 +47,8 @@ class TypeRepositoryEloquent extends BaseRepository implements TypeRepository
     
     public static function getTypes()
     {
-        $types = Type::lists('name', 'id');
+        $types = Type::where('company_id', Auth::user()['company_id'])
+                        ->lists('name', 'id');
         return $types;
     }
 }

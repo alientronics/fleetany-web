@@ -59,7 +59,8 @@ class ContactRepositoryEloquent extends BaseRepository implements ContactReposit
     
     public static function getContacts()
     {
-        $contacts = Contact::lists('name', 'id');
+        $contacts = Contact::where('contacts.company_id', Auth::user()['company_id'])
+                            ->lists('name', 'id');
         return $contacts;
     }
 }

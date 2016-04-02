@@ -60,7 +60,8 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
     
     public static function getVehicles()
     {
-        $vehicles = Vehicle::lists('number', 'id');
+        $vehicles = Vehicle::where('vehicles.company_id', Auth::user()['company_id'])
+                                ->lists('number', 'id');
         return $vehicles;
     }
     
