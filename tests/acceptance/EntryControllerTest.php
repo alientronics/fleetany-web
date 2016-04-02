@@ -22,8 +22,8 @@ class EntryControllerTest extends AcceptanceTestCase
         
         $this->visit('/entry/create');
     
-        $this->type('2016-01-01', 'datetime_ini')
-            ->type('2016-01-02', 'datetime_end')
+        $this->type('2016-01-01 15:15:15', 'datetime_ini')
+            ->type('2016-01-02 15:15:15', 'datetime_end')
             ->type('123', 'entry_number')
             ->type('90000', 'cost')
             ->type('Descricao', 'description')
@@ -34,8 +34,8 @@ class EntryControllerTest extends AcceptanceTestCase
         $this->seeInDatabase(
             'entries',
             [
-                    'datetime_ini' => '2016-01-01',
-                    'datetime_end' => '2016-01-02',
+                    'datetime_ini' => '2016-01-01 15:15:15',
+                    'datetime_end' => '2016-01-02 15:15:15',
                     'entry_number' => '123',
                     'cost' => '90000',
                     'description' => 'Descricao',
@@ -47,8 +47,8 @@ class EntryControllerTest extends AcceptanceTestCase
     {
         $this->visit('/entry/'.Entry::all()->last()['id'].'/edit');
         
-        $this->type('2016-05-01', 'datetime_ini')
-            ->type('2016-05-02', 'datetime_end')
+        $this->type('2016-05-01 15:15:15', 'datetime_ini')
+            ->type('2016-05-02 15:15:15', 'datetime_end')
             ->type('125', 'entry_number')
             ->type('90005', 'cost')
             ->type('Descricao2', 'description')
@@ -59,8 +59,8 @@ class EntryControllerTest extends AcceptanceTestCase
         $this->seeInDatabase(
             'entries',
             [
-                    'datetime_ini' => '2016-05-01',
-                    'datetime_end' => '2016-05-02',
+                    'datetime_ini' => '2016-05-01 15:15:15',
+                    'datetime_end' => '2016-05-02 15:15:15',
                     'entry_number' => '125',
                     'cost' => '90005',
                     'description' => 'Descricao2',

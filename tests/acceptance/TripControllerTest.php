@@ -22,8 +22,8 @@ class TripControllerTest extends AcceptanceTestCase
         
         $this->visit('/trip/create');
     
-        $this->type('2016-01-01', 'pickup_date')
-            ->type('2016-01-02', 'deliver_date')
+        $this->type('2016-01-01 15:15:15', 'pickup_date')
+            ->type('2016-01-02 15:15:15', 'deliver_date')
             ->type('1200 First Av', 'pickup_place')
             ->type('345 63th St', 'deliver_place')
             ->type('320', 'begin_mileage')
@@ -39,8 +39,8 @@ class TripControllerTest extends AcceptanceTestCase
         $this->seeInDatabase(
             'trips',
             [
-                    'pickup_date' => '2016-01-01',
-                    'deliver_date' => '2016-01-02',
+                    'pickup_date' => '2016-01-01 15:15:15',
+                    'deliver_date' => '2016-01-02 15:15:15',
                     'pickup_place' => '1200 First Av',
                     'deliver_place' => '345 63th St',
                     'begin_mileage' => 320,
@@ -57,8 +57,8 @@ class TripControllerTest extends AcceptanceTestCase
     {
         $this->visit('/trip/'.Trip::all()->last()['id'].'/edit');
     
-        $this->type('2016-02-01', 'pickup_date')
-        ->type('2016-02-02', 'deliver_date')
+        $this->type('2016-02-01 15:15:15', 'pickup_date')
+        ->type('2016-02-02 15:15:15', 'deliver_date')
         ->type('1220 First Av', 'pickup_place')
         ->type('342 63th St', 'deliver_place')
         ->type('322', 'begin_mileage')
@@ -74,8 +74,8 @@ class TripControllerTest extends AcceptanceTestCase
         $this->seeInDatabase(
             'trips',
             [
-                'pickup_date' => '2016-02-01',
-                'deliver_date' => '2016-02-02',
+                'pickup_date' => '2016-02-01 15:15:15',
+                'deliver_date' => '2016-02-02 15:15:15',
                 'pickup_place' => '1220 First Av',
                 'deliver_place' => '342 63th St',
                 'begin_mileage' => 322,
