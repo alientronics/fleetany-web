@@ -14,7 +14,8 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
 
     protected $rules = [
         'entry_type_id'   => 'required',
-        'datetime_ini'  => 'min:3|required',
+        'datetime_ini'  => 'date|date_format:Y-m-d H:i:s|required',
+        'datetime_end' => 'date|date_format:Y-m-d H:i:s|after:datetime_ini',
         'cost'      => 'min:3|required',
         ];
 

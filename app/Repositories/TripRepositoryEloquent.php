@@ -15,10 +15,11 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
     protected $rules = [
         'vehicle_id'    => 'required',
         'trip_type_id'  => 'required',
-        'pickup_date'   => 'required',
+        'pickup_date'  => 'date|date_format:Y-m-d H:i:s|required',
+        'deliver_date' => 'date|date_format:Y-m-d H:i:s|after:pickup_date',
         'end_mileage'   => 'required',
-        'fuel_cost'     => 'required',
-        'fuel_amount'   => 'required',
+        'fuel_cost'     => 'required|numeric|min:0',
+        'fuel_amount'   => 'required|numeric|min:0',
         ];
 
     public function model()
