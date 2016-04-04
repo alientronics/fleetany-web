@@ -1,12 +1,6 @@
 @extends('layouts.default')
 
 @section('header')
-
-      @permission('create.model')
-      <a href="{{url('/')}}/model/create" class="button mdl-add__button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
-    	<i class="material-icons">add</i>
-      </a>
-      @endpermission
       
       <span class="mdl-layout-title">{{Lang::get("general.Model")}}</span>
 

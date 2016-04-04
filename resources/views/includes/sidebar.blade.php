@@ -15,38 +15,38 @@
         </ul>
       </div>
     </header>
-    <nav class="demo-navigation mdl-navigation mdl-color--blue-grey-800">
+    <nav class="demo-navigation mdl-navigation mdl-color--white">
           @if (Auth::check())
-            <a class="mdl-navigation__link" href="{{URL::to('/')}}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>{{Lang::get('menu.FleetPanel')}}</a>
+            <a class="mdl-color--grey mdl-color-text--white mdl-navigation__link" href="{{URL::to('/')}}"><i class="material-icons" role="presentation">home</i>{{Lang::get('menu.FleetPanel')}}</a>
             @permission('view.company')  
-            <a class="mdl-navigation__link" href="{{URL::to('company')}}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>{{Lang::get('menu.Company')}}</a>
+            <a class="mdl-navigation__link" href="{{URL::to('company')}}"><i class="material-icons" role="presentation">home</i>{{Lang::get('menu.Company')}}</a>
             @endpermission  
             @permission('view.user') 
-            <a class="mdl-navigation__link" href="{{URL::to('user')}}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>{{Lang::get('menu.Users')}}</a>
+            <a class="mdl-navigation__link" href="{{URL::to('user')}}"><i class="material-icons" role="presentation">home</i>{{Lang::get('menu.Users')}}</a>
             @endpermission
             @permission('view.fleet')
-            <a class="mdl-navigation__link" href="{{URL::to('fleets')}}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>{{Lang::get('menu.Fleet')}}</a>       
+            <a class="mdl-navigation__link" href="{{URL::to('fleets')}}"><i class="material-icons" role="presentation">home</i>{{Lang::get('menu.Fleet')}}</a>       
             @endpermission  
             @permission('view.vehicle')
-            <a class="mdl-navigation__link" href="{{URL::to('vehicle')}}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>{{Lang::get('menu.Vehicles')}}</a>       
+            <a class="mdl-navigation__link" href="{{URL::to('vehicle')}}"><i class="material-icons" role="presentation">home</i>{{Lang::get('menu.Vehicles')}}</a>       
             @endpermission
             @permission('view.model')
-            <a class="mdl-navigation__link" href="{{URL::to('model')}}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>{{Lang::get('menu.Models')}}</a>       
+            <a class="mdl-navigation__link" href="{{URL::to('model')}}"><i class="material-icons" role="presentation">home</i>{{Lang::get('menu.Models')}}</a>       
             @endpermission  
             @permission('view.type')
-            <a class="mdl-navigation__link" href="{{URL::to('type')}}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>{{Lang::get('menu.Types')}}</a>       
+            <a class="mdl-navigation__link" href="{{URL::to('type')}}"><i class="material-icons" role="presentation">home</i>{{Lang::get('menu.Types')}}</a>       
             @endpermission  
             @permission('view.contact')
-            <a class="mdl-navigation__link" href="{{URL::to('contact')}}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>{{Lang::get('menu.Contacts')}}</a>       
+            <a class="mdl-navigation__link" href="{{URL::to('contact')}}"><i class="material-icons" role="presentation">home</i>{{Lang::get('menu.Contacts')}}</a>       
             @endpermission   
             @permission('view.entry')
-            <a class="mdl-navigation__link" href="{{URL::to('entry')}}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>{{Lang::get('menu.Entries')}}</a>       
+            <a class="mdl-navigation__link" href="{{URL::to('entry')}}"><i class="material-icons" role="presentation">home</i>{{Lang::get('menu.Entries')}}</a>       
             @endpermission   
             @permission('view.trip')
-            <a class="mdl-navigation__link" href="{{URL::to('trip')}}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>{{Lang::get('menu.Trips')}}</a>       
+            <a class="mdl-navigation__link" href="{{URL::to('trip')}}"><i class="material-icons" role="presentation">home</i>{{Lang::get('menu.Trips')}}</a>       
             @endpermission   
         @else
-        	<a class="mdl-navigation__link" href="{{URL::asset("auth/login")}}"><i class="mdl-color-text--blue-grey-400 material-icons" role="presentation">home</i>{{Lang::get('menu.Login')}}</a>
+        	<a class="mdl-navigation__link" href="{{URL::asset("auth/login")}}"><i class="material-icons" role="presentation">home</i>{{Lang::get('menu.Login')}}</a>
         @endif
     </nav>
 </div>

@@ -1,5 +1,11 @@
 @extends('layouts.default')
 
+@section('header')
+      
+      <span class="mdl-layout-title">{{Lang::get('menu.FleetPanel')}}</span>
+
+@stop
+
 @section('content')
 
 <script type="text/javascript">
