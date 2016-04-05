@@ -107,4 +107,16 @@ class TripControllerTest extends AcceptanceTestCase
             ->see('de um valor para o campo fuel amount.</span>')
         ;
     }
+    
+    public function testFilters()
+    {
+        $this->visit('/trip')
+            ->type('Generic Car', 'vehicle')
+            ->type('delivery', 'trip_type')
+            ->type('2016-01-01 00:00:00', 'pickup_date')
+            ->type('Generic Car', 'fuel_cost')
+            ->press('Buscar')
+            ->see('<td class="mdl-data-table__cell--non-numeric"> 1 </td>')
+        ;
+    }
 }

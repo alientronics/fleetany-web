@@ -103,4 +103,16 @@ class UserControllerTest extends AcceptanceTestCase
             ->see('de um valor para o campo nome.</span>')
         ;
     }
+    
+    public function testFilters()
+    {
+        $this->visit('/user')
+            ->type('Company', 'name')
+            ->type('admin@alientronics.com.br', 'email')
+            ->type('Administrator', 'contact_id')
+            ->type('Company', 'company_id')
+            ->press('Buscar')
+            ->see('<td class="mdl-data-table__cell--non-numeric"> 1 </td>')
+        ;
+    }
 }

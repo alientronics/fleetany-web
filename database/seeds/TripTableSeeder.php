@@ -25,7 +25,7 @@ class TripTableSeeder extends Seeder
                         'begin_mileage' => 320,
                         'end_mileage' => 450,
                         'total_mileage' => 130,
-                        'fuel_cost' => 13.6,
+                        'fuel_cost' => 15,
                         'fuel_amount' => 5,
                         'description' => 'Descricao Trip',
                         'company_id' => 1)

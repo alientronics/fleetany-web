@@ -60,4 +60,14 @@ class TypeControllerTest extends AcceptanceTestCase
             ->see('de um valor para o campo nome.</span>')
         ;
     }
+    
+    public function testFilters()
+    {
+        $this->visit('/type')
+            ->type('entry', 'entity_key')
+            ->type('service', 'name')
+            ->press('Buscar')
+            ->see('<td class="mdl-data-table__cell--non-numeric"> 1 </td>')
+        ;
+    }
 }

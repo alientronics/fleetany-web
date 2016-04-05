@@ -31,11 +31,13 @@ class ContactRepositoryEloquent extends BaseRepository implements ContactReposit
     {
         $contacts = $this->scopeQuery(function ($query) use ($filters) {
             
+            $query = $query->select('contacts.*', 'types.name as contact_type')
+                            ->leftJoin('types', 'contacts.contact_type_id', '=', 'types.id');
+            
             if (!empty($filters['name'])) {
                 $query = $query->where('contacts.name', 'like', '%'.$filters['name'].'%');
             }
             if (!empty($filters['contact-type'])) {
-                $query = $query->join('types', 'contacts.contact_type_id', '=', 'types.id');
                 $query = $query->where('types.name', 'like', '%'.$filters['contact-type'].'%');
             }
             if (!empty($filters['city'])) {

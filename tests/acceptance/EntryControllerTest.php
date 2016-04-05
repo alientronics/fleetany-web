@@ -85,4 +85,16 @@ class EntryControllerTest extends AcceptanceTestCase
             ->see('de um valor para o campo cost.</span>')
         ;
     }
+    
+    public function testFilters()
+    {
+        $this->visit('/entry')
+            ->type('Generic Car', 'vehicle')
+            ->type('service', 'entry_type')
+            ->type('2016-01-01 00:00:00', 'datetime_ini')
+            ->type('321', 'cost')
+            ->press('Buscar')
+            ->see('<td class="mdl-data-table__cell--non-numeric"> 1 </td>')
+        ;
+    }
 }

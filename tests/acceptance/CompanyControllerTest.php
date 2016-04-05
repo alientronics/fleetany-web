@@ -74,4 +74,15 @@ class CompanyControllerTest extends AcceptanceTestCase
             ->see('de um valor para o campo api token.</span>')
         ;
     }
+    
+    public function testFilters()
+    {
+        $this->visit('/company')
+            ->type('Company', 'name')
+            ->type('City', 'city')
+            ->type('Country', 'country')
+            ->press('Buscar')
+            ->see('<td class="mdl-data-table__cell--non-numeric"> 1 </td>')
+        ;
+    }
 }

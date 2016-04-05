@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Entities\Contact;
+use App\Entities\Company;
 
 class ContactTableSeeder extends Seeder
 {
@@ -16,8 +17,13 @@ class ContactTableSeeder extends Seeder
         Contact::create(
                 array(  'company_id' => 1,
                         'contact_type_id' => 3,
-                        'name' => 'Administrator')
+                        'name' => 'Administrator',
+                        'country' => 'Country',
+                        'city' => 'City')
             );
+        $company = Company::find(1);
+        $company->contact_id = 1;
+        $company->save();
         Contact::create(
                 array(  'company_id' => 1,
                         'contact_type_id' => 5,

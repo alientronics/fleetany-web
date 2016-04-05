@@ -84,4 +84,15 @@ class VehicleControllerTest extends AcceptanceTestCase
             ->see('de um valor para o campo cost.</span>')
         ;
     }
+    
+    public function testFilters()
+    {
+        $this->visit('/vehicle')
+            ->type('Generic Car', 'model_vehicle')
+            ->type('IOP-1234', 'number')
+            ->type('50000', 'cost')
+            ->press('Buscar')
+            ->see('<td class="mdl-data-table__cell--non-numeric"> 1 </td>')
+        ;
+    }
 }

@@ -93,4 +93,15 @@ class ContactControllerTest extends AcceptanceTestCase
             ->see('de um valor para o campo license no.</span>')
         ;
     }
+    
+    public function testFilters()
+    {
+        $this->visit('/contact')
+            ->type('Administrator', 'name')
+            ->type('user', 'contact_type')
+            ->type('City', 'city')
+            ->press('Buscar')
+            ->see('<td class="mdl-data-table__cell--non-numeric"> 1 </td>')
+        ;
+    }
 }

@@ -16,7 +16,7 @@ class ModelTableSeeder extends Seeder
         Model::create(
                 array(  'model_type_id' => 2,
                         'vendor_id' => 2,
-                        'name' => 'Palio',
+                        'name' => 'Generic Car',
                         'company_id' => 1)
             );
     }

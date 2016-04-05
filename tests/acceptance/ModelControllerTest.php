@@ -58,4 +58,15 @@ class ModelControllerTest extends AcceptanceTestCase
             ->see('de um valor para o campo nome.</span>')
         ;
     }
+    
+    public function testFilters()
+    {
+        $this->visit('/model')
+            ->type('car', 'model_type')
+            ->type('Vendor Name', 'vendor')
+            ->type('Generic Car', 'name')
+            ->press('Buscar')
+            ->see('<td class="mdl-data-table__cell--non-numeric"> 1 </td>')
+        ;
+    }
 }
