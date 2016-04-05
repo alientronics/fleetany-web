@@ -29,10 +29,14 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 {!! HTML::script('js/fleetany.js') !!}
 {!! HTML::style('css/style-edit.css') !!}
+{!! HTML::style('css/md-date-time-picker.min.css') !!}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Lobster+Two' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.amber-indigo.min.css">
+{!! HTML::script('js/moment.js') !!}
+{!! HTML::script('js/md-date-time-picker.min.js') !!}
+  
 <style>
 #view-source {
   position: fixed;

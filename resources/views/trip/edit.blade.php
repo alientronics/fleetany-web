@@ -123,6 +123,27 @@
 	</section>
 </div>
 
+  <script type="text/javascript">
+    (function() {
+      var x = new mdDateTimePicker({
+        type: 'date'
+      });
+
+		$( "input[name='pickup_date']" ).click(function() {
+			x.toggle();
+		});
+
+
+		$( "#mddtp-date__ok" ).click(function() {
+			var date = new Date(x.time());
+			date = moment(date, "YYYY-MM-DD HH:mm:ss");
+		
+			$( "input[name='pickup_date']" ).val(x.time().toString());
+    	});
+		
+    }).call(this);
+  </script>
+
 @else
 <div class="alert alert-info">
 	{{Lang::get("general.accessdenied")}}
