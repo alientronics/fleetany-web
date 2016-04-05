@@ -39,9 +39,18 @@ class TripController extends Controller
     {
         $filters = $this->helper->getFilters($this->request->all(), $this->fields, $this->request);
         
-        $trips = $this->tripRepo->results($filters);
-                
-        return view("trip.index", compact('trips', 'filters'));
+        $registers = $this->tripRepo->results($filters);
+        
+        $gridview['pageActive'] = "trip";
+        $gridview['sortFilters'] = [
+            ["size" => 3, "name" => "vehicle", "lang" => "general.vehicle"],
+            ["size" => 3, "name" => "trip-type", "lang" => "general.trip_type"],
+            ["size" => 2, "name" => "pickup-date", "lang" => "general.pickup_date"],
+            ["size" => 2, "name" => "fuel-cost", "lang" => "general.fuel_cost"],
+            
+        ];
+        
+        return view("trip.index", compact('registers', 'filters', 'gridview'));
     }
     
     public function create()
