@@ -18,13 +18,9 @@
         <div class="mdl-grid">
           <div class="mdl-cell mdl-cell--1-col mdl-data-table__cell--non-numeric">@if (!empty($register->id)) {{$register->id}} @endif</div>
           
-          
-          <div class="mdl-cell {{$gridview['sortFilters'][0]['class']}}">@if (!empty($register->vehicle->model->name)) {{$register->vehicle->model->name}} @endif</div>
-          <div class="mdl-cell {{$gridview['sortFilters'][1]['class']}}">@if (!empty($register->type->name)) {{$register->type->name}} @endif</div>
-          <div class="mdl-cell {{$gridview['sortFilters'][2]['class']}}">@if (!empty($register->pickup_date)) {{$register->pickup_date}} @endif</div>
-          <div class="mdl-cell {{$gridview['sortFilters'][3]['class']}}">@if (!empty($register->fuel_cost)) {{$register->fuel_cost}} @endif</div>
-          
-          
+          @foreach($gridview['sortFilters'] as $sortFilter)
+          <div class="mdl-cell {{$sortFilter['class']}}">{{$register->$sortFilter['name']}}</div>
+          @endforeach
           
           @permission('delete.'.$gridview['pageActive'].'|update.'.$gridview['pageActive'])
           <div class="mdl-cell mdl-cell--1-col">
