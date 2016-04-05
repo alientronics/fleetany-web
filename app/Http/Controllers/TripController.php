@@ -49,9 +49,10 @@ class TripController extends Controller
         $trip = new Trip();
         $company_id = CompanyRepositoryEloquent::getCompanies();
         $vehicle_id = VehicleRepositoryEloquent::getVehicles();
-        $contacts = ContactRepositoryEloquent::getContacts('vendor', true);
+        $driver_id = ContactRepositoryEloquent::getContacts('driver');
+        $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
         $trip_type_id = TypeRepositoryEloquent::getTypes();
-        return view("trip.edit", compact('trip', 'contacts', 'company_id', 'vehicle_id', 'trip_type_id'));
+        return view("trip.edit", compact('trip', 'driver_id', 'vendor_id', 'company_id', 'vehicle_id', 'trip_type_id'));
     }
 
     public function store()
@@ -81,9 +82,10 @@ class TripController extends Controller
 
         $company_id = CompanyRepositoryEloquent::getCompanies();
         $vehicle_id = VehicleRepositoryEloquent::getVehicles();
-        $contacts = ContactRepositoryEloquent::getContacts('vendor', true);
+        $driver_id = ContactRepositoryEloquent::getContacts('driver');
+        $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
         $trip_type_id = TypeRepositoryEloquent::getTypes();
-        return view("trip.edit", compact('trip', 'contacts', 'company_id', 'vehicle_id', 'trip_type_id'));
+        return view("trip.edit", compact('trip', 'driver_id', 'vendor_id', 'contacts', 'company_id', 'vehicle_id', 'trip_type_id'));
     }
     
     public function update($idTrip)

@@ -28,7 +28,7 @@
 @endif
             
     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('driver_id')) is-invalid is-dirty @endif"">
-                {!!Form::select('driver_id', $contacts, $trip->driver_id, array('class' => 'mdl-textfield__input'))!!}
+                {!!Form::select('driver_id', $driver_id, $trip->driver_id, array('class' => 'mdl-textfield__input'))!!}
        			{!!Form::label('driver_id', Lang::get('general.driver'), array('class' => 'mdl-textfield__label is-dirty'))!!}
             	<span class="mdl-textfield__error">{{ $errors->first('driver_id') }}</span>
             </div>
@@ -40,7 +40,7 @@
             </div>
             
     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('vendor_id')) is-invalid is-dirty @endif"">
-                {!!Form::select('vendor_id', $contacts, $trip->vendor_id, array('class' => 'mdl-textfield__input'))!!}
+                {!!Form::select('vendor_id', $vendor_id, $trip->vendor_id, array('class' => 'mdl-textfield__input'))!!}
        			{!!Form::label('vendor_id', Lang::get('general.vendor'), array('class' => 'mdl-textfield__label is-dirty'))!!}
             	<span class="mdl-textfield__error">{{ $errors->first('vendor_id') }}</span>
             </div>
