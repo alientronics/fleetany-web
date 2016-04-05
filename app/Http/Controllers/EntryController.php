@@ -49,7 +49,7 @@ class EntryController extends Controller
         $entry = new Entry();
         $company_id = CompanyRepositoryEloquent::getCompanies();
         $entry_type_id = TypeRepositoryEloquent::getTypes();
-        $vendor_id = ContactRepositoryEloquent::getContacts();
+        $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
         $vehicle_id = VehicleRepositoryEloquent::getVehicles();
         return view("entry.edit", compact('entry', 'entry_type_id', 'company_id', 'vehicle_id', 'vendor_id'));
     }
@@ -59,6 +59,9 @@ class EntryController extends Controller
         try {
             $this->entryRepo->validator();
             $inputs = $this->request->all();
+            if(empty($inputs['vendor_id'])) {
+                unset($inputs['vendor_id']);
+            }
             $inputs['company_id'] = Auth::user()['company_id'];
             $this->entryRepo->create($inputs);
             return $this->redirect->to('entry')->with('message', Lang::get(
@@ -78,7 +81,7 @@ class EntryController extends Controller
 
         $company_id = CompanyRepositoryEloquent::getCompanies();
         $entry_type_id = TypeRepositoryEloquent::getTypes();
-        $vendor_id = ContactRepositoryEloquent::getContacts();
+        $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
         $vehicle_id = VehicleRepositoryEloquent::getVehicles();
         return view("entry.edit", compact('entry', 'entry_type_id', 'company_id', 'vehicle_id', 'vendor_id'));
     }
@@ -91,6 +94,9 @@ class EntryController extends Controller
             $this->entryRepo->validator();
             $inputs = $this->request->all();
             $inputs['company_id'] = Auth::user()['company_id'];
+            if(empty($inputs['vendor_id'])) {
+                unset($inputs['vendor_id']);
+            }
             $this->entryRepo->update($inputs, $idEntry);
             return $this->redirect->to('entry')->with('message', Lang::get(
                 'general.succefullupdate',

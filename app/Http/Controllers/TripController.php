@@ -49,7 +49,7 @@ class TripController extends Controller
         $trip = new Trip();
         $company_id = CompanyRepositoryEloquent::getCompanies();
         $vehicle_id = VehicleRepositoryEloquent::getVehicles();
-        $contacts = ContactRepositoryEloquent::getContacts();
+        $contacts = ContactRepositoryEloquent::getContacts('vendor', true);
         $trip_type_id = TypeRepositoryEloquent::getTypes();
         return view("trip.edit", compact('trip', 'contacts', 'company_id', 'vehicle_id', 'trip_type_id'));
     }
@@ -60,6 +60,9 @@ class TripController extends Controller
             $this->tripRepo->validator();
             $inputs = $this->request->all();
             $inputs['company_id'] = Auth::user()['company_id'];
+            if(empty($inputs['vendor_id'])) {
+                unset($inputs['vendor_id']);
+            }
             $this->tripRepo->create($inputs);
             return $this->redirect->to('trip')->with('message', Lang::get(
                 'general.succefullcreate',
@@ -78,7 +81,7 @@ class TripController extends Controller
 
         $company_id = CompanyRepositoryEloquent::getCompanies();
         $vehicle_id = VehicleRepositoryEloquent::getVehicles();
-        $contacts = ContactRepositoryEloquent::getContacts();
+        $contacts = ContactRepositoryEloquent::getContacts('vendor', true);
         $trip_type_id = TypeRepositoryEloquent::getTypes();
         return view("trip.edit", compact('trip', 'contacts', 'company_id', 'vehicle_id', 'trip_type_id'));
     }
@@ -91,6 +94,9 @@ class TripController extends Controller
             $this->tripRepo->validator();
             $inputs = $this->request->all();
             $inputs['company_id'] = Auth::user()['company_id'];
+            if(empty($inputs['vendor_id'])) {
+                unset($inputs['vendor_id']);
+            }
             $this->tripRepo->update($inputs, $idTrip);
             return $this->redirect->to('trip')->with('message', Lang::get(
                 'general.succefullupdate',
