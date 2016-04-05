@@ -70,6 +70,19 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
         return $trips;
     }
     
+    public function gridview()
+    {
+        $gridview['pageActive'] = "trip";
+        $gridview['sortFilters'] = [
+            ["class" => "mdl-cell--3-col", "name" => "vehicle", "lang" => "general.vehicle"],
+            ["class" => "mdl-cell--3-col", "name" => "trip-type", "lang" => "general.trip_type"],
+            ["class" => "mdl-cell--2-col", "name" => "pickup-date", "lang" => "general.pickup_date"],
+            ["class" => "mdl-cell--2-col", "name" => "fuel-cost", "lang" => "general.fuel_cost"],
+        
+        ];
+        return $gridview;
+    }
+    
     public static function getFuelCostMonthStatistics($month, $year)
     {
         $prefix = \DB::getTablePrefix();

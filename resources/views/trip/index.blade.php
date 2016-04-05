@@ -14,7 +14,7 @@
 
 <div class="mdl-grid demo-content">
 
-    @include('includes.gridview')
+    @include('includes.gridview', ['gridview' => $gridview, 'registers' => $registers])
      
 </div>
 
