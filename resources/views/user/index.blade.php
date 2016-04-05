@@ -44,7 +44,7 @@
                     @endpermission
                 	@permission('delete.user')
                 		@if ($user->id != 1)
-                            {!!Form::buttonLink( url('#') , 'danger show-confirm-operation' , 'delete' , 'Excluir' )!!}
+                            {!!Form::buttonLink( url('user/destroy',$user->id) , 'danger show-confirm-operation' , 'delete' , 'Excluir' )!!}
                         	@include('includes.confirmoperation', ['url' => url('user/destroy',$user->id), 'confirm' => Lang::get("general.areyousuredelete")]) 
                         @endif
                     @endpermission

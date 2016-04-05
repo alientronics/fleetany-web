@@ -40,7 +40,7 @@
                     	{!!Form::buttonLink( route('vehicle.edit', $vehicle->id) , 'primary' , 'mode_edit' , 'Editar' )!!}
                     @endpermission
                 	@permission('delete.vehicle')
-                        {!!Form::buttonLink( url('#') , 'danger show-confirm-operation' , 'delete' , 'Excluir' )!!}
+                        {!!Form::buttonLink( url('vehicle/destroy',$vehicle->id) , 'danger show-confirm-operation' , 'delete' , 'Excluir' )!!}
                     	@include('includes.confirmoperation', ['url' => url('vehicle/destroy',$vehicle->id), 'confirm' => Lang::get("general.areyousuredelete")]) 
                     @endpermission
                 </td>
