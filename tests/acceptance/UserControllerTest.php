@@ -15,7 +15,7 @@ class UserControllerTest extends AcceptanceTestCase
     
     public function testView()
     {
-        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/user">');
+        $this->visit('/')->see('mdl-navigation__link" href="'.$this->baseUrl.'/user">');
     
         $this->visit('/user')
             ->see('<i class="material-icons">filter_list</i>')
@@ -107,7 +107,7 @@ class UserControllerTest extends AcceptanceTestCase
     public function testFilters()
     {
         $this->visit('/user')
-            ->type('Company', 'name')
+            ->type('Administrator', 'name')
             ->type('admin@alientronics.com.br', 'email')
             ->type('Administrator', 'contact_id')
             ->type('Company', 'company_id')

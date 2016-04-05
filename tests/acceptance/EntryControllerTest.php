@@ -9,7 +9,7 @@ class EntryControllerTest extends AcceptanceTestCase
 {
     public function testView()
     {
-        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/entry">');
+        $this->visit('/')->see('mdl-navigation__link" href="'.$this->baseUrl.'/entry">');
     
         $this->visit('/entry')
             ->see('<i class="material-icons">filter_list</i>')

@@ -36,7 +36,7 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
     {
         $trips = $this->scopeQuery(function ($query) use ($filters) {
 
-            $query = $query->select('trips.*', 'models.name', 'types.name');
+            $query = $query->select('trips.*');
             $query = $query->leftJoin('vehicles', 'trips.vehicle_id', '=', 'vehicles.id');
             $query = $query->leftJoin('models', 'vehicles.model_vehicle_id', '=', 'models.id');
             $query = $query->leftJoin('types', 'trips.trip_type_id', '=', 'types.id');

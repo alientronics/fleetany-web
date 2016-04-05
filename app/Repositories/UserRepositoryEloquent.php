@@ -29,7 +29,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     {
         $users = $this->scopeQuery(function ($query) use ($filters) {
             
-            $query = $query->select('users.*', 'contacts.name', 'companies.name');
+            $query = $query->select('users.*');
             $query = $query->leftJoin('companies', 'users.company_id', '=', 'companies.id');
             $query = $query->leftJoin('contacts', 'users.contact_id', '=', 'contacts.id');
             

@@ -9,7 +9,7 @@ class TypeControllerTest extends AcceptanceTestCase
 {
     public function testView()
     {
-        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/type">');
+        $this->visit('/')->see('mdl-navigation__link" href="'.$this->baseUrl.'/type">');
     
         $this->visit('/type')
             ->see('<i class="material-icons">filter_list</i>')

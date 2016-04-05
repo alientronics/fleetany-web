@@ -9,7 +9,7 @@ class ContactControllerTest extends AcceptanceTestCase
 {
     public function testView()
     {
-        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/contact">');
+        $this->visit('/')->see('mdl-navigation__link" href="'.$this->baseUrl.'/contact">');
     
         $this->visit('/contact')
             ->see('<i class="material-icons">filter_list</i>')

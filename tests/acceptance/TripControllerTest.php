@@ -9,7 +9,7 @@ class TripControllerTest extends AcceptanceTestCase
 {
     public function testView()
     {
-        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/trip">');
+        $this->visit('/')->see('mdl-navigation__link" href="'.$this->baseUrl.'/trip">');
     
         $this->visit('/trip')
             ->see('<i class="material-icons">filter_list</i>')
@@ -114,7 +114,7 @@ class TripControllerTest extends AcceptanceTestCase
             ->type('Generic Car', 'vehicle')
             ->type('delivery', 'trip_type')
             ->type('2016-01-01 00:00:00', 'pickup_date')
-            ->type('Generic Car', 'fuel_cost')
+            ->type('15.00', 'fuel_cost')
             ->press('Buscar')
             ->see('<td class="mdl-data-table__cell--non-numeric"> 1 </td>')
         ;
