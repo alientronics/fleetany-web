@@ -64,7 +64,7 @@
 			</div>
 
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('cost')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('cost', $entry->cost, array('class' => 'mdl-textfield__input'))!!}
+         		{!!Form::text('cost', $entry->cost, array('id' => 'cost', 'class' => 'mdl-textfield__input'))!!}
 				{!!Form::label('cost', Lang::get('general.cost'), array('class' => 'mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('cost') }}</span>
 			</div>
@@ -86,6 +86,12 @@
 		</div>
 	</section>
 </div>
+
+<script>
+	$( document ).ready(function() {
+		$('#cost').maskMoney({!!Lang::get("masks.money")!!});
+	});
+</script>
 
 @else
 <div class="alert alert-info">

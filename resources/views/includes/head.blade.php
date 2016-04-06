@@ -26,6 +26,7 @@
 -->
 <script type="text/javascript" src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/plentz/jquery-maskmoney/master/dist/jquery.maskMoney.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 {!! HTML::script('js/fleetany.js') !!}
 {!! HTML::style('css/style-edit.css') !!}

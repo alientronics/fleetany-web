@@ -102,4 +102,20 @@ class HelperRepository
             Redirect::to('/')->with('danger', Lang::get('general.accessdenied'))->send();
         }
     }
+    
+    public static function moeda($valor, $mask = 'en', $decimal = 2) {
+        $valor = preg_replace("/[^0-9]/", "", $valor);
+        if(strlen($valor) < 3) {
+            $valor = str_pad($valor, 3, "0", STR_PAD_LEFT);
+        }
+        $valor = substr($valor, 0, ($decimal * -1)) . "." . substr($valor, ($decimal * -1));
+        if($mask == 'ptbr') {
+            return number_format($valor, $decimal, ',', '.');
+        } else if($mask == 'en') {
+            return number_format($valor, $decimal, '.', '');
+        } else if($mask == 'url') {
+            return preg_replace("/[^0-9]/", "", $valor);
+        }
+        return preg_replace("/[^0-9]/", "", $valor);
+    }
 }

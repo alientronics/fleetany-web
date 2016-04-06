@@ -67,6 +67,16 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
         return $entries;
     }
     
+    public function getInputs($inputs)
+    {
+        if(empty($inputs['vendor_id'])) {
+            unset($inputs['vendor_id']);
+        }
+        $inputs['company_id'] = Auth::user()['company_id'];
+        $inputs['cost'] = HelperRepository::moeda($inputs['cost']);
+        return $inputs;
+    }
+    
     public static function getServiceCostMonthStatistics($month, $year)
     {
         $prefix = \DB::getTablePrefix();

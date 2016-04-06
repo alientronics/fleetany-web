@@ -83,6 +83,16 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
         return $gridview;
     }
     
+    public function getInputs($inputs)
+    {
+        $inputs['company_id'] = Auth::user()['company_id'];
+        if(empty($inputs['vendor_id'])) {
+            unset($inputs['vendor_id']);
+        }
+        $inputs['fuel_cost'] = HelperRepository::moeda($inputs['fuel_cost']);
+        return $inputs;
+    }
+    
     public static function getFuelCostMonthStatistics($month, $year)
     {
         $prefix = \DB::getTablePrefix();
