@@ -35,6 +35,7 @@ return [
     'digits'               => 'The :attribute must be :digits digits.',
     'digits_between'       => 'The :attribute must be between :min and :max digits.',
     'email'                => 'The :attribute must be a valid email address.',
+    "exists"               => "The :attribute must be valid.",
     'filled'               => 'The :attribute field is required.',
     'exists'               => 'The selected :attribute is invalid.',
     'image'                => 'The :attribute must be an image.',
@@ -103,6 +104,18 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'code' => 'Country code',
+        'name' => 'name',
+        'abbr' => 'abbreviation',
+        'cpf'  => 'CPF',
+        'address' => 'Address',
+        'phone'   => 'Phone',
+        'birthdate' => 'Birthdate',
+        'crea' => 'CREA',
+        'start_at' => 'Start at',
+        'end_at'   => 'End at',
+        'farm_id'  => "Farm ID"
+    ],
 
 ];

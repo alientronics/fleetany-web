@@ -137,6 +137,9 @@ return [
     "Operational" => "Operacional",
     "Staff" => "Comum",
     
+    "LoginGoogle"   => "Log In com Google",
+    "LoginFacebook"   => "Log In com Facebook",
+    
     //Linguagens
     "en" => "Ingl&ecirc;s",
     "pt-br" => "Portugu&ecirc;s"
