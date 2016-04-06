@@ -18,7 +18,7 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
         'pickup_date'  => 'date|date_format:Y-m-d H:i:s|required',
         'deliver_date' => 'date|date_format:Y-m-d H:i:s|after:pickup_date',
         'end_mileage'   => 'required',
-        'fuel_cost'     => 'required|numeric|min:0',
+        'fuel_cost'     => 'required|numeric|min:0.01',
         'fuel_amount'   => 'required|numeric|min:0',
         ];
 

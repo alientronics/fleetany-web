@@ -25,7 +25,7 @@ class EntryControllerTest extends AcceptanceTestCase
         $this->type('2016-01-01 15:15:15', 'datetime_ini')
             ->type('2016-01-02 15:15:15', 'datetime_end')
             ->type('123', 'entry_number')
-            ->type('90000', 'cost')
+            ->type('90000.00', 'cost')
             ->type('Descricao', 'description')
             ->press('Enviar')
             ->seePageIs('/entry')
@@ -50,7 +50,7 @@ class EntryControllerTest extends AcceptanceTestCase
         $this->type('2016-05-01 15:15:15', 'datetime_ini')
             ->type('2016-05-02 15:15:15', 'datetime_end')
             ->type('125', 'entry_number')
-            ->type('90005', 'cost')
+            ->type('90005.00', 'cost')
             ->type('Descricao2', 'description')
             ->press('Enviar')
             ->seePageIs('/entry')
@@ -82,7 +82,7 @@ class EntryControllerTest extends AcceptanceTestCase
             ->press('Enviar')
             ->seePageIs('/entry/create')
             ->see('de um valor para o campo datetime ini.</span>')
-            ->see('de um valor para o campo cost.</span>')
+            ->see('<span class="mdl-textfield__error">O campo cost dever')
         ;
     }
     

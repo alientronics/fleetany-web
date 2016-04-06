@@ -94,7 +94,7 @@
 			</div>
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('fuel_cost')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('fuel_cost', $trip->fuel_cost, array('id' => 'fuel_cost', 'class' => 'mdl-textfield__input'))!!}
+         		{!!Form::text('fuel_cost', $trip->fuel_cost, array('id' => 'fuel_cost', 'class' => 'mdl-textfield__input', 'maxlength' => '12'))!!}
 				{!!Form::label('fuel_cost', Lang::get('general.fuel_cost'), array('class' => 'mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('fuel_cost') }}</span>
 			</div>

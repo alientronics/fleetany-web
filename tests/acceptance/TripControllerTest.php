@@ -29,7 +29,7 @@ class TripControllerTest extends AcceptanceTestCase
             ->type('320', 'begin_mileage')
             ->type('450', 'end_mileage')
             ->type('130', 'total_mileage')
-            ->type('13.6', 'fuel_cost')
+            ->type('13.60', 'fuel_cost')
             ->type('5', 'fuel_amount')
             ->type('Descricao', 'description')
             ->press('Enviar')
@@ -64,7 +64,7 @@ class TripControllerTest extends AcceptanceTestCase
         ->type('322', 'begin_mileage')
         ->type('452', 'end_mileage')
         ->type('132', 'total_mileage')
-        ->type('13.2', 'fuel_cost')
+        ->type('13.20', 'fuel_cost')
         ->type('2', 'fuel_amount')
         ->type('Descricao2', 'description')
         ->press('Enviar')
@@ -103,7 +103,7 @@ class TripControllerTest extends AcceptanceTestCase
             ->seePageIs('/trip/create')
             ->see('de um valor para o campo pickup date.</span>')
             ->see('de um valor para o campo end mileage.</span>')
-            ->see('de um valor para o campo fuel cost.</span>')
+            ->see('<span class="mdl-textfield__error">O campo fuel cost dever')
             ->see('de um valor para o campo fuel amount.</span>')
         ;
     }
@@ -116,7 +116,7 @@ class TripControllerTest extends AcceptanceTestCase
             ->type('2016-01-01 00:00:00', 'pickup_date')
             ->type('15.00', 'fuel_cost')
             ->press('Buscar')
-            ->see('<td class="mdl-data-table__cell--non-numeric"> 1 </td>')
+            ->see('Generic Car</div>')
         ;
     }
 }
