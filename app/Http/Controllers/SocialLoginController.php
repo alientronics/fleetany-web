@@ -8,6 +8,8 @@ use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Lang;
 
 class SocialLoginController extends Controller
 {
@@ -26,12 +28,13 @@ class SocialLoginController extends Controller
         return Socialite::driver($provider)->redirect();
     }
 
-    public function handleProviderCallback($provider)
+    public function handleProviderCallback($provider, Request $request)
     {
         try {
             $user = Socialite::driver($provider)->user();
         } catch (\Exception $e) {
-            return redirect('/auth/'.$provider);
+            $request->session()->flash('error', Lang::get("general.LoginGoogleFailed"));
+            return redirect('/auth/login');
         }
 
         $authUser = $this->findOrCreateUser($user);

@@ -139,7 +139,9 @@ return [
     
 
     "LoginGoogle"   => "Log In with Google",
+    "LoginGoogleFailed"   => "Log In with Google failed!",
     "LoginFacebook"   => "Log In with Facebook",
+    "LoginFacebookFailed"   => "Log In with Facebook failed!",
     
     //Linguagens
     "en" => "English",

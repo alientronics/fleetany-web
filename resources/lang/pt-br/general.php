@@ -136,9 +136,11 @@ return [
     "Manager" => "Gerente",
     "Operational" => "Operacional",
     "Staff" => "Comum",
-    
+
     "LoginGoogle"   => "Log In com Google",
+    "LoginGoogleFailed"   => "Falha na tentativa de login com Google",
     "LoginFacebook"   => "Log In com Facebook",
+    "LoginFacebookFailed"   => "Falha na tentativa de login com Facebook",
     
     //Linguagens
     "en" => "Ingl&ecirc;s",

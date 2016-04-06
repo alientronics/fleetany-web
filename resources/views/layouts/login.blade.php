@@ -30,6 +30,11 @@
     
     @yield('content')
     
+    
+    
+    @if (Session::has('error')) 
+      <script>showSnackBar('{{ Session::get('error')}} ')</script> 
+    @endif
     @if (!empty($errors->first('email'))) 
       <script>showSnackBar('{{ $errors->first('email') }}')</script> 
     @endif
