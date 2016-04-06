@@ -14,8 +14,19 @@
 
 <div class="mdl-grid demo-content">
 
-    @include('includes.gridview', ['gridview' => $gridview, 'registers' => $registers])
-     
+    @include('includes.gridview', [
+    	'registers' => $registers,
+    	'gridview' => [
+    		'pageActive' => 'trip',
+         	'sortFilters' => [
+                ["class" => "mdl-cell--3-col", "name" => "vehicle", "lang" => "general.vehicle"], 
+                ["class" => "mdl-cell--3-col", "name" => "trip-type", "lang" => "general.trip_type"], 
+                ["class" => "mdl-cell--2-col", "name" => "pickup-date", "lang" => "general.pickup_date"], 
+                ["class" => "mdl-cell--2-col", "name" => "fuel-cost", "lang" => "general.fuel_cost"],
+    		] 
+    	]
+    ]);
+        
 </div>
 
 @stop
