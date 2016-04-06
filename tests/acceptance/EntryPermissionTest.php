@@ -57,9 +57,9 @@ class EntryPermissionTest extends AcceptanceTestCase
         $this->actingAs($user);
 
         $this->visit('/entry/1/edit');
-        $this->see('accessdenied');
+        $this->see('Access denied');
         
         $this->visit('/entry/destroy/1');
-        $this->see('accessdenied');
+        $this->see('Access denied');
     }
 }

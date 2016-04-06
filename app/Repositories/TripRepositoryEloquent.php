@@ -36,7 +36,13 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
     {
         $trips = $this->scopeQuery(function ($query) use ($filters) {
 
-            $query = $query->select('trips.id', 'models.name as vehicle', 'types.name as trip-type', 'trips.pickup_date as pickup-date', 'trips.fuel_cost as fuel-cost');
+            $query = $query->select(
+                'trips.id',
+                'models.name as vehicle',
+                'types.name as trip-type',
+                'trips.pickup_date as pickup-date',
+                'trips.fuel_cost as fuel-cost'
+            );
             $query = $query->leftJoin('vehicles', 'trips.vehicle_id', '=', 'vehicles.id');
             $query = $query->leftJoin('models', 'vehicles.model_vehicle_id', '=', 'models.id');
             $query = $query->leftJoin('types', 'trips.trip_type_id', '=', 'types.id');
@@ -86,7 +92,7 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
     public function getInputs($inputs)
     {
         $inputs['company_id'] = Auth::user()['company_id'];
-        if(empty($inputs['vendor_id'])) {
+        if (empty($inputs['vendor_id'])) {
             unset($inputs['vendor_id']);
         }
         $inputs['fuel_cost'] = HelperRepository::moeda($inputs['fuel_cost']);

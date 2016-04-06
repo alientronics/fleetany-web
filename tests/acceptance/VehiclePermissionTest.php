@@ -57,9 +57,9 @@ class VehiclePermissionTest extends AcceptanceTestCase
         $this->actingAs($user);
 
         $this->visit('/vehicle/1/edit');
-        $this->see('accessdenied');
+        $this->see('Access denied');
 
         $this->visit('/vehicle/destroy/1');
-        $this->see('accessdenied');
+        $this->see('Access denied');
     }
 }

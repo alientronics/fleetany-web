@@ -69,7 +69,7 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
     
     public function getInputs($inputs)
     {
-        if(empty($inputs['vendor_id'])) {
+        if (empty($inputs['vendor_id'])) {
             unset($inputs['vendor_id']);
         }
         $inputs['company_id'] = Auth::user()['company_id'];

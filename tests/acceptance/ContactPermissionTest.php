@@ -58,9 +58,9 @@ class ContactPermissionTest extends AcceptanceTestCase
         $this->actingAs($user);
 
         $this->visit('/contact/1/edit');
-        $this->see('accessdenied');
+        $this->see('Access denied');
         
         $this->visit('/contact/destroy/1');
-        $this->see('accessdenied');
+        $this->see('Access denied');
     }
 }

@@ -62,13 +62,13 @@ class ContactRepositoryEloquent extends BaseRepository implements ContactReposit
     public static function getContacts($type = null, $optionalChoice = false)
     {
         $contacts = Contact::where('contacts.company_id', Auth::user()['company_id']);
-        if(!empty($type)) {
+        if (!empty($type)) {
             $contacts = $contacts->join('types', 'contacts.contact_type_id', '=', 'types.id')
                             ->where('types.name', $type);
         }
         $contacts = $contacts->lists('contacts.name', 'contacts.id');
 
-        if($optionalChoice) {
+        if ($optionalChoice) {
             $contacts->splice(0, 0, array("" => ""));
         }
         

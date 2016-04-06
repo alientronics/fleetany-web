@@ -58,9 +58,9 @@ class UserPermissionTest extends AcceptanceTestCase
         $this->actingAs($user);
         
         $this->visit('/user/'.$idAccessDenied.'/edit');
-        $this->see('accessdenied');
+        $this->see('Access denied');
         
         $this->visit('/user/destroy/'.$idAccessDenied);
-        $this->see('accessdenied');
+        $this->see('Access denied');
     }
 }

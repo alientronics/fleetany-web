@@ -57,9 +57,9 @@ class TripPermissionTest extends AcceptanceTestCase
         $this->actingAs($user);
 
         $this->visit('/trip/1/edit');
-        $this->see('accessdenied');
+        $this->see('Access denied');
         
         $this->visit('/trip/destroy/1');
-        $this->see('accessdenied');
+        $this->see('Access denied');
     }
 }

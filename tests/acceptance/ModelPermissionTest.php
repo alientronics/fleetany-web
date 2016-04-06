@@ -57,9 +57,9 @@ class ModelPermissionTest extends AcceptanceTestCase
         $this->actingAs($user);
 
         $this->visit('/model/1/edit');
-        $this->see('accessdenied');
+        $this->see('Access denied');
         
         $this->visit('/model/destroy/1');
-        $this->see('accessdenied');
+        $this->see('Access denied');
     }
 }
