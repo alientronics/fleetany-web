@@ -33,7 +33,11 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
     {
         $entries = $this->scopeQuery(function ($query) use ($filters) {
 
-            $query = $query->select('entries.*', 'models.name', 'types.name');
+            $query = $query->select('entries.*', 
+                                    'entries.datetime_ini as datetime-ini', 
+                                    'models.name as vehicle', 
+                                    'types.name as entry-type'
+                );
             $query = $query->leftJoin('vehicles', 'entries.vehicle_id', '=', 'vehicles.id');
             $query = $query->leftJoin('models', 'vehicles.model_vehicle_id', '=', 'models.id');
             $query = $query->leftJoin('types', 'entries.entry_type_id', '=', 'types.id');

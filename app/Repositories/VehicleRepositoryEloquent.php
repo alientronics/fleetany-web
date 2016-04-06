@@ -31,7 +31,7 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
     {
         $vehicles = $this->scopeQuery(function ($query) use ($filters) {
 
-            $query = $query->select('vehicles.*', 'models.name');
+            $query = $query->select('vehicles.*', 'models.name as model-vehicle');
             $query = $query->leftJoin('models', 'vehicles.model_vehicle_id', '=', 'models.id');
             
             if (!empty($filters['model-vehicle'])) {

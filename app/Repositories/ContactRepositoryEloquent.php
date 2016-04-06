@@ -31,7 +31,7 @@ class ContactRepositoryEloquent extends BaseRepository implements ContactReposit
     {
         $contacts = $this->scopeQuery(function ($query) use ($filters) {
             
-            $query = $query->select('contacts.*', 'types.name as contact_type')
+            $query = $query->select('contacts.*', 'types.name as contact-type')
                             ->leftJoin('types', 'contacts.contact_type_id', '=', 'types.id');
             
             if (!empty($filters['name'])) {

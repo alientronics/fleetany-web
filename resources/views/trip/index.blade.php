@@ -15,7 +15,7 @@
 <div class="mdl-grid demo-content">
 
     @include('includes.gridview', [
-    	'registers' => $registers,
+    	'registers' => $trips,
     	'gridview' => [
     		'pageActive' => 'trip',
          	'sortFilters' => [

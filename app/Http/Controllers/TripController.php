@@ -38,9 +38,9 @@ class TripController extends Controller
     public function index()
     {
         $filters = $this->helper->getFilters($this->request->all(), $this->fields, $this->request);
-        $registers = $this->tripRepo->results($filters);
+        $trips = $this->tripRepo->results($filters);
         
-        return view("trip.index", compact('registers', 'filters'));
+        return view("trip.index", compact('trips', 'filters'));
     }
     
     public function create()
