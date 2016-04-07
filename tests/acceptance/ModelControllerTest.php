@@ -66,7 +66,9 @@ class ModelControllerTest extends AcceptanceTestCase
             ->type('Vendor Name', 'vendor')
             ->type('Generic Car', 'name')
             ->press('Buscar')
-            ->see('<td class="mdl-data-table__cell--non-numeric"> 1 </td>')
+            ->see('car</div>')
+            ->see('Vendor Name</div>')
+            ->see('Generic Car</div>')
         ;
     }
 }

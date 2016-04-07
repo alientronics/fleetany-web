@@ -101,7 +101,9 @@ class ContactControllerTest extends AcceptanceTestCase
             ->type('user', 'contact_type')
             ->type('City', 'city')
             ->press('Buscar')
-            ->see('<td class="mdl-data-table__cell--non-numeric"> 1 </td>')
+            ->see('Administrator</div>')
+            ->see('user</div>')
+            ->see('City</div>')
         ;
     }
 }

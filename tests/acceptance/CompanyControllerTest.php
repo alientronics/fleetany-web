@@ -82,7 +82,9 @@ class CompanyControllerTest extends AcceptanceTestCase
             ->type('City', 'city')
             ->type('Country', 'country')
             ->press('Buscar')
-            ->see('<td class="mdl-data-table__cell--non-numeric"> 1 </td>')
+            ->see('Company</div>')
+            ->see('City</div>')
+            ->see('Country</div>')
         ;
     }
 }

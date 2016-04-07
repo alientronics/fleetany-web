@@ -92,7 +92,8 @@ class VehicleControllerTest extends AcceptanceTestCase
             ->type('IOP-1234', 'number')
             ->type('50000', 'cost')
             ->press('Buscar')
-            ->see('<td class="mdl-data-table__cell--non-numeric"> 1 </td>')
+            ->see('Generic Car</div>')
+            ->see('IOP-1234</div>')
         ;
     }
 }

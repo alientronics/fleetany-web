@@ -112,7 +112,10 @@ class UserControllerTest extends AcceptanceTestCase
             ->type('Administrator', 'contact_id')
             ->type('Company', 'company_id')
             ->press('Buscar')
-            ->see('<td class="mdl-data-table__cell--non-numeric"> 1 </td>')
+            ->see('Administrator</div>')
+            ->see('admin@alientronics.com.br</div>')
+            ->see('Administrator</div>')
+            ->see('Company</div>')
         ;
     }
 }

@@ -67,7 +67,8 @@ class TypeControllerTest extends AcceptanceTestCase
             ->type('entry', 'entity_key')
             ->type('service', 'name')
             ->press('Buscar')
-            ->see('<td class="mdl-data-table__cell--non-numeric"> 1 </td>')
+            ->see('entry</div>')
+            ->see('service</div>')
         ;
     }
 }

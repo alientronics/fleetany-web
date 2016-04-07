@@ -30,10 +30,11 @@ class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
     {
         $models = $this->scopeQuery(function ($query) use ($filters) {
 
-            $query = $query->select('models.*',
-                                    'types.name as model-type',
-                                    'contacts.name as vendor'
-                );
+            $query = $query->select(
+                'models.*',
+                'types.name as model-type',
+                'contacts.name as vendor'
+            );
             $query = $query->leftJoin('types', 'models.model_type_id', '=', 'types.id');
             $query = $query->leftJoin('contacts', 'models.vendor_id', '=', 'contacts.id');
             

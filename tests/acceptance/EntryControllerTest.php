@@ -94,7 +94,9 @@ class EntryControllerTest extends AcceptanceTestCase
             ->type('2016-01-01 00:00:00', 'datetime_ini')
             ->type('321', 'cost')
             ->press('Buscar')
-            ->see('<td class="mdl-data-table__cell--non-numeric"> 1 </td>')
+            ->see('Generic Car</div>')
+            ->see('service</div>')
+            ->see('2016-01-01 00:00:00</div>')
         ;
     }
 }
