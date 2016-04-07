@@ -127,6 +127,8 @@
 	$( document ).ready(function() {
 		$('#fuel_cost').maskMoney({!!Lang::get("masks.money")!!});
 		$('#fuel_amount').maskMoney({!!Lang::get("masks.money")!!});
+		$( "input[name='pickup_date']" ).mask('{!!Lang::get("masks.datetime")!!}');
+		$( "input[name='deliver_date']" ).mask('{!!Lang::get("masks.datetime")!!}');
 		
         var x = new mdDateTimePicker({
             type: 'date'

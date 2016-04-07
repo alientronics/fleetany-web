@@ -91,6 +91,8 @@
 	$( document ).ready(function() {
 		$('#cost').maskMoney({!!Lang::get("masks.money")!!});
 		$('#cost').trigger('liszt:updated');
+		$( "input[name='datetime_ini']" ).mask('{!!Lang::get("masks.datetime")!!}');
+		$( "input[name='datetime_end']" ).mask('{!!Lang::get("masks.datetime")!!}');
 	});
 </script>
 
