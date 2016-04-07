@@ -8,7 +8,7 @@
 				<span id="logo-lettering">fleetany</span>
 			</div>
 			{!! Form::open() !!}
-			<div class="mdl-card__title mdl-color--primary mdl-color-text--white">
+			<div class="mdl-card__title mdl-color--primary mdl-color-text--accent-contrast">
 				<h2 class="mdl-card__title-text">{{Lang::get('general.PleaseSignIn')}}</h2>
 			</div>
 	  		<div class="mdl-card__supporting-text">
