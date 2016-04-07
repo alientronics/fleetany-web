@@ -46,13 +46,13 @@
             </div>                        
 
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('datetime_ini')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('datetime_ini', $entry->datetime_ini, array('class' => 'mdl-textfield__input'))!!}
+         		{!!Form::text('datetime_ini', $entry->datetime_ini, array('id' => 'datetime_ini', 'class' => 'mdl-textfield__input'))!!}
 				{!!Form::label('datetime_ini', Lang::get('general.datetime_ini'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('datetime_ini') }}</span>
 			</div>
 
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('datetime_end')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('datetime_end', $entry->datetime_end, array('class' => 'mdl-textfield__input'))!!}
+         		{!!Form::text('datetime_end', $entry->datetime_end, array('id' => 'datetime_end', 'class' => 'mdl-textfield__input'))!!}
 				{!!Form::label('datetime_end', Lang::get('general.datetime_end'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('datetime_end') }}</span>
 			</div>
@@ -88,6 +88,32 @@
 </div>
 
 <script>
+	(function() {
+      var x = new mdDateTimePicker({
+        type: 'date',
+		future: moment().add(21, 'years')
+      });
+      var y = new mdDateTimePicker({
+        type: 'date',
+		future: moment().add(21, 'years')
+      });
+      document.getElementById('datetime_ini').addEventListener('click', function() {
+		x.trigger(document.getElementById('datetime_ini'));
+        x.toggle();
+      });
+      document.getElementById('datetime_end').addEventListener('click', function() {
+		y.trigger(document.getElementById('datetime_end'));
+        y.toggle();
+      });
+      // dispatch event test
+      document.getElementById('datetime_ini').addEventListener('onOk', function() {
+        this.value = x.time().format('{!!Lang::get("masks.datetimeDatepicker")!!}').toString();
+      });
+      document.getElementById('datetime_end').addEventListener('onOk', function() {
+        this.value = y.time().format('{!!Lang::get("masks.datetimeDatepicker")!!}').toString();
+      });
+    }).call(this);
+		
 	$( document ).ready(function() {
 		$('#cost').maskMoney({!!Lang::get("masks.money")!!});
 		$('#cost').trigger('liszt:updated');

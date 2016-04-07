@@ -52,13 +52,13 @@
             </div>
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('pickup_date')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('pickup_date', $trip->pickup_date, array('class' => 'mdl-textfield__input'))!!}
+         		{!!Form::text('pickup_date', $trip->pickup_date, array('id' => 'pickup_date', 'class' => 'mdl-textfield__input'))!!}
 				{!!Form::label('pickup_date', Lang::get('general.pickup_date'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('pickup_date') }}</span>
 			</div>
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('deliver_date')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('deliver_date', $trip->deliver_date, array('class' => 'mdl-textfield__input'))!!}
+         		{!!Form::text('deliver_date', $trip->deliver_date, array('id' => 'deliver_date', 'class' => 'mdl-textfield__input'))!!}
 				{!!Form::label('deliver_date', Lang::get('general.deliver_date'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('deliver_date') }}</span>
 			</div>
@@ -124,27 +124,36 @@
 </div>
 
 <script>
+
+	(function() {
+	      var x = new mdDateTimePicker({
+	        type: 'date',
+			future: moment().add(21, 'years')
+	      });
+	      var y = new mdDateTimePicker({
+	        type: 'date',
+			future: moment().add(21, 'years')
+	      });
+	      document.getElementById('pickup_date').addEventListener('click', function() {
+			x.trigger(document.getElementById('pickup_date'));
+	        x.toggle();
+	      });
+	      document.getElementById('deliver_date').addEventListener('click', function() {
+			y.trigger(document.getElementById('deliver_date'));
+	        y.toggle();
+	      });
+	      // dispatch event test
+	      document.getElementById('pickup_date').addEventListener('onOk', function() {
+	        this.value = x.time().format('{!!Lang::get("masks.datetimeDatepicker")!!}').toString();
+	      });
+	      document.getElementById('deliver_date').addEventListener('onOk', function() {
+        this.value = y.time().format('{!!Lang::get("masks.datetimeDatepicker")!!}').toString();
+      });
+    }).call(this);
+	    
 	$( document ).ready(function() {
 		$('#fuel_cost').maskMoney({!!Lang::get("masks.money")!!});
 		$('#fuel_amount').maskMoney({!!Lang::get("masks.money")!!});
-		$( "input[name='pickup_date']" ).mask('{!!Lang::get("masks.datetime")!!}');
-		$( "input[name='deliver_date']" ).mask('{!!Lang::get("masks.datetime")!!}');
-		
-        var x = new mdDateTimePicker({
-            type: 'date'
-        });
-
-		$( "input[name='pickup_date']" ).click(function() {
-			x.toggle();
-		});
-
-		$( "#mddtp-date__ok" ).click(function() {
-			var date = new Date(x.time());
-			date = moment(date, "YYYY-MM-DD HH:mm:ss");
-		
-			$( "input[name='pickup_date']" ).val(x.time().toString());
-    	});
-    	
 	});
 </script>
 

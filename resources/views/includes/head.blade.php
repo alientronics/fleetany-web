@@ -28,6 +28,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.min.js"></script>
 <script type="text/javascript" src="https://cdn.rawgit.com/plentz/jquery-maskmoney/master/dist/jquery.maskMoney.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 {!! HTML::script('js/fleetany.js') !!}
 {!! HTML::style('css/style-edit.css') !!}
@@ -36,7 +37,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Lobster+Two' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.amber-indigo.min.css">
-{!! HTML::script('js/moment.js') !!}
+
 {!! HTML::script('js/md-date-time-picker.min.js') !!}
   
 <style>
