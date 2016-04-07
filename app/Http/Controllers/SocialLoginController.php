@@ -33,7 +33,11 @@ class SocialLoginController extends Controller
         try {
             $user = Socialite::driver($provider)->user();
         } catch (\Exception $e) {
-            $request->session()->flash('error', Lang::get("general.LoginGoogleFailed"));
+            if($provider == 'google') {
+                $request->session()->flash('error', Lang::get("general.LoginGoogleFailed"));
+            } else {
+                $request->session()->flash('error', Lang::get("general.LoginFacebookFailed"));
+            }
             return redirect('/auth/login');
         }
 
