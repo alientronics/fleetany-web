@@ -76,7 +76,7 @@
 			</div>
 
 			<div class="mdl-card__actions">
-				<button type="submit" class="mdl-button mdl-color--amber mdl-color-text--white mdl-js-button mdl-button--raised mdl-button--colored">
+				<button type="submit" class="mdl-button mdl-color--primary mdl-color-text--accent-contrast mdl-js-button mdl-button--raised mdl-button--colored">
                   {{ Lang::get('general.Send') }} 
                 </button>
 			</div>
