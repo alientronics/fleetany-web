@@ -100,7 +100,7 @@
 			</div>
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('fuel_amount')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('fuel_amount', $trip->fuel_amount, array('class' => 'mdl-textfield__input'))!!}
+         		{!!Form::text('fuel_amount', $trip->fuel_amount, array('id' => 'fuel_amount', 'class' => 'mdl-textfield__input'))!!}
 				{!!Form::label('fuel_amount', Lang::get('general.fuel_amount'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('fuel_amount') }}</span>
 			</div>
@@ -126,7 +126,8 @@
 <script>
 	$( document ).ready(function() {
 		$('#fuel_cost').maskMoney({!!Lang::get("masks.money")!!});
-
+		$('#fuel_amount').maskMoney({!!Lang::get("masks.money")!!});
+		
         var x = new mdDateTimePicker({
             type: 'date'
         });
