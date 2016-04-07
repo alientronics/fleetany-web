@@ -36,7 +36,7 @@
         </div>
     </div>
     @endforeach
-    <div class="mdl-data-table mdl-js-data-table mdl-cell--12-col mdl-shadow--2dp">
+    
 	@include('includes.pagination', ['paginator' => $registers->appends($filters['pagination'])]) 
-	</div>
+	
 </div>

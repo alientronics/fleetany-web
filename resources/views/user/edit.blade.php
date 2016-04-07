@@ -30,43 +30,43 @@
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('name')) is-invalid is-dirty @endif"" data-upgraded="eP">
          		{!!Form::text('name', $user->name, array('class' => 'mdl-textfield__input'))!!}
-				{!!Form::label('name', Lang::get('general.name'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+				{!!Form::label('name', Lang::get('general.name'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('name') }}</span>
 			</div>
 						
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('email')) is-invalid is-dirty @endif"" data-upgraded="eP">
          		{!!Form::text('email', $user->email, array('class' => 'mdl-textfield__input'))!!}
-				{!!Form::label('email', Lang::get('general.email'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+				{!!Form::label('email', Lang::get('general.email'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('email') }}</span>
 			</div>
 						
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('password')) is-invalid is-dirty @endif"" data-upgraded="eP">
          		{!!Form::password('password', array('class' => 'mdl-textfield__input'))!!}
-				{!!Form::label('password', Lang::get('general.password'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+				{!!Form::label('password', Lang::get('general.password'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('password') }}</span>
 			</div>
 
     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('role_id')) is-invalid is-dirty @endif"">
                 {!!Form::select('role_id', $role, $user->role_id, array('class' => 'mdl-textfield__input'))!!}
-       			{!!Form::label('role_id', Lang::get('general.role_id'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+       			{!!Form::label('role_id', Lang::get('general.role_id'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
             	<span class="mdl-textfield__error">{{ $errors->first('role_id') }}</span>
             </div>
 
     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('language')) is-invalid is-dirty @endif"">
                 {!!Form::select('language', $language, $user->language, array('class' => 'mdl-textfield__input'))!!}
-       			{!!Form::label('language', Lang::get('general.language'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+       			{!!Form::label('language', Lang::get('general.language'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
             	<span class="mdl-textfield__error">{{ $errors->first('language') }}</span>
             </div>
 						
     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('contact_id')) is-invalid is-dirty @endif"">
                 {!!Form::select('contact_id', $contacts, $user->contact_id, array('class' => 'mdl-textfield__input'))!!}
-       			{!!Form::label('contact_id', Lang::get('general.contact_id'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+       			{!!Form::label('contact_id', Lang::get('general.contact_id'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
             	<span class="mdl-textfield__error">{{ $errors->first('contact_id') }}</span>
             </div>
             
     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('company_id')) is-invalid is-dirty @endif"">
                 {!!Form::select('company_id', $companies, $user->company_id, array('class' => 'mdl-textfield__input'))!!}
-       			{!!Form::label('company_id', Lang::get('general.company_id'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+       			{!!Form::label('company_id', Lang::get('general.company_id'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
             	<span class="mdl-textfield__error">{{ $errors->first('company_id') }}</span>
             </div>
 

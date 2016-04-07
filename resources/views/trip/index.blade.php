@@ -25,7 +25,7 @@
                 ["class" => "mdl-cell--2-col", "name" => "fuel-cost", "lang" => "general.fuel_cost"],
     		] 
     	]
-    ]);
+    ])
         
 </div>
 

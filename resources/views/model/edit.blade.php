@@ -29,19 +29,19 @@
 
     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('model_type_id')) is-invalid is-dirty @endif"">
                 {!!Form::select('model_type_id', $model_type_id, $model->model_type_id, array('class' => 'mdl-textfield__input'))!!}
-       			{!!Form::label('model_type_id', Lang::get('general.model_type'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+       			{!!Form::label('model_type_id', Lang::get('general.model_type'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
             	<span class="mdl-textfield__error">{{ $errors->first('model_type_id') }}</span>
             </div>
             
     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('vendor_id')) is-invalid is-dirty @endif"">
                 {!!Form::select('vendor_id', $vendor_id, $model->vendor_id, array('class' => 'mdl-textfield__input'))!!}
-       			{!!Form::label('vendor_id', Lang::get('general.vendor'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+       			{!!Form::label('vendor_id', Lang::get('general.vendor'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
             	<span class="mdl-textfield__error">{{ $errors->first('vendor_id') }}</span>
             </div>                        
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('name')) is-invalid is-dirty @endif"" data-upgraded="eP">
          		{!!Form::text('name', $model->name, array('class' => 'mdl-textfield__input'))!!}
-				{!!Form::label('name', Lang::get('general.name'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+				{!!Form::label('name', Lang::get('general.name'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('name') }}</span>
 			</div>
 
