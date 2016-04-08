@@ -71,6 +71,11 @@ class VehicleControllerTest extends AcceptanceTestCase
     public function testDelete()
     {
         $idDelete = Vehicle::all()->last()['id'];
+        
+        $vehicle = Vehicle::find($idDelete);
+        $vehicle->entries()->delete();
+        $vehicle->trips()->delete();
+        
         $this->seeInDatabase('vehicles', ['id' => $idDelete]);
         $this->visit('/vehicle/destroy/'.$idDelete);
         $this->seeIsSoftDeletedInDatabase('vehicles', ['id' => $idDelete]);

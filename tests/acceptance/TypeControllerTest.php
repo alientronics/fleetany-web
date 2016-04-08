@@ -47,6 +47,13 @@ class TypeControllerTest extends AcceptanceTestCase
     public function testDelete()
     {
         $idDelete = Type::all()->last()['id'];
+        
+        $type = Type::find($idDelete);
+        $type->contacts()->delete();
+        $type->entries()->delete();
+        $type->models()->delete();
+        $type->trips()->delete();
+        
         $this->seeInDatabase('types', ['id' => $idDelete]);
         $this->visit('/type/destroy/'.$idDelete);
         $this->seeIsSoftDeletedInDatabase('types', ['id' => $idDelete]);

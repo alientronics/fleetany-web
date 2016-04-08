@@ -45,6 +45,8 @@ class ModelControllerTest extends AcceptanceTestCase
     public function testDelete()
     {
         $idDelete = Model::all()->last()['id'];
+        $model = Model::find($idDelete);
+        $model->vehicles()->delete();
         $this->seeInDatabase('models', ['id' => $idDelete]);
         $this->visit('/model/destroy/'.$idDelete);
         $this->seeIsSoftDeletedInDatabase('models', ['id' => $idDelete]);

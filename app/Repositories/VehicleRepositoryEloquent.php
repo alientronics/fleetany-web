@@ -61,7 +61,7 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
     public function hasReferences($idVehicle)
     {
         $vehicle = $this->find($idVehicle);
-        $countReferences += $vehicle->entries()->count();
+        $countReferences = $vehicle->entries()->count();
         $countReferences += $vehicle->trips()->count();
         
         if ($countReferences > 0) {

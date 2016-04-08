@@ -79,6 +79,15 @@ class ContactControllerTest extends AcceptanceTestCase
     public function testDelete()
     {
         $idDelete = Contact::all()->last()['id'];
+        
+        $contact = Contact::find($idDelete);
+        $contact->companies()->delete();
+        $contact->entries()->delete();
+        $contact->models()->delete();
+        $contact->tripsDriver()->delete();
+        $contact->tripsVendor()->delete();
+        $contact->users()->delete();
+        
         $this->seeInDatabase('contacts', ['id' => $idDelete]);
         $this->visit('/contact/destroy/'.$idDelete);
         $this->seeIsSoftDeletedInDatabase('contacts', ['id' => $idDelete]);

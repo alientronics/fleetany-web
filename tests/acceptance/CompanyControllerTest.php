@@ -60,6 +60,17 @@ class CompanyControllerTest extends AcceptanceTestCase
     public function testDelete()
     {
         $idDelete = Company::all()->last()['id'];
+        
+        $company = Company::find($idDelete);
+        $company->contacts()->delete();
+        $company->entries()->delete();
+        $company->models()->delete();
+        $company->trips()->delete();
+        $company->types()->delete();
+        $company->usersCompany()->delete();
+        $company->usersPendingCompany()->delete();
+        $company->vehicles()->delete();
+        
         $this->seeInDatabase('companies', ['id' => $idDelete]);
         $this->visit('/company/destroy/'.$idDelete);
         $this->seeIsSoftDeletedInDatabase('companies', ['id' => $idDelete]);
