@@ -59,6 +59,9 @@ class ModelPermissionTest extends AcceptanceTestCase
         $this->visit('/model/1/edit');
         $this->see('Access denied');
         
+        $model = Model::find(1);
+        $model->vehicles()->delete();
+        
         $this->visit('/model/destroy/1');
         $this->see('Access denied');
     }

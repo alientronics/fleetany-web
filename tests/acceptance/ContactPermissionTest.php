@@ -60,6 +60,14 @@ class ContactPermissionTest extends AcceptanceTestCase
         $this->visit('/contact/1/edit');
         $this->see('Access denied');
         
+        $contact = Contact::find(1);
+        $contact->companies()->delete();
+        $contact->entries()->delete();
+        $contact->models()->delete();
+        $contact->tripsDriver()->delete();
+        $contact->tripsVendor()->delete();
+        $contact->users()->delete();
+        
         $this->visit('/contact/destroy/1');
         $this->see('Access denied');
     }

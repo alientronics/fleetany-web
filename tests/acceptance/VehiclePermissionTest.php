@@ -59,6 +59,10 @@ class VehiclePermissionTest extends AcceptanceTestCase
         $this->visit('/vehicle/1/edit');
         $this->see('Access denied');
 
+        $vehicle = Vehicle::find(1);
+        $vehicle->entries()->delete();
+        $vehicle->trips()->delete();
+        
         $this->visit('/vehicle/destroy/1');
         $this->see('Access denied');
     }

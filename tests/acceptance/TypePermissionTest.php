@@ -59,6 +59,12 @@ class TypePermissionTest extends AcceptanceTestCase
         $this->visit('/type/1/edit');
         $this->see('Access denied');
         
+        $type = Type::find(1);
+        $type->contacts()->delete();
+        $type->entries()->delete();
+        $type->models()->delete();
+        $type->trips()->delete();
+        
         $this->visit('/type/destroy/1');
         $this->see('Access denied');
     }
