@@ -19,7 +19,7 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
         'deliver_date' => 'date|date_format:Y-m-d H:i:s|after:pickup_date',
         'end_mileage'   => 'required',
         'fuel_cost'     => 'required|numeric|min:0.01',
-        'fuel_amount'   => 'required|numeric|min:0',
+        'fuel_amount'   => 'required|numeric|min:0.01',
         ];
 
     public function model()
@@ -82,7 +82,10 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
         if (empty($inputs['vendor_id'])) {
             unset($inputs['vendor_id']);
         }
-        $inputs['fuel_cost'] = HelperRepository::moeda($inputs['fuel_cost']);
+        $inputs['pickup_date'] = HelperRepository::date($inputs['pickup_date']);
+        $inputs['deliver_date'] = HelperRepository::date($inputs['deliver_date']);
+        $inputs['fuel_cost'] = HelperRepository::money($inputs['fuel_cost']);
+        $inputs['fuel_amount'] = HelperRepository::money($inputs['fuel_amount']);
         return $inputs;
     }
     

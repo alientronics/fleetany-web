@@ -103,20 +103,71 @@ class HelperRepository
         }
     }
     
-    public static function moeda($valor, $mask = 'en', $decimal = 2)
+    public static function money($value, $mask = 'en', $decimal = 2)
     {
-        $valor = preg_replace("/[^0-9]/", "", $valor);
-        if (strlen($valor) < 3) {
-            $valor = str_pad($valor, 3, "0", STR_PAD_LEFT);
+        $value = preg_replace("/[^0-9]/", "", $value);
+        if (strlen($value) < 3) {
+            $value = str_pad($value, 3, "0", STR_PAD_LEFT);
         }
-        $valor = substr($valor, 0, ($decimal * -1)) . "." . substr($valor, ($decimal * -1));
+        $value = substr($value, 0, ($decimal * -1)) . "." . substr($value, ($decimal * -1));
         if ($mask == 'ptbr') {
-            return number_format($valor, $decimal, ',', '.');
+            return number_format($value, $decimal, ',', '.');
         } elseif ($mask == 'en') {
-            return number_format($valor, $decimal, '.', '');
+            return number_format($value, $decimal, '.', '');
         } elseif ($mask == 'url') {
-            return preg_replace("/[^0-9]/", "", $valor);
+            return preg_replace("/[^0-9]/", "", $value);
         }
-        return preg_replace("/[^0-9]/", "", $valor);
+        return preg_replace("/[^0-9]/", "", $value);
+    }
+
+    public static function date($value, $mask = 'en') {
+    
+        $hour = "";
+        if(strlen($value) > 10) {
+            $dh = explode(" ", $value);
+            $value = $dh[0];
+            $hour = " ".$dh[1];
+        }
+    
+        $originalMask = self::dataGetMask($value);
+    
+        if($originalMask == $mask) {
+            return $value.$hour;
+        } else if($mask == 'ptbr') {
+            if($originalMask == 'url') {
+                return str_replace("-", "/", $value).$hour;
+            } else if($originalMask == 'en') {
+                return implode("/", array_reverse(explode("-", $value))).$hour;
+            }
+        } else if($mask == 'en') {
+            if($originalMask == 'url') {
+                $value = self::date($value);
+                return implode("-", array_reverse(explode("/", $value))).$hour;
+            } else if($originalMask == 'ptbr') {
+                return implode("-", array_reverse(explode("/", $value))).$hour;
+            }
+        } else if($mask == 'url') {
+            if($originalMask == 'ptbr') {
+                return str_replace("/", "-", $value).$hour;
+            } else if($originalMask == 'en') {
+                $value = self::date($value);
+                return str_replace("/", "-", $value).$hour;
+            }
+        } else if ($mask == "view") {
+            return implode("/", array_reverse(explode("-", $value)));
+        }
+    
+        return '';
+    }
+    
+    public static function dataGetMask($value) {
+        if (preg_match("/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/", $value)) {
+            return 'ptbr';
+        } else if (preg_match("/[0-9]{2}\-[0-9]{2}\-[0-9]{4}/", $value)) {
+            return 'url';
+        } else  if (preg_match("/[0-9]{4}\-[0-9]{2}\-[0-9]{2}/", $value)) {
+            return 'bd';
+        }
+        return '';
     }
 }
