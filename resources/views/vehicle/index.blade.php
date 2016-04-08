@@ -19,9 +19,9 @@
     	'gridview' => [
     		'pageActive' => 'vehicle',
          	'sortFilters' => [
-                ["class" => "mdl-cell--3-col", "name" => "model-vehicle", "lang" => "general.model_vehicle"], 
+                ["class" => "hideme-mobile mdl-cell--3-col", "name" => "model-vehicle", "lang" => "general.model_vehicle"], 
                 ["class" => "mdl-cell--4-col", "name" => "number", "lang" => "general.number"], 
-                ["class" => "mdl-cell--3-col", "name" => "cost", "lang" => "general.cost"], 
+                ["class" => "hideme-mobile mdl-cell--3-col", "name" => "cost", "lang" => "general.cost"], 
     		] 
     	]
     ])

@@ -19,8 +19,8 @@
     	'gridview' => [
     		'pageActive' => 'model',
          	'sortFilters' => [
-                ["class" => "mdl-cell--3-col", "name" => "vendor", "lang" => "general.vendor"], 
-                ["class" => "mdl-cell--3-col", "name" => "model-type", "lang" => "general.model_type"], 
+                ["class" => "hideme-mobile mdl-cell--3-col", "name" => "vendor", "lang" => "general.vendor"], 
+                ["class" => "hideme-mobile mdl-cell--3-col", "name" => "model-type", "lang" => "general.model_type"], 
                 ["class" => "mdl-cell--4-col", "name" => "name", "lang" => "general.name"], 
     		] 
     	]

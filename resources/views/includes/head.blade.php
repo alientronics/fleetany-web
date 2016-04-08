@@ -52,3 +52,4 @@
 }
 </style>
 {!! HTML::style('css/styles.css') !!}
+{!! HTML::style('css/fleetany.css') !!}

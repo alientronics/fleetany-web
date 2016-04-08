@@ -20,8 +20,8 @@
     		'pageActive' => 'contact',
          	'sortFilters' => [
                 ["class" => "mdl-cell--4-col", "name" => "name", "lang" => "general.name"], 
-                ["class" => "mdl-cell--3-col", "name" => "contact-type", "lang" => "general.contact_type"], 
-                ["class" => "mdl-cell--3-col", "name" => "city", "lang" => "general.city"], 
+                ["class" => "hideme-mobile mdl-cell--3-col", "name" => "contact-type", "lang" => "general.contact_type"], 
+                ["class" => "hideme-mobile mdl-cell--3-col", "name" => "city", "lang" => "general.city"], 
     		] 
     	]
     ])

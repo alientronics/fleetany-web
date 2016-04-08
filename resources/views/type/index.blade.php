@@ -19,7 +19,7 @@
     	'gridview' => [
     		'pageActive' => 'type',
          	'sortFilters' => [
-                ["class" => "mdl-cell--5-col", "name" => "entity-key", "lang" => "general.entity_key"], 
+                ["class" => "hideme-mobile mdl-cell--5-col", "name" => "entity-key", "lang" => "general.entity_key"], 
                 ["class" => "mdl-cell--5-col", "name" => "name", "lang" => "general.name"], 
     		] 
     	]
