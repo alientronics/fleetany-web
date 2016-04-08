@@ -58,7 +58,7 @@ class TripController extends Controller
     {
         try {
             $this->tripRepo->validator();
-            $inputs = $this->tripRepo->getInputs($this->request->all());
+            $inputs = $this->tripRepo->setInputs($this->request->all());
             $this->tripRepo->create($inputs);
             return $this->redirect->to('trip')->with('message', Lang::get(
                 'general.succefullcreate',
@@ -73,6 +73,7 @@ class TripController extends Controller
     public function edit($idTrip)
     {
         $trip = $this->tripRepo->find($idTrip);
+        $trip = $this->tripRepo->getInputs($trip);
         $this->helper->validateRecord($trip);
 
         $company_id = CompanyRepositoryEloquent::getCompanies();
@@ -89,7 +90,7 @@ class TripController extends Controller
             $trip = $this->tripRepo->find($idTrip);
             $this->helper->validateRecord($trip);
             $this->tripRepo->validator();
-            $inputs = $this->tripRepo->getInputs($this->request->all());
+            $inputs = $this->tripRepo->setInputs($this->request->all());
             $this->tripRepo->update($inputs, $idTrip);
             return $this->redirect->to('trip')->with('message', Lang::get(
                 'general.succefullupdate',

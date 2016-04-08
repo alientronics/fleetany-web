@@ -46,7 +46,7 @@ class ModelController extends Controller
     {
         $model = new Model();
         $company_id = CompanyRepositoryEloquent::getCompanies();
-        $model_type_id = TypeRepositoryEloquent::getTypes('model');
+        $model_type_id = TypeRepositoryEloquent::getTypes();
         $vendor_id = ContactRepositoryEloquent::getContacts();
         return view("model.edit", compact('model', 'model_type_id', 'company_id', 'vendor_id'));
     }
@@ -74,7 +74,7 @@ class ModelController extends Controller
         $this->helper->validateRecord($model);
 
         $company_id = CompanyRepositoryEloquent::getCompanies();
-        $model_type_id = TypeRepositoryEloquent::getTypes('model');
+        $model_type_id = TypeRepositoryEloquent::getTypes();
         $vendor_id = ContactRepositoryEloquent::getContacts();
         
         return view("model.edit", compact('model', 'model_type_id', 'company_id', 'vendor_id'));

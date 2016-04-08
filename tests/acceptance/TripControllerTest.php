@@ -22,15 +22,15 @@ class TripControllerTest extends AcceptanceTestCase
         
         $this->visit('/trip/create');
     
-        $this->type('2016-01-01 15:15:15', 'pickup_date')
-            ->type('2016-01-02 15:15:15', 'deliver_date')
+        $this->type('01/01/2016 15:15:15', 'pickup_date')
+            ->type('02/01/2016 15:15:15', 'deliver_date')
             ->type('1200 First Av', 'pickup_place')
             ->type('345 63th St', 'deliver_place')
             ->type('320', 'begin_mileage')
             ->type('450', 'end_mileage')
             ->type('130', 'total_mileage')
             ->type('13.60', 'fuel_cost')
-            ->type('5', 'fuel_amount')
+            ->type('50.00', 'fuel_amount')
             ->type('Descricao', 'description')
             ->press('Enviar')
             ->seePageIs('/trip')
@@ -47,7 +47,7 @@ class TripControllerTest extends AcceptanceTestCase
                     'end_mileage' => 450,
                     'total_mileage' => 130,
                     'fuel_cost' => 13.6,
-                    'fuel_amount' => 5,
+                    'fuel_amount' => 50,
                     'description' => 'Descricao',
             ]
         );
@@ -57,18 +57,18 @@ class TripControllerTest extends AcceptanceTestCase
     {
         $this->visit('/trip/'.Trip::all()->last()['id'].'/edit');
     
-        $this->type('2016-02-01 15:15:15', 'pickup_date')
-        ->type('2016-02-02 15:15:15', 'deliver_date')
-        ->type('1220 First Av', 'pickup_place')
-        ->type('342 63th St', 'deliver_place')
-        ->type('322', 'begin_mileage')
-        ->type('452', 'end_mileage')
-        ->type('132', 'total_mileage')
-        ->type('13.20', 'fuel_cost')
-        ->type('2', 'fuel_amount')
-        ->type('Descricao2', 'description')
-        ->press('Enviar')
-        ->seePageIs('/trip')
+        $this->type('01/02/2016 15:15:15', 'pickup_date')
+            ->type('02/02/2016 15:15:15', 'deliver_date')
+            ->type('1220 First Av', 'pickup_place')
+            ->type('342 63th St', 'deliver_place')
+            ->type('322', 'begin_mileage')
+            ->type('452', 'end_mileage')
+            ->type('132', 'total_mileage')
+            ->type('13.20', 'fuel_cost')
+            ->type('20.00', 'fuel_amount')
+            ->type('Descricao2', 'description')
+            ->press('Enviar')
+            ->seePageIs('/trip')
         ;
     
         $this->seeInDatabase(
@@ -82,7 +82,7 @@ class TripControllerTest extends AcceptanceTestCase
                 'end_mileage' => 452,
                 'total_mileage' => 132,
                 'fuel_cost' => 13.2,
-                'fuel_amount' => 2,
+                'fuel_amount' => 20,
                 'description' => 'Descricao2',
             ]
         );
@@ -104,7 +104,7 @@ class TripControllerTest extends AcceptanceTestCase
             ->see('de um valor para o campo pickup date.</span>')
             ->see('de um valor para o campo end mileage.</span>')
             ->see('<span class="mdl-textfield__error">O campo fuel cost dever')
-            ->see('de um valor para o campo fuel amount.</span>')
+            ->see('<span class="mdl-textfield__error">O campo fuel amount dever')
         ;
     }
     

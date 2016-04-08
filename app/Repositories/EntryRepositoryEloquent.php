@@ -8,6 +8,7 @@ use App\Repositories\EntryRepository;
 use App\Entities\Entry;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
 
 class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
 {
@@ -73,6 +74,14 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
     }
     
     public function getInputs($inputs)
+    {
+        $inputs['datetime_ini'] = HelperRepository::date($inputs['datetime_ini'], App::getLocale());
+        $inputs['datetime_end'] = HelperRepository::date($inputs['datetime_end'], App::getLocale());
+        $inputs['cost'] = HelperRepository::money($inputs['cost'], App::getLocale());
+        return $inputs;
+    }
+    
+    public function setInputs($inputs)
     {
         if (empty($inputs['vendor_id'])) {
             unset($inputs['vendor_id']);

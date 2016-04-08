@@ -58,7 +58,7 @@ class EntryController extends Controller
     {
         try {
             $this->entryRepo->validator();
-            $inputs = $this->entryRepo->getInputs($this->request->all());
+            $inputs = $this->entryRepo->setInputs($this->request->all());
             $this->entryRepo->create($inputs);
             return $this->redirect->to('entry')->with('message', Lang::get(
                 'general.succefullcreate',
@@ -73,6 +73,7 @@ class EntryController extends Controller
     public function edit($idEntry)
     {
         $entry = $this->entryRepo->find($idEntry);
+        $entry = $this->entryRepo->getInputs($entry);
         $this->helper->validateRecord($entry);
 
         $company_id = CompanyRepositoryEloquent::getCompanies();
@@ -88,7 +89,7 @@ class EntryController extends Controller
             $entry = $this->entryRepo->find($idEntry);
             $this->helper->validateRecord($entry);
             $this->entryRepo->validator();
-            $inputs = $this->entryRepo->getInputs($this->request->all());
+            $inputs = $this->entryRepo->setInputs($this->request->all());
             $this->entryRepo->update($inputs, $idEntry);
             return $this->redirect->to('entry')->with('message', Lang::get(
                 'general.succefullupdate',

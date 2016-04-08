@@ -8,6 +8,7 @@ use App\Repositories\TripRepository;
 use App\Entities\Trip;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\App;
 
 class TripRepositoryEloquent extends BaseRepository implements TripRepository
 {
@@ -77,6 +78,15 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
     }
     
     public function getInputs($inputs)
+    {
+        $inputs['pickup_date'] = HelperRepository::date($inputs['pickup_date'], App::getLocale());
+        $inputs['deliver_date'] = HelperRepository::date($inputs['deliver_date'], App::getLocale());
+        $inputs['fuel_cost'] = HelperRepository::money($inputs['fuel_cost'], App::getLocale());
+        $inputs['fuel_amount'] = HelperRepository::money($inputs['fuel_amount'], App::getLocale());
+        return $inputs;
+    }
+    
+    public function setInputs($inputs)
     {
         $inputs['company_id'] = Auth::user()['company_id'];
         if (empty($inputs['vendor_id'])) {

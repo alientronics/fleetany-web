@@ -51,7 +51,7 @@ class TypeRepositoryEloquent extends BaseRepository implements TypeRepository
     {
         $types = Type::where('company_id', Auth::user()['company_id']);
         
-        if(!empty($entity_key)) {
+        if (!empty($entity_key)) {
             $types = $types->where('entity_key', $entity_key);
         }
         
