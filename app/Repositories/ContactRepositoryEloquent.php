@@ -14,7 +14,6 @@ class ContactRepositoryEloquent extends BaseRepository implements ContactReposit
     protected $rules = [
         'contact_type_id'   => 'required',
         'name'      => 'min:3|required',
-        'license_no'  => 'required',
         ];
 
     public function model()

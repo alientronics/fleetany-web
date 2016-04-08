@@ -90,7 +90,6 @@ class ContactControllerTest extends AcceptanceTestCase
             ->press('Enviar')
             ->seePageIs('/contact/create')
             ->see('de um valor para o campo nome.</span>')
-            ->see('de um valor para o campo license no.</span>')
         ;
     }
     
