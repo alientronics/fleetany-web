@@ -7,6 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\UserRepository;
 use App\Entities\User;
 use Illuminate\Support\Facades\Auth;
+use Hash;
 
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
@@ -64,5 +65,17 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         })->paginate($filters['paginate']);
         
         return $users;
+    }
+    
+    public function setInputs($inputs, $user = null)
+    {
+        $inputs['company_id'] = Auth::user()['company_id'];
+        if (!empty($user) && empty($user->password)) {
+            unset($inputs['email']);
+            unset($inputs['password']);
+        } elseif (!empty($user->password) && !empty($inputs['password'])) {
+            $inputs['password'] = Hash::make($inputs['password']);
+        }
+        return $inputs;
     }
 }

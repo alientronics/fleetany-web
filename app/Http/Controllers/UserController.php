@@ -92,9 +92,7 @@ class UserController extends Controller
             $user = $this->userRepo->find($idUser);
             $this->helper->validateRecord($user);
             $this->userRepo->validator();
-            Input::merge(array('password' => Hash::make(Input::get('password'))));
-            $inputs = $this->request->all();
-            $inputs['company_id'] = Auth::user()['company_id'];
+            $inputs = $this->userRepo->setInputs($this->request->all(), $user);
             $this->userRepo->update($inputs, $idUser);
             User::all()->last()->assignRole(Input::get('role_id'));
             return $this->redirect->to('user')->with('message', Lang::get(
@@ -129,8 +127,10 @@ class UserController extends Controller
     public function updateProfile($idUser)
     {
         try {
+            $user = $this->userRepo->find($idUser);
             $this->userRepo->validator();
-            $this->userRepo->update($this->request->all(), $idUser);
+            $inputs = $this->userRepo->setInputs($this->request->all(), $user);
+            $this->userRepo->update($inputs, $idUser);
             $this->session->put('language', Input::get('language'));
             app()->setLocale(Input::get('language'));
             return $this->redirect->to('profile')->with('message', Lang::get(
