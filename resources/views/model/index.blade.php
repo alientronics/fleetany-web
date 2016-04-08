@@ -19,9 +19,9 @@
     	'gridview' => [
     		'pageActive' => 'model',
          	'sortFilters' => [
-                ["class" => "hideme-mobile mdl-cell--3-col", "name" => "vendor", "lang" => "general.vendor"], 
-                ["class" => "hideme-mobile mdl-cell--3-col", "name" => "model-type", "lang" => "general.model_type"], 
-                ["class" => "mdl-cell--4-col", "name" => "name", "lang" => "general.name"], 
+                ["class" => "mdl-cell--hide-phone mdl-cell--hide-tablet mdl-cell--4-col", "name" => "vendor", "lang" => "general.vendor"], 
+                ["class" => "mdl-cell--hide-phone mdl-cell--4-col", "name" => "model-type", "lang" => "general.model_type"], 
+                ["class" => "mdl-cell--2-col", "name" => "name", "lang" => "general.name"], 
     		] 
     	]
     ])

@@ -1,14 +1,6 @@
 @section('filter')
 
-      @permission('create.vehicle')
-      <a href="{{url('/')}}/vehicle/create" class="button mdl-add__button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--primary">
-        <i class="material-icons">add</i>
-      </a>
-      @endpermission
-
-    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--primary mdl-button--search">
-      <i class="material-icons">filter_list</i>
-    </button>
+    @include('includes.filter-buttons', [ 'pageActive' => 'vehicle' ])
       
     <form method="get" id="search">
       <div class="demo-drawer mdl-layout__drawer-right">

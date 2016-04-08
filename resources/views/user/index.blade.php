@@ -19,10 +19,10 @@
     	'gridview' => [
     		'pageActive' => 'user',
          	'sortFilters' => [
-                ["class" => "mdl-cell--3-col", "name" => "name", "lang" => "general.name"], 
-                ["class" => "hideme-mobile mdl-cell--3-col", "name" => "email", "lang" => "general.email"],  
-                ["class" => "hideme-mobile mdl-cell--2-col", "name" => "contact-id", "lang" => "general.contact_id"],  
-                ["class" => "hideme-mobile mdl-cell--2-col", "name" => "company-id", "lang" => "general.company_id"], 
+                ["class" => "mdl-cell--2-col", "name" => "name", "lang" => "general.name"], 
+                ["class" => "mdl-cell--hide-phone mdl-cell--hide-tablet mdl-cell--4-col", "name" => "email", "lang" => "general.email"],  
+                ["class" => "mdl-cell--hide-phone mdl-cell--2-col", "name" => "contact-id", "lang" => "general.contact_id"],  
+                ["class" => "mdl-cell--hide-phone mdl-cell--2-col", "name" => "company-id", "lang" => "general.company_id"], 
     		] 
     	]
     ])

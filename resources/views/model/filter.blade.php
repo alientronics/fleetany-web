@@ -1,15 +1,7 @@
 @section('filter')
 
-      @permission('create.model')
-      <a href="{{url('/')}}/model/create" class="button mdl-add__button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--primary">
-        <i class="material-icons">add</i>
-      </a>
-      @endpermission
+    @include('includes.filter-buttons', [ 'pageActive' => 'model' ])
 
-    <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--primary mdl-button--search">
-      <i class="material-icons">filter_list</i>
-    </button>
-      
     <form method="get" id="search">
       <div class="demo-drawer mdl-layout__drawer-right">
         <span class="mdl-layout-title mdl-color--primary mdl-color-text--accent-contrast">{{Lang::get('general.Search')}}<span class="mdl-search__div-close"><i class="material-icons">highlight_off</i></span></span>
