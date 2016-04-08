@@ -20,36 +20,21 @@
 
 <link rel="shortcut icon" href="images/favicon.png">
 
-<!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
-<!--
-<link rel="canonical" href="http://www.example.com/">
--->
-<script type="text/javascript" src="https://code.getmdl.io/1.1.3/material.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.min.js"></script>
-<script type="text/javascript" src="https://cdn.rawgit.com/plentz/jquery-maskmoney/master/dist/jquery.maskMoney.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment-with-locales.min.js"></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-{!! HTML::script('js/fleetany.js') !!}
+<!-- first, parallel css -->
 {!! HTML::style('css/style-edit.css') !!}
 {!! HTML::style('css/md-date-time-picker.min.css') !!}
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Lobster+Two' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.amber-indigo.min.css">
-
-{!! HTML::script('js/md-date-time-picker.min.js') !!}
-  
-<style>
-#view-source {
-  position: fixed;
-  display: block;
-  right: 0;
-  bottom: 0;
-  margin-right: 40px;
-  margin-bottom: 40px;
-  z-index: 900;
-}
-</style>
 {!! HTML::style('css/styles.css') !!}
-{!! HTML::style('css/fleetany.css') !!}
+
+<!-- second, javascript -->
+<script type="text/javascript" src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.2.2.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.0/jquery.mask.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/plentz/jquery-maskmoney/master/dist/jquery.maskMoney.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+{!! HTML::script('js/md-date-time-picker.min.js') !!}
+{!! HTML::script('js/fleetany.js') !!}

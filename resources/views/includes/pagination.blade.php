@@ -4,15 +4,15 @@
         <button id="HkhZcTBbWFADje7t2" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-paging__per-page-dropdown"><i class="material-icons">arrow_drop_down</i>
         </button>
         <ul for="HkhZcTBbWFADje7t2" class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect mdl-js-ripple-effect--ignore-events">
-          <li tabindex="-1" data-value="10" class="mdl-menu__item mdl-js-ripple-effect"><a href="{{ $paginator->url($paginator->currentPage()) . '&paginate=10'}}">10</a></span>
+          <li tabindex="-1" data-value="10" class="mdl-menu__item"><a href="{{ $paginator->url($paginator->currentPage()) . '&paginate=10'}}" class="mdl-navigation__link">10</a></span>
           </li>
-          <li tabindex="-1" data-value="20" class="mdl-menu__item mdl-js-ripple-effect"><a href="{{ $paginator->url($paginator->currentPage()) . '&paginate=20'}}">20</a></span>
+          <li tabindex="-1" data-value="20" class="mdl-menu__item"><a href="{{ $paginator->url($paginator->currentPage()) . '&paginate=20'}}" class="mdl-navigation__link">20</a></span>
           </li>
-          <li tabindex="-1" data-value="30" class="mdl-menu__item mdl-js-ripple-effect"><a href="{{ $paginator->url($paginator->currentPage()) . '&paginate=30'}}">30</a></span>
+          <li tabindex="-1" data-value="30" class="mdl-menu__item"><a href="{{ $paginator->url($paginator->currentPage()) . '&paginate=30'}}" class="mdl-navigation__link">30</a></span>
           </li>
-          <li tabindex="-1" data-value="40" class="mdl-menu__item mdl-js-ripple-effect"><a href="{{ $paginator->url($paginator->currentPage()) . '&paginate=40'}}">40</a></span>
+          <li tabindex="-1" data-value="40" class="mdl-menu__item"><a href="{{ $paginator->url($paginator->currentPage()) . '&paginate=40'}}" class="mdl-navigation__link">40</a></span>
           </li>
-          <li tabindex="-1" data-value="50" class="mdl-menu__item mdl-js-ripple-effect"><a href="{{ $paginator->url($paginator->currentPage()) . '&paginate=50'}}">50</a></span>
+          <li tabindex="-1" data-value="50" class="mdl-menu__item"><a href="{{ $paginator->url($paginator->currentPage()) . '&paginate=50'}}" class="mdl-navigation__link">50</a></span>
           </li>
         </ul>
         </span><span class="mdl-paging__count">{{$paginator->perPage() * $paginator->currentPage() - ($paginator->perPage() - 1)}}-{{$paginator->perPage() * $paginator->currentPage()}} de {{$paginator->total()}}</span>

@@ -97,19 +97,21 @@
         type: 'date',
 		future: moment().add(21, 'years')
       });
-      document.getElementById('datetime_ini').addEventListener('click', function() {
-		x.trigger(document.getElementById('datetime_ini'));
+      $('#datetime_ini')[0].addEventListener('click', function() {
+		x.trigger($('#datetime_ini')[0]);
+		$('#datetime_ini').parent().addClass('is-dirty');
         x.toggle();
       });
-      document.getElementById('datetime_end').addEventListener('click', function() {
-		y.trigger(document.getElementById('datetime_end'));
+      $('#datetime_end')[0].addEventListener('click', function() {
+		y.trigger($('#datetime_end')[0]);
+		$('#datetime_end').parent().addClass('is-dirty');
         y.toggle();
       });
       // dispatch event test
-      document.getElementById('datetime_ini').addEventListener('onOk', function() {
+      $('#datetime_ini')[0].addEventListener('onOk', function() {
         this.value = x.time().format('{!!Lang::get("masks.datetimeDatepicker")!!}').toString();
       });
-      document.getElementById('datetime_end').addEventListener('onOk', function() {
+      $('#datetime_end')[0].addEventListener('onOk', function() {
         this.value = y.time().format('{!!Lang::get("masks.datetimeDatepicker")!!}').toString();
       });
     }).call(this);

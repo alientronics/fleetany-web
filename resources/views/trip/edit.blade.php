@@ -134,19 +134,21 @@
 	        type: 'date',
 			future: moment().add(21, 'years')
 	      });
-	      document.getElementById('pickup_date').addEventListener('click', function() {
-			x.trigger(document.getElementById('pickup_date'));
+	      $('#pickup_date')[0].addEventListener('click', function() {
+			x.trigger($('#pickup_date')[0]);
+			$('#pickup_date').parent().addClass('is-dirty');
 	        x.toggle();
 	      });
-	      document.getElementById('deliver_date').addEventListener('click', function() {
-			y.trigger(document.getElementById('deliver_date'));
+	      $('#deliver_date')[0].addEventListener('click', function() {
+			y.trigger($('#deliver_date')[0]);
+			$('#deliver_date').parent().addClass('is-dirty');
 	        y.toggle();
 	      });
 	      // dispatch event test
-	      document.getElementById('pickup_date').addEventListener('onOk', function() {
+	      $('#pickup_date')[0].addEventListener('onOk', function() {
 	        this.value = x.time().format('{!!Lang::get("masks.datetimeDatepicker")!!}').toString();
 	      });
-	      document.getElementById('deliver_date').addEventListener('onOk', function() {
+	      $('#deliver_date')[0].addEventListener('onOk', function() {
         this.value = y.time().format('{!!Lang::get("masks.datetimeDatepicker")!!}').toString();
       });
     }).call(this);

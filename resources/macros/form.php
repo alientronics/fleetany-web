@@ -205,7 +205,7 @@ Form::macro(
     function ($link, $class, $icon, $title) {
         
         return "<a href='$link'
-                    class='mdl-color-text--primary-dark' 
+                    class='mdl-color-text--primary-dark mdl-button mdl-js-button mdl-js-ripple-effect button-link' 
                     title='$title' 
                     name='$title'><i class='material-icons'>$icon</i></a>";
     }

@@ -17,7 +17,7 @@ class HelperRepository
         unset($filters['sort_url']['sort']);
         
         $paginate = empty($request->session()->get('paginate')) ? 10 : $request->session()->get('paginate');
-        $filters['paginate'] = empty($form['paginate']) ? $paginate : $form['paginate'];
+        $filters['paginate'] = ( empty($form['paginate']) || !is_numeric($form['paginate']) ) ? $paginate : $form['paginate'];
         $request->session()->put('paginate', $filters['paginate']);
         
         if (empty($form['sort'])) {

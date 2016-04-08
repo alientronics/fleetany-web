@@ -397,3 +397,7 @@ _:-ms-input-placeholder, :root .demo-graph {
 .mdl-paging__count + .mdl-paging__next {
     margin-left: 68px;
 }
+.button-link {
+  min-width: 30px;
+  padding: 0px;
+}
