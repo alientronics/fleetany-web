@@ -107,14 +107,15 @@ class UserController extends Controller
     
     public function destroy($idUser)
     {
-        Log::info('Delete field: '.$idUser);
-
         $user = $this->userRepo->find($idUser);
         if ($idUser != 1 && $user) {
             $this->helper->validateRecord($user);
+            Log::info('Delete field: '.$idUser);
             $this->userRepo->delete($idUser);
+            return $this->redirect->to('user')->with('message', Lang::get("general.deletedregister"));
+        } else {
+            return $this->redirect->to('user')->with('message', Lang::get("general.deletedregistererror"));
         }
-        return $this->redirect->to('user')->with('message', Lang::get("general.deletedregister"));
     }
     
     public function showProfile()

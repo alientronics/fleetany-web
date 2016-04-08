@@ -29,6 +29,8 @@ return [
     "areyousure"     => "Are you sure?",
     "areyousuredelete"     => "Are you sure?",
     "deletedregister"   => "Register successfull deleted.",
+    "deletedregisterhasreferences"   => "This record has references and can not be excluded.",
+    "deletedregistererror"   => "An error occurred.",
     "notdeletedregister" => "There are records in the table :tabela",
     "RememberMe"     => "Remember Me",
     "PleaseSignIn"   => "Please Sign In",

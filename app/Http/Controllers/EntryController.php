@@ -103,13 +103,14 @@ class EntryController extends Controller
     
     public function destroy($idEntry)
     {
-        Log::info('Delete field: '.$idEntry);
-
         $entry = $this->entryRepo->find($idEntry);
         if ($entry) {
             $this->helper->validateRecord($entry);
+            Log::info('Delete field: '.$idEntry);
             $this->entryRepo->delete($idEntry);
+            return $this->redirect->to('entry')->with('message', Lang::get("general.deletedregister"));
+        } else {
+            return $this->redirect->to('entry')->with('message', Lang::get("general.deletedregistererror"));
         }
-        return $this->redirect->to('entry')->with('message', Lang::get("general.deletedregister"));
     }
 }

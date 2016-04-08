@@ -98,13 +98,17 @@ class VehicleController extends Controller
     
     public function destroy($idVehicle)
     {
-        Log::info('Delete field: '.$idVehicle);
-
+        $hasReferences = $this->vehicleRepo->hasReferences($idVehicle);
         $vehicle = $this->vehicleRepo->find($idVehicle);
-        if ($vehicle) {
+        if ($vehicle && !$hasReferences) {
             $this->helper->validateRecord($vehicle);
+            Log::info('Delete field: '.$idVehicle);
             $this->vehicleRepo->delete($idVehicle);
+            return $this->redirect->to('vehicle')->with('message', Lang::get("general.deletedregister"));
+        } elseif ($hasReferences) {
+            return $this->redirect->to('vehicle')->with('message', Lang::get("general.deletedregisterhasreferences"));
+        } else {
+            return $this->redirect->to('vehicle')->with('message', Lang::get("general.deletedregistererror"));
         }
-        return $this->redirect->to('vehicle')->with('message', Lang::get("general.deletedregister"));
     }
 }

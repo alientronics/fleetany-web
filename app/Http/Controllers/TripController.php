@@ -104,13 +104,14 @@ class TripController extends Controller
     
     public function destroy($idTrip)
     {
-        Log::info('Delete field: '.$idTrip);
-
         $trip = $this->tripRepo->find($idTrip);
         if ($trip) {
             $this->helper->validateRecord($trip);
+            Log::info('Delete field: '.$idTrip);
             $this->tripRepo->delete($idTrip);
+            return $this->redirect->to('trip')->with('message', Lang::get("general.deletedregister"));
+        } else {
+            return $this->redirect->to('trip')->with('message', Lang::get("general.deletedregistererror"));
         }
-        return $this->redirect->to('trip')->with('message', Lang::get("general.deletedregister"));
     }
 }

@@ -58,6 +58,18 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
         return $vehicles;
     }
     
+    public function hasReferences($idVehicle)
+    {
+        $vehicle = $this->find($idVehicle);
+        $countReferences += $vehicle->entries()->count();
+        $countReferences += $vehicle->trips()->count();
+        
+        if ($countReferences > 0) {
+            return true;
+        }
+        return false;
+    }
+    
     public static function getVehicles()
     {
         $vehicles = Vehicle::where('vehicles.company_id', Auth::user()['company_id'])

@@ -98,13 +98,17 @@ class TypeController extends Controller
     
     public function destroy($idType)
     {
-        Log::info('Delete field: '.$idType);
-
+        $hasReferences = $this->typeRepo->hasReferences($idType);
         $type = $this->typeRepo->find($idType);
-        if ($type) {
+        if ($type && !$hasReferences) {
             $this->helper->validateRecord($type);
+            Log::info('Delete field: '.$idType);
             $this->typeRepo->delete($idType);
+            return $this->redirect->to('type')->with('message', Lang::get("general.deletedregister"));
+        } elseif ($hasReferences) {
+            return $this->redirect->to('type')->with('message', Lang::get("general.deletedregisterhasreferences"));
+        } else {
+            return $this->redirect->to('type')->with('message', Lang::get("general.deletedregistererror"));
         }
-        return $this->redirect->to('type')->with('message', Lang::get("general.deletedregister"));
     }
 }

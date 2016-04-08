@@ -99,15 +99,17 @@ class ContactController extends Controller
     
     public function destroy($idContact)
     {
-        Log::info('Delete field: '.$idContact);
-
+        $hasReferences = $this->contactRepo->hasReferences($idContact);
         $contact = $this->contactRepo->find($idContact);
-        if ($contact) {
+        if ($contact && !$hasReferences) {
             $this->helper->validateRecord($contact);
+            Log::info('Delete field: '.$idContact);
             $this->contactRepo->delete($idContact);
-            $this->session->flash('message', Lang::get("general.deletedregister"));
+            return $this->redirect->to('contact')->with('message', Lang::get("general.deletedregister"));
+        } elseif ($hasReferences) {
+            return $this->redirect->to('contact')->with('message', Lang::get("general.deletedregisterhasreferences"));
+        } else {
+            return $this->redirect->to('contact')->with('message', Lang::get("general.deletedregistererror"));
         }
-        return $this->redirect->to('contact')->with('message', Lang::get("general.deletedregister"));
-        ;
     }
 }

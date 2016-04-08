@@ -64,6 +64,17 @@ class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
         return $models;
     }
     
+    public function hasReferences($idModel)
+    {
+        $model = $this->find($idModel);
+        $countReferences = $model->vehicles()->count();
+        
+        if ($countReferences > 0) {
+            return true;
+        }
+        return false;
+    }
+    
     public static function getModelVehicles()
     {
         $modelVehicles = Model::join('types', 'models.model_type_id', '=', 'types.id')

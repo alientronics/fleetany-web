@@ -101,13 +101,17 @@ class ModelController extends Controller
     
     public function destroy($idModel)
     {
-        Log::info('Delete field: '.$idModel);
-
+        $hasReferences = $this->modelRepo->hasReferences($idModel);
         $model = $this->modelRepo->find($idModel);
-        if ($model) {
+        if ($model && !$hasReferences) {
             $this->helper->validateRecord($model);
+            Log::info('Delete field: '.$idModel);
             $this->modelRepo->delete($idModel);
+            return $this->redirect->to('model')->with('message', Lang::get("general.deletedregister"));
+        } elseif ($hasReferences) {
+            return $this->redirect->to('model')->with('message', Lang::get("general.deletedregisterhasreferences"));
+        } else {
+            return $this->redirect->to('model')->with('message', Lang::get("general.deletedregistererror"));
         }
-        return $this->redirect->to('model')->with('message', Lang::get("general.deletedregister"));
     }
 }

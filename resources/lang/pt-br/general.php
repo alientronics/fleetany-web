@@ -29,6 +29,8 @@ return [
     "areyousure"     => "Voc&ecirc; tem certeza?",
     "areyousuredelete"     => "Voc&ecirc; tem certeza de que deseja excluir?",
     "deletedregister"   => "Registro excluido.",
+    "deletedregisterhasreferences"   => "Este registro possui refer&ecirc;ncias e n&atilde;o pode ser excluido.",
+    "deletedregistererror"   => "Ocorreu um erro na exclus&atilde;o do registro.",
     "notdeletedregister" => "H&aacute; registros na tabela :tabela",
     "RememberMe"     => "Lembre-me",
     "PleaseSignIn"   => "Por favor autentique-se",

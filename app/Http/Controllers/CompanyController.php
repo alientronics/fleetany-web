@@ -88,11 +88,15 @@ class CompanyController extends Controller
     
     public function destroy($idCompany)
     {
-        Log::info('Delete field: '.$idCompany);
-
-        if ($this->companyRepo->find($idCompany)) {
+        $hasReferences = $this->companyRepo->hasReferences($idCompany);
+        if ($this->companyRepo->find($idCompany) && !$hasReferences) {
+            Log::info('Delete field: '.$idCompany);
             $this->companyRepo->delete($idCompany);
+            return $this->redirect->to('company')->with('message', Lang::get("general.deletedregister"));
+        } elseif ($hasReferences) {
+            return $this->redirect->to('company')->with('message', Lang::get("general.deletedregisterhasreferences"));
+        } else {
+            return $this->redirect->to('company')->with('message', Lang::get("general.deletedregistererror"));
         }
-        return $this->redirect->to('company')->with('message', Lang::get("general.deletedregister"));
     }
 }

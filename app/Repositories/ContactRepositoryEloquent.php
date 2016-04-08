@@ -58,6 +58,22 @@ class ContactRepositoryEloquent extends BaseRepository implements ContactReposit
         return $contacts;
     }
     
+    public function hasReferences($idContact)
+    {
+        $contact = $this->find($idContact);
+        $countReferences = $contact->companies()->count();
+        $countReferences += $contact->entries()->count();
+        $countReferences += $contact->models()->count();
+        $countReferences += $contact->tripsDriver()->count();
+        $countReferences += $contact->tripsVendor()->count();
+        $countReferences += $contact->users()->count();
+        
+        if ($countReferences > 0) {
+            return true;
+        }
+        return false;
+    }
+    
     public static function getContacts($type = null, $optionalChoice = false)
     {
         $contacts = Contact::where('contacts.company_id', Auth::user()['company_id']);

@@ -56,6 +56,24 @@ class CompanyRepositoryEloquent extends BaseRepository implements CompanyReposit
         return $companies;
     }
     
+    public function hasReferences($idCompany)
+    {
+        $company = $this->find($idCompany);
+        $countReferences = $company->contacts()->count();
+        $countReferences += $company->entries()->count();
+        $countReferences += $company->models()->count();
+        $countReferences += $company->trips()->count();
+        $countReferences += $company->types()->count();
+        $countReferences += $company->usersCompany()->count();
+        $countReferences += $company->usersPendingCompany()->count();
+        $countReferences += $company->vehicles()->count();
+        
+        if ($countReferences > 0) {
+            return true;
+        }
+        return false;
+    }
+    
     public static function getCompanies()
     {
         $companies = Company::lists('name', 'id');

@@ -47,6 +47,20 @@ class TypeRepositoryEloquent extends BaseRepository implements TypeRepository
         return $types;
     }
     
+    public function hasReferences($idType)
+    {
+        $type = $this->find($idType);
+        $countReferences = $type->contacts()->count();
+        $countReferences += $type->entries()->count();
+        $countReferences += $type->models()->count();
+        $countReferences += $type->trips()->count();
+        
+        if ($countReferences > 0) {
+            return true;
+        }
+        return false;
+    }
+    
     public static function getTypes($entity_key = null)
     {
         $types = Type::where('company_id', Auth::user()['company_id']);
