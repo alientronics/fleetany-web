@@ -17,7 +17,7 @@
 	@include('includes.gridview', [
     	'registers' => $models,
     	'gridview' => [
-    		'pageActive' => 'contact',
+    		'pageActive' => 'model',
          	'sortFilters' => [
                 ["class" => "mdl-cell--3-col", "name" => "vendor", "lang" => "general.vendor"], 
                 ["class" => "mdl-cell--3-col", "name" => "model-type", "lang" => "general.model_type"], 
