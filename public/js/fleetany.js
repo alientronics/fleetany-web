@@ -9,6 +9,16 @@ window.onload=function(){
 	  $(".mdl-layout__obfuscator-right").removeClass("ob-active");
 	});
 	
+	$(".mdl-textfield__maskmoney").keyup(function() {
+		$(this).parent().addClass('is-dirty');
+	});
+
+	$(".mdl-textfield__maskmoney").focusout(function() {
+		if($(this).val() == '0,00' || $(this).val() == '0.00') {
+			$(this).parent().removeClass('is-dirty');
+		}
+	});
+	
     var dialog = $('dialog')[0];
     if (dialog) {
 	    if (! $('dialog')[0].showModal) {
