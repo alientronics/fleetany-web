@@ -48,7 +48,7 @@ class EntryController extends Controller
     {
         $entry = new Entry();
         $company_id = CompanyRepositoryEloquent::getCompanies();
-        $entry_type_id = TypeRepositoryEloquent::getTypes();
+        $entry_type_id = TypeRepositoryEloquent::getTypes('entry');
         $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
         $vehicle_id = VehicleRepositoryEloquent::getVehicles();
         return view("entry.edit", compact('entry', 'entry_type_id', 'company_id', 'vehicle_id', 'vendor_id'));
@@ -76,7 +76,7 @@ class EntryController extends Controller
         $this->helper->validateRecord($entry);
 
         $company_id = CompanyRepositoryEloquent::getCompanies();
-        $entry_type_id = TypeRepositoryEloquent::getTypes();
+        $entry_type_id = TypeRepositoryEloquent::getTypes('entry');
         $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
         $vehicle_id = VehicleRepositoryEloquent::getVehicles();
         return view("entry.edit", compact('entry', 'entry_type_id', 'company_id', 'vehicle_id', 'vendor_id'));

@@ -50,7 +50,7 @@ class TripController extends Controller
         $vehicle_id = VehicleRepositoryEloquent::getVehicles();
         $driver_id = ContactRepositoryEloquent::getContacts('driver');
         $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
-        $trip_type_id = TypeRepositoryEloquent::getTypes();
+        $trip_type_id = TypeRepositoryEloquent::getTypes('trip');
         return view("trip.edit", compact('trip', 'driver_id', 'vendor_id', 'company_id', 'vehicle_id', 'trip_type_id'));
     }
 
@@ -79,7 +79,7 @@ class TripController extends Controller
         $vehicle_id = VehicleRepositoryEloquent::getVehicles();
         $driver_id = ContactRepositoryEloquent::getContacts('driver');
         $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
-        $trip_type_id = TypeRepositoryEloquent::getTypes();
+        $trip_type_id = TypeRepositoryEloquent::getTypes('trip');
         return view("trip.edit", compact('trip', 'driver_id', 'vendor_id', 'company_id', 'vehicle_id', 'trip_type_id'));
     }
     

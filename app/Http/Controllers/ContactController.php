@@ -45,7 +45,7 @@ class ContactController extends Controller
     {
         $contact = new Contact();
         $company_id = CompanyRepositoryEloquent::getCompanies();
-        $contact_type_id = TypeRepositoryEloquent::getTypes();
+        $contact_type_id = TypeRepositoryEloquent::getTypes('contact');
         return view("contact.edit", compact('contact', 'contact_type_id', 'company_id'));
     }
 
@@ -72,7 +72,7 @@ class ContactController extends Controller
         $this->helper->validateRecord($contact);
         
         $company_id = CompanyRepositoryEloquent::getCompanies();
-        $contact_type_id = TypeRepositoryEloquent::getTypes();
+        $contact_type_id = TypeRepositoryEloquent::getTypes('contact');
         
         return view("contact.edit", compact('contact', 'contact_type_id', 'company_id'));
     }
