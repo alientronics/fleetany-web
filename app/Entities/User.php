@@ -23,9 +23,7 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
 {
     use Authenticatable, CanResetPassword, HasRole, SoftDeletes, TransformableTrait;
     
-    protected $fillable = ['id', 'company_id', 'contact_id', 'pending_company_id',
-                            'name', 'email', 'password', 'language','created_at','updated_at'];
-    protected $hidden = ['remember_token'];
+    protected $fillable = ['contact_id', 'name', 'email', 'password', 'language'];
 
     public function contact()
     {
@@ -124,25 +122,25 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
         $this->syncRoles('administrator');
     }
     
-    public function createContact($inputs)
+    public function createContact($name, $company_id)
     {
         
         $typeDetail = Type::where('entity_key', 'contact')
                             ->where('name', 'detail')
-                            ->where('company_id', $inputs['company_id'])
+                            ->where('company_id', $company_id)
                             ->first();
         
         if (empty($typeDetail)) {
             $typeRepo = new TypeRepositoryEloquent(new Application);
             $typeDetail = $typeRepo->create(array('entity_key' => 'contact',
                 'name' => 'detail',
-                'company_id' => $inputs['company_id']));
+                'company_id' => $company_id));
         }
                             
         $contactRepo = new ContactRepositoryEloquent(new Application);
-        $contactUser = $contactRepo->create(array('company_id' => $inputs['company_id'],
+        $contactUser = $contactRepo->create(array('company_id' => $company_id,
             'contact_type_id' => $typeDetail->id,
-            'name' => $inputs['name']));
+            'name' => $name));
         $this->contact_id = $contactUser->id;
         $this->save();
     }

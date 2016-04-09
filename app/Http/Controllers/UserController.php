@@ -156,13 +156,18 @@ class UserController extends Controller
         try {
             $this->userRepo->validator();
             $inputs = $this->request->all();
-            $inputs['name'] = explode("@", $inputs['email'])[0];
-            $inputs['company_id'] = Auth::user()['company_id'];
-            $inputs['pending_company_id'] = Auth::user()['company_id'];
-            $this->userRepo->create($inputs);
-            User::all()->last()->assignRole('staff');
-            $user = User::all()->last();
-            $user->createContact($inputs);
+
+            $user = new User;
+            $user->name = explode("@", $inputs['email'])[0];
+            $user->email = $inputs['email'];
+            $user->company_id = Auth::user()['company_id'];
+            $user->pending_company_id = Auth::user()['company_id'];
+            $user->remember_token = str_random(30);
+            $user->save();
+
+            $user->assignRole('staff');
+            $user->createContact($user->name, $user->company_id);
+
             $this->sendEmailInvite($user->id);
             return $this->redirect->to('invite')->with('message', Lang::get(
                 'general.succefullcreate',
@@ -180,9 +185,9 @@ class UserController extends Controller
     
         try {
             Mail::send('emails.invite', ['user' => $user], function ($m) use ($user) {
-                $m->from('hello@app.com', 'Your Application');
+                $m->from(env('MAIL_SENDER'), 'fleetany sender');
         
-                $m->to($user->email, $user->name)->subject('Your Reminder!');
+                $m->to($user->email, $user->name)->subject('fleetany invitation');
             });
         } catch (\Exception $e) {
             Log::info($e->getMessage());
