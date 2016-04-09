@@ -143,4 +143,31 @@ class UserController extends Controller
             ->with('errors', $e->getMessageBag());
         }
     }
+    
+    public function showPending()
+    {
+        return view("pending-user");
+    }
+    
+    public function pending()
+    {
+        try {
+            $this->userRepo->validator();
+            $inputs = $this->request->all();
+            $inputs['name'] = explode("@", $inputs['email'])[0];
+            $inputs['company_id'] = Auth::user()['company_id'];
+            $inputs['pending_company_id'] = Auth::user()['company_id'];
+            $this->userRepo->create($inputs);
+            User::all()->last()->assignRole('staff');
+            $user = User::all()->last();
+            $user->createContact($inputs);
+            return $this->redirect->to('pending-user')->with('message', Lang::get(
+                'general.succefullcreate',
+                ['table'=> Lang::get('general.PendingUser')]
+            ));
+        } catch (ValidatorException $e) {
+            return $this->redirect->back()->withInput()
+                   ->with('errors', $e->getMessageBag());
+        }
+    }
 }

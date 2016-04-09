@@ -34,8 +34,10 @@ Route::get('vehicle/destroy/{id}', 'VehicleController@destroy');
 Route::get('user/destroy/{id}', 'UserController@destroy');
 
 Route::get('profile', 'UserController@showProfile');
-
 Route::put('updateProfile/{id}', 'UserController@updateProfile');
+
+Route::get('pending-user', 'UserController@showPending');
+Route::put('pending', 'UserController@pending');
 
 Route::get('auth/social/{provider}', 'SocialLoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'SocialLoginController@handleProviderCallback');

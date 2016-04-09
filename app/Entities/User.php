@@ -123,4 +123,27 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
         
         $this->syncRoles('administrator');
     }
+    
+    public function createContact($inputs)
+    {
+        
+        $typeDetail = Type::where('entity_key', 'contact')
+                            ->where('name', 'detail')
+                            ->where('company_id', $inputs['company_id'])
+                            ->first();
+        
+        if (empty($typeDetail)) {
+            $typeRepo = new TypeRepositoryEloquent(new Application);
+            $typeDetail = $typeRepo->create(array('entity_key' => 'contact',
+                'name' => 'detail',
+                'company_id' => $inputs['company_id']));
+        }
+                            
+        $contactRepo = new ContactRepositoryEloquent(new Application);
+        $contactUser = $contactRepo->create(array('company_id' => $inputs['company_id'],
+            'contact_type_id' => $typeDetail->id,
+            'name' => $inputs['name']));
+        $this->contact_id = $contactUser->id;
+        $this->save();
+    }
 }

@@ -11,6 +11,7 @@
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
           <li class="mdl-menu__item"></li>
           <li class="mdl-menu__item"><a href="{{URL::to('/profile')}}" class="mdl-navigation__link"><i class="material-icons">person</i>profile</a></li>
+          <li class="mdl-menu__item"><a href="{{URL::to('/pending-user')}}" class="mdl-navigation__link"><i class="material-icons">person</i>pending user</a></li>
           <li class="mdl-menu__item"><a href="{{URL::to('/auth/logout')}}" class="mdl-navigation__link"><i class="material-icons">exit_to_app</i>log out</a></li>
         </ul>
       </div>
