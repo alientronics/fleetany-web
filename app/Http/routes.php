@@ -36,10 +36,10 @@ Route::get('user/destroy/{id}', 'UserController@destroy');
 Route::get('profile', 'UserController@showProfile');
 Route::put('updateProfile/{id}', 'UserController@updateProfile');
 
-Route::get('pending-user', 'UserController@showPending');
-Route::put('pending', 'UserController@pending');
-Route::get('create-account/{token?}', 'UserController@showCreateAccount');
-Route::put('create-account/{token?}', 'UserController@createAccount');
+Route::get('invite', 'UserController@showInvite');
+Route::put('invite', 'UserController@storeInvite');
+Route::get('create-account/{token}', 'UserController@showCreateAccount');
+Route::put('create-account/{token}', 'UserController@createAccount');
 
 Route::get('auth/social/{provider}/{token?}', 'SocialLoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'SocialLoginController@handleProviderCallback');

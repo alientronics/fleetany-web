@@ -32,7 +32,7 @@ class UserController extends Controller
     {
         parent::__construct();
         
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['showCreateAccount', 'createAccount']]);
         $this->userRepo = $userRepo;
     }
 
@@ -145,12 +145,12 @@ class UserController extends Controller
         }
     }
     
-    public function showPending()
+    public function showInvite()
     {
-        return view("pending-user");
+        return view("invite");
     }
     
-    public function pending()
+    public function storeInvite()
     {
         try {
             $this->userRepo->validator();
@@ -162,7 +162,7 @@ class UserController extends Controller
             User::all()->last()->assignRole('staff');
             $user = User::all()->last();
             $user->createContact($inputs);
-            return $this->redirect->to('pending-user')->with('message', Lang::get(
+            return $this->redirect->to('invite')->with('message', Lang::get(
                 'general.succefullcreate',
                 ['table'=> Lang::get('general.PendingUser')]
             ));
@@ -201,6 +201,9 @@ class UserController extends Controller
             $userPending->password = Hash::make($inputs['password']);
             $userPending->pending_company_id = null;
             $userPending->save();
+            
+            
+            Auth::login($userPending, true);
             
             return $this->redirect->to('/');
             
