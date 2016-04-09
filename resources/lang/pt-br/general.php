@@ -143,6 +143,11 @@ return [
     "LoginGoogleFailed"   => "Falha na tentativa de login com Google",
     "LoginFacebook"   => "Log In com Facebook",
     "LoginFacebookFailed"   => "Falha na tentativa de login com Facebook",
+
+    "InviteUser"   => "Convidar Usu&aacute;rio",
+    "invalidtoken"   => "O token utilizado &eacute; inv&aacute;lido",
+    "usernotfound"   => "Usu&aacute;rio n&atilde;o encontrado",
+    "CreateAccount"   => "Criar conta",
     
     //Linguagens
     "en" => "Ingl&ecirc;s",

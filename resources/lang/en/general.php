@@ -144,6 +144,11 @@ return [
     "LoginGoogleFailed"   => "Log In with Google failed!",
     "LoginFacebook"   => "Log In with Facebook",
     "LoginFacebookFailed"   => "Log In with Facebook failed!",
+
+    "InviteUser"   => "Invite User",
+    "invalidtoken"   => "Invalid token",
+    "usernotfound"   => "User not found",
+    "CreateAccount"   => "Create Account",
     
     //Linguagens
     "en" => "English",

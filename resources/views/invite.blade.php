@@ -1,7 +1,7 @@
 @extends('layouts.default')
 
 @section('header')
-	<span class="mdl-layout-title">{{Lang::get('general.PendingUser')}}</span>
+	<span class="mdl-layout-title">{{Lang::get('general.InviteUser')}}</span>
 @stop
 
 @section('content')

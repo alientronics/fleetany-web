@@ -164,7 +164,7 @@ class UserController extends Controller
             $user->createContact($inputs);
             return $this->redirect->to('invite')->with('message', Lang::get(
                 'general.succefullcreate',
-                ['table'=> Lang::get('general.PendingUser')]
+                ['table'=> Lang::get('general.InviteUser')]
             ));
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
@@ -190,12 +190,14 @@ class UserController extends Controller
             
             $userPending = User::where('remember_token', $token)->first();
             
-            $this->userRepo->validator();
             $inputs = $this->request->all();
             
             if (empty($userPending) || $userPending->email != $inputs['email']) {
                 return redirect('/create-account/'.$token)
                         ->with('error', Lang::get("general.usernotfound"));
+            } else if(strlen($inputs['password']) < 6) {
+                return redirect('/create-account/'.$token)
+                    ->with('error', Lang::get("general.invalidpassword"));
             }
             
             $userPending->password = Hash::make($inputs['password']);
