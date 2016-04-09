@@ -9,6 +9,7 @@ use Hash;
 use Input;
 use Log;
 use Lang;
+use Mail;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\CompanyRepositoryEloquent;
@@ -162,6 +163,7 @@ class UserController extends Controller
             User::all()->last()->assignRole('staff');
             $user = User::all()->last();
             $user->createContact($inputs);
+            $this->sendEmailInvite($user->id);
             return $this->redirect->to('invite')->with('message', Lang::get(
                 'general.succefullcreate',
                 ['table'=> Lang::get('general.InviteUser')]
@@ -169,6 +171,21 @@ class UserController extends Controller
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
+        }
+    }
+    
+    private function sendEmailInvite($idUser)
+    {
+        $user = User::findOrFail($idUser);
+    
+        try {
+            Mail::send('emails.invite', ['user' => $user], function ($m) use ($user) {
+                $m->from('hello@app.com', 'Your Application');
+        
+                $m->to($user->email, $user->name)->subject('Your Reminder!');
+            });
+        } catch (\Exception $e) {
+            Log::info($e->getMessage());
         }
     }
     
@@ -195,7 +212,7 @@ class UserController extends Controller
             if (empty($userPending) || $userPending->email != $inputs['email']) {
                 return redirect('/create-account/'.$token)
                         ->with('error', Lang::get("general.usernotfound"));
-            } else if(strlen($inputs['password']) < 6) {
+            } elseif (strlen($inputs['password']) < 6) {
                 return redirect('/create-account/'.$token)
                     ->with('error', Lang::get("general.invalidpassword"));
             }
