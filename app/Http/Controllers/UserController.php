@@ -13,6 +13,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\CompanyRepositoryEloquent;
 use App\Repositories\ContactRepositoryEloquent;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -165,6 +166,44 @@ class UserController extends Controller
                 'general.succefullcreate',
                 ['table'=> Lang::get('general.PendingUser')]
             ));
+        } catch (ValidatorException $e) {
+            return $this->redirect->back()->withInput()
+                   ->with('errors', $e->getMessageBag());
+        }
+    }
+    
+    public function showCreateAccount(Request $request, $token = "")
+    {
+        $userPending = User::where('remember_token', $token)->first();
+        
+        if (empty($userPending)) {
+            $request->session()->flash('error', Lang::get("general.invalidtoken"));
+            return redirect('/create-account/'.$token);
+        }
+        
+        return view("create-account", compact('userPending'));
+    }
+    
+    public function createAccount($token)
+    {
+        try {
+            
+            $userPending = User::where('remember_token', $token)->first();
+            
+            $this->userRepo->validator();
+            $inputs = $this->request->all();
+            
+            if (empty($userPending) || $userPending->email != $inputs['email']) {
+                return redirect('/create-account/'.$token)
+                        ->with('error', Lang::get("general.usernotfound"));
+            }
+            
+            $userPending->password = Hash::make($inputs['password']);
+            $userPending->pending_company_id = null;
+            $userPending->save();
+            
+            return $this->redirect->to('/');
+            
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());

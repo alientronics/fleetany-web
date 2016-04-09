@@ -23,8 +23,9 @@ class SocialLoginController extends Controller
         //$this->middleware('guest', ['except' => 'getLogout']);
     }
 
-    public function redirectToProvider($provider)
+    public function redirectToProvider(Request $request, $provider, $token = null)
     {
+        $request->session()->flash('token', $token);
         return Socialite::driver($provider)->redirect();
     }
 
@@ -32,6 +33,24 @@ class SocialLoginController extends Controller
     {
         try {
             $user = Socialite::driver($provider)->user();
+
+            if (!empty($request->session()->get('token'))) {
+                $userPending = User::where('remember_token', $request->session()->get('token'))
+                                    ->first();
+
+                if (empty($userPending) || $userPending->email != $user->email) {
+                    if ($provider == 'google') {
+                        $request->session()->flash('error', Lang::get("general.LoginGoogleFailed"));
+                    } else {
+                        $request->session()->flash('error', Lang::get("general.LoginFacebookFailed"));
+                    }
+                    return redirect('/create-account/'.$request->session()->get('token'));
+                }
+                
+                $userPending->pending_company_id = null;
+                $userPending->save();
+            }
+            
         } catch (\Exception $e) {
             if ($provider == 'google') {
                 $request->session()->flash('error', Lang::get("general.LoginGoogleFailed"));
