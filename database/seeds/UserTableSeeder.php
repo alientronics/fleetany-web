@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Entities\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserTableSeeder extends Seeder
 {
