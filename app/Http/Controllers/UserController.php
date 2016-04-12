@@ -163,7 +163,13 @@ class UserController extends Controller
             $this->userRepo->validator();
             $inputs = $this->request->all();
 
-            if (User::where('email', $inputs['email'])->count() == 0) {
+            $user = User::where('email', $inputs['email'])->first();
+            if(!empty($user)) {
+                $this->sendEmailInvite($user->id);
+                return $this->redirect->to('invite')->with('message', Lang::get(
+                    'general.invitesucessfullresend'
+                    ));
+            } else {
                 $user = new User;
                 $user->name = explode("@", $inputs['email'])[0];
                 $user->email = $inputs['email'];
@@ -180,13 +186,7 @@ class UserController extends Controller
                     'general.succefullcreate',
                     ['table'=> Lang::get('general.InviteUser')]
                 ));
-            } else {
-                $user = User::where('email', $inputs['email'])->first();
-                $this->sendEmailInvite($user->id);
-                return $this->redirect->to('invite')->with('message', Lang::get(
-                    'general.invitesucessfullresend'
-                ));
-            }
+            } 
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
