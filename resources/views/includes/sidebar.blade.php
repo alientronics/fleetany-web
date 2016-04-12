@@ -23,7 +23,7 @@
           @if (Auth::check())
             <a class="@if (Request::is('') || Request::is('/')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('/')}}"><i class="material-icons" role="presentation">dashboard</i>{{Lang::get('menu.FleetPanel')}}</a>
             @permission('view.company')  
-            <a class="@if (Request::is('company*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('company')}}"><i class="material-icons" role="presentation">domain</i>{{Lang::get('menu.Company')}}</a>
+<!--             <a class="@if (Request::is('company*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('company')}}"><i class="material-icons" role="presentation">domain</i>{{Lang::get('menu.Company')}}</a> -->
             @endpermission  
             @permission('view.user') 
             <a class="@if (Request::is('user*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('user')}}"><i class="material-icons" role="presentation">people</i>{{Lang::get('menu.Users')}}</a>

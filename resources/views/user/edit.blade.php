@@ -64,11 +64,7 @@
             	<span class="mdl-textfield__error">{{ $errors->first('language') }}</span>
             </div>
 						
-    		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('contact_id')) is-invalid is-dirty @endif"">
-                {!!Form::select('contact_id', $contacts, $user->contact_id, array('class' => 'mdl-textfield__input'))!!}
-       			{!!Form::label('contact_id', Lang::get('general.contact_id'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
-            	<span class="mdl-textfield__error">{{ $errors->first('contact_id') }}</span>
-            </div>
+			@include ('contact.shared-fields')
             
     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('company_id')) is-invalid is-dirty @endif"">
                 {!!Form::select('company_id', $companies, $user->company_id, array('class' => 'mdl-textfield__input'))!!}
