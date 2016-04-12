@@ -24,13 +24,13 @@
 			</div>
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('phone')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('phone', $contact->phone, array('class' => 'mdl-textfield__input'))!!}
+         		{!!Form::tel('phone', $contact->phone, array('class' => 'mdl-textfield__input'))!!}
 				{!!Form::label('phone', Lang::get('general.phone'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('phone') }}</span>
 			</div>
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('license_no')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('license_no', $contact->license_no, array('class' => 'mdl-textfield__input'))!!}
+         		{!!Form::number('license_no', $contact->license_no, array('class' => 'mdl-textfield__input'))!!}
 				{!!Form::label('license_no', Lang::get('general.license_no'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('license_no') }}</span>
 			</div>

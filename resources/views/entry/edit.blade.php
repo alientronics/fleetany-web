@@ -58,7 +58,7 @@
 			</div>
 
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('entry_number')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('entry_number', $entry->entry_number, array('class' => 'mdl-textfield__input'))!!}
+         		{!!Form::number('entry_number', $entry->entry_number, array('class' => 'mdl-textfield__input'))!!}
 				{!!Form::label('entry_number', Lang::get('general.entry_number'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('entry_number') }}</span>
 			</div>

@@ -76,19 +76,19 @@
 			</div>
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('begin_mileage')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('begin_mileage', $trip->begin_mileage, array('class' => 'mdl-textfield__input'))!!}
+         		{!!Form::number('begin_mileage', $trip->begin_mileage, array('class' => 'mdl-textfield__input'))!!}
 				{!!Form::label('begin_mileage', Lang::get('general.begin_mileage'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('begin_mileage') }}</span>
 			</div>
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('end_mileage')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('end_mileage', $trip->end_mileage, array('class' => 'mdl-textfield__input'))!!}
+         		{!!Form::number('end_mileage', $trip->end_mileage, array('class' => 'mdl-textfield__input'))!!}
 				{!!Form::label('end_mileage', Lang::get('general.end_mileage'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('end_mileage') }}</span>
 			</div>
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('total_mileage')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('total_mileage', $trip->total_mileage, array('class' => 'mdl-textfield__input'))!!}
+         		{!!Form::number('total_mileage', $trip->total_mileage, array('class' => 'mdl-textfield__input'))!!}
 				{!!Form::label('total_mileage', Lang::get('general.total_mileage'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('total_mileage') }}</span>
 			</div>

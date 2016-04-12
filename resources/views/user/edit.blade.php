@@ -36,9 +36,9 @@
 						
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('email')) is-invalid is-dirty @endif"" data-upgraded="eP">
          		@if (empty($user->email) && empty($user->password) || !empty($user->password))
-         		{!!Form::text('email', $user->email, array('class' => 'mdl-textfield__input'))!!}
+         		{!!Form::email('email', $user->email, array('class' => 'mdl-textfield__input'))!!}
 				@else
-				{!!Form::text('email', $user->email, array('class' => 'mdl-textfield__input', 'readonly' => 'true'))!!}
+				{!!Form::email('email', $user->email, array('class' => 'mdl-textfield__input', 'readonly' => 'true'))!!}
 				@endif
 				{!!Form::label('email', Lang::get('general.email'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('email') }}</span>
