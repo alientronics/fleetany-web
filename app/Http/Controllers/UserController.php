@@ -157,22 +157,30 @@ class UserController extends Controller
             $this->userRepo->validator();
             $inputs = $this->request->all();
 
-            $user = new User;
-            $user->name = explode("@", $inputs['email'])[0];
-            $user->email = $inputs['email'];
-            $user->company_id = Auth::user()['company_id'];
-            $user->pending_company_id = Auth::user()['company_id'];
-            $user->remember_token = str_random(30);
-            $user->save();
-
-            $user->assignRole('staff');
-            $user->createContact($user->name, $user->company_id);
-
-            $this->sendEmailInvite($user->id);
-            return $this->redirect->to('invite')->with('message', Lang::get(
-                'general.succefullcreate',
-                ['table'=> Lang::get('general.InviteUser')]
-            ));
+            if (User::where('email', $inputs['email'])->count() == 0) {
+                $user = new User;
+                $user->name = explode("@", $inputs['email'])[0];
+                $user->email = $inputs['email'];
+                $user->company_id = Auth::user()['company_id'];
+                $user->pending_company_id = Auth::user()['company_id'];
+                $user->remember_token = str_random(30);
+                $user->save();
+    
+                $user->assignRole('staff');
+                $user->createContact($user->name, $user->company_id);
+    
+                $this->sendEmailInvite($user->id);
+                return $this->redirect->to('invite')->with('message', Lang::get(
+                    'general.succefullcreate',
+                    ['table'=> Lang::get('general.InviteUser')]
+                ));
+            } else {
+                $user = User::where('email', $inputs['email'])->first();
+                $this->sendEmailInvite($user->id);
+                return $this->redirect->to('invite')->with('message', Lang::get(
+                    'general.invitesucessfullresend'
+                ));
+            }
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());

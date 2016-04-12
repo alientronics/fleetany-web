@@ -149,6 +149,7 @@ return [
     "invalidtoken"   => "Invalid token",
     "usernotfound"   => "User not found",
     "CreateAccount"   => "Create Account",
+    "invitesucessfullresend"   => "Invite sucessfull resend",
     
     //Linguagens
     "en" => "English",

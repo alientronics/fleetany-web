@@ -148,6 +148,7 @@ return [
     "invalidtoken"   => "O token utilizado &eacute; inv&aacute;lido",
     "usernotfound"   => "Usu&aacute;rio n&atilde;o encontrado",
     "CreateAccount"   => "Criar conta",
+    "invitesucessfullresend"   => "Convite reenviado com sucesso",
     
     //Linguagens
     "en" => "Ingl&ecirc;s",
