@@ -165,6 +165,8 @@ class UserController extends Controller
 
             $user = User::where('email', $inputs['email'])->first();
             if(!empty($user)) {
+                $user->remember_token = str_random(30);
+                $user->save();
                 $this->sendEmailInvite($user->id);
                 return $this->redirect->to('invite')->with('message', Lang::get(
                     'general.invitesucessfullresend'
