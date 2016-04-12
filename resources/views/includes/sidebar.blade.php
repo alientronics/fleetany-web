@@ -12,6 +12,9 @@
           <li class="mdl-menu__item"></li>
           <li class="mdl-menu__item"><a href="{{URL::to('/profile')}}" class="mdl-navigation__link"><i class="material-icons">person</i>profile</a></li>
           <li class="mdl-menu__item"><a href="{{URL::to('/invite')}}" class="mdl-navigation__link"><i class="material-icons">person</i>invite user</a></li>
+          @if (Auth::user()->is('administrator'))
+          <li class="mdl-menu__item"><a href="{{URL::to('/company/'.Auth::user()["company_id"].'/edit')}}" class="mdl-navigation__link"><i class="material-icons">domain</i>edit company</a></li>
+          @endif
           <li class="mdl-menu__item"><a href="{{URL::to('/auth/logout')}}" class="mdl-navigation__link"><i class="material-icons">exit_to_app</i>log out</a></li>
         </ul>
       </div>
