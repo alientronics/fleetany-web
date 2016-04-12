@@ -10,6 +10,8 @@ use Lang;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\ContactRepositoryEloquent;
+use App\Entities\Contact;
+use Illuminate\Container\Container as Application;
 
 class CompanyController extends Controller
 {
@@ -43,8 +45,9 @@ class CompanyController extends Controller
     public function create()
     {
         $company = new Company();
+        $contact = new Contact();
         $contact_id = ContactRepositoryEloquent::getContacts();
-        return view("company.edit", compact('company', 'contact_id'));
+        return view("company.edit", compact('company', 'contact', 'contact_id'));
     }
 
     public function store()
@@ -66,9 +69,12 @@ class CompanyController extends Controller
     {
         $company = $this->companyRepo->find($idCompany);
         
+        $contactRepo = new ContactRepositoryEloquent(new Application);
+        $contact = $contactRepo->find($company['contact_id']);
+        
         $contact_id = ContactRepositoryEloquent::getContacts();
         
-        return view("company.edit", compact('company', 'contact_id'));
+        return view("company.edit", compact('company', 'contact', 'contact_id'));
     }
     
     public function update($idCompany)

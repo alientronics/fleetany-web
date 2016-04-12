@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Repositories\CompanyRepositoryEloquent;
 use App\Repositories\ContactRepositoryEloquent;
 use Illuminate\Http\Request;
+use App\Entities\Contact;
+use Illuminate\Container\Container as Application;
 
 class UserController extends Controller
 {
@@ -49,11 +51,12 @@ class UserController extends Controller
     public function create()
     {
         $user = new User();
+        $contact = new Contact();
         $role = $this->helper->getAvailableRoles();
         $language = $this->helper->getAvailableLanguages();
         $companies = CompanyRepositoryEloquent::getCompanies();
         $contacts = ContactRepositoryEloquent::getContacts();
-        return view("user.edit", compact('user', 'role', 'language', 'companies', 'contacts'));
+        return view("user.edit", compact('user', 'contact', 'role', 'language', 'companies', 'contacts'));
     }
 
     public function store()
@@ -80,12 +83,15 @@ class UserController extends Controller
         $user = $this->userRepo->find($idUser);
         $this->helper->validateRecord($user);
         
+        $contactRepo = new ContactRepositoryEloquent(new Application);
+        $contact = $contactRepo->find($user['contact_id']);
+        
         $role = $this->helper->getAvailableRoles();
         $language = $this->helper->getAvailableLanguages();
         $companies = CompanyRepositoryEloquent::getCompanies();
         $contacts = ContactRepositoryEloquent::getContacts();
             
-        return view("user.edit", compact('user', 'role', 'language', 'companies', 'contacts'));
+        return view("user.edit", compact('user', 'contact', 'role', 'language', 'companies', 'contacts'));
     }
     
     public function update($idUser)
