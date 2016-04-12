@@ -207,8 +207,9 @@ class UserController extends Controller
         $userPending = User::where('remember_token', $token)->first();
         
         if (empty($userPending)) {
+            Auth::logout();
             $request->session()->flash('error', Lang::get("general.invalidtoken"));
-            return redirect('/create-account/'.$token);
+            return redirect('/auth/login');
         }
         
         return view("create-account", compact('userPending'));

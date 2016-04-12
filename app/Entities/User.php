@@ -124,24 +124,25 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
     
     public function createContact($name, $company_id)
     {
-        
-        $typeDetail = Type::where('entity_key', 'contact')
-                            ->where('name', 'detail')
-                            ->where('company_id', $company_id)
-                            ->first();
-        
-        if (empty($typeDetail)) {
-            $typeRepo = new TypeRepositoryEloquent(new Application);
-            $typeDetail = $typeRepo->create(array('entity_key' => 'contact',
-                'name' => 'detail',
-                'company_id' => $company_id));
+        if(User::where('name', $name)->count() == 0) {
+            $typeDetail = Type::where('entity_key', 'contact')
+                                ->where('name', 'detail')
+                                ->where('company_id', $company_id)
+                                ->first();
+            
+            if (empty($typeDetail)) {
+                $typeRepo = new TypeRepositoryEloquent(new Application);
+                $typeDetail = $typeRepo->create(array('entity_key' => 'contact',
+                    'name' => 'detail',
+                    'company_id' => $company_id));
+            }
+                                
+            $contactRepo = new ContactRepositoryEloquent(new Application);
+            $contactUser = $contactRepo->create(array('company_id' => $company_id,
+                'contact_type_id' => $typeDetail->id,
+                'name' => $name));
+            $this->contact_id = $contactUser->id;
+            $this->save();
         }
-                            
-        $contactRepo = new ContactRepositoryEloquent(new Application);
-        $contactUser = $contactRepo->create(array('company_id' => $company_id,
-            'contact_type_id' => $typeDetail->id,
-            'name' => $name));
-        $this->contact_id = $contactUser->id;
-        $this->save();
     }
 }
