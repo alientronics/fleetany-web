@@ -94,13 +94,13 @@
 			</div>
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('fuel_cost')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('fuel_cost', $trip->fuel_cost, array('id' => 'fuel_cost', 'class' => 'mdl-textfield__input mdl-textfield__maskmoney', 'maxlength' => '12'))!!}
+         		{!!Form::tel('fuel_cost', $trip->fuel_cost, array('id' => 'fuel_cost', 'class' => 'mdl-textfield__input mdl-textfield__maskmoney', 'maxlength' => '12'))!!}
 				{!!Form::label('fuel_cost', Lang::get('general.fuel_cost'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('fuel_cost') }}</span>
 			</div>
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('fuel_amount')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('fuel_amount', $trip->fuel_amount, array('id' => 'fuel_amount', 'class' => 'mdl-textfield__input mdl-textfield__maskmoney'))!!}
+         		{!!Form::tel('fuel_amount', $trip->fuel_amount, array('id' => 'fuel_amount', 'class' => 'mdl-textfield__input mdl-textfield__maskmoney'))!!}
 				{!!Form::label('fuel_amount', Lang::get('general.fuel_amount'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('fuel_amount') }}</span>
 			</div>

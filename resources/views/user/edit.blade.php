@@ -65,12 +65,6 @@
             </div>
 						
 			@include ('contact.shared-fields')
-            
-    		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('company_id')) is-invalid is-dirty @endif"">
-                {!!Form::select('company_id', $companies, $user->company_id, array('class' => 'mdl-textfield__input'))!!}
-       			{!!Form::label('company_id', Lang::get('general.company_id'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
-            	<span class="mdl-textfield__error">{{ $errors->first('company_id') }}</span>
-            </div>
 
 			<div class="mdl-card__actions">
 				<button type="submit" class="mdl-button mdl-color--primary mdl-color-text--accent-contrast mdl-js-button mdl-button--raised mdl-button--colored">

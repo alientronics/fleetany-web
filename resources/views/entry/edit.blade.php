@@ -64,7 +64,7 @@
 			</div>
 
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('cost')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('cost', $entry->cost, array('id' => 'cost', 'class' => 'mdl-textfield__input mdl-textfield__maskmoney', 'maxlength' => '12'))!!}
+         		{!!Form::tel('cost', $entry->cost, array('id' => 'cost', 'class' => 'mdl-textfield__input mdl-textfield__maskmoney', 'maxlength' => '12'))!!}
 				{!!Form::label('cost', Lang::get('general.cost'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
 				<span class="mdl-textfield__error">{{ $errors->first('cost') }}</span>
 			</div>
