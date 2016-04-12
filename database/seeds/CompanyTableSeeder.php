@@ -15,7 +15,7 @@ class CompanyTableSeeder extends Seeder
         DB::table('companies')->delete();
         Company::create(
                 array(  'name' => 'Company',
-                        'api_token' => 1)
+                        'api_token' => str_random(10))
             );
        
         
