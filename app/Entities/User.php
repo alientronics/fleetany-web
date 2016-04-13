@@ -40,7 +40,7 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
     {
     
         $companyRepo = new CompanyRepositoryEloquent(new Application);
-        $company = $companyRepo->create(['name' => $this->name . ' Inc.', 'api_token' => str_random(10)]);
+        $company = $companyRepo->create(['name' => $this->name . ' Inc.']);
     
         $this->company_id = $company->id;
         $this->save();

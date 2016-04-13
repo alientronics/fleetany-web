@@ -13,8 +13,7 @@ class CompanyRepositoryEloquent extends BaseRepository implements CompanyReposit
 {
 
     protected $rules = [
-        'name'      => 'min:3|required',
-        'api_token'      => 'min:3|required',
+        'name'      => 'min:3|required'
         ];
 
     public function model()

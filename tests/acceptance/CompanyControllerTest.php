@@ -24,7 +24,6 @@ class CompanyControllerTest extends AcceptanceTestCase
     
         $this->type('Nome Empresa', 'name')
             ->type('measure units', 'measure_units')
-            ->type('api token', 'api_token')
             ->press('Enviar')
             ->seePageIs('/company')
         ;
@@ -32,8 +31,7 @@ class CompanyControllerTest extends AcceptanceTestCase
         $this->seeInDatabase(
             'companies',
             ['name' => 'Nome Empresa',
-            'measure_units' => 'measure units',
-            'api_token' => 'api token']
+            'measure_units' => 'measure units']
         );
     }
     
@@ -43,7 +41,6 @@ class CompanyControllerTest extends AcceptanceTestCase
         
         $this->type('Nome Empresa Editado', 'name')
             ->type('measure units editado', 'measure_units')
-            ->type('api token editado', 'api_token')
             ->type('Brasil2', 'country')
             ->type('RS2', 'state')
             ->type('Porto Alegre2', 'city')
@@ -56,8 +53,7 @@ class CompanyControllerTest extends AcceptanceTestCase
         $this->seeInDatabase(
             'companies',
             ['name' => 'Nome Empresa Editado',
-            'measure_units' => 'measure units editado',
-            'api_token' => 'api token editado']
+            'measure_units' => 'measure units editado']
         );
         
         $this->seeInDatabase(

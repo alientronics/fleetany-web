@@ -23,8 +23,7 @@ $factory->define(App\Entities\User::class, function ($faker) {
 
 $factory->define(App\Entities\Company::class, function ($faker) {
     return [
-        'name' => $faker->name,
-        'api_token' => str_random(10),
+        'name' => $faker->name
     ];
 });
 

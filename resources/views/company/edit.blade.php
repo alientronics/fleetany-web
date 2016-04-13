@@ -41,12 +41,6 @@
 				<span class="mdl-textfield__error">{{ $errors->first('measure_units') }}</span>
 			</div>
 
-			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('api_token')) is-invalid is-dirty @endif" data-upgraded="eP">
-         		{!!Form::text('api_token', $company->api_token, ['class' => 'mdl-textfield__input'])!!}
-				{!!Form::label('api_token', Lang::get('general.api_token'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
-				<span class="mdl-textfield__error">{{ $errors->first('api_token') }}</span>
-			</div>
-
 			<div class="mdl-card__actions">
 				<button type="submit" class="mdl-button mdl-color--primary mdl-color-text--accent-contrast mdl-js-button mdl-button--raised mdl-button--colored">
                   {{ Lang::get('general.Send') }} 

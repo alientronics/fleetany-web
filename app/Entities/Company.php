@@ -65,4 +65,12 @@ class Company extends BaseModel
     {
         return [];
     }
+    
+    public static function boot()
+    {
+        parent::boot();
+        Company::creating(function ($company) {
+            $company->api_token = str_random(10);
+        });
+    }
 }
