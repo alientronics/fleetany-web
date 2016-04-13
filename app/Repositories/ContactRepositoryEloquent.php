@@ -84,7 +84,7 @@ class ContactRepositoryEloquent extends BaseRepository implements ContactReposit
         $contacts = $contacts->lists('contacts.name', 'contacts.id');
 
         if ($optionalChoice) {
-            $contacts->splice(0, 0, array("" => ""));
+            $contacts->splice(0, 0, ["" => ""]);
         }
         
         return $contacts;

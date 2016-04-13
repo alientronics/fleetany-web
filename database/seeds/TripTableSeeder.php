@@ -14,7 +14,7 @@ class TripTableSeeder extends Seeder
     {
         DB::table('trips')->delete();
         Trip::create(
-                array(  'driver_id' => 3,
+                [  'driver_id' => 3,
                         'vehicle_id' => 1,
                         'vendor_id' => 2,
                         'trip_type_id' => 6,
@@ -28,7 +28,7 @@ class TripTableSeeder extends Seeder
                         'fuel_cost' => 15,
                         'fuel_amount' => 5,
                         'description' => 'Descricao Trip',
-                        'company_id' => 1)
+                        'company_id' => 1]
             );
     }
 }

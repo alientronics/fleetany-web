@@ -10,11 +10,11 @@ Form::macro(
     ) {
 
         if (empty($form_parameters) === true) {
-            $form_parameters = array(
+            $form_parameters = [
                                 'method' => 'GET',
                                 'class'  => 'update-form',
                                 'url'    => $url,
-                               );
+                               ];
         } else {
             $form_parameters['url']    = $url;
             $form_parameters['method'] = 'GET';
@@ -42,11 +42,11 @@ Form::macro(
     ) {
 
         if (empty($form_parameters) === true) {
-            $form_parameters = array(
+            $form_parameters = [
                                 'method' => 'DELETE',
                                 'class'  => 'delete-form',
                                 'url'    => $url,
-                               );
+                               ];
         } else {
             $form_parameters['url']    = $url;
             $form_parameters['method'] = 'DELETE';
@@ -77,11 +77,11 @@ Form::macro(
     ) {
 
         if (empty($form_parameters) === true) {
-            $form_parameters = array(
+            $form_parameters = [
                                 'method' => 'POST',
                                 'class'  => 'delete-form',
                                 'url'    => $url,
-                               );
+                               ];
         } else {
             $form_parameters['url']    = $url;
             $form_parameters['method'] = 'POST';
@@ -125,7 +125,7 @@ Form::macro(
     function ($value, $attributes = []) {
 
         if (empty($attributes) === true) {
-            $attributes = array('class' => 'form-control-static');
+            $attributes = ['class' => 'form-control-static'];
         } else {
             if (isset($attributes['class']) === false) {
                 $attributes['class'] = 'form-control-static';

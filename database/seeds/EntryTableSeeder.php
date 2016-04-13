@@ -14,7 +14,7 @@ class EntryTableSeeder extends Seeder
     {
         DB::table('entries')->delete();
         Entry::create(
-                array(  'entry_type_id' => 1,
+                [  'entry_type_id' => 1,
                         'vendor_id' => 1,
                         'vehicle_id' => 1,
                         'datetime_ini' => '2016-01-01',
@@ -22,7 +22,7 @@ class EntryTableSeeder extends Seeder
                         'entry_number' => 123,
                         'cost' => 321,
                         'description' => 'Descricao Entry',
-                        'company_id' => 1)
+                        'company_id' => 1]
             );
     }
 }

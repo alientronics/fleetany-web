@@ -6,20 +6,20 @@
       <div class="demo-drawer mdl-layout__drawer-right">
         <span class="mdl-layout-title mdl-color--primary mdl-color-text--accent-contrast">{{Lang::get('general.Search')}}<span class="mdl-search__div-close"><i class="material-icons">highlight_off</i></span></span>
          <div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label mdl-search__div" data-upgraded="eP">
-     		{!!Form::text('vehicle', $filters['vehicle'], array('class' => 'mdl-textfield__input mdl-search__input'))!!}
-    		{!!Form::label('vehicle', Lang::get('general.vehicle'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+     		{!!Form::text('vehicle', $filters['vehicle'], ['class' => 'mdl-textfield__input mdl-search__input'])!!}
+    		{!!Form::label('vehicle', Lang::get('general.vehicle'), ['class' => 'mdl-textfield__label is-dirty'])!!}
          </div>
          <div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label mdl-search__div" data-upgraded="eP">
-     		{!!Form::text('trip_type', $filters['trip-type'], array('class' => 'mdl-textfield__input mdl-search__input'))!!}
-    		{!!Form::label('trip_type', Lang::get('general.trip_type'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+     		{!!Form::text('trip_type', $filters['trip-type'], ['class' => 'mdl-textfield__input mdl-search__input'])!!}
+    		{!!Form::label('trip_type', Lang::get('general.trip_type'), ['class' => 'mdl-textfield__label is-dirty'])!!}
          </div>
          <div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label mdl-search__div" data-upgraded="eP">
-     		{!!Form::text('pickup_date', $filters['pickup-date'], array('class' => 'mdl-textfield__input mdl-search__input'))!!}
-    		{!!Form::label('pickup_date', Lang::get('general.pickup_date'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+     		{!!Form::text('pickup_date', $filters['pickup-date'], ['class' => 'mdl-textfield__input mdl-search__input'])!!}
+    		{!!Form::label('pickup_date', Lang::get('general.pickup_date'), ['class' => 'mdl-textfield__label is-dirty'])!!}
          </div>
          <div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label mdl-search__div" data-upgraded="eP">
-     		{!!Form::text('fuel_cost', $filters['fuel-cost'], array('class' => 'mdl-textfield__input mdl-search__input'))!!}
-    		{!!Form::label('fuel_cost', Lang::get('general.fuel_cost'), array('class' => 'mdl-textfield__label is-dirty'))!!}
+     		{!!Form::text('fuel_cost', $filters['fuel-cost'], ['class' => 'mdl-textfield__input mdl-search__input'])!!}
+    		{!!Form::label('fuel_cost', Lang::get('general.fuel_cost'), ['class' => 'mdl-textfield__label is-dirty'])!!}
          </div>
          <button type="submit" class="mdl-button mdl-color--primary mdl-color-text--accent-contrast mdl-js-button mdl-button--raised mdl-button--colored mdl-search__button">
     		{{Lang::get('general.Search')}}

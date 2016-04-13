@@ -14,39 +14,39 @@ class TypeTableSeeder extends Seeder
     {
         DB::table('types')->delete();
         Type::create(
-                array(  'entity_key' => 'entry',
+                [  'entity_key' => 'entry',
                         'name' => 'service',
-                        'company_id' => 1)
+                        'company_id' => 1]
             );
         Type::create(
-                array(  'entity_key' => 'vehicle',
+                [  'entity_key' => 'vehicle',
                         'name' => 'car',
-                        'company_id' => 1)
+                        'company_id' => 1]
             );
         Type::create(
-                array(  'entity_key' => 'contact',
+                [  'entity_key' => 'contact',
                         'name' => 'user',
-                        'company_id' => 1)
+                        'company_id' => 1]
             );
         Type::create(
-                array(  'entity_key' => 'contact',
+                [  'entity_key' => 'contact',
                         'name' => 'driver',
-                        'company_id' => 1)
+                        'company_id' => 1]
             );
         Type::create(
-                array(  'entity_key' => 'contact',
+                [  'entity_key' => 'contact',
                         'name' => 'vendor',
-                        'company_id' => 1)
+                        'company_id' => 1]
             );
         Type::create(
-                array(  'entity_key' => 'trip',
+                [  'entity_key' => 'trip',
                         'name' => 'delivery',
-                        'company_id' => 1)
+                        'company_id' => 1]
             );
         Type::create(
-                array(  'entity_key' => 'contact',
+                [  'entity_key' => 'contact',
                         'name' => 'detail',
-                        'company_id' => 1)
+                        'company_id' => 1]
             );
     }
 }

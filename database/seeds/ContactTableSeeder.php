@@ -15,25 +15,25 @@ class ContactTableSeeder extends Seeder
     {
         DB::table('contacts')->delete();
         Contact::create(
-                array(  'company_id' => 1,
+                [  'company_id' => 1,
                         'contact_type_id' => 3,
                         'name' => 'Administrator',
                         'country' => 'Country',
-                        'city' => 'City')
+                        'city' => 'City']
             );
         $company = Company::find(1);
         $company->contact_id = 1;
         $company->save();
         Contact::create(
-                array(  'company_id' => 1,
+                [  'company_id' => 1,
                         'contact_type_id' => 5,
-                        'name' => 'Vendor Name')
+                        'name' => 'Vendor Name']
             );
         Contact::create(
-                array(  'company_id' => 1,
+                [  'company_id' => 1,
                         'contact_type_id' => 4,
                         'name' => 'Driver Name',
-                        'license_no' => 'license')
+                        'license_no' => 'license']
             );
     }
 }

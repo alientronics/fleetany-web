@@ -14,10 +14,10 @@ class ModelTableSeeder extends Seeder
     {
         DB::table('models')->delete();
         Model::create(
-                array(  'model_type_id' => 2,
+                [  'model_type_id' => 2,
                         'vendor_id' => 2,
                         'name' => 'Generic Car',
-                        'company_id' => 1)
+                        'company_id' => 1]
             );
     }
 }

@@ -14,13 +14,13 @@ class VehicleTableSeeder extends Seeder
     {
         DB::table('vehicles')->delete();
         Vehicle::create(
-                array(  'model_vehicle_id' => 1,
+                [  'model_vehicle_id' => 1,
                         'number' => 'IOP-1234',
                         'initial_miliage' => 1,
                         'actual_miliage' => 1,
                         'cost' => 50000,
                         'description' => 'Descricao Veiculo',
-                        'company_id' => 1)
+                        'company_id' => 1]
             );
     }
 }

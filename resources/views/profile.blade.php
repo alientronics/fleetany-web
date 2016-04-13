@@ -17,32 +17,32 @@
 
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('name')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('name', $user->name, array('class' => 'mdl-textfield__input'))!!}
-				{!!Form::label('name', Lang::get('general.name'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
+         		{!!Form::text('name', $user->name, ['class' => 'mdl-textfield__input'])!!}
+				{!!Form::label('name', Lang::get('general.name'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
 				<span class="mdl-textfield__error">{{ $errors->first('name') }}</span>
 			</div>
 						
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('email')) is-invalid is-dirty @endif"" data-upgraded="eP">
          		@if (!empty($user->password)) 	
-         		{!!Form::text('email', $user->email, array('class' => 'mdl-textfield__input'))!!}
+         		{!!Form::text('email', $user->email, ['class' => 'mdl-textfield__input'])!!}
 				@else
-				{!!Form::text('email', $user->email, array('class' => 'mdl-textfield__input', 'readonly' => 'true'))!!}
+				{!!Form::text('email', $user->email, ['class' => 'mdl-textfield__input', 'readonly' => 'true'])!!}
 				@endif
-				{!!Form::label('email', Lang::get('general.email'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
+				{!!Form::label('email', Lang::get('general.email'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
 				<span class="mdl-textfield__error">{{ $errors->first('email') }}</span>
 			</div>
 					
 			@if (!empty($user->password)) 	
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('password')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::password('password', array('class' => 'mdl-textfield__input'))!!}
-				{!!Form::label('password', Lang::get('general.password'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
+         		{!!Form::password('password', ['class' => 'mdl-textfield__input'])!!}
+				{!!Form::label('password', Lang::get('general.password'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
 				<span class="mdl-textfield__error">{{ $errors->first('password') }}</span>
 			</div>
 			@endif
 
     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('language')) is-invalid is-dirty @endif"">
-                {!!Form::select('language', $language, $user->language, array('class' => 'mdl-textfield__input'))!!}
-       			{!!Form::label('language', Lang::get('general.language'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
+                {!!Form::select('language', $language, $user->language, ['class' => 'mdl-textfield__input'])!!}
+       			{!!Form::label('language', Lang::get('general.language'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
             	<span class="mdl-textfield__error">{{ $errors->first('language') }}</span>
             </div>
 						

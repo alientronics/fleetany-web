@@ -15,12 +15,12 @@ class UserTableSeeder extends Seeder
     {
         DB::table('users')->delete();
         User::create(
-                array(  'name' => 'Administrator',
+                [  'name' => 'Administrator',
                         'email' => 'admin@alientronics.com.br',
                         'password' => Hash::make('admin'),
                         'language' => 'pt-br',
                         'company_id' => 1,
-                        'contact_id' => 1)
+                        'contact_id' => 1]
             );
        
         

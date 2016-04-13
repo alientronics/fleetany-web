@@ -16,8 +16,8 @@
     ]) !!}
 
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('email')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('email', "", array('class' => 'mdl-textfield__input'))!!}
-				{!!Form::label('email', Lang::get('general.email'), array('class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'))!!}
+         		{!!Form::text('email', "", ['class' => 'mdl-textfield__input'])!!}
+				{!!Form::label('email', Lang::get('general.email'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
 				<span class="mdl-textfield__error">{{ $errors->first('email') }}</span>
 			</div>
 						
