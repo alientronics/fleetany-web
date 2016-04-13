@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\UserController;
 use Illuminate\Container\Container as Application;
-use App\Repositories\ContactRepositoryEloquent;
 use App\Repositories\UserRepositoryEloquent;
+use App\Entities\User;
 
 class UserModelTest extends UnitTestCase
 {
@@ -107,20 +107,22 @@ class UserModelTest extends UnitTestCase
     {
         \Illuminate\Support\Facades\Request::setSession($this->app['session.store']);
         
+        $user = User::findOrFail(1);
+        
         $testCase = $this;
         
         Mail::shouldReceive('send')
-        ->times(1)
-        ->andReturnUsing(function ($message) use ($testCase) {
-            $testCase->assertEquals('Thank you for registering an account.', $message->getSubject());
-            $testCase->assertEquals('mcc', $message->getTo());
+        ->once()
+        ->andReturn(function ($message) use ($testCase) {
+            $testCase->assertEquals('fleetany invitation', $message->getSubject());
+            $testCase->assertEquals($user->email, $message->getTo());
             $testCase->assertEquals(View::make('emails.invite'), $message->getBody());
         });
 
-        try{
+        try {
             $repo = new UserRepositoryEloquent(new Application);
-            $teste = new UserController($repo);
-            $teste->sendEmailInvite(1);
+            $userController = new UserController($repo);
+            $userController->sendEmailInvite($user->id);
         } catch (\Exception $e) {
             echo $e->getMessage();
         }
