@@ -6,6 +6,10 @@ use Tests\UnitTestCase;
 use App\Entities\Company;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
+use App\Http\Controllers\UserController;
+use Illuminate\Container\Container as Application;
+use App\Repositories\ContactRepositoryEloquent;
+use App\Repositories\UserRepositoryEloquent;
 
 class UserModelTest extends UnitTestCase
 {
@@ -101,7 +105,8 @@ class UserModelTest extends UnitTestCase
     
     public function testSendEmailInvite()
     {
-    
+        \Illuminate\Support\Facades\Request::setSession($this->app['session.store']);
+        
         $testCase = $this;
         
         Mail::shouldReceive('send')
@@ -112,7 +117,12 @@ class UserModelTest extends UnitTestCase
             $testCase->assertEquals(View::make('emails.invite'), $message->getBody());
         });
 
-        $user = factory(App\Http\Controllers\UserController::class)->storeInvite();
-        
+        try{
+            $repo = new UserRepositoryEloquent(new Application);
+            $teste = new UserController($repo);
+            $teste->sendEmailInvite(1);
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
     }
 }

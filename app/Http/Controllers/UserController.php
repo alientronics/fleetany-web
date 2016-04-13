@@ -203,7 +203,7 @@ class UserController extends Controller
         }
     }
     
-    private function sendEmailInvite($idUser)
+    public function sendEmailInvite($idUser)
     {
         $user = User::findOrFail($idUser);
     
