@@ -43,5 +43,10 @@ class TypeTableSeeder extends Seeder
                         'name' => 'delivery',
                         'company_id' => 1)
             );
+        Type::create(
+                array(  'entity_key' => 'contact',
+                        'name' => 'detail',
+                        'company_id' => 1)
+            );
     }
 }

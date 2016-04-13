@@ -11,7 +11,6 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\ContactRepositoryEloquent;
 use App\Entities\Contact;
-use Illuminate\Container\Container as Application;
 
 class CompanyController extends Controller
 {
@@ -26,13 +25,13 @@ class CompanyController extends Controller
         'country'
     ];
     
-    public function __construct(CompanyRepositoryEloquent $companyRepo)
+    public function __construct(CompanyRepositoryEloquent $companyRepo, ContactRepositoryEloquent $contactRepo)
     {
         parent::__construct();
         
         $this->middleware('auth');
         $this->companyRepo = $companyRepo;
-        $this->contactRepo = new ContactRepositoryEloquent(new Application);
+        $this->contactRepo = $contactRepo;
     }
 
     public function index()
@@ -57,7 +56,10 @@ class CompanyController extends Controller
         try {
             
             $this->companyRepo->validator();
-            $this->companyRepo->create($this->request->all());
+            $inputs = $this->userRepo->setInputs($this->request->all());
+            $contact = $this->contactRepo->create($inputs);
+            $inputs['contact_id'] = $contact->id;
+            $this->companyRepo->create($inputs);
             return $this->redirect->to('company')->with('message', Lang::get(
                 'general.succefullcreate',
                 ['table'=> Lang::get('general.Company')]
@@ -72,8 +74,7 @@ class CompanyController extends Controller
     {
         $company = $this->companyRepo->find($idCompany);
         
-        $contactRepo = new ContactRepositoryEloquent(new Application);
-        $contact = $contactRepo->find($company['contact_id']);
+        $contact = $this->contactRepo->find($company['contact_id']);
         
         $contact_id = ContactRepositoryEloquent::getContacts();
         

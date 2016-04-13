@@ -28,6 +28,9 @@
     @if (Session::has('message')) 
       <script>showSnackBar('{{ Session::get('message') }}')</script>
     @endif 
+    @if (Session::has('errors')) 
+      <script>showSnackBar('{{ Session::get('errors') }}')</script>
+    @endif 
     @if (Session::has('danger')) 
       <script>showSnackBar('{{ Session::get('danger') }}')</script> 
     @endif
