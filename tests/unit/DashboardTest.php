@@ -30,7 +30,7 @@ class DashboardModelTest extends UnitTestCase
     
     public function testVehiclesStatistics()
     {
-        $vehicles = array();
+        $vehicles = [];
         for ($i = 0; $i < 9; $i++) {
             $vehicles[] = factory(\App\Entities\Vehicle::class)->create([
                 'company_id' => $this->company_id,

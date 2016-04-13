@@ -27,7 +27,7 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
         $this->pushCriteria(app(RequestCriteria::class));
     }
     
-    public function results($filters = array())
+    public function results($filters = [])
     {
         $vehicles = $this->scopeQuery(function ($query) use ($filters) {
 

@@ -27,7 +27,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         $this->pushCriteria(app(RequestCriteria::class));
     }
     
-    public function results($filters = array())
+    public function results($filters = [])
     {
         $users = $this->scopeQuery(function ($query) use ($filters) {
             

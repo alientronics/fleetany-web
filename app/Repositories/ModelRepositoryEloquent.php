@@ -26,7 +26,7 @@ class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
         $this->pushCriteria(app(RequestCriteria::class));
     }
     
-    public function results($filters = array())
+    public function results($filters = [])
     {
         $models = $this->scopeQuery(function ($query) use ($filters) {
 

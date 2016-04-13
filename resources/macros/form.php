@@ -5,8 +5,8 @@ Form::macro(
     function (
         $url,
         $button_label = null,
-        $form_parameters = array(),
-        $button_options = array()
+        $form_parameters = [],
+        $button_options = []
     ) {
 
         if (empty($form_parameters) === true) {
@@ -37,8 +37,8 @@ Form::macro(
     function (
         $url,
         $button_label = null,
-        $form_parameters = array(),
-        $button_options = array()
+        $form_parameters = [],
+        $button_options = []
     ) {
 
         if (empty($form_parameters) === true) {
@@ -72,8 +72,8 @@ Form::macro(
     function (
         $url,
         $button_label = null,
-        $form_parameters = array(),
-        $button_options = array()
+        $form_parameters = [],
+        $button_options = []
     ) {
 
         if (empty($form_parameters) === true) {
@@ -105,7 +105,7 @@ Form::macro(
     function (
         $url,
         $title = null,
-        $attributes = array(),
+        $attributes = [],
         $icon = null,
         $secure = null
     ) {
@@ -122,7 +122,7 @@ Form::macro(
 
 Form::macro(
     'text_static',
-    function ($value, $attributes = array()) {
+    function ($value, $attributes = []) {
 
         if (empty($attributes) === true) {
             $attributes = array('class' => 'form-control-static');
@@ -146,19 +146,19 @@ Form::macro(
     'selectLang',
     function (
         $name,
-        $list = array(),
+        $list = [],
         $selected = null,
-        $options = array(),
-        $translator = array()
+        $options = [],
+        $translator = []
     ) {
 
         if (empty($translator) === true) {
-            $translator['parameters'] = array();
+            $translator['parameters'] = [];
             $translator['domain']     = "messages";
             $translator['locale']     = null;
         } else {
             if (isset($translator['parameters']) === false) {
-                $translator['parameters'] = array();
+                $translator['parameters'] = [];
             }
 
             if (isset($translator['domain']) === false) {
@@ -184,7 +184,7 @@ Form::macro(
 
 Form::macro(
     'actions',
-    function ($attributes = array()) {
+    function ($attributes = []) {
 
         if (isset($attributes['new']) === true) {
             $actions['new'] = sprintf(

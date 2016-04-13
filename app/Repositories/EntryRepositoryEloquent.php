@@ -30,7 +30,7 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
         $this->pushCriteria(app(RequestCriteria::class));
     }
     
-    public function results($filters = array())
+    public function results($filters = [])
     {
         $entries = $this->scopeQuery(function ($query) use ($filters) {
 
@@ -109,7 +109,7 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
     
     public static function getLastsServiceCostStatistics()
     {
-        $statistics = array();
+        $statistics = [];
         $date = Carbon::now()->addMonthNoOverflow();
         for ($i = 0; $i < 6; $i++) {
             $date = $date->subMonthNoOverflow();

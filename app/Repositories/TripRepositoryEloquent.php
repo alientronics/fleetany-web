@@ -33,7 +33,7 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
         $this->pushCriteria(app(RequestCriteria::class));
     }
   
-    public function results($filters = array())
+    public function results($filters = [])
     {
         $trips = $this->scopeQuery(function ($query) use ($filters) {
 
@@ -113,7 +113,7 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
     
     public static function getLastsFuelCostStatistics()
     {
-        $statistics = array();
+        $statistics = [];
         $date = Carbon::now()->addMonthNoOverflow();
         for ($i = 0; $i < 6; $i++) {
             $date = $date->subMonthNoOverflow();

@@ -27,7 +27,7 @@ class CompanyRepositoryEloquent extends BaseRepository implements CompanyReposit
         $this->pushCriteria(app(RequestCriteria::class));
     }
     
-    public function results($filters = array())
+    public function results($filters = [])
     {
         $companies = $this->scopeQuery(function ($query) use ($filters) {
             

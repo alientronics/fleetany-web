@@ -25,7 +25,7 @@ class TypeRepositoryEloquent extends BaseRepository implements TypeRepository
         $this->pushCriteria(app(RequestCriteria::class));
     }
     
-    public function results($filters = array())
+    public function results($filters = [])
     {
         $types = $this->scopeQuery(function ($query) use ($filters) {
 

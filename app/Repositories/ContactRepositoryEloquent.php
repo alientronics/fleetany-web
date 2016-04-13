@@ -26,7 +26,7 @@ class ContactRepositoryEloquent extends BaseRepository implements ContactReposit
         $this->pushCriteria(app(RequestCriteria::class));
     }
     
-    public function results($filters = array())
+    public function results($filters = [])
     {
         $contacts = $this->scopeQuery(function ($query) use ($filters) {
             

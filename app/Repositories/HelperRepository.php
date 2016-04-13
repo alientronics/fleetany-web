@@ -45,7 +45,7 @@ class HelperRepository
 
     private function getFiltersValues($form, $fields)
     {
-        $filters = array();
+        $filters = [];
         if (! empty($fields)) {
             foreach ($fields as $value) {
                 $filters[$value] = empty($form[str_replace("-", "_", $value)]) ? "" :
@@ -85,7 +85,7 @@ class HelperRepository
 
     public function getAvailableLanguages()
     {
-        $languages = array();
+        $languages = [];
         $directories = File::directories(base_path() . DIRECTORY_SEPARATOR .
                             'resources' . DIRECTORY_SEPARATOR . 'lang');
         
