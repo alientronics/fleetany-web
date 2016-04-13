@@ -17,6 +17,7 @@ class CompanyController extends Controller
 {
 
     protected $companyRepo;
+    protected $contactRepo;
     
     protected $fields = [
         'id',
@@ -31,6 +32,7 @@ class CompanyController extends Controller
         
         $this->middleware('auth');
         $this->companyRepo = $companyRepo;
+        $this->contactRepo = new ContactRepositoryEloquent(new Application);
     }
 
     public function index()
@@ -53,6 +55,7 @@ class CompanyController extends Controller
     public function store()
     {
         try {
+            
             $this->companyRepo->validator();
             $this->companyRepo->create($this->request->all());
             return $this->redirect->to('company')->with('message', Lang::get(
@@ -80,8 +83,14 @@ class CompanyController extends Controller
     public function update($idCompany)
     {
         try {
+            
             $this->companyRepo->validator();
-            $this->companyRepo->update($this->request->all(), $idCompany);
+            $this->contactRepo->validator();
+            
+            $company = $this->companyRepo->find($idCompany);
+            $inputs = $this->companyRepo->setInputs($this->request->all());
+            $this->companyRepo->update($inputs, $idCompany);
+            $this->contactRepo->update($inputs, $company->contact_id);
             return $this->redirect->to('company')->with('message', Lang::get(
                 'general.succefullupdate',
                 ['table'=> Lang::get('general.Company')]

@@ -44,6 +44,11 @@ class CompanyControllerTest extends AcceptanceTestCase
         $this->type('Nome Empresa Editado', 'name')
             ->type('measure units editado', 'measure_units')
             ->type('api token editado', 'api_token')
+            ->type('Brasil2', 'country')
+            ->type('RS2', 'state')
+            ->type('Porto Alegre2', 'city')
+            ->type('Adress2', 'address')
+            ->type('(99) 9999-9998', 'phone')
             ->press('Enviar')
             ->seePageIs('/company')
         ;
@@ -54,7 +59,16 @@ class CompanyControllerTest extends AcceptanceTestCase
             'measure_units' => 'measure units editado',
             'api_token' => 'api token editado']
         );
-    
+        
+        $this->seeInDatabase(
+            'contacts',
+            ['name' => 'Nome Empresa Editado',
+            'country' => 'Brasil2',
+            'state' => 'RS2',
+            'city' => 'Porto Alegre2',
+            'address' => 'Adress2',
+            'phone' => '(99) 9999-9998']
+        );
     }
     
     public function testDelete()

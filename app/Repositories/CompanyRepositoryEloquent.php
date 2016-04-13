@@ -6,6 +6,8 @@ use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\CompanyRepository;
 use App\Entities\Company;
+use App\Entities\Type;
+use Illuminate\Support\Facades\Auth;
 
 class CompanyRepositoryEloquent extends BaseRepository implements CompanyRepository
 {
@@ -54,6 +56,17 @@ class CompanyRepositoryEloquent extends BaseRepository implements CompanyReposit
         })->paginate($filters['paginate']);
         
         return $companies;
+    }
+    
+    public function setInputs($inputs, $user = null)
+    {
+        $inputs['company_id'] = Auth::user()['company_id'];
+        $typeId = Type::where('entity_key', 'contact')
+                                            ->where('name', 'detail')
+                                            ->where('company_id', $inputs['company_id'])
+                                            ->first();
+        $inputs['contact_type_id'] = $typeId->id;
+        return $inputs;
     }
     
     public function hasReferences($idCompany)
