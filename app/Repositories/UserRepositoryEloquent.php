@@ -72,7 +72,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     {
         $inputs['company_id'] = Auth::user()['company_id'];
         $typeId = Type::where('entity_key', 'contact')
-                                            ->where('name', 'user')
+                                            ->where('name', 'detail')
                                             ->where('company_id', $inputs['company_id'])
                                             ->first();
         $inputs['contact_type_id'] = $typeId->id;
