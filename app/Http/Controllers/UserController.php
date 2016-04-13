@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Repositories\UserRepositoryEloquent;
 use App\Entities\User;
-use Hash;
 use Log;
 use Lang;
-use Mail;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\CompanyRepositoryEloquent;
@@ -35,7 +33,7 @@ class UserController extends Controller
     {
         parent::__construct();
         
-        $this->middleware('auth', ['except' => ['showCreateAccount', 'createAccount']]);
+        $this->middleware('auth');
         $this->userRepo = $userRepo;
         $this->contactRepo = new ContactRepositoryEloquent(new Application);
     }
@@ -157,108 +155,6 @@ class UserController extends Controller
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
             ->with('errors', $e->getMessageBag());
-        }
-    }
-    
-    public function showInvite()
-    {
-        return view("invite");
-    }
-    
-    public function storeInvite()
-    {
-        try {
-            $this->userRepo->validator();
-            $inputs = $this->request->all();
-
-            $user = User::where('email', $inputs['email'])->first();
-            if (!empty($user)) {
-                $user->remember_token = str_random(30);
-                $user->save();
-                $this->sendEmailInvite($user->id);
-                return $this->redirect->to('invite')->with('message', Lang::get(
-                    'general.invitesucessfullresend'
-                ));
-            } else {
-                $user = new User;
-                $user->name = explode("@", $inputs['email'])[0];
-                $user->email = $inputs['email'];
-                $user->company_id = Auth::user()['company_id'];
-                $user->pending_company_id = Auth::user()['company_id'];
-                $user->remember_token = str_random(30);
-                $user->save();
-    
-                $user->assignRole('staff');
-                $user->createContact($user->name, $user->company_id);
-    
-                $this->sendEmailInvite($user->id);
-                return $this->redirect->to('invite')->with('message', Lang::get(
-                    'general.succefullcreate',
-                    ['table'=> Lang::get('general.InviteUser')]
-                ));
-            }
-        } catch (ValidatorException $e) {
-            return $this->redirect->back()->withInput()
-                   ->with('errors', $e->getMessageBag());
-        }
-    }
-    
-    public function sendEmailInvite($idUser)
-    {
-        $user = User::findOrFail($idUser);
-    
-        try {
-            Mail::send('emails.invite', ['user' => $user], function ($m) use ($user) {
-                $m->from(env('MAIL_SENDER'), 'fleetany sender');
-        
-                $m->to($user->email, $user->name)->subject('fleetany invitation');
-            });
-        } catch (\Exception $e) {
-            Log::info($e->getMessage());
-        }
-    }
-    
-    public function showCreateAccount(Request $request, $token = "")
-    {
-        $userPending = User::where('remember_token', $token)->first();
-        
-        if (empty($userPending)) {
-            Auth::logout();
-            $request->session()->flash('error', Lang::get("general.invalidtoken"));
-            return redirect('/auth/login');
-        }
-        
-        return view("create-account", compact('userPending'));
-    }
-    
-    public function createAccount($token)
-    {
-        try {
-            
-            $userPending = User::where('remember_token', $token)->first();
-            
-            $inputs = $this->request->all();
-            
-            if (empty($userPending) || $userPending->email != $inputs['email']) {
-                return redirect('/create-account/'.$token)
-                        ->with('error', Lang::get("general.usernotfound"));
-            } elseif (strlen($inputs['password']) < 6) {
-                return redirect('/create-account/'.$token)
-                    ->with('error', Lang::get("general.invalidpassword"));
-            }
-            
-            $userPending->password = Hash::make($inputs['password']);
-            $userPending->pending_company_id = null;
-            $userPending->save();
-            
-            
-            Auth::login($userPending, true);
-            
-            return $this->redirect->to('/');
-            
-        } catch (ValidatorException $e) {
-            return $this->redirect->back()->withInput()
-                   ->with('errors', $e->getMessageBag());
         }
     }
 }

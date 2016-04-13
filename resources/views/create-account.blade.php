@@ -9,7 +9,7 @@
 			</div>
         	{!! Form::model('$user', [
                 'method'=>'PUT',
-                'action' => ['UserController@createAccount', $userPending->remember_token]
+                'action' => ['Auth\AuthController@createAccount', $userPending->remember_token]
             ]) !!}
 			<div class="mdl-card__title mdl-color--primary mdl-color-text--accent-contrast">
 				<h2 class="mdl-card__title-text">{{Lang::get('general.CreateAccount')}}</h2>

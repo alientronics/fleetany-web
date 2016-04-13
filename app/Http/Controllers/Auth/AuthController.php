@@ -7,6 +7,11 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Prettus\Validator\Exceptions\ValidatorException;
+use Hash;
+use Lang;
 
 class AuthController extends Controller
 {
@@ -30,7 +35,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'getLogout']);
+        $this->middleware('guest', ['except' => ['getLogout', 'showCreateAccount', 'createAccount']]);
     }
 
     /**
@@ -66,5 +71,49 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
             ]
         );
+    }
+    
+    public function showCreateAccount(Request $request, $token = "")
+    {
+        $userPending = User::where('remember_token', $token)->first();
+    
+        if (empty($userPending)) {
+            Auth::logout();
+            $request->session()->flash('error', Lang::get("general.invalidtoken"));
+            return redirect('/auth/login');
+        }
+
+        return view("create-account", compact('userPending'));
+    }
+    
+    public function createAccount(Request $request, $token)
+    {
+        try {
+    
+            $userPending = User::where('remember_token', $token)->first();
+    
+            $inputs = $request->all();
+    
+            if (empty($userPending) || $userPending->email != $inputs['email']) {
+                return redirect('/create-account/'.$token)
+                ->with('error', Lang::get("general.usernotfound"));
+            } elseif (strlen($inputs['password']) < 6) {
+                return redirect('/create-account/'.$token)
+                ->with('error', Lang::get("general.invalidpassword"));
+            }
+    
+            $userPending->password = Hash::make($inputs['password']);
+            $userPending->pending_company_id = null;
+            $userPending->save();
+    
+    
+            Auth::login($userPending, true);
+    
+            return redirect('/');
+    
+        } catch (ValidatorException $e) {
+            return $this->redirect->back()->withInput()
+            ->with('errors', $e->getMessageBag());
+        }
     }
 }

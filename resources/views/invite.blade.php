@@ -12,7 +12,7 @@
 
 {!! Form::model('$user', [
         'method'=>'PUT',
-        'action' => ['UserController@storeInvite']
+        'action' => ['InviteController@storeInvite']
     ]) !!}
 
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('email')) is-invalid is-dirty @endif"" data-upgraded="eP">
