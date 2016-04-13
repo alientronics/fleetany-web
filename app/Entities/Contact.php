@@ -70,7 +70,7 @@ class Contact extends BaseModel
     {
         parent::boot();
         Contact::creating(function ($contact) {
-            $contact->company_id = Auth::user()['company_id'];
+            $contact->company_id = empty(Auth::user()['company_id']) ? 1 : Auth::user()['company_id'];
         });
     }
 }
