@@ -56,7 +56,7 @@ class CompanyController extends Controller
         try {
             
             $this->companyRepo->validator();
-            $inputs = $this->userRepo->setInputs($this->request->all());
+            $inputs = $this->companyRepo->setInputs($this->request->all());
             $contact = $this->contactRepo->create($inputs);
             $inputs['contact_id'] = $contact->id;
             $this->companyRepo->create($inputs);
