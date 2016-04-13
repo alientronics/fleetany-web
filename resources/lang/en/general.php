@@ -12,7 +12,7 @@ return [
     "New"       => "New",
     "Search"    => "Search",
     "Send"      => "Send",
-    "Welcome"   => "Welcome!",
+    "Welcome"   => "Welcome",
     "Yes"       => "Yes",
     "No"        => "No",
     "Actions"   => "Actions",

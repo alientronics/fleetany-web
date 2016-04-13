@@ -19,7 +19,7 @@
     		<div class="demo-drawer-header mdl-color--primary">
 				<span id="logo-lettering">fleetany</span>
 			</div><div class="demo-drawer-header mdl-color--primary">
-				<span id="welcome-lettering">{{Lang::get('general.Welcome')}}</span>
+				<span id="welcome-lettering">{{Lang::get('general.Welcome')}}!</span>
 			</div>
 			
     	</div>

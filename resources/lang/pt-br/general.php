@@ -12,7 +12,7 @@ return [
     "New"       => "Novo",
     "Search"    => "Buscar",
     "Send"      => "Enviar",
-    "Welcome"   => "Seja bem-vindo!",
+    "Welcome"   => "Seja bem-vindo",
     "Yes"       => "Sim",
     "No"        => "N&atilde;o",
     "Actions"   => "A&ccedil;&otilde;es",
