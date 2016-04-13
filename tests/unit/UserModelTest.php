@@ -4,6 +4,8 @@ namespace Tests\Unit;
 
 use Tests\UnitTestCase;
 use App\Entities\Company;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\View;
 
 class UserModelTest extends UnitTestCase
 {
@@ -95,5 +97,22 @@ class UserModelTest extends UnitTestCase
             'cost' => 50000
         ]);
     
+    }
+    
+    public function testSendEmailInvite()
+    {
+    
+        $testCase = $this;
+        
+        Mail::shouldReceive('send')
+        ->times(1)
+        ->andReturnUsing(function ($message) use ($testCase) {
+            $testCase->assertEquals('Thank you for registering an account.', $message->getSubject());
+            $testCase->assertEquals('mcc', $message->getTo());
+            $testCase->assertEquals(View::make('emails.invite'), $message->getBody());
+        });
+
+        $user = factory(App\Http\Controllers\UserController::class)->storeInvite();
+        
     }
 }
