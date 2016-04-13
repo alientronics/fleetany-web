@@ -96,7 +96,6 @@ class CompanyControllerTest extends AcceptanceTestCase
             ->press('Enviar')
             ->seePageIs('/company/create')
             ->see('de um valor para o campo nome.</span>')
-            ->see('de um valor para o campo api token.</span>')
         ;
     }
     
