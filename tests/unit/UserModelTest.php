@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Container\Container as Application;
 use App\Repositories\UserRepositoryEloquent;
 use App\Entities\User;
+use App\Http\Controllers\InviteController;
 
 class UserModelTest extends UnitTestCase
 {
@@ -79,8 +80,7 @@ class UserModelTest extends UnitTestCase
             'name' => 'delivery'
         ]);
         $this->seeInDatabase('contacts', ['company_id' => $user->company_id,
-            'name' => $user->name,
-            'license_no' => '123456'
+            'name' => $user->name
         ]);
         $this->seeInDatabase('contacts', ['company_id' => $user->company_id,
             'name' => 'Generic Vendor',
@@ -119,7 +119,7 @@ class UserModelTest extends UnitTestCase
 
         try {
             $repo = new UserRepositoryEloquent(new Application);
-            $userController = new UserController($repo);
+            $userController = new InviteController($repo);
             $userController->sendEmailInvite($user->id);
         } catch (\Exception $e) {
             echo $e->getMessage();
