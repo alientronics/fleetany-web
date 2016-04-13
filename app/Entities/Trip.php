@@ -44,4 +44,14 @@ class Trip extends BaseModel
     {
         return $this->belongsTo(\App\Entities\Type::class, 'trip_type_id', 'id');
     }
+    
+    public function checkCompanyRelationships()
+    {
+        return [
+            "driver_id" => "Contact",
+            "vehicle_id" => "Vehicle",
+            "vendor_id" => "Contact",
+            "trip_type_id" => "Type"
+        ];
+    }
 }

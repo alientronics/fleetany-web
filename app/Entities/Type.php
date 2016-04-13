@@ -40,4 +40,9 @@ class Type extends BaseModel
     {
         return $this->hasMany(\App\Entities\Trip::class, 'trip_type_id', 'id');
     }
+    
+    public function checkCompanyRelationships()
+    {
+        return [];
+    }
 }

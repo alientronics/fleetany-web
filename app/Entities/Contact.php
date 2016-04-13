@@ -57,4 +57,11 @@ class Contact extends BaseModel
     {
         return $this->hasMany(\App\Entities\User::class, 'contact_id', 'id');
     }
+    
+    public function checkCompanyRelationships()
+    {
+        return [
+            "contact_type_id" => "Type"
+        ];
+    }
 }

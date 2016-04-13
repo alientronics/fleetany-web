@@ -36,4 +36,11 @@ class Vehicle extends BaseModel
     {
         return $this->hasMany(\App\Entities\Entry::class, 'vehicle_id', 'id');
     }
+    
+    public function checkCompanyRelationships()
+    {
+        return [
+            "model_vehicle_id" => "Model"
+        ];
+    }
 }

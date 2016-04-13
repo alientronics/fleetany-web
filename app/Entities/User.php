@@ -69,7 +69,7 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
             'name' => 'driver',
             'company_id' => $company->id));
     
-        $typeDetail = $typeRepo->create(array('entity_key' => 'contact',
+        $typeRepo->create(array('entity_key' => 'contact',
             'name' => 'detail',
             'company_id' => $company->id));
     
@@ -130,5 +130,10 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
             'name' => $name));
         $this->contact_id = $contactUser->id;
         $this->save();
+    }
+    
+    public function checkCompanyRelationships()
+    {
+        return [];
     }
 }

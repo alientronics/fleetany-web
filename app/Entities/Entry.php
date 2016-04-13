@@ -37,4 +37,13 @@ class Entry extends BaseModel
     {
         return $this->belongsTo(\App\Entities\Vehicle::class, 'vehicle_id', 'id');
     }
+    
+    public function checkCompanyRelationships()
+    {
+        return [
+            "entry_type_id" => "Type",
+            "vendor_id" => "Contact",
+            "vehicle_id" => "Vehicle"
+        ];
+    }
 }
