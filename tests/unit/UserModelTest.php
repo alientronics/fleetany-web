@@ -109,14 +109,12 @@ class UserModelTest extends UnitTestCase
         
         $user = User::findOrFail(1);
         
-        $testCase = $this;
-        
         Mail::shouldReceive('send')
         ->once()
-        ->andReturn(function ($message) use ($testCase) {
-            $testCase->assertEquals('fleetany invitation', $message->getSubject());
-            $testCase->assertEquals($user->email, $message->getTo());
-            $testCase->assertEquals(View::make('emails.invite'), $message->getBody());
+        ->andReturn(function ($message) {
+            $this->assertEquals('fleetany invitation', $message->getSubject());
+            $this->assertEquals($user->email, $message->getTo());
+            $this->assertEquals(View::make('emails.invite'), $message->getBody());
         });
 
         try {
