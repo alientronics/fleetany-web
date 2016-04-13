@@ -81,14 +81,9 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
             'name' => 'delivery',
             'company_id' => $company->id));
 
-        $contactRepo = new ContactRepositoryEloquent(new Application);
-        $contactUser = $contactRepo->create(array('company_id' => $company->id,
-            'contact_type_id' => $typeDetail->id,
-            'name' => $this->name,
-            'license_no' => '123456'));
-        $this->contact_id = $contactUser->id;
-        $this->save();
+        $this->createContact($this->name, $company->id);
 
+        $contactRepo = new ContactRepositoryEloquent(new Application);
         $contactVendor = $contactRepo->create(array('company_id' => $company->id,
             'contact_type_id' => $typeVendor->id,
             'name' => 'Generic Vendor',
@@ -129,13 +124,6 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
                             ->where('company_id', $company_id)
                             ->first();
         
-        if (empty($typeDetail)) {
-            $typeRepo = new TypeRepositoryEloquent(new Application);
-            $typeDetail = $typeRepo->create(array('entity_key' => 'contact',
-                'name' => 'detail',
-                'company_id' => $company_id));
-        }
-                            
         $contactRepo = new ContactRepositoryEloquent(new Application);
         $contactUser = $contactRepo->create(array('company_id' => $company_id,
             'contact_type_id' => $typeDetail->id,
