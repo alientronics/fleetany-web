@@ -36,11 +36,23 @@ class UserControllerTest extends AcceptanceTestCase
             ->select($idOption, 'role_id')
             ->type('1', 'contact_id')
             ->type('1', 'company_id')
+            ->type('Brasil', 'country')
+            ->type('RS', 'state')
+            ->type('Porto Alegre', 'city')
+            ->type('Adress', 'address')
+            ->type('(99) 9999-9999', 'phone')
             ->press('Enviar')
             ->seePageIs('/user')
         ;
     
         $this->seeInDatabase('users', ['name' => 'Nome Usuario Teste', 'email' => 'teste@alientronics.com.br']);
+        $this->seeInDatabase('contacts', ['name' => 'Nome Usuario Teste', 
+                                            'country' => 'Brasil',
+                                            'state' => 'RS',
+                                            'city' => 'Porto Alegre',
+                                            'address' => 'Adress',
+                                            'phone' => '(99) 9999-9999'            
+        ]);
         $this->seeInDatabase('role_user', ['role_id' => '5', 'user_id' => User::all()->last()['id']]);
     }
     
@@ -56,10 +68,22 @@ class UserControllerTest extends AcceptanceTestCase
             ->select($idOption, 'role_id')
             ->type('1', 'contact_id')
             ->type('1', 'company_id')
+            ->type('Brasil2', 'country')
+            ->type('RS2', 'state')
+            ->type('Porto Alegre2', 'city')
+            ->type('Adress2', 'address')
+            ->type('(99) 9999-9998', 'phone')
             ->press('Enviar')
         ;
         
         $this->seeInDatabase('users', ['name' => 'Nome Usuario Editado', 'email' => 'emaileditado@usuario.com']);
+        $this->seeInDatabase('contacts', ['name' => 'Nome Usuario Editado',
+                                            'country' => 'Brasil2',
+                                            'state' => 'RS2',
+                                            'city' => 'Porto Alegre2',
+                                            'address' => 'Adress2',
+                                            'phone' => '(99) 9999-9998'
+        ]);
         $this->seeInDatabase('role_user', ['role_id' => '3', 'user_id' => User::all()->last()['id']]);
     }
     

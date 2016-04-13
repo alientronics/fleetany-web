@@ -8,6 +8,7 @@ use App\Repositories\UserRepository;
 use App\Entities\User;
 use Illuminate\Support\Facades\Auth;
 use Hash;
+use App\Entities\Type;
 
 class UserRepositoryEloquent extends BaseRepository implements UserRepository
 {
@@ -70,11 +71,18 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
     public function setInputs($inputs, $user = null)
     {
         $inputs['company_id'] = Auth::user()['company_id'];
+        $typeId = Type::where('entity_key', 'contact')
+                                            ->where('name', 'user')
+                                            ->where('company_id', $inputs['company_id'])
+                                            ->first();
+        $inputs['contact_type_id'] = $typeId->id;
         if (!empty($user) && empty($user->password)) {
             unset($inputs['email']);
             unset($inputs['password']);
-        } elseif (!empty($user->password) && !empty($inputs['password'])) {
+        } elseif ((!empty($user->password) && !empty($inputs['password'])) || empty($user)) {
             $inputs['password'] = Hash::make($inputs['password']);
+        } elseif (!empty($user) && empty($inputs['password'])) {
+            unset($inputs['password']);
         }
         return $inputs;
     }

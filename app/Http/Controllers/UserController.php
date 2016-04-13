@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Repositories\UserRepositoryEloquent;
 use App\Entities\User;
 use Hash;
-use Input;
 use Log;
 use Lang;
 use Mail;
@@ -22,6 +21,7 @@ class UserController extends Controller
 {
 
     protected $userRepo;
+    protected $contactRepo;
     
     protected $fields = [
         'id',
@@ -37,6 +37,7 @@ class UserController extends Controller
         
         $this->middleware('auth', ['except' => ['showCreateAccount', 'createAccount']]);
         $this->userRepo = $userRepo;
+        $this->contactRepo = new ContactRepositoryEloquent(new Application);
     }
 
     public function index()
@@ -63,11 +64,12 @@ class UserController extends Controller
     {
         try {
             $this->userRepo->validator();
-            Input::merge(array('password' => Hash::make(Input::get('password'))));
-            $inputs = $this->request->all();
-            $inputs['company_id'] = Auth::user()['company_id'];
+            $this->contactRepo->validator();
+            $inputs = $this->userRepo->setInputs($this->request->all());
+            $contact = $this->contactRepo->create($inputs);
+            $inputs['contact_id'] = $contact->id;
             $this->userRepo->create($inputs);
-            User::all()->last()->assignRole(Input::get('role_id'));
+            User::all()->last()->assignRole($inputs['role_id']);
             return $this->redirect->to('user')->with('message', Lang::get(
                 'general.succefullcreate',
                 ['table'=> Lang::get('general.User')]
@@ -83,8 +85,8 @@ class UserController extends Controller
         $user = $this->userRepo->find($idUser);
         $this->helper->validateRecord($user);
         
-        $contactRepo = new ContactRepositoryEloquent(new Application);
-        $contact = $contactRepo->find($user['contact_id']);
+        $contact = $this->contactRepo->find($user['contact_id']);
+        $this->helper->validateRecord($contact);
         
         $role = $this->helper->getAvailableRoles();
         $language = $this->helper->getAvailableLanguages();
@@ -100,9 +102,15 @@ class UserController extends Controller
             $user = $this->userRepo->find($idUser);
             $this->helper->validateRecord($user);
             $this->userRepo->validator();
+
+            $contact = $this->contactRepo->find($user->contact_id);
+            $this->helper->validateRecord($contact);
+            $this->contactRepo->validator();
+            
             $inputs = $this->userRepo->setInputs($this->request->all(), $user);
             $this->userRepo->update($inputs, $idUser);
-            User::all()->last()->assignRole(Input::get('role_id'));
+            User::all()->last()->assignRole($inputs['role_id']);
+            $this->contactRepo->update($inputs, $user->contact_id);
             return $this->redirect->to('user')->with('message', Lang::get(
                 'general.succefullupdate',
                 ['table'=> Lang::get('general.User')]
@@ -140,8 +148,8 @@ class UserController extends Controller
             $this->userRepo->validator();
             $inputs = $this->userRepo->setInputs($this->request->all(), $user);
             $this->userRepo->update($inputs, $idUser);
-            $this->session->put('language', Input::get('language'));
-            app()->setLocale(Input::get('language'));
+            $this->session->put('language', $inputs['language']);
+            app()->setLocale($inputs['language']);
             return $this->redirect->to('profile')->with('message', Lang::get(
                 'general.succefullupdate',
                 ['table'=> Lang::get('general.User')]
