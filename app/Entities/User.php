@@ -18,6 +18,7 @@ use App\Repositories\TypeRepositoryEloquent;
 use App\Repositories\ContactRepositoryEloquent;
 use App\Repositories\ModelRepositoryEloquent;
 use App\Repositories\VehicleRepositoryEloquent;
+use Illuminate\Support\Facades\Auth;
 
 class User extends BaseModel implements Transformable, AuthenticatableContract, CanResetPasswordContract
 {
@@ -135,5 +136,13 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
     public function checkCompanyRelationships()
     {
         return [];
+    }
+    
+    public static function boot()
+    {
+        parent::boot();
+        User::creating(function ($user) {
+            $user->company_id = Auth::user()['company_id'];
+        });
     }
 }

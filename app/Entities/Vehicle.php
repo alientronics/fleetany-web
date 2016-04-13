@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Vehicle extends BaseModel
 {
@@ -13,8 +14,8 @@ class Vehicle extends BaseModel
     use SoftDeletes;
     
     protected $table = 'vehicles';
-    protected $fillable = ['id', 'company_id', 'model_vehicle_id', 'number',
-                            'initial_miliage', 'actual_miliage', 'cost', 'description'];
+    protected $fillable = ['model_vehicle_id', 'number', 'initial_miliage',
+                            'actual_miliage', 'cost', 'description'];
 
 
     public function company()
@@ -42,5 +43,13 @@ class Vehicle extends BaseModel
         return [
             "model_vehicle_id" => "Model"
         ];
+    }
+    
+    public static function boot()
+    {
+        parent::boot();
+        Vehicle::creating(function ($vehicle) {
+            $vehicle->company_id = Auth::user()['company_id'];
+        });
     }
 }

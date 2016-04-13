@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Entry extends BaseModel
 {
@@ -13,8 +14,7 @@ class Entry extends BaseModel
     use SoftDeletes;
     
     protected $table = 'entries';
-    protected $fillable = ['id', 'company_id', 'entry_type_id',
-                            'vendor_id', 'vehicle_id', 'datetime_ini',
+    protected $fillable = ['entry_type_id', 'vendor_id', 'vehicle_id', 'datetime_ini',
                             'datetime_end', 'entry_number', 'cost', 'description'];
 
 
@@ -45,5 +45,13 @@ class Entry extends BaseModel
             "vendor_id" => "Contact",
             "vehicle_id" => "Vehicle"
         ];
+    }
+    
+    public static function boot()
+    {
+        parent::boot();
+        Entry::creating(function ($entry) {
+            $entry->company_id = Auth::user()['company_id'];
+        });
     }
 }

@@ -48,7 +48,6 @@ class InviteController extends Controller
                 $user = new User;
                 $user->name = explode("@", $inputs['email'])[0];
                 $user->email = $inputs['email'];
-                $user->company_id = Auth::user()['company_id'];
                 $user->pending_company_id = Auth::user()['company_id'];
                 $user->remember_token = str_random(30);
                 $user->save();

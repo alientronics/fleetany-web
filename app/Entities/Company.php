@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Model;
 
 class Company extends BaseModel
 {
@@ -13,8 +14,7 @@ class Company extends BaseModel
     use SoftDeletes;
     
     protected $table = 'companies';
-    protected $fillable = ['id', 'contact_id', 'name', 'measure_units', 'api_token'];
-
+    protected $fillable = ['contact_id', 'name', 'measure_units'];
 
     public function contact()
     {

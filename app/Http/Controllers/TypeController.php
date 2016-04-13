@@ -51,7 +51,6 @@ class TypeController extends Controller
         try {
             $this->typeRepo->validator();
             $inputs = $this->request->all();
-            $inputs['company_id'] = Auth::user()['company_id'];
             $this->typeRepo->create($inputs);
             return $this->redirect->to('type')->with('message', Lang::get(
                 'general.succefullcreate',
@@ -80,7 +79,6 @@ class TypeController extends Controller
             $this->helper->validateRecord($type);
             $this->typeRepo->validator();
             $inputs = $this->request->all();
-            $inputs['company_id'] = Auth::user()['company_id'];
             $this->typeRepo->update($inputs, $idType);
             $this->session->flash(
                 'message',

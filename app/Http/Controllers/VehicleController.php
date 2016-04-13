@@ -54,7 +54,6 @@ class VehicleController extends Controller
         try {
             $this->vehicleRepo->validator();
             $inputs = $this->request->all();
-            $inputs['company_id'] = Auth::user()['company_id'];
             $this->vehicleRepo->create($inputs);
             return $this->redirect->to('vehicle')->with('message', Lang::get(
                 'general.succefullcreate',
@@ -84,7 +83,6 @@ class VehicleController extends Controller
             $this->helper->validateRecord($vehicle);
             $this->vehicleRepo->validator();
             $inputs = $this->request->all();
-            $inputs['company_id'] = Auth::user()['company_id'];
             $this->vehicleRepo->update($inputs, $idVehicle);
             return $this->redirect->to('vehicle')->with('message', Lang::get(
                 'general.succefullupdate',

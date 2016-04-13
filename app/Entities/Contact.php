@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Contact extends BaseModel
 {
@@ -13,9 +14,9 @@ class Contact extends BaseModel
     use SoftDeletes;
     
     protected $table = 'contacts';
-    protected $fillable = ['id', 'company_id', 'contact_type_id',
-                            'name', 'country', 'state', 'city',
-                            'address', 'phone', 'license_no'];
+    protected $fillable = ['contact_type_id', 'name', 'country',
+                            'state', 'city', 'address', 'phone',
+                            'license_no'];
 
 
     public function company()
@@ -63,5 +64,13 @@ class Contact extends BaseModel
         return [
             "contact_type_id" => "Type"
         ];
+    }
+    
+    public static function boot()
+    {
+        parent::boot();
+        Contact::creating(function ($contact) {
+            $contact->company_id = Auth::user()['company_id'];
+        });
     }
 }

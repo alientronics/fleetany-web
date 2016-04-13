@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Type extends BaseModel
 {
@@ -13,7 +14,7 @@ class Type extends BaseModel
     use SoftDeletes;
     
     protected $table = 'types';
-    protected $fillable = ['id', 'entity_key', 'company_id', 'name'];
+    protected $fillable = ['entity_key', 'name'];
 
 
     public function company()
@@ -44,5 +45,13 @@ class Type extends BaseModel
     public function checkCompanyRelationships()
     {
         return [];
+    }
+    
+    public static function boot()
+    {
+        parent::boot();
+        Type::creating(function ($type) {
+            $type->company_id = Auth::user()['company_id'];
+        });
     }
 }

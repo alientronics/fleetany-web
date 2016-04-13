@@ -86,7 +86,6 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
         if (empty($inputs['vendor_id'])) {
             unset($inputs['vendor_id']);
         }
-        $inputs['company_id'] = Auth::user()['company_id'];
         $inputs['datetime_ini'] = HelperRepository::date($inputs['datetime_ini']);
         $inputs['datetime_end'] = HelperRepository::date($inputs['datetime_end']);
         $inputs['cost'] = HelperRepository::money($inputs['cost']);

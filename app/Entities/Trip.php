@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Trip extends BaseModel
 {
@@ -13,11 +14,10 @@ class Trip extends BaseModel
     use SoftDeletes;
     
     protected $table = 'trips';
-    protected $fillable = ['id', 'company_id', 'driver_id', 'vehicle_id',
-                            'vendor_id', 'trip_type_id', 'pickup_date',
-                            'deliver_date', 'pickup_place', 'deliver_place',
-                            'begin_mileage', 'end_mileage', 'total_mileage',
-                            'fuel_cost', 'fuel_amount', 'description'];
+    protected $fillable = ['driver_id', 'vehicle_id', 'vendor_id',
+                            'trip_type_id', 'pickup_date', 'pickup_place',
+                            'deliver_place', 'begin_mileage', 'end_mileage',
+                            'total_mileage', 'fuel_cost', 'fuel_amount', 'description'];
 
 
     public function company()
@@ -53,5 +53,13 @@ class Trip extends BaseModel
             "vendor_id" => "Contact",
             "trip_type_id" => "Type"
         ];
+    }
+    
+    public static function boot()
+    {
+        parent::boot();
+        Trip::creating(function ($trip) {
+            $trip->company_id = Auth::user()['company_id'];
+        });
     }
 }

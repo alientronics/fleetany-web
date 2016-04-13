@@ -88,7 +88,6 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
     
     public function setInputs($inputs)
     {
-        $inputs['company_id'] = Auth::user()['company_id'];
         if (empty($inputs['vendor_id'])) {
             unset($inputs['vendor_id']);
         }

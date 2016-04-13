@@ -54,7 +54,6 @@ class ContactController extends Controller
         try {
             $this->contactRepo->validator();
             $inputs = $this->request->all();
-            $inputs['company_id'] = Auth::user()['company_id'];
             $this->contactRepo->create($inputs);
             return $this->redirect->to('contact')->with('message', Lang::get(
                 'general.succefullcreate',
@@ -84,7 +83,6 @@ class ContactController extends Controller
             $this->helper->validateRecord($contact);
             $this->contactRepo->validator();
             $inputs = $this->request->all();
-            $inputs['company_id'] = Auth::user()['company_id'];
             $this->contactRepo->update($inputs, $idContact);
             return $this->redirect->to('contact')->with('message', Lang::get(
                 'general.succefullupdate',

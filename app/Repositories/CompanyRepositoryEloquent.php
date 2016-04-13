@@ -60,10 +60,9 @@ class CompanyRepositoryEloquent extends BaseRepository implements CompanyReposit
     
     public function setInputs($inputs)
     {
-        $inputs['company_id'] = Auth::user()['company_id'];
         $typeId = Type::where('entity_key', 'contact')
                                             ->where('name', 'detail')
-                                            ->where('company_id', $inputs['company_id'])
+                                            ->where('company_id', Auth::user()['company_id'])
                                             ->first();
         $inputs['contact_type_id'] = $typeId->id;
         return $inputs;
