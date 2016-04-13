@@ -34,8 +34,6 @@ class UserControllerTest extends AcceptanceTestCase
             ->type('teste@alientronics.com.br', 'email')
             ->type('admin', 'password')
             ->select($idOption, 'role_id')
-            ->type('1', 'contact_id')
-            ->type('1', 'company_id')
             ->type('Brasil', 'country')
             ->type('RS', 'state')
             ->type('Porto Alegre', 'city')
@@ -46,12 +44,12 @@ class UserControllerTest extends AcceptanceTestCase
         ;
     
         $this->seeInDatabase('users', ['name' => 'Nome Usuario Teste', 'email' => 'teste@alientronics.com.br']);
-        $this->seeInDatabase('contacts', ['name' => 'Nome Usuario Teste', 
+        $this->seeInDatabase('contacts', ['name' => 'Nome Usuario Teste',
                                             'country' => 'Brasil',
                                             'state' => 'RS',
                                             'city' => 'Porto Alegre',
                                             'address' => 'Adress',
-                                            'phone' => '(99) 9999-9999'            
+                                            'phone' => '(99) 9999-9999'
         ]);
         $this->seeInDatabase('role_user', ['role_id' => '5', 'user_id' => User::all()->last()['id']]);
     }
@@ -66,8 +64,6 @@ class UserControllerTest extends AcceptanceTestCase
             ->type('emaileditado@usuario.com', 'email')
             ->type('654321', 'password')
             ->select($idOption, 'role_id')
-            ->type('1', 'contact_id')
-            ->type('1', 'company_id')
             ->type('Brasil2', 'country')
             ->type('RS2', 'state')
             ->type('Porto Alegre2', 'city')

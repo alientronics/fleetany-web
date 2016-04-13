@@ -172,13 +172,13 @@ class UserController extends Controller
             $inputs = $this->request->all();
 
             $user = User::where('email', $inputs['email'])->first();
-            if(!empty($user)) {
+            if (!empty($user)) {
                 $user->remember_token = str_random(30);
                 $user->save();
                 $this->sendEmailInvite($user->id);
                 return $this->redirect->to('invite')->with('message', Lang::get(
                     'general.invitesucessfullresend'
-                    ));
+                ));
             } else {
                 $user = new User;
                 $user->name = explode("@", $inputs['email'])[0];
@@ -196,7 +196,7 @@ class UserController extends Controller
                     'general.succefullcreate',
                     ['table'=> Lang::get('general.InviteUser')]
                 ));
-            } 
+            }
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
                    ->with('errors', $e->getMessageBag());
