@@ -49,9 +49,7 @@ class Vehicle extends BaseModel
     {
         parent::boot();
         Vehicle::creating(function ($vehicle) {
-            if (empty($vehicle->company_id)) {
-                $vehicle->company_id = empty(Auth::user()['company_id']) ? 1 : Auth::user()['company_id'];
-            }
+            $vehicle->company_id = ( $vehicle->company_id ?: Auth::user()['company_id'] );
         });
     }
 }

@@ -49,9 +49,7 @@ class Model extends BaseModel
     {
         parent::boot();
         Model::creating(function ($model) {
-            if (empty($model->company_id)) {
-                $model->company_id = Auth::user()['company_id'];
-            }
+            $model->company_id = ( $model->company_id ?: Auth::user()['company_id'] );
         });
     }
 }

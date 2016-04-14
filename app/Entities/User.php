@@ -147,9 +147,7 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
     {
         parent::boot();
         User::creating(function ($user) {
-            if (empty($user->company_id)) {
-                $user->company_id = Auth::user()['company_id'];
-            }
+            $user->company_id = ( $user->company_id ?: Auth::user()['company_id'] );
         });
     }
 }

@@ -51,9 +51,7 @@ class Entry extends BaseModel
     {
         parent::boot();
         Entry::creating(function ($entry) {
-            if (empty($entry->company_id)) {
-                $entry->company_id = Auth::user()['company_id'];
-            }
+            $entry->company_id = ( $entry->company_id ?: Auth::user()['company_id'] );
         });
     }
 }
