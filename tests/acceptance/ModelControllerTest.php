@@ -73,4 +73,31 @@ class ModelControllerTest extends AcceptanceTestCase
             ->see('Generic Car</div>')
         ;
     }
+    
+    public function testSort()
+    {
+        $this->visit('/model?id=&model-type=&vendor=&name=&sort=id-desc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/model?id=&model-type=&vendor=&name=&sort=id-asc')
+            ->see('mode_edit</i>');
+
+        $this->visit('/model?id=&model-type=&vendor=&name=&sort=vendor-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/model?id=&model-type=&vendor=&name=&sort=vendor-asc')
+            ->see('mode_edit</i>');
+
+        $this->visit('/model?id=&model-type=&vendor=&name=&sort=model-type-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/model?id=&model-type=&vendor=&name=&sort=model-type-asc')
+            ->see('mode_edit</i>');
+
+        $this->visit('/model?id=&model-type=&vendor=&name=&sort=name-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/model?id=&model-type=&vendor=&name=&sort=name-asc')
+            ->see('mode_edit</i>');
+    }
 }

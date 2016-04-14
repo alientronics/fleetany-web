@@ -78,4 +78,26 @@ class TypeControllerTest extends AcceptanceTestCase
             ->see('service</div>')
         ;
     }
+    
+    public function testSort()
+    {
+        $this->visit('/type?id=&entity-key=&name=&sort=id-desc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/type?id=&entity-key=&name=&sort=id-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/type?id=&entity-key=&name=&sort=entity-key-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/type?id=&entity-key=&name=&sort=entity-key-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/type?id=&entity-key=&name=&sort=name-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/type?id=&entity-key=&name=&sort=name-asc')
+            ->see('mode_edit</i>');
+        
+    }
 }

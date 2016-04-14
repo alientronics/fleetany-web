@@ -107,4 +107,31 @@ class CompanyControllerTest extends AcceptanceTestCase
             ->see('Country</div>')
         ;
     }
+    
+    public function testSort()
+    {
+        $this->visit('/company?id=&name=&city=&country=&sort=id-desc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/company?id=&name=&city=&country=&sort=id-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/company?id=&name=&city=&country=&sort=name-desc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/company?id=&name=&city=&country=&sort=name-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/company?id=&name=&city=&country=&sort=city-desc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/company?id=&name=&city=&country=&sort=city-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/company?id=&name=&city=&country=&sort=country-desc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/company?id=&name=&city=&country=&sort=country-asc')
+            ->see('mode_edit</i>');
+    }
 }

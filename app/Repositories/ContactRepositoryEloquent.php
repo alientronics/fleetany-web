@@ -45,7 +45,6 @@ class ContactRepositoryEloquent extends BaseRepository implements ContactReposit
 
             $query = $query->where('contacts.company_id', Auth::user()['company_id']);
             if ($filters['sort'] == 'contact_type') {
-                $query = $query->join('types', 'contacts.contact_type_id', '=', 'types.id');
                 $sort = 'types.name';
             } else {
                 $sort = 'contacts.'.$filters['sort'];

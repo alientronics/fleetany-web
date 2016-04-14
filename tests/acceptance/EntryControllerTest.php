@@ -99,4 +99,38 @@ class EntryControllerTest extends AcceptanceTestCase
             ->see('2016-01-01 00:00:00</div>')
         ;
     }
+    
+    public function testSort()
+    {
+        $this->visit('/entry?id=&vehicle=&entry-type=&datetime-ini=&cost=&sort=id-desc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/entry?id=&vehicle=&entry-type=&datetime-ini=&cost=&sort=id-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/entry?id=&vehicle=&entry-type=&datetime-ini=&cost=&sort=vehicle-desc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/entry?id=&vehicle=&entry-type=&datetime-ini=&cost=&sort=vehicle-asc')
+            ->see('mode_edit</i>');
+
+        $this->visit('/entry?id=&vehicle=&entry-type=&datetime-ini=&cost=&sort=entry-type-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/entry?id=&vehicle=&entry-type=&datetime-ini=&cost=&sort=entry-type-asc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/entry?id=&vehicle=&entry-type=&datetime-ini=&cost=&sort=datetime-ini-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/entry?id=&vehicle=&entry-type=&datetime-ini=&cost=&sort=datetime-ini-asc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/entry?id=&vehicle=&entry-type=&datetime-ini=&cost=&sort=cost-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/entry?id=&vehicle=&entry-type=&datetime-ini=&cost=&sort=cost-asc')
+            ->see('mode_edit</i>');
+        
+    }
 }

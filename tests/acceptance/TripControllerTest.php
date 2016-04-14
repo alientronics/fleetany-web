@@ -122,4 +122,38 @@ class TripControllerTest extends AcceptanceTestCase
             ->see('15.00</div>')
         ;
     }
+    
+    public function testSort()
+    {
+        $this->visit('/trip?id=&vehicle=&trip-type=&pickup-date=&fuel-cost=&sort=id-desc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/trip?id=&vehicle=&trip-type=&pickup-date=&fuel-cost=&sort=id-asc')
+            ->see('mode_edit</i>');
+
+        $this->visit('/trip?id=&vehicle=&trip-type=&pickup-date=&fuel-cost=&sort=vehicle-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/trip?id=&vehicle=&trip-type=&pickup-date=&fuel-cost=&sort=vehicle-asc')
+            ->see('mode_edit</i>');
+
+        $this->visit('/trip?id=&vehicle=&trip-type=&pickup-date=&fuel-cost=&sort=trip-type-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/trip?id=&vehicle=&trip-type=&pickup-date=&fuel-cost=&sort=trip-type-asc')
+            ->see('mode_edit</i>');
+
+        $this->visit('/trip?id=&vehicle=&trip-type=&pickup-date=&fuel-cost=&sort=pickup-date-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/trip?id=&vehicle=&trip-type=&pickup-date=&fuel-cost=&sort=pickup-date-asc')
+            ->see('mode_edit</i>');
+
+        $this->visit('/trip?id=&vehicle=&trip-type=&pickup-date=&fuel-cost=&sort=fuel-cost-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/trip?id=&vehicle=&trip-type=&pickup-date=&fuel-cost=&sort=fuel-cost-asc')
+            ->see('mode_edit</i>');
+            
+    }
 }

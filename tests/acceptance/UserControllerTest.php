@@ -138,4 +138,37 @@ class UserControllerTest extends AcceptanceTestCase
             ->see('Company</div>')
         ;
     }
+    
+    public function testSort()
+    {
+        $this->visit('/user?id=&name=&email=&contact-id=&company-id=&sort=id-desc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/user?id=&name=&email=&contact-id=&company-id=&sort=id-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/user?id=&name=&email=&contact-id=&company-id=&sort=name-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/user?id=&name=&email=&contact-id=&company-id=&sort=name-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/user?id=&name=&email=&contact-id=&company-id=&sort=email-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/user?id=&name=&email=&contact-id=&company-id=&sort=email-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/user?id=&name=&email=&contact-id=&company-id=&sort=contact-id-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/user?id=&name=&email=&contact-id=&company-id=&sort=contact-id-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/user?id=&name=&email=&contact-id=&company-id=&sort=company-id-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/user?id=&name=&email=&contact-id=&company-id=&sort=company-id-asc')
+            ->see('mode_edit</i>');
+    }
 }

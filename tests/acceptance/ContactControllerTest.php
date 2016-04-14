@@ -114,4 +114,31 @@ class ContactControllerTest extends AcceptanceTestCase
             ->see('City</div>')
         ;
     }
+    
+    public function testSort()
+    {
+        $this->visit('/contact?id=&name=&contact-type=&city=&sort=id-desc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/contact?id=&name=&contact-type=&city=&sort=id-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/contact?id=&name=&contact-type=&city=&sort=name-desc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/contact?id=&name=&contact-type=&city=&sort=name-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/contact?id=&name=&contact-type=&city=&sort=contact-type-desc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/contact?id=&name=&contact-type=&city=&sort=contact-type-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/contact?id=&name=&contact-type=&city=&sort=city-desc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/contact?id=&name=&contact-type=&city=&sort=city-asc')
+            ->see('mode_edit</i>');
+    }
 }

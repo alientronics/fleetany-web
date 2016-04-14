@@ -101,4 +101,32 @@ class VehicleControllerTest extends AcceptanceTestCase
             ->see('IOP-1234</div>')
         ;
     }
+    
+    public function testSort()
+    {
+        $this->visit('/vehicle?id=&model-vehicle=&number=&cost=&sort=id-desc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/vehicle?id=&model-vehicle=&number=&cost=&sort=id-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/vehicle?id=&model-vehicle=&number=&cost=&sort=model-vehicle-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/vehicle?id=&model-vehicle=&number=&cost=&sort=model-vehicle-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/vehicle?id=&model-vehicle=&number=&cost=&sort=number-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/vehicle?id=&model-vehicle=&number=&cost=&sort=number-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/vehicle?id=&model-vehicle=&number=&cost=&sort=cost-desc')
+            ->see('mode_edit</i>');
+            
+        $this->visit('/vehicle?id=&model-vehicle=&number=&cost=&sort=cost-asc')
+            ->see('mode_edit</i>');
+        
+    }
 }
