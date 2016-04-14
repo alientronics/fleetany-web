@@ -39,7 +39,7 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
     public function setUp()
     {
     
-        $authUser = Auth::user();
+        $authUser = empty(Auth::user()) ? $this : Auth::user();
         Auth::login($this, true);
         
         $companyRepo = new CompanyRepositoryEloquent(new Application);

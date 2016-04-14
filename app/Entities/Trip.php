@@ -16,7 +16,7 @@ class Trip extends BaseModel
     protected $table = 'trips';
     protected $fillable = ['driver_id', 'vehicle_id', 'vendor_id',
                             'trip_type_id', 'pickup_date', 'pickup_place',
-                            'deliver_place', 'begin_mileage', 'end_mileage',
+                            'deliver_date', 'deliver_place', 'begin_mileage', 'end_mileage',
                             'total_mileage', 'fuel_cost', 'fuel_amount', 'description'];
 
 
