@@ -61,11 +61,6 @@ class Company extends BaseModel
         return $this->hasMany(\App\Entities\Vehicle::class, 'company_id', 'id');
     }
     
-    public function checkCompanyRelationships()
-    {
-        return [];
-    }
-    
     public static function boot()
     {
         parent::boot();

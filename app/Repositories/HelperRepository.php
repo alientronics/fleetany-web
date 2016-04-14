@@ -103,7 +103,7 @@ class HelperRepository
             Redirect::to('/')->with('danger', Lang::get('general.accessdenied'))->send();
         }
         
-        if (!empty($record->checkCompanyRelationships())) {
+        if (method_exists($record, 'checkCompanyRelationships') && !empty($record->checkCompanyRelationships())) {
             foreach ($record->checkCompanyRelationships() as $field => $entity) {
                 
                 $namespacedEntity = '\\App\\Entities\\' . $entity;

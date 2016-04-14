@@ -39,6 +39,9 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
     public function setUp()
     {
     
+        $authUser = Auth::user();
+        Auth::login($this, true);
+        
         $companyRepo = new CompanyRepositoryEloquent(new Application);
         $company = $companyRepo->create(['name' => $this->name . ' Inc.']);
     
@@ -116,6 +119,8 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
             'company_id' => $company->id]);
         
         $this->syncRoles('administrator');
+        
+        Auth::login($authUser, true);
     }
     
     public function createContact($name, $company_id)
