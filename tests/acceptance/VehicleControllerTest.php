@@ -71,6 +71,16 @@ class VehicleControllerTest extends AcceptanceTestCase
     public function testDelete()
     {
         $idDelete = Vehicle::all()->last()['id'];
+
+        $entry = factory(\App\Entities\Entry::class)->create([
+            'vehicle_id' => $idDelete,
+        ]);
+        
+        $this->seeInDatabase('vehicles', ['id' => $idDelete]);
+        $this->visit('/vehicle/destroy/'.$idDelete)
+            ->seePageIs('/vehicle')
+            ->see('Este registro possui refer');
+        $this->seeIsNotSoftDeletedInDatabase('vehicles', ['id' => $idDelete]);
         
         $vehicle = Vehicle::find($idDelete);
         $vehicle->entries()->delete();

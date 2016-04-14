@@ -79,6 +79,16 @@ class ContactControllerTest extends AcceptanceTestCase
     public function testDelete()
     {
         $idDelete = Contact::all()->last()['id'];
+
+        $company = factory(\App\Entities\Company::class)->create([
+            'contact_id' => $idDelete,
+        ]);
+        
+        $this->seeInDatabase('contacts', ['id' => $idDelete]);
+        $this->visit('/contact/destroy/'.$idDelete)
+            ->seePageIs('/contact')
+            ->see('Este registro possui refer');
+        $this->seeIsNotSoftDeletedInDatabase('contacts', ['id' => $idDelete]);
         
         $contact = Contact::find($idDelete);
         $contact->companies()->delete();

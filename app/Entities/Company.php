@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Model;
 
 class Company extends BaseModel
 {

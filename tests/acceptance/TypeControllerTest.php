@@ -48,6 +48,12 @@ class TypeControllerTest extends AcceptanceTestCase
     {
         $idDelete = Type::all()->last()['id'];
         
+        $this->seeInDatabase('types', ['id' => $idDelete]);
+        $this->visit('/type/destroy/'.$idDelete)
+            ->seePageIs('/type')
+            ->see('Este registro possui refer');
+        $this->seeIsNotSoftDeletedInDatabase('types', ['id' => $idDelete]);
+        
         $type = Type::find($idDelete);
         $type->contacts()->delete();
         $type->entries()->delete();

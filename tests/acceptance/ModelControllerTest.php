@@ -45,6 +45,17 @@ class ModelControllerTest extends AcceptanceTestCase
     public function testDelete()
     {
         $idDelete = Model::all()->last()['id'];
+
+        $vehicle = factory(\App\Entities\Vehicle::class)->create([
+            'model_vehicle_id' => $idDelete,
+        ]);
+        
+        $this->seeInDatabase('models', ['id' => $idDelete]);
+        $this->visit('/model/destroy/'.$idDelete)
+            ->seePageIs('/model')
+            ->see('Este registro possui refer');
+        $this->seeIsNotSoftDeletedInDatabase('models', ['id' => $idDelete]);
+        
         $model = Model::find($idDelete);
         $model->vehicles()->delete();
         $this->seeInDatabase('models', ['id' => $idDelete]);
