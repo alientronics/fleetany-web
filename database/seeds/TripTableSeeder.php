@@ -13,7 +13,7 @@ class TripTableSeeder extends Seeder
     public function run()
     {
         DB::table('trips')->delete();
-        Trip::create(
+        Trip::forceCreate(
                 [  'driver_id' => 3,
                         'vehicle_id' => 1,
                         'vendor_id' => 2,

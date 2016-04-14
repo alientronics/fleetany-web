@@ -59,7 +59,9 @@ class Trip extends BaseModel
     {
         parent::boot();
         Trip::creating(function ($trip) {
-            $trip->company_id = empty(Auth::user()['company_id']) ? 1 : Auth::user()['company_id'];
+            if (empty($trip->company_id)) {
+                $trip->company_id = Auth::user()['company_id'];
+            }
         });
     }
 }

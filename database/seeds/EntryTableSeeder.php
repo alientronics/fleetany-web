@@ -13,7 +13,7 @@ class EntryTableSeeder extends Seeder
     public function run()
     {
         DB::table('entries')->delete();
-        Entry::create(
+        Entry::forceCreate(
                 [  'entry_type_id' => 1,
                         'vendor_id' => 1,
                         'vehicle_id' => 1,

@@ -13,37 +13,37 @@ class TypeTableSeeder extends Seeder
     public function run()
     {
         DB::table('types')->delete();
-        Type::create(
+        Type::forceCreate(
                 [  'entity_key' => 'entry',
                         'name' => 'service',
                         'company_id' => 1]
             );
-        Type::create(
+        Type::forceCreate(
                 [  'entity_key' => 'vehicle',
                         'name' => 'car',
                         'company_id' => 1]
             );
-        Type::create(
+        Type::forceCreate(
                 [  'entity_key' => 'contact',
                         'name' => 'user',
                         'company_id' => 1]
             );
-        Type::create(
+        Type::forceCreate(
                 [  'entity_key' => 'contact',
                         'name' => 'driver',
                         'company_id' => 1]
             );
-        Type::create(
+        Type::forceCreate(
                 [  'entity_key' => 'contact',
                         'name' => 'vendor',
                         'company_id' => 1]
             );
-        Type::create(
+        Type::forceCreate(
                 [  'entity_key' => 'trip',
                         'name' => 'delivery',
                         'company_id' => 1]
             );
-        Type::create(
+        Type::forceCreate(
                 [  'entity_key' => 'contact',
                         'name' => 'detail',
                         'company_id' => 1]

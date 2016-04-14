@@ -13,7 +13,7 @@ class VehicleTableSeeder extends Seeder
     public function run()
     {
         DB::table('vehicles')->delete();
-        Vehicle::create(
+        Vehicle::forceCreate(
                 [  'model_vehicle_id' => 1,
                         'number' => 'IOP-1234',
                         'initial_miliage' => 1,

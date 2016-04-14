@@ -51,7 +51,9 @@ class Type extends BaseModel
     {
         parent::boot();
         Type::creating(function ($type) {
-            $type->company_id = empty(Auth::user()['company_id']) ? 1 : Auth::user()['company_id'];
+            if (empty($type->company_id)) {
+                $type->company_id = Auth::user()['company_id'];
+            }
         });
     }
 }

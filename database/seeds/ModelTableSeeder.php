@@ -13,7 +13,7 @@ class ModelTableSeeder extends Seeder
     public function run()
     {
         DB::table('models')->delete();
-        Model::create(
+        Model::forceCreate(
                 [  'model_type_id' => 2,
                         'vendor_id' => 2,
                         'name' => 'Generic Car',

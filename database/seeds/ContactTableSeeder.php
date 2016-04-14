@@ -14,7 +14,7 @@ class ContactTableSeeder extends Seeder
     public function run()
     {
         DB::table('contacts')->delete();
-        Contact::create(
+        Contact::forceCreate(
                 [  'company_id' => 1,
                         'contact_type_id' => 3,
                         'name' => 'Administrator',
@@ -24,12 +24,12 @@ class ContactTableSeeder extends Seeder
         $company = Company::find(1);
         $company->contact_id = 1;
         $company->save();
-        Contact::create(
+        Contact::forceCreate(
                 [  'company_id' => 1,
                         'contact_type_id' => 5,
                         'name' => 'Vendor Name']
             );
-        Contact::create(
+        Contact::forceCreate(
                 [  'company_id' => 1,
                         'contact_type_id' => 4,
                         'name' => 'Driver Name',
