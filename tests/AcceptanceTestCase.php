@@ -27,8 +27,17 @@ class AcceptanceTestCase extends BaseTestCase
     {
         parent::setUp();
         $this->be(User::find(1));
+        \DB::connection()->enableQueryLog();
     }
-    
+
+    public function tearDown()
+    {
+        echo ' ' . count(\DB::getQueryLog()) . ' queries in '
+            . (array_sum(array_column(\DB::getQueryLog(), 'time'))/1000) . ' seconds';
+        //var_dump( \DB::getQueryLog() );
+        parent::tearDown();
+    }
+
     public function createApplication()
     {
         $app = require __DIR__.'/../bootstrap/app.php';
