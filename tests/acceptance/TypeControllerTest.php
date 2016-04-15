@@ -48,6 +48,10 @@ class TypeControllerTest extends AcceptanceTestCase
     {
         $idDelete = Type::all()->last()['id'];
         
+        $model = factory(\App\Entities\Model::class)->create([
+            'model_type_id' => $idDelete,
+        ]);
+
         $this->seeInDatabase('types', ['id' => $idDelete]);
         $this->visit('/type/destroy/'.$idDelete)
             ->seePageIs('/type')
