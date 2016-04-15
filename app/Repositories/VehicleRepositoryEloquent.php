@@ -29,6 +29,8 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
     
     public function results($filters = [])
     {
+        $filters['cost'] = empty($filters['cost']) ? "" : HelperRepository::money($filters['cost']);
+        
         $vehicles = $this->scopeQuery(function ($query) use ($filters) {
 
             $query = $query->select('vehicles.*', 'models.name as model-vehicle');

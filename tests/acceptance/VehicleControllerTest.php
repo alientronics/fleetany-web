@@ -105,10 +105,11 @@ class VehicleControllerTest extends AcceptanceTestCase
         $this->visit('/vehicle')
             ->type('Generic Car', 'model_vehicle')
             ->type('IOP-1234', 'number')
-            ->type('50000', 'cost')
+            ->type('50.000,00', 'cost')
             ->press('Buscar')
             ->see('Generic Car</div>')
             ->see('IOP-1234</div>')
+            ->see('50.000,00</div>')
         ;
     }
     

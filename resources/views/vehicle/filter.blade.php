@@ -14,7 +14,7 @@
     		{!!Form::label('number', Lang::get('general.number'), ['class' => 'mdl-textfield__label is-dirty'])!!}
          </div>
          <div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label mdl-search__div" data-upgraded="eP">
-     		{!!Form::text('cost', $filters['cost'], ['class' => 'mdl-textfield__input mdl-search__input'])!!}
+     		{!!Form::text('cost', $filters['cost'], ['id' => 'cost', 'class' => 'mdl-textfield__input mdl-search__input  mdl-textfield__maskmoney'])!!}
     		{!!Form::label('cost', Lang::get('general.cost'), ['class' => 'mdl-textfield__label is-dirty'])!!}
          </div>
          <button type="submit" class="mdl-button mdl-color--primary mdl-color-text--accent-contrast mdl-js-button mdl-button--raised mdl-button--colored mdl-search__button">
@@ -23,4 +23,10 @@
       </div>
     </form>
 
+	<script>
+    	$( document ).ready(function() {
+    		$('#cost').maskMoney({!!Lang::get("masks.money")!!});
+    	});
+    </script>
+    
 @stop

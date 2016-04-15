@@ -91,12 +91,13 @@ class EntryControllerTest extends AcceptanceTestCase
         $this->visit('/entry')
             ->type('Generic Car', 'vehicle')
             ->type('service', 'entry_type')
-            ->type('2016-01-01 00:00:00', 'datetime_ini')
-            ->type('321', 'cost')
+            ->type('01/01/2016 00:00:00', 'datetime_ini')
+            ->type('321,00', 'cost')
             ->press('Buscar')
             ->see('Generic Car</div>')
             ->see('service</div>')
             ->see('01/01/2016 00:00:00</div>')
+            ->see('321,00</div>')
         ;
     }
     

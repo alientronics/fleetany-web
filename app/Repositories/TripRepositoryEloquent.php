@@ -35,6 +35,8 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
   
     public function results($filters = [])
     {
+        $filters = $this->formatFilters($filters);
+        
         $trips = $this->scopeQuery(function ($query) use ($filters) {
 
             $query = $query->select(
@@ -75,6 +77,14 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
         })->paginate($filters['paginate']);
         
         return $trips;
+    }
+    
+    private function formatFilters($filters = [])
+    {
+        $filters['pickup-date'] = empty($filters['pickup-date']) ? "" : HelperRepository::date($filters['pickup-date']);
+        $filters['fuel-cost'] = empty($filters['fuel-cost']) ? "" : HelperRepository::money($filters['fuel-cost']);
+        
+        return $filters;
     }
     
     public function getInputs($inputs)

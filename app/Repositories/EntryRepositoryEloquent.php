@@ -32,6 +32,8 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
     
     public function results($filters = [])
     {
+        $filters = $this->formatFilters($filters);
+        
         $entries = $this->scopeQuery(function ($query) use ($filters) {
 
             $query = $query->select(
@@ -71,6 +73,14 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
         })->paginate($filters['paginate']);
         
         return $entries;
+    }
+    
+    private function formatFilters($filters = [])
+    {
+        $filters['datetime-ini'] = empty($filters['datetime-ini']) ? "" :
+                                    HelperRepository::date($filters['datetime-ini']);
+    
+        return $filters;
     }
     
     public function getInputs($inputs)
