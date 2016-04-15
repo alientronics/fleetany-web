@@ -118,8 +118,8 @@ class TripControllerTest extends AcceptanceTestCase
             ->press('Buscar')
             ->see('Generic Car</div>')
             ->see('delivery</div>')
-            ->see('2016-01-01 00:00:00</div>')
-            ->see('15.00</div>')
+            ->see('01/01/2016 00:00:00</div>')
+            ->see('15,00</div>')
         ;
     }
     
