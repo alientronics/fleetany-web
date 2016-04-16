@@ -46,8 +46,21 @@ function showSnackBar(message) {
 	  };
 	  $(window).load(function() {
 	    'use strict';
+	    message = $('<textarea />').html(message).text();
+	    try {
+    		var jsonMessage = $.parseJSON(message);
+    	    if(typeof jsonMessage == 'object')
+    	    {
+    	    	message = '';
+    	    	$.each( jsonMessage, function( key, value ) {
+    	    		message += value + ' ';
+	    		});
+    	    }
+    	}
+    	catch (err) {
+    	}
 	    var data = {
-	      message: $('<textarea />').html(message).text(),
+	      message: message,
 	      timeout: 5000,
 //		       actionHandler: handler,
 	      actionText: 'Undo'
