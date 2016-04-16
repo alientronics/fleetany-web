@@ -151,6 +151,8 @@ return [
     "CreateAccount"   => "Create Account",
     "invitesucessfullresend"   => "Invite sucessfull resend",
     
+    "tos" => "Accept Terms of Service",
+
     //Linguagens
     "en" => "English",
     "pt-br" => "Portuguese"

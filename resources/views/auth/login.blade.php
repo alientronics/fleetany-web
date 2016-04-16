@@ -21,7 +21,8 @@
 						<label class="mdl-textfield__label" for="password">Password</label>
 					</div>
 					<div class="mdl-textfield mdl-js-textfield">
-    					<input name="remember" type="checkbox" value="Remember Me">{{Lang::get("general.RememberMe")}}
+    					<input name="remember" type="checkbox" value="tos">
+    					<a href="/tos" class="mdl-color-text--primary" >{{Lang::get("general.tos")}}</a>
 					</div>
 			</div>
 			<div class="mdl-card__actions mdl-card--border">

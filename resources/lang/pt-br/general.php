@@ -150,6 +150,8 @@ return [
     "CreateAccount"   => "Criar conta",
     "invitesucessfullresend"   => "Convite reenviado com sucesso",
     
+    "tos" => "Aceito os Termos de Serviço",
+
     //Linguagens
     "en" => "Ingl&ecirc;s",
     "pt-br" => "Portugu&ecirc;s"
