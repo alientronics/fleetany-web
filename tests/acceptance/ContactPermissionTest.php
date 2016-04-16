@@ -17,37 +17,27 @@ class ContactPermissionTest extends AcceptanceTestCase
     
     public function testViewExecutive()
     {
-        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/contact">', true);
+        $this->get('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/contact">', true);
         
-        $this->visit('/contact')
-            ->see('<i class="material-icons">filter_list</i>', true)
-        ;
+        $this->get('/contact')->assertResponseStatus(401);
     }
     
     public function testCreateExecutive()
     {
-        $this->visit('/contact')->see('<a href="'.$this->baseUrl.'/contact/create', true);
-    
-        $this->visit('/contact/create')
-            ->see('de acesso para esta p')
-        ;
+        $this->get('/contact/create')->assertResponseStatus(401);
     }
     
     public function testUpdateExecutive()
     {
-        $this->visit('/contact')
-            ->see('Editar', true)
-        ;
-        
-        $this->visit('/contact/'.Contact::all()->last()['id'].'/edit')
-            ->see('de acesso para esta p')
+        $this->get('/contact/'.Contact::all()->last()['id'].'/edit')
+            ->assertResponseStatus(401)
         ;
     }
     
     public function testDeleteExecutive()
     {
-        $this->visit('/contact')
-            ->see('Excluir', true)
+        $this->get('/contact/destroy/'.Contact::all()->last()['id'])
+            ->assertResponseStatus(302)
         ;
     }
     

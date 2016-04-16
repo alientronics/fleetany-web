@@ -16,37 +16,27 @@ class ModelPermissionTest extends AcceptanceTestCase
     
     public function testViewExecutive()
     {
-        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/model">', true);
+        $this->get('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/model">', true);
         
-        $this->visit('/model')
-            ->see('<i class="material-icons">filter_list</i>', true)
-        ;
+        $this->get('/model')->assertResponseStatus(401);
     }
     
     public function testCreateExecutive()
     {
-        $this->visit('/model')->see('<a href="'.$this->baseUrl.'/model/create', true);
-        
-        $this->visit('/model/create')
-            ->see('de acesso para esta p')
-        ;
+        $this->get('/model/create')->assertResponseStatus(401);
     }
     
     public function testUpdateExecutive()
     {
-        $this->visit('/model')
-            ->see('Editar', true)
-        ;
-        
-        $this->visit('/model/'.Model::all()->last()['id'].'/edit')
-            ->see('de acesso para esta p')
+        $this->get('/model/'.Model::all()->last()['id'].'/edit')
+            ->assertResponseStatus(401)
         ;
     }
     
     public function testDeleteExecutive()
     {
-        $this->visit('/model')
-            ->see('Excluir', true)
+        $this->get('/model/destroy/'.Model::all()->last()['id'])
+            ->assertResponseStatus(302)
         ;
     }
     

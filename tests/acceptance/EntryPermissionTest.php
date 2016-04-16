@@ -16,37 +16,27 @@ class EntryPermissionTest extends AcceptanceTestCase
     
     public function testViewExecutive()
     {
-        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/entry">', true);
+        $this->get('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/entry">', true);
         
-        $this->visit('/entry')
-            ->see('<i class="material-icons">filter_list</i>', true)
-        ;
+        $this->get('/entry')->assertResponseStatus(401);
     }
     
     public function testCreateExecutive()
     {
-        $this->visit('/entry')->see('<a href="'.$this->baseUrl.'/entry/create', true);
-        
-        $this->visit('/entry/create')
-            ->see('de acesso para esta p')
-        ;
+        $this->get('/entry/create')->assertResponseStatus(401);
     }
     
     public function testUpdateExecutive()
     {
-        $this->visit('/entry')
-            ->see('Editar', true)
-        ;
-        
-        $this->visit('/entry/'.Entry::all()->last()['id'].'/edit')
-            ->see('de acesso para esta p')
+        $this->get('/entry/'.Entry::all()->last()['id'].'/edit')
+            ->assertResponseStatus(401)
         ;
     }
     
     public function testDeleteExecutive()
     {
-        $this->visit('/entry')
-            ->see('Excluir', true)
+        $this->get('/entry/destroy/'.Entry::all()->last()['id'])
+            ->assertResponseStatus(302)
         ;
     }
     

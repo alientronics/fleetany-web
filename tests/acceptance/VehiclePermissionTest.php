@@ -16,37 +16,27 @@ class VehiclePermissionTest extends AcceptanceTestCase
     
     public function testViewExecutive()
     {
-        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/vehicle">', true);
+        $this->get('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/vehicle">', true);
         
-        $this->visit('/vehicle')
-            ->see('<i class="material-icons">filter_list</i>', true)
-        ;
+        $this->get('/vehicle')->assertResponseStatus(401);
     }
     
     public function testCreateExecutive()
     {
-        $this->visit('/vehicle')->see('<a href="'.$this->baseUrl.'/vehicle/create', true);
-        
-        $this->visit('/vehicle/create')
-            ->see('de acesso para esta p')
-        ;
+        $this->get('/vehicle/create')->assertResponseStatus(401);
     }
     
     public function testUpdateExecutive()
     {
-        $this->visit('/vehicle')
-            ->see('Editar', true)
-        ;
-        
-        $this->visit('/vehicle/'.Vehicle::all()->last()['id'].'/edit')
-            ->see('de acesso para esta p')
+        $this->get('/vehicle/'.Vehicle::all()->last()['id'].'/edit')
+            ->assertResponseStatus(401)
         ;
     }
     
     public function testDeleteExecutive()
     {
-        $this->visit('/vehicle')
-            ->see('Excluir', true)
+        $this->get('/vehicle/destroy/'.Vehicle::all()->last()['id'])
+            ->assertResponseStatus(302)
         ;
     }
     

@@ -6,8 +6,6 @@
 
 @stop
 
-@permission('view.trip')  
-
 @include('trip.filter')
 
 @section('content')
@@ -30,5 +28,3 @@
 </div>
 
 @stop
-
-@endpermission

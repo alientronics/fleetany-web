@@ -6,8 +6,6 @@
 
 @stop
 
-@permission('view.vehicle')  
-
 @include('vehicle.filter')
 
 @section('content')
@@ -29,5 +27,3 @@
 </div>
 
 @stop   
-
-@endpermission

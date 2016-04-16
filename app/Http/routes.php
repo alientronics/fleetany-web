@@ -15,14 +15,85 @@ Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::get('home', 'HomeController@index');
 Route::resource('/contact', 'HomeController@contact');
 
-Route::resource('trip', 'TripController');
-Route::resource('entry', 'EntryController');
-Route::resource('contact', 'ContactController');
-Route::resource('type', 'TypeController');
-Route::resource('model', 'ModelController');
-Route::resource('company', 'CompanyController');
-Route::resource('vehicle', 'VehicleController');
-Route::resource('user', 'UserController');
+Route::group(
+    [
+    'middleware' => ['auth',
+    'acl'],
+    'can' => 'view.trip'],
+    function () {
+        Route::resource('trip', 'TripController');
+    }
+);
+
+Route::group(
+    [
+    'middleware' => ['auth',
+    'acl'],
+    'can' => 'view.entry'],
+    function () {
+        Route::resource('entry', 'EntryController');
+    }
+);
+
+Route::group(
+    [
+    'middleware' => ['auth',
+    'acl'],
+    'can' => 'view.contact'],
+    function () {
+        Route::resource('contact', 'ContactController');
+    }
+);
+
+Route::group(
+    [
+    'middleware' => ['auth',
+    'acl'],
+    'can' => 'view.type'],
+    function () {
+        Route::resource('type', 'TypeController');
+    }
+);
+
+Route::group(
+    [
+    'middleware' => ['auth',
+    'acl'],
+    'can' => 'view.model'],
+    function () {
+        Route::resource('model', 'ModelController');
+    }
+);
+
+Route::group(
+    [
+    'middleware' => ['auth',
+    'acl'],
+    'can' => 'view.company'],
+    function () {
+        Route::resource('company', 'CompanyController');
+    }
+);
+
+Route::group(
+    [
+    'middleware' => ['auth',
+    'acl'],
+    'can' => 'view.vehicle'],
+    function () {
+        Route::resource('vehicle', 'VehicleController');
+    }
+);
+
+Route::group(
+    [
+    'middleware' => ['auth',
+    'acl'],
+    'can' => 'view.user'],
+    function () {
+        Route::resource('user', 'UserController');
+    }
+);
 
 Route::get('trip/destroy/{id}', 'TripController@destroy');
 Route::get('entry/destroy/{id}', 'EntryController@destroy');

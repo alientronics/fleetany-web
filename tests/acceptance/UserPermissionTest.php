@@ -16,37 +16,27 @@ class UserPermissionTest extends AcceptanceTestCase
     
     public function testViewExecutive()
     {
-        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/user">', true);
+        $this->get('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/user">', true);
         
-        $this->visit('/user')
-            ->see('<i class="material-icons">filter_list</i>', true)
-        ;
+        $this->get('/user')->assertResponseStatus(401);
     }
     
     public function testCreateExecutive()
     {
-        $this->visit('/user')->see('<a href="'.$this->baseUrl.'/user/create', true);
-        
-        $this->visit('/user/create')
-            ->see('de acesso para esta p')
-        ;
+        $this->get('/user/create')->assertResponseStatus(401);
     }
     
     public function testUpdateExecutive()
     {
-        $this->visit('/user')
-            ->see('Editar', true)
-        ;
-        
-        $this->visit('/user/'.User::all()->last()['id'].'/edit')
-            ->see('de acesso para esta p')
+        $this->get('/user/'.User::all()->last()['id'].'/edit')
+            ->assertResponseStatus(401)
         ;
     }
     
     public function testDeleteExecutive()
     {
-        $this->visit('/user')
-            ->see('Excluir', true)
+        $this->get('/user/destroy/'.User::all()->last()['id'])
+            ->assertResponseStatus(302)
         ;
     }
     

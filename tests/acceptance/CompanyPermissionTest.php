@@ -16,37 +16,27 @@ class CompanyPermissionTest extends AcceptanceTestCase
     
     public function testViewExecutive()
     {
-        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/company">', true);
+        $this->get('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/company">', true);
         
-        $this->visit('/company')
-            ->see('<i class="material-icons">filter_list</i>', true)
-        ;
+        $this->get('/company')->assertResponseStatus(401);
     }
     
     public function testCreateExecutive()
     {
-        $this->visit('/company')->see('<a href="'.$this->baseUrl.'/company/create', true);
-        
-        $this->visit('/company/create')
-            ->see('de acesso para esta p')
-        ;
+        $this->get('/company/create')->assertResponseStatus(401);
     }
     
     public function testUpdateExecutive()
     {
-        $this->visit('/company')
-            ->see('Editar', true)
-        ;
-        
-        $this->visit('/company/'.Company::all()->last()['id'].'/edit')
-            ->see('de acesso para esta p')
+        $this->get('/company/'.Company::all()->last()['id'].'/edit')
+            ->assertResponseStatus(401)
         ;
     }
     
     public function testDeleteExecutive()
     {
-        $this->visit('/company')
-            ->see('Excluir', true)
+        $this->get('/company/destroy/'.Company::all()->last()['id'])
+            ->assertResponseStatus(302)
         ;
     }
 }

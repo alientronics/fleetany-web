@@ -16,37 +16,27 @@ class TypePermissionTest extends AcceptanceTestCase
     
     public function testViewExecutive()
     {
-        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/type">', true);
+        $this->get('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/type">', true);
         
-        $this->visit('/type')
-            ->see('<i class="material-icons">filter_list</i>', true)
-        ;
+        $this->get('/type')->assertResponseStatus(401);
     }
     
     public function testCreateExecutive()
     {
-        $this->visit('/type')->see('<a href="'.$this->baseUrl.'/type/create', true);
-        
-        $this->visit('/type/create')
-            ->see('de acesso para esta p')
-        ;
+        $this->get('/type/create')->assertResponseStatus(401);
     }
     
     public function testUpdateExecutive()
     {
-        $this->visit('/type')
-            ->see('Editar', true)
-        ;
-        
-        $this->visit('/type/'.Type::all()->last()['id'].'/edit')
-            ->see('de acesso para esta p')
+        $this->get('/type/'.Type::all()->last()['id'].'/edit')
+            ->assertResponseStatus(401)
         ;
     }
     
     public function testDeleteExecutive()
     {
-        $this->visit('/type')
-            ->see('Excluir', true)
+        $this->get('/type/destroy/'.Type::all()->last()['id'])
+            ->assertResponseStatus(302)
         ;
     }
     

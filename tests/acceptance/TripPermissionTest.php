@@ -16,37 +16,27 @@ class TripPermissionTest extends AcceptanceTestCase
     
     public function testViewExecutive()
     {
-        $this->visit('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/trip">', true);
+        $this->get('/')->see('<a class="mdl-navigation__link" href="'.$this->baseUrl.'/trip">', true);
         
-        $this->visit('/trip')
-            ->see('<i class="material-icons">filter_list</i>', true)
-        ;
+        $this->get('/trip')->assertResponseStatus(401);
     }
     
     public function testCreateExecutive()
     {
-        $this->visit('/trip')->see('<a href="'.$this->baseUrl.'/trip/create', true);
-        
-        $this->visit('/trip/create')
-            ->see('de acesso para esta p')
-        ;
+        $this->get('/trip/create')->assertResponseStatus(401);
     }
     
     public function testUpdateExecutive()
     {
-        $this->visit('/trip')
-            ->see('Editar', true)
-        ;
-        
-        $this->visit('/trip/'.Trip::all()->last()['id'].'/edit')
-            ->see('de acesso para esta p')
+        $this->get('/trip/'.Trip::all()->last()['id'].'/edit')
+            ->assertResponseStatus(401)
         ;
     }
     
     public function testDeleteExecutive()
     {
-        $this->visit('/trip')
-            ->see('Excluir', true)
+        $this->get('/trip/destroy/'.Trip::all()->last()['id'])
+            ->assertResponseStatus(302)
         ;
     }
     

@@ -6,8 +6,6 @@
 
 @stop
 
-@permission('view.type')  
-
 @include('type.filter')
 
 @section('content')
@@ -28,5 +26,3 @@
 </div>
 
 @stop
-
-@endpermission
