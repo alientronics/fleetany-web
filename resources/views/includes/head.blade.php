@@ -4,22 +4,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>fleetany - open source fleet management system</title>
 
-<!-- Add to homescreen for Chrome on Android -->
-<meta name="mobile-web-app-capable" content="yes">
-<link rel="icon" sizes="192x192" href="images/android-desktop.png">
-
-<!-- Add to homescreen for Safari on iOS -->
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="Material Design Lite">
-<link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
-
-<!-- Tile icon for Win8 (144x144 + tile color) -->
-<meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-<meta name="msapplication-TileColor" content="#3372DF">
-
-<link rel="shortcut icon" href="images/favicon.png">
-
 <!-- first, parallel css -->
 {!! HTML::style('css/style-edit.css') !!}
 {!! HTML::style('css/md-date-time-picker.min.css') !!}
@@ -38,3 +22,17 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 {!! HTML::script('js/md-date-time-picker.min.js') !!}
 {!! HTML::script('js/fleetany.js') !!}
+
+<script>
+	@if (!is_null(env('GOOGLE_ANALYTICS')))
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', '{{ env('GOOGLE_ANALYTICS') }}', 'auto');
+		ga('send', 'pageview');
+	@else
+		window.ga = function() { console.log("Sending to GA", arguments) };
+	@endif
+</script>

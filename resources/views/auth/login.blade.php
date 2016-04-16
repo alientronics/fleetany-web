@@ -34,6 +34,13 @@
 			<div class="mdl-card__actions mdl-card--border">
 				<a href="{{url('/')}}/auth/social/facebook" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">{{Lang::get("general.LoginFacebook")}}</a>
         	</div>
+        	@if (!is_null(env('GOOGLE_PLAY')))
+			<div class="mdl-card__actions mdl-card--border">
+				<a href="{{ env('GOOGLE_PLAY') }}" target="_blank" id="app-link">
+					<img src='https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png' title='get in google play' id="img-app-link" />
+				</a>
+        	</div>
+        	@endif
 		</div>
 	</main>
 </div>

@@ -401,3 +401,9 @@ _:-ms-input-placeholder, :root .demo-graph {
   min-width: 30px;
   padding: 0px;
 }
+#app-link {
+  margin-left: 15px;
+}
+#img-app-link {
+  width: 140px;
+}
