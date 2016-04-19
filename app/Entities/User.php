@@ -32,56 +32,52 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
     
     public function setUp()
     {
-    
-        $authUser = empty(Auth::user()) ? $this : Auth::user();
-        Auth::login($this, true);
-        
-        $company = new Company(['name' => $this->name . ' Inc.']);
+        $company = Company::forceCreate(['name' => $this->name . ' Inc.']);
         $company->save();
         $this->company_id = $company->id;
         $this->save();
         
-        $typeRepair = new Type(['entity_key' => 'entry',
+        $typeRepair = Type::forceCreate(['entity_key' => 'entry',
             'name' => 'repair',
             'company_id' => $company->id]);
         $typeRepair->save();
         
-        $typeService = new Type(['entity_key' => 'entry',
+        $typeService = Type::forceCreate(['entity_key' => 'entry',
             'name' => 'service',
             'company_id' => $company->id]);
         $typeService->save();
         
-        $typeCar = new Type(['entity_key' => 'vehicle',
+        $typeCar = Type::forceCreate(['entity_key' => 'vehicle',
             'name' => 'car',
             'company_id' => $company->id]);
         $typeCar->save();
     
-        $typeTruck = new Type(['entity_key' => 'vehicle',
+        $typeTruck = Type::forceCreate(['entity_key' => 'vehicle',
             'name' => 'truck',
             'company_id' => $company->id]);
         $typeTruck->save();
     
-        $typeVendor = new Type(['entity_key' => 'contact',
+        $typeVendor = Type::forceCreate(['entity_key' => 'contact',
             'name' => 'vendor',
             'company_id' => $company->id]);
         $typeVendor->save();
     
-        $typeDriver = new Type(['entity_key' => 'contact',
+        $typeDriver = Type::forceCreate(['entity_key' => 'contact',
             'name' => 'driver',
             'company_id' => $company->id]);
         $typeDriver->save();
     
-        $typeContactDetail = new Type(['entity_key' => 'contact',
+        $typeContactDetail = Type::forceCreate(['entity_key' => 'contact',
             'name' => 'detail',
             'company_id' => $company->id]);
         $typeContactDetail->save();
     
-        $typeTour = new Type(['entity_key' => 'trip',
+        $typeTour = Type::forceCreate(['entity_key' => 'trip',
             'name' => 'tour',
             'company_id' => $company->id]);
         $typeTour->save();
     
-        $typeDelivery = new Type(['entity_key' => 'trip',
+        $typeDelivery = Type::forceCreate(['entity_key' => 'trip',
             'name' => 'delivery',
             'company_id' => $company->id]);
         $typeDelivery->save();
@@ -90,31 +86,31 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
         $company->contact_id = $contactDetail->id;
         $company->save();
         
-        $contactVendor = new Contact(['company_id' => $company->id,
+        $contactVendor = Contact::forceCreate(['company_id' => $company->id,
             'contact_type_id' => $typeVendor->id,
             'name' => 'Generic Vendor',
             'license_no' => '123456']);
         $contactVendor->save();
     
-        $contactDriver = new Contact(['company_id' => $company->id,
+        $contactDriver = Contact::forceCreate(['company_id' => $company->id,
             'contact_type_id' => $typeDriver->id,
             'name' => 'Generic Driver',
             'license_no' => '123456']);
         $contactDriver->save();
 
-        $modelCar = new Model(['model_type_id' => $typeCar->id,
+        $modelCar = Model::forceCreate(['model_type_id' => $typeCar->id,
             'vendor_id' => $contactVendor->id,
             'name' => 'Generic Car',
             'company_id' => $company->id]);
         $modelCar->save();
     
-        $modelTruck = new Model(['model_type_id' => $typeTruck->id,
+        $modelTruck = Model::forceCreate(['model_type_id' => $typeTruck->id,
             'vendor_id' => $contactVendor->id,
             'name' => 'Generic Truck',
             'company_id' => $company->id]);
         $modelTruck->save();
 
-        $vehicle = new Vehicle(['model_vehicle_id' => $modelCar->id,
+        $vehicle = Vehicle::forceCreate(['model_vehicle_id' => $modelCar->id,
             'number' => 'IOP-1234',
             'initial_miliage' => 123,
             'actual_miliage' => 123,
@@ -124,8 +120,6 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
         $vehicle->save();
         
         $this->syncRoles('administrator');
-        
-        Auth::login($authUser, true);
     }
     
     public function createContact($name, $company_id)
@@ -135,7 +129,7 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
                             ->where('company_id', $company_id)
                             ->first();
         
-        $contactUser = new Contact(['company_id' => $company_id,
+        $contactUser = Contact::forceCreate(['company_id' => $company_id,
             'contact_type_id' => $typeDetail->id,
             'name' => $name]);
         $contactUser->save();
