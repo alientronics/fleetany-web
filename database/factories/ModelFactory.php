@@ -44,6 +44,16 @@ $factory->define(App\Entities\Entry::class, function ($faker) {
     ];
 });
 
+$factory->define(App\Entities\Gps::class, function ($faker) {
+    return [
+        'vehicle_id' => 1,
+        'company_id' => 1,
+        'latitude' => 51,
+        'longitude' => 31,
+		'deleted_at' => null,
+    ];
+});
+
 $factory->define(App\Entities\Model::class, function ($faker) {
     return [
         'name' => $faker->name,
