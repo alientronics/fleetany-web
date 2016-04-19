@@ -141,6 +141,7 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
         $contactUser->save();
         $this->contact_id = $contactUser->id;
         $this->save();
+        return $contactUser;
     }
     
     public function checkCompanyRelationships()
