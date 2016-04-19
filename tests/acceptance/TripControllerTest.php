@@ -32,6 +32,8 @@ class TripControllerTest extends AcceptanceTestCase
             ->type('13.60', 'fuel_cost')
             ->type('50.00', 'fuel_amount')
             ->type('Descricao', 'description')
+            ->type('2', 'fuel_type')
+            ->select('0', 'tank_fill_up')
             ->press('Enviar')
             ->seePageIs('/trip')
         ;
@@ -48,6 +50,8 @@ class TripControllerTest extends AcceptanceTestCase
                     'total_mileage' => 130,
                     'fuel_cost' => 13.6,
                     'fuel_amount' => 50,
+                    'fuel_type' => 2,
+                    'tank_fill_up' => 0,
                     'description' => 'Descricao',
             ]
         );
@@ -67,6 +71,8 @@ class TripControllerTest extends AcceptanceTestCase
             ->type('13.20', 'fuel_cost')
             ->type('20.00', 'fuel_amount')
             ->type('Descricao2', 'description')
+            ->type('3', 'fuel_type')
+            ->select('1', 'tank_fill_up')
             ->press('Enviar')
             ->seePageIs('/trip')
         ;
@@ -83,6 +89,8 @@ class TripControllerTest extends AcceptanceTestCase
                 'total_mileage' => 132,
                 'fuel_cost' => 13.2,
                 'fuel_amount' => 20,
+                'fuel_type' => 3,
+                'tank_fill_up' => 1,
                 'description' => 'Descricao2',
             ]
         );

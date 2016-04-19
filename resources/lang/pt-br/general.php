@@ -98,6 +98,8 @@ return [
     "end_mileage"    => "Quilometragem Final",
     "total_mileage"    => "Quilometragem Total",
     "fuel_amount"    => "Quantidade de Combust&iacute;vel",
+    "fuel_type"    => "Tipo do combust&iacute;vel",
+    "tank_fill_up"    => "Tanque completo",
     "driver"    => "Motorista",
     "pickup_date"    => "Data de Busca",
     "deliver_date"    => "Data de Entrega",

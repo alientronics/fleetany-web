@@ -110,7 +110,19 @@
 				{!!Form::label('description', Lang::get('general.description'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
 				<span class="mdl-textfield__error">{{ $errors->first('description') }}</span>
 			</div>
+			
+			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('fuel_type')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		{!!Form::number('fuel_type', $trip->fuel_type, ['id' => 'fuel_type', 'class' => 'mdl-textfield__input'])!!}
+				{!!Form::label('fuel_type', Lang::get('general.fuel_type'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
+				<span class="mdl-textfield__error">{{ $errors->first('fuel_type') }}</span>
+			</div>
 
+    		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('tank_fill_up')) is-invalid is-dirty @endif"">
+                {!!Form::select('tank_fill_up', [Lang::get('general.No'), Lang::get('general.Yes')], $trip->tank_fill_up, ['class' => 'mdl-textfield__input'])!!}
+       			{!!Form::label('tank_fill_up', Lang::get('general.tank_fill_up'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
+            	<span class="mdl-textfield__error">{{ $errors->first('tank_fill_up') }}</span>
+            </div>
+            
 			<div class="mdl-card__actions">
 				<button type="submit" class="mdl-button mdl-color--primary mdl-color-text--accent-contrast mdl-js-button mdl-button--raised mdl-button--colored">
                   {{ Lang::get('general.Send') }} 

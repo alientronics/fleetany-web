@@ -98,6 +98,8 @@ return [
     "end_mileage"    => "End mileage",
     "total_mileage"    => "Total mileage",
     "fuel_amount"    => "Fuel amount",
+    "fuel_type"    => "Fuel type",
+    "tank_fill_up"    => "Tank fill up",
     "driver"    => "Driver",
     "pickup_date"    => "Pickup date",
     "deliver_date"    => "Deliver date",
