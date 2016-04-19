@@ -30,6 +30,8 @@ class CreateTripsTable extends Migration {
 			$table->decimal('fuel_cost');
 			$table->decimal('fuel_amount');
 			$table->text('description', 65535)->nullable();
+			$table->integer('fuel_type')->nullable();
+			$table->boolean('tank_fill_up')->nullable()->default(0);
 			$table->timestamps();
 			$table->softDeletes();
 			$table->engine = 'InnoDB';

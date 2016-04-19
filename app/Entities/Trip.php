@@ -17,7 +17,8 @@ class Trip extends BaseModel
     protected $fillable = ['driver_id', 'vehicle_id', 'vendor_id',
                             'trip_type_id', 'pickup_date', 'pickup_place',
                             'deliver_date', 'deliver_place', 'begin_mileage', 'end_mileage',
-                            'total_mileage', 'fuel_cost', 'fuel_amount', 'description'];
+                            'total_mileage', 'fuel_cost', 'fuel_amount', 'description',
+                            'fuel_type', 'tank_fill_up'];
 
 
     public function company()
