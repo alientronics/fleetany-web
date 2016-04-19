@@ -6,18 +6,12 @@ use Illuminate\Database\Eloquent\Model as BaseModel;
 use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Container\Container as Application;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Kodeine\Acl\Traits\HasRole;
-use App\Repositories\CompanyRepositoryEloquent;
-use App\Repositories\TypeRepositoryEloquent;
-use App\Repositories\ContactRepositoryEloquent;
-use App\Repositories\ModelRepositoryEloquent;
-use App\Repositories\VehicleRepositoryEloquent;
 use Illuminate\Support\Facades\Auth;
 
 class User extends BaseModel implements Transformable, AuthenticatableContract, CanResetPasswordContract
@@ -42,81 +36,92 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
         $authUser = empty(Auth::user()) ? $this : Auth::user();
         Auth::login($this, true);
         
-        $companyRepo = new CompanyRepositoryEloquent(new Application);
-        $company = $companyRepo->create(['name' => $this->name . ' Inc.']);
-    
+        $company = new Company(['name' => $this->name . ' Inc.']);
+        $company->save();
         $this->company_id = $company->id;
         $this->save();
         
-        $typeRepo = new TypeRepositoryEloquent(new Application);
-        $typeRepo->create(['entity_key' => 'entry',
+        $typeRepair = new Type(['entity_key' => 'entry',
             'name' => 'repair',
             'company_id' => $company->id]);
-    
-        $typeRepo->create(['entity_key' => 'entry',
+        $typeRepair->save();
+        
+        $typeService = new Type(['entity_key' => 'entry',
             'name' => 'service',
             'company_id' => $company->id]);
-    
-        $typeCar = $typeRepo->create(['entity_key' => 'vehicle',
+        $typeService->save();
+        
+        $typeCar = new Type(['entity_key' => 'vehicle',
             'name' => 'car',
             'company_id' => $company->id]);
+        $typeCar->save();
     
-        $typeTruck = $typeRepo->create(['entity_key' => 'vehicle',
+        $typeTruck = new Type(['entity_key' => 'vehicle',
             'name' => 'truck',
             'company_id' => $company->id]);
+        $typeTruck->save();
     
-        $typeVendor = $typeRepo->create(['entity_key' => 'contact',
+        $typeVendor = new Type(['entity_key' => 'contact',
             'name' => 'vendor',
             'company_id' => $company->id]);
+        $typeVendor->save();
     
-        $typeDriver = $typeRepo->create(['entity_key' => 'contact',
+        $typeDriver = new Type(['entity_key' => 'contact',
             'name' => 'driver',
             'company_id' => $company->id]);
+        $typeDriver->save();
     
-        $typeRepo->create(['entity_key' => 'contact',
+        $typeContactDetail = new Type(['entity_key' => 'contact',
             'name' => 'detail',
             'company_id' => $company->id]);
+        $typeContactDetail->save();
     
-        $typeRepo->create(['entity_key' => 'trip',
+        $typeTour = new Type(['entity_key' => 'trip',
             'name' => 'tour',
             'company_id' => $company->id]);
+        $typeTour->save();
     
-        $typeRepo->create(['entity_key' => 'trip',
+        $typeDelivery = new Type(['entity_key' => 'trip',
             'name' => 'delivery',
             'company_id' => $company->id]);
+        $typeDelivery->save();
 
-        $this->createContact($this->name, $company->id);
-
-        $contactRepo = new ContactRepositoryEloquent(new Application);
-        $contactVendor = $contactRepo->create(['company_id' => $company->id,
+        $contactDetail = $this->createContact($this->name, $company->id);
+        $company->contact_id = $contactDetail->id;
+        $company->save();
+        
+        $contactVendor = new Contact(['company_id' => $company->id,
             'contact_type_id' => $typeVendor->id,
             'name' => 'Generic Vendor',
             'license_no' => '123456']);
+        $contactVendor->save();
     
-        $contactRepo->create(['company_id' => $company->id,
+        $contactDriver = new Contact(['company_id' => $company->id,
             'contact_type_id' => $typeDriver->id,
             'name' => 'Generic Driver',
             'license_no' => '123456']);
+        $contactDriver->save();
 
-        $modelRepo = new ModelRepositoryEloquent(new Application);
-        $modelCar = $modelRepo->create(['model_type_id' => $typeCar->id,
+        $modelCar = new Model(['model_type_id' => $typeCar->id,
             'vendor_id' => $contactVendor->id,
             'name' => 'Generic Car',
             'company_id' => $company->id]);
+        $modelCar->save();
     
-        $modelRepo->create(['model_type_id' => $typeTruck->id,
+        $modelTruck = new Model(['model_type_id' => $typeTruck->id,
             'vendor_id' => $contactVendor->id,
             'name' => 'Generic Truck',
             'company_id' => $company->id]);
+        $modelTruck->save();
 
-        $vehicleRepo = new VehicleRepositoryEloquent(new Application);
-        $vehicleRepo->create(['model_vehicle_id' => $modelCar->id,
+        $vehicle = new Vehicle(['model_vehicle_id' => $modelCar->id,
             'number' => 'IOP-1234',
             'initial_miliage' => 123,
             'actual_miliage' => 123,
             'cost' => 50000,
             'description' => 'Generic Vehicle',
             'company_id' => $company->id]);
+        $vehicle->save();
         
         $this->syncRoles('administrator');
         
@@ -130,10 +135,10 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
                             ->where('company_id', $company_id)
                             ->first();
         
-        $contactRepo = new ContactRepositoryEloquent(new Application);
-        $contactUser = $contactRepo->create(['company_id' => $company_id,
+        $contactUser = new Contact(['company_id' => $company_id,
             'contact_type_id' => $typeDetail->id,
             'name' => $name]);
+        $contactUser->save();
         $this->contact_id = $contactUser->id;
         $this->save();
     }
