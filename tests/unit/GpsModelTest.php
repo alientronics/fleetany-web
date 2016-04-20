@@ -18,7 +18,7 @@ class GpsModelTest extends UnitTestCase
         $this->assertEquals($gps->company->name, $company->name);
     }
     
-    public function testHasContact()
+    public function testHasVehicle()
     {
     
         $vehicle = factory(\App\Entities\Vehicle::class)->create();
