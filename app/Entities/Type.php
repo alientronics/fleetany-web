@@ -41,6 +41,11 @@ class Type extends BaseModel
     {
         return $this->hasMany(\App\Entities\Trip::class, 'trip_type_id', 'id');
     }
+
+    public function fuelTypes()
+    {
+        return $this->hasMany(\App\Entities\Trip::class, 'fuel_type', 'id');
+    }
     
     public function checkCompanyRelationships()
     {

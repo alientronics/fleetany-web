@@ -21,6 +21,7 @@ class TripRepositoryEloquent extends BaseRepository implements TripRepository
         'end_mileage'   => 'required',
         'fuel_cost'     => 'required|numeric|min:0.01',
         'fuel_amount'   => 'required|numeric|min:0.01',
+        'fuel_type'  => 'required',
         ];
 
     public function model()

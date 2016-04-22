@@ -45,6 +45,11 @@ class Trip extends BaseModel
     {
         return $this->belongsTo(\App\Entities\Type::class, 'trip_type_id', 'id');
     }
+
+    public function fuelType()
+    {
+        return $this->belongsTo(\App\Entities\Type::class, 'fuel_type', 'id');
+    }
     
     public function checkCompanyRelationships()
     {
@@ -52,7 +57,8 @@ class Trip extends BaseModel
             "driver_id" => "Contact",
             "vehicle_id" => "Vehicle",
             "vendor_id" => "Contact",
-            "trip_type_id" => "Type"
+            "trip_type_id" => "Type",
+            "fuel_type" => "Type"
         ];
     }
     

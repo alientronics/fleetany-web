@@ -72,6 +72,14 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
             'company_id' => $company->id]);
         $typeContactDetail->save();
     
+        Type::forceCreate(['entity_key' => 'fuel',
+            'name' => 'unleaded',
+            'company_id' => $company->id]);
+    
+        Type::forceCreate(['entity_key' => 'fuel',
+            'name' => 'premium',
+            'company_id' => $company->id]);
+    
         $typeTour = Type::forceCreate(['entity_key' => 'trip',
             'name' => 'tour',
             'company_id' => $company->id]);
