@@ -4,6 +4,7 @@ namespace Tests\Acceptance;
 
 use Tests\AcceptanceTestCase;
 use App\Entities\Trip;
+use App\Entities\Type;
 
 class TripControllerTest extends AcceptanceTestCase
 {
@@ -18,6 +19,8 @@ class TripControllerTest extends AcceptanceTestCase
     
     public function testCreate()
     {
+        $fuelType = Type::where('entity_key', 'fuel')->where('name', 'unleaded')->first();
+
         $this->visit('/trip')->see('<a href="'.$this->baseUrl.'/trip/create');
         
         $this->visit('/trip/create');
@@ -32,7 +35,7 @@ class TripControllerTest extends AcceptanceTestCase
             ->type('13.60', 'fuel_cost')
             ->type('50.00', 'fuel_amount')
             ->type('Descricao', 'description')
-            ->type('2', 'fuel_type')
+            ->type($fuelType->id, 'fuel_type')
             ->select('0', 'tank_fill_up')
             ->press('Enviar')
             ->seePageIs('/trip')
@@ -50,7 +53,7 @@ class TripControllerTest extends AcceptanceTestCase
                     'total_mileage' => 130,
                     'fuel_cost' => 13.6,
                     'fuel_amount' => 50,
-                    'fuel_type' => 2,
+                    'fuel_type' => $fuelType->id,
                     'tank_fill_up' => 0,
                     'description' => 'Descricao',
             ]
@@ -59,6 +62,8 @@ class TripControllerTest extends AcceptanceTestCase
 
     public function testUpdate()
     {
+        $fuelType = Type::where('entity_key', 'fuel')->where('name', 'premium')->first();
+        
         $this->visit('/trip/'.Trip::all()->last()['id'].'/edit');
     
         $this->type('01/02/2016 15:15:15', 'pickup_date')
@@ -71,7 +76,7 @@ class TripControllerTest extends AcceptanceTestCase
             ->type('13.20', 'fuel_cost')
             ->type('20.00', 'fuel_amount')
             ->type('Descricao2', 'description')
-            ->type('3', 'fuel_type')
+            ->type($fuelType->id, 'fuel_type')
             ->select('1', 'tank_fill_up')
             ->press('Enviar')
             ->seePageIs('/trip')
@@ -89,7 +94,7 @@ class TripControllerTest extends AcceptanceTestCase
                 'total_mileage' => 132,
                 'fuel_cost' => 13.2,
                 'fuel_amount' => 20,
-                'fuel_type' => 3,
+                'fuel_type' => $fuelType->id,
                 'tank_fill_up' => 1,
                 'description' => 'Descricao2',
             ]

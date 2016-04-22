@@ -48,5 +48,15 @@ class TypeTableSeeder extends Seeder
                         'name' => 'detail',
                         'company_id' => 1]
             );
+        Type::forceCreate(
+                [  'entity_key' => 'fuel',
+                        'name' => 'unleaded',
+                        'company_id' => 1]
+            );
+        Type::forceCreate(
+                [  'entity_key' => 'fuel',
+                        'name' => 'premium',
+                        'company_id' => 1]
+            );
     }
 }
