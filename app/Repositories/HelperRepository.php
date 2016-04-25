@@ -100,7 +100,7 @@ class HelperRepository
     public function validateRecord($record)
     {
         if (empty($record) || $record->company_id != Auth::user()['company_id']) {
-            Redirect::to('/')->with('danger', Lang::get('general.accessdenied1'))->send();
+            Redirect::to('/')->with('danger', Lang::get('general.accessdenied'))->send();
         }
         
         if (method_exists($record, 'checkCompanyRelationships') && !empty($record->checkCompanyRelationships())) {
@@ -111,7 +111,7 @@ class HelperRepository
                                     ->where('company_id', Auth::user()['company_id'])
                                     ->count();
                     if ($count == 0) {
-                        Redirect::to('/')->with('danger', Lang::get('general.accessdenied2'))->send();
+                        Redirect::to('/')->with('danger', Lang::get('general.accessdenied'))->send();
                     }
                 }
             }
