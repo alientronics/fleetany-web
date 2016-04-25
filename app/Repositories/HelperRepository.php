@@ -100,18 +100,19 @@ class HelperRepository
     public function validateRecord($record)
     {
         if (empty($record) || $record->company_id != Auth::user()['company_id']) {
-            Redirect::to('/')->with('danger', Lang::get('general.accessdenied'))->send();
+            Redirect::to('/')->with('danger', Lang::get('general.accessdenied1'))->send();
         }
         
         if (method_exists($record, 'checkCompanyRelationships') && !empty($record->checkCompanyRelationships())) {
             foreach ($record->checkCompanyRelationships() as $field => $entity) {
-                
-                $namespacedEntity = '\\App\\Entities\\' . $entity;
-                $count = $namespacedEntity::where('id', $record->$field)
-                                ->where('company_id', Auth::user()['company_id'])
-                                ->count();
-                if ($count == 0) {
-                    Redirect::to('/')->with('danger', Lang::get('general.accessdenied'))->send();
+                if ($record->$field) {
+                    $namespacedEntity = '\\App\\Entities\\' . $entity;
+                    $count = $namespacedEntity::where('id', $record->$field)
+                                    ->where('company_id', Auth::user()['company_id'])
+                                    ->count();
+                    if ($count == 0) {
+                        Redirect::to('/')->with('danger', Lang::get('general.accessdenied2'))->send();
+                    }
                 }
             }
         }
