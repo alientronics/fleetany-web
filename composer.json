@@ -16,7 +16,7 @@
                     "reference": "master"
                 },
                 "autoload": {
-                    "classmap": ["src"]
+                    "classmap": ["vendor/alientronics/cachedEloquentUser/src/"]
                 }
             }
         }
