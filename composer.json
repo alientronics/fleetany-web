@@ -9,7 +9,7 @@
             "type": "package",
             "package": {
                 "version": "dev-master",
-                "name": "alientronics/cachedEloquentUser",
+                "name": "alientronics/CachedEloquentUser",
                 "source": {
                     "url": "https://github.com/alientronics/CachedEloquentUser.git",
                     "type": "git",
