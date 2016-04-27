@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8a728ad5e4a3e34a84ce7ad0fcf7c1a9",
-    "content-hash": "9c678339268ff4b844333b8de6376666",
+    "hash": "f3acd03569f719646dfb033b7235c959",
+    "content-hash": "bfefe4140551203b96f6d064ea39fdb7",
     "packages": [
         {
-            "name": "alientronics/cachedEloquentUser",
+            "name": "alientronics/cached-eloquent-user",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/alientronics/CachedEloquentUser.git",
+                "url": "https://github.com/alientronics/cached-eloquent-user.git",
                 "reference": "master"
             },
             "type": "library",
@@ -4937,7 +4937,7 @@
     "stability-flags": {
         "prettus/l5-repository": 20,
         "kodeine/laravel-acl": 20,
-        "alientronics/cachedeloquentuser": 20,
+        "alientronics/cached-eloquent-user": 20,
         "codeclimate/php-test-reporter": 20
     },
     "prefer-stable": false,
