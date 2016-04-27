@@ -146,6 +146,7 @@ return [
 		Prettus\Repository\Providers\RepositoryServiceProvider::class,
 		"Kodeine\Acl\AclServiceProvider",
         Laravel\Socialite\SocialiteServiceProvider::class,
+        Thinmy\CachedEloquentUser\AuthServiceProvider::class,
 
     ],
 

@@ -4,6 +4,20 @@
     "keywords": ["alientronics", "fleetany", "web"],
     "license": "AGPL-3.0",
     "type": "project",
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "version": "dev-master",
+                "name": "alientronics/cachedEloquentUser",
+                "source": {
+                    "url": "https://github.com/alientronics/CachedEloquentUser.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        }
+    ],
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
@@ -13,7 +27,8 @@
         "caouecs/laravel4-lang": "~2.0",
         "kodeine/laravel-acl": "dev-master",
         "laravel/socialite": "^2.0",
-		"doctrine/dbal": "v2.4.2"
+		"doctrine/dbal": "v2.4.2",
+        "alientronics/CachedEloquentUser": "dev-master"
     },
     "require-dev": {
         "symfony/dom-crawler": "~3.0",
@@ -30,7 +45,8 @@
     },
     "autoload": {
         "classmap": [
-            "database"
+            "database",
+            "vendor/alientronics/CachedEloquentUser/src/"
         ],
         "psr-4": {
             "App\\": "app/"
