@@ -147,6 +147,7 @@ return [
 		"Kodeine\Acl\AclServiceProvider",
         Laravel\Socialite\SocialiteServiceProvider::class,
         Thinmy\CachedEloquentUser\AuthServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
     ],
 

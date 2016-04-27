@@ -4,3 +4,4 @@ Homestead.yaml
 .env
 /nbproject
 composer.phar
+/storage/*

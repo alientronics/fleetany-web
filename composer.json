@@ -28,7 +28,8 @@
         "kodeine/laravel-acl": "dev-master",
         "laravel/socialite": "^2.0",
 		"doctrine/dbal": "v2.4.2",
-        "alientronics/cached-eloquent-user": "dev-master"
+        "alientronics/cached-eloquent-user": "dev-master",
+        "barryvdh/laravel-debugbar": "^2.2"
     },
     "require-dev": {
         "symfony/dom-crawler": "~3.0",
