@@ -2,6 +2,8 @@
 
 return [
 
+    'cacheSeconds' => 60,
+    
     /**
      * Model definitions.
      * If you want to use your own model and extend it
