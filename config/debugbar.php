@@ -2,5 +2,5 @@
 
 return [
 
-    'enabled' => true,
+    'enabled' => false,
 ];

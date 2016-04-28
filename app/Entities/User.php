@@ -134,7 +134,10 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
     public function createContact($name, $company_id)
     {
         $typeDetail = Type::where('entity_key', 'contact')
-                            ->where('name', Lang::get('setup.detail'))
+                            ->where(function ($query) {
+                                $query->where('name', Lang::get('setup.detail'))
+                                    ->orWhere('name', 'detail');
+                            })
                             ->where('company_id', $company_id)
                             ->first();
         
