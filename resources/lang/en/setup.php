@@ -12,6 +12,7 @@ return [
     'premium'   => 'premium',
     'tour'   => 'tour',
     'delivery'   => 'delivery',
+    'VehiclePlate'   => 'Vehicle Plate',
     'GenericVendor'   => 'Generic Vendor',
     'GenericDriver'   => 'Generic Driver',
     'GenericCar'   => 'Generic Car',

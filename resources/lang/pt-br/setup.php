@@ -12,6 +12,7 @@ return [
     'premium'   => 'aditivado',
     'tour'   => 'passeio',
     'delivery'   => 'entrega',
+    'VehiclePlate'   => 'Placa do Ve&iacute;culo',
     'GenericVendor'   => 'Fornecedor Gen&eacute;rico',
     'GenericDriver'   => 'Motorista Gen&eacute;rico',
     'GenericCar'   => 'Carro Gen&eacute;rico',

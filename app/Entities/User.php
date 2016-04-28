@@ -120,7 +120,7 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
         $modelTruck->save();
 
         $vehicle = Vehicle::forceCreate(['model_vehicle_id' => $modelCar->id,
-            'number' => 'IOP-1234',
+            'number' => Lang::get('setup.VehiclePlate'),
             'initial_miliage' => 123,
             'actual_miliage' => 123,
             'cost' => 50000,
