@@ -8,7 +8,7 @@ return [
      * to package's model. You can define your model here.
      */
 
-    'role'       => 'Kodeine\Acl\Models\Eloquent\Role',
+    'role'       => 'Alientronics\CachedEloquentUser\Role',
     'permission' => 'Kodeine\Acl\Models\Eloquent\Permission',
 
     /**
