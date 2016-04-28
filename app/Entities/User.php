@@ -13,6 +13,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Kodeine\Acl\Traits\HasRole;
 use Illuminate\Support\Facades\Auth;
+use Lang;
 
 class User extends BaseModel implements Transformable, AuthenticatableContract, CanResetPasswordContract
 {
@@ -38,55 +39,55 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
         $this->save();
         
         $typeRepair = Type::forceCreate(['entity_key' => 'entry',
-            'name' => 'repair',
+            'name' => Lang::get('setup.repair'),
             'company_id' => $company->id]);
         $typeRepair->save();
         
         $typeService = Type::forceCreate(['entity_key' => 'entry',
-            'name' => 'service',
+            'name' => Lang::get('setup.service'),
             'company_id' => $company->id]);
         $typeService->save();
         
         $typeCar = Type::forceCreate(['entity_key' => 'vehicle',
-            'name' => 'car',
+            'name' => Lang::get('setup.car'),
             'company_id' => $company->id]);
         $typeCar->save();
     
         $typeTruck = Type::forceCreate(['entity_key' => 'vehicle',
-            'name' => 'truck',
+            'name' => Lang::get('setup.truck'),
             'company_id' => $company->id]);
         $typeTruck->save();
     
         $typeVendor = Type::forceCreate(['entity_key' => 'contact',
-            'name' => 'vendor',
+            'name' => Lang::get('setup.vendor'),
             'company_id' => $company->id]);
         $typeVendor->save();
     
         $typeDriver = Type::forceCreate(['entity_key' => 'contact',
-            'name' => 'driver',
+            'name' => Lang::get('setup.driver'),
             'company_id' => $company->id]);
         $typeDriver->save();
     
         $typeContactDetail = Type::forceCreate(['entity_key' => 'contact',
-            'name' => 'detail',
+            'name' => Lang::get('setup.detail'),
             'company_id' => $company->id]);
         $typeContactDetail->save();
     
         Type::forceCreate(['entity_key' => 'fuel',
-            'name' => 'unleaded',
+            'name' => Lang::get('setup.unleaded'),
             'company_id' => $company->id]);
     
         Type::forceCreate(['entity_key' => 'fuel',
-            'name' => 'premium',
+            'name' => Lang::get('setup.premium'),
             'company_id' => $company->id]);
     
         $typeTour = Type::forceCreate(['entity_key' => 'trip',
-            'name' => 'tour',
+            'name' => Lang::get('setup.tour'),
             'company_id' => $company->id]);
         $typeTour->save();
     
         $typeDelivery = Type::forceCreate(['entity_key' => 'trip',
-            'name' => 'delivery',
+            'name' => Lang::get('setup.delivery'),
             'company_id' => $company->id]);
         $typeDelivery->save();
 
@@ -96,25 +97,25 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
         
         $contactVendor = Contact::forceCreate(['company_id' => $company->id,
             'contact_type_id' => $typeVendor->id,
-            'name' => 'Generic Vendor',
+            'name' => Lang::get('setup.GenericVendor'),
             'license_no' => '123456']);
         $contactVendor->save();
     
         $contactDriver = Contact::forceCreate(['company_id' => $company->id,
             'contact_type_id' => $typeDriver->id,
-            'name' => 'Generic Driver',
+            'name' => Lang::get('setup.GenericDriver'),
             'license_no' => '123456']);
         $contactDriver->save();
 
         $modelCar = Model::forceCreate(['model_type_id' => $typeCar->id,
             'vendor_id' => $contactVendor->id,
-            'name' => 'Generic Car',
+            'name' => Lang::get('setup.GenericCar'),
             'company_id' => $company->id]);
         $modelCar->save();
     
         $modelTruck = Model::forceCreate(['model_type_id' => $typeTruck->id,
             'vendor_id' => $contactVendor->id,
-            'name' => 'Generic Truck',
+            'name' => Lang::get('setup.GenericTruck'),
             'company_id' => $company->id]);
         $modelTruck->save();
 
@@ -123,7 +124,7 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
             'initial_miliage' => 123,
             'actual_miliage' => 123,
             'cost' => 50000,
-            'description' => 'Generic Vehicle',
+            'description' => Lang::get('setup.GenericVehicle'),
             'company_id' => $company->id]);
         $vehicle->save();
         
@@ -133,7 +134,7 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
     public function createContact($name, $company_id)
     {
         $typeDetail = Type::where('entity_key', 'contact')
-                            ->where('name', 'detail')
+                            ->where('name', Lang::get('setup.detail'))
                             ->where('company_id', $company_id)
                             ->first();
         
