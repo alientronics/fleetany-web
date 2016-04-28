@@ -50,7 +50,6 @@ class SocialLoginController extends Controller
                 $userPending->pending_company_id = null;
                 $userPending->save();
             }
-            
         } catch (\Exception $e) {
             if ($provider == 'google') {
                 $request->session()->flash('error', Lang::get("general.LoginGoogleFailed"));

@@ -54,7 +54,6 @@ class CompanyController extends Controller
     public function store()
     {
         try {
-            
             $this->companyRepo->validator();
             $inputs = $this->companyRepo->setInputs($this->request->all());
             $contact = $this->contactRepo->create($inputs);
@@ -84,7 +83,6 @@ class CompanyController extends Controller
     public function update($idCompany)
     {
         try {
-            
             $this->companyRepo->validator();
             $this->contactRepo->validator();
             

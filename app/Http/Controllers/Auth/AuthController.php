@@ -89,7 +89,6 @@ class AuthController extends Controller
     public function createAccount(Request $request, $token)
     {
         try {
-    
             $userPending = User::where('remember_token', $token)->first();
     
             $inputs = $request->all();
@@ -110,7 +109,6 @@ class AuthController extends Controller
             Auth::login($userPending, true);
     
             return redirect('/');
-    
         } catch (ValidatorException $e) {
             return $this->redirect->back()->withInput()
             ->with('errors', $e->getMessageBag());
