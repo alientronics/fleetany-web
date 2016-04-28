@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d8d190d5081822c9fa1acfbeb5606cfb",
-    "content-hash": "a95d177e0139d6b84e175a356b4962f2",
+    "hash": "4cb210823f9923cf1565105ff8631e09",
+    "content-hash": "4d7482a2f6c763c154ba787baa1192ea",
     "packages": [
         {
             "name": "alientronics/cached-eloquent-user",
@@ -17,6 +17,17 @@
             },
             "type": "library",
             "time": "2016-04-27 03:02:24"
+        },
+        {
+            "name": "alientronics/laravel-acl",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alientronics/laravel-acl.git",
+                "reference": "master"
+            },
+            "type": "library",
+            "time": "2016-04-28 02:54:46"
         },
         {
             "name": "barryvdh/laravel-debugbar",
@@ -1072,64 +1083,17 @@
             "time": "2015-12-05 17:17:57"
         },
         {
-            "name": "kodeine/laravel-acl",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/kodeine/laravel-acl.git",
-                "reference": "76f0a3e2c8d7097eceeeb8cecb98de3fb3e23a7d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/kodeine/laravel-acl/zipball/76f0a3e2c8d7097eceeeb8cecb98de3fb3e23a7d",
-                "reference": "76f0a3e2c8d7097eceeeb8cecb98de3fb3e23a7d",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~5.0",
-                "php": ">=5.5.9"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Kodeine\\Acl\\": "src/Kodeine/Acl"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ahsen M.",
-                    "homepage": "https://github.com/kodeine",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Light-weight role-based permissions for Laravel 5 built in Auth system.",
-            "keywords": [
-                "acl",
-                "auth",
-                "eloquent",
-                "laravel",
-                "permissions",
-                "roles",
-                "security"
-            ],
-            "time": "2016-02-06 01:36:43"
-        },
-        {
             "name": "laravel/framework",
-            "version": "v5.2.30",
+            "version": "v5.2.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "ecfbbfbf96105439cc9a40bc78277bdb0268e34d"
+                "reference": "2fa2797604bf54b06faf7bb139a9fc0d66826fea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/ecfbbfbf96105439cc9a40bc78277bdb0268e34d",
-                "reference": "ecfbbfbf96105439cc9a40bc78277bdb0268e34d",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/2fa2797604bf54b06faf7bb139a9fc0d66826fea",
+                "reference": "2fa2797604bf54b06faf7bb139a9fc0d66826fea",
                 "shasum": ""
             },
             "require": {
@@ -1245,7 +1209,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-04-19 19:12:18"
+            "time": "2016-04-27 13:02:09"
         },
         {
             "name": "laravel/socialite",
@@ -5051,8 +5015,8 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "prettus/l5-repository": 20,
-        "kodeine/laravel-acl": 20,
         "alientronics/cached-eloquent-user": 20,
+        "alientronics/laravel-acl": 20,
         "codeclimate/php-test-reporter": 20
     },
     "prefer-stable": false,
