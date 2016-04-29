@@ -13,7 +13,7 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Kodeine\Acl\Traits\HasRole;
 use Illuminate\Support\Facades\Auth;
-use Lang;
+use Illuminate\Support\Facades\Lang;
 
 class User extends BaseModel implements Transformable, AuthenticatableContract, CanResetPasswordContract
 {
