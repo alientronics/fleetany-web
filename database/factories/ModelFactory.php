@@ -51,6 +51,7 @@ $factory->define(App\Entities\Gps::class, function ($faker) {
         'latitude' => 51,
         'longitude' => 31,
 		'deleted_at' => null,
+        'driver_id' => 1,
     ];
 });
 
