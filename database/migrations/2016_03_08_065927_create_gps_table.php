@@ -17,8 +17,8 @@ class CreateGpsTable extends Migration {
 			$table->integer('id', true);
 			$table->integer('company_id')->index('fk_gps_companies1_idx');
 			$table->integer('vehicle_id')->index('fk_gps_vehicles1_idx');
-			$table->decimal('latitude');
-			$table->decimal('longitude');
+			$table->decimal('latitude', 10, 6);
+			$table->decimal('longitude', 10, 6);
 			$table->timestamps();
 			$table->softDeletes();
 			$table->engine = 'InnoDB';
