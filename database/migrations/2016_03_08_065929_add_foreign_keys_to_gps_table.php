@@ -16,6 +16,7 @@ class AddForeignKeysToGpsTable extends Migration {
 		{
 			$table->foreign('company_id', 'fk_gps_companies1_idx')->references('id')->on('companies')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 			$table->foreign('vehicle_id', 'fk_gps_vehicles1_idx')->references('id')->on('vehicles')->onUpdate('NO ACTION')->onDelete('NO ACTION');
+			$table->foreign('driver_id', 'fk_gps_contacts1')->references('id')->on('contacts')->onUpdate('NO ACTION')->onDelete('NO ACTION');
 		});
 	}
 

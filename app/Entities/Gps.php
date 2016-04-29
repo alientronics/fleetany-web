@@ -14,7 +14,7 @@ class Gps extends BaseModel
     use SoftDeletes;
     
     protected $table = 'gps';
-    protected $fillable = ['vehicle_id', 'latitude', 'longitude'];
+    protected $fillable = ['vehicle_id', 'driver_id', 'latitude', 'longitude'];
 
 
     public function company()
