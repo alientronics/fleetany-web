@@ -83,8 +83,8 @@
 	$( document ).ready(function() {
 		$('#cost').maskMoney({!!Lang::get("masks.money")!!});
 
-		@if(!empty($vehicleLastPosition))
-		var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng={{$vehicleLastPosition->latitude}},{{$vehicleLastPosition->longitude}}';
+		@if(!empty($vehicleLastPlace))
+		var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng={{$vehicleLastPlace->latitude}},{{$vehicleLastPlace->longitude}}';
 		$.get( url, function( data ) {
 			if(data.results[0] != undefined) {
     			$("#last-position").html($("#last-position").html() + data.results[0].formatted_address);

@@ -76,7 +76,7 @@ class VehicleController extends Controller
         $vehicleLastPlace = $this->vehicleRepo->getVehiclesLastPlace($idVehicle);
         $vehicleLastPlace = !empty($vehicleLastPlace[0]) ? $vehicleLastPlace[0] : null;
             
-        return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 'company_id', 'vehicleLastPosition'));
+        return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 'company_id', 'vehicleLastPlace'));
     }
     
     public function update($idVehicle)
