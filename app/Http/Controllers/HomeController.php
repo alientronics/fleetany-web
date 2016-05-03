@@ -27,14 +27,14 @@ class HomeController extends Controller
     ) {
     
         $vehiclesStatistics = $vehicleRepo->getVehiclesStatistics();
-        $vehiclesLastPositions = $vehicleRepo->getVehiclesLastPositions();
+        $vehiclesLastPlace = $vehicleRepo->getVehiclesLastPositions();
         $lastsServiceCost = $entryRepo->getLastsServiceCostStatistics();
         $servicesStatistics = $entryRepo->getServicesStatistics();
         $tripsStatistics = $tripRepo->getTripsStatistics();
         $lastsFuelCost = $tripRepo->getLastsFuelCostStatistics();
         return View::make('welcome', [
             'vehiclesStatistics' => $vehiclesStatistics,
-            'vehiclesLastPositions' => $vehiclesLastPositions,
+            'vehiclesLastPositions' => $vehiclesLastPlace,
             'lastsServiceCostStatistics' => $lastsServiceCost,
             'servicesStatistics' => $servicesStatistics,
             'tripsStatistics' => $tripsStatistics,

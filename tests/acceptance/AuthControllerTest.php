@@ -33,7 +33,7 @@ class AuthControllerTest extends AcceptanceTestCase
             ->type('123456', 'password')
             ->press('Log in')
             ->seePageIs('/')
-            ->see('Seja bem-vindo')
+            ->see('Painel de Frota')
         ;
     }
     
