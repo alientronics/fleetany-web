@@ -16,17 +16,10 @@
 
     <div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-grid mdl-color--primary">
     	<div class="mdl-card__actions mdl-color--primary">
-    		<div class="demo-drawer-header mdl-color--primary">
-				<span id="logo-lettering">fleetany</span>
-			</div><div class="demo-drawer-header mdl-color--primary">
-				<span id="welcome-lettering">{{Lang::get('general.Welcome')}}!</span>
-			</div>
-			
+    		<div id="map"></div>
     	</div>
     </div>
     	
-
-			
 		@include ('includes.statistics.cardnumber', ['statistics' => $vehiclesStatistics,
 										'cardTitle' => Lang::get('general.Vehicles'),
 										'cardLink' => url('/').'/vehicles'
@@ -60,4 +53,39 @@
 		
 </div>
 
+<script type="text/javascript">
+    function initMap() {
+
+    	// Apenas teste da função para mostrar endereço do veículo
+    	var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452';
+    	$.get( url, function( data ) {
+  		  console.log(data.results[0].formatted_address);
+  		});
+  		// Fim do teste
+    	
+        var bounds = new google.maps.LatLngBounds();
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 8,
+            center: {lat: -30.02, lng: -51.11}
+        });
+
+        @foreach($vehiclesLastPositions as $vehicle)
+            var myLatLng = {lat: {{$vehicle->latitude}}, lng: {{$vehicle->longitude}}};
+            var marker = new google.maps.Marker({
+                position: myLatLng,
+                map: map
+            });
+            var latlng = new google.maps.LatLng({{$vehicle->latitude}}, {{$vehicle->longitude}});
+            bounds.extend(latlng); 
+    	@endforeach
+
+        @if(count($vehiclesLastPositions) > 0)	    
+        	map.fitBounds(bounds);
+        @endif
+
+    }
+</script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=GOOGLE_MAPS_API_KEY&callback=initMap">
+</script>
 @endsection

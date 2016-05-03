@@ -426,3 +426,8 @@ _:-ms-input-placeholder, :root .demo-graph {
   padding: 80px 56px;
   margin-bottom: 80px;
 }
+
+#map { 
+  height: 100%; 
+  max-height: 300px; 
+}

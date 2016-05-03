@@ -8,6 +8,7 @@ use App\Repositories\VehicleRepository;
 use App\Entities\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use App\Entities\Gps;
 
 class VehicleRepositoryEloquent extends BaseRepository implements VehicleRepository
 {
@@ -76,6 +77,16 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
     {
         $vehicles = Vehicle::where('vehicles.company_id', Auth::user()['company_id'])
                                 ->lists('number', 'id');
+        return $vehicles;
+    }
+    
+    public static function getVehiclesLastPositions()
+    {
+        $vehicles = Gps::select(\DB::raw('max(id) as id, vehicle_id, latitude, longitude'))
+            ->where('company_id', Auth::user()['company_id'])
+            ->groupBy('vehicle_id')
+            ->get();
+
         return $vehicles;
     }
     

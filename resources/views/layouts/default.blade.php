@@ -1,4 +1,3 @@
-<!doctype html>
 <html>
 <head>    
 	@include('includes.head')
