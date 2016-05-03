@@ -117,6 +117,7 @@ return [
     "Vehicle"   => "Vehicle",
     "Vehicles"    => "Vehicles",
     "newvehicle" => "New vehicle",
+    "LastPosition" => "Last Position",
     "model_vehicle"=> "Model vehicle",
     "number" => "Number",
     "initial_miliage"=> "Initial miliage",

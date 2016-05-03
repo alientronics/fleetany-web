@@ -18,6 +18,10 @@
 	<section class="demo-section demo-section--textfield demo-page--textfield mdl-upgraded">
 		<div class="demo-preview-block">
 
+      		<div id="last-position" style="display: none">
+      			<b>{{ Lang::get('general.LastPosition') }}: </b>
+    		</div>
+  		
 @if (!$vehicle->id)
 {!! Form::open(['route' => 'vehicle.store']) !!}
 @else
@@ -78,6 +82,17 @@
 <script>
 	$( document ).ready(function() {
 		$('#cost').maskMoney({!!Lang::get("masks.money")!!});
+
+		@if(!empty($vehicleLastPosition))
+		var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng={{$vehicleLastPosition->latitude}},{{$vehicleLastPosition->longitude}}';
+		$.get( url, function( data ) {
+			if(data.results[0] != undefined) {
+    			$("#last-position").html($("#last-position").html() + data.results[0].formatted_address);
+    			$("#last-position").show();
+			}
+		});
+		@endif
+		
 	});
 </script>
 @else

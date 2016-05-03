@@ -56,13 +56,6 @@
 <script type="text/javascript">
     function initMap() {
 
-    	// Apenas teste da função para mostrar endereço do veículo
-    	var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452';
-    	$.get( url, function( data ) {
-  		  console.log(data.results[0].formatted_address);
-  		});
-  		// Fim do teste
-    	
         var bounds = new google.maps.LatLngBounds();
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 8,

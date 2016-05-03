@@ -116,6 +116,7 @@ return [
     "vehicle"   => "Ve&iacute;culo",
     "Vehicle"   => "Ve&iacute;culo",
     "Vehicles"    => "Ve&iacute;culos",
+    "LastPosition" => "&Uacute;ltima posi&ccedil;&atilde;o",
     "newvehicle" => "Novo Ve&iacute;culo",
     "model_vehicle"=> "Modelo do ve&iacute;culo",
     "number"=> "Placa",
