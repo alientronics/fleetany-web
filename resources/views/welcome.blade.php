@@ -62,7 +62,7 @@
             center: {lat: -30.02, lng: -51.11}
         });
 
-        @foreach($vehiclesLastPositions as $vehicle)
+        @foreach($vehiclesLastPlace as $vehicle)
             var myLatLng = {lat: {{$vehicle->latitude}}, lng: {{$vehicle->longitude}}};
             var marker = new google.maps.Marker({
                 position: myLatLng,
@@ -72,7 +72,7 @@
             bounds.extend(latlng); 
     	@endforeach
 
-        @if(count($vehiclesLastPositions) > 0)	    
+        @if(count($vehiclesLastPlace) > 0)	    
         	map.fitBounds(bounds);
         @endif
 

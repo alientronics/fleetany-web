@@ -80,12 +80,12 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
         return $vehicles;
     }
     
-    public static function getVehiclesLastPositions($vehicle_id = null)
+    public static function getVehiclesLastPlace($vehicle_id = null)
     {
         $vehicles = Gps::select(\DB::raw('max(id) as id, vehicle_id, latitude, longitude'))
             ->where('company_id', Auth::user()['company_id']);
         
-        if(!empty($vehicle_id)) {
+        if (!empty($vehicle_id)) {
             $vehicles = $vehicles->where('vehicle_id', $vehicle_id);
         }
             

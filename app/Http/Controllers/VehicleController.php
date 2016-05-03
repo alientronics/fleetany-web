@@ -73,8 +73,8 @@ class VehicleController extends Controller
         $company_id = CompanyRepositoryEloquent::getCompanies();
         $model_vehicle_id = ModelRepositoryEloquent::getModelVehicles();
         
-        $vehicleLastPosition = $this->vehicleRepo->getVehiclesLastPositions($idVehicle);
-        $vehicleLastPosition = !empty($vehicleLastPosition[0]) ? $vehicleLastPosition[0] : null;
+        $vehicleLastPlace = $this->vehicleRepo->getVehiclesLastPlace($idVehicle);
+        $vehicleLastPlace = !empty($vehicleLastPlace[0]) ? $vehicleLastPlace[0] : null;
             
         return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 'company_id', 'vehicleLastPosition'));
     }
