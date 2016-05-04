@@ -1,18 +1,18 @@
-			
+    			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('country')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('country', $contact->country, ['id' => 'country', 'class' => 'mdl-textfield__input'])!!}
-				{!!Form::label('country', Lang::get('general.country'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
-				<span class="mdl-textfield__error">{{ $errors->first('country') }}</span>
+         		{!!Form::text('country', $contact->country, ['id' => 'country', 'class' => 'mdl-textfield__input immybox immybox_witharrow', 'autocomplete' => 'off'])!!}
+                {!!Form::label('country', Lang::get('general.country'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
+                <span class="mdl-textfield__error">{{ $errors->first('country') }}</span>
 			</div>
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('state')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('state', $contact->state, ['id' => 'state', 'class' => 'mdl-textfield__input'])!!}
-				{!!Form::label('state', Lang::get('general.state'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
+         		{!!Form::text('state', $contact->state, ['id' => 'state', 'class' => 'mdl-textfield__input immybox immybox_witharrow', 'autocomplete' => 'off'])!!}
+                {!!Form::label('state', Lang::get('general.state'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
 				<span class="mdl-textfield__error">{{ $errors->first('state') }}</span>
 			</div>
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('city')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::text('city', $contact->city, ['id' => 'city', 'class' => 'mdl-textfield__input'])!!}
+         		{!!Form::text('city', $contact->city, ['id' => 'city', 'class' => 'mdl-textfield__input immybox immybox_witharrow', 'autocomplete' => 'off'])!!}
 				{!!Form::label('city', Lang::get('general.city'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
 				<span class="mdl-textfield__error">{{ $errors->first('city') }}</span>
 			</div>
@@ -38,7 +38,7 @@
 <script>
 	$( document ).ready(function() {
 
-		var urlCountries = 'http://api.geonames.org/countryInfoJSON?username=demo&lang={!!Lang::get("masks.geoname")!!}';
+		var urlCountries = "http://api.geonames.org/countryInfoJSON?username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
 		$.get( urlCountries, function( data ) {
 			var countries = [];
 			$.each(data.geonames, function (index, country) {
@@ -52,10 +52,10 @@
 			});
 		});
 
-		$('input[name="country"]').change(function() {
-			var urlStates = 'http://api.geonames.org/childrenJSON?geonameId=' + 
+		$(document).off("change","#country").on("change","#country",function() {
+			var urlStates = "http://api.geonames.org/childrenJSON?geonameId=" + 
 								$(this).val() + 
-								'&username=demo&lang={!!Lang::get("masks.geoname")!!}';
+								"&username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
 			$.get( urlStates, function( data ) {
 				var states = [];
 				$.each(data.geonames, function (index, state) {
@@ -70,10 +70,10 @@
 			});
 		});
 
-		$('input[name="state"]').change(function() {
-			var urlCities = 'http://api.geonames.org/childrenJSON?geonameId=' + 
+		$('#state').change(function() {
+			var urlCities = "http://api.geonames.org/childrenJSON?geonameId=" + 
 								$(this).val() + 
-								'&username=demo&lang={!!Lang::get("masks.geoname")!!}';
+								"&username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
 			$.get( urlCities, function( data ) {
 				var cities = [];
 				$.each(data.geonames, function (index, city) {
