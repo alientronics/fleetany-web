@@ -96,11 +96,11 @@ class TypeModelTest extends UnitTestCase
         $type = factory(\App\Entities\Type::class)->create();
 
         $trip1 = factory(\App\Entities\Trip::class)->create([
-                'company_id' => $type->id,
+                'fuel_type' => $type->id,
             ]);
 
         $trip2 = factory(\App\Entities\Trip::class)->create([
-                'company_id' => $type->id,
+                'fuel_type' => $type->id,
             ]);
 
         $this->assertEquals(count($type->fuelTypes), 2);

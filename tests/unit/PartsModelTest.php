@@ -109,7 +109,7 @@ class PartsModelTest extends UnitTestCase
         $this->assertTrue($part->partEntries->contains($partEntry2));
     }
 
-    public function testHasPartHistories()
+    public function testHasPartsHistories()
     {
 
         $part = factory(\App\Entities\Part::class)->create();
@@ -122,9 +122,9 @@ class PartsModelTest extends UnitTestCase
                 'part_id' => $part->id,
             ]);
 
-        $this->assertEquals(count($part->partHistories), 2);
-        $this->assertTrue($part->partHistories->contains($partHistory1));
-        $this->assertTrue($part->partHistories->contains($partHistory2));
+        $this->assertEquals(count($part->partsHistories), 2);
+        $this->assertTrue($part->partsHistories->contains($partHistory1));
+        $this->assertTrue($part->partsHistories->contains($partHistory2));
     }
 
     public function testHasTireSensors()

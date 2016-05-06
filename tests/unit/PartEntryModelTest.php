@@ -11,8 +11,10 @@ class PartEntryModelTest extends UnitTestCase
     {
     
         $entry = factory(\App\Entities\Entry::class)->create();
+        $part = factory(\App\Entities\Part::class)->create();
         $partEntry = factory(\App\Entities\PartEntry::class)->create([
             'entry_id' => $entry->id,
+            'part_id' => $part->id
         ]);
     
         $this->assertEquals($partEntry->entry->description, $entry->description);
