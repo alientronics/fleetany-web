@@ -46,6 +46,11 @@ class Type extends BaseModel
     {
         return $this->hasMany(\App\Entities\Trip::class, 'fuel_type', 'id');
     }
+
+    public function parts()
+    {
+        return $this->hasMany(\App\Entities\Part::class, 'part_type_id', 'id');
+    }
     
     public function checkCompanyRelationships()
     {

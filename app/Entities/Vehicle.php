@@ -37,6 +37,16 @@ class Vehicle extends BaseModel
     {
         return $this->hasMany(\App\Entities\Entry::class, 'vehicle_id', 'id');
     }
+
+    public function parts()
+    {
+        return $this->hasMany(\App\Entities\Part::class, 'vehicle_id', 'id');
+    }
+
+    public function partsHistories()
+    {
+        return $this->hasMany(\App\Entities\PartHistory::class, 'vehicle_id', 'id');
+    }
     
     public function checkCompanyRelationships()
     {

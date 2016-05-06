@@ -44,6 +44,11 @@ class Contact extends BaseModel
         return $this->hasMany(\App\Entities\Model::class, 'vendor_id', 'id');
     }
 
+    public function parts()
+    {
+        return $this->hasMany(\App\Entities\Part::class, 'vendor_id', 'id');
+    }
+
     public function tripsDriver()
     {
         return $this->hasMany(\App\Entities\Trip::class, 'driver_id', 'id');

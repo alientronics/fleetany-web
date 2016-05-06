@@ -35,6 +35,11 @@ class Company extends BaseModel
         return $this->hasMany(\App\Entities\Model::class, 'company_id', 'id');
     }
 
+    public function parts()
+    {
+        return $this->hasMany(\App\Entities\Part::class, 'company_id', 'id');
+    }
+
     public function trips()
     {
         return $this->hasMany(\App\Entities\Trip::class, 'company_id', 'id');

@@ -32,6 +32,11 @@ class Model extends BaseModel
         return $this->belongsTo(\App\Entities\Contact::class, 'vendor_id', 'id');
     }
 
+    public function parts()
+    {
+        return $this->hasMany(\App\Entities\Part::class, 'part_model_id', 'id');
+    }
+
     public function vehicles()
     {
         return $this->hasMany(\App\Entities\Vehicle::class, 'model_vehicle_id', 'id');
