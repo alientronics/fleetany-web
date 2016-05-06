@@ -64,4 +64,42 @@ class VehicleModelTest extends UnitTestCase
         $this->assertTrue($vehicle->entries->contains($entry1));
         $this->assertTrue($vehicle->entries->contains($entry2));
     }
+
+    public function testHasParts()
+    {
+
+        $vehicle = factory(\App\Entities\Vehicle::class)->create();
+
+        $part1 = factory(\App\Entities\Part::class)->create([
+                'company_id' => $vehicle->id,
+            ]);
+
+        $part2 = factory(\App\Entities\Part::class)->create([
+                'company_id' => $vehicle->id,
+            ]);
+
+        $this->assertEquals(count($vehicle->parts), 2);
+        $this->assertTrue($vehicle->parts->contains($part1));
+        $this->assertTrue($vehicle->parts->contains($part2));
+        
+    }
+
+    public function testHasPartsHistories()
+    {
+
+        $vehicle = factory(\App\Entities\Vehicle::class)->create();
+
+        $partsHistories1 = factory(\App\Entities\Part::class)->create([
+                'company_id' => $vehicle->id,
+            ]);
+
+        $partsHistories2 = factory(\App\Entities\Part::class)->create([
+                'company_id' => $vehicle->id,
+            ]);
+
+        $this->assertEquals(count($vehicle->partsHistories), 2);
+        $this->assertTrue($vehicle->partsHistories->contains($partsHistories1));
+        $this->assertTrue($vehicle->partsHistories->contains($partsHistories2));
+        
+    }
 }

@@ -71,10 +71,39 @@ $factory->define(App\Entities\Part::class, function ($faker) {
         'part_model_id' => 1,
         'company_id' => 1,
         'cost' => 1,
-        'name' => 1,
+        'name' => $faker->name,
         'number' => 1,
         'position' => 1,
         'lifecycle' => 1,
+		'deleted_at' => null,
+    ];
+});
+
+$factory->define(App\Entities\PartEntry::class, function ($faker) {
+    return [
+        'entry_id' => 1,
+        'part_id' => 1,
+		'deleted_at' => null,
+    ];
+});
+
+$factory->define(App\Entities\PartHistory::class, function ($faker) {
+    return [
+        'vehicle_id' => 1,
+        'part_id' => 1,
+        'position' => 1,
+		'deleted_at' => null,
+    ];
+});
+
+$factory->define(App\Entities\TireSensor::class, function ($faker) {
+    return [
+        'part_id' => 1,
+        'temperature' => 1,
+        'pressure' => 1,
+        'latitude' => 1,
+        'longitude' => 1,
+        'number' => 1,
 		'deleted_at' => null,
     ];
 });

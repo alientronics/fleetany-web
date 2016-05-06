@@ -40,6 +40,25 @@ class ModelModelTest extends UnitTestCase
         $this->assertEquals($model->contact->name, $contact->name);
     }
 
+    public function testHasParts()
+    {
+
+        $model = factory(\App\Entities\Model::class)->create();
+
+        $part1 = factory(\App\Entities\Part::class)->create([
+                'company_id' => $model->id,
+            ]);
+
+        $part2 = factory(\App\Entities\Part::class)->create([
+                'company_id' => $model->id,
+            ]);
+
+        $this->assertEquals(count($model->parts), 2);
+        $this->assertTrue($model->parts->contains($part1));
+        $this->assertTrue($model->parts->contains($part2));
+        
+    }
+
     public function testHasVehicles()
     {
 

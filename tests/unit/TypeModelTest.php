@@ -89,4 +89,42 @@ class TypeModelTest extends UnitTestCase
         $this->assertTrue($type->trips->contains($trip1));
         $this->assertTrue($type->trips->contains($trip2));
     }
+
+    public function testHasFuelTypes()
+    {
+
+        $type = factory(\App\Entities\Type::class)->create();
+
+        $trip1 = factory(\App\Entities\Trip::class)->create([
+                'company_id' => $type->id,
+            ]);
+
+        $trip2 = factory(\App\Entities\Trip::class)->create([
+                'company_id' => $type->id,
+            ]);
+
+        $this->assertEquals(count($type->fuelTypes), 2);
+        $this->assertTrue($type->fuelTypes->contains($trip1));
+        $this->assertTrue($type->fuelTypes->contains($trip2));
+        
+    }
+
+    public function testHasParts()
+    {
+
+        $type = factory(\App\Entities\Type::class)->create();
+
+        $part1 = factory(\App\Entities\Part::class)->create([
+                'company_id' => $type->id,
+            ]);
+
+        $part2 = factory(\App\Entities\Part::class)->create([
+                'company_id' => $type->id,
+            ]);
+
+        $this->assertEquals(count($type->parts), 2);
+        $this->assertTrue($type->parts->contains($part1));
+        $this->assertTrue($type->parts->contains($part2));
+        
+    }
 }

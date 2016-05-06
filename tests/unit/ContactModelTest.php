@@ -83,6 +83,25 @@ class ContactModelTest extends UnitTestCase
         $this->assertTrue($contact->models->contains($model2));
     }
 
+    public function testHasParts()
+    {
+
+        $contact = factory(\App\Entities\Contact::class)->create();
+
+        $part1 = factory(\App\Entities\Part::class)->create([
+                'company_id' => $contact->id,
+            ]);
+
+        $part2 = factory(\App\Entities\Part::class)->create([
+                'company_id' => $contact->id,
+            ]);
+
+        $this->assertEquals(count($contact->parts), 2);
+        $this->assertTrue($contact->parts->contains($part1));
+        $this->assertTrue($contact->parts->contains($part2));
+        
+    }
+
     public function testHasTripsDriver()
     {
 
