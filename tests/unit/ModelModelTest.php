@@ -46,11 +46,11 @@ class ModelModelTest extends UnitTestCase
         $model = factory(\App\Entities\Model::class)->create();
 
         $part1 = factory(\App\Entities\Part::class)->create([
-                'company_id' => $model->id,
+                'part_model_id' => $model->id,
             ]);
 
         $part2 = factory(\App\Entities\Part::class)->create([
-                'company_id' => $model->id,
+                'part_model_id' => $model->id,
             ]);
 
         $this->assertEquals(count($model->parts), 2);

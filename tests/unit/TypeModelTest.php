@@ -115,11 +115,11 @@ class TypeModelTest extends UnitTestCase
         $type = factory(\App\Entities\Type::class)->create();
 
         $part1 = factory(\App\Entities\Part::class)->create([
-                'company_id' => $type->id,
+                'part_type_id' => $type->id,
             ]);
 
         $part2 = factory(\App\Entities\Part::class)->create([
-                'company_id' => $type->id,
+                'part_type_id' => $type->id,
             ]);
 
         $this->assertEquals(count($type->parts), 2);

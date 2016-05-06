@@ -67,7 +67,7 @@ class TripModelTest extends UnitTestCase
     
         $fuelType = factory(\App\Entities\Type::class)->create();
         $trip = factory(\App\Entities\Trip::class)->create([
-            'trip_type_id' => $fuelType->id,
+            'fuel_type' => $fuelType->id,
         ]);
     
         $this->assertEquals($trip->fuelType->name, $fuelType->name);

@@ -89,11 +89,11 @@ class ContactModelTest extends UnitTestCase
         $contact = factory(\App\Entities\Contact::class)->create();
 
         $part1 = factory(\App\Entities\Part::class)->create([
-                'company_id' => $contact->id,
+                'vendor_id' => $contact->id,
             ]);
 
         $part2 = factory(\App\Entities\Part::class)->create([
-                'company_id' => $contact->id,
+                'vendor_id' => $contact->id,
             ]);
 
         $this->assertEquals(count($contact->parts), 2);

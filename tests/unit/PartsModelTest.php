@@ -70,7 +70,7 @@ class PartsModelTest extends UnitTestCase
             'part_id' => $partChild->id,
         ]);
     
-        $this->assertEquals($part->partChild->name, $partChild->name);
+        $this->assertEquals($part->part->name, $partChild->name);
     }
 
     public function testHasParts()
