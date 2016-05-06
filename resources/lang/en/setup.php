@@ -12,10 +12,14 @@ return [
     'premium'   => 'premium',
     'tour'   => 'tour',
     'delivery'   => 'delivery',
+    'tire'   => 'tire',
+    'sensor'   => 'sensor',
     'VehiclePlate'   => 'Vehicle Plate',
     'GenericVendor'   => 'Generic Vendor',
     'GenericDriver'   => 'Generic Driver',
     'GenericCar'   => 'Generic Car',
     'GenericTruck'   => 'Generic Truck',
-    'GenericVehicle'   => 'Generic Vehicle'
+    'GenericVehicle'   => 'Generic Vehicle',
+    'GenericTire'   => 'Generic Tire',
+    'GenericSensor'   => 'Generic Sensor'
 ];

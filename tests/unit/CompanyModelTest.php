@@ -72,6 +72,25 @@ class CompanyModelTest extends UnitTestCase
         $this->assertTrue($company->models->contains($model2));
     }
 
+    public function testHasParts()
+    {
+
+        $company = factory(\App\Entities\Company::class)->create();
+
+        $part1 = factory(\App\Entities\Part::class)->create([
+                'company_id' => $company->id,
+            ]);
+
+        $part2 = factory(\App\Entities\Part::class)->create([
+                'company_id' => $company->id,
+            ]);
+
+        $this->assertEquals(count($company->parts), 2);
+        $this->assertTrue($company->parts->contains($part1));
+        $this->assertTrue($company->parts->contains($part2));
+        
+    }
+
     public function testHasTrips()
     {
 

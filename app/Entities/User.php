@@ -48,6 +48,16 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
             'company_id' => $company->id]);
         $typeService->save();
         
+        $typeTire = Type::forceCreate(['entity_key' => 'part',
+            'name' => Lang::get('setup.tire'),
+            'company_id' => $company->id]);
+        $typeTire->save();
+    
+        $typeSensor = Type::forceCreate(['entity_key' => 'part',
+            'name' => Lang::get('setup.sensor'),
+            'company_id' => $company->id]);
+        $typeSensor->save();
+        
         $typeCar = Type::forceCreate(['entity_key' => 'vehicle',
             'name' => Lang::get('setup.car'),
             'company_id' => $company->id]);
@@ -118,6 +128,16 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
             'name' => Lang::get('setup.GenericTruck'),
             'company_id' => $company->id]);
         $modelTruck->save();
+    
+        $modelTire = Model::forceCreate(['model_type_id' => $typeTire->id,
+            'name' => Lang::get('setup.GenericTire'),
+            'company_id' => $company->id]);
+        $modelTire->save();
+    
+        $modelSensor = Model::forceCreate(['model_type_id' => $typeSensor->id,
+            'name' => Lang::get('setup.GenericSensor'),
+            'company_id' => $company->id]);
+        $modelSensor->save();
 
         $vehicle = Vehicle::forceCreate(['model_vehicle_id' => $modelCar->id,
             'number' => Lang::get('setup.VehiclePlate'),

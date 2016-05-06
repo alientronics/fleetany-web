@@ -64,6 +64,21 @@ $factory->define(App\Entities\Model::class, function ($faker) {
     ];
 });
 
+$factory->define(App\Entities\Part::class, function ($faker) {
+    return [
+        'vehicle_id' => 1,
+        'part_type_id' => 1,
+        'part_model_id' => 1,
+        'company_id' => 1,
+        'cost' => 1,
+        'name' => 1,
+        'number' => 1,
+        'position' => 1,
+        'lifecycle' => 1,
+		'deleted_at' => null,
+    ];
+});
+
 $factory->define(App\Entities\Trip::class, function ($faker) {
     return [
         'vehicle_id' => 1,
