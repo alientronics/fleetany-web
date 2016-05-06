@@ -45,7 +45,7 @@ class VehicleController extends Controller
     {
         $vehicle = new Vehicle();
         $company_id = CompanyRepositoryEloquent::getCompanies();
-        $model_vehicle_id = ModelRepositoryEloquent::getModelVehicles();
+        $model_vehicle_id = ModelRepositoryEloquent::getModels('vehicle');
         return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 'company_id'));
     }
 
@@ -71,7 +71,7 @@ class VehicleController extends Controller
         $this->helper->validateRecord($vehicle);
 
         $company_id = CompanyRepositoryEloquent::getCompanies();
-        $model_vehicle_id = ModelRepositoryEloquent::getModelVehicles();
+        $model_vehicle_id = ModelRepositoryEloquent::getModels('vehicle');
         
         $vehicleLastPlace = $this->vehicleRepo->getVehiclesLastPlace($idVehicle);
         $vehicleLastPlace = !empty($vehicleLastPlace[0]) ? $vehicleLastPlace[0] : null;

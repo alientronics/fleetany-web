@@ -29,6 +29,16 @@ Route::group(
 
 Route::group(
     [
+        'middleware' => ['auth',
+            'acl'],
+        'can' => 'view.part'],
+    function () {
+        Route::resource('part', 'PartController');
+    }
+);
+
+Route::group(
+    [
     'middleware' => ['auth',
     'acl'],
     'can' => 'view.entry'],
@@ -98,6 +108,7 @@ Route::group(
 );
 
 Route::get('trip/destroy/{id}', 'TripController@destroy');
+Route::get('part/destroy/{id}', 'PartController@destroy');
 Route::get('entry/destroy/{id}', 'EntryController@destroy');
 Route::get('contact/destroy/{id}', 'ContactController@destroy');
 Route::get('type/destroy/{id}', 'TypeController@destroy');

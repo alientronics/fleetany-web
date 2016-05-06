@@ -73,10 +73,15 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
         return false;
     }
     
-    public static function getVehicles()
+    public static function getVehicles($optionalChoice = false)
     {
         $vehicles = Vehicle::where('vehicles.company_id', Auth::user()['company_id'])
                                 ->lists('number', 'id');
+        
+        if ($optionalChoice) {
+            $vehicles->splice(0, 0, ["" => ""]);
+        }
+                                
         return $vehicles;
     }
     

@@ -26,6 +26,8 @@ return [
     'Trip'          => "Trip",
     'Models'        => "Models",
     'Model'         => "Model",
+    'Parts'         => "Parts",
+    'Part'          => "Part",
     'Tires'         => "Tires",
     'Fleet'         => "Fleet",
     'Maintenance'   => "Maintenance",

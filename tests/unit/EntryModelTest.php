@@ -50,4 +50,26 @@ class EntryModelTest extends UnitTestCase
     
         $this->assertEquals($entry->vehicle->model_vehicle_id, $vehicle->model_vehicle_id);
     }
+
+    public function testHasPartsEntries()
+    {
+
+        $entry = factory(\App\Entities\Entry::class)->create();
+        $part = factory(\App\Entities\Part::class)->create();
+
+        $partsEntries1 = factory(\App\Entities\PartEntry::class)->create([
+                'entry_id' => $entry->id,
+                'part_id' => $part->id
+            ]);
+
+        $partsEntries2 = factory(\App\Entities\PartEntry::class)->create([
+                'entry_id' => $entry->id,
+                'part_id' => $part->id
+            ]);
+
+        $this->assertEquals(count($entry->partsEntries), 2);
+        $this->assertTrue($entry->partsEntries->contains($partsEntries1));
+        $this->assertTrue($entry->partsEntries->contains($partsEntries2));
+        
+    }
 }

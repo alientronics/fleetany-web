@@ -88,13 +88,16 @@ class VehicleModelTest extends UnitTestCase
     {
 
         $vehicle = factory(\App\Entities\Vehicle::class)->create();
+        $part = factory(\App\Entities\Part::class)->create();
 
         $partsHistories1 = factory(\App\Entities\PartHistory::class)->create([
                 'vehicle_id' => $vehicle->id,
+                'part_id' => $part->id
             ]);
 
         $partsHistories2 = factory(\App\Entities\PartHistory::class)->create([
                 'vehicle_id' => $vehicle->id,
+                'part_id' => $part->id
             ]);
 
         $this->assertEquals(count($vehicle->partsHistories), 2);

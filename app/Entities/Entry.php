@@ -38,9 +38,9 @@ class Entry extends BaseModel
         return $this->belongsTo(\App\Entities\Vehicle::class, 'vehicle_id', 'id');
     }
     
-    public function parts()
+    public function partsEntries()
     {
-        return $this->hasMany(\App\Entities\Part::class, 'entry_id', 'id');
+        return $this->hasMany(\App\Entities\PartEntry::class, 'entry_id', 'id');
     }
     
     public function checkCompanyRelationships()

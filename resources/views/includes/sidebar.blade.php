@@ -48,6 +48,9 @@
             @endpermission   
             @permission('view.trip')
             <a class="@if (Request::is('trip*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('trip')}}"><i class="material-icons" role="presentation">place</i>{{Lang::get('menu.Trips')}}</a>       
+            @endpermission     
+            @permission('view.part')
+            <a class="@if (Request::is('part*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('part')}}"><i class="material-icons" role="presentation">build</i>{{Lang::get('menu.Parts')}}</a>       
             @endpermission   
         @else
         	<a class="mdl-navigation__link" href="{{URL::asset("auth/login")}}"><i class="material-icons" role="presentation">home</i>{{Lang::get('menu.Login')}}</a>

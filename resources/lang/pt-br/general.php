@@ -88,6 +88,16 @@ return [
     "model_type" => "Tipo do Modelo",
     "vendor" => "Fornecedor",
     
+    // Part
+    "Part"   => "Parte",
+    "Parts"    => "Partes",
+    "part" => "Parte",
+    "part_type" => "Tipo da parte",
+    "part_model" => "Modelo da parte",
+    "mileage"    => "Quilometragem",
+    "position"    => "Posi&ccedil;&atilde;o",
+    "lifecycle"    => "Ciclo de vida",
+    
     // Trip
     "Trip"   => "Viagem",
     "Trips"    => "Viagens",

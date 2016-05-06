@@ -26,6 +26,8 @@ return [
     'Trip'          => "Viagem",
     'Models'        => "Modelos",
     'Model'         => "Modelo",
+    'Parts'         => "Partes",
+    'Part'          => "Parte",
     'Tires'         => "Pneus",
     'Fleet'         => "Frotas",
     'Maintenance'   => "Manuten&ccedil;&atilde;o",

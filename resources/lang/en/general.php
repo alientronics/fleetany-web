@@ -88,6 +88,16 @@ return [
     "model_type" => "Model type",
     "vendor" => "Vendor",
     
+    // Part
+    "Part"   => "Part",
+    "Parts"    => "Parts",
+    "part" => "Part",
+    "part_type" => "Part type",
+    "part_model" => "Part model",
+    "mileage"    => "Mileage",
+    "position"    => "Position",
+    "lifecycle"    => "Lifecycle",
+    
     // Trip
     "Trip"   => "Trip",
     "Trips"    => "Trips",

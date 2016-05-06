@@ -75,12 +75,17 @@ class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
         return false;
     }
     
-    public static function getModelVehicles()
+    public static function getModels($entity_key = null)
     {
-        $modelVehicles = Model::join('types', 'models.model_type_id', '=', 'types.id')
-                        ->where('models.company_id', Auth::user()['company_id'])
-                        ->where('types.entity_key', 'vehicle')
-                        ->lists('models.name', 'models.id');
-        return $modelVehicles;
+        $models = Model::join('types', 'models.model_type_id', '=', 'types.id')
+                        ->where('models.company_id', Auth::user()['company_id']);
+
+        if (!empty($entity_key)) {
+            $models = $models->where('entity_key', $entity_key);
+        }
+        
+        $models = $models->lists('models.name', 'models.id');
+        
+        return $models;
     }
 }

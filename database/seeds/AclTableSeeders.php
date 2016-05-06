@@ -211,6 +211,61 @@ class AclTableSeeder extends Seeder
         $roleAdmin->assignPermission($permTripAdmin);
         
 
+        //Part
+        //Permissions
+        $permPartStaff = Permission::create([
+            'name'        => 'part',
+            'slug'        => [
+                'create' => false,
+                'view'   => false,
+                'update' => false,
+                'delete' => false
+            ],
+            'description' => 'Administra permissoes do part para o nivel staff de usuario'
+        ]);
+        
+        $permPartOperational = Permission::create([
+            'name'        => 'part.operational',
+            'slug'        => [],
+            'inherit_id' => $permPartStaff->getKey(),
+            'description' => 'Administra permissoes do part para o nivel operational de usuario'
+        ]);
+        
+        $permPartManager = Permission::create([
+            'name'        => 'part.manager',
+            'slug'        => [],
+            'inherit_id' => $permPartOperational->getKey(),
+            'description' => 'Administra permissoes do part para o nivel manager de usuario'
+        ]);
+        
+        $permPartExecutive = Permission::create([
+            'name'        => 'part.executive',
+            'slug'        => [],
+            'inherit_id' => $permPartManager->getKey(),
+            'description' => 'Administra permissoes do part para o nivel executive de usuario'
+        ]);
+        
+        $permPartAdmin = Permission::create([
+            'name'        => 'part.admin',
+            'slug'        => [
+                'create' => true,
+                'view'   => true,
+                'update' => true,
+                'delete' => true
+            ],
+            'inherit_id' => $permPartExecutive->getKey(),
+            'description' => 'Administra permissoes do part para o nivel admin de usuario'
+        ]);
+        
+        
+        //Assign permissions to rules
+        $roleStaff->assignPermission($permPartStaff);
+        $roleOperational->assignPermission($permPartOperational);
+        $roleManager->assignPermission($permPartManager);
+        $roleExecutive->assignPermission($permPartExecutive);
+        $roleAdmin->assignPermission($permPartAdmin);
+        
+        
         //Entry
         //Permissions
         $permEntryStaff = Permission::create([
