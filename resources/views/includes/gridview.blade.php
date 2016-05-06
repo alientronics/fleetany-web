@@ -24,7 +24,7 @@
           @elseif(!empty($sortFilter['mask']) && $sortFilter['mask'] == 'datetime')
           <div class="mdl-cell {{$sortFilter['class']}}">{!! App\Repositories\HelperRepository::date($register->$sortFilter['name'], App::getLocale()) !!}</div>
           @else
-          <div class="mdl-cell {{$sortFilter['class']}}">{{$register->$sortFilter['name']}}</div>
+          <div class="mdl-cell {{$sortFilter['class']}}">{{ $register->{$sortFilter['name']} }}</div>
           @endif
           @endforeach
           
