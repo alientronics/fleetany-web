@@ -20,9 +20,9 @@
           
           @foreach($gridview['sortFilters'] as $sortFilter)
           @if(!empty($sortFilter['mask']) && $sortFilter['mask'] == 'money')
-          <div class="mdl-cell {{$sortFilter['class']}}">{!! App\Repositories\HelperRepository::money($register->$sortFilter['name'], App::getLocale()) !!}</div>
+          <div class="mdl-cell {{$sortFilter['class']}}">{!! App\Repositories\HelperRepository::money($register->{$sortFilter['name']}, App::getLocale()) !!}</div>
           @elseif(!empty($sortFilter['mask']) && $sortFilter['mask'] == 'datetime')
-          <div class="mdl-cell {{$sortFilter['class']}}">{!! App\Repositories\HelperRepository::date($register->$sortFilter['name'], App::getLocale()) !!}</div>
+          <div class="mdl-cell {{$sortFilter['class']}}">{!! App\Repositories\HelperRepository::date($register->{$sortFilter['name']}, App::getLocale()) !!}</div>
           @else
           <div class="mdl-cell {{$sortFilter['class']}}">{{ $register->{$sortFilter['name']} }}</div>
           @endif
