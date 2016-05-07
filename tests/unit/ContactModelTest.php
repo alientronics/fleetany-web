@@ -29,6 +29,24 @@ class ContactModelTest extends UnitTestCase
         $this->assertEquals($contact->type->name, $type->name);
     }
 
+    public function testHasCompanies()
+    {
+
+        $contact = factory(\App\Entities\Contact::class)->create();
+
+        $company1 = factory(\App\Entities\Company::class)->create([
+                'contact_id' => $contact->id,
+            ]);
+
+        $company2 = factory(\App\Entities\Company::class)->create([
+                'contact_id' => $contact->id,
+            ]);
+
+        $this->assertEquals(count($contact->companies), 2);
+        $this->assertTrue($contact->companies->contains($company1));
+        $this->assertTrue($contact->companies->contains($company2));
+    }
+        
     public function testHasEntries()
     {
 

@@ -19,7 +19,12 @@ class Company extends BaseModel
     {
         return $this->belongsTo(\App\Entities\Contact::class, 'contact_id', 'id');
     }
-
+    
+    public function contacts()
+    {
+        return $this->hasMany(\App\Entities\Contact::class, 'company_id', 'id');
+    }
+        
     public function entries()
     {
         return $this->hasMany(\App\Entities\Entry::class, 'company_id', 'id');
