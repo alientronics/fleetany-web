@@ -90,7 +90,7 @@ class CompanyController extends Controller
             $inputs = $this->companyRepo->setInputs($this->request->all());
             $this->companyRepo->update($inputs, $idCompany);
             $this->contactRepo->update($inputs, $company->contact_id);
-            return $this->redirect->to('company')->with('message', Lang::get(
+            return $this->redirect->to('/')->with('message', Lang::get(
                 'general.succefullupdate',
                 ['table'=> Lang::get('general.Company')]
             ));
