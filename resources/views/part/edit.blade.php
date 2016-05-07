@@ -75,10 +75,10 @@
 				<span class="mdl-textfield__error">{{ $errors->first('number') }}</span>
 			</div>   
 			
-			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('mileage')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		{!!Form::number('mileage', $part->mileage, ['class' => 'mdl-textfield__input'])!!}
-				{!!Form::label('mileage', Lang::get('general.mileage'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
-				<span class="mdl-textfield__error">{{ $errors->first('mileage') }}</span>
+			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('miliage')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		{!!Form::number('miliage', $part->miliage, ['class' => 'mdl-textfield__input'])!!}
+				{!!Form::label('miliage', Lang::get('general.miliage'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
+				<span class="mdl-textfield__error">{{ $errors->first('miliage') }}</span>
 			</div>  
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('position')) is-invalid is-dirty @endif"" data-upgraded="eP">

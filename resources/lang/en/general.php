@@ -94,7 +94,7 @@ return [
     "part" => "Part",
     "part_type" => "Part type",
     "part_model" => "Part model",
-    "mileage"    => "Mileage",
+    "miliage"    => "Mileage",
     "position"    => "Position",
     "lifecycle"    => "Lifecycle",
     

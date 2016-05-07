@@ -47,7 +47,7 @@ class CompanyControllerTest extends AcceptanceTestCase
             ->type('Adress2', 'address')
             ->type('(99) 9999-9998', 'phone')
             ->press('Enviar')
-            ->seePageIs('/company')
+            ->seePageIs('/')
         ;
         
         $this->seeInDatabase(

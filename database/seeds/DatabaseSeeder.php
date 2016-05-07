@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call('VehicleTableSeeder');
         $this->call('EntryTableSeeder');
         $this->call('TripTableSeeder');
+        $this->call('PartTableSeeder');
         $this->call('AclTableSeeder');
     }
 }

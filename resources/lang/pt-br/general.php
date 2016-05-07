@@ -94,7 +94,7 @@ return [
     "part" => "Parte",
     "part_type" => "Tipo da parte",
     "part_model" => "Modelo da parte",
-    "mileage"    => "Quilometragem",
+    "miliage"    => "Quilometragem",
     "position"    => "Posi&ccedil;&atilde;o",
     "lifecycle"    => "Ciclo de vida",
     

@@ -58,5 +58,15 @@ class TypeTableSeeder extends Seeder
                         'name' => 'premium',
                         'company_id' => 1]
             );
+        Type::forceCreate(
+                [  'entity_key' => 'part',
+                        'name' => 'tire',
+                        'company_id' => 1]
+            );
+        Type::forceCreate(
+                [  'entity_key' => 'part',
+                        'name' => 'sensor',
+                        'company_id' => 1]
+            );
     }
 }

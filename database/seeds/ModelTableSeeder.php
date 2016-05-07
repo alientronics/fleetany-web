@@ -19,5 +19,17 @@ class ModelTableSeeder extends Seeder
                         'name' => 'Generic Car',
                         'company_id' => 1]
             );
+        Model::forceCreate(
+                [  'model_type_id' => 10,
+                        'vendor_id' => 2,
+                        'name' => 'Generic Tire',
+                        'company_id' => 1]
+            );
+        Model::forceCreate(
+                [  'model_type_id' => 11,
+                        'vendor_id' => 2,
+                        'name' => 'Generic Sensor',
+                        'company_id' => 1]
+            );
     }
 }
