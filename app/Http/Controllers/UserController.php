@@ -109,6 +109,7 @@ class UserController extends Controller
             $this->userRepo->update($inputs, $idUser);
             User::all()->last()->assignRole($inputs['role_id']);
             $this->contactRepo->update($inputs, $user->contact_id);
+            \Cache::flush();
             return $this->redirect->to('user')->with('message', Lang::get(
                 'general.succefullupdate',
                 ['table'=> Lang::get('general.User')]
@@ -148,6 +149,7 @@ class UserController extends Controller
             $this->userRepo->update($inputs, $idUser);
             $this->session->put('language', $inputs['language']);
             app()->setLocale($inputs['language']);
+            \Cache::flush();
             return $this->redirect->to('profile')->with('message', Lang::get(
                 'general.succefullupdate',
                 ['table'=> Lang::get('general.User')]
