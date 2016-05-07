@@ -20,11 +20,6 @@ class Company extends BaseModel
         return $this->belongsTo(\App\Entities\Contact::class, 'contact_id', 'id');
     }
 
-    public function contacts()
-    {
-        return $this->hasMany(\App\Entities\Contact::class, 'company_id', 'id');
-    }
-
     public function entries()
     {
         return $this->hasMany(\App\Entities\Entry::class, 'company_id', 'id');
@@ -65,7 +60,7 @@ class Company extends BaseModel
         return $this->hasMany(\App\Entities\Vehicle::class, 'company_id', 'id');
     }
     
-    public static function boot()
+    protected static function boot()
     {
         parent::boot();
         Company::creating(function ($company) {

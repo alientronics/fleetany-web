@@ -73,42 +73,6 @@ class PartsModelTest extends UnitTestCase
         $this->assertEquals($part->part->name, $partChild->name);
     }
 
-    public function testHasParts()
-    {
-
-        $part = factory(\App\Entities\Part::class)->create();
-
-        $part1 = factory(\App\Entities\Part::class)->create([
-                'part_id' => $part->id,
-            ]);
-
-        $part2 = factory(\App\Entities\Part::class)->create([
-                'part_id' => $part->id,
-            ]);
-
-        $this->assertEquals(count($part->parts), 2);
-        $this->assertTrue($part->parts->contains($part1));
-        $this->assertTrue($part->parts->contains($part2));
-    }
-
-    public function testHasPartEntries()
-    {
-
-        $part = factory(\App\Entities\Part::class)->create();
-
-        $partEntry1 = factory(\App\Entities\PartEntry::class)->create([
-                'part_id' => $part->id,
-            ]);
-
-        $partEntry2 = factory(\App\Entities\PartEntry::class)->create([
-                'part_id' => $part->id,
-            ]);
-
-        $this->assertEquals(count($part->partEntries), 2);
-        $this->assertTrue($part->partEntries->contains($partEntry1));
-        $this->assertTrue($part->partEntries->contains($partEntry2));
-    }
-
     public function testHasPartsHistories()
     {
 

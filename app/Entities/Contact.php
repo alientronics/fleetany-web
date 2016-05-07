@@ -29,11 +29,6 @@ class Contact extends BaseModel
         return $this->belongsTo(\App\Entities\Type::class, 'contact_type_id', 'id');
     }
 
-    public function companies()
-    {
-        return $this->hasMany(\App\Entities\Company::class, 'contact_id', 'id');
-    }
-
     public function entries()
     {
         return $this->hasMany(\App\Entities\Entry::class, 'vendor_id', 'id');
@@ -71,7 +66,7 @@ class Contact extends BaseModel
         ];
     }
     
-    public static function boot()
+    protected static function boot()
     {
         parent::boot();
         Contact::creating(function ($contact) {

@@ -50,16 +50,6 @@ class Part extends BaseModel
         return $this->belongsTo(\App\Entities\Part::class, 'part_id', 'id');
     }
 
-    public function parts()
-    {
-        return $this->hasMany(\App\Entities\Part::class, 'part_id', 'id');
-    }
-    
-    public function partEntries()
-    {
-        return $this->hasMany(\App\Entities\PartEntry::class, 'part_id', 'id');
-    }
-
     public function partsHistories()
     {
         return $this->hasMany(\App\Entities\PartHistory::class, 'part_id', 'id');
