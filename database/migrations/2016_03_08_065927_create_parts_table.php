@@ -21,12 +21,12 @@ class CreatePartsTable extends Migration {
 			$table->integer('part_type_id')->index('fk_parts_types1_idx');
 			$table->integer('part_model_id')->index('fk_parts_models1_idx');
 			$table->integer('part_id')->nullable()->index('fk_parts_parts1_idx');
-			$table->decimal('cost');
-			$table->string('name');			
+			$table->decimal('cost')->nullable();
+			$table->string('name')->nullable();			
 			$table->string('number');
 			$table->integer('miliage')->nullable();
-			$table->char('position', 10);
-			$table->integer('lifecycle');
+			$table->char('position', 10)->nullable();
+			$table->integer('lifecycle')->nullable();
 			$table->timestamps();
 			$table->softDeletes();
 			$table->engine = 'InnoDB';

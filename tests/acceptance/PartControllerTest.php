@@ -90,11 +90,7 @@ class PartControllerTest extends AcceptanceTestCase
         $this->visit('/part/create')
             ->press('Enviar')
             ->seePageIs('/part/create')
-            ->see('de um valor para o campo nome.</span>')
             ->see('de um valor para o campo number.</span>')
-            ->see('de um valor para o campo position.</span>')
-            ->see('de um valor para o campo lifecycle.</span>')
-            ->see('<span class="mdl-textfield__error">O campo cost dever')
         ;
     }
     

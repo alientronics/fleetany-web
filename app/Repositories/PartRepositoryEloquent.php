@@ -15,11 +15,8 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
     protected $rules = [
         'part_type_id'  => 'required',
         'part_model_id'  => 'required',
-        'cost'     => 'required|numeric|min:0.01',
-        'name'  => 'required',
+        'cost'     => 'numeric|min:0.01',
         'number'  => 'required',
-        'position'  => 'required',
-        'lifecycle'  => 'required',
         ];
 
     public function model()

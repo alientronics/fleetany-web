@@ -97,6 +97,7 @@ return [
     "miliage"    => "Mileage",
     "position"    => "Position",
     "lifecycle"    => "Lifecycle",
+    "linked_part"  => "Linked Part",
     
     // Trip
     "Trip"   => "Trip",
