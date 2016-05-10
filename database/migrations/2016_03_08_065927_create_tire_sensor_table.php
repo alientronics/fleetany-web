@@ -15,9 +15,9 @@ class CreateTireSensorTable extends Migration {
 		Schema::create('tire_sensor', function(Blueprint $table)
 		{
 		    $table->integer('id', true);
-		    $table->integer('part_id')->index('fk_tire_sensor_parts1_idx');
-		    $table->decimal('temperature');
-		    $table->decimal('pressure');
+		    $table->integer('part_id')->nullable()->index('fk_tire_sensor_parts1_idx');
+		    $table->decimal('temperature')->nullable();
+		    $table->decimal('pressure')->nullable();
 		    $table->decimal('latitude', 10, 7);
 		    $table->decimal('longitude', 10, 7);
 		    $table->string('number');
