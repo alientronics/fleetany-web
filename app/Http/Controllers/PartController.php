@@ -104,7 +104,7 @@ class PartController extends Controller
             $this->helper->validateRecord($part);
             $this->partRepo->validator();
             $inputs = $this->partRepo->setInputs(array_merge(
-                [['current_part_id'] => $idPart],
+                ['current_part_id' => $idPart],
                 $this->request->all()
             ));
             $this->partRepo->update($inputs, $idPart);

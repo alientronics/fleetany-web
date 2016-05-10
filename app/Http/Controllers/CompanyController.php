@@ -72,8 +72,11 @@ class CompanyController extends Controller
     public function edit($idCompany)
     {
         $company = $this->companyRepo->find($idCompany);
+        $company->company_id = $company->id;
+        $this->helper->validateRecord($company);
         
         $contact = $this->contactRepo->find($company['contact_id']);
+        $this->helper->validateRecord($contact);
         
         $contact_id = ContactRepositoryEloquent::getContacts();
         
@@ -103,7 +106,10 @@ class CompanyController extends Controller
     public function destroy($idCompany)
     {
         $hasReferences = $this->companyRepo->hasReferences($idCompany);
-        if ($this->companyRepo->find($idCompany) && !$hasReferences) {
+        $company = $this->companyRepo->find($idCompany);
+        if ($company && !$hasReferences) {
+            $company->company_id = $company->id;
+            $this->helper->validateRecord($company);
             Log::info('Delete field: '.$idCompany);
             $this->companyRepo->delete($idCompany);
             return $this->redirect->to('company')->with('message', Lang::get("general.deletedregister"));
