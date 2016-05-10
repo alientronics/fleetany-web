@@ -92,7 +92,7 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         if (empty($inputs['vendor_id'])) {
             unset($inputs['vendor_id']);
         }
-        if (empty($inputs['part_id'])) {
+        if (empty($inputs['part_id']) || $inputs['part_id'] == $inputs['current_part_id']) {
             unset($inputs['part_id']);
         }
         $inputs['cost'] = HelperRepository::money($inputs['cost']);

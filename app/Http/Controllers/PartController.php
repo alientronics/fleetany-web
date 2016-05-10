@@ -49,7 +49,7 @@ class PartController extends Controller
         $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
         $part_type_id = TypeRepositoryEloquent::getTypes('part');
         $part_model_id = ModelRepositoryEloquent::getModels('part');
-        $part_id = self::getParts(true);
+        $part_id = self::getParts(null, true);
         return view("part.edit", compact(
             'part',
             'vehicle_id',
@@ -86,7 +86,7 @@ class PartController extends Controller
         $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
         $part_type_id = TypeRepositoryEloquent::getTypes('part');
         $part_model_id = ModelRepositoryEloquent::getModels('part');
-        $part_id = self::getParts(true);
+        $part_id = self::getParts($idPart, true);
         return view("part.edit", compact(
             'part',
             'vehicle_id',
@@ -103,7 +103,10 @@ class PartController extends Controller
             $part = $this->partRepo->find($idPart);
             $this->helper->validateRecord($part);
             $this->partRepo->validator();
-            $inputs = $this->partRepo->setInputs($this->request->all());
+            $inputs = $this->partRepo->setInputs(array_merge(
+                [['current_part_id'] => $idPart],
+                $this->request->all()
+            ));
             $this->partRepo->update($inputs, $idPart);
             return $this->redirect->to('part')->with('message', Lang::get(
                 'general.succefullupdate',
@@ -128,10 +131,15 @@ class PartController extends Controller
         }
     }
     
-    public static function getParts($optionalChoice = false)
+    public static function getParts($idCurrentPart = null, $optionalChoice = false)
     {
-        $parts = Part::where('company_id', Auth::user()['company_id'])
-                        ->lists('number', 'id');
+        $parts = Part::where('company_id', Auth::user()['company_id']);
+        
+        if (!empty($idCurrentPart)) {
+            $parts = $parts->where('id', '!=', $idCurrentPart);
+        }
+                        
+        $parts = $parts->lists('number', 'id');
 
         if ($optionalChoice) {
             $parts->splice(0, 0, ["" => ""]);
