@@ -94,10 +94,17 @@ return [
     "part" => "Part",
     "part_type" => "Part type",
     "part_model" => "Part model",
+    "part_number" => "Number",
     "miliage"    => "Mileage",
     "position"    => "Position",
     "lifecycle"    => "Lifecycle",
     "linked_part"  => "Linked Part",
+    
+    // Tire Sensor
+    "temperature"   => "Temperature",
+    "pressure"    => "Pressure",
+    "latitude" => "Latitude",
+    "longitude" => "Longitude",
     
     // Trip
     "Trip"   => "Trip",

@@ -13,6 +13,8 @@ use App\Repositories\VehicleRepositoryEloquent;
 use App\Repositories\ContactRepositoryEloquent;
 use App\Repositories\TypeRepositoryEloquent;
 use App\Repositories\ModelRepositoryEloquent;
+use App\Repositories\TireSensorRepositoryEloquent;
+use Illuminate\Container\Container as Application;
 
 class PartController extends Controller
 {
@@ -38,7 +40,7 @@ class PartController extends Controller
     {
         $filters = $this->helper->getFilters($this->request->all(), $this->fields, $this->request);
         $parts = $this->partRepo->results($filters);
-        
+
         return view("part.index", compact('parts', 'filters'));
     }
     
@@ -50,13 +52,15 @@ class PartController extends Controller
         $part_type_id = TypeRepositoryEloquent::getTypes('part');
         $part_model_id = ModelRepositoryEloquent::getModels('part');
         $part_id = self::getParts(null, true);
+        $sensor_data = null;
         return view("part.edit", compact(
             'part',
             'vehicle_id',
             'vendor_id',
             'part_type_id',
             'part_model_id',
-            'part_id'
+            'part_id',
+            'sensor_data'
         ));
     }
 
@@ -87,13 +91,25 @@ class PartController extends Controller
         $part_type_id = TypeRepositoryEloquent::getTypes('part');
         $part_model_id = ModelRepositoryEloquent::getModels('part');
         $part_id = self::getParts($idPart, true);
+        
+        if ($part->partType->name == Lang::get('setup.sensor')) {
+            $tireSensorRepo = new TireSensorRepositoryEloquent(new Application);
+            $filters = $this->helper->getFilters($this->request->all(), $tireSensorRepo->getFields(), $this->request);
+            $filters['id'] = $part->id;
+            $sensor_data = $tireSensorRepo->results($filters);
+        } else {
+            $sensor_data = $filters = null;
+        }
+
         return view("part.edit", compact(
             'part',
             'vehicle_id',
             'vendor_id',
             'part_type_id',
             'part_model_id',
-            'part_id'
+            'part_id',
+            'sensor_data',
+            'filters'
         ));
     }
     

@@ -100,6 +100,12 @@ return [
     "lifecycle"    => "Ciclo de vida",
     "linked_part"  => "Parte Vinculada",
     
+    // Tire Sensor
+    "temperature"   => "Temperatura",
+    "pressure"    => "Press&atilde;o",
+    "latitude" => "Latitude",
+    "longitude" => "Longitude",
+    
     // Trip
     "Trip"   => "Viagem",
     "Trips"    => "Viagens",
