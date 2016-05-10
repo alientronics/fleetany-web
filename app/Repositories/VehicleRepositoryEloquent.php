@@ -89,9 +89,10 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
     {
         $sub = Gps::select(\DB::raw('MAX(id) as id'))
             ->groupBy('vehicle_id');
-        
+        $prefix = \DB::getTablePrefix();
+
         $vehicles = Gps::select('gps.id', 'vehicle_id', 'latitude', 'longitude')
-            ->join(\DB::raw("({$sub->toSql()}) as gps2"), 'gps.id', '=', 'gps2.id')
+            ->join(\DB::raw("({$sub->toSql()}) as ".$prefix."gps2"), 'gps.id', '=', 'gps2.id')
             ->where('company_id', Auth::user()['company_id']);
         if (!empty($vehicle_id)) {
             $vehicles = $vehicles->where('vehicle_id', $vehicle_id);
