@@ -102,21 +102,4 @@ class CompanyController extends Controller
                     ->with('errors', $e->getMessageBag());
         }
     }
-    
-    public function destroy($idCompany)
-    {
-        $hasReferences = $this->companyRepo->hasReferences($idCompany);
-        $company = $this->companyRepo->find($idCompany);
-        if ($company && !$hasReferences) {
-            $company->company_id = $company->id;
-            $this->helper->validateRecord($company);
-            Log::info('Delete field: '.$idCompany);
-            $this->companyRepo->delete($idCompany);
-            return $this->redirect->to('company')->with('message', Lang::get("general.deletedregister"));
-        } elseif ($hasReferences) {
-            return $this->redirect->to('company')->with('message', Lang::get("general.deletedregisterhasreferences"));
-        } else {
-            return $this->redirect->to('company')->with('message', Lang::get("general.deletedregistererror"));
-        }
-    }
 }

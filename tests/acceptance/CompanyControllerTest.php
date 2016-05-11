@@ -69,27 +69,13 @@ class CompanyControllerTest extends AcceptanceTestCase
     
     public function testDelete()
     {
-        $idDelete = Company::all()->last()['id'];
+        $this->visit('/company')
+            ->see('<i class="material-icons">delete</i>', true)
+        ;
         
-        $this->seeInDatabase('companies', ['id' => $idDelete]);
-        $this->visit('/company/destroy/'.$idDelete)
-            ->seePageIs('/company')
-            ->see('Este registro possui refer');
-        $this->seeIsNotSoftDeletedInDatabase('companies', ['id' => $idDelete]);
-        
-        $company = Company::find($idDelete);
-        $company->contacts()->delete();
-        $company->entries()->delete();
-        $company->models()->delete();
-        $company->trips()->delete();
-        $company->types()->delete();
-        $company->usersCompany()->delete();
-        $company->usersPendingCompany()->delete();
-        $company->vehicles()->delete();
-        
-        $this->seeInDatabase('companies', ['id' => $idDelete]);
-        $this->visit('/company/destroy/'.$idDelete);
-        $this->seeIsSoftDeletedInDatabase('companies', ['id' => $idDelete]);
+        $this->get('/company/destroy/'.Company::all()->last()['id'])
+            ->assertResponseStatus(302)
+        ;
     }
     
     public function testErrors()

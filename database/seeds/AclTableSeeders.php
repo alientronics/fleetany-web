@@ -471,7 +471,7 @@ class AclTableSeeder extends Seeder
                 'create' => true,
                 'view'   => true,
                 'update' => true,
-                'delete' => true
+                'delete' => false
             ],
             'inherit_id' => $permCompanyExecutive->getKey(),
             'description' => 'Administra permissoes do company para o nivel admin de usuario'

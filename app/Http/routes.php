@@ -113,7 +113,6 @@ Route::get('entry/destroy/{id}', 'EntryController@destroy');
 Route::get('contact/destroy/{id}', 'ContactController@destroy');
 Route::get('type/destroy/{id}', 'TypeController@destroy');
 Route::get('model/destroy/{id}', 'ModelController@destroy');
-Route::get('company/destroy/{id}', 'CompanyController@destroy');
 Route::get('vehicle/destroy/{id}', 'VehicleController@destroy');
 Route::get('user/destroy/{id}', 'UserController@destroy');
 
