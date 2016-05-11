@@ -50,43 +50,41 @@
 			$('#country').immybox({
 			    choices: countries
 			});
-		});
+			$('#state').immybox({choices: []});
 
-		$(document).off("change","#country").on("change","#country",function() {
-			var urlStates = "http://api.geonames.org/childrenJSON?geonameId=" + 
-								$(this).val() + 
-								"&username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
-			$.get( urlStates, function( data ) {
-				var states = [];
-				$.each(data.geonames, function (index, state) {
-					item = {}
-			        item ["text"] = state.toponymName;
-			        item ["value"] = state.geonameId;
-			        states.push(item);
+			$('#country').on('update', function(){
+				var urlStates = "http://api.geonames.org/childrenJSON?geonameId=" + 
+									$('#country').immybox('getValue') + 
+									"&username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
+				$.get( urlStates, function( data ) {
+					var states = [];
+					$.each(data.geonames, function (index, state) {
+						item = {}
+				        item ["text"] = state.toponymName;
+				        item ["value"] = state.geonameId;
+				        states.push(item);
+					});
+					$('#state').immybox('setChoices', states)
 				});
-				$('#state').immybox({
-				    choices: states
-				});
-			});
-		});
+			})
 
-		$('#state').change(function() {
-			var urlCities = "http://api.geonames.org/childrenJSON?geonameId=" + 
-								$(this).val() + 
-								"&username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
-			$.get( urlCities, function( data ) {
-				var cities = [];
-				$.each(data.geonames, function (index, city) {
-					item = {}
-			        item ["text"] = city.toponymName;
-			        item ["value"] = city.geonameId;
-			        cities.push(item);
+			
+			$('#city').immybox({choices: []});
+			$('#state').on('update', function(){
+				var urlCities = "http://api.geonames.org/childrenJSON?geonameId=" + 
+									$('#state').immybox('getValue') + 
+									"&username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
+				$.get( urlCities, function( data ) {
+					var cities = [];
+					$.each(data.geonames, function (index, city) {
+						item = {}
+				        item ["text"] = city.toponymName;
+				        item ["value"] = city.geonameId;
+				        cities.push(item);
+					});
+					$('#city').immybox('setChoices', cities)
 				});
-				$('#city').immybox({
-				    choices: cities
-				});
-			});
+			})
 		});
-		
 	});
 </script>
