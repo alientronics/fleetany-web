@@ -98,4 +98,13 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         $inputs['cost'] = HelperRepository::money($inputs['cost']);
         return $inputs;
     }
+    
+    public static function getPartsByVehicle($vehicle_id)
+    {
+        $parts = Part::select('*')->where('company_id', Auth::user()['company_id'])
+                    ->where('vehicle_id', $vehicle_id)
+                    ->get();
+        
+        return $parts;
+    }
 }

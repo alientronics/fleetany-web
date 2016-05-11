@@ -5,6 +5,7 @@ namespace Tests\Acceptance;
 use Tests\AcceptanceTestCase;
 use App\Entities\Contact;
 use App\Entities\User;
+use Lang;
 
 class ContactPermissionTest extends AcceptanceTestCase
 {

@@ -13,6 +13,8 @@ use App\Repositories\CompanyRepositoryEloquent;
 use App\Repositories\TypeRepositoryEloquent;
 use App\Repositories\ContactRepositoryEloquent;
 use App\Repositories\VehicleRepositoryEloquent;
+use App\Repositories\PartRepositoryEloquent;
+use App\Entities\PartEntry;
 
 class EntryController extends Controller
 {
@@ -51,7 +53,15 @@ class EntryController extends Controller
         $entry_type_id = TypeRepositoryEloquent::getTypes('entry');
         $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
         $vehicle_id = VehicleRepositoryEloquent::getVehicles();
-        return view("entry.edit", compact('entry', 'entry_type_id', 'company_id', 'vehicle_id', 'vendor_id'));
+        $parts = PartRepositoryEloquent::getPartsByVehicle(array_keys($vehicle_id->toArray())[0]);
+        return view("entry.edit", compact(
+            'entry',
+            'entry_type_id',
+            'company_id',
+            'vehicle_id',
+            'vendor_id',
+            'parts'
+        ));
     }
 
     public function store()
@@ -59,7 +69,17 @@ class EntryController extends Controller
         try {
             $this->entryRepo->validator();
             $inputs = $this->entryRepo->setInputs($this->request->all());
-            $this->entryRepo->create($inputs);
+            $entry = $this->entryRepo->create($inputs);
+            
+            if (!empty($inputs['parts'])) {
+                foreach ($inputs['parts'] as $part) {
+                    PartEntry::create([
+                        "part_id" => $part,
+                        "entry_id" => $entry->id
+                    ]);
+                }
+            }
+            
             return $this->redirect->to('entry')->with('message', Lang::get(
                 'general.succefullcreate',
                 ['table'=> Lang::get('general.Entry')]
@@ -80,7 +100,15 @@ class EntryController extends Controller
         $entry_type_id = TypeRepositoryEloquent::getTypes('entry');
         $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
         $vehicle_id = VehicleRepositoryEloquent::getVehicles();
-        return view("entry.edit", compact('entry', 'entry_type_id', 'company_id', 'vehicle_id', 'vendor_id'));
+        $parts = PartRepositoryEloquent::getPartsByVehicle($entry->vehicle_id);
+        return view("entry.edit", compact(
+            'entry',
+            'entry_type_id',
+            'company_id',
+            'vehicle_id',
+            'vendor_id',
+            'parts'
+        ));
     }
     
     public function update($idEntry)
@@ -91,6 +119,18 @@ class EntryController extends Controller
             $this->entryRepo->validator();
             $inputs = $this->entryRepo->setInputs($this->request->all());
             $this->entryRepo->update($inputs, $idEntry);
+            
+            PartEntry::where('entry_id', $entry->id)->delete();
+            
+            if (!empty($inputs['parts'])) {
+                foreach ($inputs['parts'] as $part) {
+                    PartEntry::create([
+                        "part_id" => $part,
+                        "entry_id" => $entry->id
+                    ]);
+                }
+            }
+            
             return $this->redirect->to('entry')->with('message', Lang::get(
                 'general.succefullupdate',
                 ['table'=> Lang::get('general.Entry')]

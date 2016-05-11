@@ -73,6 +73,17 @@
          		{!!Form::text('description', $entry->description, ['class' => 'mdl-textfield__input'])!!}
 				{!!Form::label('description', Lang::get('general.description'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
 				<span class="mdl-textfield__error">{{ $errors->first('description') }}</span>
+			</div>	
+
+			<div @if (empty($parts)) style="display:none" @endif class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('description')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		@foreach($parts as $part)
+         		<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="part{{$part->id}}">
+                  <input name="parts[]" type="checkbox" id="part{{$part->id}}" class="mdl-checkbox__input" value={{$part->id}} />
+                  <span class="mdl-checkbox__label">{{$part->name}}</span> <!-- Checkbox Label -->
+                </label>
+                @endforeach
+				{!!Form::label('parts', Lang::get('general.Parts'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
+				<span class="mdl-textfield__error">{{ $errors->first('description') }}</span>
 			</div>						
 
 			<div class="mdl-card__actions">
