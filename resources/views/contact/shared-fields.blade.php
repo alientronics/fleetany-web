@@ -38,8 +38,8 @@
 <script>
 	$( document ).ready(function() {
 
-		var urlCountries = "http://api.geonames.org/countryInfoJSON?username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
-		$.get( urlCountries, function( data ) {
+
+		function fillCountries(data) {
 			var countries = [];
 			$.each(data.geonames, function (index, country) {
 		        item = {}
@@ -51,40 +51,68 @@
 			    choices: countries
 			});
 			$('#state').immybox({choices: []});
-
-			$('#country').on('update', function(){
-				var urlStates = "http://api.geonames.org/childrenJSON?geonameId=" + 
-									$('#country').immybox('getValue') + 
-									"&username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
-				$.get( urlStates, function( data ) {
-					var states = [];
-					$.each(data.geonames, function (index, state) {
-						item = {}
-				        item ["text"] = state.toponymName;
-				        item ["value"] = state.geonameId;
-				        states.push(item);
-					});
-					$('#state').immybox('setChoices', states)
-				});
-			})
-
-			
 			$('#city').immybox({choices: []});
-			$('#state').on('update', function(){
-				var urlCities = "http://api.geonames.org/childrenJSON?geonameId=" + 
-									$('#state').immybox('getValue') + 
-									"&username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
-				$.get( urlCities, function( data ) {
-					var cities = [];
-					$.each(data.geonames, function (index, city) {
-						item = {}
-				        item ["text"] = city.toponymName;
-				        item ["value"] = city.geonameId;
-				        cities.push(item);
-					});
-					$('#city').immybox('setChoices', cities)
-				});
-			})
+		};
+
+		var urlCountries = "http://api.geonames.org/countryInfoJSON?username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
+		$.ajax({
+		    url: urlCountries,
+		    type: 'GET',
+		    crossDomain: true,
+		    dataType: 'jsonp',
+		    success: fillCountries,
+		    error: function() { console.log('Failed!'); }
 		});
+
+		function fillStates(data){
+			var states = [];
+			$.each(data.geonames, function (index, state) {
+				item = {}
+		        item ["text"] = state.toponymName;
+		        item ["value"] = state.geonameId;
+		        states.push(item);
+			});
+			$('#state').immybox('setChoices', states);
+		}
+
+		$('#country').on('update', function(){
+			var urlStates = "http://api.geonames.org/childrenJSON?geonameId=" + 
+								$('#country').immybox('getValue') + 
+								"&username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
+			$.ajax({
+			    url: urlStates,
+			    type: 'GET',
+			    crossDomain: true,
+			    dataType: 'jsonp',
+			    success: fillStates,
+			    error: function() { console.log('Failed!'); }
+			});
+		});
+
+		function fillCities(data){
+			var cities = [];
+			$.each(data.geonames, function (index, city) {
+				item = {}
+		        item ["text"] = city.toponymName;
+		        item ["value"] = city.geonameId;
+		        cities.push(item);
+			});
+			$('#city').immybox('setChoices', cities);
+		}
+
+		$('#state').on('update', function(){
+			var urlCities = "http://api.geonames.org/childrenJSON?geonameId=" + 
+								$('#state').immybox('getValue') + 
+								"&username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
+			$.ajax({
+			    url: urlCities,
+			    type: 'GET',
+			    crossDomain: true,
+			    dataType: 'jsonp',
+			    success: fillCities,
+			    error: function() { console.log('Failed!'); }
+			});
+		});
+
 	});
 </script>
