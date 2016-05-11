@@ -36,7 +36,7 @@ class CompanyPermissionTest extends AcceptanceTestCase
     public function testDeleteExecutive()
     {
         $this->get('/company/destroy/'.Company::all()->last()['id'])
-            ->assertResponseStatus(302)
+            ->assertResponseStatus(404)
         ;
     }
 }

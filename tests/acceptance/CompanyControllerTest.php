@@ -74,7 +74,7 @@ class CompanyControllerTest extends AcceptanceTestCase
         ;
         
         $this->get('/company/destroy/'.Company::all()->last()['id'])
-            ->assertResponseStatus(302)
+            ->assertResponseStatus(404)
         ;
     }
     
