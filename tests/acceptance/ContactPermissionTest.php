@@ -48,7 +48,7 @@ class ContactPermissionTest extends AcceptanceTestCase
         $this->actingAs($user);
 
         $this->visit('/contact/1/edit');
-        $this->see('Access denied');
+        $this->see(Lang::get('general.accessdenied'));
         
         $contact = Contact::find(1);
         $contact->companies()->delete();
@@ -59,6 +59,6 @@ class ContactPermissionTest extends AcceptanceTestCase
         $contact->users()->delete();
         
         $this->visit('/contact/destroy/1');
-        $this->see('Access denied');
+        $this->see(Lang::get('general.accessdenied'));
     }
 }

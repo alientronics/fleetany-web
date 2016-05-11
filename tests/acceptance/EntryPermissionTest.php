@@ -4,6 +4,7 @@ namespace Tests\Acceptance;
 
 use Tests\AcceptanceTestCase;
 use App\Entities\Entry;
+use Lang;
 
 class EntryPermissionTest extends AcceptanceTestCase
 {
@@ -47,9 +48,9 @@ class EntryPermissionTest extends AcceptanceTestCase
         $this->actingAs($user);
 
         $this->visit('/entry/1/edit');
-        $this->see('Access denied');
+        $this->see(Lang::get('general.accessdenied'));
         
         $this->visit('/entry/destroy/1');
-        $this->see('Access denied');
+        $this->see(Lang::get('general.accessdenied'));
     }
 }

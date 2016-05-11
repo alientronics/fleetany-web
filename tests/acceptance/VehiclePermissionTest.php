@@ -4,6 +4,7 @@ namespace Tests\Acceptance;
 
 use Tests\AcceptanceTestCase;
 use App\Entities\Vehicle;
+use Lang;
 
 class VehiclePermissionTest extends AcceptanceTestCase
 {
@@ -47,13 +48,13 @@ class VehiclePermissionTest extends AcceptanceTestCase
         $this->actingAs($user);
 
         $this->visit('/vehicle/1/edit');
-        $this->see('Access denied');
+        $this->see(Lang::get('general.accessdenied'));
 
         $vehicle = Vehicle::find(1);
         $vehicle->entries()->delete();
         $vehicle->trips()->delete();
         
         $this->visit('/vehicle/destroy/1');
-        $this->see('Access denied');
+        $this->see(Lang::get('general.accessdenied'));
     }
 }

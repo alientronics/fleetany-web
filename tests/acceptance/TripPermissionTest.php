@@ -4,6 +4,7 @@ namespace Tests\Acceptance;
 
 use Tests\AcceptanceTestCase;
 use App\Entities\Trip;
+use Lang;
 
 class TripPermissionTest extends AcceptanceTestCase
 {
@@ -47,9 +48,9 @@ class TripPermissionTest extends AcceptanceTestCase
         $this->actingAs($user);
 
         $this->visit('/trip/1/edit');
-        $this->see('Access denied');
+        $this->see(Lang::get('general.accessdenied'));
         
         $this->visit('/trip/destroy/1');
-        $this->see('Access denied');
+        $this->see(Lang::get('general.accessdenied'));
     }
 }

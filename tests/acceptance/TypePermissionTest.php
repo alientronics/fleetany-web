@@ -4,6 +4,7 @@ namespace Tests\Acceptance;
 
 use Tests\AcceptanceTestCase;
 use App\Entities\Type;
+use Lang;
 
 class TypePermissionTest extends AcceptanceTestCase
 {
@@ -47,7 +48,7 @@ class TypePermissionTest extends AcceptanceTestCase
         $this->actingAs($user);
 
         $this->visit('/type/1/edit');
-        $this->see('Access denied');
+        $this->see(Lang::get('general.accessdenied'));
         
         $type = Type::find(1);
         $type->contacts()->delete();
@@ -56,6 +57,6 @@ class TypePermissionTest extends AcceptanceTestCase
         $type->trips()->delete();
         
         $this->visit('/type/destroy/1');
-        $this->see('Access denied');
+        $this->see(Lang::get('general.accessdenied'));
     }
 }

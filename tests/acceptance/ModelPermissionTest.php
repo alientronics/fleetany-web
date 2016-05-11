@@ -4,6 +4,7 @@ namespace Tests\Acceptance;
 
 use Tests\AcceptanceTestCase;
 use App\Entities\Model;
+use Lang;
 
 class ModelPermissionTest extends AcceptanceTestCase
 {
@@ -47,12 +48,12 @@ class ModelPermissionTest extends AcceptanceTestCase
         $this->actingAs($user);
 
         $this->visit('/model/1/edit');
-        $this->see('Access denied');
+        $this->see(Lang::get('general.accessdenied'));
         
         $model = Model::find(1);
         $model->vehicles()->delete();
         
         $this->visit('/model/destroy/1');
-        $this->see('Access denied');
+        $this->see(Lang::get('general.accessdenied'));
     }
 }

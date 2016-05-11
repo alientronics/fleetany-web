@@ -103,11 +103,14 @@ class HelperRepository
             return Auth::user()['language'];
         } else {
             $availableLangs = $this->getAvailableLanguages();
-            $browserLanguages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
             
-            foreach ($browserLanguages as $lang) {
-                if (in_array($lang, $availableLangs)) {
-                    return $lang;
+            if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+                $browserLanguages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+                
+                foreach ($browserLanguages as $lang) {
+                    if (in_array($lang, $availableLangs)) {
+                        return $lang;
+                    }
                 }
             }
         }
