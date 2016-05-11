@@ -14,6 +14,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Kodeine\Acl\Traits\HasRole;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+use App\Repositories\HelperRepository;
 
 class User extends BaseModel implements Transformable, AuthenticatableContract, CanResetPasswordContract
 {
@@ -132,6 +133,11 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
     
     private function setUserProperties($company)
     {
+        $objHelper = new HelperRepository();
+        $userLanguage = $objHelper->getUserLanguage();
+        app()->setLocale($userLanguage);
+        
+        $this->language = $userLanguage;
         $this->company_id = $company->id;
         $this->save();
         $this->syncRoles('administrator');
