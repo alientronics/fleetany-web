@@ -129,7 +129,7 @@
 
 		$('#part_type_id').change(function() {
     		$('#part_model_id').empty();
-            $.post(url('part/get-models'), {"part_type_id" : $("#part_type_id").val()}, function(retorno) {
+            $.get(url('getModels/part/'+$("#part_type_id").val()), function(retorno) {
         		$.each(JSON.parse(retorno), function (i, value) {
 					console.log(i + ' - ' + value);
             		$('#part_model_id').append($('<option>', {

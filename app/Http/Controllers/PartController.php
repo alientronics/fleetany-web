@@ -163,10 +163,4 @@ class PartController extends Controller
         
         return $parts;
     }
-    
-    public function getTypePartModels()
-    {
-        $data = $this->request->all();
-        echo ModelRepositoryEloquent::getModels('part', $data['part_type_id']);
-    }
 }

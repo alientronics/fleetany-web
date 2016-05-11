@@ -112,4 +112,9 @@ class ModelController extends Controller
             return $this->redirect->to('model')->with('message', Lang::get("general.deletedregistererror"));
         }
     }
+    
+    public function getModelsByType($entityKey = null, $idType = null)
+    {
+        echo ModelRepositoryEloquent::getModels($entityKey, $idType);
+    }
 }

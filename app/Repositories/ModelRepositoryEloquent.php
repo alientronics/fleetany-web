@@ -75,7 +75,7 @@ class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
         return false;
     }
     
-    public static function getModels($entity_key = null, $partTypeId = null)
+    public static function getModels($entity_key = null, $idType = null)
     {
         $models = Model::join('types', 'models.model_type_id', '=', 'types.id')
                         ->where('models.company_id', Auth::user()['company_id']);
@@ -84,8 +84,8 @@ class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
             $models = $models->where('types.entity_key', $entity_key);
         }
 
-        if (!empty($partTypeId)) {
-            $models = $models->where('types.id', $partTypeId);
+        if (!empty($idType)) {
+            $models = $models->where('types.id', $idType);
         }
         
         $models = $models->lists('models.name', 'models.id');
