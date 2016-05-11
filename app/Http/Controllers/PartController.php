@@ -50,7 +50,7 @@ class PartController extends Controller
         $vehicle_id = VehicleRepositoryEloquent::getVehicles(true);
         $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
         $part_type_id = TypeRepositoryEloquent::getTypes('part');
-        $part_model_id = ModelRepositoryEloquent::getModels('part');
+        $part_model_id = ModelRepositoryEloquent::getModels('part', array_keys($part_type_id->toArray())[0]);
         $part_id = self::getParts(null, true);
         $sensor_data = null;
         return view("part.edit", compact(
@@ -89,7 +89,7 @@ class PartController extends Controller
         $vehicle_id = VehicleRepositoryEloquent::getVehicles(true);
         $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
         $part_type_id = TypeRepositoryEloquent::getTypes('part');
-        $part_model_id = ModelRepositoryEloquent::getModels('part');
+        $part_model_id = ModelRepositoryEloquent::getModels('part', array_keys($part_type_id->toArray())[0]);
         $part_id = self::getParts($idPart, true);
         
         if ($part->partType->name == Lang::get('setup.sensor')) {
@@ -162,5 +162,11 @@ class PartController extends Controller
         }
         
         return $parts;
+    }
+    
+    public function getTypePartModels()
+    {
+        $data = $this->request->all();
+        echo ModelRepositoryEloquent::getModels('part', $data['part_type_id']);
     }
 }

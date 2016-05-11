@@ -69,3 +69,12 @@ function showSnackBar(message) {
 	  });
 	}());
 }
+
+
+function getApplicationUrl() {
+	return $('meta[name="base-url"]').attr('content');
+}
+
+function url(url) {
+	return getApplicationUrl() + '/' + url;
+}

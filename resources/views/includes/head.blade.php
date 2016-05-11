@@ -2,6 +2,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="fleetany - open source fleet management system">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="base-url" content="{{url('/')}}">
 <title>fleetany - open source fleet management system</title>
 
 <!-- first, parallel css -->
@@ -26,6 +28,12 @@
 {!! HTML::script('js/fleetany.js') !!}
 
 <script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
 	@if (!is_null(env('GOOGLE_ANALYTICS')))
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
