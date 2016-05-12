@@ -22,15 +22,20 @@ class EntryControllerTest extends AcceptanceTestCase
         
         $this->visit('/entry/create');
     
-        $this->type('01/01/2016 15:15:15', 'datetime_ini')
-            ->type('02/01/2016 15:15:15', 'datetime_end')
-            ->type('123', 'entry_number')
-            ->type('90000.00', 'cost')
-            ->type('Descricao', 'description')
-            ->press('Enviar')
+        $form = $this->getForm();
+        $form['parts'][0]->tick();
+        $form['datetime_ini']->setValue('2016-01-01 15:15:15');
+        $form['datetime_end']->setValue('2016-01-02 15:15:15');
+        $form['entry_number']->setValue('123');
+        $form['cost']->setValue('90000.00');
+        $form['description']->setValue('Descricao');
+
+        $partId = $form['parts'][0]->getValue();
+        
+        $this->makeRequestUsingForm($form)
             ->seePageIs('/entry')
         ;
-    
+        
         $this->seeInDatabase(
             'entries',
             [
@@ -41,21 +46,36 @@ class EntryControllerTest extends AcceptanceTestCase
                     'description' => 'Descricao',
             ]
         );
+        
+        $this->seeInDatabase(
+            'part_entry',
+            [
+                    'entry_id' => Entry::all()->last()['id'],
+                    'part_id' => $partId
+            ]
+        );
     }
     
     public function testUpdate()
     {
         $this->visit('/entry/'.Entry::all()->last()['id'].'/edit');
         
-        $this->type('01/05/2016 15:15:15', 'datetime_ini')
-            ->type('02/05/2016 15:15:15', 'datetime_end')
-            ->type('125', 'entry_number')
-            ->type('90005.00', 'cost')
-            ->type('Descricao2', 'description')
-            ->press('Enviar')
+        $form = $this->getForm();
+        $form['parts'][0]->untick();
+        $form['parts'][1]->tick();
+        $form['datetime_ini']->setValue('2016-05-01 15:15:15');
+        $form['datetime_end']->setValue('2016-05-02 15:15:15');
+        $form['entry_number']->setValue('125');
+        $form['cost']->setValue('90005.00');
+        $form['description']->setValue('Descricao2');
+
+        $partId1 = $form['parts'][1]->getValue();
+        $partId2 = $form['parts'][1]->getValue();
+        
+        $this->makeRequestUsingForm($form)
             ->seePageIs('/entry')
         ;
-    
+        
         $this->seeInDatabase(
             'entries',
             [
@@ -64,6 +84,22 @@ class EntryControllerTest extends AcceptanceTestCase
                     'entry_number' => '125',
                     'cost' => '90005',
                     'description' => 'Descricao2',
+            ]
+        );
+        
+        $this->seeInDatabase(
+            'part_entry',
+            [
+                    'entry_id' => Entry::all()->last()['id'],
+                    'part_id' => $partId2
+            ]
+        );
+        
+        $this->seeIsSoftDeletedInDatabase(
+            'part_entry',
+            [
+                    'entry_id' => Entry::all()->last()['id'],
+                    'part_id' => $partId1
             ]
         );
     }
