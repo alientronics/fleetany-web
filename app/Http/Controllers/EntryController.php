@@ -73,7 +73,7 @@ class EntryController extends Controller
             $inputs = $this->entryRepo->setInputs($this->request->all());
             $entry = $this->entryRepo->create($inputs);
             
-            if(!empty($inputs['parts'])) {
+            if (!empty($inputs['parts'])) {
                 $entry->updateEntryParts($entry->id, $inputs['parts']);
             }
             
@@ -122,7 +122,7 @@ class EntryController extends Controller
             $inputs = $this->entryRepo->setInputs($this->request->all());
             $this->entryRepo->update($inputs, $idEntry);
             
-            if(!empty($inputs['parts'])) {
+            if (!empty($inputs['parts'])) {
                 $entry->updateEntryParts($entry->id, $inputs['parts']);
             }
             

@@ -20,7 +20,8 @@ class TireSensorControllerTest extends AcceptanceTestCase
             'part_id' => $idPart,
         ]);
         
-        $this->visit('/part/'.$idPart.'/edit?id=&temperature=1&pressure=1&latitude=&longitude=&number=1&sort=temperature-asc')
+        $this->visit('/part/'.$idPart.'/edit?id=&temperature=1&pressure=1&latitude=
+                        &longitude=&number=1&sort=temperature-asc')
             ->see('mode_edit</i>');
     }
     
@@ -37,28 +38,30 @@ class TireSensorControllerTest extends AcceptanceTestCase
             'part_id' => $idPart,
         ]);
         
-        $this->visit('/part/'.$idPart.'/edit?id=&temperature=&pressure=&latitude=&longitude=&number=&sort=temperature-asc')
+        $url = '/part/'.$idPart.'/edit?id=&temperature=&pressure=&latitude=&longitude=&number=';
+        
+        $this->visit($url.'&sort=temperature-asc')
             ->see('mode_edit</i>');
         
-        $this->visit('/part/'.$idPart.'/edit?id=&temperature=&pressure=&latitude=&longitude=&number=&sort=id-asc')
+        $this->visit($url.'&sort=id-asc')
             ->see('mode_edit</i>');
 
-        $this->visit('/part/'.$idPart.'/edit?id=&temperature=&pressure=&latitude=&longitude=&number=&sort=vehicle-desc')
+        $this->visit($url.'&sort=vehicle-desc')
             ->see('mode_edit</i>');
             
-        $this->visit('/part/'.$idPart.'/edit?id=&temperature=&pressure=&latitude=&longitude=&number=&sort=vehicle-asc')
+        $this->visit($url.'&sort=vehicle-asc')
             ->see('mode_edit</i>');
 
-        $this->visit('/part/'.$idPart.'/edit?id=&temperature=&pressure=&latitude=&longitude=&number=&sort=part-type-desc')
+        $this->visit($url.'&sort=part-type-desc')
             ->see('mode_edit</i>');
             
-        $this->visit('/part/'.$idPart.'/edit?id=&temperature=&pressure=&latitude=&longitude=&number=&sort=part-type-asc')
+        $this->visit($url.'&sort=part-type-asc')
             ->see('mode_edit</i>');
 
-        $this->visit('/part/'.$idPart.'/edit?id=&temperature=&pressure=&latitude=&longitude=&number=&sort=cost-desc')
+        $this->visit($url.'&sort=cost-desc')
             ->see('mode_edit</i>');
             
-        $this->visit('/part/'.$idPart.'/edit?id=&temperature=&pressure=&latitude=&longitude=&number=&sort=cost-asc')
+        $this->visit($url.'&sort=cost-asc')
             ->see('mode_edit</i>');
             
     }
