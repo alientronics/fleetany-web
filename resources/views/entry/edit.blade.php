@@ -40,7 +40,7 @@
             </div>
             
     		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('vehicle_id')) is-invalid is-dirty @endif"">
-                {!!Form::select('vehicle_id', $vehicle_id, $entry->vehicle_id, ['class' => 'mdl-textfield__input'])!!}
+                {!!Form::select('vehicle_id', $vehicle_id, $entry->vehicle_id, ['id' => 'vehicle_id', 'class' => 'mdl-textfield__input'])!!}
        			{!!Form::label('vehicle_id', Lang::get('general.vehicle'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
             	<span class="mdl-textfield__error">{{ $errors->first('vehicle_id') }}</span>
             </div>                        
@@ -75,16 +75,18 @@
 				<span class="mdl-textfield__error">{{ $errors->first('description') }}</span>
 			</div>	
 
-			<div @if (empty($parts)) style="display:none" @endif class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('description')) is-invalid is-dirty @endif"" data-upgraded="eP">
-         		@foreach($parts as $part)
-         		<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="part{{$part->id}}">
-                  <input name="parts[]" type="checkbox" id="part{{$part->id}}" class="mdl-checkbox__input" value={{$part->id}} />
-                  <span class="mdl-checkbox__label">{{$part->name}}</span> <!-- Checkbox Label -->
-                </label>
-                @endforeach
-				{!!Form::label('parts', Lang::get('general.Parts'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
-				<span class="mdl-textfield__error">{{ $errors->first('description') }}</span>
-			</div>						
+     		<div class="div_entry_parts">
+    			<div @if (empty($parts)) style="display:none" @endif class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('description')) is-invalid is-dirty @endif"" data-upgraded="eP">
+             		@foreach($parts as $part)
+                 		<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="part{{$part->id}}">
+                          <input name="parts[]" type="checkbox" id="part{{$part->id}}" class="mdl-checkbox__input" value={{$part->id}} @if(in_array($part->id, $entry_parts)) checked @endif />
+                          <span class="mdl-checkbox__label">{{$part->name}}</span>
+                        </label>
+                    @endforeach
+    				{!!Form::label('parts', Lang::get('general.Parts'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
+    				<span class="mdl-textfield__error">{{ $errors->first('description') }}</span>
+				</div>
+            </div>
 
 			<div class="mdl-card__actions">
 				<button type="submit" class="mdl-button mdl-color--primary mdl-color-text--accent-contrast mdl-js-button mdl-button--raised mdl-button--colored">
@@ -131,7 +133,33 @@
 		$('#cost').maskMoney({!!Lang::get("masks.money")!!});
 		$( "input[name='datetime_ini']" ).mask('{!!Lang::get("masks.datetime")!!}');
 		$( "input[name='datetime_end']" ).mask('{!!Lang::get("masks.datetime")!!}');
+
+		$('#vehicle_id').change(function() {
+    		$('.div_entry_parts').empty();
+
+            $.get(url('getPartsByVehicle/'+$("#vehicle_id").val()), function(retorno) {
+
+				var parts = "";
+        
+        		$.each(retorno, function (i, part) {
+					parts += '<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="part'+part.id+'">'+
+                      '<input name="parts[]" type="checkbox" id="part'+part.id+'" class="mdl-checkbox__input" value="'+part.id+'" />'+
+                      '<span class="mdl-checkbox__label">'+part.name+'</span>'+
+                    '</label>';
+                }); 
+
+				if(parts.length > 0) {
+					$(".div_entry_parts").html(
+						'<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label "" data-upgraded="eP">'+
+						parts +
+                		'{!!Form::label("parts", Lang::get("general.Parts"), ["class" => "mdl-color-text--primary-contrast mdl-textfield__label is-dirty"])!!}'+
+                    	'<span class="mdl-textfield__error"></span>'+
+                    '</div>');
+				}
+        	});   
+    	});
 	});
+	
 </script>
 
 @else

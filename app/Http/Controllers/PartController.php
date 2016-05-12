@@ -163,4 +163,9 @@ class PartController extends Controller
         
         return $parts;
     }
+    
+    public function getPartsByVehicle($idVehicle)
+    {
+        return PartRepositoryEloquent::getPartsByVehicle($idVehicle);
+    }
 }

@@ -54,13 +54,15 @@ class EntryController extends Controller
         $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
         $vehicle_id = VehicleRepositoryEloquent::getVehicles();
         $parts = PartRepositoryEloquent::getPartsByVehicle(array_keys($vehicle_id->toArray())[0]);
+        $entry_parts = [];
         return view("entry.edit", compact(
             'entry',
             'entry_type_id',
             'company_id',
             'vehicle_id',
             'vendor_id',
-            'parts'
+            'parts',
+            'entry_parts'
         ));
     }
 
@@ -71,14 +73,7 @@ class EntryController extends Controller
             $inputs = $this->entryRepo->setInputs($this->request->all());
             $entry = $this->entryRepo->create($inputs);
             
-            if (!empty($inputs['parts'])) {
-                foreach ($inputs['parts'] as $part) {
-                    PartEntry::create([
-                        "part_id" => $part,
-                        "entry_id" => $entry->id
-                    ]);
-                }
-            }
+            $entry->updateEntryParts($entry->id, $inputs['parts']);
             
             return $this->redirect->to('entry')->with('message', Lang::get(
                 'general.succefullcreate',
@@ -101,13 +96,18 @@ class EntryController extends Controller
         $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
         $vehicle_id = VehicleRepositoryEloquent::getVehicles();
         $parts = PartRepositoryEloquent::getPartsByVehicle($entry->vehicle_id);
+        $entry_parts = [];
+        foreach ($entry->partsEntries->toArray() as $entryPart) {
+            $entry_parts[] = $entryPart['part_id'];
+        }
         return view("entry.edit", compact(
             'entry',
             'entry_type_id',
             'company_id',
             'vehicle_id',
             'vendor_id',
-            'parts'
+            'parts',
+            'entry_parts'
         ));
     }
     
@@ -120,16 +120,7 @@ class EntryController extends Controller
             $inputs = $this->entryRepo->setInputs($this->request->all());
             $this->entryRepo->update($inputs, $idEntry);
             
-            PartEntry::where('entry_id', $entry->id)->delete();
-            
-            if (!empty($inputs['parts'])) {
-                foreach ($inputs['parts'] as $part) {
-                    PartEntry::create([
-                        "part_id" => $part,
-                        "entry_id" => $entry->id
-                    ]);
-                }
-            }
+            $entry->updateEntryParts($entry->id, $inputs['parts']);
             
             return $this->redirect->to('entry')->with('message', Lang::get(
                 'general.succefullupdate',

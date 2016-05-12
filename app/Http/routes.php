@@ -117,6 +117,7 @@ Route::get('vehicle/destroy/{id}', 'VehicleController@destroy');
 Route::get('user/destroy/{id}', 'UserController@destroy');
 
 Route::get('getModels/{entityKey}/{idType?}', 'ModelController@getModelsByType');
+Route::get('getPartsByVehicle/{idVehicle}', 'PartController@getPartsByVehicle');
 
 Route::get('profile', 'UserController@showProfile');
 Route::put('updateProfile/{id}', 'UserController@updateProfile');

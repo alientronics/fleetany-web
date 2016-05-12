@@ -52,7 +52,21 @@ class Entry extends BaseModel
         ];
     }
     
-    public static function boot()
+    public function updateEntryParts($idEntry, $parts)
+    {
+        PartEntry::where('entry_id', $idEntry)->delete();
+        
+        if (!empty($parts)) {
+            foreach ($parts as $part) {
+                PartEntry::create([
+                    "part_id" => $part,
+                    "entry_id" => $idEntry
+                ]);
+            }
+        }
+    }
+    
+    protected static function boot()
     {
         parent::boot();
         Entry::creating(function ($entry) {
