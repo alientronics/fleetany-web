@@ -73,7 +73,9 @@ class EntryController extends Controller
             $inputs = $this->entryRepo->setInputs($this->request->all());
             $entry = $this->entryRepo->create($inputs);
             
-            $entry->updateEntryParts($entry->id, $inputs['parts']);
+            if(!empty($inputs['parts'])) {
+                $entry->updateEntryParts($entry->id, $inputs['parts']);
+            }
             
             return $this->redirect->to('entry')->with('message', Lang::get(
                 'general.succefullcreate',
@@ -120,7 +122,9 @@ class EntryController extends Controller
             $inputs = $this->entryRepo->setInputs($this->request->all());
             $this->entryRepo->update($inputs, $idEntry);
             
-            $entry->updateEntryParts($entry->id, $inputs['parts']);
+            if(!empty($inputs['parts'])) {
+                $entry->updateEntryParts($entry->id, $inputs['parts']);
+            }
             
             return $this->redirect->to('entry')->with('message', Lang::get(
                 'general.succefullupdate',
