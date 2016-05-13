@@ -59,18 +59,14 @@ class EntryControllerTest extends AcceptanceTestCase
     public function testUpdate()
     {
         $this->visit('/entry/'.Entry::all()->last()['id'].'/edit');
-        
         $form = $this->getForm();
-        $form['parts'][0]->untick();
         $form['parts'][1]->tick();
+        $partId2 = $form['parts'][1]->getValue();
         $form['datetime_ini']->setValue('2016-05-01 15:15:15');
         $form['datetime_end']->setValue('2016-05-02 15:15:15');
         $form['entry_number']->setValue('125');
         $form['cost']->setValue('90005.00');
         $form['description']->setValue('Descricao2');
-
-        $partId1 = $form['parts'][1]->getValue();
-        $partId2 = $form['parts'][1]->getValue();
         
         $this->makeRequestUsingForm($form)
             ->seePageIs('/entry')
@@ -86,20 +82,12 @@ class EntryControllerTest extends AcceptanceTestCase
                     'description' => 'Descricao2',
             ]
         );
-        
+
         $this->seeInDatabase(
             'part_entry',
             [
                     'entry_id' => Entry::all()->last()['id'],
                     'part_id' => $partId2
-            ]
-        );
-        
-        $this->seeIsSoftDeletedInDatabase(
-            'part_entry',
-            [
-                    'entry_id' => Entry::all()->last()['id'],
-                    'part_id' => $partId1
             ]
         );
     }

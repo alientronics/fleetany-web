@@ -14,7 +14,6 @@ use App\Repositories\TypeRepositoryEloquent;
 use App\Repositories\ContactRepositoryEloquent;
 use App\Repositories\VehicleRepositoryEloquent;
 use App\Repositories\PartRepositoryEloquent;
-use App\Entities\PartEntry;
 
 class EntryController extends Controller
 {

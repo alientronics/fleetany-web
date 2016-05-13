@@ -22,7 +22,7 @@ class TireSensorControllerTest extends AcceptanceTestCase
         
         $this->visit('/part/'.$idPart.'/edit?id=&temperature=1&pressure=1&latitude=
                         &longitude=&number=1&sort=temperature-asc')
-            ->see('mode_edit</i>');
+            ->see('mdl-cell--1-col mdl-data-table__cell--non-numeric">');
     }
     
     public function testSort()
@@ -41,28 +41,28 @@ class TireSensorControllerTest extends AcceptanceTestCase
         $url = '/part/'.$idPart.'/edit?id=&temperature=&pressure=&latitude=&longitude=&number=';
         
         $this->visit($url.'&sort=temperature-asc')
-            ->see('mode_edit</i>');
+            ->see('mdl-cell--1-col mdl-data-table__cell--non-numeric">');
         
         $this->visit($url.'&sort=id-asc')
-            ->see('mode_edit</i>');
+            ->see('mdl-cell--1-col mdl-data-table__cell--non-numeric">');
 
         $this->visit($url.'&sort=vehicle-desc')
-            ->see('mode_edit</i>');
+            ->see('mdl-cell--1-col mdl-data-table__cell--non-numeric">');
             
         $this->visit($url.'&sort=vehicle-asc')
-            ->see('mode_edit</i>');
+            ->see('mdl-cell--1-col mdl-data-table__cell--non-numeric">');
 
         $this->visit($url.'&sort=part-type-desc')
-            ->see('mode_edit</i>');
+            ->see('mdl-cell--1-col mdl-data-table__cell--non-numeric">');
             
         $this->visit($url.'&sort=part-type-asc')
-            ->see('mode_edit</i>');
+            ->see('mdl-cell--1-col mdl-data-table__cell--non-numeric">');
 
         $this->visit($url.'&sort=cost-desc')
-            ->see('mode_edit</i>');
+            ->see('mdl-cell--1-col mdl-data-table__cell--non-numeric">');
             
         $this->visit($url.'&sort=cost-asc')
-            ->see('mode_edit</i>');
+            ->see('mdl-cell--1-col mdl-data-table__cell--non-numeric">');
             
     }
 }
