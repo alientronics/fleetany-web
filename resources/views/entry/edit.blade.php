@@ -155,6 +155,7 @@
                 		'{!!Form::label("parts", Lang::get("general.Parts"), ["class" => "mdl-color-text--primary-contrast mdl-textfield__label is-dirty"])!!}'+
                     	'<span class="mdl-textfield__error"></span>'+
                     '</div>');
+					componentHandler.upgradeDom();
 				}
         	});   
     	});
