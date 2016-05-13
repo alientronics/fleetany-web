@@ -106,7 +106,7 @@
                 @include('includes.gridview', [
                 	'registers' => $sensor_data,
                 	'gridview' => [
-                		'pageActive' => 'part',
+                		'pageActive' => 'tireSensor',
                      	'sortFilters' => [
                             ["class" => "mdl-cell--2-col", "name" => "temperature", "lang" => "general.temperature"], 
                             ["class" => "mdl-cell--hide-phone mdl-cell--hide-tablet mdl-cell--2-col", "name" => "pressure", "lang" => "general.pressure"], 

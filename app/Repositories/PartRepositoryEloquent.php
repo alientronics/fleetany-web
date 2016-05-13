@@ -44,7 +44,10 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
             $query = $query->leftJoin('vehicles', 'parts.vehicle_id', '=', 'vehicles.id');
             $query = $query->leftJoin('models', 'vehicles.model_vehicle_id', '=', 'models.id');
             $query = $query->leftJoin('types', 'parts.part_type_id', '=', 'types.id');
-            
+
+            if (!empty($filters['vehicle_id'])) {
+                $query = $query->where('vehicles.id', $filters['vehicle_id']);
+            }
             if (!empty($filters['vehicle'])) {
                 $query = $query->where('models.name', 'like', '%'.$filters['vehicle'].'%');
             }

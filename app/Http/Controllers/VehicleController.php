@@ -11,6 +11,8 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\CompanyRepositoryEloquent;
 use App\Repositories\ModelRepositoryEloquent;
+use App\Repositories\PartRepositoryEloquent;
+use Illuminate\Container\Container as Application;
 
 class VehicleController extends Controller
 {
@@ -46,7 +48,8 @@ class VehicleController extends Controller
         $vehicle = new Vehicle();
         $company_id = CompanyRepositoryEloquent::getCompanies();
         $model_vehicle_id = ModelRepositoryEloquent::getModels('vehicle');
-        return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 'company_id'));
+        $parts = null;
+        return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 'company_id', 'parts'));
     }
 
     public function store()
@@ -75,8 +78,21 @@ class VehicleController extends Controller
         
         $vehicleLastPlace = $this->vehicleRepo->getVehiclesLastPlace($idVehicle);
         $vehicleLastPlace = !empty($vehicleLastPlace[0]) ? $vehicleLastPlace[0] : null;
-            
-        return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 'company_id', 'vehicleLastPlace'));
+
+        $partRepo = new PartRepositoryEloquent(new Application);
+        $partController = new PartController($partRepo);
+        $filters = $this->helper->getFilters($this->request->all(), $partController->getFields(), $this->request);
+        $filters['vehicle_id'] = $vehicle->id;
+        $parts = $partRepo->results($filters);
+        
+        return view("vehicle.edit", compact(
+            'vehicle',
+            'model_vehicle_id',
+            'company_id',
+            'vehicleLastPlace',
+            'parts',
+            'filters'
+        ));
     }
     
     public function update($idVehicle)

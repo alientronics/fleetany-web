@@ -35,6 +35,11 @@ class PartController extends Controller
         $this->middleware('auth');
         $this->partRepo = $partRepo;
     }
+  
+    public function getFields()
+    {
+        return $this->fields;
+    }
 
     public function index()
     {
