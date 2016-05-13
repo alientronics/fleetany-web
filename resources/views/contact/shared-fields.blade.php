@@ -38,77 +38,53 @@
 <script>
 	$( document ).ready(function() {
 
-
 		function fillCountries(data) {
 			var countries = [];
-			var countryVal = $('#country').val();
 			$.each(data.geonames, function (index, country) {
 		        item = {}
 		        item ["text"] = country.countryName;
-		        item ["value"] = country.countryCode;
+		        item ["value"] = country.geonameId;
 		        countries.push(item);
 			});
 			$('#country').immybox({
 			    choices: countries
 			});
-			$('#country').val(countryVal);
+			$('#state').immybox({choices: []});
 		};
 
-		$('#country').on('keyup', function(){
-
-			if($('#country').val().length < 3) {
-				return;
-			}
-
-			var urlCountries = "http://api.geonames.org/searchJSON?name_startsWith="+
-                        		$('#country').val()+'&fcode=pcli'+
-                    			"&username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
-
-    		$.ajax({
-    		    url: urlCountries,
-    		    type: 'GET',
-    		    crossDomain: true,
-    		    dataType: 'jsonp',
-    		    success: fillCountries,
-    		    error: function() { console.log('Failed!'); }
-    		});
+		var urlCountries = "http://api.geonames.org/countryInfoJSON?username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
+		$.ajax({
+		    url: urlCountries,
+		    type: 'GET',
+		    crossDomain: true,
+		    dataType: 'jsonp',
+		    success: fillCountries,
+		    error: function() { console.log('Failed!'); }
 		});
-		
+
 		function fillStates(data){
 			var states = [];
-			var stateVal = $('#state').val();
 			$.each(data.geonames, function (index, state) {
 				item = {}
 		        item ["text"] = state.toponymName;
 		        item ["value"] = state.name;
 		        states.push(item);
 			});
-			$('#state').immybox({
-			    choices: states
-			});
-			$('#state').val(stateVal);
+			$('#state').immybox('setChoices', states);
 		}
 
-		$('#state').on('keyup', function(){
-
-			if($('#state').val().length < 3) {
-				return;
-			}
-
-			var urlStates = "http://api.geonames.org/searchJSON?name_startsWith="+
-								encodeURIComponent($('#state').val())+
-								'&country='+$('#country').immybox('getValue')+
-								'&fcode=ADM1'+
-                    			"&username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
-
-    		$.ajax({
-    		    url: urlStates,
-    		    type: 'GET',
-    		    crossDomain: true,
-    		    dataType: 'jsonp',
-    		    success: fillStates,
-    		    error: function() { console.log('Failed!'); }
-    		});
+		$('#country').on('update', function(){
+			var urlStates = "http://api.geonames.org/childrenJSON?geonameId=" + 
+								$('#country').immybox('getValue') + 
+								"&username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
+			$.ajax({
+			    url: urlStates,
+			    type: 'GET',
+			    crossDomain: true,
+			    dataType: 'jsonp',
+			    success: fillStates,
+			    error: function() { console.log('Failed!'); }
+			});
 		});
 
 		function fillCities(data){
@@ -126,26 +102,34 @@
 			$('#city').val(cityVal);
 		}
 
-		$('#city').on('keyup', function(){
+		var delay = (function(){
+		  var timer = 0;
+		  return function(callback, ms){
+		    clearTimeout (timer);
+		    timer = setTimeout(callback, ms);
+		  };
+		})();
+		
+		$('#city').keyup(function() {
+		    delay(function(){
+		    	if($('#city').val().length < 3) {
+					return;
+				}
 
-			if($('#city').val().length < 3) {
-				return;
-			}
+		    	var urlCities = "http://api.geonames.org/searchJSON?q="+encodeURIComponent($('#state').immybox('getValue'))+
+	                        		"&name_startsWith="+encodeURIComponent($('#city').val())+
+	                        		'&fcode=ADM2'+
+	                    			"&username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
 
-			var urlCities = "http://api.geonames.org/searchJSON?q="+encodeURIComponent($('#state').immybox('getValue'))+
-                        		"&name_startsWith="+encodeURIComponent($('#city').val())+
-                        		'&country='+encodeURIComponent($('#country').immybox('getValue'))+
-                        		'&fcode=ADM2'+
-                    			"&username={{config('app.geonames_username')}}&lang={!!Lang::get('masks.geoname')!!}";
-
-    		$.ajax({
-    		    url: urlCities,
-    		    type: 'GET',
-    		    crossDomain: true,
-    		    dataType: 'jsonp',
-    		    success: fillCities,
-    		    error: function() { console.log('Failed!'); }
-    		});
+				$.ajax({
+	    		    url: urlCities,
+	    		    type: 'GET',
+	    		    crossDomain: true,
+	    		    dataType: 'jsonp',
+	    		    success: fillCities,
+	    		    error: function() { console.log('Failed!'); }
+	    		});
+		    }, 500 );
 		});
 
 	});
