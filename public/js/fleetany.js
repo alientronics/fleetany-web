@@ -93,7 +93,6 @@ window.onload=function(){
 		});
 	});
 
-	var hasResults = false;
 	function fillCities(data){
 		var cities = [];
 		var cityVal = $('#city').val();
@@ -107,22 +106,14 @@ window.onload=function(){
 		    choices: cities
 		});
 		$('#city').val(cityVal);
-		hasResults = true;
 	}
 	
 	$('#state').on('update', function(){
 		$('#city').val('');
-		hasResults = false;
 	});
 	
-	$('#city').keyup(function() {
-
-		if($('#city').val().length == 0) {
-			hasResults = false;
-			return;
-		}
-		
-    	if(hasResults) {
+	$('#city').keydown(function() {
+		if($('#city').val().length != 1 || $('#city').val() == '') {
 			return;
 		}
 
