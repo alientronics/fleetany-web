@@ -164,6 +164,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Thinmy\CachedEloquentUser\AuthServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Alientronics\FleetanyWebPages\FleetanyWebPagesServiceProvider::class,
 
     ],
 
