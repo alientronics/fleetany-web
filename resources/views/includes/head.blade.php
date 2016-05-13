@@ -4,6 +4,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <meta name="base-url" content="{{url('/')}}">
+<meta name="geonames-username" content="{{config('app.geonames_username')}}">
+<meta name="geonames-lang" content="{!!Lang::get('masks.geoname')!!}">
 <title>fleetany - open source fleet management system</title>
 
 <!-- first, parallel css -->

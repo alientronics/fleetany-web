@@ -73,7 +73,7 @@
         "classmap": [
             "database",
             "vendor/alientronics/cached-eloquent-user/src/",
-            "vendor/alientronics/laravel-acl/src/",
+            "vendor/alientronics/laravel-acl/src/Kodeine/Acl/",
             "vendor/alientronics/fleetany-web-pages/src/"
         ],
         "psr-4": {
