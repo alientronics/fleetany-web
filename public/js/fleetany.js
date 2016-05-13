@@ -51,18 +51,21 @@ window.onload=function(){
 		$('#state').immybox({choices: []});
 	};
 
-	var urlCountries = 'http://api.geonames.org/countryInfoJSON?username=' +
-						$('meta[name="geonames-username"]').attr('content') +
-						'&lang=' + $('meta[name="geonames-lang"]').attr('content');
 	
-	$.ajax({
-	    url: urlCountries,
-	    type: 'GET',
-	    crossDomain: true,
-	    dataType: 'jsonp',
-	    success: fillCountries,
-	    error: function() { console.log('Failed!'); }
-	});
+	if ($("#country").length) {
+		var urlCountries = 'http://api.geonames.org/countryInfoJSON?username=' +
+							$('meta[name="geonames-username"]').attr('content') +
+							'&lang=' + $('meta[name="geonames-lang"]').attr('content');
+		
+		$.ajax({
+		    url: urlCountries,
+		    type: 'GET',
+		    crossDomain: true,
+		    dataType: 'jsonp',
+		    success: fillCountries,
+		    error: function() { console.log('Failed!'); }
+		});
+	}
 
 	function fillStates(data){
 		var states = [];
