@@ -53,6 +53,7 @@
 		"doctrine/dbal": "v2.4.2",
         "alientronics/cached-eloquent-user": "dev-master",
         "alientronics/laravel-acl": "dev-master",
+        "alientronics/fleetany-web-pages": "dev-master",
         "barryvdh/laravel-debugbar": "^2.2"
     },
     "require-dev": {
