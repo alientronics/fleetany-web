@@ -14,8 +14,6 @@
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::get('home', 'HomeController@index');
 Route::resource('/contact', 'HomeController@contact');
-Route::get('tos', 'PagesController@termsofservice');
-Route::get('privacy', 'PagesController@privacy');
 
 Route::group(
     [
