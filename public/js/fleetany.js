@@ -102,9 +102,7 @@ window.onload=function(){
 	        item ["value"] = city.geonameId;
 	        cities.push(item);
 		});
-		$('#city').immybox({
-		    choices: cities
-		});
+		$('#city').immybox('setChoices', cities);
 		$('#city').val(cityVal);
 	}
 	
@@ -112,11 +110,14 @@ window.onload=function(){
 		$('#city').val('');
 	});
 	
+	var firstSearch = true;
 	$('#city').keydown(function() {
-		if($('#city').val().length != 1 || $('#city').val() == '') {
+		if(($('#city').val().length != 1) && !firstSearch) {
 			return;
 		}
 
+		firstSearch = false;
+		
     	var urlCities = "http://api.geonames.org/searchJSON?q="+encodeURIComponent($('#state').immybox('getValue'))+
                     		"&name_startsWith="+encodeURIComponent($('#city').val())+
                     		'&fcode=ADM2'+
