@@ -37,7 +37,11 @@ window.onload=function(){
 	    });
 	}
     
+
 	function fillCountries(data) {
+		var countryVal = $('#country').val();
+		var stateVal = $('#state').val();
+		
 		var countries = [];
 		$.each(data.geonames, function (index, country) {
 	        item = {}
@@ -49,10 +53,20 @@ window.onload=function(){
 		    choices: countries
 		});
 		$('#state').immybox({choices: []});
+		$('#country').val(countryVal);
+		$('#state').val(stateVal);
+		
+		if($('#country').val().length) {
+			$('#country').parent().addClass('is-dirty');
+		}
+		if($('#state').val().length) {
+			$('#state').parent().addClass('is-dirty');
+		}
 	};
 
 	
 	if ($("#country").length) {
+		
 		var urlCountries = 'http://api.geonames.org/countryInfoJSON?username=' +
 							$('meta[name="geonames-username"]').attr('content') +
 							'&lang=' + $('meta[name="geonames-lang"]').attr('content');
@@ -91,6 +105,10 @@ window.onload=function(){
 		    success: fillStates,
 		    error: function() { console.log('Failed!'); }
 		});
+		$('#state').val('');
+		$('#city').val('');
+		$('#state').parent().removeClass('is-dirty');
+		$('#city').parent().removeClass('is-dirty');
 	});
 
 	function fillCities(data){
