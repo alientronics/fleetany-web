@@ -41,6 +41,7 @@ window.onload=function(){
 	function fillCountries(data) {
 		var countryVal = $('#country').val();
 		var stateVal = $('#state').val();
+		var cityVal = $('#city').val();
 		
 		var countries = [];
 		$.each(data.geonames, function (index, country) {
@@ -52,15 +53,20 @@ window.onload=function(){
 		$('#country').immybox({
 		    choices: countries
 		});
-		$('#state').immybox({choices: []});
+		$('#state').immybox({choices: [{text: stateVal, value: stateVal}]});
+		$('#city').immybox({choices: [{text: cityVal, value: 1}]});
 		$('#country').val(countryVal);
 		$('#state').val(stateVal);
+		$('#city').val(cityVal);
 		
 		if($('#country').val().length) {
 			$('#country').parent().addClass('is-dirty');
 		}
 		if($('#state').val().length) {
 			$('#state').parent().addClass('is-dirty');
+		}
+		if($('#city').val().length) {
+			$('#city').parent().addClass('is-dirty');
 		}
 	};
 
@@ -92,7 +98,7 @@ window.onload=function(){
 		$('#state').immybox('setChoices', states);
 	}
 
-	$('#country').on('update', function(){
+	$('#country').on('update', function() {
 		var urlStates = "http://api.geonames.org/childrenJSON?geonameId=" + 
 							$('#country').immybox('getValue') + 
 							'&username=' + $('meta[name="geonames-username"]').attr('content') +
@@ -105,10 +111,6 @@ window.onload=function(){
 		    success: fillStates,
 		    error: function() { console.log('Failed!'); }
 		});
-		$('#state').val('');
-		$('#city').val('');
-		$('#state').parent().removeClass('is-dirty');
-		$('#city').parent().removeClass('is-dirty');
 	});
 
 	function fillCities(data){
@@ -122,6 +124,9 @@ window.onload=function(){
 		});
 		$('#city').immybox('setChoices', cities);
 		$('#city').val(cityVal);
+		if($('#city').val().length) {
+			$('#city').parent().addClass('is-dirty');
+		}
 	}
 	
 	$('#state').on('update', function(){
@@ -151,6 +156,12 @@ window.onload=function(){
 		    error: function() { console.log('Failed!'); }
 		});
 	});
+	
+	$('#city').on('update', function() {
+		if($('#city').val().length) {
+			$('#city').parent().addClass('is-dirty');
+		}
+	});	
 }
 
 function showSnackBar(message) {
