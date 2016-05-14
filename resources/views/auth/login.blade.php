@@ -20,10 +20,12 @@
 						<input class="mdl-textfield__input" type="password" id="password" name="password" />
 						<label class="mdl-textfield__label" for="password">Password</label>
 					</div>
+					@if (class_exists('Alientronics\FleetanyWebPages\Controllers\PageController'))
 					<div class="mdl-textfield mdl-js-textfield">
     					<input name="remember" type="checkbox" value="tos">
     					<a href="/tos" class="mdl-color-text--primary" >{{Lang::get("general.tos")}}</a>
 					</div>
+					@endif
 			</div>
 			<div class="mdl-card__actions mdl-card--border">
 				<button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Log in</button>
