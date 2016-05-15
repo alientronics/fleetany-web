@@ -14,7 +14,6 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Kodeine\Acl\Traits\HasRole;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
-use App\Repositories\HelperRepository;
 
 class User extends BaseModel implements Transformable, AuthenticatableContract, CanResetPasswordContract
 {
@@ -118,23 +117,37 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
             'name' => Lang::get('setup.GenericTire'),
             'company_id' => $company->id]);
     
-        Model::forceCreate(['model_type_id' => $typeSensor->id,
+        $modelSensor = Model::forceCreate(['model_type_id' => $typeSensor->id,
             'name' => Lang::get('setup.GenericSensor'),
             'company_id' => $company->id]);
 
-        Vehicle::forceCreate(['model_vehicle_id' => $modelCar->id,
+        $vehicle = Vehicle::forceCreate(['model_vehicle_id' => $modelCar->id,
             'number' => Lang::get('setup.VehiclePlate'),
             'initial_miliage' => 123,
             'actual_miliage' => 123,
             'cost' => 50000,
             'description' => Lang::get('setup.GenericVehicle'),
             'company_id' => $company->id]);
+
+        Part::forceCreate(
+            [  'vehicle_id' => $vehicle->id,
+            'vendor_id' => $contactVendor->id,
+            'part_type_id' => $typeSensor->id,
+            'part_model_id' => $modelSensor->id,
+            'cost' => 1,
+            'name' => Lang::get('setup.GenericSensor'),
+            'number' => '0000000001',
+            'miliage' => 1,
+            'position' => 1,
+            'lifecycle' => 1,
+            'company_id' => $company->id]
+        );
+
     }
     
     private function setUserProperties($company)
     {
-        $objHelper = new HelperRepository();
-        $userLanguage = $objHelper->getUserLanguage();
+        $userLanguage = $this->getUserLanguage();
         app()->setLocale($userLanguage);
         
         $this->language = $userLanguage;
@@ -173,5 +186,25 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
         User::creating(function ($user) {
             $user->company_id = ( $user->company_id ?: Auth::user()['company_id'] );
         });
+    }
+
+    public function getUserLanguage()
+    {
+        if (!empty(Auth::user()['language'])) {
+            return Auth::user()['language'];
+        } else {
+            $availableLangs = $this->getAvailableLanguages();
+            
+            if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
+                $browserLanguages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+                
+                foreach ($browserLanguages as $lang) {
+                    if (in_array($lang, $availableLangs)) {
+                        return $lang;
+                    }
+                }
+            }
+        }
+        return 'en';
     }
 }

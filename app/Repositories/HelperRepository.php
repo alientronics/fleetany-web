@@ -97,26 +97,6 @@ class HelperRepository
         return $languages;
     }
 
-    public function getUserLanguage()
-    {
-        if (!empty(Auth::user()['language'])) {
-            return Auth::user()['language'];
-        } else {
-            $availableLangs = $this->getAvailableLanguages();
-            
-            if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
-                $browserLanguages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
-                
-                foreach ($browserLanguages as $lang) {
-                    if (in_array($lang, $availableLangs)) {
-                        return $lang;
-                    }
-                }
-            }
-        }
-        return 'en';
-    }
-
     public function validateRecord($record)
     {
         if (empty($record) || $record->company_id != Auth::user()['company_id']) {

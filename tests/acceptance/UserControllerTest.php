@@ -85,10 +85,10 @@ class UserControllerTest extends AcceptanceTestCase
     
     public function testDelete()
     {
-        $idDelete = User::all()->last()['id'];
-        $this->seeInDatabase('users', ['email' => 'staff@alientronics.com.br']);
-        $this->visit('/user/destroy/'.$idDelete);
-        $this->seeIsSoftDeletedInDatabase('users', ['email' => 'staff@alientronics.com.br']);
+        $userDelete = User::all()->last();
+        $this->seeInDatabase('users', ['email' => $userDelete->email]);
+        $this->visit('/user/destroy/'.$userDelete->id);
+        $this->seeIsSoftDeletedInDatabase('users', ['email' => $userDelete->email]);
     }
     
     public function testProfile()
