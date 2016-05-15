@@ -25,7 +25,6 @@ install:
 before_script:
   - mysql -e 'create database fleetany;'
   - mv .env.travis .env
-  - php artisan vendor:publish --provider="Kodeine\Acl\AclServiceProvider"
   - php artisan migrate:refresh --seed --force
 
 script:

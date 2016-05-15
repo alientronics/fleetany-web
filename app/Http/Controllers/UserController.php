@@ -52,7 +52,7 @@ class UserController extends Controller
         $user = new User();
         $contact = new Contact();
         $role = $this->helper->getAvailableRoles();
-        $language = $this->helper->getAvailableLanguages();
+        $language = $user->getAvailableLanguages();
         $companies = CompanyRepositoryEloquent::getCompanies();
         $contacts = ContactRepositoryEloquent::getContacts();
         return view("user.edit", compact('user', 'contact', 'role', 'language', 'companies', 'contacts'));

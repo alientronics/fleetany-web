@@ -92,6 +92,7 @@
     },
     "scripts": {
         "post-install-cmd": [
+            "php artisan vendor:publish --provider='Kodeine\\Acl\\AclServiceProvider'",
             "php artisan clear-compiled",
             "php artisan optimize"
         ],

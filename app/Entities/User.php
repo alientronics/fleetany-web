@@ -31,12 +31,8 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
         return $this->belongsTo("App\Entities\Company");
     }
     
-    public function setUp()
+    private function createGenericTypes($company)
     {
-        $company = Company::forceCreate(['name' => $this->name . ' Inc.']);
-        $company->save();
-        $this->setUserProperties($company);
-        
         Type::forceCreate(['entity_key' => 'entry',
             'name' => Lang::get('setup.repair'),
             'company_id' => $company->id]);
@@ -44,6 +40,35 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
         Type::forceCreate(['entity_key' => 'entry',
             'name' => Lang::get('setup.service'),
             'company_id' => $company->id]);
+
+        Type::forceCreate(['entity_key' => 'contact',
+            'name' => Lang::get('setup.detail'),
+            'company_id' => $company->id]);
+    
+        Type::forceCreate(['entity_key' => 'fuel',
+            'name' => Lang::get('setup.unleaded'),
+            'company_id' => $company->id]);
+    
+        Type::forceCreate(['entity_key' => 'fuel',
+            'name' => Lang::get('setup.premium'),
+            'company_id' => $company->id]);
+    
+        Type::forceCreate(['entity_key' => 'trip',
+            'name' => Lang::get('setup.tour'),
+            'company_id' => $company->id]);
+    
+        Type::forceCreate(['entity_key' => 'trip',
+            'name' => Lang::get('setup.delivery'),
+            'company_id' => $company->id]);
+    }
+
+    public function setUp()
+    {
+        $company = Company::forceCreate(['name' => $this->name . ' Inc.']);
+        $company->save();
+        $this->setUserProperties($company);
+        
+        $this->createGenericTypes($company);
         
         $typeTire = Type::forceCreate(['entity_key' => 'part',
             'name' => Lang::get('setup.tire'),
@@ -67,26 +92,6 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
     
         $typeDriver = Type::forceCreate(['entity_key' => 'contact',
             'name' => Lang::get('setup.driver'),
-            'company_id' => $company->id]);
-    
-        Type::forceCreate(['entity_key' => 'contact',
-            'name' => Lang::get('setup.detail'),
-            'company_id' => $company->id]);
-    
-        Type::forceCreate(['entity_key' => 'fuel',
-            'name' => Lang::get('setup.unleaded'),
-            'company_id' => $company->id]);
-    
-        Type::forceCreate(['entity_key' => 'fuel',
-            'name' => Lang::get('setup.premium'),
-            'company_id' => $company->id]);
-    
-        Type::forceCreate(['entity_key' => 'trip',
-            'name' => Lang::get('setup.tour'),
-            'company_id' => $company->id]);
-    
-        Type::forceCreate(['entity_key' => 'trip',
-            'name' => Lang::get('setup.delivery'),
             'company_id' => $company->id]);
 
         $contactDetail = $this->createContact($this->name, $company->id);
@@ -206,5 +211,19 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
             }
         }
         return 'en';
+    }
+
+    public function getAvailableLanguages()
+    {
+        $languages = [];
+        $directories = File::directories(base_path() . DIRECTORY_SEPARATOR .
+                            'resources' . DIRECTORY_SEPARATOR . 'lang');
+        
+        foreach ($directories as $directory) {
+            $lang = explode(DIRECTORY_SEPARATOR, $directory);
+            $lang = end($lang);
+            $languages[$lang] = Lang::get('general.' . $lang);
+        }
+        return $languages;
     }
 }

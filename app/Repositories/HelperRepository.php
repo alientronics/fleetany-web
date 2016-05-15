@@ -83,20 +83,6 @@ class HelperRepository
         return $role;
     }
 
-    public function getAvailableLanguages()
-    {
-        $languages = [];
-        $directories = File::directories(base_path() . DIRECTORY_SEPARATOR .
-                            'resources' . DIRECTORY_SEPARATOR . 'lang');
-        
-        foreach ($directories as $directory) {
-            $lang = explode(DIRECTORY_SEPARATOR, $directory);
-            $lang = end($lang);
-            $languages[$lang] = Lang::get('general.' . $lang);
-        }
-        return $languages;
-    }
-
     public function validateRecord($record)
     {
         if (empty($record) || $record->company_id != Auth::user()['company_id']) {
