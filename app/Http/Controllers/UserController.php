@@ -87,7 +87,7 @@ class UserController extends Controller
         $this->helper->validateRecord($contact);
         
         $role = $this->helper->getAvailableRoles();
-        $language = $this->helper->getAvailableLanguages();
+        $language = $user->getAvailableLanguages();
         $companies = CompanyRepositoryEloquent::getCompanies();
         $contacts = ContactRepositoryEloquent::getContacts();
             
@@ -136,7 +136,7 @@ class UserController extends Controller
     public function showProfile()
     {
         $user = User::findOrFail(Auth::id());
-        $language = $this->helper->getAvailableLanguages();
+        $language = $user->getAvailableLanguages();
         return view("profile", compact('user', 'language'));
     }
     

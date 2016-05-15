@@ -4,7 +4,6 @@ namespace App\Repositories;
 use Illuminate\Http\Request;
 use Kodeine\Acl\Models\Eloquent\Role;
 use Lang;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
