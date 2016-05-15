@@ -154,7 +154,7 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
     private function setUserProperties($company)
     {
         $userLanguage = $this->getUserLanguage();
-        app()->setLocale($userLanguage);
+        app('translator')->setLocale($userLanguage);
         
         $this->language = $userLanguage;
         $this->company_id = $company->id;
