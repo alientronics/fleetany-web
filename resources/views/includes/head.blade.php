@@ -26,6 +26,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="http://immybox.js.org/jquery.immybox.min.js"></script>	
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 {!! HTML::script('js/md-date-time-picker.min.js') !!}
 {!! HTML::script('js/fleetany.js') !!}
 

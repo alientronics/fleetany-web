@@ -100,13 +100,23 @@
 		$('#cost').maskMoney({!!Lang::get("masks.money")!!});
 
 		@if(!empty($vehicleLastPlace))
-		var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng={{$vehicleLastPlace->latitude}},{{$vehicleLastPlace->longitude}}';
-		$.get( url, function( data ) {
-			if(data.results[0] != undefined) {
-    			$("#last-position").html($("#last-position").html() + data.results[0].formatted_address);
-    			$("#last-position").show();
-			}
-		});
+
+		   var geocoder = new google.maps.Geocoder();
+		   if (geocoder) {
+		   	  var latLng = new google.maps.LatLng({{$vehicleLastPlace->latitude}}, {{$vehicleLastPlace->longitude}});
+		      geocoder.geocode({'location': latLng}, function (results, status) {
+		         if (status == google.maps.GeocoderStatus.OK) {
+            		if(results[0] != undefined) {
+                		$("#last-position").html($("#last-position").html() + results[0].formatted_address);
+                		$("#last-position").show();
+                	}
+		         }
+		         else {
+		            console.log("Geocoding failed: " + status);
+		         }
+		      });
+		   }    
+		
 		@endif
 		
 	});
