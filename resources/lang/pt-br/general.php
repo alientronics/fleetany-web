@@ -91,6 +91,7 @@ return [
     // Part
     "Part"   => "Parte",
     "Parts"    => "Partes",
+    "PartData" => "Dados da Parte",
     "part" => "Parte",
     "part_type" => "Tipo da parte",
     "part_model" => "Modelo da parte",
@@ -101,6 +102,7 @@ return [
     "linked_part"  => "Parte Vinculada",
     
     // Tire Sensor
+    "SensorData"   => "Dados de Sensor",
     "temperature"   => "Temperatura",
     "pressure"    => "Press&atilde;o",
     "latitude" => "Latitude",
@@ -134,6 +136,7 @@ return [
     "vehicle"   => "Ve&iacute;culo",
     "Vehicle"   => "Ve&iacute;culo",
     "Vehicles"    => "Ve&iacute;culos",
+    "VehicleData"    => "Dados do Ve&iacute;culo",
     "LastPosition" => "&Uacute;ltima posi&ccedil;&atilde;o",
     "newvehicle" => "Novo Ve&iacute;culo",
     "model_vehicle"=> "Modelo do ve&iacute;culo",
