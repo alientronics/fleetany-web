@@ -4,6 +4,12 @@
     	<span class="mdl-textfield__error">{{ $errors->first('model_vehicle_id') }}</span>
     </div>
     
+    <div id="div_last_position" style="display: none" class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('last_position')) is-invalid is-dirty @endif"" data-upgraded="eP">
+    	{!!Form::text('last_position', "", ['id' => 'last_position', 'class' => 'mdl-textfield__input', 'disabled' => 'disabled'])!!}
+    	{!!Form::label('last_position', Lang::get('general.last_position'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label'])!!}
+    	<span class="mdl-textfield__error">{{ $errors->first('last_position') }}</span>
+    </div>
+    
     <div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('number')) is-invalid is-dirty @endif"" data-upgraded="eP">
     	{!!Form::text('number', $vehicle->number, ['class' => 'mdl-textfield__input'])!!}
     	{!!Form::label('number', Lang::get('general.number'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}

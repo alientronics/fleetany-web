@@ -18,10 +18,6 @@
 	<section class="demo-section demo-section--textfield demo-page--textfield mdl-upgraded">
 		<div class="demo-preview-block">
 
-      		<div id="last-position" style="display: none">
-      			<b>{{ Lang::get('general.LastPosition') }}: </b>
-    		</div>
-  		
 @if (!$vehicle->id)
 {!! Form::open(['route' => 'vehicle.store']) !!}
 @else
@@ -56,8 +52,8 @@
 		      geocoder.geocode({'location': latLng}, function (results, status) {
 		         if (status == google.maps.GeocoderStatus.OK) {
             		if(results[0] != undefined) {
-                		$("#last-position").html($("#last-position").html() + results[0].formatted_address);
-                		$("#last-position").show();
+                		$("#last_position").val(results[0].formatted_address);
+                		$("#div_last_position").show();
                 	}
 		         }
 		         else {
