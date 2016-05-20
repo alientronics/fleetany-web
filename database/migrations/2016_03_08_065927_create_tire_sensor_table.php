@@ -18,6 +18,7 @@ class CreateTireSensorTable extends Migration {
 		    $table->integer('part_id')->nullable()->index('fk_tire_sensor_parts1_idx');
 		    $table->decimal('temperature')->nullable();
 		    $table->decimal('pressure')->nullable();
+		    $table->decimal('battery')->nullable();
 		    $table->decimal('latitude', 10, 7);
 		    $table->decimal('longitude', 10, 7);
 		    $table->string('number');

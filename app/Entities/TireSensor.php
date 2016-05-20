@@ -13,7 +13,7 @@ class TireSensor extends BaseModel
     use SoftDeletes;
     
     protected $table = 'tire_sensor';
-    protected $fillable = ['part_id', 'temperature', 'pressure',
+    protected $fillable = ['part_id', 'temperature', 'pressure', 'battery',
                             'latitude', 'longitude', 'number'
                           ];
 

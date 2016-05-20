@@ -20,7 +20,7 @@ class TireSensorControllerTest extends AcceptanceTestCase
             'part_id' => $idPart,
         ]);
         
-        $this->visit('/part/'.$idPart.'/edit?id=&temperature=1&pressure=1&latitude=
+        $this->visit('/part/'.$idPart.'/edit?id=&temperature=1&pressure=1&battery=1&latitude=
                         &longitude=&number=1&sort=temperature-asc')
             ->see('mdl-cell--1-col mdl-data-table__cell--non-numeric">');
     }
@@ -38,7 +38,7 @@ class TireSensorControllerTest extends AcceptanceTestCase
             'part_id' => $idPart,
         ]);
         
-        $url = '/part/'.$idPart.'/edit?id=&temperature=&pressure=&latitude=&longitude=&number=';
+        $url = '/part/'.$idPart.'/edit?id=&temperature=&pressure=&battery=&latitude=&longitude=&number=';
         
         $this->visit($url.'&sort=temperature-asc')
             ->see('mdl-cell--1-col mdl-data-table__cell--non-numeric">');

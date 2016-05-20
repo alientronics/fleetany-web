@@ -101,6 +101,7 @@ $factory->define(App\Entities\TireSensor::class, function ($faker) {
         'part_id' => 1,
         'temperature' => 1,
         'pressure' => 1,
+        'battery' => 1,
         'latitude' => 1,
         'longitude' => 1,
         'number' => 1,

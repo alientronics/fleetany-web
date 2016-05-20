@@ -15,6 +15,7 @@ class TireSensorRepositoryEloquent extends BaseRepository implements TireSensorR
         'id',
         'temperature',
         'pressure',
+        'battery',
         'latitude',
         'longitude',
         'number'
@@ -43,6 +44,7 @@ class TireSensorRepositoryEloquent extends BaseRepository implements TireSensorR
                 'id',
                 'temperature',
                 'pressure',
+                'battery',
                 'latitude',
                 'longitude',
                 'number'
@@ -55,6 +57,9 @@ class TireSensorRepositoryEloquent extends BaseRepository implements TireSensorR
             }
             if (!empty($filters['pressure'])) {
                 $query = $query->where('pressure', $filters['pressure']);
+            }
+            if (!empty($filters['battery'])) {
+                $query = $query->where('battery', $filters['battery']);
             }
             if (!empty($filters['number'])) {
                 $query = $query->where('number', 'like', '%'.$filters['number'].'%');

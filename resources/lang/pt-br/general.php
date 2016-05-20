@@ -105,6 +105,7 @@ return [
     "SensorData"   => "Dados de Sensor",
     "temperature"   => "Temperatura",
     "pressure"    => "Press&atilde;o",
+    "battery"    => "Bateria",
     "latitude" => "Latitude",
     "longitude" => "Longitude",
     
