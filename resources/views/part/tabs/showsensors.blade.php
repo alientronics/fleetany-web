@@ -9,7 +9,7 @@
                 ["class" => "mdl-cell--hide-phone mdl-cell--hide-tablet mdl-cell--2-col", "name" => "battery", "lang" => "general.battery"], 
                 ["class" => "mdl-cell--hide-phone mdl-cell--hide-tablet mdl-cell--2-col", "name" => "latitude", "lang" => "general.latitude"], 
                 ["class" => "mdl-cell--hide-phone mdl-cell--hide-tablet mdl-cell--2-col", "name" => "longitude", "lang" => "general.longitude"], 
-                ["class" => "mdl-cell--hide-phone mdl-cell--hide-tablet mdl-cell--2-col", "name" => "number", "lang" => "general.part_number"]
+                ["class" => "mdl-cell--hide-phone mdl-cell--hide-tablet mdl-cell--1-col", "name" => "number", "lang" => "general.part_number"]
     		] 
     	]
     ])
