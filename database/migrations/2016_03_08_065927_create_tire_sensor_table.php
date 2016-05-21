@@ -19,8 +19,8 @@ class CreateTireSensorTable extends Migration {
 		    $table->decimal('temperature')->nullable();
 		    $table->decimal('pressure')->nullable();
 		    $table->decimal('battery')->nullable();
-		    $table->decimal('latitude', 10, 7);
-		    $table->decimal('longitude', 10, 7);
+		    $table->decimal('latitude', 10, 7)->nullable();
+		    $table->decimal('longitude', 10, 7)->nullable();
 		    $table->string('number');
 		    $table->timestamps();
 		    $table->softDeletes();
