@@ -1,6 +1,6 @@
 <div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
     <header class="demo-drawer-header mdl-color--primary">
-      <span id="logo-lettering">fleetany</span>
+      <span id="side-lettering">fleetany</span>
       <div class="demo-avatar-dropdown mdl-color-text--accent-contrast">
         <span>{{Auth::user()['name']}}</span>
         <div class="mdl-layout-spacer"></div>

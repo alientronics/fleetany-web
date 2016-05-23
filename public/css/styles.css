@@ -220,18 +220,22 @@ _:-ms-input-placeholder, :root .demo-graph {
       -ms-flex-align: center;
           align-items: center;
 }
-#logo-lettering {
-  color: white;
-  font-family: 'Lobster Two', cursive; 
-  font-size: 55px; 
+#login-lettering {
+  color: rgb(255,193,7);
+  background-image: url("../images/fleetany-lettering.png");
+  background-size: 290px;
+  background-repeat: no-repeat;
   padding-bottom: 20px;
   text-align: center;
   margin-bottom: 25px;
+  height: 70px;
 }
-#welcome-lettering {
-  color: white;
-  font-size: 30px; 
-  padding-bottom: 20px;
+#side-lettering {
+  color: rgb(255,193,7);
+  background-image: url("../images/fleetany-lettering.png");
+  background-size: 210px;
+  background-repeat: no-repeat;
+  padding-bottom: 50px;
   text-align: center;
   margin-bottom: 25px;
 }

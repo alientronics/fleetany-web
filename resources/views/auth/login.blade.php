@@ -5,7 +5,7 @@
 	<main class="mdl-layout__content">
 		<div class="mdl-card mdl-shadow--6dp">
 			<div class="demo-drawer-header mdl-color--primary">
-				<span id="logo-lettering">fleetany</span>
+				<span id="login-lettering">fleetany</span>
 			</div>
 			{!! Form::open() !!}
 			<div class="mdl-card__title mdl-color--primary mdl-color-text--accent-contrast">
