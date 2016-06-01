@@ -63,11 +63,11 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
             'company_id' => $company->id]);
     }
 
-    public function setUp()
+    public function setUp($lang = null)
     {
         $company = Company::forceCreate(['name' => $this->name . ' Inc.']);
         $company->save();
-        $this->setUserProperties($company);
+        $this->setUserProperties($company, $lang);
         
         $this->createGenericTypes($company);
         
@@ -151,9 +151,9 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
 
     }
     
-    private function setUserProperties($company)
+    private function setUserProperties($company, $lang)
     {
-        $userLanguage = $this->getUserLanguage();
+        $userLanguage = $this->getUserLanguage($lang);
         app('translator')->setLocale($userLanguage);
         
         $this->language = $userLanguage;
@@ -194,19 +194,23 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
         });
     }
 
-    public function getUserLanguage()
+    public function getUserLanguage($lang)
     {
-        if (!empty(Auth::user()['language'])) {
+        $availableLangs = $this->getAvailableLanguages();
+            
+        if(!empty($lang)) {
+            if (in_array($lang, $availableLangs)) {
+                return $lang;
+            }
+        } else if (!empty(Auth::user()['language'])) {
             return Auth::user()['language'];
         } else {
-            $availableLangs = $this->getAvailableLanguages();
-            
             if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
                 $browserLanguages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
                 
-                foreach ($browserLanguages as $lang) {
-                    if (in_array($lang, $availableLangs)) {
-                        return $lang;
+                foreach ($browserLanguages as $browserLang) {
+                    if (in_array($browserLang, $availableLangs)) {
+                        return $browserLang;
                     }
                 }
             }
