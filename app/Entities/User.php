@@ -198,11 +198,11 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
     {
         $availableLangs = $this->getAvailableLanguages();
             
-        if(!empty($lang)) {
+        if (!empty($lang)) {
             if (in_array($lang, $availableLangs)) {
                 return $lang;
             }
-        } else if (!empty(Auth::user()['language'])) {
+        } elseif (!empty(Auth::user()['language'])) {
             return Auth::user()['language'];
         } else {
             if (!empty($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
