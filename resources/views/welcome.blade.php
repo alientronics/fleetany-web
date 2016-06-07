@@ -68,6 +68,15 @@
                 position: myLatLng,
                 map: map
             });
+
+            @if($vehicle['in_geofence'] == true)
+            marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+            @endif
+
+            marker.addListener('click', function() {
+            	window.location.href = "{{url('/')}}/vehicle/{{$vehicle->vehicle_id}}/edit";
+          	});
+            
             var latlng = new google.maps.LatLng({{$vehicle->latitude}}, {{$vehicle->longitude}});
             bounds.extend(latlng); 
     	@endforeach

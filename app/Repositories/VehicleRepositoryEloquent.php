@@ -91,15 +91,51 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
             ->groupBy('vehicle_id');
         $prefix = \DB::getTablePrefix();
 
-        $vehicles = Gps::select('gps.id', 'vehicle_id', 'latitude', 'longitude')
+        $vehicles = Gps::select('gps.id', 'vehicle_id', 'latitude', 'longitude', 'geofence')
             ->join(\DB::raw("({$sub->toSql()}) as ".$prefix."gps2"), 'gps.id', '=', 'gps2.id')
-            ->where('company_id', Auth::user()['company_id']);
+            ->join('vehicles', 'vehicles.id', '=', 'gps.vehicle_id')
+            ->where('gps.company_id', Auth::user()['company_id']);
         if (!empty($vehicle_id)) {
             $vehicles = $vehicles->where('vehicle_id', $vehicle_id);
         }
         $vehicles = $vehicles->groupBy('vehicle_id')
                             ->get();
         
+        $vehicles = self::getVehiclesGeofence($vehicles);
+        
+        return $vehicles;
+    }
+    
+    private static function isVehicleInGeofence($vehiclePoint, $geofence)
+    {
+        $deg_per_rad = 57.29578;  // Number of degrees/radian (for conversion)
+    
+        $distance = ($geofence['radius'] * pi() * sqrt(
+            ($vehiclePoint['latitude'] - $geofence['latitude'])
+            * ($vehiclePoint['latitude'] - $geofence['latitude'])
+            + cos($vehiclePoint['latitude'] / $deg_per_rad)  // Convert these to
+            * cos($geofence['latitude'] / $deg_per_rad)  // radians for cos()
+            * ($vehiclePoint['longitude'] - $geofence['longitude'])
+            * ($vehiclePoint['longitude'] - $geofence['longitude'])
+        ) / 180);
+    
+        return $distance <= $geofence['radius'];  // Returned using the units used for $radius.
+    }
+    
+    private static function getVehiclesGeofence($vehicles)
+    {
+        if (!empty($vehicles)) {
+            foreach ($vehicles as $index => $vehicle) {
+                if (empty($vehicle['geofence'])) {
+                    $vehicles[$index]['in_geofence'] = true;
+                } else {
+                    $geofenceJson = json_decode($vehicle['geofence'], true);
+                    $geofenceJson = $geofenceJson[0];
+
+                    $vehicles[$index]['in_geofence'] = self::isVehicleInGeofence($vehicle, $geofenceJson);
+                }
+            }
+        }
         return $vehicles;
     }
     

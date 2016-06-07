@@ -20,6 +20,7 @@ class CreateVehiclesTable extends Migration {
 			$table->string('number')->nullable();
 			$table->integer('initial_miliage')->nullable();
 			$table->integer('actual_miliage')->nullable();
+			$table->string('geofence')->nullable();
 			$table->decimal('cost');
 			$table->text('description', 65535)->nullable();
 			$table->timestamps();
