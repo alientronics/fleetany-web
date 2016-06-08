@@ -108,18 +108,12 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
     
     private static function isVehicleInGeofence($vehiclePoint, $geofence)
     {
-        $deg_per_rad = 57.29578;  // Number of degrees/radian (for conversion)
+        $distance = sqrt(
+            pow(($vehiclePoint['latitude'] - $geofence['latitude']), 2)
+            + pow(($vehiclePoint['longitude'] - $geofence['longitude']), 2)
+        );
     
-        $distance = ($geofence['radius'] * pi() * sqrt(
-            ($vehiclePoint['latitude'] - $geofence['latitude'])
-            * ($vehiclePoint['latitude'] - $geofence['latitude'])
-            + cos($vehiclePoint['latitude'] / $deg_per_rad)  // Convert these to
-            * cos($geofence['latitude'] / $deg_per_rad)  // radians for cos()
-            * ($vehiclePoint['longitude'] - $geofence['longitude'])
-            * ($vehiclePoint['longitude'] - $geofence['longitude'])
-        ) / 180);
-    
-        return $distance <= $geofence['radius'];  // Returned using the units used for $radius.
+        return $distance <= $geofence['radius'];
     }
     
     private static function getVehiclesGeofence($vehicles)
