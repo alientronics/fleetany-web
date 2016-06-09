@@ -56,7 +56,7 @@ class VehicleController extends Controller
     {
         try {
             $this->vehicleRepo->validator();
-            $inputs = $this->request->all();
+            $inputs = $this->vehicleRepo->setInputs($this->request->all());
             $this->vehicleRepo->create($inputs);
             return $this->redirect->to('vehicle')->with('message', Lang::get(
                 'general.succefullcreate',
@@ -85,6 +85,10 @@ class VehicleController extends Controller
         $filters['vehicle_id'] = $vehicle->id;
         $parts = $partRepo->results($filters);
         
+        if (!empty($vehicle->geofence)) {
+            $vehicle->geofence = json_decode($vehicle->geofence, true);
+        }
+        
         return view("vehicle.edit", compact(
             'vehicle',
             'model_vehicle_id',
@@ -101,7 +105,7 @@ class VehicleController extends Controller
             $vehicle = $this->vehicleRepo->find($idVehicle);
             $this->helper->validateRecord($vehicle);
             $this->vehicleRepo->validator();
-            $inputs = $this->request->all();
+            $inputs = $this->vehicleRepo->setInputs($this->request->all());
             $this->vehicleRepo->update($inputs, $idVehicle);
             return $this->redirect->to('vehicle')->with('message', Lang::get(
                 'general.succefullupdate',

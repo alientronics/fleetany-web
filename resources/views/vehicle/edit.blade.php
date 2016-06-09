@@ -21,11 +21,20 @@
 @if (!$vehicle->id)
 {!! Form::open(['route' => 'vehicle.store']) !!}
 
-	@include('includes.tabs', [
-    	'tabs' => [
-            ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
-    	]
-    ])
+	@if (class_exists('Alientronics\FleetanyWebGeofence\Controllers\GeofenceController'))
+        @include('includes.tabs', [
+        	'tabs' => [
+                ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
+                ["title" => "geofence.Geofence", "view" => "vehicle.tabs.geofence"], 
+        	]
+        ])
+    @else
+    	@include('includes.tabs', [
+        	'tabs' => [
+                ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
+        	]
+        ])
+    @endif
     
 @else
 {!! Form::model('$vehicle', [

@@ -124,8 +124,6 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
                     $vehicles[$index]['in_geofence'] = true;
                 } else {
                     $geofenceJson = json_decode($vehicle['geofence'], true);
-                    $geofenceJson = $geofenceJson[0];
-
                     $vehicles[$index]['in_geofence'] = self::isVehicleInGeofence($vehicle, $geofenceJson);
                 }
             }
@@ -163,5 +161,24 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
         $vehicles['available']['result'] = Vehicle::where('vehicles.company_id', Auth::user()['company_id'])
                                             ->count() - $vehiclesOff;
         return $vehicles;
+    }
+    
+    public function setInputs($inputs)
+    {
+        if (!empty($inputs['geofence_name']) &&
+            !empty($inputs['geofence_radius']) && is_numeric($inputs['geofence_radius']) &&
+            !empty($inputs['geofence_latitude']) && is_numeric($inputs['geofence_latitude']) &&
+            !empty($inputs['geofence_longitude']) && is_numeric($inputs['geofence_longitude'])
+        ) {
+            $inputs['geofence'] = '{"latitude": '.$inputs['geofence_latitude'].','.
+                                    '"longitude": '.$inputs['geofence_longitude'].', '.
+                                    '"radius": '.$inputs['geofence_radius'].', '.
+                                    '"transitionType": 2, '.
+                                    '"notification": { "text": "'.$inputs['geofence_name'].'"} }';
+        } else {
+            unset($inputs['geofence']);
+        }
+        
+        return $inputs;
     }
 }
