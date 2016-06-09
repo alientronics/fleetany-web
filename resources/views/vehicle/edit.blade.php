@@ -21,7 +21,7 @@
 @if (!$vehicle->id)
 {!! Form::open(['route' => 'vehicle.store']) !!}
 
-	@if (class_exists('Alientronics\FleetanyWebGeofence\Controllers\GeofenceController'))
+	@if (class_exists('Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider'))
         @include('includes.tabs', [
         	'tabs' => [
                 ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
@@ -42,7 +42,7 @@
         'route' => ['vehicle.update',$vehicle->id]
     ]) !!}
     
-    @if (class_exists('Alientronics\FleetanyWebGeofence\Controllers\GeofenceController'))
+    @if (class_exists('Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider'))
         @include('includes.tabs', [
         	'tabs' => [
                 ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
