@@ -26,8 +26,8 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment-with-locales.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="http://immybox.js.org/jquery.immybox.min.js"></script>	
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-{!! HTML::script('js/md-date-time-picker.min.js') !!}
+<script src="https://maps.googleapis.com/maps/api/js?key={{config('app.google_maps_api_key')}}&signed_in=true&libraries=drawing&callback=initMap" defer></script>
+ {!! HTML::script('js/md-date-time-picker.min.js') !!}
 {!! HTML::script('js/fleetany.js') !!}
 
 <script>
