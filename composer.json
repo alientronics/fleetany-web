@@ -40,6 +40,18 @@
                     "reference": "master"
                 }
             }
+        },
+        {
+            "type": "package",
+            "package": {
+                "version": "dev-master",
+                "name": "alientronics/fleetany-web-geofences",
+                "source": {
+                    "url": "https://github.com/alientronics/fleetany-web-geofences.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
         }
     ],
     "require": {
@@ -54,6 +66,7 @@
         "alientronics/cached-eloquent-user": "dev-master",
         "alientronics/laravel-acl": "dev-master",
         "alientronics/fleetany-web-pages": "dev-master",
+        "alientronics/fleetany-web-geofence": "dev-master",
         "barryvdh/laravel-debugbar": "^2.2"
     },
     "require-dev": {
@@ -74,7 +87,8 @@
             "database",
             "vendor/alientronics/cached-eloquent-user/src/",
             "vendor/alientronics/laravel-acl/src/Kodeine/Acl/",
-            "vendor/alientronics/fleetany-web-pages/src/"
+            "vendor/alientronics/fleetany-web-pages/src/",
+            "vendor/alientronics/fleetany-web-geofence/src/"
         ],
         "psr-4": {
             "App\\": "app/"

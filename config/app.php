@@ -165,6 +165,7 @@ return [
         Thinmy\CachedEloquentUser\AuthServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         Alientronics\FleetanyWebPages\FleetanyWebPagesServiceProvider::class,
+        Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider::class,
 
     ],
 
