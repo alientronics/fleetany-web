@@ -46,7 +46,8 @@ class ContactController extends Controller
         $contact = new Contact();
         $company_id = CompanyRepositoryEloquent::getCompanies();
         $contact_type_id = TypeRepositoryEloquent::getTypes('contact');
-        return view("contact.edit", compact('contact', 'contact_type_id', 'company_id'));
+        $driver_profile = [];
+        return view("contact.edit", compact('contact', 'contact_type_id', 'company_id', 'driver_profile'));
     }
 
     public function store()
@@ -73,7 +74,9 @@ class ContactController extends Controller
         $company_id = CompanyRepositoryEloquent::getCompanies();
         $contact_type_id = TypeRepositoryEloquent::getTypes('contact');
         
-        return view("contact.edit", compact('contact', 'contact_type_id', 'company_id'));
+        $driver_profile = $this->contactRepo->getDriverProfile($idContact);
+        
+        return view("contact.edit", compact('contact', 'contact_type_id', 'company_id', 'driver_profile'));
     }
     
     public function update($idContact)

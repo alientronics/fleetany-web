@@ -71,6 +71,8 @@ return [
     "address"    => "Address",
     "phone"    => "Phone",
     "license_no"    => "License number",
+    "ContactData"    => "Contact Data",
+    "DriverProfile"    => "Driver Profile",
 
     // Entry
     "Entry"   => "Entry",

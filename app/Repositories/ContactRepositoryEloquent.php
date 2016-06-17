@@ -7,6 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\ContactRepository;
 use App\Entities\Contact;
 use Illuminate\Support\Facades\Auth;
+use App\Entities\Gps;
 
 class ContactRepositoryEloquent extends BaseRepository implements ContactRepository
 {
@@ -87,5 +88,17 @@ class ContactRepositoryEloquent extends BaseRepository implements ContactReposit
         }
         
         return $contacts;
+    }
+    
+    public function getDriverProfile($idContact)
+    {
+        $results = Gps::select('speed')
+            ->where('driver_id', $idContact)
+            ->whereNotNull('speed')
+            ->orderBy('id', 'desc')
+            ->take(50)
+            ->get();
+        
+        return $results;
     }
 }

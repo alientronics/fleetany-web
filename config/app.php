@@ -166,6 +166,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Alientronics\FleetanyWebPages\FleetanyWebPagesServiceProvider::class,
         Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider::class,
+        Alientronics\FleetanyWebDriver\FleetanyWebDriverServiceProvider::class,
 
     ],
 

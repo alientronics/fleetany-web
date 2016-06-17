@@ -71,6 +71,8 @@ return [
     "address"    => "Endere&ccedil;o",
     "phone"    => "Telefone",
     "license_no"    => "N&uacute;mero da Licen&ccedil;a",
+    "ContactData"    => "Dados do Contato",
+    "DriverProfile"    => "Perfil do Motorista",
 
     // Entry
     "Entry"   => "Entrada",
