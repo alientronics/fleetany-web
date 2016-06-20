@@ -34,7 +34,7 @@
     ]) !!}
     
     
-    @if (!empty($driver_profile) && class_exists('Alientronics\FleetanyWebDriver\FleetanyWebDriverServiceProvider'))
+    @if (!empty($driver_profile->toArray()) && class_exists('Alientronics\FleetanyWebDriver\FleetanyWebDriverServiceProvider'))
         @include('includes.tabs', [
         	'tabs' => [
                 ["title" => "general.ContactData", "view" => "contact.tabs.contactdata"], 
