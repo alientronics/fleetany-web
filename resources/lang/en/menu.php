@@ -41,6 +41,7 @@ return [
     'PlanType'      => "Plan Types",
 
     'User' => "User",
+    'Attributes' => "Attributes",
     
     'logout' => 'Logout'
 

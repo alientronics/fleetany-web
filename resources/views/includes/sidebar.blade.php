@@ -51,7 +51,12 @@
             @endpermission     
             @permission('view.part')
             <a class="@if (Request::is('part*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('part')}}"><i class="material-icons" role="presentation">build</i>{{Lang::get('menu.Parts')}}</a>       
-            @endpermission   
+            @endpermission  
+            @if (class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider'))   
+            @permission('view.attribute')
+            <a class="@if (Request::is('attribute*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('attribute')}}"><i class="material-icons" role="presentation">build</i>{{Lang::get('menu.Attributes')}}</a>       
+            @endpermission 
+            @endif  
         @else
         	<a class="mdl-navigation__link" href="{{URL::asset("auth/login")}}"><i class="material-icons" role="presentation">home</i>{{Lang::get('menu.Login')}}</a>
         @endif

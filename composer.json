@@ -64,6 +64,18 @@
                     "reference": "master"
                 }
             }
+        },
+        {
+            "type": "package",
+            "package": {
+                "version": "dev-master",
+                "name": "alientronics/fleetany-web-attributes",
+                "source": {
+                    "url": "https://github.com/alientronics/fleetany-web-attributes.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
         }
     ],
     "require": {
@@ -80,6 +92,7 @@
         "alientronics/fleetany-web-pages": "dev-master",
         "alientronics/fleetany-web-geofence": "dev-master",
         "alientronics/fleetany-web-driver": "dev-master",
+        "alientronics/fleetany-web-attributes": "dev-master",
         "barryvdh/laravel-debugbar": "^2.2"
     },
     "require-dev": {
@@ -102,7 +115,8 @@
             "vendor/alientronics/laravel-acl/src/Kodeine/Acl/",
             "vendor/alientronics/fleetany-web-pages/src/",
             "vendor/alientronics/fleetany-web-geofence/src/",
-            "vendor/alientronics/fleetany-web-driver/src/"
+            "vendor/alientronics/fleetany-web-driver/src/",
+            "vendor/alientronics/fleetany-web-attributes/src/"
         ],
         "psr-4": {
             "App\\": "app/"

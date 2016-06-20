@@ -43,6 +43,7 @@ return [
     'PlanType'      => "Tipos de Planos",
 
     'User' => "Usu&aacute;rio",
+    'Attributes' => "Atributos",
     
     'logout' => 'Logout'
 

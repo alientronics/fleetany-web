@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ba591e1d6fe116290dcc164a765ab465",
-    "content-hash": "7e7532d3aca0fc7fa8f622f8628be252",
+    "hash": "0c28746f3fce16980658e596aede3d65",
+    "content-hash": "e8c250fea07527504d06f4b065ef6510",
     "packages": [
         {
             "name": "alientronics/cached-eloquent-user",
@@ -17,6 +17,17 @@
             },
             "type": "library",
             "time": "2016-04-28 22:36:56"
+        },
+        {
+            "name": "alientronics/fleetany-web-attributes",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/alientronics/fleetany-web-attributes.git",
+                "reference": "master"
+            },
+            "type": "library",
+            "time": "2016-05-13 22:32:23"
         },
         {
             "name": "alientronics/fleetany-web-driver",
@@ -1118,16 +1129,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.2.38",
+            "version": "v5.2.39",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "e211a37eab49a124996ad9150f9e1bdfb52aa048"
+                "reference": "c2a77050269b4e03bd9a735a9f24e573a7598b8a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/e211a37eab49a124996ad9150f9e1bdfb52aa048",
-                "reference": "e211a37eab49a124996ad9150f9e1bdfb52aa048",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/c2a77050269b4e03bd9a735a9f24e573a7598b8a",
+                "reference": "c2a77050269b4e03bd9a735a9f24e573a7598b8a",
                 "shasum": ""
             },
             "require": {
@@ -1243,7 +1254,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2016-06-14 01:20:40"
+            "time": "2016-06-17 19:25:12"
         },
         {
             "name": "laravel/socialite",
@@ -4321,16 +4332,16 @@
         },
         {
             "name": "sebastian/exporter",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "7ae5513327cb536431847bcc0c10edba2701064e"
+                "reference": "42c4c2eec485ee3e159ec9884f95b431287edde4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/7ae5513327cb536431847bcc0c10edba2701064e",
-                "reference": "7ae5513327cb536431847bcc0c10edba2701064e",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/42c4c2eec485ee3e159ec9884f95b431287edde4",
+                "reference": "42c4c2eec485ee3e159ec9884f95b431287edde4",
                 "shasum": ""
             },
             "require": {
@@ -4338,12 +4349,13 @@
                 "sebastian/recursion-context": "~1.0"
             },
             "require-dev": {
+                "ext-mbstring": "*",
                 "phpunit/phpunit": "~4.4"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2.x-dev"
+                    "dev-master": "1.3.x-dev"
                 }
             },
             "autoload": {
@@ -4383,7 +4395,7 @@
                 "export",
                 "exporter"
             ],
-            "time": "2015-06-21 07:55:53"
+            "time": "2016-06-17 09:04:28"
         },
         {
             "name": "sebastian/finder-facade",
@@ -5205,6 +5217,7 @@
         "alientronics/fleetany-web-pages": 20,
         "alientronics/fleetany-web-geofence": 20,
         "alientronics/fleetany-web-driver": 20,
+        "alientronics/fleetany-web-attributes": 20,
         "codeclimate/php-test-reporter": 20
     },
     "prefer-stable": false,
