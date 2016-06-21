@@ -13,6 +13,7 @@ use App\Repositories\CompanyRepositoryEloquent;
 use App\Repositories\ModelRepositoryEloquent;
 use App\Repositories\PartRepositoryEloquent;
 use Illuminate\Container\Container as Application;
+use App\Repositories\AttributeRepositoryEloquent;
 
 class VehicleController extends Controller
 {
@@ -49,7 +50,12 @@ class VehicleController extends Controller
         $company_id = CompanyRepositoryEloquent::getCompanies();
         $model_vehicle_id = ModelRepositoryEloquent::getModels('vehicle');
         $parts = null;
-        return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 'company_id', 'parts'));
+
+        $attributes = [];
+        if(class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')) {
+            $attributes = AttributeRepositoryEloquent::getAttributesValues('vehicle');
+        }
+        return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 'company_id', 'parts', 'attributes'));
     }
 
     public function store()

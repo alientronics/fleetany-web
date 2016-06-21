@@ -21,7 +21,25 @@
 @if (!$vehicle->id)
 {!! Form::open(['route' => 'vehicle.store']) !!}
 
-	@if (class_exists('Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider'))
+	@if (class_exists('Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider') && 
+			class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')
+			&& !empty($attributes))
+        @include('includes.tabs', [
+        	'tabs' => [
+                ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
+                ["title" => "attributes.Attributes", "view" => "vehicle.tabs.attributes", 'attributes' => $attributes],
+                ["title" => "geofence.Geofence", "view" => "vehicle.tabs.geofence"], 
+        	]
+        ])
+	@elseif (class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')
+			&& !empty($attributes))
+        @include('includes.tabs', [
+        	'tabs' => [
+                ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
+                ["title" => "attributes.Attributes", "view" => "vehicle.tabs.attributes", 'attributes' => $attributes],
+        	]
+        ])
+	@elseif (class_exists('Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider'))
         @include('includes.tabs', [
         	'tabs' => [
                 ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
@@ -42,7 +60,27 @@
         'route' => ['vehicle.update',$vehicle->id]
     ]) !!}
     
-    @if (class_exists('Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider'))
+    @if (class_exists('Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider') && 
+			class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')
+			&& !empty($attributes))
+        @include('includes.tabs', [
+        	'tabs' => [
+                ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
+                ["title" => "attributes.Attributes", "view" => "vehicle.tabs.attributes", 'attributes' => $attributes],
+                ["title" => "general.Parts", "view" => "vehicle.tabs.showparts"], 
+                ["title" => "geofence.Geofence", "view" => "vehicle.tabs.geofence"], 
+        	]
+        ])
+	@elseif (class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')
+			&& !empty($attributes))
+        @include('includes.tabs', [
+        	'tabs' => [
+                ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"],
+                ["title" => "attributes.Attributes", "view" => "vehicle.tabs.attributes", 'attributes' => $attributes],
+                ["title" => "general.Parts", "view" => "vehicle.tabs.showparts"], 
+        	]
+        ])
+    @elseif (class_exists('Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider'))
         @include('includes.tabs', [
         	'tabs' => [
                 ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
