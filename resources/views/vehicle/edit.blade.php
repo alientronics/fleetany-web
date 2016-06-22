@@ -27,7 +27,7 @@
         @include('includes.tabs', [
         	'tabs' => [
                 ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
-                ["title" => "attributes.Attributes", "view" => "vehicle.tabs.attributes", 'attributes' => $attributes],
+                ["title" => "attributes.Attributes", "view" => "includes.attributes", 'attributes' => $attributes],
                 ["title" => "geofence.Geofence", "view" => "vehicle.tabs.geofence"], 
         	]
         ])
@@ -36,7 +36,7 @@
         @include('includes.tabs', [
         	'tabs' => [
                 ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
-                ["title" => "attributes.Attributes", "view" => "vehicle.tabs.attributes", 'attributes' => $attributes],
+                ["title" => "attributes.Attributes", "view" => "includes.attributes", 'attributes' => $attributes],
         	]
         ])
 	@elseif (class_exists('Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider'))
@@ -66,7 +66,7 @@
         @include('includes.tabs', [
         	'tabs' => [
                 ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
-                ["title" => "attributes.Attributes", "view" => "vehicle.tabs.attributes", 'attributes' => $attributes],
+                ["title" => "attributes.Attributes", "view" => "includes.attributes", 'attributes' => $attributes],
                 ["title" => "general.Parts", "view" => "vehicle.tabs.showparts"], 
                 ["title" => "geofence.Geofence", "view" => "vehicle.tabs.geofence"], 
         	]
@@ -76,7 +76,7 @@
         @include('includes.tabs', [
         	'tabs' => [
                 ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"],
-                ["title" => "attributes.Attributes", "view" => "vehicle.tabs.attributes", 'attributes' => $attributes],
+                ["title" => "attributes.Attributes", "view" => "includes.attributes", 'attributes' => $attributes],
                 ["title" => "general.Parts", "view" => "vehicle.tabs.showparts"], 
         	]
         ])

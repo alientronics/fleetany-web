@@ -179,6 +179,8 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
             unset($inputs['geofence']);
         }
         
+        $inputs['entity_key'] = "vehicle";
+        
         return $inputs;
     }
 }

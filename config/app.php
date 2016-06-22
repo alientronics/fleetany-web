@@ -164,9 +164,10 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Thinmy\CachedEloquentUser\AuthServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        Alientronics\FleetanyWebPages\FleetanyWebPagesServiceProvider::class,
-        Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider::class,
-        Alientronics\FleetanyWebDriver\FleetanyWebDriverServiceProvider::class,
+        "Alientronics\FleetanyWebPages\FleetanyWebPagesServiceProvider",
+        "Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider",
+        "Alientronics\FleetanyWebDriver\FleetanyWebDriverServiceProvider",
+        "Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider",
 
     ],
 
