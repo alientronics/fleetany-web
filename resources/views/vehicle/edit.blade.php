@@ -19,7 +19,7 @@
 		<div class="demo-preview-block">
 
 @if (!$vehicle->id)
-{!! Form::open(['route' => 'vehicle.store']) !!}
+{!! Form::open(['route' => 'vehicle.store', 'enctype' => 'multipart/form-data']) !!}
 
 	@if (class_exists('Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider') && 
 			class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')
