@@ -85,6 +85,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Fleetany Attributes API
+    |--------------------------------------------------------------------------
+    */
+
+    'attributes_api_url' => env('ATTRIBUTES_API_URL', 'SomeUrl'),
+    'attributes_api_key' => env('ATTRIBUTES_API_KEY', 'SomeRandomString'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Encryption Key
     |--------------------------------------------------------------------------
     |
@@ -164,10 +173,10 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Thinmy\CachedEloquentUser\AuthServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        "Alientronics\FleetanyWebPages\FleetanyWebPagesServiceProvider",
-        "Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider",
-        "Alientronics\FleetanyWebDriver\FleetanyWebDriverServiceProvider",
-        "Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider",
+//         "Alientronics\FleetanyWebPages\FleetanyWebPagesServiceProvider",
+//         "Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider",
+//         "Alientronics\FleetanyWebDriver\FleetanyWebDriverServiceProvider",
+//         "Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider",
 
     ],
 
