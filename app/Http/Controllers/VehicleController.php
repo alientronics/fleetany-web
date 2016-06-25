@@ -100,7 +100,7 @@ class VehicleController extends Controller
         
         $attributes = [];
         if(class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')) {
-            $attributes = AttributeRepositoryEloquent::getAttributesWithValues('vehicle', $idVehicle);
+            $attributes = AttributeRepositoryEloquent::getAttributesWithValues('vehicle.'.$vehicle->model->type->name, $idVehicle);
         }
         
         return view("vehicle.edit", compact(
