@@ -35,7 +35,7 @@
 			&& !empty($attributes))
         @include('includes.tabs', [
         	'tabs' => [
-                ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
+                ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"],
                 ["title" => "attributes.Attributes", "view" => "includes.attributes", 'attributes' => $attributes],
         	]
         ])
@@ -66,6 +66,7 @@
         @include('includes.tabs', [
         	'tabs' => [
                 ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
+                ["title" => "general.Tires", "view" => "vehicle.tabs.tires"], 
                 ["title" => "attributes.Attributes", "view" => "includes.attributes", 'attributes' => $attributes],
                 ["title" => "general.Parts", "view" => "vehicle.tabs.showparts"], 
                 ["title" => "geofence.Geofence", "view" => "vehicle.tabs.geofence"], 
@@ -76,6 +77,7 @@
         @include('includes.tabs', [
         	'tabs' => [
                 ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"],
+                ["title" => "general.Tires", "view" => "vehicle.tabs.tires"], 
                 ["title" => "attributes.Attributes", "view" => "includes.attributes", 'attributes' => $attributes],
                 ["title" => "general.Parts", "view" => "vehicle.tabs.showparts"], 
         	]
@@ -84,6 +86,7 @@
         @include('includes.tabs', [
         	'tabs' => [
                 ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
+                ["title" => "general.Tires", "view" => "vehicle.tabs.tires"], 
                 ["title" => "general.Parts", "view" => "vehicle.tabs.showparts"], 
                 ["title" => "geofence.Geofence", "view" => "vehicle.tabs.geofence"], 
         	]
@@ -92,6 +95,7 @@
     	@include('includes.tabs', [
         	'tabs' => [
                 ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
+                ["title" => "general.Tires", "view" => "vehicle.tabs.tires"], 
                 ["title" => "general.Parts", "view" => "vehicle.tabs.showparts"], 
         	]
         ])
