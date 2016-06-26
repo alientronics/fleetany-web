@@ -18,87 +18,33 @@
 	<section class="demo-section demo-section--textfield demo-page--textfield mdl-upgraded">
 		<div class="demo-preview-block">
 
+{{--*/ $tabs = []; /*--}}
+{{--*/ $tabs[] = ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"]; /*--}}
+
+@if (class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')
+		&& !empty($attributes))
+	{{--*/ $tabs[] = ["title" => "attributes.Attributes", "view" => "includes.attributes", 'attributes' => $attributes]; /*--}}
+@endif
+@if (class_exists('Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider'))
+    {{--*/ $tabs[] = ["title" => "geofence.Geofence", "view" => "vehicle.tabs.geofence"]; /*--}}
+@endif
+
 @if (!$vehicle->id)
 {!! Form::open(['route' => 'vehicle.store', 'enctype' => 'multipart/form-data']) !!}
-
-	@if (class_exists('Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider') && 
-			class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')
-			&& !empty($attributes))
-        @include('includes.tabs', [
-        	'tabs' => [
-                ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
-                ["title" => "attributes.Attributes", "view" => "includes.attributes", 'attributes' => $attributes],
-                ["title" => "geofence.Geofence", "view" => "vehicle.tabs.geofence"], 
-        	]
-        ])
-	@elseif (class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')
-			&& !empty($attributes))
-        @include('includes.tabs', [
-        	'tabs' => [
-                ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
-                ["title" => "attributes.Attributes", "view" => "includes.attributes", 'attributes' => $attributes],
-        	]
-        ])
-	@elseif (class_exists('Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider'))
-        @include('includes.tabs', [
-        	'tabs' => [
-                ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
-                ["title" => "geofence.Geofence", "view" => "vehicle.tabs.geofence"], 
-        	]
-        ])
-    @else
-    	@include('includes.tabs', [
-        	'tabs' => [
-                ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
-        	]
-        ])
-    @endif
-    
 @else
 {!! Form::model('$vehicle', [
         'method'=>'PUT',
         'route' => ['vehicle.update',$vehicle->id]
     ]) !!}
-    
-    @if (class_exists('Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider') && 
-			class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')
-			&& !empty($attributes))
-        @include('includes.tabs', [
-        	'tabs' => [
-                ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
-                ["title" => "attributes.Attributes", "view" => "includes.attributes", 'attributes' => $attributes],
-                ["title" => "general.Parts", "view" => "vehicle.tabs.showparts"], 
-                ["title" => "geofence.Geofence", "view" => "vehicle.tabs.geofence"], 
-        	]
-        ])
-	@elseif (class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')
-			&& !empty($attributes))
-        @include('includes.tabs', [
-        	'tabs' => [
-                ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"],
-                ["title" => "attributes.Attributes", "view" => "includes.attributes", 'attributes' => $attributes],
-                ["title" => "general.Parts", "view" => "vehicle.tabs.showparts"], 
-        	]
-        ])
-    @elseif (class_exists('Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider'))
-        @include('includes.tabs', [
-        	'tabs' => [
-                ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
-                ["title" => "general.Parts", "view" => "vehicle.tabs.showparts"], 
-                ["title" => "geofence.Geofence", "view" => "vehicle.tabs.geofence"], 
-        	]
-        ])
-    @else
-    	@include('includes.tabs', [
-        	'tabs' => [
-                ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"], 
-                ["title" => "general.Parts", "view" => "vehicle.tabs.showparts"], 
-        	]
-        ])
-    @endif
+  
+    {{--*/ $tabs[] = ["title" => "general.Parts", "view" => "vehicle.tabs.showparts"]; /*--}}  
     
 @endif
-            
+         
+@include('includes.tabs', [
+	'tabs' => $tabs
+])
+           
 {!! Form::close() !!}
 			
 		</div>
