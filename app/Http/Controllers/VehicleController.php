@@ -52,7 +52,7 @@ class VehicleController extends Controller
         $parts = null;
 
         $attributes = [];
-        if(class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')) {
+        if (class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')) {
             $attributes = AttributeRepositoryEloquent::getAttributesWithValues('vehicle');
         }
         return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 'company_id', 'parts', 'attributes'));
@@ -64,7 +64,7 @@ class VehicleController extends Controller
             $this->vehicleRepo->validator();
             $inputs = $this->vehicleRepo->setInputs($this->request->all());
             $inputs['entity_id'] = $this->vehicleRepo->create($inputs)->id;
-            if(class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')) {
+            if (class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')) {
                 AttributeRepositoryEloquent::setValues($inputs);
             }
             return $this->redirect->to('vehicle')->with('message', Lang::get(
@@ -99,8 +99,11 @@ class VehicleController extends Controller
         }
         
         $attributes = [];
-        if(class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')) {
-            $attributes = AttributeRepositoryEloquent::getAttributesWithValues('vehicle.'.$vehicle->model->type->name, $idVehicle);
+        if (class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')) {
+            $attributes = AttributeRepositoryEloquent::getAttributesWithValues(
+                'vehicle.'.$vehicle->model->type->name,
+                $idVehicle
+            );
         }
         
         return view("vehicle.edit", compact(
@@ -122,7 +125,7 @@ class VehicleController extends Controller
             $this->vehicleRepo->validator();
             $inputs = $this->vehicleRepo->setInputs($this->request->all());
             $inputs['entity_id'] = $this->vehicleRepo->update($inputs, $idVehicle)->id;
-            if(class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')) {
+            if (class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')) {
                 AttributeRepositoryEloquent::setValues($inputs);
             }
             return $this->redirect->to('vehicle')->with('message', Lang::get(
