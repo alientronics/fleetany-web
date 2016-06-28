@@ -115,8 +115,7 @@
             "vendor/alientronics/laravel-acl/src/Kodeine/Acl/",
             "vendor/alientronics/fleetany-web-pages/src/",
             "vendor/alientronics/fleetany-web-geofence/src/",
-            "vendor/alientronics/fleetany-web-driver/src/",
-            "vendor/alientronics/fleetany-web-attributes/src/"
+            "vendor/alientronics/fleetany-web-driver/src/"
         ],
         "psr-4": {
             "App\\": "app/"
