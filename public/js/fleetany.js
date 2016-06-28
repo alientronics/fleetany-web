@@ -19,6 +19,57 @@ window.onload=function(){
 		}
 	});
 	
+
+//	$(".tires-empty").click(function() {
+//	  if($('.tires-selected').length > 0) {
+//		  $(".tires-selected").removeClass("mdl-color--green");
+//		  $(".tires-selected").addClass("mdl-color--grey");
+//		  $(".tires-selected").addClass("tires-empty");
+//		  $(".tires-selected").removeClass("tires-selected");
+//	  }
+//	  if($('.tires-selected-focus').length > 0) {
+//		  $(".tires-selected-focus").addClass("tires-selected");
+//		  $(".tires-selected-focus").removeClass("tires-selected-focus");
+//	  }
+//	  $(this).removeClass("tires-empty");
+//	  $(this).removeClass("mdl-color--grey");
+//	  $(this).addClass("mdl-color--green");
+//	  $(this).addClass("tires-selected-focus");
+//	  setTireSelectedFocusData();
+//	});
+	
+
+//	$(".tires-selected").click(function() {
+//	  $(".tires-selected-focus").addClass("tires-selected");
+//	  $(".tires-selected-focus").removeClass("tires-selected-focus");
+//	  $(this).removeClass("tires-selected");
+//	  $(this).addClass("tires-selected-focus");
+//	  setTireSelectedFocusData();
+//	});
+	
+	$(".tires-empty, .tires-filled").click(function() {
+	  if($('.tires-selected').length > 0) {
+		  $(".tires-selected").removeClass("tires-selected");
+	  }
+	  if($('.tires-selected-focus').length > 0) {
+		  $(".tires-selected-focus").addClass("tires-selected");
+		  $(".tires-selected-focus").removeClass("tires-selected-focus");
+	  }
+	  $(this).addClass("tires-selected-focus");
+	  setTireSelectedFocusData();
+	});
+
+	function setTireSelectedFocusData() {
+
+		if($(".tires-selected-focus.tires-empty").length > 0) {
+			$(".tire-position-detail-button").hide();
+		} else {
+			$(".tire-position-detail-button").show();
+		}
+		$('#tire-position-detail-data').html("Tire detail do pneu da posicao " + $('.tires-selected-focus').attr('id'));
+		$('#tire-storage-data').html("Sensor log do pneu da posicao " + $('.tires-selected-focus').attr('id'));
+	}
+	
     var dialog = $('dialog')[0];
     if (dialog) {
 	    if (! $('dialog')[0].showModal) {

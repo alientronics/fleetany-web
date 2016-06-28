@@ -435,3 +435,46 @@ _:-ms-input-placeholder, :root .demo-graph {
   height: 100%; 
   max-height: 300px; 
 }
+
+.tires-empty {
+	border-radius: 10px;	
+}
+
+.tires-filled {
+	border-radius: 10px;	
+}
+
+.tires-selected {
+	border-radius: 10px;	
+}
+
+.tire-position-detail-button {
+	display: none;
+}
+
+.tires-selected-focus {
+	border-radius: 10px;
+	border-style: solid;
+    border-width: 5px; 
+    border-color:#38761d; 
+}
+
+.tires-front {
+	text-align: center; 
+   	-ms-transform: rotate(90deg); 
+   	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+	font-size: 320px;
+	height: 80px;
+	padding-top: 25px;
+}
+
+.tires-back {
+	text-align: center; 
+   	-ms-transform: rotate(90deg); 
+   	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+	font-size: 320px;
+	height: 80px;
+	padding-top: 50px;
+}
