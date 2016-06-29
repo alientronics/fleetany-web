@@ -63,19 +63,21 @@
 		        Tire Position Detail
 			</div>
 			
+			<input id="tire-position-swap-flag" type="hidden" value="0" />
+			<input id="tire-position-focus-id" type="hidden" value="0" />
+			
 			<div class="mdl-card__actions mdl-card--border"></div>
 		    <div id="tire-position-detail" style="height: 200px;">
 		    	<div id="tire-position-detail-data"></div>
-            	<select><option>1</option>
-            		<option>2</option>
-            		<option>3</option>
-            	</select>
-            	<button class="mdl-cell--hide-tablet mdl-cell--hide-phone mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--primary mdl-button--search tire-position-detail-button">
-                  <i class="material-icons">swap_horiz</i>
-                </button>
-                <button class="mdl-cell--hide-tablet mdl-cell--hide-phone mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--primary mdl-button--search tire-position-detail-button">
-                  <i class="material-icons">arrow_downward</i>
-                </button>
+                	
+                <div class="tires-buttons-bottom">	    	
+                	<button id="tire-position-swap" class="mdl-cell--hide-tablet mdl-cell--hide-phone mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--primary tire-position-detail-button">
+                      <i class="material-icons">swap_horiz</i>
+                    </button>
+                    <button id="tire-position-remove" class="mdl-cell--hide-tablet mdl-cell--hide-phone mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--primary tire-position-detail-button">
+                      <i class="material-icons">arrow_downward</i>
+                    </button>
+		    	</div>
 		    </div>
 		</div>
 
@@ -87,14 +89,50 @@
 			</div>
 			
 			<div class="mdl-card__actions mdl-card--border"></div>
-		    <div id="tire-storage" style="height: 200px;">
-		    	<div id="tire-storage-data"></div>
-                <button class="mdl-cell--hide-tablet mdl-cell--hide-phone mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--primary mdl-button--search">
-                  <i class="material-icons">add</i>
-                </button>
-                <button class="mdl-cell--hide-tablet mdl-cell--hide-phone mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--primary mdl-button--search">
-                  <i class="material-icons">arrow_upward</i>
-                </button>
+		    <div id="tire-storage">
+                <div class="tires-buttons-top">	   
+                    <button id="tire-add" class="mdl-cell--hide-tablet mdl-cell--hide-phone mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--primary">
+                      <i class="material-icons">add</i>
+                    </button>
+                    <button id="tire-position-add" class="mdl-cell--hide-tablet mdl-cell--hide-phone mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-color--primary">
+                      <i class="material-icons">arrow_upward</i>
+                    </button>
+                </div>
+		    	<div id="tire-storage-data">
+		    	
+    		    	<table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                      <thead>
+                        <tr>
+                          <th class="mdl-data-table__cell--non-numeric">Nº</th>
+                          <th>Brand</th>
+                          <th>Mileage</th>
+                          <th>Lifecycle</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
+                          <td>25</td>
+                          <td>$2.90</td>
+                          <td>$2.90</td>
+                        </tr>
+                        <tr>
+                          <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
+                          <td>50</td>
+                          <td>$1.25</td>
+                          <td>$1.25</td>
+                        </tr>
+                        <tr>
+                          <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
+                          <td>10</td>
+                          <td>$2.35</td>
+                          <td>$2.35</td>
+                        </tr>
+                      </tbody>
+                    </table>
+		    	
+		    	</div>
+		    	
 		    </div>
 		</div>
 

@@ -130,6 +130,11 @@ Route::get('auth/{provider}/callback', 'SocialLoginController@handleProviderCall
 Route::get('auth/{provider}/callback', 'SocialLoginController@handleProviderCallback');
 Route::get('auth/logout', 'SocialLoginController@getLogout');
 
+Route::post('tires/position/swap', 'TireController@positionSwap');
+Route::post('tires/position/remove', 'TireController@positionRemove');
+Route::post('tires/position/add', 'TireController@positionAdd');
+Route::post('tires/details', 'TireController@details');
+
 Route::bind(
     'users',
     function ($value, $route) {

@@ -20,54 +20,115 @@ window.onload=function(){
 	});
 	
 
-//	$(".tires-empty").click(function() {
-//	  if($('.tires-selected').length > 0) {
-//		  $(".tires-selected").removeClass("mdl-color--green");
-//		  $(".tires-selected").addClass("mdl-color--grey");
-//		  $(".tires-selected").addClass("tires-empty");
-//		  $(".tires-selected").removeClass("tires-selected");
-//	  }
-//	  if($('.tires-selected-focus').length > 0) {
-//		  $(".tires-selected-focus").addClass("tires-selected");
-//		  $(".tires-selected-focus").removeClass("tires-selected-focus");
-//	  }
-//	  $(this).removeClass("tires-empty");
-//	  $(this).removeClass("mdl-color--grey");
-//	  $(this).addClass("mdl-color--green");
-//	  $(this).addClass("tires-selected-focus");
-//	  setTireSelectedFocusData();
-//	});
-	
-
-//	$(".tires-selected").click(function() {
-//	  $(".tires-selected-focus").addClass("tires-selected");
-//	  $(".tires-selected-focus").removeClass("tires-selected-focus");
-//	  $(this).removeClass("tires-selected");
-//	  $(this).addClass("tires-selected-focus");
-//	  setTireSelectedFocusData();
-//	});
-	
 	$(".tires-empty, .tires-filled").click(function() {
-	  if($('.tires-selected').length > 0) {
-		  $(".tires-selected").removeClass("tires-selected");
-	  }
-	  if($('.tires-selected-focus').length > 0) {
-		  $(".tires-selected-focus").addClass("tires-selected");
-		  $(".tires-selected-focus").removeClass("tires-selected-focus");
-	  }
-	  $(this).addClass("tires-selected-focus");
-	  setTireSelectedFocusData();
+		
+		$("#tire-position-focus-id").val($(this).attr('id'));
+		
+		if($("#tire-position-swap-flag").val() == 1) {
+			return;
+		}
+		
+		if($('.tires-selected').length > 0) {
+			$(".tires-selected").removeClass("tires-selected");
+		}
+		if($('.tires-selected-focus').length > 0) {
+			$(".tires-selected-focus").addClass("tires-selected");
+			$(".tires-selected-focus").removeClass("tires-selected-focus");
+		}
+		$(this).addClass("tires-selected-focus");
+		
+		setTireSelectedFocusData();
 	});
 
+	$(".tires-filled").click(function() {
+		if($("#tire-position-swap-flag").val() == 1) {
+			
+			var data = {
+		        "part_id1"	: $('.tires-selected-focus').attr('id').replace('pos', ''),
+		        "part_id2"	: $(this).attr('id').replace('pos', '')
+		    };
+
+		    $.post(url('tires/position/swap'), data, function(retorno) {
+		    	$(".tires-selected-focus").removeClass("tires-selected-focus");
+		    	$(this).addClass("tires-selected-focus");
+		    	$("#tire-position-swap-flag").val(0); 
+		    });
+		}
+	});
+	
+	$("#tire-position-swap").click(function(event){
+	    event.preventDefault();
+	    $("#tire-position-swap-flag").val(1);
+	});
+	
+	$("#tire-position-remove").click(function(event){
+	    event.preventDefault();
+	    
+	    var data = {
+	        "part_id"	: $('.tires-selected-focus').attr('id').replace('pos', '')
+	    };
+
+	    $.post(url('tires/position/remove'), data, function(retorno) {
+	    	$(".tires-selected-focus").addClass("tires-empty");
+	    	$(".tires-selected-focus").removeClass("tires-filled");
+	    	$(".tires-selected-focus").addClass("mdl-color--grey");
+	    	$(".tires-selected-focus").removeClass("mdl-color--green");
+	    	setTireSelectedFocusData();
+	    });
+	    
+	});
+	
+	$("#tire-add").click(function(event){
+	    event.preventDefault();
+	});
+	
+	$("#tire-position-add").click(function(event){
+	    event.preventDefault();
+	    
+	    var data = {
+	        "position"	: 1, //TODO CORRIGIR
+	        "part_id"	: $('.tires-selected-focus').attr('id').replace('pos', '')
+	    };
+
+	    $.post(url('tires/position/add'), data, function(retorno) {
+	    	$(".tires-selected-focus").addClass("tires-filled");
+	    	$(".tires-selected-focus").removeClass("tires-empty");
+	    	$(".tires-selected-focus").addClass("mdl-color--green");
+	    	$(".tires-selected-focus").removeClass("mdl-color--grey");
+	    	setTireSelectedFocusData();
+	    });
+	    
+	});
+	
 	function setTireSelectedFocusData() {
 
-		if($(".tires-selected-focus.tires-empty").length > 0) {
-			$(".tire-position-detail-button").hide();
+		if($("#"+$("#tire-position-focus-id").val()).hasClass("tires-filled")) {
+			
+			var data = {
+		        "part_id"	: $('.tires-selected-focus').attr('id').replace('pos', '')
+		    };
+	
+		    $.post(url('tires/details'), data, function(retorno) {
+		    	
+		    	var positionDetailData = 'Position: '+retorno[0].position+'<br>';
+		    	positionDetailData += 'Nº: 01<br>';
+		    	positionDetailData += 'Model: Pirelli<br>';
+		    	positionDetailData += 'Lifecycle: '+retorno[0].lifecycle+'<br>';
+		    	positionDetailData += 'Mileage: '+retorno[0].miliage+'<br>';
+		    	
+		    	$('#tire-position-detail-data').html(positionDetailData);
+		    	
+		    	if($(".tires-selected-focus.tires-empty").length > 0) {
+					$(".tire-position-detail-button").hide();
+				} else {
+					$(".tire-position-detail-button").show();
+				}
+		    });
+		    
 		} else {
-			$(".tire-position-detail-button").show();
+			$(".tire-position-detail-button").hide();
+			$('#tire-position-detail-data').html("");
 		}
-		$('#tire-position-detail-data').html("Tire detail do pneu da posicao " + $('.tires-selected-focus').attr('id'));
-		$('#tire-storage-data').html("Sensor log do pneu da posicao " + $('.tires-selected-focus').attr('id'));
 	}
 	
     var dialog = $('dialog')[0];
