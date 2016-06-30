@@ -25,37 +25,45 @@ window.onload=function(){
 		$("#tire-position-focus-id").val($(this).attr('id'));
 		
 		if($("#tire-position-swap-flag").val() == 1) {
-			return;
-		}
-		
-		if($('.tires-selected').length > 0) {
-			$(".tires-selected").removeClass("tires-selected");
-		}
-		if($('.tires-selected-focus').length > 0) {
-			$(".tires-selected-focus").addClass("tires-selected");
-			$(".tires-selected-focus").removeClass("tires-selected-focus");
-		}
-		$(this).addClass("tires-selected-focus");
-		
-		setTireSelectedFocusData();
-	});
-
-	$(".tires-filled").click(function() {
-		if($("#tire-position-swap-flag").val() == 1) {
-			
 			var data = {
-		        "part_id1"	: $('.tires-selected-focus').attr('id').replace('pos', ''),
-		        "part_id2"	: $(this).attr('id').replace('pos', '')
+		        "position1"	: $('.tires-selected-focus').attr('id').replace('pos', ''),
+		        "position2"	: $(this).attr('id').replace('pos', ''),
+		        "vehicle_id" : $('#vehicle-id').val()
 		    };
 
+			var selectedTire = this;
 		    $.post(url('tires/position/swap'), data, function(retorno) {
-		    	$(".tires-selected-focus").removeClass("tires-selected-focus");
-		    	$(this).addClass("tires-selected-focus");
-		    	$("#tire-position-swap-flag").val(0); 
+				if($(selectedTire).hasClass("tires-empty")) {
+					$(".tires-selected-focus").addClass("tires-empty");
+			    	$(".tires-selected-focus").addClass("mdl-color--grey");
+			    	$(".tires-selected-focus").removeClass("mdl-color--green");
+					$(".tires-selected-focus").removeClass("tires-filled");
+					$(".tires-selected-focus").removeClass("tires-selected-focus");
+					$(selectedTire).addClass("tires-filled");
+			    	$(selectedTire).addClass("mdl-color--green");
+			    	$(selectedTire).removeClass("mdl-color--grey");
+					$(selectedTire).removeClass("tires-empty");
+				} else {
+					$(".tires-selected-focus").removeClass("tires-selected-focus");
+					$(selectedTire).addClass("tires-selected-focus");
+				}
+				$(selectedTire).addClass("tires-selected-focus");
+				$("#tire-position-swap-flag").val(0); 
 		    });
+		} else {
+			if($('.tires-selected').length > 0) {
+				$(".tires-selected").removeClass("tires-selected");
+			}
+			if($('.tires-selected-focus').length > 0) {
+				$(".tires-selected-focus").addClass("tires-selected");
+				$(".tires-selected-focus").removeClass("tires-selected-focus");
+			}
+			$(this).addClass("tires-selected-focus");
+			
+			setTireSelectedFocusData();
 		}
 	});
-	
+
 	$("#tire-position-swap").click(function(event){
 	    event.preventDefault();
 	    $("#tire-position-swap-flag").val(1);
@@ -65,7 +73,8 @@ window.onload=function(){
 	    event.preventDefault();
 	    
 	    var data = {
-	        "part_id"	: $('.tires-selected-focus').attr('id').replace('pos', '')
+	        "position"	: $('.tires-selected-focus').attr('id').replace('pos', ''),
+	        "vehicle_id" : $('#vehicle-id').val()
 	    };
 
 	    $.post(url('tires/position/remove'), data, function(retorno) {
@@ -78,16 +87,26 @@ window.onload=function(){
 	    
 	});
 	
+	var dialog = document.querySelector('dialog');
+	var showDialogButton = document.querySelector('#show-dialog');
+	if (! dialog.showModal) {
+		dialogPolyfill.registerDialog(dialog);
+	}
+	dialog.querySelector('.close').addEventListener('click', function() {
+		dialog.close();
+	});
 	$("#tire-add").click(function(event){
 	    event.preventDefault();
+	    dialog.showModal();
 	});
 	
 	$("#tire-position-add").click(function(event){
 	    event.preventDefault();
 	    
 	    var data = {
-	        "position"	: 1, //TODO CORRIGIR
-	        "part_id"	: $('.tires-selected-focus').attr('id').replace('pos', '')
+	        "part_id"	: 1, //TODO CORRIGIR
+	        "position"	: $('.tires-selected-focus').attr('id').replace('pos', ''),
+	        "vehicle_id" : $('#vehicle-id').val()
 	    };
 
 	    $.post(url('tires/position/add'), data, function(retorno) {
@@ -105,14 +124,15 @@ window.onload=function(){
 		if($("#"+$("#tire-position-focus-id").val()).hasClass("tires-filled")) {
 			
 			var data = {
-		        "part_id"	: $('.tires-selected-focus').attr('id').replace('pos', '')
+		        "position"	: $('.tires-selected-focus').attr('id').replace('pos', ''),
+		        "vehicle_id" : $('#vehicle-id').val()
 		    };
 	
 		    $.post(url('tires/details'), data, function(retorno) {
 		    	
 		    	var positionDetailData = 'Position: '+retorno[0].position+'<br>';
-		    	positionDetailData += 'Nº: 01<br>';
-		    	positionDetailData += 'Model: Pirelli<br>';
+		    	positionDetailData += 'N&ordm;: '+retorno[0].number+'<br>';
+		    	positionDetailData += 'Model: '+retorno[0].tire_model+'<br>';
 		    	positionDetailData += 'Lifecycle: '+retorno[0].lifecycle+'<br>';
 		    	positionDetailData += 'Mileage: '+retorno[0].miliage+'<br>';
 		    	

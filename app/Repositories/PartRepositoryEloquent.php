@@ -8,6 +8,7 @@ use App\Repositories\PartRepository;
 use App\Entities\Part;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\App;
+use Lang;
 
 class PartRepositoryEloquent extends BaseRepository implements PartRepository
 {
@@ -36,14 +37,16 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         $parts = $this->scopeQuery(function ($query) use ($filters) {
 
             $query = $query->select(
-                'parts.id',
+                'parts.*',
                 'models.name as vehicle',
                 'types.name as part-type',
-                'parts.cost as cost'
+                'parts.cost as cost',
+                'part_models.name as tire-model'
             );
             $query = $query->leftJoin('vehicles', 'parts.vehicle_id', '=', 'vehicles.id');
             $query = $query->leftJoin('models', 'vehicles.model_vehicle_id', '=', 'models.id');
             $query = $query->leftJoin('types', 'parts.part_type_id', '=', 'types.id');
+            $query = $query->leftJoin('models as part_models', 'parts.part_model_id', '=', 'part_models.id');
 
             if (!empty($filters['vehicle_id'])) {
                 $query = $query->where('vehicles.id', $filters['vehicle_id']);
@@ -114,34 +117,43 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
     public function tiresPositionSwap($data)
     {
         $parts = [];
-        $parts[] = $data['part_id1'];
-        $parts[] = $data['part_id2'];
-        sort($parts);
-    
-        $partsQuery = Part::select('position')
-            ->whereIn('id', $parts)
-            ->where('company_id', Auth::user()['company_id'])
-            ->orderBy('id', 'asc')
-            ->get();
-    
-        Part::where('id', $parts[0])
-            ->where('company_id', Auth::user()['company_id'])
-            ->update([
-                'position' => $partsQuery[1]['position']
-            ]);
-    
-        Part::where('id', $parts[1])
-            ->where('company_id', Auth::user()['company_id'])
-            ->update([
-                'position' => $partsQuery[0]['position']
-            ]);
+        $parts[] = $this->getPartIdByTirePosition($data['position1'], $data['vehicle_id']);
+        $part_id2 = $this->getPartIdByTirePosition($data['position2'], $data['vehicle_id']);
+        if(!empty($part_id2)) {
+            $parts[] = $part_id2;
+            sort($parts);
+            
+            $partsQuery = Part::select('position')
+                ->whereIn('id', $parts)
+                ->where('company_id', Auth::user()['company_id'])
+                ->orderBy('id', 'asc')
+                ->get();
+        
+            Part::where('id', $parts[0])
+                ->where('company_id', Auth::user()['company_id'])
+                ->update([
+                    'position' => $partsQuery[1]['position']
+                ]);
+        
+            Part::where('id', $parts[1])
+                ->where('company_id', Auth::user()['company_id'])
+                ->update([
+                    'position' => $partsQuery[0]['position']
+                ]);
+        } else {
+            Part::where('id', $parts[0])
+                ->where('company_id', Auth::user()['company_id'])
+                ->update([
+                    'position' => $data['position2']
+                ]);
+        }
     
         return true;
     }
     
     public function tiresPositionRemove($data)
     {
-        Part::where('id', $data['part_id'])
+        Part::where('id', $this->getPartIdByTirePosition($data['position'], $data['vehicle_id']))
             ->where('company_id', Auth::user()['company_id'])
             ->update([
                 'position' => 0
@@ -163,10 +175,47 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
     
     public function tiresDetails($data)
     {
-        $part = Part::where('id', $data['part_id'])
-            ->where('company_id', Auth::user()['company_id'])
+        $part_id = $this->getPartIdByTirePosition($data['position'], $data['vehicle_id']);
+        
+        $part = Part::select('parts.*', 'models.name as tire_model')
+            ->join('models', 'parts.part_model_id', '=', 'models.id')
+            ->where('parts.id', $part_id)
+            ->where('parts.company_id', Auth::user()['company_id'])
             ->get();
         
         return $part;
+    }
+    
+    private function getPartIdByTirePosition($position, $vehicle_id) {
+        $part = Part::select('id')
+            ->where('position', $position)
+            ->where('vehicle_id', $vehicle_id)
+            ->where('company_id', Auth::user()['company_id'])
+            ->first();
+
+        return empty($part->id) ? "" : $part->id;
+    }
+    
+    public function getTiresPositions($vehicle_id)
+    {
+        $results = Part::select('position')
+            ->join('vehicles', 'parts.vehicle_id', '=', 'vehicles.id')
+            ->join('models', 'parts.part_model_id', '=', 'models.id')
+            ->join('types', 'parts.part_type_id', '=', 'types.id')
+            ->where('parts.vehicle_id', $vehicle_id)
+            ->where('parts.position', '>', 0)
+            ->where('parts.company_id', Auth::user()['company_id'])
+            ->where('types.name', Lang::get('setup.tire'))
+            ->orderBy('position', 'asc')
+            ->get();
+        
+        $tires = [];
+        if(!empty($results)) {
+            foreach ($results as $result) {
+                $tires[$result->position] = true;
+            }
+        }
+            
+        return $tires;
     }
 }

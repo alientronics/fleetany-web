@@ -94,6 +94,8 @@ class VehicleController extends Controller
         $filters['vehicle_id'] = $vehicle->id;
         $parts = $partRepo->results($filters);
         
+        $tiresPositions = $partRepo->getTiresPositions($idVehicle);
+        
         if (!empty($vehicle->geofence)) {
             $vehicle->geofence = json_decode($vehicle->geofence, true);
         }
@@ -112,6 +114,7 @@ class VehicleController extends Controller
             'company_id',
             'vehicleLastPlace',
             'parts',
+            'tiresPositions',
             'attributes',
             'filters'
         ));
