@@ -448,6 +448,7 @@ _:-ms-input-placeholder, :root .demo-graph {
 	border-radius: 10px;	
 }
 
+#tire-position-add, 
 .tire-position-detail-button {
 	display: none;
 }
@@ -483,7 +484,8 @@ _:-ms-input-placeholder, :root .demo-graph {
 	margin-left: 5px;	
 }
 
-#tire-position-detail-data {
+#tire-position-detail-data, 
+#tire-storage-detail-data {
 	margin-top: 15px; 
 	margin-left: 30px;
 }

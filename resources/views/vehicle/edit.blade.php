@@ -3,7 +3,7 @@
 @section('header')
 	@if ($vehicle->id)
 	{{--*/ $operation = 'update' /*--}}
-	<span class="mdl-layout-title">{{$vehicle->model->name}}</span>
+	<span class="mdl-layout-title">{{$vehicle->number}}</span>
 	@else
 	{{--*/ $operation = 'create' /*--}}
 	<span class="mdl-layout-title">{{Lang::get("general.Vehicle")}}</span>

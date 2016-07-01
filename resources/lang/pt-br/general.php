@@ -6,6 +6,7 @@ return [
     "name"      => "Nome",
     "email"     => "E-Mail",
     "Submit"    => "Enviar",
+    "Close"     => "Fechar",
     "Edit"      => "Editar",
     "Reset"     => "Limpar",
     "Save"      => "Salvar",
@@ -148,6 +149,11 @@ return [
     "actual_miliage"=> "Quilometragem Real",
     "cost"=> "Valor",
     "description"=> "Descri&ccedil;&atilde;o",
+    "Tires" => "Pneus",
+    "VehicleMap" => "Mapa do Ve&iacute;culo",
+    "TirePositionDetail" => "Detalhes do Pneu Posicionado",
+    "TireStorage" => "Pneus em Estoque",
+    "TireStorageDetail" => "Detalhes do Pneu em Estoque",
     
     // user
     "Users"   => "Usu&aacute;rios",

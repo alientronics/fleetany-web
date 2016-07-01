@@ -101,7 +101,11 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         if (empty($inputs['part_id']) || $inputs['part_id'] == $inputs['current_part_id']) {
             unset($inputs['part_id']);
         }
-        $inputs['cost'] = HelperRepository::money($inputs['cost']);
+        if(empty($inputs['cost'])) {
+            unset($inputs['cost']);
+        } else {
+            $inputs['cost'] = HelperRepository::money($inputs['cost']);
+        }
         return $inputs;
     }
     
@@ -175,7 +179,11 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
     
     public function tiresDetails($data)
     {
-        $part_id = $this->getPartIdByTirePosition($data['position'], $data['vehicle_id']);
+        if(!empty($data['position'])) {
+            $part_id = $this->getPartIdByTirePosition($data['position'], $data['vehicle_id']);
+        } else {
+            $part_id = $data['part_id'];
+        }
         
         $part = Part::select('parts.*', 'models.name as tire_model')
             ->join('models', 'parts.part_model_id', '=', 'models.id')
@@ -217,5 +225,23 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         }
             
         return $tires;
+    }
+    
+    public function getTiresTypeId($vehicle_id)
+    {
+        $result = Part::select('types.id')
+            ->join('vehicles', 'parts.vehicle_id', '=', 'vehicles.id')
+            ->join('models', 'parts.part_model_id', '=', 'models.id')
+            ->join('types', 'parts.part_type_id', '=', 'types.id')
+            ->where('parts.vehicle_id', $vehicle_id)
+            ->where('parts.company_id', Auth::user()['company_id'])
+            ->where('types.name', Lang::get('setup.tire'))
+            ->first();
+        
+        if(!empty($result->id)) {
+            return $result->id;
+        } else {
+            return null;
+        }
     }
 }

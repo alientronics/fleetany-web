@@ -6,6 +6,7 @@ return [
     "name"      => "Name",
     "email"     => "E-Mail",
     "Submit"    => "Submit",
+    "Close"     => "Close",
     "Edit"      => "Edit",
     "Reset"     => "Reset",
     "Save"      => "Save",
@@ -148,6 +149,11 @@ return [
     "actual_miliage"=> "Actual miliage",
     "cost"=> "Cost",
     "description"=> "Description",
+    "Tires" => "Tires",
+    "VehicleMap" => "Vehicle Map",
+    "TirePositionDetail" => "Tire Position Detail",
+    "TireStorage" => "Tire Storage",
+    "TireStorageDetail" => "Tire Storage Detail",
     
     // user
     "Users"   => "Users",

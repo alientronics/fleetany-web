@@ -19,7 +19,18 @@ window.onload=function(){
 		}
 	});
 	
-
+	function showSnackBarWindowLoaded(message) {
+		(function() {
+		  'use strict';
+		  var snackbarContainer = $('#snackbar')[0];
+		    var data = {
+		      message: message,
+		      timeout: 5000
+		    };
+		    $('#snackbar')[0].MaterialSnackbar.showSnackbar(data);
+		}());
+	}
+	
 	$(".tires-empty, .tires-filled").click(function() {
 		
 		$("#tire-position-focus-id").val($(this).attr('id'));
@@ -92,19 +103,42 @@ window.onload=function(){
 	if (! dialog.showModal) {
 		dialogPolyfill.registerDialog(dialog);
 	}
+	dialog.querySelector('.create-tire').addEventListener('click', function() {
+		var dataTire = {
+		    "part_type_id" : $('#part-type-id').val(),
+	        "part_model_id" : $('#part_model_id').val(),
+	        "number" : $('#part_number').val(),
+	        "miliage" : $('#part_miliage').val(),
+	        "lifecycle" : $('#part_lifecycle').val(),
+	        "vehicle_id" : $('#vehicle-id').val()
+	    };
+
+	    $.post(url('parts/create'), dataTire, function(retorno) {
+	    	dialog.close();
+	    });
+	});
 	dialog.querySelector('.close').addEventListener('click', function() {
 		dialog.close();
 	});
+	
 	$("#tire-add").click(function(event){
-	    event.preventDefault();
+		event.preventDefault();
 	    dialog.showModal();
 	});
-	
+
 	$("#tire-position-add").click(function(event){
 	    event.preventDefault();
+
+	    if($("input[name=tire-storage-id]:checked").val() == undefined) {
+	    	showSnackBarWindowLoaded("Um pneu deve ser selecionado!");
+	    	return;
+	    } else if($('.tires-selected-focus').length == 0) {
+	    	showSnackBarWindowLoaded("Uma posição deve ser selecionada!");
+	    	return;
+	    }
 	    
 	    var data = {
-	        "part_id"	: 1, //TODO CORRIGIR
+	        "part_id"	: $("input[name=tire-storage-id]:checked").val(),
 	        "position"	: $('.tires-selected-focus').attr('id').replace('pos', ''),
 	        "vehicle_id" : $('#vehicle-id').val()
 	    };
@@ -150,6 +184,26 @@ window.onload=function(){
 			$('#tire-position-detail-data').html("");
 		}
 	}
+	
+	$("input[name=tire-storage-id]").change(function(){
+		
+		var data = {
+	        "part_id"	: $('input[name=tire-storage-id]:checked').val(),
+	        "vehicle_id" : $('#vehicle-id').val()
+	    };
+
+	    $.post(url('tires/details'), data, function(retorno) {
+	    	
+	    	var storageDetailData = 'N&ordm;: '+retorno[0].number+'<br>';
+	    	storageDetailData += 'Model: '+retorno[0].tire_model+'<br>';
+	    	storageDetailData += 'Lifecycle: '+retorno[0].lifecycle+'<br>';
+	    	storageDetailData += 'Mileage: '+retorno[0].miliage+'<br>';
+	    	
+	    	$('#tire-storage-detail-data').html(storageDetailData);
+	    	$("#tire-position-add").show();
+	    	
+	    });
+	});
 	
     var dialog = $('dialog')[0];
     if (dialog) {
