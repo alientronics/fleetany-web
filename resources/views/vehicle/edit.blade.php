@@ -21,7 +21,7 @@
 {{--*/ $tabs = []; /*--}}
 {{--*/ $tabs[] = ["title" => "general.VehicleData", "view" => "vehicle.tabs.vehicledata"]; /*--}}
 
-@if (class_exists('Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider')
+@if (config('app.attributes_api_url') != null
 		&& !empty($attributes))
 	{{--*/ $tabs[] = ["title" => "attributes.Attributes", "view" => "includes.attributes", 'attributes' => $attributes]; /*--}}
 @endif
