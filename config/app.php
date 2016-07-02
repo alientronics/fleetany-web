@@ -176,7 +176,7 @@ return [
         "Alientronics\FleetanyWebPages\FleetanyWebPagesServiceProvider",
         "Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider",
         "Alientronics\FleetanyWebDriver\FleetanyWebDriverServiceProvider",
-        //"Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider",
+        "Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider",
 
     ],
 
