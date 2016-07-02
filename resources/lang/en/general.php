@@ -154,6 +154,8 @@ return [
     "TirePositionDetail" => "Tire Position Detail",
     "TireStorage" => "Tire Storage",
     "TireStorageDetail" => "Tire Storage Detail",
+    "SelectTire" => "A tire must be selected!",
+    "SelectPosition" => "A position must be selected!",
     
     // user
     "Users"   => "Users",

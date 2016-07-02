@@ -94,7 +94,9 @@ class VehicleController extends Controller
         $filters['vehicle_id'] = $vehicle->id;
         $parts = $partRepo->results($filters);
 
-        $tiresPositions = $partRepo->getTiresPositions($idVehicle);
+        $tires = $partRepo->getTires($idVehicle);
+        $tiresPositions = $partRepo->getTiresPositions($tires);
+        
         $part_type_id = $partRepo->getTiresTypeId($idVehicle);
         $tiresModels = [];
         if(!empty($part_type_id)) {
@@ -120,6 +122,7 @@ class VehicleController extends Controller
             'part_type_id',
             'vehicleLastPlace',
             'parts',
+            'tires',
             'tiresPositions',
             'tiresModels',
             'attributes',

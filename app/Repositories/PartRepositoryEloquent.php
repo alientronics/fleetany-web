@@ -40,13 +40,11 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
                 'parts.*',
                 'models.name as vehicle',
                 'types.name as part-type',
-                'parts.cost as cost',
-                'part_models.name as tire-model'
+                'parts.cost as cost'
             );
             $query = $query->leftJoin('vehicles', 'parts.vehicle_id', '=', 'vehicles.id');
             $query = $query->leftJoin('models', 'vehicles.model_vehicle_id', '=', 'models.id');
             $query = $query->leftJoin('types', 'parts.part_type_id', '=', 'types.id');
-            $query = $query->leftJoin('models as part_models', 'parts.part_model_id', '=', 'part_models.id');
 
             if (!empty($filters['vehicle_id'])) {
                 $query = $query->where('vehicles.id', $filters['vehicle_id']);
@@ -204,27 +202,31 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         return empty($part->id) ? "" : $part->id;
     }
     
-    public function getTiresPositions($vehicle_id)
+    public function getTires($vehicle_id)
     {
-        $results = Part::select('position')
+        $results = Part::select('parts.*', 'models.name as tire_model')
             ->join('vehicles', 'parts.vehicle_id', '=', 'vehicles.id')
             ->join('models', 'parts.part_model_id', '=', 'models.id')
             ->join('types', 'parts.part_type_id', '=', 'types.id')
             ->where('parts.vehicle_id', $vehicle_id)
-            ->where('parts.position', '>', 0)
             ->where('parts.company_id', Auth::user()['company_id'])
-            ->where('types.name', Lang::get('setup.tire'))
+            ->where('types.name', 'tire')
             ->orderBy('position', 'asc')
             ->get();
         
-        $tires = [];
-        if(!empty($results)) {
-            foreach ($results as $result) {
-                $tires[$result->position] = true;
+        return $results;
+    }
+    
+    public function getTiresPositions($tires)
+    {
+        $tiresPositions = [];
+        if(!empty($tires)) {
+            foreach ($tires as $tire) {
+                $tiresPositions[$tire->position] = true;
             }
         }
-            
-        return $tires;
+        
+        return $tiresPositions;
     }
     
     public function getTiresTypeId($vehicle_id)
@@ -235,7 +237,7 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
             ->join('types', 'parts.part_type_id', '=', 'types.id')
             ->where('parts.vehicle_id', $vehicle_id)
             ->where('parts.company_id', Auth::user()['company_id'])
-            ->where('types.name', Lang::get('setup.tire'))
+            ->where('types.name', 'tire')
             ->first();
         
         if(!empty($result->id)) {

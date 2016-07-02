@@ -135,35 +135,9 @@
                 </div>
 		    	<div id="tire-storage-data">
 		    	
-    		    	<table class="mdl-data-table mdl-shadow--2dp" style="width:102%; margin-left:-10px;">
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th class="mdl-data-table__cell--non-numeric">{{Lang::get('general.number')}}</th>
-                          <th>{{Lang::get('general.Model')}}</th>
-                          <th>{{Lang::get('general.miliage')}}</th>
-                          <th>{{Lang::get('general.lifecycle')}}</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      
-                      @foreach($parts as $key => $part)
-                        @if($part['part-type'] == Lang::get('setup.tire') && $part['position'] == 0)
-                        <tr>
-                           <td>
-                              <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect mdl-data-table__select" for="row[{{++$key}}]">
-                                <input type="radio" id="row[{{$key}}]" class="mdl-radio__button" name="tire-storage-id" value="{{$part['id']}}" />
-                              </label>
-                          </td>
-                          <td class="mdl-data-table__cell--non-numeric">{{$part['number']}}</td>
-                          <td>{{$part['tire-model']}}</td>
-                          <td>{{$part['miliage']}}</td>
-                          <td>{{$part['lifecycle']}}</td>
-                        </tr>
-                        @endif
-                      @endforeach
-                      </tbody>
-                    </table>
+    		    	@include('vehicle.tabs.tiresstorage', [
+                    	'tires' => $tires
+                    ])
 		    	
 		    	</div>
 		    	

@@ -17,6 +17,8 @@
 {!! HTML::style('css/styles.css') !!}
 {!! HTML::style('css/immybox.css') !!}
 
+@include('includes.jstranslations')
+                    
 <!-- second, javascript -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.3/material.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>

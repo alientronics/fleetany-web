@@ -134,6 +134,7 @@ Route::post('tires/position/swap', 'TireController@positionSwap');
 Route::post('tires/position/remove', 'TireController@positionRemove');
 Route::post('tires/position/add', 'TireController@positionAdd');
 Route::post('tires/details', 'TireController@details');
+Route::get('tires/updateStorage/{vehicle_id}', 'TireController@updateStorage');
 Route::post('parts/create', 'PartController@store');
 
 Route::bind(

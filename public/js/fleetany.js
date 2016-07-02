@@ -100,11 +100,18 @@ window.onload=function(){
 	    	$(".tires-selected-focus").removeClass("tires-filled");
 	    	$(".tires-selected-focus").addClass("mdl-color--grey");
 	    	$(".tires-selected-focus").removeClass("mdl-color--green");
+	    	$("#tire-storage-data").load(url('tires/updateStorage/'+data.vehicle_id),function(data){
+	    	    if(data.search('<td>') >= 0) {
+	    	    	$("#tire-position-add").show();
+	    	    } else {
+	    	    	$("#tire-position-add").hide();
+	    	    }
+	    	});
+	    			
 	    	setTireSelectedFocusData();
 	    });
 	    
 	});
-	
 	var dialog = document.querySelector('dialog');
 	var showDialogButton = document.querySelector('#show-dialog');
 	if (! dialog.showModal) {
@@ -137,10 +144,10 @@ window.onload=function(){
 	    event.preventDefault();
 
 	    if($("input[name=tire-storage-id]:checked").val() == undefined) {
-	    	showSnackBarWindowLoaded("Um pneu deve ser selecionado!");
+	    	showSnackBarWindowLoaded(jstrans_selectTire);
 	    	return;
 	    } else if($('.tires-selected-focus').length == 0) {
-	    	showSnackBarWindowLoaded("Uma posição deve ser selecionada!");
+	    	showSnackBarWindowLoaded(jstrans_selectPosition);
 	    	return;
 	    }
 	    
@@ -155,6 +162,13 @@ window.onload=function(){
 	    	$(".tires-selected-focus").removeClass("tires-empty");
 	    	$(".tires-selected-focus").addClass("mdl-color--green");
 	    	$(".tires-selected-focus").removeClass("mdl-color--grey");
+	    	$("#tire-storage-data").load(url('tires/updateStorage/'+data.vehicle_id),function(data){
+	    	    if(data.search('<td>') >= 0) {
+	    	    	$("#tire-position-add").show();
+	    	    } else {
+	    	    	$("#tire-position-add").hide();
+	    	    }
+	    	});
 	    	tirePositionDetail[data.position] = tireStorageDetail[data.part_id];
 	    	setTireSelectedFocusData();
 	    });
@@ -170,14 +184,14 @@ window.onload=function(){
 		        "vehicle_id" : $('#vehicle-id').val()
 		    };
 	
-			var positionData = 'Position: '+data.position+'<br>';
+			var positionData = jstrans_position+': '+data.position+'<br>';
 			if(tirePositionDetail[data.position] == undefined || tirePositionDetail[data.position] == '') {
 				$.post(url('tires/details'), data, function(retorno) {
 					
-					var positionDetailData = 'N&ordm;: '+retorno[0].number+'<br>';
-					positionDetailData += 'Model: '+retorno[0].tire_model+'<br>';
-					positionDetailData += 'Lifecycle: '+retorno[0].lifecycle+'<br>';
-					positionDetailData += 'Mileage: '+retorno[0].miliage+'<br>';
+					var positionDetailData = jstrans_number+': '+retorno[0].number+'<br>';
+					positionDetailData += jstrans_model+': '+retorno[0].tire_model+'<br>';
+					positionDetailData += jstrans_lifecycle+': '+retorno[0].lifecycle+'<br>';
+					positionDetailData += jstrans_mileage+': '+retorno[0].miliage+'<br>';
 					
 					$('#tire-position-detail-data').html(positionData + positionDetailData);
 					
@@ -197,7 +211,6 @@ window.onload=function(){
 			$(".tire-position-detail-button").hide();
 			$('#tire-position-detail-data').html("");
 		}
-		console.log(tirePositionDetail);
 	}
 	
 	$("input[name=tire-storage-id]").change(function(){
@@ -210,10 +223,10 @@ window.onload=function(){
 		if(tirePositionDetail[data.position] == undefined || tirePositionDetail[data.position] == '') {
 			$.post(url('tires/details'), data, function(retorno) {
 		    	
-		    	var storageDetailData = 'N&ordm;: '+retorno[0].number+'<br>';
-		    	storageDetailData += 'Model: '+retorno[0].tire_model+'<br>';
-		    	storageDetailData += 'Lifecycle: '+retorno[0].lifecycle+'<br>';
-		    	storageDetailData += 'Mileage: '+retorno[0].miliage+'<br>';
+		    	var storageDetailData = jstrans_number+': '+retorno[0].number+'<br>';
+		    	storageDetailData += jstrans_model+': '+retorno[0].tire_model+'<br>';
+		    	storageDetailData += jstrans_lifecycle+': '+retorno[0].lifecycle+'<br>';
+		    	storageDetailData += jstrans_mileage+': '+retorno[0].miliage+'<br>';
 		    	
 		    	$('#tire-storage-detail-data').html(storageDetailData);
 		    	$("#tire-position-add").show();
