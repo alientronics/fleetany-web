@@ -89,8 +89,8 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'attributes_api_url' => env('ATTRIBUTES_API_URL', 'SomeUrl'),
-    'attributes_api_key' => env('ATTRIBUTES_API_KEY', 'SomeRandomString'),
+    'attributes_api_url' => env('ATTRIBUTES_API_URL', null),
+    'attributes_api_key' => env('ATTRIBUTES_API_KEY', null),
 
     /*
     |--------------------------------------------------------------------------

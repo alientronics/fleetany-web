@@ -27,7 +27,7 @@
                 "reference": "master"
             },
             "type": "library",
-            "time": "2016-06-28 10:07:21"
+            "time": "2016-07-02 13:58:08"
         },
         {
             "name": "alientronics/fleetany-web-driver",
@@ -2982,47 +2982,6 @@
         }
     ],
     "packages-dev": [
-        {
-            "name": "caouecs/laravel4-lang",
-            "version": "2.0.43",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/caouecs/Laravel-lang.git",
-                "reference": "1f1a7d5d6b63636b5842cd667a162d12589604df"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/caouecs/Laravel-lang/zipball/1f1a7d5d6b63636b5842cd667a162d12589604df",
-                "reference": "1f1a7d5d6b63636b5842cd667a162d12589604df",
-                "shasum": ""
-            },
-            "require-dev": {
-                "fabpot/php-cs-fixer": "^1.10"
-            },
-            "suggest": {
-                "overtrue/laravel-lang": "Command to add languages in your project"
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "caouecs",
-                    "email": "caouecs@caouecs.net"
-                }
-            ],
-            "description": "Languages for Laravel",
-            "keywords": [
-                "lang",
-                "languages",
-                "laravel",
-                "lpm"
-            ],
-            "abandoned": "caouecs/laravel-lang",
-            "time": "2016-04-20 13:26:08"
-        },
         {
             "name": "codeclimate/php-test-reporter",
             "version": "dev-master",

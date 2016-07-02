@@ -13,7 +13,7 @@ use App\Repositories\CompanyRepositoryEloquent;
 use App\Repositories\ModelRepositoryEloquent;
 use App\Repositories\PartRepositoryEloquent;
 use Illuminate\Container\Container as Application;
-use App\Repositories\AttributeRepositoryEloquent;
+use Alientronics\FleetanyWebAttributes\Repositories\AttributeRepositoryEloquent;
 
 class VehicleController extends Controller
 {
