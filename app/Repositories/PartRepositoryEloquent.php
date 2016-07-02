@@ -209,7 +209,7 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
             ->join('vehicles', 'parts.vehicle_id', '=', 'vehicles.id')
             ->join('models', 'parts.part_model_id', '=', 'models.id')
             ->join('types', 'parts.part_type_id', '=', 'types.id')
-            ->where('parts.vehicle_id', $vehicle_id)
+            ->whereNull('parts.vehicle_id')
             ->where('parts.company_id', Auth::user()['company_id'])
             ->where('types.name', 'tire')
             ->orderBy('position', 'asc')
