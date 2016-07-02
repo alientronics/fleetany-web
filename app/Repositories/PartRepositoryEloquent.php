@@ -99,7 +99,7 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         if (empty($inputs['part_id']) || $inputs['part_id'] == $inputs['current_part_id']) {
             unset($inputs['part_id']);
         }
-        if(empty($inputs['cost'])) {
+        if (empty($inputs['cost'])) {
             unset($inputs['cost']);
         } else {
             $inputs['cost'] = HelperRepository::money($inputs['cost']);
@@ -121,7 +121,7 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         $parts = [];
         $parts[] = $this->getPartIdByTirePosition($data['position1'], $data['vehicle_id']);
         $part_id2 = $this->getPartIdByTirePosition($data['position2'], $data['vehicle_id']);
-        if(!empty($part_id2)) {
+        if (!empty($part_id2)) {
             $parts[] = $part_id2;
             sort($parts);
             
@@ -177,7 +177,7 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
     
     public function tiresDetails($data)
     {
-        if(!empty($data['position'])) {
+        if (!empty($data['position'])) {
             $part_id = $this->getPartIdByTirePosition($data['position'], $data['vehicle_id']);
         } else {
             $part_id = $data['part_id'];
@@ -192,7 +192,8 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         return $part;
     }
     
-    private function getPartIdByTirePosition($position, $vehicle_id) {
+    private function getPartIdByTirePosition($position, $vehicle_id)
+    {
         $part = Part::select('id')
             ->where('position', $position)
             ->where('vehicle_id', $vehicle_id)
@@ -220,7 +221,7 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
     public function getTiresPositions($tires)
     {
         $tiresPositions = [];
-        if(!empty($tires)) {
+        if (!empty($tires)) {
             foreach ($tires as $tire) {
                 $tiresPositions[$tire->position] = true;
             }
@@ -240,7 +241,7 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
             ->where('types.name', 'tire')
             ->first();
         
-        if(!empty($result->id)) {
+        if (!empty($result->id)) {
             return $result->id;
         } else {
             return null;

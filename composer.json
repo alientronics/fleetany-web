@@ -84,7 +84,6 @@
         "laravelcollective/html": "5.2.*",
         "prettus/l5-repository": "dev-master",
         "prettus/laravel-validation": "1.1.*",
-        "caouecs/laravel4-lang": "~2.0",
         "laravel/socialite": "^2.0",
 		"doctrine/dbal": "v2.4.2",
         "alientronics/cached-eloquent-user": "dev-master",
@@ -93,7 +92,8 @@
         "alientronics/fleetany-web-geofence": "dev-master",
         "alientronics/fleetany-web-driver": "dev-master",
         "alientronics/fleetany-web-attributes": "dev-master",
-        "barryvdh/laravel-debugbar": "^2.2"
+        "barryvdh/laravel-debugbar": "^2.2",
+        "caouecs/laravel-lang": "^3.0"
     },
     "require-dev": {
         "symfony/dom-crawler": "~3.0",

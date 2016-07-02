@@ -99,7 +99,7 @@ class VehicleController extends Controller
         
         $part_type_id = $partRepo->getTiresTypeId($idVehicle);
         $tiresModels = [];
-        if(!empty($part_type_id)) {
+        if (!empty($part_type_id)) {
             $tiresModels = ModelRepositoryEloquent::getModels('part', $part_type_id);
         }
         
