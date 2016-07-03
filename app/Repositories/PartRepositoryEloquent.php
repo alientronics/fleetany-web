@@ -209,7 +209,12 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
             ->join('vehicles', 'parts.vehicle_id', '=', 'vehicles.id')
             ->join('models', 'parts.part_model_id', '=', 'models.id')
             ->join('types', 'parts.part_type_id', '=', 'types.id')
-            ->whereNull('parts.vehicle_id')
+            ->where(function ($queryStorage) use ($vehicle_id) {
+                $queryStorage->whereNull('parts.vehicle_id')
+                    ->orWhere('parts.vehicle_id', $vehicle_id);
+            })
+            ->where('parts.vehicle_id', $vehicle_id)
+            
             ->where('parts.company_id', Auth::user()['company_id'])
             ->where('types.name', 'tire')
             ->orderBy('position', 'asc')
@@ -218,12 +223,15 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         return $results;
     }
     
-    public function getTiresPositions($tires)
+    public function getTiresPositions($tires, $idVehicle)
     {
         $tiresPositions = [];
         if (!empty($tires)) {
             foreach ($tires as $tire) {
-                $tiresPositions[$tire->position] = true;
+                if(!empty($tire->vehicle_id) && $tire->vehicle_id == $idVehicle 
+                        && !empty($tire->position) && $tire->position > 0) {
+                    $tiresPositions[$tire->position] = true;
+                }
             }
         }
         

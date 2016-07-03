@@ -11,7 +11,7 @@
   <tbody>
   
   @foreach($tires as $key => $tire)
-    @if($tire->position == 0)
+    @if(empty($tire->vehicle_id) || $tire->position == 0)
     <tr>
        <td>
         <input type="radio" id="row[{{$key}}]" name="tire-storage-id" value="{{$tire->id}}" />

@@ -95,7 +95,7 @@ class VehicleController extends Controller
         $parts = $partRepo->results($filters);
 
         $tires = $partRepo->getTires($idVehicle);
-        $tiresPositions = $partRepo->getTiresPositions($tires);
+        $tiresPositions = $partRepo->getTiresPositions($tires, $idVehicle);
         
         $part_type_id = $partRepo->getTiresTypeId($idVehicle);
         $tiresModels = [];
