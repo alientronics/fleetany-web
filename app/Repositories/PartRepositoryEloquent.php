@@ -228,7 +228,7 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         $tiresPositions = [];
         if (!empty($tires)) {
             foreach ($tires as $tire) {
-                if(!empty($tire->vehicle_id) && $tire->vehicle_id == $idVehicle 
+                if (!empty($tire->vehicle_id) && $tire->vehicle_id == $idVehicle
                         && !empty($tire->position) && $tire->position > 0) {
                     $tiresPositions[$tire->position] = true;
                 }
