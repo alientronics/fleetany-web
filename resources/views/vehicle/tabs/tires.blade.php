@@ -43,46 +43,40 @@
 	    	<div class="mdl-color-text--grey tires-front">
 	    		<span>(</span>
 	    	</div>
-	    	<div class="mdl-grid" style="height: 100px;">
-		    	<div class="mdl-cell mdl-cell--1-col">
-		    		&nbsp;
-		    	</div>
-		    	<div id="pos1" class="@if(!empty($tiresPositions[1])) mdl-color--green tires-filled @else mdl-color--grey tires-empty @endif mdl-cell mdl-cell--2-col">
-		    		&nbsp;
-		    	</div>
-		    	<div id="pos2" class="@if(!empty($tiresPositions[2])) mdl-color--green tires-filled @else mdl-color--grey tires-empty @endif mdl-cell mdl-cell--2-col">
-		    		&nbsp;
-		    	</div>
-		    	<div class="mdl-cell mdl-cell--2-col">
-		    		&nbsp;
-		    	</div>
-		    	<div id="pos3" class="@if(!empty($tiresPositions[3])) mdl-color--green tires-filled @else mdl-color--grey tires-empty @endif mdl-cell mdl-cell--2-col">
-		    		&nbsp;
-		    	</div>
-		    	<div id="pos4" class="@if(!empty($tiresPositions[4])) mdl-color--green tires-filled @else mdl-color--grey tires-empty @endif mdl-cell mdl-cell--2-col">
-		    		&nbsp;
-		    	</div>
-	    	</div>
-	    	<div class="mdl-grid" style="height: 100px;">
-		    	<div class="mdl-cell mdl-cell--1-col">
-		    		&nbsp;
-		    	</div>
-		    	<div id="pos5" class="@if(!empty($tiresPositions[5])) mdl-color--green tires-filled @else mdl-color--grey tires-empty @endif mdl-cell mdl-cell--2-col">
-		    		&nbsp;
-		    	</div>
-		    	<div id="pos6" class="@if(!empty($tiresPositions[6])) mdl-color--green tires-filled @else mdl-color--grey tires-empty @endif mdl-cell mdl-cell--2-col">
-		    		&nbsp;
-		    	</div>
-		    	<div class="mdl-cell mdl-cell--2-col">
-		    		&nbsp;
-		    	</div>
-		    	<div id="pos7" class="@if(!empty($tiresPositions[7])) mdl-color--green tires-filled @else mdl-color--grey tires-empty @endif mdl-cell mdl-cell--2-col">
-		    		&nbsp;
-		    	</div>
-		    	<div id="pos8" class="@if(!empty($tiresPositions[8])) mdl-color--green tires-filled @else mdl-color--grey tires-empty @endif mdl-cell mdl-cell--2-col">
-		    		&nbsp;
-		    	</div>
-	    	</div>
+	    	
+    	@if(!empty(str_split($vehicle->model->map)))
+    		{{--*/ $col = 0; /*--}}
+    		@foreach(str_split($vehicle->model->map) as $key => $value)
+    			
+    			@if($col == 4)
+	    		{{--*/ $col = 1; /*--}}
+	    		@else
+	    		{{--*/ $col++; /*--}}
+				@endif
+					    	
+	    		@if($col == 1)
+    	    	<div class="mdl-grid" style="height: 100px;">
+    		    	<div class="mdl-cell mdl-cell--1-col">
+    		    		&nbsp;
+    		    	</div>
+    		    @endif
+    		    
+    		    	<div id="pos{{$key + 1}}" class="@if($value == 1) @if(!empty($tiresPositions[$key + 1])) mdl-color--green tires-filled @else mdl-color--grey tires-empty @endif @endif mdl-cell mdl-cell--2-col">
+    		    		&nbsp;
+    		    	</div>
+    		    	
+    		    @if($col == 2)
+    	    		<div class="mdl-cell mdl-cell--2-col">
+    		    		&nbsp;
+    		    	</div>
+    		    @endif	
+    		    	
+    		    @if($col == 4)
+	    		</div>
+    		    @endif	
+    		    
+    		@endforeach    	
+		@endif
 	    	<div class="mdl-color-text--grey tires-back">
 	    		<span>]</span>
 	    	</div>

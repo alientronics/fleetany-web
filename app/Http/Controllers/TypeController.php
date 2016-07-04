@@ -79,6 +79,9 @@ class TypeController extends Controller
             $this->helper->validateRecord($type);
             $this->typeRepo->validator();
             $inputs = $this->request->all();
+            if ($inputs['locked'] == 1) {
+                $inputs['name'] = $type->name;
+            }
             $this->typeRepo->update($inputs, $idType);
             $this->session->flash(
                 'message',

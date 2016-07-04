@@ -14,7 +14,7 @@ class Type extends BaseModel
     use SoftDeletes;
     
     protected $table = 'types';
-    protected $fillable = ['entity_key', 'name'];
+    protected $fillable = ['entity_key', 'name', 'locked'];
 
 
     public function company()

@@ -43,6 +43,12 @@
          		{!!Form::text('name', $model->name, ['class' => 'mdl-textfield__input'])!!}
 				{!!Form::label('name', Lang::get('general.name'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
 				<span class="mdl-textfield__error">{{ $errors->first('name') }}</span>
+			</div>                       
+			
+			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('map')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		{!!Form::text('map', $model->map, ['class' => 'mdl-textfield__input'])!!}
+				{!!Form::label('map', Lang::get('general.Map'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
+				<span class="mdl-textfield__error">{{ $errors->first('map') }}</span>
 			</div>
 
 			<div class="mdl-card__actions">

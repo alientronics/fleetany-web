@@ -28,11 +28,17 @@
 @endif
 			
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('name')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		@if(!empty($type->locked))
+         		{!!Form::text('name', $type->name, ['class' => 'mdl-textfield__input', 'disabled' => 'disabled'])!!}
+         		@else
          		{!!Form::text('name', $type->name, ['class' => 'mdl-textfield__input'])!!}
+         		@endif
 				{!!Form::label('name', Lang::get('general.name'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
 				<span class="mdl-textfield__error">{{ $errors->first('name') }}</span>
 			</div>
 
+			{!!Form::hidden('locked', $type->locked, ['id' => 'locked'])!!}
+				
 			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('entity_key')) is-invalid is-dirty @endif"" data-upgraded="eP">
          		{!!Form::text('entity_key', $type->entity_key, ['class' => 'mdl-textfield__input'])!!}
 				{!!Form::label('entity_key', Lang::get('general.entity_key'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}

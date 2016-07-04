@@ -156,6 +156,7 @@ return [
     "TireStorageDetail" => "Detalhes do Pneu em Estoque",
     "SelectTire" => "Um pneu deve ser selecionado!",
     "SelectPosition" => "Uma posi\u00e7\u00e3o deve ser selecionada!",
+    "Map" => "Mapa",
     
     // user
     "Users"   => "Usu&aacute;rios",

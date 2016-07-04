@@ -18,6 +18,7 @@ class CreateTypesTable extends Migration {
 			$table->string('entity_key');
 			$table->integer('company_id')->index('fk_types_companies1_idx');
 			$table->string('name');
+			$table->boolean('locked')->nullable()->default(0);
 // 			$table->primary(['id','entity_key']);
 			$table->timestamps();
 			$table->softDeletes();

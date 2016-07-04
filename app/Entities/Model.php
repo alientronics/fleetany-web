@@ -14,7 +14,7 @@ class Model extends BaseModel
     use SoftDeletes;
     
     protected $table = 'models';
-    protected $fillable = ['model_type_id', 'vendor_id', 'name'];
+    protected $fillable = ['model_type_id', 'vendor_id', 'name', 'map'];
 
 
     public function company()
