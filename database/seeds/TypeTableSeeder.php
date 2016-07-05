@@ -21,6 +21,7 @@ class TypeTableSeeder extends Seeder
         Type::forceCreate(
                 [  'entity_key' => 'vehicle',
                         'name' => 'car',
+                        'locked' => 1,
                         'company_id' => 1]
             );
         Type::forceCreate(

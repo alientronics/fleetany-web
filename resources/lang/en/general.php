@@ -90,6 +90,7 @@ return [
     "newmodel" => "New model",
     "model_type" => "Model type",
     "vendor" => "Vendor",
+    "ModelData" => "Model Data",
     
     // Part
     "Part"   => "Part",
