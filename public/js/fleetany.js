@@ -128,6 +128,13 @@ window.onload=function(){
 	    };
 
 	    $.post(url('parts/create'), dataTire, function(retorno) {
+	    	$("#tire-storage-data").load(url('tires/updateStorage/'+dataTire.vehicle_id),function(data){
+	    	    if(data.search('<td>') >= 0) {
+	    	    	$("#tire-position-add").show();
+	    	    } else {
+	    	    	$("#tire-position-add").hide();
+	    	    }
+	    	});
 	    	dialog.close();
 	    });
 	});
