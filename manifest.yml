@@ -1,16 +1,15 @@
 ---
 declared-services:
-  mysql-db:
+  postgres-service:
     label: cleardb
-    plan: spark
 
 applications:
 - name: fleetany-web
-  memory: 128M 
+  memory: 512M 
   instances: 1
   random-route: true
   path: ./
   stack: cflinuxfs2
   buildpack: php_buildpack
   services:
-  - mysql-db
+  - postgres-service

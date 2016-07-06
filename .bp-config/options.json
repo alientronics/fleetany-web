@@ -1,11 +1,11 @@
 {
 	 "ADMIN_EMAIL": "henrique.dias@alientronics.com.br",
-     "PHP_VERSION": "{PHP_55_LATEST}",
+     "PHP_VERSION": "{PHP_70_LATEST}",
      "COMPOSER_VENDOR_DIR": "./vendor",
      "COMPOSER_INSTALL_OPTIONS": [ "--no-dev", "--no-scripts", "--no-interaction"],
      "WEBDIR": "./public",
      "PHP_MODULES": ["cli"],
      "ZEND_EXTENSIONS": ["opcache"],
-     "PHP_EXTENSIONS": [ "mysqli", "bz2", "zlib", "openssl", "fpm", "tokenizer", "curl", "mcrypt", "mbstring", "pdo", "pdo_mysql"],
+     "PHP_EXTENSIONS": [ "mysqli", "bz2", "zlib", "openssl", "fpm", "tokenizer", "curl", "mcrypt", "mbstring", "pdo", "pdo_mysql", "pdo_pgsql"],
      "ADDITIONAL_PREPROCESS_CMDS": ["php app/artisan migrate:refresh --seed --force"]
 }
