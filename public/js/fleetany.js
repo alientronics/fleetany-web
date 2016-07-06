@@ -33,7 +33,9 @@ window.onload=function(){
 
 	var tirePositionDetail = [];
 	var tireStorageDetail = [];
-	var tireFillable = JSON.parse($("#tires_fillable").val());
+	if($("#tires_fillable").length > 0) {
+		var tireFillable = JSON.parse($("#tires_fillable").val());
+	}
 	
 	$(".tire-position-fillable").dblclick(function(event){
 	    event.preventDefault();
@@ -128,35 +130,38 @@ window.onload=function(){
 	    });
 	    
 	});
-	var dialog = document.querySelector('dialog');
-	var showDialogButton = document.querySelector('#show-dialog');
-	if (! dialog.showModal) {
-		dialogPolyfill.registerDialog(dialog);
+	
+	if($("#show-dialog").length > 0) {
+		var dialog = document.querySelector('dialog');
+		var showDialogButton = document.querySelector('#show-dialog');
+		if (! dialog.showModal) {
+			dialogPolyfill.registerDialog(dialog);
+		}
+		dialog.querySelector('.create-tire').addEventListener('click', function() {
+			var dataTire = {
+			    "part_type_id" : $('#part-type-id').val(),
+		        "part_model_id" : $('#part_model_id').val(),
+		        "number" : $('#part_number').val(),
+		        "miliage" : $('#part_miliage').val(),
+		        "lifecycle" : $('#part_lifecycle').val(),
+		        "vehicle_id" : $('#vehicle-id').val()
+		    };
+	
+		    $.post(url('parts/create'), dataTire, function(retorno) {
+		    	$("#tire-storage-data").load(url('tires/updateStorage/'+dataTire.vehicle_id),function(data){
+		    	    if(data.search('<td>') >= 0) {
+		    	    	$("#tire-position-add").show();
+		    	    } else {
+		    	    	$("#tire-position-add").hide();
+		    	    }
+		    	});
+		    	dialog.close();
+		    });
+		});
+		dialog.querySelector('.close').addEventListener('click', function() {
+			dialog.close();
+		});
 	}
-	dialog.querySelector('.create-tire').addEventListener('click', function() {
-		var dataTire = {
-		    "part_type_id" : $('#part-type-id').val(),
-	        "part_model_id" : $('#part_model_id').val(),
-	        "number" : $('#part_number').val(),
-	        "miliage" : $('#part_miliage').val(),
-	        "lifecycle" : $('#part_lifecycle').val(),
-	        "vehicle_id" : $('#vehicle-id').val()
-	    };
-
-	    $.post(url('parts/create'), dataTire, function(retorno) {
-	    	$("#tire-storage-data").load(url('tires/updateStorage/'+dataTire.vehicle_id),function(data){
-	    	    if(data.search('<td>') >= 0) {
-	    	    	$("#tire-position-add").show();
-	    	    } else {
-	    	    	$("#tire-position-add").hide();
-	    	    }
-	    	});
-	    	dialog.close();
-	    });
-	});
-	dialog.querySelector('.close').addEventListener('click', function() {
-		dialog.close();
-	});
 	
 	$("#tire-add").click(function(event){
 		event.preventDefault();

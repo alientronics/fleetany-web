@@ -96,6 +96,7 @@ class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
     
     public function setInputs($inputs)
     {
+        $inputs['map'] = "";
         if(!empty($inputs['tires_fillable'])) {
             $inputs['tires_fillable'] = json_decode($inputs['tires_fillable']);
             unset($inputs['tires_fillable'][0]);
@@ -104,6 +105,9 @@ class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
                 $inputs['map'] .= $fillable === 1 || $fillable === "1" ? 1 : 0;
             }
         }
+        
+        $inputs['map'] = str_pad($inputs['map'], 24, "0", STR_PAD_RIGHT);
+        
         return $inputs;
     }
 }

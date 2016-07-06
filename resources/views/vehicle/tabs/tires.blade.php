@@ -39,7 +39,7 @@
 		</div>
 		
 		<div class="mdl-card__actions mdl-card--border"></div>
-	    <div class="mdl-card__supporting-text" style="height: 500px;">
+	    <div class="mdl-card__supporting-text" style="height: 900px;">
 	    	<div class="mdl-color-text--grey tires-front">
 	    		<span>(</span>
 	    	</div>
@@ -47,7 +47,7 @@
     	@if(!empty(str_split($vehicle->model->map)))
     		{{--*/ $col = 0; /*--}}
     		@foreach(str_split($vehicle->model->map) as $key => $value)
-    			
+
     			@if($col == 4)
 	    		{{--*/ $col = 1; /*--}}
 	    		@else
