@@ -85,7 +85,7 @@ class ModelController extends Controller
             $model = $this->modelRepo->find($idModel);
             $this->helper->validateRecord($model);
             $this->modelRepo->validator();
-            $inputs = $this->request->all();
+            $inputs = $this->modelRepo->setInputs($this->request->all());
             $this->modelRepo->update($inputs, $idModel);
             return $this->redirect->to('model')->with('message', Lang::get(
                 'general.succefullupdate',

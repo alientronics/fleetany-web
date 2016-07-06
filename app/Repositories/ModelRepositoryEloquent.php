@@ -7,6 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\ModelRepository;
 use App\Entities\Model;
 use Illuminate\Support\Facades\Auth;
+use function GuzzleHttp\json_decode;
 
 class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
 {
@@ -91,5 +92,18 @@ class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
         $models = $models->lists('models.name', 'models.id');
         
         return $models;
+    }
+    
+    public function setInputs($inputs)
+    {
+        if(!empty($inputs['tires_fillable'])) {
+            $inputs['tires_fillable'] = json_decode($inputs['tires_fillable']);
+            unset($inputs['tires_fillable'][0]);
+            $inputs['map'] = "";
+            foreach ($inputs['tires_fillable'] as $fillable) {
+                $inputs['map'] .= $fillable === 1 || $fillable === "1" ? 1 : 0;
+            }
+        }
+        return $inputs;
     }
 }

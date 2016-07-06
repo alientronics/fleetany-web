@@ -33,6 +33,22 @@ window.onload=function(){
 
 	var tirePositionDetail = [];
 	var tireStorageDetail = [];
+	var tireFillable = JSON.parse($("#tires_fillable").val());
+	
+	$(".tire-position-fillable").dblclick(function(event){
+	    event.preventDefault();
+	    if($(this).hasClass("mdl-color--green")) {
+			tireFillable[$(this).attr('id').replace('pos', '')] = 0;
+			$('#tires_fillable').val(JSON.stringify(tireFillable)); 
+	    	$(this).addClass("mdl-color--grey");
+	    	$(this).removeClass("mdl-color--green");
+		} else {
+			tireFillable[$(this).attr('id').replace('pos', '')] = 1;
+			$('#tires_fillable').val(JSON.stringify(tireFillable)); 
+	    	$(this).addClass("mdl-color--green");
+	    	$(this).removeClass("mdl-color--grey");
+		}
+	});
 	
 	$(".tires-empty, .tires-filled").click(function() {
 		
