@@ -97,7 +97,7 @@ class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
     public function setInputs($inputs)
     {
         $inputs['map'] = "";
-        if(!empty($inputs['tires_fillable'])) {
+        if (!empty($inputs['tires_fillable'])) {
             $inputs['tires_fillable'] = json_decode($inputs['tires_fillable']);
             unset($inputs['tires_fillable'][0]);
             $inputs['map'] = "";

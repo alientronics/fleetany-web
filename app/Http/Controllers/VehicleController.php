@@ -115,6 +115,13 @@ class VehicleController extends Controller
             );
         }
         
+        if (empty($vehicle->model->map)) {
+            $vehicle->model->map = str_pad("", 24, "0", STR_PAD_RIGHT);
+        } else {
+            $vehicle->model->map = substr($vehicle->model->map, 0, 24);
+            $vehicle->model->map = str_pad($vehicle->model->map, 24, "0", STR_PAD_RIGHT);
+        }
+        
         return view("vehicle.edit", compact(
             'vehicle',
             'model_vehicle_id',
