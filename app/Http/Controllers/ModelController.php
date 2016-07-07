@@ -66,6 +66,17 @@ class ModelController extends Controller
                    ->with('errors', $e->getMessageBag());
         }
     }
+    
+    public function storeByDialog()
+    {
+        try {
+            $this->modelRepo->validator();
+            $inputs = $this->request->all();
+            return $this->modelRepo->create($inputs);
+        } catch (ValidatorException $e) {
+            return false;
+        }
+    }
 
     public function edit($idModel)
     {

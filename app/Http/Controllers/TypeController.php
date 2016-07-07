@@ -62,6 +62,17 @@ class TypeController extends Controller
         }
     }
     
+    public function storeByDialog()
+    {
+        try {
+            $this->typeRepo->validator();
+            $inputs = $this->request->all();
+            return $this->typeRepo->create($inputs);
+        } catch (ValidatorException $e) {
+            return false;
+        }
+    }
+    
     public function edit($idType)
     {
         $type = $this->typeRepo->find($idType);

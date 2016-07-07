@@ -1,5 +1,10 @@
+@include('includes.dialogs.typecreate', [
+	'typedialog' => $typedialog
+])
+
 	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('contact_type_id')) is-invalid is-dirty @endif"">
         {!!Form::select('contact_type_id', $contact_type_id, $contact->contact_type_id, ['class' => 'mdl-textfield__input'])!!}
+		<i id="type-add" class="material-icons">add_circle_outline</i>
 		{!!Form::label('contact_type_id', Lang::get('general.contact_type'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
     	<span class="mdl-textfield__error">{{ $errors->first('contact_type_id') }}</span>
     </div>

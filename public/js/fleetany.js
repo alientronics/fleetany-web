@@ -128,40 +128,93 @@ window.onload=function(){
 	    
 	});
 	
-	if($("#show-dialog").length > 0) {
+	if($(".mdl-dialog").length > 0) {
 		var dialog = document.querySelector('dialog');
+		var dialogAddButton = "";
 		var showDialogButton = document.querySelector('#show-dialog');
 		if (! dialog.showModal) {
 			dialogPolyfill.registerDialog(dialog);
 		}
-		dialog.querySelector('.create-tire').addEventListener('click', function() {
-			var dataTire = {
-			    "part_type_id" : $('#part-type-id').val(),
-		        "part_model_id" : $('#part_model_id').val(),
-		        "number" : $('#part_number').val(),
-		        "miliage" : $('#part_miliage').val(),
-		        "lifecycle" : $('#part_lifecycle').val(),
-		        "vehicle_id" : $('#vehicle-id').val()
-		    };
-	
-		    $.post(url('parts/create'), dataTire, function(retorno) {
-		    	$("#tire-storage-data").load(url('tires/updateStorage/'+dataTire.vehicle_id),function(data){
-		    	    if(data.search('<td>') >= 0) {
-		    	    	$("#tire-position-add").show();
-		    	    } else {
-		    	    	$("#tire-position-add").hide();
-		    	    }
-		    	});
-		    	dialog.close();
-		    });
-		});
-		dialog.querySelector('.close').addEventListener('click', function() {
-			dialog.close();
-		});
+		
+		if($(".create-tire").length > 0) {
+			dialog.querySelector('.create-tire').addEventListener('click', function() {
+				var dataTire = {
+				    "part_type_id" : $('#part-type-id').val(),
+			        "part_model_id" : $('#part_model_id').val(),
+			        "number" : $('#part_number').val(),
+			        "miliage" : $('#part_miliage').val(),
+			        "lifecycle" : $('#part_lifecycle').val(),
+			        "vehicle_id" : $('#vehicle-id').val()
+			    };
+		
+			    $.post(url('parts/create'), dataTire, function(retorno) {
+			    	$("#tire-storage-data").load(url('tires/updateStorage/'+dataTire.vehicle_id),function(data){
+			    	    if(data.search('<td>') >= 0) {
+			    	    	$("#tire-position-add").show();
+			    	    } else {
+			    	    	$("#tire-position-add").hide();
+			    	    }
+			    	});
+			    	dialog.close();
+			    });
+			});
+		}
+		
+		if($(".create-model").length > 0) {
+			dialog.querySelector('.create-model').addEventListener('click', function() {
+				var dataModel = {
+				    "model_type_id" : $('#modeldialog_model_type_id').val(),
+			        "vendor_id" : $('#modeldialog_vendor_id').val(),
+			        "name" : $('#modeldialog_name').val()
+			    };
+		
+				$.post(url('models/create'), dataModel, function(retorno) {
+			    	if(retorno.id != undefined) {
+			    		dialogAddButton.prev().append($('<option>', {
+		    				value: retorno.id,
+		    				text: $('#modeldialog_name').val()
+		    			}));
+			    		
+			    		dialogAddButton.prev().val(retorno.id);
+			    	}
+			    			
+			    	dialog.close();
+			    });
+			});
+		}
+		
+		if($(".create-type").length > 0) {
+			dialog.querySelector('.create-type').addEventListener('click', function() {
+				var dataType = {
+				    "name" : $('#typedialog_name').val(),
+			        "entity_key" : $('#typedialog_entity_key').val()
+			    };
+		
+			    $.post(url('types/create'), dataType, function(retorno) {
+			    	if(retorno.id != undefined) {
+			    		dialogAddButton.prev().append($('<option>', {
+		    				value: retorno.id,
+		    				text: $('#typedialog_name').val()
+		    			}));
+			    		
+			    		dialogAddButton.prev().val(retorno.id);
+			    	}
+			    			
+			    	dialog.close();
+			    });
+			});
+		}
+
+		if($(".close").length > 0) {
+			dialog.querySelector('.close').addEventListener('click', function() {
+				dialog.close();
+			});
+		}
 	}
 	
-	$("#tire-add").click(function(event){
+	$("#tire-add, #type-add, #model-add").click(function(event){
 		event.preventDefault();
+		dialogAddButton = $(this);
 	    dialog.showModal();
 	});
 

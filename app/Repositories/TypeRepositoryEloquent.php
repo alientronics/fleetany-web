@@ -74,4 +74,11 @@ class TypeRepositoryEloquent extends BaseRepository implements TypeRepository
         
         return $types;
     }
+    
+    public static function getDialogStoreOptions($entity_key = null)
+    {
+        $options['entity_key'] = $entity_key;
+        
+        return $options;
+    }
 }

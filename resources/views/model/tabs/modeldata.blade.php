@@ -1,5 +1,8 @@
+@include('includes.dialogs.typecreate')
+
 	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('model_type_id')) is-invalid is-dirty @endif"">
         {!!Form::select('model_type_id', $model_type_id, $model->model_type_id, ['class' => 'mdl-textfield__input'])!!}
+        <i id="type-add" class="material-icons">add_circle_outline</i>
 		{!!Form::label('model_type_id', Lang::get('general.model_type'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
     	<span class="mdl-textfield__error">{{ $errors->first('model_type_id') }}</span>
     </div>

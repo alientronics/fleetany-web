@@ -136,6 +136,8 @@ Route::post('tires/position/add', 'TireController@positionAdd');
 Route::post('tires/details', 'TireController@details');
 Route::get('tires/updateStorage/{vehicle_id}', 'TireController@updateStorage');
 Route::post('parts/create', 'PartController@store');
+Route::post('models/create', 'ModelController@storeByDialog');
+Route::post('types/create', 'TypeController@storeByDialog');
 
 Route::bind(
     'users',
