@@ -57,7 +57,7 @@ class TripController extends Controller
         
         $attributes = [];
         if (config('app.attributes_api_url') != null) {
-            $attributes = AttributeRepositoryEloquent::getAttributesWithValues('trip');
+            $attributes = AttributeRepositoryEloquent::getAttributes('trip');
         }
         
         return view("trip.edit", compact(

@@ -58,7 +58,7 @@ class EntryController extends Controller
         $typedialog = TypeRepositoryEloquent::getDialogStoreOptions('entry');
         $attributes = [];
         if (config('app.attributes_api_url') != null) {
-            $attributes = AttributeRepositoryEloquent::getAttributesWithValues('entry');
+            $attributes = AttributeRepositoryEloquent::getAttributes('entry');
         }
         
         return view("entry.edit", compact(

@@ -62,7 +62,7 @@ class PartController extends Controller
         
         $attributes = [];
         if (config('app.attributes_api_url') != null) {
-            $attributes = AttributeRepositoryEloquent::getAttributesWithValues('part');
+            $attributes = AttributeRepositoryEloquent::getAttributes('part');
         }
         
         return view("part.edit", compact(

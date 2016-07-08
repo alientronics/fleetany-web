@@ -52,7 +52,7 @@ class ContactController extends Controller
         
         $attributes = [];
         if (config('app.attributes_api_url') != null) {
-            $attributes = AttributeRepositoryEloquent::getAttributesWithValues('contact');
+            $attributes = AttributeRepositoryEloquent::getAttributes('contact');
         }
         
         return view("contact.edit", compact(
