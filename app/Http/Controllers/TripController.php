@@ -76,7 +76,7 @@ class TripController extends Controller
         try {
             $this->tripRepo->validator();
             $inputs = $this->tripRepo->setInputs($this->request->all());
-            $this->tripRepo->create($inputs);
+            $inputs['entity_id'] = $this->tripRepo->create($inputs)->id;
             if (config('app.attributes_api_url') != null) {
                 AttributeRepositoryEloquent::setValues($inputs);
             }
@@ -130,7 +130,7 @@ class TripController extends Controller
             $this->helper->validateRecord($trip);
             $this->tripRepo->validator();
             $inputs = $this->tripRepo->setInputs($this->request->all());
-            $this->tripRepo->update($inputs, $idTrip);
+            $inputs['entity_id'] = $this->tripRepo->update($inputs, $idTrip)->id;
             if (config('app.attributes_api_url') != null) {
                 AttributeRepositoryEloquent::setValues($inputs);
             }

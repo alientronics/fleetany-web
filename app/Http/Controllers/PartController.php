@@ -82,7 +82,7 @@ class PartController extends Controller
         try {
             $this->partRepo->validator();
             $inputs = $this->partRepo->setInputs($this->request->all());
-            $this->partRepo->create($inputs);
+            $inputs['entity_id'] = $this->partRepo->create($inputs)->id;
             if (config('app.attributes_api_url') != null) {
                 AttributeRepositoryEloquent::setValues($inputs);
             }
@@ -148,7 +148,7 @@ class PartController extends Controller
                 ['current_part_id' => $idPart],
                 $this->request->all()
             ));
-            $this->partRepo->update($inputs, $idPart);
+            $inputs['entity_id'] = $this->partRepo->update($inputs, $idPart)->id;
             if (config('app.attributes_api_url') != null) {
                 AttributeRepositoryEloquent::setValues($inputs);
             }

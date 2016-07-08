@@ -101,4 +101,11 @@ class ContactRepositoryEloquent extends BaseRepository implements ContactReposit
         
         return $results;
     }
+    
+    public function setInputs($inputs)
+    {
+        $inputs['entity_key'] = "contact";
+        
+        return $inputs;
+    }
 }

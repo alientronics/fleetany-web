@@ -90,6 +90,7 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
     
     public function setInputs($inputs)
     {
+        $inputs['entity_key'] = "part";
         if (empty($inputs['vehicle_id'])) {
             unset($inputs['vehicle_id']);
         }

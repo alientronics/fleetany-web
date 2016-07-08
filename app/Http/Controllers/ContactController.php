@@ -69,8 +69,8 @@ class ContactController extends Controller
     {
         try {
             $this->contactRepo->validator();
-            $inputs = $this->request->all();
-            $this->contactRepo->create($inputs);
+            $inputs = $this->contactRepo->setInputs($this->request->all());
+            $inputs['entity_id'] = $this->contactRepo->create($inputs)->id;
             if (config('app.attributes_api_url') != null) {
                 AttributeRepositoryEloquent::setValues($inputs);
             }
@@ -119,8 +119,8 @@ class ContactController extends Controller
             $contact = $this->contactRepo->find($idContact);
             $this->helper->validateRecord($contact);
             $this->contactRepo->validator();
-            $inputs = $this->request->all();
-            $this->contactRepo->update($inputs, $idContact);
+            $inputs = $this->contactRepo->setInputs($this->request->all());
+            $inputs['entity_id'] = $this->contactRepo->update($inputs, $idContact)->id;
             if (config('app.attributes_api_url') != null) {
                 AttributeRepositoryEloquent::setValues($inputs);
             }

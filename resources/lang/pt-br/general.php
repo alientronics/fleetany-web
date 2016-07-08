@@ -171,6 +171,11 @@ return [
     "contact_id" => "Contato",
     "company_id" => "Empresa",
     
+    // Dialogs
+    "createmodel" => "Criar novo modelo",
+    "createtire" => "Criar novo pneu",
+    "createtype" => "Criar novo tipo",
+    
     //Grupos de permissao
     "Administrator" => "Administrador",
     "Executive" => "Gestor",

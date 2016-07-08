@@ -93,6 +93,7 @@ class EntryRepositoryEloquent extends BaseRepository implements EntryRepository
     
     public function setInputs($inputs)
     {
+        $inputs['entity_key'] = "entry";
         if (empty($inputs['vendor_id'])) {
             unset($inputs['vendor_id']);
         }

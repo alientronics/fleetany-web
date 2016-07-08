@@ -1,4 +1,5 @@
 <dialog class="mdl-dialog">
+	<h1 class="mdl-dialog__title mdl-color-text--grey-600">{{Lang::get('general.createtype')}}</h1>
     <div class="mdl-dialog__content">
         
         <div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('typedialog_name')) is-invalid is-dirty @endif"" data-upgraded="eP">

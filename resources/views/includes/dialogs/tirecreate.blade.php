@@ -1,4 +1,5 @@
 <dialog class="mdl-dialog">
+	<h1 class="mdl-dialog__title mdl-color-text--grey-600">{{Lang::get('general.createtire')}}</h1>
     <div class="mdl-dialog__content">
         
     	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('part_model_id')) is-invalid is-dirty @endif"">

@@ -79,7 +79,8 @@ class EntryController extends Controller
             $this->entryRepo->validator();
             $inputs = $this->entryRepo->setInputs($this->request->all());
             $entry = $this->entryRepo->create($inputs);
-
+            $inputs['entity_id'] = $entry->id;
+            
             if (config('app.attributes_api_url') != null) {
                 AttributeRepositoryEloquent::setValues($inputs);
             }
@@ -141,7 +142,7 @@ class EntryController extends Controller
             $this->helper->validateRecord($entry);
             $this->entryRepo->validator();
             $inputs = $this->entryRepo->setInputs($this->request->all());
-            $this->entryRepo->update($inputs, $idEntry);
+            $inputs['entity_id'] = $this->entryRepo->update($inputs, $idEntry)->id;
             if (config('app.attributes_api_url') != null) {
                 AttributeRepositoryEloquent::setValues($inputs);
             }
