@@ -111,7 +111,7 @@ class PartController extends Controller
         $attributes = [];
         if (config('app.attributes_api_url') != null) {
             $attributes = AttributeRepositoryEloquent::getAttributesWithValues(
-                'part.'.$part->type->name,
+                'part.'.$part->partType->name,
                 $idPart
             );
         }

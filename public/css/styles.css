@@ -503,3 +503,14 @@ _:-ms-input-placeholder, :root .demo-graph {
 	margin-bottom: 15px;	
 }
 
+.dialog-add-item-combobox {
+	display:unset!important; 
+	width: 97%;	
+}
+
+.dialog-add-item-button {
+	top:7px; 
+	position: relative;	
+	cursor: pointer;
+}
+

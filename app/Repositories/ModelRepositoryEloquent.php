@@ -110,4 +110,14 @@ class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
         
         return $inputs;
     }
+    
+    public static function getDialogStoreOptions($entity_key = null)
+    {
+        $options['entity_key'] = $entity_key;
+        $options['model_types'] = TypeRepositoryEloquent::getTypes();
+        $options['vendors'] = ContactRepositoryEloquent::getContacts();
+        
+        return $options;
+    }
+
 }

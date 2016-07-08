@@ -50,12 +50,14 @@ class VehicleController extends Controller
         $company_id = CompanyRepositoryEloquent::getCompanies();
         $model_vehicle_id = ModelRepositoryEloquent::getModels('vehicle');
         $parts = null;
+        $modeldialog = ModelRepositoryEloquent::getDialogStoreOptions('vehicle');
 
         $attributes = [];
         if (config('app.attributes_api_url') != null) {
             $attributes = AttributeRepositoryEloquent::getAttributesWithValues('vehicle');
         }
-        return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 'company_id', 'parts', 'attributes'));
+        return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 
+            'company_id', 'parts', 'attributes', 'modeldialog'));
     }
 
     public function store()
@@ -93,6 +95,7 @@ class VehicleController extends Controller
         $filters = $this->helper->getFilters($this->request->all(), $partController->getFields(), $this->request);
         $filters['vehicle_id'] = $vehicle->id;
         $parts = $partRepo->results($filters);
+        $modeldialog = ModelRepositoryEloquent::getDialogStoreOptions('vehicle');
 
         $tires = $partRepo->getTires($idVehicle);
         $tiresPositions = $partRepo->getTiresPositions($tires, $idVehicle);
@@ -133,7 +136,8 @@ class VehicleController extends Controller
             'tiresPositions',
             'tiresModels',
             'attributes',
-            'filters'
+            'filters',
+            'modeldialog'
         ));
     }
     

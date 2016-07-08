@@ -55,7 +55,7 @@ class EntryController extends Controller
         $vehicle_id = VehicleRepositoryEloquent::getVehicles();
         $parts = PartRepositoryEloquent::getPartsByVehicle(array_keys($vehicle_id->toArray())[0]);
         $entry_parts = [];
-        
+        $typedialog = TypeRepositoryEloquent::getDialogStoreOptions('entry');
         $attributes = [];
         if (config('app.attributes_api_url') != null) {
             $attributes = AttributeRepositoryEloquent::getAttributesWithValues('entry');
@@ -69,7 +69,8 @@ class EntryController extends Controller
             'vendor_id',
             'parts',
             'entry_parts',
-            'attributes'
+            'attributes',
+            'typedialog'
         ));
     }
 
@@ -111,6 +112,7 @@ class EntryController extends Controller
         $vehicle_id = VehicleRepositoryEloquent::getVehicles();
         $parts = PartRepositoryEloquent::getPartsByVehicle($entry->vehicle_id);
         $entry_parts = [];
+        $typedialog = TypeRepositoryEloquent::getDialogStoreOptions('entry');
         foreach ($entry->partsEntries->toArray() as $entryPart) {
             $entry_parts[] = $entryPart['part_id'];
         }
@@ -131,7 +133,8 @@ class EntryController extends Controller
             'vendor_id',
             'parts',
             'entry_parts',
-            'attributes'
+            'attributes',
+            'typedialog'
         ));
     }
     

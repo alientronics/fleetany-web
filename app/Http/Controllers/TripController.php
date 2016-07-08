@@ -53,6 +53,7 @@ class TripController extends Controller
         $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
         $trip_type_id = TypeRepositoryEloquent::getTypes('trip');
         $fuel_type = TypeRepositoryEloquent::getTypes('fuel');
+        $typedialog = TypeRepositoryEloquent::getDialogStoreOptions('trip');
         
         $attributes = [];
         if (config('app.attributes_api_url') != null) {
@@ -67,7 +68,8 @@ class TripController extends Controller
             'vehicle_id',
             'trip_type_id',
             'fuel_type',
-            'attributes'
+            'attributes',
+            'typedialog'
         ));
     }
 
@@ -102,6 +104,7 @@ class TripController extends Controller
         $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
         $trip_type_id = TypeRepositoryEloquent::getTypes('trip');
         $fuel_type = TypeRepositoryEloquent::getTypes('fuel');
+        $typedialog = TypeRepositoryEloquent::getDialogStoreOptions('trip');
         
         $attributes = [];
         if (config('app.attributes_api_url') != null) {
@@ -119,7 +122,8 @@ class TripController extends Controller
             'vehicle_id',
             'trip_type_id',
             'fuel_type',
-            'attributes'
+            'attributes',
+            'typedialog'
         ));
     }
     

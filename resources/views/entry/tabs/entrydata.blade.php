@@ -1,5 +1,10 @@
+@include('includes.dialogs.typecreate', [
+	'typedialog' => $typedialog
+])
+
 	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('entry_type_id')) is-invalid is-dirty @endif"">
-        {!!Form::select('entry_type_id', $entry_type_id, $entry->entry_type_id, ['class' => 'mdl-textfield__input'])!!}
+        {!!Form::select('entry_type_id', $entry_type_id, $entry->entry_type_id, ['class' => 'mdl-textfield__input dialog-add-item-combobox'])!!}
+		<i id="type-add" class="material-icons dialog-add-item-button">add_circle_outline</i>
 		{!!Form::label('entry_type_id', Lang::get('general.entry_type'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
     	<span class="mdl-textfield__error">{{ $errors->first('entry_type_id') }}</span>
     </div>

@@ -1,3 +1,7 @@
+@include('includes.dialogs.typecreate', [
+	'typedialog' => $typedialog
+])
+
 	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('driver_id')) is-invalid is-dirty @endif"">
         {!!Form::select('driver_id', $driver_id, $trip->driver_id, ['class' => 'mdl-textfield__input'])!!}
 		{!!Form::label('driver_id', Lang::get('general.driver'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
@@ -17,7 +21,8 @@
     </div>
     
 	<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('trip_type_id')) is-invalid is-dirty @endif"">
-        {!!Form::select('trip_type_id', $trip_type_id, $trip->trip_type_id, ['class' => 'mdl-textfield__input'])!!}
+        {!!Form::select('trip_type_id', $trip_type_id, $trip->trip_type_id, ['class' => 'mdl-textfield__input dialog-add-item-combobox'])!!}
+		<i id="type-add" class="material-icons dialog-add-item-button">add_circle_outline</i>
 		{!!Form::label('trip_type_id', Lang::get('general.trip_type'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
     	<span class="mdl-textfield__error">{{ $errors->first('trip_type_id') }}</span>
     </div>

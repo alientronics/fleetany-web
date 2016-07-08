@@ -1,6 +1,11 @@
+@include('includes.dialogs.modelcreate', [
+	'modeldialog' => $modeldialog
+])
+
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('model_vehicle_id')) is-invalid is-dirty @endif"">
-        {!!Form::select('model_vehicle_id', $model_vehicle_id, $vehicle->model_vehicle_id, ['class' => 'mdl-textfield__input'])!!}
-    	{!!Form::label('model_vehicle_id', Lang::get('general.model_vehicle'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
+        {!!Form::select('model_vehicle_id', $model_vehicle_id, $vehicle->model_vehicle_id, ['class' => 'mdl-textfield__input dialog-add-item-combobox'])!!}
+    	<i id="model-add" class="material-icons dialog-add-item-button">add_circle_outline</i>
+		{!!Form::label('model_vehicle_id', Lang::get('general.model_vehicle'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
     	<span class="mdl-textfield__error">{{ $errors->first('model_vehicle_id') }}</span>
     </div>
     
