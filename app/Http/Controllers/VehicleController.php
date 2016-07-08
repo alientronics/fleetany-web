@@ -56,8 +56,14 @@ class VehicleController extends Controller
         if (config('app.attributes_api_url') != null) {
             $attributes = AttributeRepositoryEloquent::getAttributesWithValues('vehicle');
         }
-        return view("vehicle.edit", compact('vehicle', 'model_vehicle_id', 
-            'company_id', 'parts', 'attributes', 'modeldialog'));
+        return view("vehicle.edit", compact(
+            'vehicle',
+            'model_vehicle_id',
+            'company_id',
+            'parts',
+            'attributes',
+            'modeldialog'
+        ));
     }
 
     public function store()

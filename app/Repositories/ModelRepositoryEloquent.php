@@ -119,5 +119,4 @@ class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
         
         return $options;
     }
-
 }
