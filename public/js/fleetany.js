@@ -139,6 +139,19 @@ window.onload=function(){
 			dialogPolyfill.registerDialog(dialog);
 		}
 		
+		$(document).keypress(function(e) {
+		    if(e.which == 13) {
+		    	e.preventDefault();
+		        if($(".create-model").is(":visible")) {
+		        	$(".create-model").trigger("click");
+		        } else if($(".create-tire").is(":visible")) {
+		        	$(".create-tire").trigger("click");
+		        } else if($(".create-type").is(":visible")) {
+		        	$(".create-type").trigger("click");
+		        } 
+		    }
+		});
+		
 		if($(".create-tire").length > 0) {
 			dialog.querySelector('.create-tire').addEventListener('click', function() {
 				var dataTire = {
