@@ -100,7 +100,7 @@ class ContactController extends Controller
             $attributes = AttributeRepositoryEloquent::getAttributesWithValues(
                 'contact.'.$contact->type->name,
                 $idContact
-                );
+            );
         }
         
         return view("contact.edit", compact(

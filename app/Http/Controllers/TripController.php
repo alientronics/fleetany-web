@@ -108,7 +108,7 @@ class TripController extends Controller
             $attributes = AttributeRepositoryEloquent::getAttributesWithValues(
                 'trip.'.$trip->type->name,
                 $idTrip
-                );
+            );
         }
         
         return view("trip.edit", compact(

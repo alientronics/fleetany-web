@@ -32,14 +32,8 @@
     		    	</div>
     		    @endif
     		    
-    		    	<div id="pos{{$key + 1}}" class="@if($value == 1) @if(!empty($tiresPositions[$key + 1])) tires-filled @else tires-empty @endif @endif mdl-cell mdl-cell--2-col">
-    		    		@if($value == 1) 
-        		    		@if(!empty($tiresPositions[$key + 1])) 
-    		    				<i class="material-icons">gps_fixed</i>
-        		    		@else 
-    		    				<i class="material-icons">gps_not_fixed</i>
-        		    		@endif 
-    		    		@endif
+    		    	<div id="pos{{$key + 1}}" class="@if($value == 1) @if(!empty($tiresPositions[$key + 1])) mdl-color--green tires-filled @else mdl-color--grey tires-empty @endif @endif mdl-cell mdl-cell--2-col">
+    		    		&nbsp;
     		    	</div>
     		    	
     		    @if($col == 2)

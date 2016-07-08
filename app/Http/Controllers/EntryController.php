@@ -119,7 +119,7 @@ class EntryController extends Controller
             $attributes = AttributeRepositoryEloquent::getAttributesWithValues(
                 'entry.'.$entry->type->name,
                 $idEntry
-                );
+            );
         }
         
         return view("entry.edit", compact(

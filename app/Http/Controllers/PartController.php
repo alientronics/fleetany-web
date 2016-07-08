@@ -113,7 +113,7 @@ class PartController extends Controller
             $attributes = AttributeRepositoryEloquent::getAttributesWithValues(
                 'part.'.$part->type->name,
                 $idPart
-                );
+            );
         }
         
         if ($part->partType->name == Lang::get('setup.sensor')) {

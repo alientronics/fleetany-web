@@ -33,13 +33,9 @@
         		    	</div>
         		    @endif
         		    
-        		    	<div id="pos{{$i}}" class="@if(!empty($map[$i]) && $map[$i] == 1) tires-filled @else tires-empty @endif tire-position-fillable tires-icon mdl-cell mdl-cell--2-col">
-        		    		@if(!empty($map[$i]) && $map[$i] == 1) 
-        		    		<i class="material-icons">gps_not_fixed</i>
-        		    		@else 
-        		    		<i class="material-icons">gps_off</i>
-        		    		@endif
-        		    	</div>
+            		    <div id="pos{{$i}}" class="@if(!empty($map[$i]) && $map[$i] == 1) mdl-color--green tires-filled @else mdl-color--grey tires-empty @endif tire-position-fillable mdl-cell mdl-cell--2-col">
+         		    		&nbsp;
+         		    	</div>
         		    	
         		    @if($col == 2)
         	    		<div class="mdl-cell mdl-cell--2-col">
