@@ -13,6 +13,7 @@ use App\Repositories\CompanyRepositoryEloquent;
 use App\Repositories\VehicleRepositoryEloquent;
 use App\Repositories\ContactRepositoryEloquent;
 use App\Repositories\TypeRepositoryEloquent;
+use Alientronics\FleetanyWebAttributes\Repositories\AttributeRepositoryEloquent;
 
 class TripController extends Controller
 {
@@ -52,6 +53,12 @@ class TripController extends Controller
         $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
         $trip_type_id = TypeRepositoryEloquent::getTypes('trip');
         $fuel_type = TypeRepositoryEloquent::getTypes('fuel');
+        
+        $attributes = [];
+        if (config('app.attributes_api_url') != null) {
+            $attributes = AttributeRepositoryEloquent::getAttributesWithValues('trip');
+        }
+        
         return view("trip.edit", compact(
             'trip',
             'driver_id',
@@ -59,7 +66,8 @@ class TripController extends Controller
             'company_id',
             'vehicle_id',
             'trip_type_id',
-            'fuel_type'
+            'fuel_type',
+            'attributes'
         ));
     }
 
@@ -69,6 +77,9 @@ class TripController extends Controller
             $this->tripRepo->validator();
             $inputs = $this->tripRepo->setInputs($this->request->all());
             $this->tripRepo->create($inputs);
+            if (config('app.attributes_api_url') != null) {
+                AttributeRepositoryEloquent::setValues($inputs);
+            }
             return $this->redirect->to('trip')->with('message', Lang::get(
                 'general.succefullcreate',
                 ['table'=> Lang::get('general.Trip')]
@@ -91,6 +102,15 @@ class TripController extends Controller
         $vendor_id = ContactRepositoryEloquent::getContacts('vendor', true);
         $trip_type_id = TypeRepositoryEloquent::getTypes('trip');
         $fuel_type = TypeRepositoryEloquent::getTypes('fuel');
+        
+        $attributes = [];
+        if (config('app.attributes_api_url') != null) {
+            $attributes = AttributeRepositoryEloquent::getAttributesWithValues(
+                'trip.'.$trip->type->name,
+                $idTrip
+                );
+        }
+        
         return view("trip.edit", compact(
             'trip',
             'driver_id',
@@ -98,7 +118,8 @@ class TripController extends Controller
             'company_id',
             'vehicle_id',
             'trip_type_id',
-            'fuel_type'
+            'fuel_type',
+            'attributes'
         ));
     }
     
@@ -110,6 +131,9 @@ class TripController extends Controller
             $this->tripRepo->validator();
             $inputs = $this->tripRepo->setInputs($this->request->all());
             $this->tripRepo->update($inputs, $idTrip);
+            if (config('app.attributes_api_url') != null) {
+                AttributeRepositoryEloquent::setValues($inputs);
+            }
             return $this->redirect->to('trip')->with('message', Lang::get(
                 'general.succefullupdate',
                 ['table'=> Lang::get('general.Trip')]

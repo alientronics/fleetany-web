@@ -78,6 +78,7 @@ return [
     // Entry
     "Entry"   => "Entrada",
     "Entries"    => "Entradas",
+    "EntryData"    => "Dados da Entrada",
     "newentry" => "Nova Entrada",
     "entry_type"    => "Tipo de Entrada",
     "entry_number"  => "N&uacute;mero da Entrada",
@@ -116,6 +117,7 @@ return [
     // Trip
     "Trip"   => "Viagem",
     "Trips"    => "Viagens",
+    "TripData"    => "Dados da Viagem",
     "newtrip" => "Nova Viagem",
     "trip_type"    => "Tipo de Viagem",
     "fuel_cost"    => "Custo do Combust&iacute;vel",

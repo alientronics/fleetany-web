@@ -83,6 +83,7 @@ return [
     "entry_number"  => "Entry number",
     "datetime_ini"  => "Initial datetime",
     "datetime_end"  => "End datetime",
+    "EntryData"    => "Entry Data",
     
     // Model
     "Model"   => "Model",
@@ -116,6 +117,7 @@ return [
     // Trip
     "Trip"   => "Trip",
     "Trips"    => "Trips",
+    "TripData"    => "Trip Data",
     "newtrip" => "New trip",
     "trip_type"    => "Trip type",
     "fuel_cost"    => "Fuel cost",

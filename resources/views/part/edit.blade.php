@@ -18,6 +18,13 @@
 	<section class="demo-section demo-section--textfield demo-page--textfield mdl-upgraded">
 		<div class="demo-preview-block">
 
+{{--*/ $tabs = []; /*--}}
+{{--*/ $tabs[] = ["title" => "general.PartData", "view" => "part.tabs.partdata"]; /*--}}
+@if (config('app.attributes_api_url') != null
+		&& !empty($attributes))
+	{{--*/ $tabs[] = ["title" => "attributes.Attributes", "view" => "includes.attributes", 'attributes' => $attributes]; /*--}}
+@endif
+
 @if (!$part->id)
 {!! Form::open(['route' => 'part.store']) !!}
 @else
@@ -25,22 +32,16 @@
         'method'=>'PUT',
         'route' => ['part.update',$part->id]
     ]) !!}
+    
+    @if(!empty($sensor_data))   
+    {{--*/ $tabs[] = ["title" => "general.SensorData", "view" => "part.tabs.showsensors"]; /*--}}
+    @endif
+    
 @endif
      
-    @if(!empty($sensor_data))      
-    	@include('includes.tabs', [
-        	'tabs' => [
-                ["title" => "general.PartData", "view" => "part.tabs.partdata"], 
-                ["title" => "general.SensorData", "view" => "part.tabs.showsensors"], 
-        	]
-        ])
-    @else
-    	@include('includes.tabs', [
-        	'tabs' => [
-                ["title" => "general.PartData", "view" => "part.tabs.partdata"], 
-        	]
-        ])
-    @endif
+@include('includes.tabs', [
+	'tabs' => $tabs
+])
     
 {!! Form::close() !!}
 

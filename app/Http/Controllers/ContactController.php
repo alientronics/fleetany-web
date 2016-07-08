@@ -11,6 +11,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\CompanyRepositoryEloquent;
 use App\Repositories\TypeRepositoryEloquent;
+use Alientronics\FleetanyWebAttributes\Repositories\AttributeRepositoryEloquent;
 
 class ContactController extends Controller
 {
@@ -48,12 +49,19 @@ class ContactController extends Controller
         $contact_type_id = TypeRepositoryEloquent::getTypes('contact');
         $typedialog = TypeRepositoryEloquent::getDialogStoreOptions('contact');
         $driver_profile = [];
+        
+        $attributes = [];
+        if (config('app.attributes_api_url') != null) {
+            $attributes = AttributeRepositoryEloquent::getAttributesWithValues('contact');
+        }
+        
         return view("contact.edit", compact(
             'contact',
             'contact_type_id',
             'typedialog',
             'company_id',
-            'driver_profile'
+            'driver_profile',
+            'attributes'
         ));
     }
 
@@ -63,6 +71,9 @@ class ContactController extends Controller
             $this->contactRepo->validator();
             $inputs = $this->request->all();
             $this->contactRepo->create($inputs);
+            if (config('app.attributes_api_url') != null) {
+                AttributeRepositoryEloquent::setValues($inputs);
+            }
             return $this->redirect->to('contact')->with('message', Lang::get(
                 'general.succefullcreate',
                 ['table'=> Lang::get('general.Contact')]
@@ -84,12 +95,21 @@ class ContactController extends Controller
         
         $driver_profile = $this->contactRepo->getDriverProfile($idContact);
         
+        $attributes = [];
+        if (config('app.attributes_api_url') != null) {
+            $attributes = AttributeRepositoryEloquent::getAttributesWithValues(
+                'contact.'.$contact->type->name,
+                $idContact
+                );
+        }
+        
         return view("contact.edit", compact(
             'contact',
             'contact_type_id',
             'typedialog',
             'company_id',
-            'driver_profile'
+            'driver_profile',
+            'attributes'
         ));
     }
     
@@ -101,6 +121,9 @@ class ContactController extends Controller
             $this->contactRepo->validator();
             $inputs = $this->request->all();
             $this->contactRepo->update($inputs, $idContact);
+            if (config('app.attributes_api_url') != null) {
+                AttributeRepositoryEloquent::setValues($inputs);
+            }
             return $this->redirect->to('contact')->with('message', Lang::get(
                 'general.succefullupdate',
                 ['table'=> Lang::get('general.Contact')]

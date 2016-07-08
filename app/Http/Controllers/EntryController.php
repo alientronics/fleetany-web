@@ -14,6 +14,7 @@ use App\Repositories\TypeRepositoryEloquent;
 use App\Repositories\ContactRepositoryEloquent;
 use App\Repositories\VehicleRepositoryEloquent;
 use App\Repositories\PartRepositoryEloquent;
+use Alientronics\FleetanyWebAttributes\Repositories\AttributeRepositoryEloquent;
 
 class EntryController extends Controller
 {
@@ -54,6 +55,12 @@ class EntryController extends Controller
         $vehicle_id = VehicleRepositoryEloquent::getVehicles();
         $parts = PartRepositoryEloquent::getPartsByVehicle(array_keys($vehicle_id->toArray())[0]);
         $entry_parts = [];
+        
+        $attributes = [];
+        if (config('app.attributes_api_url') != null) {
+            $attributes = AttributeRepositoryEloquent::getAttributesWithValues('entry');
+        }
+        
         return view("entry.edit", compact(
             'entry',
             'entry_type_id',
@@ -61,7 +68,8 @@ class EntryController extends Controller
             'vehicle_id',
             'vendor_id',
             'parts',
-            'entry_parts'
+            'entry_parts',
+            'attributes'
         ));
     }
 
@@ -71,6 +79,10 @@ class EntryController extends Controller
             $this->entryRepo->validator();
             $inputs = $this->entryRepo->setInputs($this->request->all());
             $entry = $this->entryRepo->create($inputs);
+
+            if (config('app.attributes_api_url') != null) {
+                AttributeRepositoryEloquent::setValues($inputs);
+            }
             
             if (!empty($inputs['parts'])) {
                 $entry->updateEntryParts($entry->id, $inputs['parts']);
@@ -101,6 +113,15 @@ class EntryController extends Controller
         foreach ($entry->partsEntries->toArray() as $entryPart) {
             $entry_parts[] = $entryPart['part_id'];
         }
+        
+        $attributes = [];
+        if (config('app.attributes_api_url') != null) {
+            $attributes = AttributeRepositoryEloquent::getAttributesWithValues(
+                'entry.'.$entry->type->name,
+                $idEntry
+                );
+        }
+        
         return view("entry.edit", compact(
             'entry',
             'entry_type_id',
@@ -108,7 +129,8 @@ class EntryController extends Controller
             'vehicle_id',
             'vendor_id',
             'parts',
-            'entry_parts'
+            'entry_parts',
+            'attributes'
         ));
     }
     
@@ -120,6 +142,9 @@ class EntryController extends Controller
             $this->entryRepo->validator();
             $inputs = $this->entryRepo->setInputs($this->request->all());
             $this->entryRepo->update($inputs, $idEntry);
+            if (config('app.attributes_api_url') != null) {
+                AttributeRepositoryEloquent::setValues($inputs);
+            }
             
             if (!empty($inputs['parts'])) {
                 $entry->updateEntryParts($entry->id, $inputs['parts']);

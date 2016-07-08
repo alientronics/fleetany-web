@@ -18,38 +18,30 @@
 	<section class="demo-section demo-section--textfield demo-page--textfield mdl-upgraded">
 		<div class="demo-preview-block">
 		
+		
+{{--*/ $tabs = []; /*--}}
+{{--*/ $tabs[] = ["title" => "general.ContactData", "view" => "contact.tabs.contactdata"]; /*--}}
+@if (config('app.attributes_api_url') != null
+		&& !empty($attributes))
+	{{--*/ $tabs[] = ["title" => "attributes.Attributes", "view" => "includes.attributes", 'attributes' => $attributes]; /*--}}
+@endif
+
 @if (!$contact->id)
 {!! Form::open(['route' => 'contact.store']) !!}
-
-    	@include('includes.tabs', [
-        	'tabs' => [
-                ["title" => "general.ContactData", "view" => "contact.tabs.contactdata"], 
-        	]
-        ])
-        
 @else
 {!! Form::model('$contact', [
         'method'=>'PUT',
         'route' => ['contact.update',$contact->id]
     ]) !!}
     
-    
     @if (!empty($driver_profile->toArray()) && class_exists('Alientronics\FleetanyWebDriver\FleetanyWebDriverServiceProvider'))
-        @include('includes.tabs', [
-        	'tabs' => [
-                ["title" => "general.ContactData", "view" => "contact.tabs.contactdata"], 
-                ["title" => "general.DriverProfile", "view" => "contact.tabs.driverprofile"], 
-        	]
-        ])
-    @else
-    	@include('includes.tabs', [
-        	'tabs' => [
-                ["title" => "general.ContactData", "view" => "contact.tabs.contactdata"], 
-        	]
-        ])
+        {{--*/ $tabs[] = ["title" => "general.DriverProfile", "view" => "contact.tabs.driverprofile"]; /*--}}
     @endif
 @endif
 
+@include('includes.tabs', [
+	'tabs' => $tabs
+])
 	
 {!! Form::close() !!}
 

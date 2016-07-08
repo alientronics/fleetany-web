@@ -15,6 +15,7 @@ use App\Repositories\TypeRepositoryEloquent;
 use App\Repositories\ModelRepositoryEloquent;
 use App\Repositories\TireSensorRepositoryEloquent;
 use Illuminate\Container\Container as Application;
+use Alientronics\FleetanyWebAttributes\Repositories\AttributeRepositoryEloquent;
 
 class PartController extends Controller
 {
@@ -58,6 +59,12 @@ class PartController extends Controller
         $part_model_id = ModelRepositoryEloquent::getModels('part', array_keys($part_type_id->toArray())[0]);
         $part_id = self::getParts(null, true);
         $sensor_data = null;
+        
+        $attributes = [];
+        if (config('app.attributes_api_url') != null) {
+            $attributes = AttributeRepositoryEloquent::getAttributesWithValues('part');
+        }
+        
         return view("part.edit", compact(
             'part',
             'vehicle_id',
@@ -65,7 +72,8 @@ class PartController extends Controller
             'part_type_id',
             'part_model_id',
             'part_id',
-            'sensor_data'
+            'sensor_data',
+            'attributes'
         ));
     }
 
@@ -75,6 +83,9 @@ class PartController extends Controller
             $this->partRepo->validator();
             $inputs = $this->partRepo->setInputs($this->request->all());
             $this->partRepo->create($inputs);
+            if (config('app.attributes_api_url') != null) {
+                AttributeRepositoryEloquent::setValues($inputs);
+            }
             return $this->redirect->to('part')->with('message', Lang::get(
                 'general.succefullcreate',
                 ['table'=> Lang::get('general.Part')]
@@ -97,6 +108,14 @@ class PartController extends Controller
         $part_model_id = ModelRepositoryEloquent::getModels('part', array_keys($part_type_id->toArray())[0]);
         $part_id = self::getParts($idPart, true);
         
+        $attributes = [];
+        if (config('app.attributes_api_url') != null) {
+            $attributes = AttributeRepositoryEloquent::getAttributesWithValues(
+                'part.'.$part->type->name,
+                $idPart
+                );
+        }
+        
         if ($part->partType->name == Lang::get('setup.sensor')) {
             $tireSensorRepo = new TireSensorRepositoryEloquent(new Application);
             $filters = $this->helper->getFilters($this->request->all(), $tireSensorRepo->getFields(), $this->request);
@@ -114,7 +133,8 @@ class PartController extends Controller
             'part_model_id',
             'part_id',
             'sensor_data',
-            'filters'
+            'filters',
+            'attributes'
         ));
     }
     
@@ -129,6 +149,9 @@ class PartController extends Controller
                 $this->request->all()
             ));
             $this->partRepo->update($inputs, $idPart);
+            if (config('app.attributes_api_url') != null) {
+                AttributeRepositoryEloquent::setValues($inputs);
+            }
             return $this->redirect->to('part')->with('message', Lang::get(
                 'general.succefullupdate',
                 ['table'=> Lang::get('general.Part')]
