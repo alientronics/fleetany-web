@@ -155,6 +155,10 @@ window.onload=function(){
 			    	    	$("#tire-position-add").hide();
 			    	    }
 			    	});
+			        $('#part_model_id').val($("#part_model_id option:first").val());
+			        $('#part_number').val('');
+			        $('#part_miliage').val('');
+			        $('#part_lifecycle').val('');
 			    	dialog.close();
 			    });
 			});
@@ -177,7 +181,10 @@ window.onload=function(){
 			    		
 			    		dialogAddButton.prev().val(retorno.id);
 			    	}
-			    			
+
+			    	$('#modeldialog_model_type_id').val($("#modeldialog_model_type_id option:first").val());
+			    	$('#modeldialog_vendor_id').val($("#modeldialog_vendor_id option:first").val());
+			        $('#modeldialog_name').val('');
 			    	dialog.close();
 			    });
 			});
@@ -199,7 +206,8 @@ window.onload=function(){
 			    		
 			    		dialogAddButton.prev().val(retorno.id);
 			    	}
-			    			
+			    	$('#typedialog_name').val('');
+			        $('#typedialog_entity_key').val('');	
 			    	dialog.close();
 			    });
 			});
