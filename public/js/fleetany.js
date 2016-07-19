@@ -152,7 +152,7 @@ window.onload=function(){
 		    }
 		});
 		
-		if($(".create-tire").length > 0) {
+		if($(".create-tire").is(":visible")) {
 			dialog.querySelector('.create-tire').addEventListener('click', function() {
 				var dataTire = {
 				    "part_type_id" : $('#part-type-id').val(),
@@ -180,7 +180,7 @@ window.onload=function(){
 			});
 		}
 		
-		if($(".create-model").length > 0) {
+		if($(".create-model").is(":visible")) {
 			dialog.querySelector('.create-model').addEventListener('click', function() {
 				var dataModel = {
 				    "model_type_id" : $('#modeldialog_model_type_id').val(),
@@ -206,7 +206,7 @@ window.onload=function(){
 			});
 		}
 		
-		if($(".create-type").length > 0) {
+		if($(".create-type").is(":visible")) {
 			dialog.querySelector('.create-type').addEventListener('click', function() {
 				var dataType = {
 				    "name" : $('#typedialog_name').val(),
@@ -226,12 +226,6 @@ window.onload=function(){
 			        $('#typedialog_entity_key').val('');	
 			    	dialog.close();
 			    });
-			});
-		}
-
-		if($(".close").length > 0) {
-			dialog.querySelector('.close').addEventListener('click', function() {
-				dialog.close();
 			});
 		}
 	}
