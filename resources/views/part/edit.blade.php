@@ -55,6 +55,7 @@
 
 		$('#part_type_id').change(function() {
     		$('#part_model_id').empty();
+			$('#modeldialog_model_type_id').val($("#part_type_id").val());
             $.get(url('getModels/part/'+$("#part_type_id").val()), function(retorno) {
         		$.each(JSON.parse(retorno), function (i, value) {
 					console.log(i + ' - ' + value);
@@ -62,7 +63,6 @@
                 	    value: i,
                 	    text: value
                 	}));
-					$('#modeldialog_model_type_id').val($("#part_type_id").val());
                 });     
         	});   
     	});
