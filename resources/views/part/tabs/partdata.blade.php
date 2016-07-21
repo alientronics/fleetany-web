@@ -1,3 +1,10 @@
+@include('includes.dialogs.typecreate', [
+	'typedialog' => $typedialog
+])
+
+@include('includes.dialogs.modelcreate', [
+	'modeldialog' => $modeldialog
+])
 
 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('vehicle_id')) is-invalid is-dirty @endif"">
             {!!Form::select('vehicle_id', $vehicle_id, $part->vehicle_id, ['class' => 'mdl-textfield__input'])!!}
@@ -12,14 +19,16 @@
         </div>
         
 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('part_type_id')) is-invalid is-dirty @endif"">
-            {!!Form::select('part_type_id', $part_type_id, $part->part_type_id, ['id' => 'part_type_id', 'class' => 'mdl-textfield__input'])!!}
-   			{!!Form::label('part_type_id', Lang::get('general.part_type'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
+            {!!Form::select('part_type_id', $part_type_id, $part->part_type_id, ['id' => 'part_type_id', 'class' => 'mdl-textfield__input dialog-add-item-combobox'])!!}
+   			<i id="type-add" class="material-icons dialog-add-item-button">add_circle_outline</i>
+			{!!Form::label('part_type_id', Lang::get('general.part_type'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
         	<span class="mdl-textfield__error">{{ $errors->first('part_type_id') }}</span>
         </div>
         
 		<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label @if ($errors->has('part_model_id')) is-invalid is-dirty @endif"">
-            {!!Form::select('part_model_id', $part_model_id, $part->part_model_id, ['id' => 'part_model_id', 'class' => 'mdl-textfield__input'])!!}
-   			{!!Form::label('part_model_id', Lang::get('general.part_model'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
+            {!!Form::select('part_model_id', $part_model_id, $part->part_model_id, ['id' => 'part_model_id', 'class' => 'mdl-textfield__input dialog-add-item-combobox'])!!}
+   			<i id="model-add" class="material-icons dialog-add-item-button">add_circle_outline</i>
+			{!!Form::label('part_model_id', Lang::get('general.part_model'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
         	<span class="mdl-textfield__error">{{ $errors->first('part_model_id') }}</span>
         </div>
         

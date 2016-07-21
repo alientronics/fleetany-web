@@ -59,10 +59,13 @@ class PartController extends Controller
         $part_model_id = ModelRepositoryEloquent::getModels('part', array_keys($part_type_id->toArray())[0]);
         $part_id = self::getParts(null, true);
         $sensor_data = null;
+        $typedialog = TypeRepositoryEloquent::getDialogStoreOptions('part');
+        $modeldialog = ModelRepositoryEloquent::getDialogStoreOptions('part');
+        $modeldialog['model_type_id'] = current(array_keys($part_type_id->toArray()));
         
         $attributes = [];
         if (config('app.attributes_api_url') != null) {
-            $attributes = AttributeRepositoryEloquent::getAttributes('part');
+            $attributes = AttributeRepositoryEloquent::getAttributesWithValues('part');
         }
         
         return view("part.edit", compact(
@@ -73,7 +76,9 @@ class PartController extends Controller
             'part_model_id',
             'part_id',
             'sensor_data',
-            'attributes'
+            'attributes',
+            'modeldialog',
+            'typedialog'
         ));
     }
 
@@ -107,6 +112,9 @@ class PartController extends Controller
         $part_type_id = TypeRepositoryEloquent::getTypes('part');
         $part_model_id = ModelRepositoryEloquent::getModels('part', array_keys($part_type_id->toArray())[0]);
         $part_id = self::getParts($idPart, true);
+        $typedialog = TypeRepositoryEloquent::getDialogStoreOptions('part');
+        $modeldialog = ModelRepositoryEloquent::getDialogStoreOptions('part');
+        $modeldialog['model_type_id'] = $part->part_type_id;
         
         $attributes = [];
         if (config('app.attributes_api_url') != null) {
@@ -134,7 +142,9 @@ class PartController extends Controller
             'part_id',
             'sensor_data',
             'filters',
-            'attributes'
+            'attributes',
+            'modeldialog',
+            'typedialog'
         ));
     }
     

@@ -62,6 +62,7 @@
                 	    value: i,
                 	    text: value
                 	}));
+					$('#modeldialog_model_type_id').val($("#part_type_id").val());
                 });     
         	});   
     	});
