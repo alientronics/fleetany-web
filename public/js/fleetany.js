@@ -132,28 +132,46 @@ window.onload=function(){
 	});
 	
 	if($(".mdl-dialog").length > 0) {
-		var dialog = document.querySelector('dialog');
-		var dialogAddButton = "";
-		var showDialogButton = document.querySelector('#show-dialog');
-		if (! dialog.showModal) {
-			dialogPolyfill.registerDialog(dialog);
-		}
 		
 		$(document).keypress(function(e) {
-		    if(e.which == 13) {
-		    	e.preventDefault();
-		        if($(".create-model").is(":visible")) {
-		        	$(".create-model").trigger("click");
-		        } else if($(".create-tire").is(":visible")) {
-		        	$(".create-tire").trigger("click");
-		        } else if($(".create-type").is(":visible")) {
-		        	$(".create-type").trigger("click");
-		        } 
-		    }
+			if(e.which == 13) {
+				e.preventDefault();
+				if($(".create-model").is(":visible")) {
+					$(".create-model").trigger("click");
+				} else if($(".create-tire").is(":visible")) {
+					$(".create-tire").trigger("click");
+				} else if($(".create-type").is(":visible")) {
+					$(".create-type").trigger("click");
+				} 
+			}
 		});
-		
-		if($(".create-tire").is(":visible")) {
-			dialog.querySelector('.create-tire').addEventListener('click', function() {
+
+		if($("#modelcreate-dialog").length > 0) {
+			var dialogModelCreate = document.querySelector('#modelcreate-dialog');
+			var dialogModelCreateAddButton = "";
+			if (! dialogModelCreate.showModal) {
+				dialogPolyfill.registerDialog(dialogModelCreate);
+			}
+		}
+
+		if($("#tirecreate-dialog").length > 0) {
+			var dialogTireCreate = document.querySelector('#tirecreate-dialog');
+			var dialogTireCreateAddButton = "";
+			if (! dialogTireCreate.showModal) {
+				dialogPolyfill.registerDialog(dialogTireCreate);
+			}
+		}
+
+		if($("#typecreate-dialog").length > 0) {
+			var dialogTypeCreate = document.querySelector('#typecreate-dialog');
+			var dialogTypeCreateAddButton = "";
+			if (! dialogTypeCreate.showModal) {
+				dialogPolyfill.registerDialog(dialogTypeCreate);
+			}
+		}
+
+		if($(".create-tire").length > 0) {
+			dialogTireCreate.querySelector('.create-tire').addEventListener('click', function() {
 				var dataTire = {
 				    "part_type_id" : $('#part-type-id').val(),
 			        "part_model_id" : $('#part_model_id').val(),
@@ -175,13 +193,13 @@ window.onload=function(){
 			        $('#part_number').val('');
 			        $('#part_miliage').val('');
 			        $('#part_lifecycle').val('');
-			    	dialog.close();
+			        dialogTireCreate.close();
 			    });
 			});
 		}
 		
-		if($(".create-model").is(":visible")) {
-			dialog.querySelector('.create-model').addEventListener('click', function() {
+		if($(".create-model").length > 0) {
+			dialogModelCreate.querySelector('.create-model').addEventListener('click', function() {
 				var dataModel = {
 				    "model_type_id" : $('#modeldialog_model_type_id').val(),
 			        "vendor_id" : $('#modeldialog_vendor_id').val(),
@@ -190,24 +208,24 @@ window.onload=function(){
 		
 				$.post(url('models/create'), dataModel, function(retorno) {
 			    	if(retorno.id != undefined) {
-			    		dialogAddButton.prev().append($('<option>', {
+			    		dialogModelCreateAddButton.prev().append($('<option>', {
 		    				value: retorno.id,
 		    				text: $('#modeldialog_name').val()
 		    			}));
 			    		
-			    		dialogAddButton.prev().val(retorno.id);
+			    		dialogModelCreateAddButton.prev().val(retorno.id);
 			    	}
 
 			    	$('#modeldialog_model_type_id').val($("#modeldialog_model_type_id option:first").val());
 			    	$('#modeldialog_vendor_id').val($("#modeldialog_vendor_id option:first").val());
 			        $('#modeldialog_name').val('');
-			    	dialog.close();
+			        dialogModelCreate.close();
 			    });
 			});
 		}
 		
-		if($(".create-type").is(":visible")) {
-			dialog.querySelector('.create-type').addEventListener('click', function() {
+		if($(".create-type").length > 0) {
+			dialogTypeCreate.querySelector('.create-type').addEventListener('click', function() {
 				var dataType = {
 				    "name" : $('#typedialog_name').val(),
 			        "entity_key" : $('#typedialog_entity_key').val()
@@ -215,26 +233,50 @@ window.onload=function(){
 		
 			    $.post(url('types/create'), dataType, function(retorno) {
 			    	if(retorno.id != undefined) {
-			    		dialogAddButton.prev().append($('<option>', {
+			    		dialogTypeCreateAddButton.prev().append($('<option>', {
 		    				value: retorno.id,
 		    				text: $('#typedialog_name').val()
 		    			}));
 			    		
-			    		dialogAddButton.prev().val(retorno.id);
+			    		dialogTypeCreateAddButton.prev().val(retorno.id);
 			    	}
 			    	$('#typedialog_name').val('');
 			        $('#typedialog_entity_key').val('');	
-			    	dialog.close();
+			    	dialogTypeCreate.close();
 			    });
 			});
 		}
 	}
 	
-	$("#tire-add, #type-add, #model-add").click(function(event){
+	$("#model-add").click(function(event){
 		event.preventDefault();
-		dialogAddButton = $(this);
-	    dialog.showModal();
+		dialogModelCreateAddButton = $(this);
+		dialogModelCreate.showModal();
 	});
+
+	$("#tire-add").click(function(event){
+		event.preventDefault();
+		dialogTireCreateAddButton = $(this);
+	    dialogTireCreate.showModal();
+	});
+	
+	$("#type-add").click(function(event){
+		event.preventDefault();
+		dialogTypeCreateAddButton = $(this);
+	    dialogTypeCreate.showModal();
+	});
+	
+    $('.close-model').click(function() {
+    	dialogModelCreate.close();
+    });
+	
+    $('.close-tire').click(function() {
+    	dialogTireCreate.close();
+    });
+	
+    $('.close-type').click(function() {
+    	dialogTypeCreate.close();
+    });
 
 	$("#tire-position-add").click(function(event){
 	    event.preventDefault();

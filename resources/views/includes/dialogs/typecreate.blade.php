@@ -1,4 +1,4 @@
-<dialog class="mdl-dialog">
+<dialog id="typecreate-dialog" class="mdl-dialog">
 	<h1 class="mdl-dialog__title mdl-color-text--grey-600">{{Lang::get('general.createtype')}}</h1>
     <div class="mdl-dialog__content">
         
@@ -21,6 +21,6 @@
     </div>
     <div class="mdl-dialog__actions mdl-dialog__actions--full-width">
       <button type="button" class="mdl-button create-type">{{Lang::get('general.Submit')}}</button>
-      <button type="button" class="mdl-button close">{{Lang::get('general.Close')}}</button>
+      <button type="button" class="mdl-button close-type">{{Lang::get('general.Close')}}</button>
     </div>
 </dialog>
