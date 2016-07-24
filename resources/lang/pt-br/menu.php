@@ -44,6 +44,7 @@ return [
 
     'User' => "Usu&aacute;rio",
     'Attributes' => "Atributos",
+    'Roles' => "Grupos",
     
     'logout' => 'Logout'
 

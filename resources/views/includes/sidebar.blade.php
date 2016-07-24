@@ -56,7 +56,10 @@
               @permission('view.attribute')
               <a class="@if (Request::is('attribute*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('attribute')}}"><i class="material-icons" role="presentation">build</i>{{Lang::get('menu.Attributes')}}</a>       
               @endpermission 
-            @endif  
+            @endif       
+            @permission('view.role')
+            <a class="@if (Request::is('role*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('role')}}"><i class="material-icons" role="presentation">build</i>{{Lang::get('menu.Roles')}}</a>       
+            @endpermission  
         @else
         	<a class="mdl-navigation__link" href="{{URL::asset("auth/login")}}"><i class="material-icons" role="presentation">home</i>{{Lang::get('menu.Login')}}</a>
         @endif

@@ -429,6 +429,60 @@ class AclTableSeeder extends Seeder
         $roleExecutive->assignPermission($permAttributeExecutive);
         $roleAdmin->assignPermission($permAttributeAdmin);
         
+        //Role
+        //Permissions
+        $permRoleStaff = Permission::create([
+            'name'        => 'role',
+            'slug'        => [
+                'create' => false,
+                'view'   => false,
+                'update' => false,
+                'delete' => false
+            ],
+            'description' => 'Administra permissoes do role para o nivel staff de usuario'
+        ]);
+        
+        $permRoleOperational = Permission::create([
+            'name'        => 'role.operational',
+            'slug'        => [],
+            'inherit_id' => $permRoleStaff->getKey(),
+            'description' => 'Administra permissoes do role para o nivel operational de usuario'
+        ]);
+        
+        $permRoleManager = Permission::create([
+            'name'        => 'role.manager',
+            'slug'        => [],
+            'inherit_id' => $permRoleOperational->getKey(),
+            'description' => 'Administra permissoes do role para o nivel manager de usuario'
+        ]);
+        
+        $permRoleExecutive = Permission::create([
+            'name'        => 'role.executive',
+            'slug'        => [],
+            'inherit_id' => $permRoleManager->getKey(),
+            'description' => 'Administra permissoes do role para o nivel executive de usuario'
+        ]);
+        
+        $permRoleAdmin = Permission::create([
+            'name'        => 'role.admin',
+            'slug'        => [
+                'create' => true,
+                'view'   => true,
+                'update' => true,
+                'delete' => true
+            ],
+            'inherit_id' => $permRoleExecutive->getKey(),
+            'description' => 'Administra permissoes do role para o nivel admin de usuario'
+        ]);
+        
+        
+        //Assign permissions to rules
+        $roleStaff->assignPermission($permRoleStaff);
+        $roleOperational->assignPermission($permRoleOperational);
+        $roleManager->assignPermission($permRoleManager);
+        $roleExecutive->assignPermission($permRoleExecutive);
+        $roleAdmin->assignPermission($permRoleAdmin);
+        
         //Type
         //Permissions
         $permTypeStaff = Permission::create([
