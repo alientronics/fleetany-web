@@ -177,6 +177,8 @@ return [
         "Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider",
         "Alientronics\FleetanyWebDriver\FleetanyWebDriverServiceProvider",
         "Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider",
+        "Alientronics\FleetanyWebAdmin\FleetanyWebAdminServiceProvider",
+		
 
     ],
 
