@@ -56,7 +56,6 @@ class ModelModelTest extends UnitTestCase
         $this->assertEquals(count($model->parts), 2);
         $this->assertTrue($model->parts->contains($part1));
         $this->assertTrue($model->parts->contains($part2));
-        
     }
 
     public function testHasVehicles()

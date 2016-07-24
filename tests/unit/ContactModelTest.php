@@ -99,7 +99,6 @@ class ContactModelTest extends UnitTestCase
         $this->assertEquals(count($contact->parts), 2);
         $this->assertTrue($contact->parts->contains($part1));
         $this->assertTrue($contact->parts->contains($part2));
-        
     }
 
     public function testHasTripsDriver()

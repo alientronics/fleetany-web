@@ -88,7 +88,6 @@ class CompanyModelTest extends UnitTestCase
         $this->assertEquals(count($company->parts), 2);
         $this->assertTrue($company->parts->contains($part1));
         $this->assertTrue($company->parts->contains($part2));
-        
     }
 
     public function testHasTrips()

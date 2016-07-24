@@ -167,6 +167,5 @@ class TripControllerTest extends AcceptanceTestCase
             
         $this->visit('/trip?id=&vehicle=&trip-type=&pickup-date=&fuel-cost=&sort=fuel-cost-asc')
             ->see('mode_edit</i>');
-            
     }
 }

@@ -81,7 +81,6 @@ class VehicleModelTest extends UnitTestCase
         $this->assertEquals(count($vehicle->parts), 2);
         $this->assertTrue($vehicle->parts->contains($part1));
         $this->assertTrue($vehicle->parts->contains($part2));
-        
     }
 
     public function testHasPartsHistories()
@@ -103,6 +102,5 @@ class VehicleModelTest extends UnitTestCase
         $this->assertEquals(count($vehicle->partsHistories), 2);
         $this->assertTrue($vehicle->partsHistories->contains($partsHistories1));
         $this->assertTrue($vehicle->partsHistories->contains($partsHistories2));
-        
     }
 }

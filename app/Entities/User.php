@@ -148,7 +148,6 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
             'lifecycle' => 1,
             'company_id' => $company->id]
         );
-
     }
     
     private function setUserProperties($company, $lang)

@@ -108,6 +108,5 @@ class TypeControllerTest extends AcceptanceTestCase
             
         $this->visit('/type?id=&entity-key=&name=&sort=name-asc')
             ->see('mode_edit</i>');
-        
     }
 }

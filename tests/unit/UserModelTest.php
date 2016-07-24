@@ -100,7 +100,6 @@ class UserModelTest extends UnitTestCase
             'description' => 'Generic Vehicle',
             'cost' => 50000
         ]);
-    
     }
     
     public function testSendEmailInvite()

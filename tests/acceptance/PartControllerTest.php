@@ -132,6 +132,5 @@ class PartControllerTest extends AcceptanceTestCase
             
         $this->visit('/part?id=&vehicle=&part-type=&cost=&sort=cost-asc')
             ->see('mode_edit</i>');
-            
     }
 }

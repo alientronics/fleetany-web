@@ -26,6 +26,5 @@ class FormMacroServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
     }
 }

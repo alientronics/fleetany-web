@@ -138,6 +138,5 @@ class VehicleControllerTest extends AcceptanceTestCase
             
         $this->visit('/vehicle?id=&model-vehicle=&number=&cost=&sort=cost-asc')
             ->see('mode_edit</i>');
-        
     }
 }

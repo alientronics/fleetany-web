@@ -70,6 +70,5 @@ class EntryModelTest extends UnitTestCase
         $this->assertEquals(count($entry->partsEntries), 2);
         $this->assertTrue($entry->partsEntries->contains($partsEntries1));
         $this->assertTrue($entry->partsEntries->contains($partsEntries2));
-        
     }
 }

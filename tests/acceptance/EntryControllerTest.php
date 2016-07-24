@@ -156,6 +156,5 @@ class EntryControllerTest extends AcceptanceTestCase
             
         $this->visit('/entry?id=&vehicle=&entry-type=&datetime-ini=&cost=&sort=cost-asc')
             ->see('mode_edit</i>');
-        
     }
 }

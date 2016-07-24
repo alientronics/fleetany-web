@@ -63,6 +63,5 @@ class TireSensorControllerTest extends AcceptanceTestCase
             
         $this->visit($url.'&sort=cost-asc')
             ->see('mdl-cell--1-col mdl-data-table__cell--non-numeric">');
-            
     }
 }

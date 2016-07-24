@@ -106,7 +106,6 @@ class TypeModelTest extends UnitTestCase
         $this->assertEquals(count($type->fuelTypes), 2);
         $this->assertTrue($type->fuelTypes->contains($trip1));
         $this->assertTrue($type->fuelTypes->contains($trip2));
-        
     }
 
     public function testHasParts()
@@ -125,6 +124,5 @@ class TypeModelTest extends UnitTestCase
         $this->assertEquals(count($type->parts), 2);
         $this->assertTrue($type->parts->contains($part1));
         $this->assertTrue($type->parts->contains($part2));
-        
     }
 }
