@@ -14,7 +14,7 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if(empty(Auth::user()['id']) || Auth::user()['id'] != 1) {
+        if (empty(Auth::user()['id']) || Auth::user()['id'] != 1) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
