@@ -131,7 +131,7 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
                 ->where('company_id', Auth::user()['company_id'])
                 ->orderBy('id', 'asc')
                 ->get();
-        
+                
             Part::where('id', $parts[0])
                 ->where('company_id', Auth::user()['company_id'])
                 ->update([

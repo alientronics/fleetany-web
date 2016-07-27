@@ -198,16 +198,24 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
     
     public function getTireAndSensorData($inputs)
     {
-        $tire = Part::where('position', $inputs['position'])
-            ->where('vehicle_id', $inputs['vehicle_id'])
-            ->where('company_id', Auth::user()['company_id'])
+        $tire = Part::join('types', 'parts.part_type_id', '=', 'types.id')
+            ->where('parts.position', $inputs['position'])
+            ->where('parts.vehicle_id', $inputs['vehicle_id'])
+            ->where('parts.company_id', Auth::user()['company_id'])
+            ->where('types.name', 'tire')
             ->first();
 
         $objTire = new \stdClass();
         
         if (!empty($tire)) {
-            $sensor = TireSensor::where('part_id', $tire->id)
-                ->orderBy('id', 'desc')
+            $sensor = TireSensor::join('parts', 'tire_sensor.part_id', '=', 'parts.id')
+                ->join('types', 'parts.part_type_id', '=', 'types.id')
+                ->where('parts.part_id', $tire->id)
+                ->where('parts.position', $inputs['position'])
+                ->where('parts.vehicle_id', $inputs['vehicle_id'])
+                ->where('parts.company_id', Auth::user()['company_id'])
+                ->where('types.name', 'sensor')
+                ->orderBy('parts.id', 'desc')
                 ->first();
             
             $objTire->position = HelperRepository::manageEmptyValue($tire->position);

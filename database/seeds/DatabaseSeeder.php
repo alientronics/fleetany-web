@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call('EntryTableSeeder');
         $this->call('TripTableSeeder');
         $this->call('PartTableSeeder');
+        $this->call('TireSensorTableSeeder');
         $this->call('AclTableSeeder');
     }
 }

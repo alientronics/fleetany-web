@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use Tests\UnitTestCase;
 use App\Entities\User;
 use Illuminate\Support\Facades\Session;
+use App\Entities\Part;
 
 class VehicleModelTest extends UnitTestCase
 {
@@ -106,13 +107,23 @@ class VehicleModelTest extends UnitTestCase
         $this->assertTrue($vehicle->partsHistories->contains($partsHistories2));
     }
 
-    public function testTireAndSensorData()
+    public function testTireAndSensorWithoutData()
     {
         Session::start();
         
         $this->be(User::find(1));
         $this->post('/vehicle/dashboard/tires', ['vehicle_id' => 1,
             'position' => 1 , "_token" => csrf_token()
+        ])->assertResponseStatus(200);
+    }
+
+    public function testTireAndSensorWithData()
+    {
+        Session::start();
+        
+        $this->be(User::find(1));
+        $this->post('/vehicle/dashboard/tires', ['vehicle_id' => 1,
+            'position' => 2 , "_token" => csrf_token()
         ])->assertResponseStatus(200);
     }
 
