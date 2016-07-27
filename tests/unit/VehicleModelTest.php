@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use Tests\UnitTestCase;
+use App\Entities\User;
 
 class VehicleModelTest extends UnitTestCase
 {
@@ -102,5 +103,20 @@ class VehicleModelTest extends UnitTestCase
         $this->assertEquals(count($vehicle->partsHistories), 2);
         $this->assertTrue($vehicle->partsHistories->contains($partsHistories1));
         $this->assertTrue($vehicle->partsHistories->contains($partsHistories2));
+    }
+
+    public function testTireAndSensorData()
+    {
+        $this->be(User::find(1));
+        $this->post('/vehicle/dashboard/tires', ['vehicle_id' => 1,
+            'position' => 1
+        ])->assertResponseStatus(200);
+    }
+
+    public function testLocalizationData()
+    {
+        $this->be(User::find(1));
+        $this->post('/vehicle/dashboard/localization', ['vehicle_id' => 1])
+                ->assertResponseStatus(200);
     }
 }

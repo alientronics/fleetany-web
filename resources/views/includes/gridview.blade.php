@@ -30,7 +30,10 @@
           
           @permission('delete.'.$gridview['pageActive'].'|update.'.$gridview['pageActive'])
           <div class="mdl-cell mdl-cell--1-col">
-          		@permission('update.'.$gridview['pageActive'])
+          		@if($gridview['pageActive'] == 'vehicle')
+                	{!!Form::buttonLink( route($gridview['pageActive'].'.show', $register->id) , 'primary' , 'search' , 'Visualizar' )!!}
+                @endif
+                @permission('update.'.$gridview['pageActive'])
                 	{!!Form::buttonLink( route($gridview['pageActive'].'.edit', $register->id) , 'primary' , 'mode_edit' , 'Editar' )!!}
                 @endpermission
             	@permission('delete.'.$gridview['pageActive'])

@@ -436,7 +436,8 @@ _:-ms-input-placeholder, :root .demo-graph {
   max-height: 300px; 
 }
 
-.tires-empty {
+.tires-empty,
+.tires-show {
 	border-radius: 10px;	
 }
 
@@ -484,6 +485,9 @@ _:-ms-input-placeholder, :root .demo-graph {
 	margin-left: 5px;	
 }
 
+#vehicle-detail-data,
+#tire-detail-data,
+#driver-detail-data,
 #tire-position-detail-data, 
 #tire-storage-detail-data {
 	margin-top: 15px; 

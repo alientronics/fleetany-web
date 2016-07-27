@@ -113,6 +113,8 @@ return [
     "battery"    => "Battery",
     "latitude" => "Latitude",
     "longitude" => "Longitude",
+    "speed" => "Speed",
+    "sensorNumber" => "Sensor Number",
     
     // Trip
     "Trip"   => "Trip",
@@ -160,6 +162,9 @@ return [
     "SelectTire" => "A tire must be selected!",
     "SelectPosition" => "A position must be selected!",
     "Map" => "Map",
+    "VehicleAndLocalizationData" => "Vehicle and localization data",
+    "SelectedTireAndSensorData" => "Selected tire and sensor data",
+    "DriverData" => "Driver data",
     
     // user
     "Users"   => "Users",

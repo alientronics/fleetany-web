@@ -100,6 +100,26 @@ window.onload=function(){
 		}
 	});
 
+	$(".tires-show").click(function() {
+		
+		$("#tire-position-focus-id").val($(this).attr('id'));
+		
+		if($('.tires-selected').length > 0) {
+			$(".tires-selected").removeClass("tires-selected");
+		}
+		if($('.tires-selected-focus').length > 0) {
+			$(".tires-selected-focus").addClass("tires-selected");
+			$(".tires-selected-focus").removeClass("tires-selected-focus");
+		}
+		$(this).addClass("tires-selected-focus");
+		
+		setInterval(function () {
+	        setTireAndSensorSelectedFocusData();
+	    },180000);
+		
+		setTireAndSensorSelectedFocusData();
+	});
+	
 	$("#tire-position-swap").click(function(event){
 	    event.preventDefault();
 	    $("#tire-position-swap-flag").val(1);
@@ -130,6 +150,12 @@ window.onload=function(){
 	    });
 	    
 	});
+
+	if($("#vehicle-detail-data").length > 0) {
+		setInterval(function () {
+	        setVehicleAndLocalizationSelectedFocusData();
+	    },60000);
+	}
 	
 	if($(".mdl-dialog").length > 0) {
 		
@@ -348,6 +374,61 @@ window.onload=function(){
 			tirePositionDetail[$('.tires-selected-focus').attr('id').replace('pos', '')] = undefined;
 			$(".tire-position-detail-button").hide();
 			$('#tire-position-detail-data').html("");
+		}
+	}
+	
+	function setVehicleAndLocalizationSelectedFocusData() {
+
+		var data = {
+	        "vehicle_id" : $('#vehicle-id').val()
+	    };
+
+		$.post(url('vehicle/dashboard/localization'), data, function(retorno) {
+
+			if(retorno.latitude == null) {
+				retorno.latitude = "";
+			}
+			if(retorno.longitude == null) {
+				retorno.longitude = "";
+			}
+			if(retorno.speed == null) {
+				retorno.speed = "";
+			}
+			
+			var positionDetailData = jstrans_latitude+': '+retorno.latitude+'<br>';
+			positionDetailData += jstrans_longitude+': '+retorno.longitude+'<br>';
+			positionDetailData += jstrans_speed+': '+retorno.speed+'<br>';
+			
+			$('#vehicle-detail-refresh-data').html(positionDetailData);
+			
+		});
+	}
+	
+	function setTireAndSensorSelectedFocusData() {
+
+		var data = {
+	        "position"	: $('.tires-selected-focus').attr('id').replace('pos', ''),
+	        "vehicle_id" : $('#vehicle-id').val()
+	    };
+
+		var positionData = jstrans_position+': '+data.position+'<br>';
+		if($("#"+$("#tire-position-focus-id").val()).hasClass("mdl-color--green")) {
+			$.post(url('vehicle/dashboard/tires'), data, function(retorno) {
+				
+				var positionDetailData = jstrans_number+': '+retorno.number+'<br>';
+				positionDetailData += jstrans_model+': '+retorno.model+'<br>';
+				positionDetailData += jstrans_lifecycle+': '+retorno.lifecycle+'<br>';
+				positionDetailData += jstrans_mileage+': '+retorno.miliage+'<br>';
+
+				positionDetailData += jstrans_temperature+': '+retorno.temperature+'<br>';
+				positionDetailData += jstrans_pressure+': '+retorno.pressure+'<br>';
+				positionDetailData += jstrans_battery+': '+retorno.battery+'<br>';
+				positionDetailData += jstrans_sensorNumber+': '+retorno.sensorNumber+'<br>';
+			    
+				$('#tire-detail-data').html(positionData + positionDetailData);
+			});
+		} else {
+			$('#tire-detail-data').html("");
 		}
 	}
 	

@@ -68,6 +68,17 @@ class VehicleControllerTest extends AcceptanceTestCase
         );
     }
     
+    public function testShow()
+    {
+        $vehicle = Vehicle::all()->last();
+        
+        $this->visit('/vehicle/'.$vehicle->id);
+        
+        $this->see($vehicle->model->name)
+            ->see($vehicle->number)
+        ;
+    }
+    
     public function testDelete()
     {
         $idDelete = Vehicle::all()->last()['id'];

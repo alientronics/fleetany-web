@@ -14,6 +14,8 @@ use App\Repositories\ModelRepositoryEloquent;
 use App\Repositories\PartRepositoryEloquent;
 use Illuminate\Container\Container as Application;
 use Alientronics\FleetanyWebAttributes\Repositories\AttributeRepositoryEloquent;
+use App\Entities\Gps;
+use App\Entities\Contact;
 
 class VehicleController extends Controller
 {
@@ -182,5 +184,24 @@ class VehicleController extends Controller
         } else {
             return $this->redirect->to('vehicle')->with('message', Lang::get("general.deletedregistererror"));
         }
+    }
+
+    public function show($idVehicle)
+    {
+        $vehicle = $this->vehicleRepo->find($idVehicle);
+        $this->helper->validateRecord($vehicle);
+        $partRepo = new PartRepositoryEloquent(new Application);
+        $tires = $partRepo->getTires($vehicle->id);
+        $tiresPositions = $partRepo->getTiresPositions($tires, $vehicle->id);
+        $localizationData = $this->vehicleRepo->getLocalizationData($idVehicle);
+        $driverData = empty($localizationData->driver_id) ? "" :
+                            Contact::find($localizationData->driver_id);
+        
+        return view("vehicle.show", compact(
+            'vehicle',
+            'tiresPositions',
+            'localizationData',
+            'driverData'
+        ));
     }
 }

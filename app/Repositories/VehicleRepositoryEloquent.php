@@ -9,6 +9,9 @@ use App\Entities\Vehicle;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Entities\Gps;
+use App\Entities\Part;
+use App\Entities\TireSensor;
+use Log;
 
 class VehicleRepositoryEloquent extends BaseRepository implements VehicleRepository
 {
@@ -182,5 +185,55 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
         $inputs['entity_key'] = "vehicle";
         
         return $inputs;
+    }
+    
+    public function getLocalizationData($idVehicle)
+    {
+        $localizationData = Gps::where('vehicle_id', $idVehicle)
+            ->orderBy('id', 'desc')
+            ->first();
+        
+        return $localizationData;
+    }
+    
+    public function getTireAndSensorData($inputs)
+    {
+        $tire = Part::where('position', $inputs['position'])
+            ->where('vehicle_id', $inputs['vehicle_id'])
+            ->where('company_id', Auth::user()['company_id'])
+            ->first();
+        
+        $sensor = TireSensor::where('part_id', $tire->id)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        $objTire = new \stdClass();
+        
+        if (!empty($tire)) {
+            $objTire->position = HelperRepository::manageEmptyValue($tire->position);
+            $objTire->number = HelperRepository::manageEmptyValue($tire->number);
+            $objTire->model = HelperRepository::manageEmptyValue($tire->partModel->name);
+            $objTire->lifecycle = HelperRepository::manageEmptyValue($tire->lifecycle);
+            $objTire->miliage = HelperRepository::manageEmptyValue($tire->miliage);
+        } else {
+            $objTire->position = "";
+            $objTire->number = "";
+            $objTire->model = "";
+            $objTire->lifecycle = "";
+            $objTire->miliage = "";
+        }
+
+        if (!empty($sensor)) {
+            $objTire->temperature = HelperRepository::manageEmptyValue($sensor->temperature);
+            $objTire->pressure = HelperRepository::manageEmptyValue($sensor->pressure);
+            $objTire->battery = HelperRepository::manageEmptyValue($sensor->battery);
+            $objTire->sensorNumber = HelperRepository::manageEmptyValue($sensor->number);
+        } else {
+            $objTire->temperature = "";
+            $objTire->pressure = "";
+            $objTire->battery = "";
+            $objTire->sensorNumber = "";
+        }
+        return $objTire;
     }
 }

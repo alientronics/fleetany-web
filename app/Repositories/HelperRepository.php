@@ -156,4 +156,9 @@ class HelperRepository
         }
         return '';
     }
+    
+    public static function manageEmptyValue($value)
+    {
+        return empty($value) ? '' : $value;
+    }
 }

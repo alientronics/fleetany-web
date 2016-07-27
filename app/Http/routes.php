@@ -139,6 +139,9 @@ Route::post('parts/create', 'PartController@store');
 Route::post('models/create', 'ModelController@storeByDialog');
 Route::post('types/create', 'TypeController@storeByDialog');
 
+Route::post('vehicle/dashboard/tires', 'VehicleDashboardController@tires');
+Route::post('vehicle/dashboard/localization', 'VehicleDashboardController@localization');
+
 Route::bind(
     'users',
     function ($value, $route) {
