@@ -121,7 +121,7 @@ class VehicleModelTest extends UnitTestCase
         Session::start();
         
         $this->be(User::find(1));
-        $this->post('/vehicle/dashboard/localization', ['vehicle_id' => 1, 
+        $this->post('/vehicle/dashboard/localization', ['vehicle_id' => 1,
             "_token" => csrf_token()
         ])->assertResponseStatus(200);
     }

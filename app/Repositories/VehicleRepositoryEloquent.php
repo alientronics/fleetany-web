@@ -202,14 +202,14 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
             ->where('vehicle_id', $inputs['vehicle_id'])
             ->where('company_id', Auth::user()['company_id'])
             ->first();
-        
-        $sensor = TireSensor::where('part_id', $tire->id)
-            ->orderBy('id', 'desc')
-            ->first();
 
         $objTire = new \stdClass();
         
         if (!empty($tire)) {
+            $sensor = TireSensor::where('part_id', $tire->id)
+                ->orderBy('id', 'desc')
+                ->first();
+            
             $objTire->position = HelperRepository::manageEmptyValue($tire->position);
             $objTire->number = HelperRepository::manageEmptyValue($tire->number);
             $objTire->model = HelperRepository::manageEmptyValue($tire->partModel->name);
