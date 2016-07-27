@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use Tests\UnitTestCase;
 use App\Entities\User;
+use Illuminate\Support\Facades\Session;
 
 class VehicleModelTest extends UnitTestCase
 {
@@ -107,16 +108,21 @@ class VehicleModelTest extends UnitTestCase
 
     public function testTireAndSensorData()
     {
+        Session::start();
+        
         $this->be(User::find(1));
         $this->post('/vehicle/dashboard/tires', ['vehicle_id' => 1,
-            'position' => 1
+            'position' => 1 , "_token" => csrf_token()
         ])->assertResponseStatus(200);
     }
 
     public function testLocalizationData()
     {
+        Session::start();
+        
         $this->be(User::find(1));
-        $this->post('/vehicle/dashboard/localization', ['vehicle_id' => 1])
-                ->assertResponseStatus(200);
+        $this->post('/vehicle/dashboard/localization', ['vehicle_id' => 1, 
+            "_token" => csrf_token()
+        ])->assertResponseStatus(200);
     }
 }
