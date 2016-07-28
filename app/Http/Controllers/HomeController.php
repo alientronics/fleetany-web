@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\View;
 use App\Repositories\VehicleRepositoryEloquent;
 use App\Repositories\EntryRepositoryEloquent;
 use App\Repositories\TripRepositoryEloquent;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
     
     public function __construct()

@@ -7,7 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\ModelRepository;
 use App\Entities\Model;
 use Illuminate\Support\Facades\Auth;
-use function GuzzleHttp\json_decode;
+use GuzzleHttp\json_decode;
 
 class ModelRepositoryEloquent extends BaseRepository implements ModelRepository
 {

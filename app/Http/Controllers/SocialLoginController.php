@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entities\User;
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller as BaseController;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Lang;
 
-class SocialLoginController extends Controller
+class SocialLoginController extends BaseController
 {
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 

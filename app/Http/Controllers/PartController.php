@@ -14,13 +14,13 @@ use App\Repositories\ContactRepositoryEloquent;
 use App\Repositories\TypeRepositoryEloquent;
 use App\Repositories\ModelRepositoryEloquent;
 use App\Repositories\TireSensorRepositoryEloquent;
-use Illuminate\Container\Container as Application;
 use Alientronics\FleetanyWebAttributes\Repositories\AttributeRepositoryEloquent;
 
 class PartController extends Controller
 {
 
     protected $partRepo;
+    protected $tireSensorRepo;
     
     protected $fields = [
         'id',
@@ -29,12 +29,13 @@ class PartController extends Controller
         'cost'
     ];
     
-    public function __construct(PartRepositoryEloquent $partRepo)
+    public function __construct(PartRepositoryEloquent $partRepo, TireSensorRepositoryEloquent $tireSensorRepo)
     {
         parent::__construct();
         
         $this->middleware('auth');
         $this->partRepo = $partRepo;
+        $this->tireSensorRepo = $tireSensorRepo;
     }
   
     public function getFields()
@@ -124,13 +125,15 @@ class PartController extends Controller
             );
         }
         
+        $sensor_data = $filters = null;
         if ($part->partType->name == Lang::get('setup.sensor')) {
-            $tireSensorRepo = new TireSensorRepositoryEloquent(new Application);
-            $filters = $this->helper->getFilters($this->request->all(), $tireSensorRepo->getFields(), $this->request);
+            $filters = $this->helper->getFilters(
+                $this->request->all(),
+                $this->tireSensorRepo->getFields(),
+                $this->request
+            );
             $filters['id'] = $part->id;
-            $sensor_data = $tireSensorRepo->results($filters);
-        } else {
-            $sensor_data = $filters = null;
+            $sensor_data = $this->tireSensorRepo->results($filters);
         }
 
         return view("part.edit", compact(

@@ -12,15 +12,16 @@ use Illuminate\Support\Facades\Auth;
 use App\Repositories\CompanyRepositoryEloquent;
 use App\Repositories\ModelRepositoryEloquent;
 use App\Repositories\PartRepositoryEloquent;
-use Illuminate\Container\Container as Application;
 use Alientronics\FleetanyWebAttributes\Repositories\AttributeRepositoryEloquent;
 use App\Entities\Contact;
-use Illuminate\Http\Request;
+use App\Repositories\TireSensorRepositoryEloquent;
 
 class VehicleController extends Controller
 {
 
     protected $vehicleRepo;
+    protected $partRepo;
+    protected $tireSensorRepo;
     
     protected $fields = [
         'id',
@@ -30,12 +31,18 @@ class VehicleController extends Controller
         'cost'
     ];
     
-    public function __construct(VehicleRepositoryEloquent $vehicleRepo)
-    {
+    public function __construct(
+        VehicleRepositoryEloquent $vehicleRepo,
+        PartRepositoryEloquent $partRepo,
+        TireSensorRepositoryEloquent $tireSensorRepo
+    ) {
+    
         parent::__construct();
         
         $this->middleware('auth');
         $this->vehicleRepo = $vehicleRepo;
+        $this->partRepo = $partRepo;
+        $this->tireSensorRepo = $tireSensorRepo;
     }
 
     public function index()
@@ -99,17 +106,16 @@ class VehicleController extends Controller
         $vehicleLastPlace = $this->vehicleRepo->getVehiclesLastPlace($idVehicle);
         $vehicleLastPlace = !empty($vehicleLastPlace[0]) ? $vehicleLastPlace[0] : null;
 
-        $partRepo = new PartRepositoryEloquent(new Application);
-        $partController = new PartController($partRepo);
+        $partController = new PartController($this->partRepo, $this->tireSensorRepo);
         $filters = $this->helper->getFilters($this->request->all(), $partController->getFields(), $this->request);
         $filters['vehicle_id'] = $vehicle->id;
-        $parts = $partRepo->results($filters);
+        $parts = $this->partRepo->results($filters);
         $modeldialog = ModelRepositoryEloquent::getDialogStoreOptions('vehicle');
 
-        $tires = $partRepo->getTires($idVehicle);
-        $tiresPositions = $partRepo->getTiresPositions($tires, $idVehicle);
+        $tires = $this->partRepo->getTires($idVehicle);
+        $tiresPositions = $this->partRepo->getTiresPositions($tires, $idVehicle);
         
-        $part_type_id = $partRepo->getTiresTypeId($idVehicle);
+        $part_type_id = $this->partRepo->getTiresTypeId($idVehicle);
         $tiresModels = [];
         if (!empty($part_type_id)) {
             $tiresModels = ModelRepositoryEloquent::getModels('part', $part_type_id);
@@ -191,9 +197,8 @@ class VehicleController extends Controller
     {
         $vehicle = $this->vehicleRepo->find($idVehicle);
         $this->helper->validateRecord($vehicle);
-        $partRepo = new PartRepositoryEloquent(new Application);
-        $tires = $partRepo->getTires($vehicle->id);
-        $tiresPositions = $partRepo->getTiresPositions($tires, $vehicle->id);
+        $tires = $this->partRepo->getTires($vehicle->id);
+        $tiresPositions = $this->partRepo->getTiresPositions($tires, $vehicle->id);
         $localizationData = $this->vehicleRepo->getLocalizationData($idVehicle);
         $driverData = empty($localizationData->driver_id) ? "" :
                             Contact::find($localizationData->driver_id);
@@ -206,9 +211,9 @@ class VehicleController extends Controller
         ));
     }
     
-    public function updateMapDetail(Request $request)
+    public function updateMapDetail()
     {
-        $data = $request->all();
+        $data = $this->request->all();
 
         return view("vehicle.map.details", compact(
             'data'
