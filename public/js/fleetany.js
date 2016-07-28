@@ -98,6 +98,12 @@ window.onload=function(){
 			
 			setTireSelectedFocusData();
 		}
+		
+		if($(this).hasClass("tires-empty")) {
+			$("#tire-position-add").show();
+		} else {
+			$("#tire-position-add").hide();
+		}
 	});
 
 	$(".tires-show").click(function() {
@@ -352,7 +358,7 @@ window.onload=function(){
 			if(tirePositionDetail[data.position] == undefined || tirePositionDetail[data.position] == '') {
 				$.post(url('tires/details'), data, function(retorno) {
 					
-					var positionDetailData = jstrans_number+': '+retorno[0].number+'<br>';
+					var positionDetailData = jstrans_fire_number+': '+retorno[0].number+'<br>';
 					positionDetailData += jstrans_model+': '+retorno[0].tire_model+'<br>';
 					positionDetailData += jstrans_lifecycle+': '+retorno[0].lifecycle+'<br>';
 					positionDetailData += jstrans_mileage+': '+retorno[0].miliage+'<br>';
@@ -415,7 +421,7 @@ window.onload=function(){
 		if($("#"+$("#tire-position-focus-id").val()).hasClass("mdl-color--green")) {
 			$.post(url('vehicle/dashboard/tires'), data, function(retorno) {
 				
-				var positionDetailData = jstrans_number+': '+retorno.number+'<br>';
+				var positionDetailData = jstrans_fire_number+': '+retorno.number+'<br>';
 				positionDetailData += jstrans_model+': '+retorno.model+'<br>';
 				positionDetailData += jstrans_lifecycle+': '+retorno.lifecycle+'<br>';
 				positionDetailData += jstrans_mileage+': '+retorno.miliage+'<br>';
@@ -442,7 +448,7 @@ window.onload=function(){
 		if(tirePositionDetail[data.position] == undefined || tirePositionDetail[data.position] == '') {
 			$.post(url('tires/details'), data, function(retorno) {
 		    	
-		    	var storageDetailData = jstrans_number+': '+retorno[0].number+'<br>';
+		    	var storageDetailData = jstrans_fire_number+': '+retorno[0].number+'<br>';
 		    	storageDetailData += jstrans_model+': '+retorno[0].tire_model+'<br>';
 		    	storageDetailData += jstrans_lifecycle+': '+retorno[0].lifecycle+'<br>';
 		    	storageDetailData += jstrans_mileage+': '+retorno[0].miliage+'<br>';

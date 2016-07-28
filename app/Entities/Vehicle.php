@@ -15,7 +15,7 @@ class Vehicle extends BaseModel
     
     protected $table = 'vehicles';
     protected $fillable = ['model_vehicle_id', 'number', 'initial_miliage',
-                            'actual_miliage', 'geofence', 'cost', 'description'];
+                            'actual_miliage', 'geofence', 'cost', 'description', 'fleet'];
 
 
     public function company()

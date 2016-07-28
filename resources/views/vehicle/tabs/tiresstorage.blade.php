@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th></th>
-      <th class="mdl-data-table__cell--non-numeric">{{Lang::get('general.number')}}</th>
+      <th class="mdl-data-table__cell--non-numeric">{{Lang::get('general.fire_number')}}</th>
       <th>{{Lang::get('general.Model')}}</th>
       <th>{{Lang::get('general.miliage')}}</th>
       <th>{{Lang::get('general.lifecycle')}}</th>

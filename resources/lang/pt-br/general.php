@@ -150,6 +150,8 @@ return [
     "newvehicle" => "Novo Ve&iacute;culo",
     "model_vehicle"=> "Modelo do ve&iacute;culo",
     "number"=> "Placa",
+    "fire_number"=> "N&uacute;mero de Fogo",
+    "fleet_number" => "N&uacute;mero de Frota",
     "initial_miliage"=> "Quilometragem Inicial",
     "actual_miliage"=> "Quilometragem Real",
     "cost"=> "Valor",

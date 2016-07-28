@@ -150,6 +150,8 @@ return [
     "last_position" => "Last Position",
     "model_vehicle"=> "Model vehicle",
     "number" => "Number",
+    "fire_number"=> "Fire Number",
+    "fleet_number" => "N&uacute;mero de Frota",
     "initial_miliage"=> "Initial miliage",
     "actual_miliage"=> "Actual miliage",
     "cost"=> "Cost",
