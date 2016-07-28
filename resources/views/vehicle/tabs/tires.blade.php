@@ -4,7 +4,7 @@
 
 <div class="mdl-grid demo-content">
 
-    @include('vehicle.map', [
+    @include('vehicle.map.map', [
     	'vehicle' => $vehicle,
     	'tiresPositions' => $tiresPositions
     ])

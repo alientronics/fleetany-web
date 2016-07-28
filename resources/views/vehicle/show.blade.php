@@ -15,7 +15,7 @@
 				<input id="vehicle-id" type="hidden" value="{{$vehicle->id}}" />
             	<input type="hidden" name="tire-position-focus-id" id="tire-position-focus-id" />
             	
-                @include('vehicle.map', [
+                @include('vehicle.map.map', [
                 	'pageActive' => 'vehicleShow',
                 	'vehicle' => $vehicle,
                 	'tiresPositions' => $tiresPositions

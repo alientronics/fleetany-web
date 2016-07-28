@@ -138,6 +138,7 @@ Route::get('tires/updateStorage/{vehicle_id}', 'TireController@updateStorage');
 Route::post('parts/create', 'PartController@store');
 Route::post('models/create', 'ModelController@storeByDialog');
 Route::post('types/create', 'TypeController@storeByDialog');
+Route::post('vehicle/map/updateDetail', 'VehicleController@updateMapDetail');
 
 Route::post('vehicle/dashboard/tires', 'VehicleDashboardController@tires');
 Route::post('vehicle/dashboard/localization', 'VehicleDashboardController@localization');

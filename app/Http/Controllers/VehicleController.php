@@ -14,8 +14,8 @@ use App\Repositories\ModelRepositoryEloquent;
 use App\Repositories\PartRepositoryEloquent;
 use Illuminate\Container\Container as Application;
 use Alientronics\FleetanyWebAttributes\Repositories\AttributeRepositoryEloquent;
-use App\Entities\Gps;
 use App\Entities\Contact;
+use Illuminate\Http\Request;
 
 class VehicleController extends Controller
 {
@@ -203,6 +203,15 @@ class VehicleController extends Controller
             'tiresPositions',
             'localizationData',
             'driverData'
+        ));
+    }
+    
+    public function updateMapDetail(Request $request)
+    {
+        $data = $request->all();
+
+        return view("vehicle.map.details", compact(
+            'data'
         ));
     }
 }

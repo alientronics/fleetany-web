@@ -354,21 +354,22 @@ window.onload=function(){
 		        "vehicle_id" : $('#vehicle-id').val()
 		    };
 	
-			var positionData = jstrans_position+': '+data.position+'<br>';
+
+			var positionDetailData = {};
+			positionDetailData.position = data.position;
 			if(tirePositionDetail[data.position] == undefined || tirePositionDetail[data.position] == '') {
 				$.post(url('tires/details'), data, function(retorno) {
 					
-					var positionDetailData = jstrans_fire_number+': '+retorno[0].number+'<br>';
-					positionDetailData += jstrans_model+': '+retorno[0].tire_model+'<br>';
-					positionDetailData += jstrans_lifecycle+': '+retorno[0].lifecycle+'<br>';
-					positionDetailData += jstrans_mileage+': '+retorno[0].miliage+'<br>';
-					
-					$('#tire-position-detail-data').html(positionData + positionDetailData);
-					
+					positionDetailData.fire_number = retorno[0].number;
+					positionDetailData.Model = retorno[0].tire_model;
+					positionDetailData.lifecycle = retorno[0].lifecycle;
+					positionDetailData.miliage = retorno[0].miliage;
+			    		
+					$("#tire-position-detail-data").load(url('vehicle/map/updateDetail'), positionDetailData);
 					tirePositionDetail[data.position] = positionDetailData;
 				});
 			} else {
-				$('#tire-position-detail-data').html(positionData + tirePositionDetail[data.position]);
+				$("#tire-position-detail-data").load(url('vehicle/map/updateDetail'), tirePositionDetail[data.position]);
 			}
 			
 			if($(".tires-selected-focus.tires-empty").length > 0) {
@@ -379,7 +380,7 @@ window.onload=function(){
 		} else {
 			tirePositionDetail[$('.tires-selected-focus').attr('id').replace('pos', '')] = undefined;
 			$(".tire-position-detail-button").hide();
-			$('#tire-position-detail-data').html("");
+			$("#tire-position-detail-data").load(url('vehicle/map/updateDetail'), {});
 		}
 	}
 	
@@ -400,12 +401,13 @@ window.onload=function(){
 			if(retorno.speed == null) {
 				retorno.speed = "";
 			}
-			
-			var positionDetailData = jstrans_latitude+': '+retorno.latitude+'<br>';
-			positionDetailData += jstrans_longitude+': '+retorno.longitude+'<br>';
-			positionDetailData += jstrans_speed+': '+retorno.speed+'<br>';
-			
-			$('#vehicle-detail-refresh-data').html(positionDetailData);
+
+			var positionDetailData = {};
+			positionDetailData.latitude = retorno.longitude;
+			positionDetailData.longitude = retorno.longitude;
+			positionDetailData.speed = retorno.speed;
+	    		
+			$("#vehicle-detail-refresh-data").load(url('vehicle/map/updateDetail'), positionDetailData);
 			
 		});
 	}
@@ -417,24 +419,25 @@ window.onload=function(){
 	        "vehicle_id" : $('#vehicle-id').val()
 	    };
 
-		var positionData = jstrans_position+': '+data.position+'<br>';
+		var positionDetailData = {};
+		positionDetailData.position = data.position;
 		if($("#"+$("#tire-position-focus-id").val()).hasClass("mdl-color--green")) {
 			$.post(url('vehicle/dashboard/tires'), data, function(retorno) {
 				
-				var positionDetailData = jstrans_fire_number+': '+retorno.number+'<br>';
-				positionDetailData += jstrans_model+': '+retorno.model+'<br>';
-				positionDetailData += jstrans_lifecycle+': '+retorno.lifecycle+'<br>';
-				positionDetailData += jstrans_mileage+': '+retorno.miliage+'<br>';
-
-				positionDetailData += jstrans_temperature+': '+retorno.temperature+'<br>';
-				positionDetailData += jstrans_pressure+': '+retorno.pressure+'<br>';
-				positionDetailData += jstrans_battery+': '+retorno.battery+'<br>';
-				positionDetailData += jstrans_sensorNumber+': '+retorno.sensorNumber+'<br>';
+				positionDetailData.fire_number = retorno.number;
+				positionDetailData.Model = retorno.model;
+				positionDetailData.lifecycle = retorno.lifecycle;
+				positionDetailData.miliage = retorno.miliage;
+				
+				positionDetailData.temperature = retorno.temperature;
+				positionDetailData.pressure = retorno.pressure;
+				positionDetailData.battery = retorno.battery;
+				positionDetailData.sensorNumber = retorno.sensorNumber;
 			    
-				$('#tire-detail-data').html(positionData + positionDetailData);
+				$("#tire-detail-data").load(url('vehicle/map/updateDetail'), positionDetailData);
 			});
 		} else {
-			$('#tire-detail-data').html("");
+			$("#tire-detail-data").load(url('vehicle/map/updateDetail'), positionDetailData);
 		}
 	}
 	
@@ -448,18 +451,19 @@ window.onload=function(){
 		if(tirePositionDetail[data.position] == undefined || tirePositionDetail[data.position] == '') {
 			$.post(url('tires/details'), data, function(retorno) {
 		    	
-		    	var storageDetailData = jstrans_fire_number+': '+retorno[0].number+'<br>';
-		    	storageDetailData += jstrans_model+': '+retorno[0].tire_model+'<br>';
-		    	storageDetailData += jstrans_lifecycle+': '+retorno[0].lifecycle+'<br>';
-		    	storageDetailData += jstrans_mileage+': '+retorno[0].miliage+'<br>';
-		    	
-		    	$('#tire-storage-detail-data').html(storageDetailData);
+		    	var storageDetailData = {};
+		    	storageDetailData.fire_number = retorno[0].number;
+		    	storageDetailData.Model = retorno[0].tire_model;
+		    	storageDetailData.lifecycle = retorno[0].lifecycle;
+		    	storageDetailData.miliage = retorno[0].miliage;
+		    		
+				$("#tire-storage-detail-data").load(url('vehicle/map/updateDetail'), storageDetailData);
 		    	$("#tire-position-add").show();
 		    	tireStorageDetail[data.part_id] = storageDetailData;
 		    	
 			});
 		} else {
-			$('#tire-storage-detail-data').html(tireStorageDetail[data.part_id]);
+			$("#tire-storage-detail-data").load(url('vehicle/map/updateDetail'), tireStorageDetail[data.part_id]);
 		}
 	});
 	
