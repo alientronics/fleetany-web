@@ -14,6 +14,7 @@ use App\Repositories\ContactRepositoryEloquent;
 use Illuminate\Http\Request;
 use App\Entities\Contact;
 use Illuminate\Container\Container as Application;
+use Alientronics\CachedEloquent\Role;
 
 class UserController extends Controller
 {
@@ -82,6 +83,8 @@ class UserController extends Controller
     {
         $user = $this->userRepo->find($idUser);
         $this->helper->validateRecord($user);
+        $role = $user->getRoles()[0];
+        $user->role_id = Role::where('slug', $role)->first()->id;
         
         $contact = $this->contactRepo->find($user['contact_id']);
         $this->helper->validateRecord($contact);
