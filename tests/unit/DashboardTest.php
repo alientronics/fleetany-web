@@ -199,7 +199,7 @@ class DashboardModelTest extends UnitTestCase
         for ($i = 1; $i < 7; $i++) {
             $date = $date->subMonthNoOverflow();
             for ($j = 1; $j < 3; $j++) {
-                $trips[] = factory(\App\Entities\Trip::class)->create([
+                factory(\App\Entities\Trip::class)->create([
                     'company_id' => $this->company_id,
                     'pickup_date' => $date,
                     'fuel_cost' => $date->month * 1000
@@ -228,7 +228,7 @@ class DashboardModelTest extends UnitTestCase
         for ($i = 1; $i < 7; $i++) {
             $date = $date->subMonthNoOverflow();
             for ($j = 1; $j < 3; $j++) {
-                $services[] = factory(\App\Entities\Entry::class)->create([
+                factory(\App\Entities\Entry::class)->create([
                     'company_id' => $this->company_id,
                     'entry_type_id' => $type->id,
                     'datetime_ini' => $date,

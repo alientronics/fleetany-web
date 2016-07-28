@@ -32,6 +32,7 @@ script:
   - vendor/bin/phpcs --standard=psr2 app/ tests/
   - vendor/bin/phpcpd --verbose app/ tests/
   - vendor/bin/phpmd app/ text codesize,unusedcode,naming,design
+  - vendor/bin/phpmd tests/ text codesize,unusedcode,naming
   - vendor/bin/phploc app/ tests/
 
 notifications:

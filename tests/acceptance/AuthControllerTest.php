@@ -25,7 +25,7 @@ class AuthControllerTest extends AcceptanceTestCase
     public function testCreateAccount()
     {
         $rememberToken = str_random(10);
-        $user = factory(\App\Entities\User::class)->create([
+        factory(\App\Entities\User::class)->create([
             'remember_token' => $rememberToken
         ]);
         
@@ -50,7 +50,7 @@ class AuthControllerTest extends AcceptanceTestCase
     public function testCreateAccountInvalidPassword()
     {
         $rememberToken = str_random(10);
-        $user = factory(\App\Entities\User::class)->create([
+        factory(\App\Entities\User::class)->create([
             'remember_token' => $rememberToken
         ]);
         

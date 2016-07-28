@@ -46,7 +46,7 @@ class ModelControllerTest extends AcceptanceTestCase
     {
         $idDelete = Model::all()->last()['id'];
 
-        $vehicle = factory(\App\Entities\Vehicle::class)->create([
+        factory(\App\Entities\Vehicle::class)->create([
             'model_vehicle_id' => $idDelete,
         ]);
         

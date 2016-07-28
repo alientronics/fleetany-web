@@ -48,7 +48,7 @@ class TypeControllerTest extends AcceptanceTestCase
     {
         $idDelete = Type::all()->last()['id'];
         
-        $model = factory(\App\Entities\Model::class)->create([
+        factory(\App\Entities\Model::class)->create([
             'model_type_id' => $idDelete,
         ]);
 

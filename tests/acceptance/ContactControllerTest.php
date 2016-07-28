@@ -80,7 +80,7 @@ class ContactControllerTest extends AcceptanceTestCase
     {
         $idDelete = Contact::all()->last()['id'];
 
-        $company = factory(\App\Entities\Company::class)->create([
+        factory(\App\Entities\Company::class)->create([
             'contact_id' => $idDelete,
         ]);
         

@@ -19,8 +19,6 @@ class PartControllerTest extends AcceptanceTestCase
     
     public function testCreate()
     {
-        $fuelType = Type::where('entity_key', 'fuel')->where('name', 'unleaded')->first();
-
         $this->visit('/part')->see('<a href="'.$this->baseUrl.'/part/create');
         
         $this->visit('/part/create');
@@ -50,8 +48,6 @@ class PartControllerTest extends AcceptanceTestCase
 
     public function testUpdate()
     {
-        $fuelType = Type::where('entity_key', 'fuel')->where('name', 'premium')->first();
-        
         $this->visit('/part/'.Part::all()->last()['id'].'/edit');
     
         $this->type('125,60', 'cost')

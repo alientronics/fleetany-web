@@ -16,7 +16,7 @@ class TireSensorControllerTest extends AcceptanceTestCase
             ->where('types.name', 'sensor')
             ->first()['id'];
         
-        $tireSensor = factory(\App\Entities\TireSensor::class)->create([
+        factory(\App\Entities\TireSensor::class)->create([
             'part_id' => $idPart,
         ]);
         
@@ -34,7 +34,7 @@ class TireSensorControllerTest extends AcceptanceTestCase
             ->where('types.name', 'sensor')
             ->first()['id'];
         
-        $tireSensor = factory(\App\Entities\TireSensor::class)->create([
+        factory(\App\Entities\TireSensor::class)->create([
             'part_id' => $idPart,
         ]);
         
