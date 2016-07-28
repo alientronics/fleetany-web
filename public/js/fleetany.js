@@ -610,6 +610,10 @@ window.onload=function(){
 			$('#city').parent().addClass('is-dirty');
 		}
 	});	
+	
+    $('#HkhZcTBbWFADje7t2').click(function(event) {
+        event.preventDefault();
+    });
 }
 
 function showSnackBar(message) {

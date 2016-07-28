@@ -42,7 +42,7 @@
 @include('includes.tabs', [
 	'tabs' => $tabs
 ])
-    
+
 {!! Form::close() !!}
 
 		</div>
@@ -50,6 +50,20 @@
 </div>
 
 <script>
+    $(window).bind("load", function() {
+    	var page = '{{Request::input("page")}}';
+    	if(page) {
+            // remove all is-active classes from tabs
+            $('a.mdl-tabs__tab').removeClass('is-active');
+            // activate desired tab
+            $('a[href="#tab1"]').addClass('is-active');
+            // remove all is-active classes from panels
+            $('.mdl-tabs__panel').removeClass('is-active');
+            // activate desired tab panel
+            $('#tab1').addClass('is-active');
+		}
+	});  
+      
 	$( document ).ready(function() {
 		$('#cost').maskMoney({!!Lang::get("masks.money")!!});
 
