@@ -518,3 +518,16 @@ _:-ms-input-placeholder, :root .demo-graph {
 	cursor: pointer;
 }
 
+.vehicle-map-tire-number {
+	margin-top: 30px; 
+	font-size:45px; 
+	color: #FFF;
+}
+
+.vehicle-map-tire-number-simple {
+	margin-top: 30px; 
+	margin-left: 12px; 
+	font-size:50px; 
+	color: #FFF;
+}
+

@@ -234,7 +234,7 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
                         && !empty($tire->position) && $tire->position > 0) {
                     $tiresPositions[$tire->position] = true;
                     
-                    if($tiresPositions['max_position'] < $tire->position) {
+                    if ($tiresPositions['max_position'] < $tire->position) {
                         $tiresPositions['max_position'] = $tire->position;
                     }
                 }

@@ -34,7 +34,7 @@
         		    @endif
         		    
             		    <div id="pos{{$i}}" class="@if(!empty($map[$i]) && $map[$i] == 1) mdl-color--green tires-filled @else mdl-color--grey tires-empty @endif tire-position-fillable mdl-cell mdl-cell--2-col">
-         		    		&nbsp;
+         		    		<div class="@if(strlen($i) > 1) vehicle-map-tire-number @else vehicle-map-tire-number-simple @endif">{{$i}}</div>
          		    	</div>
         		    	
         		    @if($col == 2)
