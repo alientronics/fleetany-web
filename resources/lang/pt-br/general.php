@@ -206,6 +206,18 @@ return [
 
     //Linguagens
     "en" => "Ingl&ecirc;s",
-    "pt-br" => "Portugu&ecirc;s"
+    "pt-br" => "Portugu&ecirc;s",
+    
+    //Types values
+    "service" => "Servi&ccedil;o",
+    "car" => "Carro",
+    "user" => "Usu&aacute;rio",
+    "delivery" => "Entrega",
+    "detail" => "Detalhe",
+    "unleaded" => "Comum",
+    "premium" => "Aditivado",
+    "tire" => "Pneu",
+    "sensor" => "Sensor",
+    
     
 ];

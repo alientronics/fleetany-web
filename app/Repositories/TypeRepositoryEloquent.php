@@ -7,6 +7,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
 use App\Repositories\TypeRepository;
 use App\Entities\Type;
 use Illuminate\Support\Facades\Auth;
+use Lang;
 
 class TypeRepositoryEloquent extends BaseRepository implements TypeRepository
 {
@@ -45,6 +46,14 @@ class TypeRepositoryEloquent extends BaseRepository implements TypeRepository
             return $query;
         })->paginate($filters['paginate']);
         
+        if (!empty($types)) {
+            foreach ($types as $index => $type) {
+                if (Lang::has('general.'.$type->name)) {
+                    $types[$index]->name = Lang::get('general.'.$type->name);
+                }
+            }
+        }
+        
         return $types;
     }
     
@@ -71,6 +80,14 @@ class TypeRepositoryEloquent extends BaseRepository implements TypeRepository
         }
         
         $types = $types->lists('name', 'id');
+        
+        if (!empty($types)) {
+            foreach ($types as $index => $type) {
+                if (Lang::has('general.'.$type)) {
+                    $types[$index] = Lang::get('general.'.$type);
+                }
+            }
+        }
         
         return $types;
     }

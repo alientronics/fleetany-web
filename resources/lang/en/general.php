@@ -206,6 +206,17 @@ return [
 
     //Linguagens
     "en" => "English",
-    "pt-br" => "Portuguese"
+    "pt-br" => "Portuguese",
+    
+    //Types values
+    "service" => "service",
+    "car" => "car",
+    "user" => "user",
+    "delivery" => "delivery",
+    "detail" => "detail",
+    "unleaded" => "unleaded",
+    "premium" => "premium",
+    "tire" => "tire",
+    "sensor" => "sensor",
     
 ];
