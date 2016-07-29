@@ -2,7 +2,7 @@
 
 return [
 
-    'cacheSeconds' => 60,
+    'cacheMinutes' => 1,
     
     /**
      * Model definitions.
