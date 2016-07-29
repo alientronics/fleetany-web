@@ -227,11 +227,16 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
     public function getTiresPositions($tires, $idVehicle)
     {
         $tiresPositions = [];
+        $tiresPositions['max_position'] = 0;
         if (!empty($tires)) {
             foreach ($tires as $tire) {
                 if (!empty($tire->vehicle_id) && $tire->vehicle_id == $idVehicle
                         && !empty($tire->position) && $tire->position > 0) {
                     $tiresPositions[$tire->position] = true;
+                    
+                    if($tiresPositions['max_position'] < $tire->position) {
+                        $tiresPositions['max_position'] = $tire->position;
+                    }
                 }
             }
         }
