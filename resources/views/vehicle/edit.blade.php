@@ -34,6 +34,7 @@
 @else
 {!! Form::model('$vehicle', [
         'method'=>'PUT',
+        'enctype' => 'multipart/form-data',
         'route' => ['vehicle.update',$vehicle->id]
     ]) !!}
     

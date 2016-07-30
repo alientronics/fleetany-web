@@ -27,10 +27,11 @@
 @endif
 
 @if (!$contact->id)
-{!! Form::open(['route' => 'contact.store']) !!}
+{!! Form::open(['route' => 'contact.store', 'enctype' => 'multipart/form-data']) !!}
 @else
 {!! Form::model('$contact', [
         'method'=>'PUT',
+        'enctype' => 'multipart/form-data',
         'route' => ['contact.update',$contact->id]
     ]) !!}
     

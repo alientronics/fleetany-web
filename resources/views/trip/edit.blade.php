@@ -26,10 +26,11 @@
 @endif
 
 @if (!$trip->id)
-{!! Form::open(['route' => 'trip.store']) !!}
+{!! Form::open(['route' => 'trip.store', 'enctype' => 'multipart/form-data']) !!}
 @else
 {!! Form::model('$trip', [
         'method'=>'PUT',
+        'enctype' => 'multipart/form-data',
         'route' => ['trip.update',$trip->id]
     ]) !!}
 @endif

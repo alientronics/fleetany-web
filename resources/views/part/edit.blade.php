@@ -26,10 +26,11 @@
 @endif
 
 @if (!$part->id)
-{!! Form::open(['route' => 'part.store']) !!}
+{!! Form::open(['route' => 'part.store', 'enctype' => 'multipart/form-data']) !!}
 @else
 {!! Form::model('$part', [
         'method'=>'PUT',
+        'enctype' => 'multipart/form-data',
         'route' => ['part.update',$part->id]
     ]) !!}
     
