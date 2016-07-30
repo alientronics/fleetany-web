@@ -113,7 +113,8 @@ class VehicleController extends Controller
         $modeldialog = ModelRepositoryEloquent::getDialogStoreOptions('vehicle');
 
         $tires = $this->partRepo->getTires($idVehicle);
-        $tiresPositions = $this->partRepo->getTiresPositions($tires, $idVehicle);
+        $tiresVehicle = $this->partRepo->getTiresVehicle($idVehicle);
+        $tiresPositions = $this->partRepo->getTiresPositions($tiresVehicle, $idVehicle);
         
         $part_type_id = $this->partRepo->getTiresTypeId($idVehicle);
         $tiresModels = [];
@@ -197,7 +198,7 @@ class VehicleController extends Controller
     {
         $vehicle = $this->vehicleRepo->find($idVehicle);
         $this->helper->validateRecord($vehicle);
-        $tires = $this->partRepo->getTires($vehicle->id);
+        $tires = $this->partRepo->getTiresVehicle($vehicle->id);
         $tiresPositions = $this->partRepo->getTiresPositions($tires, $vehicle->id);
         $localizationData = $this->vehicleRepo->getLocalizationData($idVehicle);
         $driverData = empty($localizationData->driver_id) ? "" :

@@ -204,16 +204,35 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         return empty($part->id) ? "" : $part->id;
     }
     
-    public function getTires($vehicle_id)
+    public function getTires($idVehicle)
+    {
+        $results = Part::select('parts.*', 'models.name as tire_model')
+            ->join('models', 'parts.part_model_id', '=', 'models.id')
+            ->join('types', 'parts.part_type_id', '=', 'types.id')
+            ->where(function ($queryStorage) use ($idVehicle) {
+                $queryStorage->whereNull('parts.vehicle_id')
+                    ->orWhere('parts.vehicle_id', $idVehicle);
+            })
+            ->where(function ($queryPosition) {
+                $queryPosition->whereNull('parts.position')
+                    ->orWhere('parts.position', 0)
+                    ->orWhere('parts.position', '');
+            })
+            
+            ->where('parts.company_id', Auth::user()['company_id'])
+            ->where('types.name', 'tire')
+            ->orderBy('position', 'asc')
+            ->get();
+        
+        return $results;
+    }
+    
+    public function getTiresVehicle($vehicle_id)
     {
         $results = Part::select('parts.*', 'models.name as tire_model')
             ->join('vehicles', 'parts.vehicle_id', '=', 'vehicles.id')
             ->join('models', 'parts.part_model_id', '=', 'models.id')
             ->join('types', 'parts.part_type_id', '=', 'types.id')
-            ->where(function ($queryStorage) use ($vehicle_id) {
-                $queryStorage->whereNull('parts.vehicle_id')
-                    ->orWhere('parts.vehicle_id', $vehicle_id);
-            })
             ->where('parts.vehicle_id', $vehicle_id)
             
             ->where('parts.company_id', Auth::user()['company_id'])
@@ -247,10 +266,8 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
     public function getTiresTypeId($vehicle_id)
     {
         $result = Part::select('types.id')
-            ->join('vehicles', 'parts.vehicle_id', '=', 'vehicles.id')
             ->join('models', 'parts.part_model_id', '=', 'models.id')
             ->join('types', 'parts.part_type_id', '=', 'types.id')
-            ->where('parts.vehicle_id', $vehicle_id)
             ->where('parts.company_id', Auth::user()['company_id'])
             ->where('types.name', 'tire')
             ->first();
