@@ -17,9 +17,9 @@
 		
 		@foreach(str_split($vehicle->model->map) as $key => $value)
 
-			@if(($tiresPositions['max_position'] > $key || $col != 4) && !$final)
+			@if((strripos($vehicle->model->map,'1') > $key || $col != 4) && !$final)
 			
-				@if($tiresPositions['max_position'] <= $key && $col == 4)
+				@if(strripos($vehicle->model->map,'1') <= $key && $col == 4)
 					{{--*/ 
 						$final = true;
 						break;
