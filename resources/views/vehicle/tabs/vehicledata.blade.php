@@ -47,7 +47,7 @@
     
     <div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('fleet')) is-invalid is-dirty @endif"" data-upgraded="eP">
     	{!!Form::text('fleet', $vehicle->fleet, ['class' => 'mdl-textfield__input'])!!}
-    	{!!Form::label('fleet', Lang::get('general.fleet'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
+    	{!!Form::label('fleet', Lang::get('general.fleet_number'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
     	<span class="mdl-textfield__error">{{ $errors->first('fleet') }}</span>
     </div>  			
     

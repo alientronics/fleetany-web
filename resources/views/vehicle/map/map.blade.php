@@ -10,10 +10,21 @@
     	</div>
     	
 	@if(!empty(str_split($vehicle->model->map)))
-		{{--*/ $col = 0; /*--}}
+		{{--*/ 
+			$col = 0; 
+			$final = false;
+		/*--}}
+		
 		@foreach(str_split($vehicle->model->map) as $key => $value)
 
-			@if($tiresPositions['max_position'] > $key)
+			@if(($tiresPositions['max_position'] > $key || $col != 4) && !$final)
+			
+				@if($tiresPositions['max_position'] <= $key && $col == 4)
+					{{--*/ 
+						$final = true;
+						break;
+					/*--}}
+				@endif
 
     			@if($col == 4)
         		{{--*/ $col = 1; /*--}}
