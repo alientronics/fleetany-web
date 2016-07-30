@@ -85,7 +85,7 @@ class TypeControllerTest extends AcceptanceTestCase
             ->type('service', 'name')
             ->press('Buscar')
             ->see('entry</div>')
-            ->see('service</div>')
+            ->see('Serviço</div>')
         ;
     }
     
