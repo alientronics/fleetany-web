@@ -25,7 +25,7 @@ class CreatePartsTable extends Migration {
 			$table->string('name')->nullable();			
 			$table->string('number');
 			$table->integer('miliage')->nullable();
-			$table->char('position', 10)->nullable();
+			$table->integer('position')->nullable();
 			$table->integer('lifecycle')->nullable();
 			$table->timestamps();
 			$table->softDeletes();

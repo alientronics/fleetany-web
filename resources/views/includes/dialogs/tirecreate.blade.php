@@ -10,7 +10,7 @@
         
     	<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('number')) is-invalid is-dirty @endif"" data-upgraded="eP">
      		{!!Form::text('part_number', "", ['id' => 'part_number', 'class' => 'mdl-textfield__input'])!!}
-    		{!!Form::label('part_number', Lang::get('general.part_number'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
+    		{!!Form::label('part_number', Lang::get('general.fire_number'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
     		<span class="mdl-textfield__error">{{ $errors->first('number') }}</span>
     	</div>   
     	

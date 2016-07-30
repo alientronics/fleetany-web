@@ -170,7 +170,8 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         Part::where('id', $data['part_id'])
             ->where('company_id', Auth::user()['company_id'])
             ->update([
-                'position' => $data['position']
+                'position' => $data['position'],
+                'vehicle_id' => $data['vehicle_id']
             ]);
     
         return true;
@@ -209,10 +210,6 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         $results = Part::select('parts.*', 'models.name as tire_model')
             ->join('models', 'parts.part_model_id', '=', 'models.id')
             ->join('types', 'parts.part_type_id', '=', 'types.id')
-            ->where(function ($queryStorage) use ($idVehicle) {
-                $queryStorage->whereNull('parts.vehicle_id')
-                    ->orWhere('parts.vehicle_id', $idVehicle);
-            })
             ->where(function ($queryPosition) {
                 $queryPosition->whereNull('parts.position')
                     ->orWhere('parts.position', 0)

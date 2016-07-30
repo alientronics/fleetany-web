@@ -181,7 +181,8 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
         } else {
             unset($inputs['geofence']);
         }
-        
+
+        $inputs['cost'] = HelperRepository::money($inputs['cost']);
         $inputs['entity_key'] = "vehicle";
         
         return $inputs;
