@@ -10,12 +10,12 @@
         </button>
         <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
           <li class="mdl-menu__item"></li>
-          <li class="mdl-menu__item"><a href="{{URL::to('/profile')}}" class="mdl-navigation__link"><i class="material-icons">person</i>profile</a></li>
-          <li class="mdl-menu__item"><a href="{{URL::to('/invite')}}" class="mdl-navigation__link"><i class="material-icons">person</i>invite user</a></li>
+          <a href="{{URL::to('/profile')}}" class="mdl-navigation__link"><li class="mdl-menu__item"><i class="material-icons">person</i>profile</li></a>
+          <a href="{{URL::to('/invite')}}" class="mdl-navigation__link"><li class="mdl-menu__item"><i class="material-icons">person</i>invite user</li></a>
           @if (Auth::user()->is('administrator'))
-          <li class="mdl-menu__item"><a href="{{URL::to('/company/'.Auth::user()["company_id"].'/edit')}}" class="mdl-navigation__link"><i class="material-icons">domain</i>edit company</a></li>
+          <a href="{{URL::to('/company/'.Auth::user()["company_id"].'/edit')}}" class="mdl-navigation__link"><li class="mdl-menu__item"><i class="material-icons">domain</i>edit company</li></a>
           @endif
-          <li class="mdl-menu__item"><a href="{{URL::to('/auth/logout')}}" class="mdl-navigation__link"><i class="material-icons">exit_to_app</i>log out</a></li>
+          <a href="{{URL::to('/auth/logout')}}" class="mdl-navigation__link"><li class="mdl-menu__item"><i class="material-icons">exit_to_app</i>log out</li></a>
         </ul>
       </div>
     </header>
