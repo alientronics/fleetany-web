@@ -50,9 +50,9 @@ class TireController extends Controller
         return response()->json($part);
     }
     
-    public function updateStorage($vehicle_id)
+    public function updateStorage()
     {
-        $tires = $this->partRepo->getTires($vehicle_id);
+        $tires = $this->partRepo->getTires();
         
         return view("vehicle.tabs.tiresstorage", compact(
             'tires'

@@ -47,6 +47,7 @@ class TireControllerTest extends UnitTestCase
     {
         $this->post('/tires/position/add', ['part_id' => Part::where('position', 0)->first()['id'],
             'position' => 2,
+            'vehicle_id' => 1,
             "_token" => csrf_token()
         ])->assertResponseStatus(200);
     }

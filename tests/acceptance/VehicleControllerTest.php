@@ -25,7 +25,7 @@ class VehicleControllerTest extends AcceptanceTestCase
         $this->type('IOP-1234', 'number')
             ->type('123', 'initial_miliage')
             ->type('456', 'actual_miliage')
-            ->type('90000', 'cost')
+            ->type('900,00', 'cost')
             ->type('Descricao', 'description')
             ->press('Enviar')
             ->seePageIs('/vehicle')
@@ -37,7 +37,7 @@ class VehicleControllerTest extends AcceptanceTestCase
                     'number' => 'IOP-1234',
                     'initial_miliage' => '123',
                     'actual_miliage' => '456',
-                    'cost' => '90000',
+                    'cost' => '900.00',
                     'description' => 'Descricao',
             ]
         );
@@ -50,7 +50,7 @@ class VehicleControllerTest extends AcceptanceTestCase
         $this->type('IOP-1235', 'number')
             ->type('125', 'initial_miliage')
             ->type('455', 'actual_miliage')
-            ->type('90005', 'cost')
+            ->type('900,05', 'cost')
             ->type('Descricao2', 'description')
             ->press('Enviar')
             ->seePageIs('/vehicle')
@@ -62,7 +62,7 @@ class VehicleControllerTest extends AcceptanceTestCase
                     'number' => 'IOP-1235',
                     'initial_miliage' => '125',
                     'actual_miliage' => '455',
-                    'cost' => '90005',
+                    'cost' => '900,05',
                     'description' => 'Descricao2',
             ]
         );

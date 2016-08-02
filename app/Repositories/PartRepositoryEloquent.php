@@ -205,7 +205,7 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         return empty($part->id) ? "" : $part->id;
     }
     
-    public function getTires($idVehicle)
+    public function getTires()
     {
         $results = Part::select('parts.*', 'models.name as tire_model')
             ->join('models', 'parts.part_model_id', '=', 'models.id')
@@ -260,7 +260,7 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         return $tiresPositions;
     }
     
-    public function getTiresTypeId($vehicle_id)
+    public function getTiresTypeId()
     {
         $result = Part::select('types.id')
             ->join('models', 'parts.part_model_id', '=', 'models.id')

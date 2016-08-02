@@ -112,11 +112,11 @@ class VehicleController extends Controller
         $parts = $this->partRepo->results($filters);
         $modeldialog = ModelRepositoryEloquent::getDialogStoreOptions('vehicle');
 
-        $tires = $this->partRepo->getTires($idVehicle);
+        $tires = $this->partRepo->getTires();
         $tiresVehicle = $this->partRepo->getTiresVehicle($idVehicle);
         $tiresPositions = $this->partRepo->getTiresPositions($tiresVehicle, $idVehicle);
         
-        $part_type_id = $this->partRepo->getTiresTypeId($idVehicle);
+        $part_type_id = $this->partRepo->getTiresTypeId();
         $tiresModels = [];
         if (!empty($part_type_id)) {
             $tiresModels = ModelRepositoryEloquent::getModels('part', $part_type_id);

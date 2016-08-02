@@ -183,6 +183,10 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
         }
 
         $inputs['cost'] = HelperRepository::money($inputs['cost']);
+        if ($inputs['cost'] == "0.00") {
+            $inputs['cost'] = 0;
+        }
+        
         $inputs['entity_key'] = "vehicle";
         
         return $inputs;
