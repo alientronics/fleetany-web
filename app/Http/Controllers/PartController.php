@@ -133,6 +133,8 @@ class PartController extends Controller
                 $this->request
             );
             $filters['id'] = $part->id;
+            $filters['sort'] = 'created_at';
+            $filters['order'] = 'desc';
             $sensor_data = $this->tireSensorRepo->results($filters);
         }
 
