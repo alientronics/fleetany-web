@@ -62,7 +62,6 @@ class VehicleControllerTest extends AcceptanceTestCase
                     'number' => 'IOP-1235',
                     'initial_miliage' => '125',
                     'actual_miliage' => '455',
-                    'cost' => '900,05',
                     'description' => 'Descricao2',
             ]
         );
@@ -107,7 +106,7 @@ class VehicleControllerTest extends AcceptanceTestCase
         $this->visit('/vehicle/create')
             ->press('Enviar')
             ->seePageIs('/vehicle/create')
-            ->see('de um valor para o campo cost.</span>')
+            ->see('O campo cost dever')
         ;
     }
     
