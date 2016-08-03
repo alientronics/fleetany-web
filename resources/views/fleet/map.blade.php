@@ -1,6 +1,6 @@
 <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-grid">
 	<div class="mdl-button mdl-button--colored">
-        {{Lang::get('general.VehicleMap')}}
+        {{Lang::get("general.fleet_number")}}: {{$vehicle->fleet}} - {{Lang::get("general.number")}}: {{$vehicle->number}}
 	</div>
 	
 	<div class="mdl-card__actions mdl-card--border"></div>
@@ -39,13 +39,14 @@
     		    	</div>
     		    @endif
     		    
-    		    	@if(!empty($pageActive) && $pageActive == 'vehicleShow')
-    		    	<div id="pos{{$key + 1}}" class="@if($value == 1) @if(!empty($tiresPositions[$key + 1])) mdl-color--green @else mdl-color--grey @endif @endif tires-show mdl-cell mdl-cell--2-col">
-    	    		@else
-    		    	<div id="pos{{$key + 1}}" class="@if($value == 1) @if(!empty($tiresPositions[$key + 1])) mdl-color--green tires-filled @else mdl-color--grey tires-empty @endif @endif mdl-cell mdl-cell--2-col">
-    		    	@endif
+    		    	<div id="pos{{$key + 1}}_{{$vehicle->id}}" class="@if($value == 1) @if(isset($tireData[$key + 1])) mdl-color--green @else mdl-color--grey @endif @endif tires-fleet mdl-cell mdl-cell--2-col">
     		    	@if($value == 1)
     		    		<div class="@if(strlen($key + 1) > 1) vehicle-map-tire-number @else vehicle-map-tire-number-simple @endif">{{$key + 1}}</div>
+                        @if(!empty($tireData[$key + 1]->pressure) || !empty($tireData[$key + 1]->temperature))
+                        <div class="mdl-tooltip" id="tireData{{$key + 1}}_{{$vehicle->id}}" for="pos{{$key + 1}}_{{$vehicle->id}}">
+                        {{Lang::get("general.pressure")}}: $tireData[$key + 1]->pressure - {{Lang::get("general.temperature")}}: $tireData[$key + 1]->temperature
+                        </div>
+                        @endif
     		    	@endif
     		    	</div>
     		    	

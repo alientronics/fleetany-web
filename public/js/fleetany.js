@@ -157,6 +157,12 @@ window.onload=function(){
 	    
 	});
 
+	if($("#fleet-dashboard").length > 0) {
+		setInterval(function () {
+			$("#fleet-dashboard-vehicles").load(url('vehicle/fleet/dashboard/1'));
+	    },60000);
+	}
+
 	if($("#vehicle-detail-data").length > 0) {
 		setInterval(function () {
 	        setVehicleAndLocalizationSelectedFocusData();

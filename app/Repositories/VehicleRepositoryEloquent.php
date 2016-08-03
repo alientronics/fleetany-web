@@ -249,4 +249,30 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
         }
         return $objTire;
     }
+    
+    public function getFleetData()
+    {
+        $vehicles = Vehicle::where('company_id', Auth::user()['company_id'])->get();
+        $tireData = [];
+        
+        if (!empty($vehicles)) {
+            foreach ($vehicles as $vehicle) {
+                $tireData[$vehicle->id] = [];
+                $tires = PartRepositoryEloquent::getTiresVehicle($vehicle->id);
+                $tiresPositions = PartRepositoryEloquent::getTiresPositions($tires, $vehicle->id);
+        
+                if (!empty($tiresPositions)) {
+                    foreach ($tiresPositions as $position => $filled) {
+                        if ($filled) {
+                            $inputs['position'] = $position;
+                            $inputs['vehicle_id'] = $vehicle->id;
+                            $tireData[$vehicle->id][$position] = $this->getTireAndSensorData($inputs);
+                        }
+                    }
+                }
+            }
+        }
+        
+        return ['vehicles' => $vehicles, 'tireData' => $tireData];
+    }
 }

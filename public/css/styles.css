@@ -436,15 +436,10 @@ _:-ms-input-placeholder, :root .demo-graph {
   max-height: 300px; 
 }
 
+.tires-fleet,
 .tires-empty,
-.tires-show {
-	border-radius: 10px;	
-}
-
-.tires-filled {
-	border-radius: 10px;	
-}
-
+.tires-show,
+.tires-filled,
 .tires-selected {
 	border-radius: 10px;	
 }

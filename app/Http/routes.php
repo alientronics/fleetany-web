@@ -143,6 +143,9 @@ Route::post('vehicle/map/updateDetail', 'VehicleController@updateMapDetail');
 Route::post('vehicle/dashboard/tires', 'VehicleDashboardController@tires');
 Route::post('vehicle/dashboard/localization', 'VehicleDashboardController@localization');
 
+Route::get('vehicle/fleet/dashboard', 'VehicleDashboardController@fleet');
+Route::get('vehicle/fleet/dashboard/{update}', 'VehicleDashboardController@fleet');
+
 Route::bind(
     'users',
     function ($value, $route) {

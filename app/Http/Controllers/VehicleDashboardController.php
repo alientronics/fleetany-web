@@ -19,4 +19,15 @@ class VehicleDashboardController extends VehicleController
         $localization = $this->vehicleRepo->getLocalizationData($data['vehicle_id']);
         return response()->json($localization);
     }
+
+    public function fleet($update = null)
+    {
+        $fleetData = $this->vehicleRepo->getFleetData();
+        $vehicles = $fleetData['vehicles'];
+        $tireData = $fleetData['tireData'];
+            
+        $view = !empty($update) ? "fleet.vehicles" : "fleet.index";
+        
+        return view($view, compact('vehicles', 'tireData'));
+    }
 }

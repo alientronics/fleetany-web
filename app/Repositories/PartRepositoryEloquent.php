@@ -224,7 +224,7 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         return $results;
     }
     
-    public function getTiresVehicle($vehicle_id)
+    public static function getTiresVehicle($vehicle_id)
     {
         $results = Part::select('parts.*', 'models.name as tire_model')
             ->join('vehicles', 'parts.vehicle_id', '=', 'vehicles.id')
@@ -240,7 +240,7 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         return $results;
     }
     
-    public function getTiresPositions($tires, $idVehicle)
+    public static function getTiresPositions($tires, $idVehicle)
     {
         $tiresPositions = [];
         $tiresPositions['max_position'] = 0;
