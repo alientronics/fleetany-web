@@ -201,7 +201,7 @@ class PartController extends Controller
         $parts = $parts->lists('number', 'id');
 
         if ($optionalChoice) {
-            $parts->splice(0, 0, ["" => ""]);
+            $parts->prepend("", "");
         }
         
         return $parts;

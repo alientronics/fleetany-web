@@ -82,7 +82,7 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
                                 ->lists('number', 'id');
         
         if ($optionalChoice) {
-            $vehicles->splice(0, 0, ["" => ""]);
+            $vehicles->prepend("", "");
         }
                                 
         return $vehicles;
