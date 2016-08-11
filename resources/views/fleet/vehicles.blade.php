@@ -6,7 +6,8 @@
         
             @include('fleet.map', [
             	'vehicle' => $vehicle,
-            	'tireData' => $tireData[$vehicle->id]
+            	'tireData' => $tireData[$vehicle->id],
+            	'modelMap' => $modelMaps[$vehicle->model_vehicle_id]
             ])
             
         @if($index % 2 > 0) 

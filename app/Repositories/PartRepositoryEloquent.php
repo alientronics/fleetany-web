@@ -224,15 +224,18 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
         return $results;
     }
     
-    public static function getTiresVehicle($vehicle_id)
+    public static function getTiresVehicle($vehicle_id = null)
     {
         $results = Part::select('parts.*', 'models.name as tire_model')
             ->join('vehicles', 'parts.vehicle_id', '=', 'vehicles.id')
             ->join('models', 'parts.part_model_id', '=', 'models.id')
-            ->join('types', 'parts.part_type_id', '=', 'types.id')
-            ->where('parts.vehicle_id', $vehicle_id)
+            ->join('types', 'parts.part_type_id', '=', 'types.id');
+        
+         if(!empty($vehicle_id)){
+            $results = $results->where('parts.vehicle_id', $vehicle_id);
+         }
             
-            ->where('parts.company_id', Auth::user()['company_id'])
+         $results = $results->where('parts.company_id', Auth::user()['company_id'])
             ->where('types.name', 'tire')
             ->orderBy('position', 'asc')
             ->get();

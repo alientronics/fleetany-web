@@ -12,7 +12,8 @@
 
 			@include('fleet.vehicles', [
             	'vehicles' => $vehicles,
-            	'tireData' => $tireData
+            	'tireData' => $tireData,
+            	'modelMaps' => $modelMaps
             ])
                 
 		</div>

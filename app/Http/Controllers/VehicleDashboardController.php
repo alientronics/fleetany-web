@@ -25,9 +25,10 @@ class VehicleDashboardController extends VehicleController
         $fleetData = $this->vehicleRepo->getFleetData();
         $vehicles = $fleetData['vehicles'];
         $tireData = $fleetData['tireData'];
+        $modelMaps = $fleetData['modelMaps'];
             
         $view = !empty($update) ? "fleet.vehicles" : "fleet.index";
         
-        return view($view, compact('vehicles', 'tireData'));
+        return view($view, compact('vehicles', 'tireData', 'modelMaps'));
     }
 }

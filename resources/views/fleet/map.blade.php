@@ -9,17 +9,17 @@
     		<span>(</span>
     	</div>
     	
-	@if(!empty(str_split($vehicle->model->map)))
+	@if(!empty(str_split($modelMap)))
 		{{--*/ 
 			$col = 0; 
 			$final = false;
 		/*--}}
 		
-		@foreach(str_split($vehicle->model->map) as $key => $value)
+		@foreach(str_split($modelMap) as $key => $value)
 
-			@if((strripos($vehicle->model->map,'1') > $key || $col != 4) && !$final)
+			@if((strripos($modelMap,'1') > $key || $col != 4) && !$final)
 			
-				@if(strripos($vehicle->model->map,'1') <= $key && $col == 4)
+				@if(strripos($modelMap,'1') <= $key && $col == 4)
 					{{--*/ 
 						$final = true;
 						break;
@@ -44,7 +44,7 @@
     		    		<div class="@if(strlen($key + 1) > 1) vehicle-map-tire-number @else vehicle-map-tire-number-simple @endif">{{$key + 1}}</div>
                         @if(!empty($tireData[$key + 1]->pressure) || !empty($tireData[$key + 1]->temperature))
                         <div class="mdl-tooltip" id="tireData{{$key + 1}}_{{$vehicle->id}}" for="pos{{$key + 1}}_{{$vehicle->id}}">
-                        {{Lang::get("general.pressure")}}: $tireData[$key + 1]->pressure - {{Lang::get("general.temperature")}}: $tireData[$key + 1]->temperature
+                        {{Lang::get("general.pressure")}}: {{$tireData[$key + 1]->pressure}} - {{Lang::get("general.temperature")}}: {{$tireData[$key + 1]->temperature}}
                         </div>
                         @endif
     		    	@endif

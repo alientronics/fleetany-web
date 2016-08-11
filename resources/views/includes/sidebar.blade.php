@@ -22,6 +22,7 @@
     <nav class="demo-navigation mdl-navigation mdl-color--white">
           @if (Auth::check())
             <a class="@if (Request::is('') || Request::is('/')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('/')}}"><i class="material-icons" role="presentation">dashboard</i>{{Lang::get('menu.FleetPanel')}}</a>
+            <a class="@if (Request::is('vehicle/fleet/dashboard*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('vehicle/fleet/dashboard')}}"><i class="material-icons" role="presentation">dashboard</i>{{Lang::get('menu.FleetPanel')}}</a>
             @permission('view.company')  
 <!--             <a class="@if (Request::is('company*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('company')}}"><i class="material-icons" role="presentation">domain</i>{{Lang::get('menu.Company')}}</a> -->
             @endpermission  
@@ -32,7 +33,7 @@
             <a class="@if (Request::is('fleet*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('fleets')}}"><i class="material-icons" role="presentation">loca_shipping</i>{{Lang::get('menu.Fleet')}}</a>       
             @endpermission  
             @permission('view.vehicle')
-            <a class="@if (Request::is('vehicle*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('vehicle')}}"><i class="material-icons" role="presentation">directions_car</i>{{Lang::get('menu.Vehicles')}}</a>       
+            <a class="@if (!Request::is('vehicle/fleet/dashboard*') && Request::is('vehicle*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('vehicle')}}"><i class="material-icons" role="presentation">directions_car</i>{{Lang::get('menu.Vehicles')}}</a>       
             @endpermission
             @permission('view.model')
             <a class="@if (Request::is('model*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('model')}}"><i class="material-icons" role="presentation">layers</i>{{Lang::get('menu.Models')}}</a>       

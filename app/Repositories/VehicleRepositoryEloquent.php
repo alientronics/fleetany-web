@@ -249,30 +249,68 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
         }
         return $objTire;
     }
+
+    private function getFleetTireAndSensorData()
+    {
+        $sensors = TireSensor::select('tire_sensor.*', 'parts.position', 'parts.vehicle_id')
+            ->join('parts', 'tire_sensor.part_id', '=', 'parts.id')
+            ->join('types', 'parts.part_type_id', '=', 'types.id')
+            ->whereNotNull('parts.vehicle_id')
+            ->where('parts.company_id', Auth::user()['company_id'])
+            ->where('types.name', 'sensor')
+            ->orderBy('parts.id', 'desc')
+            ->get();
+
+        $tireAndSensorData = [];
+        if (!empty($sensors)) {
+            foreach ($sensors as $sensor) {
+                $objTire = new \stdClass();
+                $objTire->temperature = HelperRepository::manageEmptyValue($sensor->temperature);
+                $objTire->pressure = HelperRepository::manageEmptyValue($sensor->pressure);
+                
+                $tireAndSensorData[$sensor->vehicle_id][$sensor->position] = $objTire;
+            }
+        }
+        $objTire = new \stdClass();
+        $objTire->temperature = "";
+        $objTire->pressure = "";
+        $tireAndSensorData[0] = $objTire;
+    
+        return $tireAndSensorData;
+    }
     
     public function getFleetData()
     {
         $vehicles = Vehicle::where('company_id', Auth::user()['company_id'])->get();
         $tireData = [];
+        $modelMaps = [];
         
         if (!empty($vehicles)) {
+            $tires = PartRepositoryEloquent::getTiresVehicle();
+            $tireAndSensorData = $this->getFleetTireAndSensorData();
             foreach ($vehicles as $vehicle) {
+                
+                if(empty($modelMaps[$vehicle->model_vehicle_id])) {
+                    $modelMaps[$vehicle->model_vehicle_id] = $vehicle->model->map;
+                }
+                
                 $tireData[$vehicle->id] = [];
-                $tires = PartRepositoryEloquent::getTiresVehicle($vehicle->id);
                 $tiresPositions = PartRepositoryEloquent::getTiresPositions($tires, $vehicle->id);
         
                 if (!empty($tiresPositions)) {
                     foreach ($tiresPositions as $position => $filled) {
                         if ($filled) {
-                            $inputs['position'] = $position;
-                            $inputs['vehicle_id'] = $vehicle->id;
-                            $tireData[$vehicle->id][$position] = $this->getTireAndSensorData($inputs);
+                            if(!empty($tireAndSensorData[$vehicle->id][$position])) {
+                                $tireData[$vehicle->id][$position] = $tireAndSensorData[$vehicle->id][$position];
+                            } else {
+                                $tireData[$vehicle->id][$position] = $tireAndSensorData[0];
+                            }
                         }
                     }
                 }
             }
         }
         
-        return ['vehicles' => $vehicles, 'tireData' => $tireData];
+        return ['vehicles' => $vehicles, 'tireData' => $tireData, 'modelMaps' => $modelMaps];
     }
 }
