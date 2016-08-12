@@ -20,15 +20,19 @@ class VehicleDashboardController extends VehicleController
         return response()->json($localization);
     }
 
-    public function fleet($update = null)
+    public function fleet()
     {
         $fleetData = $this->vehicleRepo->getFleetData();
         $vehicles = $fleetData['vehicles'];
         $tireData = $fleetData['tireData'];
+        $gpsData = $fleetData['gpsData'];
         $modelMaps = $fleetData['modelMaps'];
-            
-        $view = !empty($update) ? "fleet.vehicles" : "fleet.index";
-        
-        return view($view, compact('vehicles', 'tireData', 'modelMaps'));
+
+        return view("fleet.index", compact('vehicles', 'tireData', 'gpsData', 'modelMaps'));
+    }
+
+    public function fleetGpsAndSensorData($updateDatetime = null)
+    {
+        return response()->json($this->vehicleRepo->getFleetGpsAndSensorData($updateDatetime));
     }
 }

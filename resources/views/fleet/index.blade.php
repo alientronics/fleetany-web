@@ -13,6 +13,7 @@
 			@include('fleet.vehicles', [
             	'vehicles' => $vehicles,
             	'tireData' => $tireData,
+            	'gpsData' => $gpsData,
             	'modelMaps' => $modelMaps
             ])
                 

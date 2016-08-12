@@ -7,11 +7,14 @@
             @include('fleet.map', [
             	'vehicle' => $vehicle,
             	'tireData' => $tireData[$vehicle->id],
+            	'gpsData' => $gpsData[$vehicle->id],
             	'modelMap' => $modelMaps[$vehicle->model_vehicle_id]
             ])
             
+
         @if($index % 2 > 0) 
         </div>
         @endif
+        
     @endforeach
 </div>

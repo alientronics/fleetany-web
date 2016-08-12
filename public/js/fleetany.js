@@ -159,8 +159,34 @@ window.onload=function(){
 
 	if($("#fleet-dashboard").length > 0) {
 		setInterval(function () {
-			$("#fleet-dashboard-vehicles").load(url('vehicle/fleet/dashboard/1'));
-	    },60000);
+			$.ajax({
+			    url: url('vehicle/fleet/dashboard/' + $("#updateDatetime").val()),
+			    type: 'GET',
+			    success: function(results) {
+
+			    	$("#updateDatetime").val(results.updateDatetime);
+			    	
+			    	$.each(results.tires, function (vehicle_id, tires) {
+						$.each(tires, function (position, tire) {
+							$("#tireData"+position+"_"+vehicle_id).show();
+							$("#tireData"+position+"_"+vehicle_id).html(
+								jstrans_pressure + ": " + tire.pressure + 
+								' - ' + jstrans_temperature + ": " + tire.temperature
+							)
+						});
+					});
+			    	
+			    	$.each(results.gps, function (vehicle_id, gps) {
+						$("#gpsData"+vehicle_id).show();
+						$("#gpsData"+vehicle_id).html(
+							jstrans_latitude + ": " + gps.latitude + 
+							' - ' + jstrans_longitude + ": " + gps.longitude
+						)
+					});
+			    },
+			    error: function() { console.log('Failed!'); }
+			});
+	    },30000);
 	}
 
 	if($("#vehicle-detail-data").length > 0) {

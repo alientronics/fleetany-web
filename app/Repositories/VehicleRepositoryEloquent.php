@@ -250,15 +250,20 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
         return $objTire;
     }
 
-    private function getFleetTireAndSensorData()
+    private function getFleetTireAndSensorData($updateDatetime = null)
     {
         $sensors = TireSensor::select('tire_sensor.*', 'parts.position', 'parts.vehicle_id')
             ->join('parts', 'tire_sensor.part_id', '=', 'parts.id')
             ->join('types', 'parts.part_type_id', '=', 'types.id')
             ->whereNotNull('parts.vehicle_id')
             ->where('parts.company_id', Auth::user()['company_id'])
-            ->where('types.name', 'sensor')
-            ->orderBy('parts.id', 'desc')
+            ->where('types.name', 'sensor');
+        
+        if(!empty($updateDatetime)) {
+            $sensors = $sensors->where('tire_sensor.created_at', '>', $updateDatetime);
+        }
+            
+        $sensors = $sensors->orderBy('tire_sensor.created_at', 'asc')
             ->get();
 
         $tireAndSensorData = [];
@@ -278,6 +283,31 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
     
         return $tireAndSensorData;
     }
+
+    private function getFleetGpsData($updateDatetime = null)
+    {
+        $gpsQuery = Gps::where('company_id', Auth::user()['company_id']);
+        
+        if(!empty($updateDatetime)) {
+            $gpsQuery = $gpsQuery->where('created_at', '>', $updateDatetime);
+        }
+            
+        $gpsQuery = $gpsQuery->orderBy('created_at', 'asc')
+            ->get();
+
+        $gpsData = [];
+        if (!empty($gpsQuery)) {
+            foreach ($gpsQuery as $gps) {
+                $objGps = new \stdClass();
+                $objGps->latitude = HelperRepository::manageEmptyValue($gps->latitude);
+                $objGps->longitude = HelperRepository::manageEmptyValue($gps->longitude);
+                
+                $gpsData[$gps->vehicle_id] = $objGps;
+            }
+        }
+
+        return $gpsData;
+    }
     
     public function getFleetData()
     {
@@ -287,13 +317,14 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
         
         if (!empty($vehicles)) {
             $tires = PartRepositoryEloquent::getTiresVehicle();
+            $fleetGpsData = $this->getFleetGpsData();
             $tireAndSensorData = $this->getFleetTireAndSensorData();
             foreach ($vehicles as $vehicle) {
                 
                 if(empty($modelMaps[$vehicle->model_vehicle_id])) {
                     $modelMaps[$vehicle->model_vehicle_id] = $vehicle->model->map;
                 }
-                
+
                 $tireData[$vehicle->id] = [];
                 $tiresPositions = PartRepositoryEloquent::getTiresPositions($tires, $vehicle->id);
         
@@ -308,9 +339,21 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
                         }
                     }
                 }
+
+                if(!empty($fleetGpsData[$vehicle->id])) {
+                    $gpsData[$vehicle->id] = $fleetGpsData[$vehicle->id];
+                } else {
+                    $gpsData[$vehicle->id] = [];
+                }
             }
         }
         
-        return ['vehicles' => $vehicles, 'tireData' => $tireData, 'modelMaps' => $modelMaps];
+        return ['vehicles' => $vehicles, 'tireData' => $tireData, 'gpsData' => $gpsData, 'modelMaps' => $modelMaps];
+    }
+    
+    public function getFleetGpsAndSensorData($updateDatetime = null)
+    {
+        Log::info($updateDatetime);
+        return ['updateDatetime' => date("Y-m-d H:i:s"), 'gps' => $this->getFleetGpsData($updateDatetime), 'tires' => $this->getFleetTireAndSensorData($updateDatetime)];
     }
 }
