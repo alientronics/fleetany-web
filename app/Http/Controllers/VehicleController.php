@@ -15,11 +15,13 @@ use App\Repositories\PartRepositoryEloquent;
 use Alientronics\FleetanyWebAttributes\Repositories\AttributeRepositoryEloquent;
 use App\Entities\Contact;
 use App\Repositories\TireSensorRepositoryEloquent;
+use App\Repositories\FleetRepositoryEloquent;
 
 class VehicleController extends Controller
 {
 
     protected $vehicleRepo;
+    protected $fleetRepo;
     protected $partRepo;
     protected $tireSensorRepo;
     
@@ -33,6 +35,7 @@ class VehicleController extends Controller
     
     public function __construct(
         VehicleRepositoryEloquent $vehicleRepo,
+        FleetRepositoryEloquent $fleetRepo,
         PartRepositoryEloquent $partRepo,
         TireSensorRepositoryEloquent $tireSensorRepo
     ) {
@@ -41,6 +44,7 @@ class VehicleController extends Controller
         
         $this->middleware('auth');
         $this->vehicleRepo = $vehicleRepo;
+        $this->fleetRepo = $fleetRepo;
         $this->partRepo = $partRepo;
         $this->tireSensorRepo = $tireSensorRepo;
     }

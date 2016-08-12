@@ -22,7 +22,7 @@ class VehicleDashboardController extends VehicleController
 
     public function fleet()
     {
-        $fleetData = $this->vehicleRepo->getFleetData();
+        $fleetData = $this->fleetRepo->getFleetData();
         $vehicles = $fleetData['vehicles'];
         $tireData = $fleetData['tireData'];
         $gpsData = $fleetData['gpsData'];
@@ -33,6 +33,6 @@ class VehicleDashboardController extends VehicleController
 
     public function fleetGpsAndSensorData($updateDatetime = null)
     {
-        return response()->json($this->vehicleRepo->getFleetGpsAndSensorData($updateDatetime));
+        return response()->json($this->fleetRepo->getFleetGpsAndSensorData($updateDatetime));
     }
 }

@@ -15,7 +15,9 @@ class TireSensorTableSeeder extends Seeder
         DB::table('tire_sensor')->delete();
         TireSensor::forceCreate(
                 [  'part_id' => 2,
-                        'number' => '123456']
+                        'number' => '123456',
+                        'temperature' => '80',
+                        'pressure' => '10']
             );
     }
 }

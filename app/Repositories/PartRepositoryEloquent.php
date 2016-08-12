@@ -231,9 +231,9 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
             ->join('models', 'parts.part_model_id', '=', 'models.id')
             ->join('types', 'parts.part_type_id', '=', 'types.id');
         
-         if(!empty($vehicle_id)){
+        if (!empty($vehicle_id)) {
             $results = $results->where('parts.vehicle_id', $vehicle_id);
-         }
+        }
             
          $results = $results->where('parts.company_id', Auth::user()['company_id'])
             ->where('types.name', 'tire')
