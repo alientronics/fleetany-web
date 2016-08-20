@@ -93,6 +93,18 @@ return [
     'attributes_api_key' => env('ATTRIBUTES_API_KEY', null),
 
     /*
+     |--------------------------------------------------------------------------
+     | Tires Ideal Pressure and Temperature
+     |--------------------------------------------------------------------------
+     */
+    
+    'tires_ideal_pressure' => env('TIRES_IDEAL_PRESSURE', 120),
+    'tires_warning_pressure_percentage' => env('TIRES_WARNING_PRESSURE_PERCENTAGE', 5),
+    'tires_danger_pressure_percentage' => env('TIRES_DANGER_PRESSURE_PERCENTAGE', 10),
+    'tires_warning_temperature' => env('TIRES_WARNING_TEMPERATURE', 60),
+    'tires_danger_temperature' => env('TIRES_DANGER_TEMPERATURE', 80),
+
+    /*
     |--------------------------------------------------------------------------
     | Encryption Key
     |--------------------------------------------------------------------------

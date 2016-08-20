@@ -28,22 +28,96 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
 
         $tireAndSensorData = [];
         if (!empty($sensors)) {
+
+            $tiresWarningAndDanger = $this->getTiresWarningAndDanger();
             foreach ($sensors as $sensor) {
                 $objTire = new \stdClass();
                 $objTire->temperature = HelperRepository::manageEmptyValue($sensor->temperature);
                 $objTire->pressure = HelperRepository::manageEmptyValue($sensor->pressure);
                 
+                if(!empty($tiresWarningAndDanger['parts'][$sensor->part_id])
+                    && ($sensor->pressure > $tiresWarningAndDanger['dangerMaxPressure']
+                    || $sensor->pressure < $tiresWarningAndDanger['dangerMinPressure']
+                    || $sensor->temperature > (int)config('app.tires_danger_temperature'))
+                ) {
+                    $objTire->color = "red";
+                } else if(!empty($tiresWarningAndDanger['parts'][$sensor->part_id])
+                    && ($sensor->pressure > $tiresWarningAndDanger['warningMaxPressure']
+                    || $sensor->pressure < $tiresWarningAndDanger['warningMinPressure']
+                    || $sensor->temperature > (int)config('app.tires_warning_temperature'))
+                ) {
+                    $objTire->color = "yellow";
+                } else {
+                    $objTire->color = "green";
+                }
+                
                 $tireAndSensorData[$sensor->vehicle_id][$sensor->position] = $objTire;
             }
         }
+
         $objTire = new \stdClass();
         $objTire->temperature = "";
         $objTire->pressure = "";
+        $objTire->color = "";
         $tireAndSensorData[0] = $objTire;
+        
     
         return $tireAndSensorData;
     }
 
+    private function getTiresWarningAndDanger()
+    {
+        
+
+//         $sensors = \DB::select('part_id', \DB::raw('AVG(temperature) as avg_temperature'))
+//             ->from(
+                
+//                 TireSensor::select('part_id', 'temperature')
+                
+//                 ) as 't'
+//             ->groupBy('part_id')
+//             ->get();
+
+        $sensorsReturn = [];
+
+        $warningPressure = ((int)config('app.tires_warning_pressure_percentage') *
+            (int)config('app.tires_ideal_pressure')) / 100;
+        
+        $sensorsReturn['warningMinPressure'] = (int)config('app.tires_ideal_pressure') - $warningPressure;
+        $sensorsReturn['warningMaxPressure'] = (int)config('app.tires_ideal_pressure') + $warningPressure;
+
+        $dangerPressure = ((int)config('app.tires_danger_pressure_percentage') *
+            (int)config('app.tires_ideal_pressure')) / 100;
+        
+        $sensorsReturn['dangerMinPressure'] = (int)config('app.tires_ideal_pressure') - $dangerPressure;
+        $sensorsReturn['dangerMaxPressure'] = (int)config('app.tires_ideal_pressure') + $dangerPressure;
+             
+        $sensors = \DB::select( \DB::raw('
+            select part_id, avg(temperature) as avg_temperature, avg(pressure) as avg_pressure
+            from (
+            
+                select part_id, temperature, pressure
+                from tire_sensor
+                where (
+                    select count(*) from tire_sensor as p
+                    where p.part_id = tire_sensor.part_id and p.created_at >= tire_sensor.created_at
+                    ) <= 3
+            ) as t
+            group by part_id
+            having avg_temperature > '.config('app.tires_warning_temperature').' 
+            or avg_pressure < ' . $sensorsReturn['warningMinPressure'] . '
+            or avg_pressure > ' . $sensorsReturn['warningMaxPressure']
+        ));
+        
+        if(!empty($sensors)) {
+            foreach ($sensors as $sensor) {
+                $sensorsReturn['parts'][$sensor->part_id] = $sensor;
+            }
+        }
+        
+        return $sensorsReturn;
+    }
+    
     private function getFleetGpsData($updateDatetime = null)
     {
         $gpsQuery = Gps::where('company_id', Auth::user()['company_id']);

@@ -41,7 +41,7 @@
     		    	</div>
     		    @endif
     		    
-    		    	<div id="pos{{$key + 1}}_{{$vehicle->id}}" class="@if($value == 1) @if(isset($tireData[$key + 1])) mdl-color--green @else mdl-color--grey @endif @endif tires-fleet mdl-cell mdl-cell--2-col">
+    		    	<div id="pos{{$key + 1}}_{{$vehicle->id}}" class="@if($value == 1) @if(isset($tireData[$key + 1])) @if(empty($tireData[$key + 1]->color)) mdl-color--green @else mdl-color--{{$tireData[$key + 1]->color}} @endif @else mdl-color--grey @endif @endif tires-fleet mdl-cell mdl-cell--2-col">
     		    	@if($value == 1)
     		    		<div class="@if(strlen($key + 1) > 1) vehicle-map-tire-number @else vehicle-map-tire-number-simple @endif">{{$key + 1}}</div>
                         <div @if(empty($tireData[$key + 1]->pressure) && empty($tireData[$key + 1]->temperature)) style="display:none" @endif class="mdl-tooltip" id="tireData{{$key + 1}}_{{$vehicle->id}}" for="pos{{$key + 1}}_{{$vehicle->id}}">
