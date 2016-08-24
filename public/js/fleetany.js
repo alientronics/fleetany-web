@@ -39,11 +39,13 @@ window.onload=function(){
 	
 	$(".tire-position-fillable").click(function(event){
 	    event.preventDefault();
-	    if($(this).hasClass("mdl-color--green")) {
+	    if(!$(this).hasClass("mdl-color--gray")) {
 			tireFillable[$(this).attr('id').replace('pos', '')] = 0;
 			$('#tires_fillable').val(JSON.stringify(tireFillable)); 
 			$(this).addClass("mdl-color--grey");
 	    	$(this).removeClass("mdl-color--green");
+	    	$(this).removeClass("mdl-color--yellow");
+	    	$(this).removeClass("mdl-color--red");
 		} else {
 			tireFillable[$(this).attr('id').replace('pos', '')] = 1;
 			$('#tires_fillable').val(JSON.stringify(tireFillable)); 
@@ -157,10 +159,17 @@ window.onload=function(){
 	    
 	});
 
-	if($("#fleet-dashboard").length > 0) {
+	if($("#fleet-dashboard").length > 0 || $("#vehicle-dashboard").length > 0) {
 		setInterval(function () {
+
+			var urlAddress = url('vehicle/fleet/dashboard/' + $("#updateDatetime").val());
+			
+			if($("#vehicle-dashboard").length > 0) {
+				urlAddress += '/vehicle-id/' + $("#vehicle-id").val();
+			}
+			
 			$.ajax({
-			    url: url('vehicle/fleet/dashboard/' + $("#updateDatetime").val()),
+			    url: urlAddress,
 			    type: 'GET',
 			    success: function(results) {
 
@@ -168,6 +177,10 @@ window.onload=function(){
 			    	
 			    	$.each(results.tires, function (vehicle_id, tires) {
 						$.each(tires, function (position, tire) {
+							$("#pos"+position+"_"+vehicle_id+", #pos"+position).removeClass("mdl-color--green");
+							$("#pos"+position+"_"+vehicle_id+", #pos"+position).removeClass("mdl-color--yellow");
+							$("#pos"+position+"_"+vehicle_id+", #pos"+position).removeClass("mdl-color--red");
+							$("#pos"+position+"_"+vehicle_id+", #pos"+position).addClass("mdl-color--" + tire.color);
 							$("#tireData"+position+"_"+vehicle_id).show();
 							$("#tireData"+position+"_"+vehicle_id).html(
 								jstrans_pressure + ": " + tire.pressure + 
@@ -453,7 +466,7 @@ window.onload=function(){
 
 		var positionDetailData = {};
 		positionDetailData.position = data.position;
-		if($("#"+$("#tire-position-focus-id").val()).hasClass("mdl-color--green")) {
+		if(!$("#"+$("#tire-position-focus-id").val()).hasClass("mdl-color--gray")) {
 			$.post(url('vehicle/dashboard/tires'), data, function(retorno) {
 				
 				positionDetailData.fire_number = retorno.number;

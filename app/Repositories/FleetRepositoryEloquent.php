@@ -10,7 +10,7 @@ use App\Entities\TireSensor;
 class FleetRepositoryEloquent extends VehicleRepositoryEloquent
 {
 
-    private function getFleetTireAndSensorData($updateDatetime = null)
+    private function getFleetTireAndSensorData($updateDatetime = null, $vehicleId = null)
     {
         $sensors = TireSensor::select('tire_sensor.*', 'parts.position', 'parts.vehicle_id')
             ->join('parts', 'tire_sensor.part_id', '=', 'parts.id')
@@ -21,6 +21,10 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
         
         if (!empty($updateDatetime)) {
             $sensors = $sensors->where('tire_sensor.created_at', '>', $updateDatetime);
+        }
+
+        if (!empty($vehicleId)) {
+            $sensors = $sensors->where('parts.vehicle_id', $vehicleId);
         }
             
         $sensors = $sensors->orderBy('tire_sensor.created_at', 'asc')
@@ -103,10 +107,7 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
                     where p.part_id = tire_sensor.part_id and p.created_at >= tire_sensor.created_at
                     ) <= 3
             ) as t
-            group by part_id
-            having avg_temperature > '.config('app.tires_warning_temperature').' 
-            or avg_pressure < ' . $sensorsReturn['warningMinPressure'] . '
-            or avg_pressure > ' . $sensorsReturn['warningMaxPressure']
+            group by part_id'
         ));
         
         if(!empty($sensors)) {
@@ -118,12 +119,16 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
         return $sensorsReturn;
     }
     
-    private function getFleetGpsData($updateDatetime = null)
+    private function getFleetGpsData($updateDatetime = null, $vehicleId = null)
     {
         $gpsQuery = Gps::where('company_id', Auth::user()['company_id']);
         
         if (!empty($updateDatetime)) {
             $gpsQuery = $gpsQuery->where('created_at', '>', $updateDatetime);
+        }
+
+        if (!empty($vehicleId)) {
+            $gpsQuery = $gpsQuery->where('vehicle_id', $vehicleId);
         }
             
         $gpsQuery = $gpsQuery->orderBy('created_at', 'asc')
@@ -143,9 +148,15 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
         return $gpsData;
     }
     
-    public function getFleetData()
+    public function getFleetData($vehicle_id = null)
     {
-        $vehicles = Vehicle::where('company_id', Auth::user()['company_id'])->get();
+        $vehicles = Vehicle::where('company_id', Auth::user()['company_id']);
+        
+        if(!empty($vehicle_id)) {
+            $vehicles = $vehicles->where('id', $vehicle_id);
+        }
+        
+        $vehicles = $vehicles->get();
         $tireData = [];
         $modelMaps = [];
         
@@ -184,11 +195,11 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
         return ['vehicles' => $vehicles, 'tireData' => $tireData, 'gpsData' => $gpsData, 'modelMaps' => $modelMaps];
     }
     
-    public function getFleetGpsAndSensorData($updateDatetime = null)
+    public function getFleetGpsAndSensorData($updateDatetime = null, $vehicleId = null)
     {
         return ['updateDatetime' => date("Y-m-d H:i:s"),
-            'gps' => $this->getFleetGpsData($updateDatetime),
-            'tires' => $this->getFleetTireAndSensorData($updateDatetime)
+            'gps' => $this->getFleetGpsData($updateDatetime, $vehicleId),
+            'tires' => $this->getFleetTireAndSensorData($updateDatetime, $vehicleId)
         ];
     }
 }

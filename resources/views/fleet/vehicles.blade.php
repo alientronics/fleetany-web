@@ -5,6 +5,7 @@
         @endif
         
             @include('fleet.map', [
+            	'pageActive' => 'fleet',
             	'vehicle' => $vehicle,
             	'tireData' => $tireData[$vehicle->id],
             	'gpsData' => $gpsData[$vehicle->id],

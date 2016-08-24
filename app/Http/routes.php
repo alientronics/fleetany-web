@@ -145,6 +145,7 @@ Route::post('vehicle/dashboard/localization', 'VehicleDashboardController@locali
 
 Route::get('vehicle/fleet/dashboard', 'VehicleDashboardController@fleet');
 Route::get('vehicle/fleet/dashboard/{updateDatetime}', 'VehicleDashboardController@fleetGpsAndSensorData');
+Route::get('vehicle/fleet/dashboard/{updateDatetime}/vehicle-id/{vehicleId}', 'VehicleDashboardController@fleetGpsAndSensorData');
 
 Route::bind(
     'users',

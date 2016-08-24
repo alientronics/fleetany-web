@@ -17,9 +17,10 @@ class VehicleDashboardController extends VehicleController
     public function __construct(
         VehicleRepositoryEloquent $vehicleRepo,
         PartRepositoryEloquent $partRepo,
-        TireSensorRepositoryEloquent $tireSensorRepo
+        TireSensorRepositoryEloquent $tireSensorRepo,
+        FleetRepositoryEloquent $fleetRepo
     ) {
-        parent::__construct($vehicleRepo, $partRepo, $tireSensorRepo);
+        parent::__construct($vehicleRepo, $partRepo, $tireSensorRepo, $fleetRepo);
         $this->fleetRepo = new FleetRepositoryEloquent(new Application);
     }
     
@@ -47,8 +48,8 @@ class VehicleDashboardController extends VehicleController
         return view("fleet.index", compact('vehicles', 'tireData', 'gpsData', 'modelMaps'));
     }
 
-    public function fleetGpsAndSensorData($updateDatetime = null)
+    public function fleetGpsAndSensorData($updateDatetime = null, $vehicleId = null)
     {
-        return response()->json($this->fleetRepo->getFleetGpsAndSensorData($updateDatetime));
+        return response()->json($this->fleetRepo->getFleetGpsAndSensorData($updateDatetime, $vehicleId));
     }
 }

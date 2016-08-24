@@ -4,8 +4,10 @@
 
 <div class="mdl-grid demo-content">
 
-    @include('vehicle.map.map', [
+    @include('fleet.map', [
+    	'pageActive' => 'tires',
     	'vehicle' => $vehicle,
+    	'modelMap' => $vehicle->model->map,
     	'tiresPositions' => $tiresPositions
     ])
 

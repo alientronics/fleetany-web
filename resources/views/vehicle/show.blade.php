@@ -6,7 +6,7 @@
 
 @section('content')
 
-<div class="">
+<div id="vehicle-dashboard" class="">
 	<section class="demo-section demo-section--textfield demo-page--textfield mdl-upgraded">
 		<div class="demo-preview-block">
 
@@ -15,10 +15,11 @@
 				<input id="vehicle-id" type="hidden" value="{{$vehicle->id}}" />
             	<input type="hidden" name="tire-position-focus-id" id="tire-position-focus-id" />
             	
-                @include('vehicle.map.map', [
+                @include('fleet.map', [
                 	'pageActive' => 'vehicleShow',
                 	'vehicle' => $vehicle,
-                	'tiresPositions' => $tiresPositions
+                	'modelMap' => $vehicle->model->map,
+                	'tireData' => $fleetData['tireData'][$vehicle->id]
                 ])
             
             	<div class="mdl-cell mdl-cell--6-col mdl-grid mdl-grid--no-spacing">

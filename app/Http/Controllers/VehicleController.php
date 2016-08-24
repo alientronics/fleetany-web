@@ -23,6 +23,7 @@ class VehicleController extends Controller
     protected $vehicleRepo;
     protected $partRepo;
     protected $tireSensorRepo;
+    protected $fleetRepo;
     
     protected $fields = [
         'id',
@@ -35,7 +36,8 @@ class VehicleController extends Controller
     public function __construct(
         VehicleRepositoryEloquent $vehicleRepo,
         PartRepositoryEloquent $partRepo,
-        TireSensorRepositoryEloquent $tireSensorRepo
+        TireSensorRepositoryEloquent $tireSensorRepo,
+        FleetRepositoryEloquent $fleetRepo
     ) {
     
         parent::__construct();
@@ -44,6 +46,7 @@ class VehicleController extends Controller
         $this->vehicleRepo = $vehicleRepo;
         $this->partRepo = $partRepo;
         $this->tireSensorRepo = $tireSensorRepo;
+        $this->fleetRepo = $fleetRepo;
     }
 
     public function index()
@@ -200,14 +203,14 @@ class VehicleController extends Controller
         $vehicle = $this->vehicleRepo->find($idVehicle);
         $this->helper->validateRecord($vehicle);
         $tires = $this->partRepo->getTiresVehicle($vehicle->id);
-        $tiresPositions = $this->partRepo->getTiresPositions($tires, $vehicle->id);
+        $fleetData = $this->fleetRepo->getFleetData($vehicle->id);
         $localizationData = $this->vehicleRepo->getLocalizationData($idVehicle);
         $driverData = empty($localizationData->driver_id) ? "" :
                             Contact::find($localizationData->driver_id);
-        
+
         return view("vehicle.show", compact(
             'vehicle',
-            'tiresPositions',
+            'fleetData',
             'localizationData',
             'driverData'
         ));
