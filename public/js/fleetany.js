@@ -165,7 +165,7 @@ window.onload=function(){
 			var urlAddress = url('vehicle/fleet/dashboard/' + $("#updateDatetime").val());
 			
 			if($("#vehicle-dashboard").length > 0) {
-				urlAddress += '/vehicle-id/' + $("#vehicle-id").val();
+				urlAddress += '/' + $("#vehicle-id").val();
 			}
 			
 			$.ajax({

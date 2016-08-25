@@ -32,28 +32,13 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
 
         $tireAndSensorData = [];
         if (!empty($sensors)) {
-
-            $tiresWarningAndDanger = $this->getTiresWarningAndDanger();
+            $tiresData = $this->getTiresWarningAndDanger();
             foreach ($sensors as $sensor) {
                 $objTire = new \stdClass();
                 $objTire->temperature = HelperRepository::manageEmptyValue($sensor->temperature);
                 $objTire->pressure = HelperRepository::manageEmptyValue($sensor->pressure);
                 
-                if(!empty($tiresWarningAndDanger['parts'][$sensor->part_id])
-                    && ($sensor->pressure > $tiresWarningAndDanger['dangerMaxPressure']
-                    || $sensor->pressure < $tiresWarningAndDanger['dangerMinPressure']
-                    || $sensor->temperature > (int)config('app.tires_danger_temperature'))
-                ) {
-                    $objTire->color = "red";
-                } else if(!empty($tiresWarningAndDanger['parts'][$sensor->part_id])
-                    && ($sensor->pressure > $tiresWarningAndDanger['warningMaxPressure']
-                    || $sensor->pressure < $tiresWarningAndDanger['warningMinPressure']
-                    || $sensor->temperature > (int)config('app.tires_warning_temperature'))
-                ) {
-                    $objTire->color = "yellow";
-                } else {
-                    $objTire->color = "green";
-                }
+                $objTire = $this->setTiresColor($tiresData, $sensor, $objTire);
                 
                 $tireAndSensorData[$sensor->vehicle_id][$sensor->position] = $objTire;
             }
@@ -69,6 +54,27 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
         return $tireAndSensorData;
     }
 
+    private function setTiresColor($tiresData, $sensor, $objTire)
+    {
+        if (!empty($tiresData['parts'][$sensor->part_id])
+            && ($sensor->pressure > $tiresData['dangerMaxPressure']
+                || $sensor->pressure < $tiresData['dangerMinPressure']
+                || $sensor->temperature > (int)config('app.tires_danger_temperature'))
+            ) {
+                $objTire->color = "red";
+        } elseif (!empty($tiresData['parts'][$sensor->part_id])
+            && ($sensor->pressure > $tiresData['warningMaxPressure']
+                || $sensor->pressure < $tiresData['warningMinPressure']
+                || $sensor->temperature > (int)config('app.tires_warning_temperature'))
+            ) {
+                $objTire->color = "yellow";
+        } else {
+            $objTire->color = "green";
+        }
+        
+        return $objTire;
+    }
+    
     private function getTiresWarningAndDanger()
     {
         
@@ -96,7 +102,7 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
         $sensorsReturn['dangerMinPressure'] = (int)config('app.tires_ideal_pressure') - $dangerPressure;
         $sensorsReturn['dangerMaxPressure'] = (int)config('app.tires_ideal_pressure') + $dangerPressure;
              
-        $sensors = \DB::select( \DB::raw('
+        $sensors = \DB::select(\DB::raw('
             select part_id, avg(temperature) as avg_temperature, avg(pressure) as avg_pressure
             from (
             
@@ -107,10 +113,9 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
                     where p.part_id = tire_sensor.part_id and p.created_at >= tire_sensor.created_at
                     ) <= 3
             ) as t
-            group by part_id'
-        ));
+            group by part_id'));
         
-        if(!empty($sensors)) {
+        if (!empty($sensors)) {
             foreach ($sensors as $sensor) {
                 $sensorsReturn['parts'][$sensor->part_id] = $sensor;
             }
@@ -152,7 +157,7 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
     {
         $vehicles = Vehicle::where('company_id', Auth::user()['company_id']);
         
-        if(!empty($vehicle_id)) {
+        if (!empty($vehicle_id)) {
             $vehicles = $vehicles->where('id', $vehicle_id);
         }
         
@@ -165,9 +170,7 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
             $fleetGpsData = $this->getFleetGpsData();
             $tireAndSensorData = $this->getFleetTireAndSensorData();
             foreach ($vehicles as $vehicle) {
-                if (empty($modelMaps[$vehicle->model_vehicle_id])) {
-                    $modelMaps[$vehicle->model_vehicle_id] = $vehicle->model->map;
-                }
+                $modelMaps[$vehicle->model_vehicle_id] = $vehicle->model->map;
 
                 $tireData[$vehicle->id] = [];
                 $tiresPositions = PartRepositoryEloquent::getTiresPositions($tires, $vehicle->id);
@@ -184,10 +187,9 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
                     }
                 }
 
+                $gpsData[$vehicle->id] = [];
                 if (!empty($fleetGpsData[$vehicle->id])) {
                     $gpsData[$vehicle->id] = $fleetGpsData[$vehicle->id];
-                } else {
-                    $gpsData[$vehicle->id] = [];
                 }
             }
         }

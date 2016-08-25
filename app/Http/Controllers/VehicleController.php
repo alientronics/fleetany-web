@@ -14,7 +14,6 @@ use App\Repositories\ModelRepositoryEloquent;
 use App\Repositories\PartRepositoryEloquent;
 use Alientronics\FleetanyWebAttributes\Repositories\AttributeRepositoryEloquent;
 use App\Entities\Contact;
-use App\Repositories\TireSensorRepositoryEloquent;
 use App\Repositories\FleetRepositoryEloquent;
 
 class VehicleController extends Controller
@@ -22,7 +21,6 @@ class VehicleController extends Controller
 
     protected $vehicleRepo;
     protected $partRepo;
-    protected $tireSensorRepo;
     protected $fleetRepo;
     
     protected $fields = [
@@ -36,7 +34,6 @@ class VehicleController extends Controller
     public function __construct(
         VehicleRepositoryEloquent $vehicleRepo,
         PartRepositoryEloquent $partRepo,
-        TireSensorRepositoryEloquent $tireSensorRepo,
         FleetRepositoryEloquent $fleetRepo
     ) {
     
@@ -45,7 +42,6 @@ class VehicleController extends Controller
         $this->middleware('auth');
         $this->vehicleRepo = $vehicleRepo;
         $this->partRepo = $partRepo;
-        $this->tireSensorRepo = $tireSensorRepo;
         $this->fleetRepo = $fleetRepo;
     }
 
@@ -110,8 +106,13 @@ class VehicleController extends Controller
         $vehicleLastPlace = $this->vehicleRepo->getVehiclesLastPlace($idVehicle);
         $vehicleLastPlace = !empty($vehicleLastPlace[0]) ? $vehicleLastPlace[0] : null;
 
-        $partController = new PartController($this->partRepo, $this->tireSensorRepo);
-        $filters = $this->helper->getFilters($this->request->all(), $partController->getFields(), $this->request);
+        $fields = [
+            'id',
+            'vehicle',
+            'part-type',
+            'cost'
+        ];
+        $filters = $this->helper->getFilters($this->request->all(), $fields, $this->request);
         $filters['vehicle_id'] = $vehicle->id;
         $parts = $this->partRepo->results($filters);
         $modeldialog = ModelRepositoryEloquent::getDialogStoreOptions('vehicle');
@@ -202,7 +203,6 @@ class VehicleController extends Controller
     {
         $vehicle = $this->vehicleRepo->find($idVehicle);
         $this->helper->validateRecord($vehicle);
-        $tires = $this->partRepo->getTiresVehicle($vehicle->id);
         $fleetData = $this->fleetRepo->getFleetData($vehicle->id);
         $localizationData = $this->vehicleRepo->getLocalizationData($idVehicle);
         $driverData = empty($localizationData->driver_id) ? "" :

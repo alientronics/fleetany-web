@@ -7,7 +7,6 @@ use Illuminate\Container\Container as Application;
 use App\Repositories\FleetRepositoryEloquent;
 use App\Repositories\VehicleRepositoryEloquent;
 use App\Repositories\PartRepositoryEloquent;
-use App\Repositories\TireSensorRepositoryEloquent;
 
 class VehicleDashboardController extends VehicleController
 {
@@ -17,10 +16,9 @@ class VehicleDashboardController extends VehicleController
     public function __construct(
         VehicleRepositoryEloquent $vehicleRepo,
         PartRepositoryEloquent $partRepo,
-        TireSensorRepositoryEloquent $tireSensorRepo,
         FleetRepositoryEloquent $fleetRepo
     ) {
-        parent::__construct($vehicleRepo, $partRepo, $tireSensorRepo, $fleetRepo);
+        parent::__construct($vehicleRepo, $partRepo, $fleetRepo);
         $this->fleetRepo = new FleetRepositoryEloquent(new Application);
     }
     
