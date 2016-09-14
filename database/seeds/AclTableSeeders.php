@@ -483,6 +483,61 @@ class AclTableSeeder extends Seeder
         $roleExecutive->assignPermission($permRoleExecutive);
         $roleAdmin->assignPermission($permRoleAdmin);
         
+        //Seller
+        //Permissions
+        $permSellerStaff = Permission::create([
+            'name'        => 'service',
+            'slug'        => [
+                'create' => false,
+                'view'   => false,
+                'update' => false,
+                'delete' => false
+            ],
+            'description' => 'Administra permissoes do service para o nivel staff de usuario'
+        ]);
+        
+        $permSellerOperational = Permission::create([
+            'name'        => 'service.operational',
+            'slug'        => [],
+            'inherit_id' => $permSellerStaff->getKey(),
+            'description' => 'Administra permissoes do service para o nivel operational de usuario'
+        ]);
+        
+        $permSellerManager = Permission::create([
+            'name'        => 'service.manager',
+            'slug'        => [],
+            'inherit_id' => $permSellerOperational->getKey(),
+            'description' => 'Administra permissoes do service para o nivel manager de usuario'
+        ]);
+        
+        $permSellerExecutive = Permission::create([
+            'name'        => 'service.executive',
+            'slug'        => [],
+            'inherit_id' => $permSellerManager->getKey(),
+            'description' => 'Administra permissoes do service para o nivel executive de usuario'
+        ]);
+        
+        $permSellerAdmin = Permission::create([
+            'name'        => 'service.admin',
+            'slug'        => [
+                'create' => true,
+                'view'   => true,
+                'update' => true,
+                'delete' => true
+            ],
+            'inherit_id' => $permSellerExecutive->getKey(),
+            'description' => 'Administra permissoes do service para o nivel admin de usuario'
+        ]);
+        
+        
+        //Assign permissions to rules
+        $roleStaff->assignPermission($permSellerStaff);
+        $roleOperational->assignPermission($permSellerOperational);
+        $roleManager->assignPermission($permSellerManager);
+        $roleExecutive->assignPermission($permSellerExecutive);
+        $roleAdmin->assignPermission($permSellerAdmin);
+        
+
         //Type
         //Permissions
         $permTypeStaff = Permission::create([
@@ -536,7 +591,6 @@ class AclTableSeeder extends Seeder
         $roleManager->assignPermission($permTypeManager);
         $roleExecutive->assignPermission($permTypeExecutive);
         $roleAdmin->assignPermission($permTypeAdmin);
-        
         
         //Company
         //Permissions
