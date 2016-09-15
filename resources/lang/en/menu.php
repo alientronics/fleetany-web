@@ -42,7 +42,6 @@ return [
 
     'User' => "User",
     'Attributes' => "Attributes",
-    'Services' => "Services",
     'Roles' => "Roles",
     
     'logout' => 'Logout'

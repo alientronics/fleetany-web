@@ -204,9 +204,6 @@ return [
     
     "tos" => "Accept Terms of Service",
 
-    "Service"=> "Service",
-    "price"=> "Price",
-    
     //Linguagens
     "en" => "English",
     "pt-br" => "Portuguese",

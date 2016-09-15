@@ -53,9 +53,6 @@
             @permission('view.part')
             <a class="@if (Request::is('part*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('part')}}"><i class="material-icons" role="presentation">build</i>{{Lang::get('menu.Parts')}}</a>       
             @endpermission      
-            @permission('view.service')
-            <a class="@if (Request::is('service*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('service')}}"><i class="material-icons" role="presentation">build</i>{{Lang::get('menu.Services')}}</a>       
-            @endpermission  
             @if (config('app.attributes_api_url') != null)   
               @permission('view.attribute')
               <a class="@if (Request::is('attribute*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('attribute')}}"><i class="material-icons" role="presentation">build</i>{{Lang::get('menu.Attributes')}}</a>       
