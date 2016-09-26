@@ -39,7 +39,7 @@ window.onload=function(){
 	
 	$(".tire-position-fillable").click(function(event){
 	    event.preventDefault();
-	    if(!$(this).hasClass("mdl-color--gray")) {
+	    if($(this).hasClass("mdl-color--green")) {
 			tireFillable[$(this).attr('id').replace('pos', '')] = 0;
 			$('#tires_fillable').val(JSON.stringify(tireFillable)); 
 			$(this).addClass("mdl-color--grey");
