@@ -8,22 +8,51 @@
 	<input type="hidden" id="updateDatetime" value='{{date("Y-m-d H:i:s")}}' />
 	
 	<div class="mdl-card__actions mdl-card--border"></div>
-    <div class="mdl-card__supporting-text" @if(empty($pageActive) || $pageActive != 'fleet') style="height: 900px;" @else id="vehicle{{$vehicle->id}}" @endif>
-    	<div class="mdl-color-text--grey tires-front">
-    		<span>(</span>
-    	</div>
-    	
+    <div class="mdl-card__supporting-text" @if(empty($pageActive) || $pageActive != 'fleet')  @else id="vehicle{{$vehicle->id}}" @endif>
+	
 	@if(!empty(str_split($modelMap)))
 		{{--*/ 
 			$col = 0; 
 			$final = false;
+			$modelMapTractor = substr($modelMap, 0, 16);
+			$modelMapTrailer = substr($modelMap, 33);
+			$lastTireModelMap = $lastTiremodelMapTractor = strripos($modelMapTractor,'1') + 1;
+			$lastTiremodelMapTrailer = strripos($modelMap,'1') + 1;
 		/*--}}
+
+		@if(strpos($modelMapTractor, '1') !== false)
+        	<div class="mdl-color-text--grey tires-front">
+        		<span>(</span>
+        	</div>
+    	@endif
 		
 		@foreach(str_split($modelMap) as $key => $value)
 
-			@if((strripos($modelMap,'1') > $key || $col != 4) && !$final)
+			@if($key == 16 && strpos($modelMapTrailer, '1') !== false)
+				@if(strpos($modelMapTractor, '1') !== false)
+        	    	<div class="mdl-color-text--grey tires-back">
+        	    		<span>]</span>
+        	    	</div>
+    	    	@endif
+    	    	<div class="mdl-color-text--grey tires-back">
+    	    		<span>[</span>
+    	    	</div>
+    			{{--*/ 
+    				$final = false; 
+    				$lastTireModelMap = $lastTiremodelMapTrailer;
+				/*--}}
+			@endif
 			
-				@if(strripos($modelMap,'1') <= $key && $col == 4)
+			@if(($key > 15 && $key < 32) || 
+					($key < 16 && strpos($modelMapTractor, '1') === false) ||
+					($key > 31 && strpos($modelMapTrailer, '1') === false)
+			)
+    			{{--*/ continue; /*--}}
+			@endif
+
+			@if(($lastTireModelMap > $key || $col != 4) && !$final)
+				
+				@if($lastTireModelMap <= $key && $col == 4)
 					{{--*/ 
 						$final = true;
 						break;

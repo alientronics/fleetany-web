@@ -6,7 +6,7 @@
     		</div>
     		
     		<div class="mdl-card__actions mdl-card--border"></div>
-    	    <div class="mdl-card__supporting-text" style="height: 900px;">
+    	    <div class="mdl-card__supporting-text">
     	    	<div class="mdl-color-text--grey tires-front">
     	    		<span>(</span>
     	    	</div>
@@ -18,7 +18,21 @@
             	@endif
             	
         		{{--*/ $col = 0; /*--}}
-        		@for($i = 1; $i < 25; $i++)
+        		@for($i = 1; $i < 57; $i++)
+        			
+        			
+        			@if($i == 17)
+            	    	<div class="mdl-color-text--grey tires-back">
+            	    		<span>]</span>
+            	    	</div>
+            	    	<div class="mdl-color-text--grey tires-back">
+            	    		<span>[</span>
+            	    	</div>
+    				@endif
+    				
+        			@if($i > 16 && $i < 33)
+    	    			{{--*/ continue; /*--}}
+    				@endif
         			
         			@if($col == 4)
     	    		{{--*/ $col = 1; /*--}}
