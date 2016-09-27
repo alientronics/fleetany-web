@@ -105,6 +105,7 @@ return [
     "position"    => "Position",
     "lifecycle"    => "Lifecycle",
     "linked_part"  => "Linked Part",
+    "date_and_time"  => "Date and Time",
     
     // Tire Sensor
     "SensorData"   => "Sensor Data",

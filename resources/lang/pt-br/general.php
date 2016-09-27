@@ -105,6 +105,7 @@ return [
     "position"    => "Posi&ccedil;&atilde;o",
     "lifecycle"    => "Ciclo de vida",
     "linked_part"  => "Parte Vinculada",
+    "date_and_time"  => "Data e Hora",
     
     // Tire Sensor
     "SensorData"   => "Dados de Sensor",
