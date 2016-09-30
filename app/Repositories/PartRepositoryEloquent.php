@@ -58,6 +58,12 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
             if (!empty($filters['cost'])) {
                 $query = $query->where('parts.cost', $filters['cost']);
             }
+            if (!empty($filters['name'])) {
+                $query = $query->where('parts.name', 'like', '%'.$filters['name'].'%');
+            }
+            if (!empty($filters['number'])) {
+                $query = $query->where('parts.number', 'like', '%'.$filters['number'].'%');
+            }
 
             $query = $query->where('parts.company_id', Auth::user()['company_id']);
             if ($filters['sort'] == 'part_type') {

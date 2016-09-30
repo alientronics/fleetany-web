@@ -24,6 +24,8 @@ class PartController extends Controller
     
     protected $fields = [
         'id',
+        'name',
+        'number',
         'vehicle',
         'part-type',
         'cost'
