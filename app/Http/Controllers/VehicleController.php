@@ -15,6 +15,8 @@ use App\Repositories\PartRepositoryEloquent;
 use Alientronics\FleetanyWebAttributes\Repositories\AttributeRepositoryEloquent;
 use App\Entities\Contact;
 use App\Repositories\FleetRepositoryEloquent;
+use App\Repositories\HelperRepository;
+use Illuminate\Support\Facades\App;
 
 class VehicleController extends Controller
 {
@@ -199,7 +201,7 @@ class VehicleController extends Controller
         }
     }
 
-    public function show($idVehicle)
+    public function show($idVehicle, $dateIni = null, $dateEnd = null)
     {
         $vehicle = $this->vehicleRepo->find($idVehicle);
         $this->helper->validateRecord($vehicle);
@@ -208,11 +210,37 @@ class VehicleController extends Controller
         $driverData = empty($localizationData->driver_id) ? "" :
                             Contact::find($localizationData->driver_id);
 
+        $tireSensorData['positions'] = [];
+        if (!empty($fleetData['tireData'])) {
+            foreach ($fleetData['tireData'] as $vehicleData) {
+                foreach ($vehicleData as $tireData) {
+                    if (!empty($tireData->part_id)) {
+                        $tireSensorData['positions'][] = $tireData->position;
+                        $partsIds[] = $tireData->part_id;
+                    }
+                }
+            }
+        }
+        asort($tireSensorData['positions']);
+
+        if (empty($dateIni)) {
+            $dateIni = date("Y-m-01");
+        }
+        
+        $tireSensorData['data'] = $this->fleetRepo->getTireSensorHistoricalData($partsIds, $dateIni, $dateEnd);
+        $tireSensorData = $this->fleetRepo->setColumnsChart($tireSensorData);
+
+        $dateIni = HelperRepository::date($dateIni, App::getLocale());
+        $dateEnd = HelperRepository::date($dateEnd, App::getLocale());
+        
         return view("vehicle.show", compact(
             'vehicle',
             'fleetData',
             'localizationData',
-            'driverData'
+            'tireSensorData',
+            'driverData',
+            'dateIni',
+            'dateEnd'
         ));
     }
     

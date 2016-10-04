@@ -111,11 +111,16 @@ return [
     "SensorData"   => "Dados de Sensor",
     "temperature"   => "Temperatura",
     "pressure"    => "Press&atilde;o",
+    "pressure_googlechart"    => "Press\u00e3o",
     "battery"    => "Bateria",
     "latitude" => "Latitude",
     "longitude" => "Longitude",
     "speed" => "Velocidade",
     "sensorNumber" => "N&uacute;mero do Sensor",
+    "weight" => "Peso",
+    "altitude" => "Altitude",
+    "alarm" => "Alarme",
+    "availableSoon" => "Dispon&iacute;vel em breve",
     
     // Trip
     "Trip"   => "Viagem",
@@ -147,6 +152,8 @@ return [
     "Vehicle"   => "Ve&iacute;culo",
     "Vehicles"    => "Ve&iacute;culos",
     "VehicleData"    => "Dados do Ve&iacute;culo",
+    "Current"    => "Atual",
+    "History"    => "Hist&oacute;rico",
     "last_position" => "&Uacute;ltima posi&ccedil;&atilde;o",
     "newvehicle" => "Novo Ve&iacute;culo",
     "model_vehicle"=> "Modelo do ve&iacute;culo",
@@ -168,6 +175,8 @@ return [
     "VehicleAndLocalizationData" => "Dados do ve&iacute;culo e de localiza&ccedil;&atilde;o",
     "SelectedTireAndSensorData" => "Dados do pneu e sensor selecionado",
     "DriverData" => "Dados do motorista",
+    "InitialDate" => "Data Inicial",
+    "FinalDate" => "Data Final",
     
     
     // user

@@ -123,6 +123,10 @@ class HelperRepository
     public static function date($value, $mask = 'en')
     {
     
+        if (empty($value)) {
+            return '';
+        }
+        
         $hour = "";
         if (strlen($value) > 10) {
             $datetime = explode(" ", $value);

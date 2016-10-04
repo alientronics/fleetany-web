@@ -37,6 +37,8 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
                 $objTire = new \stdClass();
                 $objTire->temperature = HelperRepository::manageEmptyValue($sensor->temperature);
                 $objTire->pressure = HelperRepository::manageEmptyValue($sensor->pressure);
+                $objTire->part_id = HelperRepository::manageEmptyValue($sensor->part_id);
+                $objTire->position = HelperRepository::manageEmptyValue($sensor->position);
                 
                 $objTire = $this->setTiresColor($tiresData, $sensor, $objTire);
                 
@@ -203,5 +205,74 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
             'gps' => $this->getFleetGpsData($updateDatetime, $vehicleId),
             'tires' => $this->getFleetTireAndSensorData($updateDatetime, $vehicleId)
         ];
+    }
+    
+    public function getTireSensorHistoricalData($partsIds, $dateIni, $dateEnd)
+    {
+        $tireSensor = TireSensor::select('tire_sensor.*', 'parts.position', 'parts.vehicle_id')
+            ->join('parts', 'tire_sensor.part_id', '=', 'parts.id')
+            ->whereIn('tire_sensor.part_id', $partsIds)
+            ->orderBy('parts.created_at', 'asc');
+
+        if (!empty($dateIni) && $dateIni != '-') {
+            $tireSensor = $tireSensor->where('tire_sensor.created_at', '>=', $dateIni);
+        }
+        
+        if (!empty($dateEnd) && $dateEnd != '-') {
+            $tireSensor = $tireSensor->where('tire_sensor.created_at', '<=', $dateEnd);
+        }
+            
+        $tireSensor = $tireSensor->get();
+
+        $historicalDataByPositions = [];
+        $maxDataCount = 0;
+        if (!empty($tireSensor)) {
+            foreach ($tireSensor as $data) {
+                $historicalDataByPositions[$data->position][] = $data;
+                if (count($historicalDataByPositions[$data->position]) > $maxDataCount) {
+                    $maxDataCount = count($historicalDataByPositions[$data->position]);
+                }
+            }
+        }
+        
+        $historicalData = [];
+        for ($i = 0; $i < $maxDataCount; $i++) {
+            $historicalData[$i + 1] = $i + 1;
+            foreach ($historicalDataByPositions as $position => $data) {
+                $historicalData[$i + 1] .= ", " . $data[$i]->temperature;
+                $historicalData[$i + 1] .= ", " . $data[$i]->pressure;
+            }
+        }
+        
+        return $historicalData;
+    }
+    
+    public function setColumnsChart($tireSensorData)
+    {
+        $chartElements[1] = "temperature";
+        $chartElements[2] = "pressure";
+        
+        $tireSensorData['columns'] = [];
+        if (!empty($tireSensorData['positions'])) {
+            foreach ($tireSensorData['positions'] as $key => $value) {
+                for ($index = 1; $index <= count($chartElements); $index++) {
+                    $tireSensorData['columns'][$value][] = ($key * count($chartElements)) + $index;
+                }
+            }
+        }
+        
+        if (!empty($tireSensorData['data'])) {
+            for ($index = count($tireSensorData['positions']) * count($chartElements); $index > 0; $index--) {
+                $elements = array_reverse($chartElements);
+                foreach ($elements as $element) {
+                    if ($index % array_search($element, $chartElements) == 0) {
+                        $tireSensorData['columns'][$element][] = $index;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        return $tireSensorData;
     }
 }

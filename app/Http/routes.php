@@ -105,6 +105,8 @@ Route::group(
     }
 );
 
+Route::get('vehicle/{id}/{dateini}/{dateend}', 'VehicleController@show');
+
 Route::get('trip/destroy/{id}', 'TripController@destroy');
 Route::get('part/destroy/{id}', 'PartController@destroy');
 Route::get('entry/destroy/{id}', 'EntryController@destroy');
