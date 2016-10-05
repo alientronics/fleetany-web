@@ -6,6 +6,7 @@ use Kodeine\Acl\Models\Eloquent\Role;
 use Lang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\App;
 
 class HelperRepository
 {
@@ -125,6 +126,10 @@ class HelperRepository
     
         if (empty($value)) {
             return '';
+        }
+        
+        if ($mask == 'app_locale') {
+            $mask = App::getLocale();
         }
         
         $hour = "";

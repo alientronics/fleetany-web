@@ -8,7 +8,6 @@ use App\Entities\Vehicle;
 use Log;
 use Lang;
 use Prettus\Validator\Exceptions\ValidatorException;
-use Illuminate\Support\Facades\Auth;
 use App\Repositories\CompanyRepositoryEloquent;
 use App\Repositories\ModelRepositoryEloquent;
 use App\Repositories\PartRepositoryEloquent;
@@ -16,7 +15,6 @@ use Alientronics\FleetanyWebAttributes\Repositories\AttributeRepositoryEloquent;
 use App\Entities\Contact;
 use App\Repositories\FleetRepositoryEloquent;
 use App\Repositories\HelperRepository;
-use Illuminate\Support\Facades\App;
 
 class VehicleController extends Controller
 {
@@ -228,10 +226,13 @@ class VehicleController extends Controller
         }
         
         $tireSensorData['data'] = $this->fleetRepo->getTireSensorHistoricalData($partsIds, $dateIni, $dateEnd);
-        $tireSensorData = $this->fleetRepo->setColumnsChart($tireSensorData);
-
-        $dateIni = HelperRepository::date($dateIni, App::getLocale());
-        $dateEnd = HelperRepository::date($dateEnd, App::getLocale());
+        
+        if (!empty($tireSensorData['positions'])) {
+            $tireSensorData = $this->fleetRepo->setColumnsChart($tireSensorData);
+        }
+        
+        $dateIni = HelperRepository::date($dateIni, 'app_locale');
+        $dateEnd = HelperRepository::date($dateEnd, 'app_locale');
         
         return view("vehicle.show", compact(
             'vehicle',

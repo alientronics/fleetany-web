@@ -224,26 +224,30 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
             
         $tireSensor = $tireSensor->get();
 
-        $historicalDataByPositions = [];
+        $historicalDataPos = [];
         $maxDataCount = 0;
         if (!empty($tireSensor)) {
             foreach ($tireSensor as $data) {
-                $historicalDataByPositions[$data->position][] = $data;
-                if (count($historicalDataByPositions[$data->position]) > $maxDataCount) {
-                    $maxDataCount = count($historicalDataByPositions[$data->position]);
+                $historicalDataPos[$data->position][] = $data;
+                if (count($historicalDataPos[$data->position]) > $maxDataCount) {
+                    $maxDataCount = count($historicalDataPos[$data->position]);
                 }
             }
         }
         
+        return $this->getHistoricalData($maxDataCount, $historicalDataPos);
+    }
+    
+    private function getHistoricalData($maxDataCount, $historicalDataPos)
+    {
         $historicalData = [];
         for ($i = 0; $i < $maxDataCount; $i++) {
             $historicalData[$i + 1] = $i + 1;
-            foreach ($historicalDataByPositions as $position => $data) {
+            foreach ($historicalDataPos as $data) {
                 $historicalData[$i + 1] .= ", " . $data[$i]->temperature;
                 $historicalData[$i + 1] .= ", " . $data[$i]->pressure;
             }
         }
-        
         return $historicalData;
     }
     
@@ -253,22 +257,18 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
         $chartElements[2] = "pressure";
         
         $tireSensorData['columns'] = [];
-        if (!empty($tireSensorData['positions'])) {
-            foreach ($tireSensorData['positions'] as $key => $value) {
-                for ($index = 1; $index <= count($chartElements); $index++) {
-                    $tireSensorData['columns'][$value][] = ($key * count($chartElements)) + $index;
-                }
+        foreach ($tireSensorData['positions'] as $key => $value) {
+            for ($index = 1; $index <= count($chartElements); $index++) {
+                $tireSensorData['columns'][$value][] = ($key * count($chartElements)) + $index;
             }
         }
         
-        if (!empty($tireSensorData['data'])) {
-            for ($index = count($tireSensorData['positions']) * count($chartElements); $index > 0; $index--) {
-                $elements = array_reverse($chartElements);
-                foreach ($elements as $element) {
-                    if ($index % array_search($element, $chartElements) == 0) {
-                        $tireSensorData['columns'][$element][] = $index;
-                        break;
-                    }
+        for ($index = count($tireSensorData['positions']) * count($chartElements); $index > 0; $index--) {
+            $elements = array_reverse($chartElements);
+            foreach ($elements as $element) {
+                if ($index % array_search($element, $chartElements) == 0) {
+                    $tireSensorData['columns'][$element][] = $index;
+                    break;
                 }
             }
         }

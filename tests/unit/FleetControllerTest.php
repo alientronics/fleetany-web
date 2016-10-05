@@ -20,7 +20,7 @@ class FleetControllerTest extends UnitTestCase
     
     public function testUpdateGpsData()
     {
-        $this->get('/vehicle/fleet/dashboard/1990-01-01')->seeJsonContains([
+        $this->get('/vehicle/fleet/dashboard/1990-01-01/1')->seeJsonContains([
             "latitude" => "80.0000000",
             "longitude" => "10.0000000"]);
     
@@ -36,14 +36,14 @@ class FleetControllerTest extends UnitTestCase
                 'longitude' => '20']
         );
         
-        $this->get('/vehicle/fleet/dashboard/' . $updateDatetime)->seeJsonContains([
+        $this->get('/vehicle/fleet/dashboard/' . $updateDatetime . '/1')->seeJsonContains([
             "latitude" => "50.0000000",
             "longitude" => "20.0000000"]);
     }
     
     public function testUpdateSensorData()
     {
-        $this->get('/vehicle/fleet/dashboard/1990-01-01')->seeJsonContains([
+        $this->get('/vehicle/fleet/dashboard/1990-01-01/1')->seeJsonContains([
             "temperature" => "80.00",
             "pressure" => "10.00"]);
     
@@ -58,7 +58,7 @@ class FleetControllerTest extends UnitTestCase
                         'pressure' => '23']
         );
         
-        $this->get('/vehicle/fleet/dashboard/' . $updateDatetime)->seeJsonContains([
+        $this->get('/vehicle/fleet/dashboard/' . $updateDatetime . '/1')->seeJsonContains([
             "temperature" => "99.00",
             "pressure" => "23.00"]);
     }
