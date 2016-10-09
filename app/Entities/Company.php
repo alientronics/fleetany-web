@@ -13,7 +13,8 @@ class Company extends BaseModel
     use SoftDeletes;
     
     protected $table = 'companies';
-    protected $fillable = ['contact_id', 'name', 'measure_units'];
+    protected $fillable = ['contact_id', 'name', 'measure_units', 'limit_temperature',
+        'ideal_pressure', 'delta_pressure', 'alert_date_time'];
 
     public function contact()
     {

@@ -40,6 +40,24 @@
 				{!!Form::label('measure_units', Lang::get('general.measure_units'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
 				<span class="mdl-textfield__error">{{ $errors->first('measure_units') }}</span>
 			</div>
+			
+			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('limit_temperature')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		{!!Form::tel('limit_temperature', $company->limit_temperature, ['id' => 'limit_temperature', 'class' => 'mdl-textfield__input'])!!}
+				{!!Form::label('limit_temperature', Lang::get('general.limit_temperature'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
+				<span class="mdl-textfield__error">{{ $errors->first('limit_temperature') }}</span>
+			</div>
+			
+			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('ideal_pressure')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		{!!Form::tel('ideal_pressure', $company->ideal_pressure, ['id' => 'ideal_pressure', 'class' => 'mdl-textfield__input'])!!}
+				{!!Form::label('ideal_pressure', Lang::get('general.ideal_pressure'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
+				<span class="mdl-textfield__error">{{ $errors->first('ideal_pressure') }}</span>
+			</div>
+			
+			<div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label @if ($errors->has('delta_pressure')) is-invalid is-dirty @endif"" data-upgraded="eP">
+         		{!!Form::tel('delta_pressure', $company->delta_pressure, ['id' => 'delta_pressure', 'class' => 'mdl-textfield__input'])!!}
+				{!!Form::label('delta_pressure', Lang::get('general.delta_pressure'), ['class' => 'mdl-color-text--primary-contrast mdl-textfield__label is-dirty'])!!}
+				<span class="mdl-textfield__error">{{ $errors->first('delta_pressure') }}</span>
+			</div>
 
 			<div class="mdl-card__actions">
 				<button type="submit" class="mdl-button mdl-color--primary mdl-color-text--accent-contrast mdl-js-button mdl-button--raised mdl-button--colored">
@@ -53,6 +71,14 @@
 	</section>
 </div>
 
+
+<script>
+	$( document ).ready(function() {
+		$('#limit_temperature').maskMoney({!!Lang::get("masks.money")!!});
+		$('#ideal_pressure').maskMoney({!!Lang::get("masks.money")!!});
+		$('#delta_pressure').maskMoney({!!Lang::get("masks.money")!!});
+	});
+</script>
 @else
 <div class="alert alert-info">
 	{{Lang::get("general.accessdenied")}}

@@ -61,7 +61,9 @@ return [
     "country" => "Pa&iacute;s",
     "measure_units" => "Unidades de Medida",
     "api_token" => "API Token",
-    
+    "limit_temperature" => "Temperatura limite",
+    "ideal_pressure" => "Press&atilde;o ideal",
+    "delta_pressure" => "Delta de press&atilde;o",
 
     // Contact
     "Contact"   => "Contato",
