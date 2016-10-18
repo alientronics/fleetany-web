@@ -14,4 +14,12 @@
     		] 
     	]
     ])
+    
 </div>
+
+<div class="mdl-grid">
+   <div class="mdl-layout-spacer"></div>
+    <a href="{{URL::to('/sensor/download/'.$part->id)}}"><i class="material-icons">file_download</i></a>
+   <div class="mdl-layout-spacer"></div>
+</div>
+

@@ -119,6 +119,8 @@ Route::get('user/destroy/{id}', 'UserController@destroy');
 Route::get('getModels/{entityKey}/{idType?}', 'ModelController@getModelsByType');
 Route::get('getPartsByVehicle/{idVehicle}', 'PartController@getPartsByVehicle');
 
+Route::get('sensor/download/{idPart}', 'TireController@downloadData');
+
 Route::get('profile', 'UserController@showProfile');
 Route::put('updateProfile/{id}', 'UserController@updateProfile');
 

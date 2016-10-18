@@ -71,7 +71,13 @@ class TireSensorRepositoryEloquent extends BaseRepository implements TireSensorR
             $query = $query->orderBy($filters['sort'], $filters['order']);
             
             return $query;
-        })->paginate($filters['paginate']);
+        });
+        
+        if (!empty($filters['paginate']) && $filters['paginate'] == '*') {
+            $tireSensors = $tireSensors->all();
+        } else {
+            $tireSensors = $tireSensors->paginate($filters['paginate']);
+        }
         
         return $tireSensors;
     }
