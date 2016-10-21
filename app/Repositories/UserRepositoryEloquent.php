@@ -85,4 +85,15 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
         }
         return $inputs;
     }
+    
+    public function checkUserExists($email)
+    {
+        $user = User::where('email', $email)->first();
+        
+        if (!empty($user)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -65,6 +65,13 @@ class UserController extends Controller
             $this->userRepo->validator();
             $this->contactRepo->validator();
             $inputs = $this->userRepo->setInputs($this->request->all());
+            
+            if ($this->userRepo->checkUserExists($inputs['email'])) {
+                return $this->redirect->to('user')->with('message', Lang::get(
+                    'general.user_exists'
+                ));
+            }
+            
             $contact = $this->contactRepo->create($inputs);
             $inputs['contact_id'] = $contact->id;
             $this->userRepo->create($inputs);

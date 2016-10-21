@@ -189,6 +189,7 @@ return [
     "language" => "Language",
     "contact_id" => "Contact",
     "company_id" => "Company",
+    "user_exists" => "User already exists",
     
     // Dialogs
     "createmodel" => "Create new model",

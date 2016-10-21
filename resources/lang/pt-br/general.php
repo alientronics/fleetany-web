@@ -190,6 +190,7 @@ return [
     "language" => "Idioma",
     "contact_id" => "Contato",
     "company_id" => "Empresa",
+    "user_exists" => "Us&aacute;rio j&aacute; existente",
     
     // Dialogs
     "createmodel" => "Criar novo modelo",
