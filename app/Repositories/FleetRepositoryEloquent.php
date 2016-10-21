@@ -31,7 +31,7 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
             ->get();
 
         $tireAndSensorData = [];
-        if (!empty($sensors)) {
+        if (count($sensors) > 0) {
             $tiresData = $this->getTiresWarningAndDanger();
             foreach ($sensors as $sensor) {
                 $objTire = new \stdClass();

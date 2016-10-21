@@ -209,6 +209,7 @@ class VehicleController extends Controller
                             Contact::find($localizationData->driver_id);
 
         $tireSensorData['positions'] = [];
+        $partsIds = [];
         if (!empty($fleetData['tireData'])) {
             foreach ($fleetData['tireData'] as $vehicleData) {
                 foreach ($vehicleData as $tireData) {
@@ -226,6 +227,7 @@ class VehicleController extends Controller
         }
         
         $tireSensorData['data'] = $this->fleetRepo->getTireSensorHistoricalData($partsIds, $dateIni, $dateEnd);
+        $tireSensorData['columns'] = [];
         
         if (!empty($tireSensorData['positions'])) {
             $tireSensorData = $this->fleetRepo->setColumnsChart($tireSensorData);

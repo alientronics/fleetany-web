@@ -95,7 +95,7 @@
         		    	
 					@if($value == 1 && in_array($key + 1, $tireSensorData['positions']))
 					<input type="checkbox" id="graph_{{$key + 1}}" checked>
-					@else
+					@elseif($value == 1)
 					<input type="checkbox" disabled id="graph_{{$key + 1}}">
 					@endif
         		    	
