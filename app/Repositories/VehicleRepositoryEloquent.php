@@ -249,4 +249,79 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
         }
         return $objTire;
     }
+    
+    protected function setTiresColor($tiresData, $sensor, $objTire)
+    {
+        if (!empty($tiresData['parts'][$sensor->part_id])
+            && ($sensor->pressure > $tiresData['dangerMaxPressure']
+                || $sensor->pressure < $tiresData['dangerMinPressure']
+                || $sensor->temperature > (int)config('app.tires_danger_temperature'))
+            ) {
+                $objTire->color = "red";
+        } elseif (!empty($tiresData['parts'][$sensor->part_id])
+                && ($sensor->pressure > $tiresData['warningMaxPressure']
+                    || $sensor->pressure < $tiresData['warningMinPressure']
+                    || $sensor->temperature > (int)config('app.tires_warning_temperature'))
+                ) {
+            $objTire->color = "yellow";
+        } else {
+            $objTire->color = "green";
+        }
+    
+            return $objTire;
+    }
+    
+    protected function getTiresWarningAndDanger($sensorsIds)
+    {
+    
+
+//         $sensors = \DB::select('part_id', \DB::raw('AVG(temperature) as avg_temperature'))
+//             ->from(
+
+//                 TireSensor::select('part_id', 'temperature')
+
+//                 ) as 't'
+//             ->groupBy('part_id')
+//             ->get();
+
+        $sensorsReturn = [];
+    
+        $warningPressure = ((int)config('app.tires_warning_pressure_percentage') *
+            (int)config('app.tires_ideal_pressure')) / 100;
+    
+        $sensorsReturn['warningMinPressure'] = (int)config('app.tires_ideal_pressure') - $warningPressure;
+        $sensorsReturn['warningMaxPressure'] = (int)config('app.tires_ideal_pressure') + $warningPressure;
+
+        $dangerPressure = ((int)config('app.tires_danger_pressure_percentage') *
+            (int)config('app.tires_ideal_pressure')) / 100;
+
+            $sensorsReturn['dangerMinPressure'] = (int)config('app.tires_ideal_pressure') - $dangerPressure;
+            $sensorsReturn['dangerMaxPressure'] = (int)config('app.tires_ideal_pressure') + $dangerPressure;
+                 
+//         $sensors = \DB::select(\DB::raw('
+//             select part_id, avg(temperature) as avg_temperature, avg(pressure) as avg_pressure
+//             from (
+
+//                 select part_id, temperature, pressure
+//                 from tire_sensor
+//                 where (
+//                     select count(*) from tire_sensor as p
+//                     where p.part_id = tire_sensor.part_id and p.created_at >= tire_sensor.created_at
+//                     and p.part_id in ('.implode(',',$parts).')
+//                     ) <= 3
+//             ) as t
+//             group by part_id'));
+    
+        $sensors = TireSensor::select('part_id', 'temperature as avg_temperature', 'pressure as avg_pressure')
+            ->whereIn('tire_sensor.id', $sensorsIds)
+            ->get();
+
+        if (!empty($sensors)) {
+            foreach ($sensors as $sensor) {
+                $sensorsReturn['parts'][$sensor->part_id] = $sensor;
+            }
+        }
+
+        return $sensorsReturn;
+    }
 }
