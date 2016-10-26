@@ -212,19 +212,21 @@ class VehicleController extends Controller
         $partsIds = [];
         if (!empty($fleetData['tireData'])) {
             foreach ($fleetData['tireData'] as $vehicleData) {
-                foreach ($vehicleData as $tireData) {
+                foreach ($vehicleData as $position => $tireData) {
                     if (!empty($tireData->part_id)) {
-                        $tireSensorData['positions'][] = $tireData->position;
+                        $tireSensorData['positions'][] = $position;
                         $partsIds[] = $tireData->part_id;
                     }
                 }
             }
         }
+
         asort($tireSensorData['positions']);
 
         if (empty($dateIni)) {
-            $dateIni = date("Y-m-01");
+            $dateIni = date("Y-m-d H:i:s");
         }
+        $dateEnd = date('Y-m-d H:i:s', strtotime("+1 days", strtotime($dateIni)));
         
         $tireSensorData['data'] = $this->fleetRepo->getTireSensorHistoricalData($partsIds, $dateIni, $dateEnd);
         $tireSensorData['columns'] = [];
@@ -232,9 +234,9 @@ class VehicleController extends Controller
         if (!empty($tireSensorData['positions'])) {
             $tireSensorData = $this->fleetRepo->setColumnsChart($tireSensorData);
         }
-        
-        $dateIni = HelperRepository::date($dateIni, 'app_locale');
-        $dateEnd = HelperRepository::date($dateEnd, 'app_locale');
+
+        $dateIni = substr(HelperRepository::date($dateIni, 'app_locale'), 0, 10);
+        $dateEnd = HelperRepository::date(substr($dateEnd, 0, 10), 'app_locale');
         
         return view("vehicle.show", compact(
             'vehicle',

@@ -92,7 +92,6 @@
     		    	@endif
     		    	</div>
     		    	
-        		    	
 					@if($value == 1 && in_array($key + 1, $tireSensorData['positions']))
 					<input type="checkbox" id="graph_{{$key + 1}}" checked>
 					@elseif($value == 1)
@@ -139,7 +138,6 @@
            <div class="mdl-cell mdl-cell--12-col">
            <form id="selectDates">
            	{{Lang::get("general.InitialDate")}}: <input type="text" id="datetime_ini" value="{{$dateIni}}">
-           	{{Lang::get("general.FinalDate")}}: <input type="text" id="datetime_end" value="{{$dateEnd}}">
            	<input type="submit">
            </form>
            </div>
@@ -183,7 +181,7 @@
           @endforeach
             		
     ]);
-    var options = {};
+    var options = {interpolateNulls: true};
     var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
 
 	@if(!empty($tireSensorData['data']))
@@ -221,22 +219,15 @@
         e.preventDefault();
 
 		var datetime_ini = $("#datetime_ini").val();
-		var datetime_end = $("#datetime_end").val();
+		var datetime_end = '-';
 
         if(datetime_ini.indexOf("/") > 0) {
     		split = datetime_ini.split('/');
     		datetime_ini = split[2] + "-" +split[1]+"-"+split[0];
 		}
-        if(datetime_end.indexOf("/") > 0) {
-    		split = datetime_end.split('/');
-    		datetime_end = split[2] + "-" +split[1]+"-"+split[0];
-		}
 
 		if(datetime_ini.length != 10) {
 			datetime_ini = '-';
-		}
-		if(datetime_end.length != 10) {
-			datetime_end = '-';
 		}
             		
 		window.location.href = "{{url('/')}}/vehicle/{{$vehicle->id}}/" + datetime_ini + "/" + datetime_end;
@@ -256,23 +247,14 @@
 		$('#datetime_ini').parent().addClass('is-dirty');
         x.toggle();
       });
-      $('#datetime_end')[0].addEventListener('click', function() {
-		y.trigger($('#datetime_end')[0]);
-		$('#datetime_end').parent().addClass('is-dirty');
-        y.toggle();
-      });
       // dispatch event test
       $('#datetime_ini')[0].addEventListener('onOk', function() {
         this.value = x.time().format('{!!Lang::get("masks.dateDatepicker")!!}').toString();
-      });
-      $('#datetime_end')[0].addEventListener('onOk', function() {
-        this.value = y.time().format('{!!Lang::get("masks.dateDatepicker")!!}').toString();
       });
     }).call(this);
 		
 	$( document ).ready(function() {
 		$( "#datetime_ini" ).mask('{!!Lang::get("masks.datetime")!!}');
-		$( "#datetime_end" ).mask('{!!Lang::get("masks.datetime")!!}');
 	});
 	
 </script>

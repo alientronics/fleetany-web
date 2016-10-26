@@ -11,26 +11,24 @@ use App\Entities\TireSensor;
 class FleetRepositoryEloquent extends VehicleRepositoryEloquent
 {
 
-    public function getFleetTireAndSensorParts($vehicleId = null)
+    private function getFleetTireAndSensorParts(&$partsData, $vehicleId = null, $partsIds = null)
     {
         $partsQuery = Part::select('parts.id', 'parts.position', 'parts.vehicle_id')
-        ->join('types', 'parts.part_type_id', '=', 'types.id')
-        ->whereNotNull('parts.vehicle_id')
-        ->where('parts.company_id', Auth::user()['company_id'])
-        ->where('types.name', 'sensor');
+            ->join('types', 'parts.part_type_id', '=', 'types.id')
+            ->whereNotNull('parts.vehicle_id')
+            ->where('parts.company_id', Auth::user()['company_id'])
+            ->where('types.name', 'sensor');
     
         if (!empty($vehicleId)) {
             $partsQuery = $partsQuery->where('parts.vehicle_id', $vehicleId);
         }
     
-        return $partsQuery->get();
-    }
+        if (!empty($partsIds)) {
+            $partsQuery = $partsQuery->whereIn('parts.id', $partsIds);
+        }
     
-    private function getFleetTireAndSensorData($updateDatetime = null, $vehicleId = null)
-    {
+        $partsResult = $partsQuery->get();
         
-        $partsResult = $this->getFleetTireAndSensorParts($vehicleId);
-
         $parts = [];
         $partsData = [];
         if (count($partsResult) > 0) {
@@ -40,6 +38,14 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
                 $partsData[$part->id]['vehicle_id'] = $part->vehicle_id;
             }
         }
+        
+        return $parts;
+    }
+    
+    private function getFleetTireAndSensorData($updateDatetime = null, $vehicleId = null)
+    {
+        
+        $parts = $this->getFleetTireAndSensorParts($partsData, $vehicleId);
          
         $sensorsIdsQuery = TireSensor::select(\DB::raw('max(id) as id'))
             ->whereIn('part_id', $parts);
@@ -129,6 +135,7 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
         $vehicles = $vehicles->get();
         $tireData = [];
         $modelMaps = [];
+        $gpsData = [];
         
         if (!empty($vehicles)) {
             $tires = PartRepositoryEloquent::getTiresVehicle();
@@ -172,32 +179,33 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
     
     public function getTireSensorHistoricalData($partsIds, $dateIni, $dateEnd)
     {
-        $tireSensor = TireSensor::select('tire_sensor.*', 'parts.position', 'parts.vehicle_id')
-            ->join('parts', 'tire_sensor.part_id', '=', 'parts.id')
-            ->whereIn('tire_sensor.part_id', $partsIds)
-            ->orderBy('parts.created_at', 'asc');
+        
+        $this->getFleetTireAndSensorParts($partsData, null, $partsIds);
+        
+        $tireSensor = TireSensor::select('part_id', 'temperature', 'pressure')
+            ->whereIn('part_id', $partsIds);
 
         if (!empty($dateIni) && $dateIni != '-') {
-            $tireSensor = $tireSensor->where('tire_sensor.created_at', '>=', $dateIni);
+            $tireSensor = $tireSensor->where('created_at', '>=', $dateIni);
         }
         
         if (!empty($dateEnd) && $dateEnd != '-') {
-            $tireSensor = $tireSensor->where('tire_sensor.created_at', '<=', $dateEnd);
+            $tireSensor = $tireSensor->where('created_at', '<=', $dateEnd);
         }
-            
+         
         $tireSensor = $tireSensor->get();
 
         $historicalDataPos = [];
         $maxDataCount = 0;
         if (!empty($tireSensor)) {
             foreach ($tireSensor as $data) {
-                $historicalDataPos[$data->position][] = $data;
-                if (count($historicalDataPos[$data->position]) > $maxDataCount) {
-                    $maxDataCount = count($historicalDataPos[$data->position]);
+                $historicalDataPos[$partsData[$data->part_id]['position']][] = $data;
+                if (count($historicalDataPos[$partsData[$data->part_id]['position']]) > $maxDataCount) {
+                    $maxDataCount = count($historicalDataPos[$partsData[$data->part_id]['position']]);
                 }
             }
         }
-        
+
         return $this->getHistoricalData($maxDataCount, $historicalDataPos);
     }
     
@@ -207,8 +215,13 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
         for ($i = 0; $i < $maxDataCount; $i++) {
             $historicalData[$i + 1] = $i + 1;
             foreach ($historicalDataPos as $data) {
-                $historicalData[$i + 1] .= ", " . $data[$i]->temperature;
-                $historicalData[$i + 1] .= ", " . $data[$i]->pressure;
+                if (!empty($data[$i])) {
+                    $historicalData[$i + 1] .= ", " . $data[$i]->temperature;
+                    $historicalData[$i + 1] .= ", " . $data[$i]->pressure;
+                } else {
+                    $historicalData[$i + 1] .= ", null";
+                    $historicalData[$i + 1] .= ", null";
+                }
             }
         }
         return $historicalData;
