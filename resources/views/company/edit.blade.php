@@ -76,7 +76,7 @@
 	$( document ).ready(function() {
 		$('#limit_temperature').maskMoney({!!Lang::get("masks.money")!!});
 		$('#ideal_pressure').maskMoney({!!Lang::get("masks.money")!!});
-		$('#delta_pressure').maskMoney({!!Lang::get("masks.money")!!});
+		$('#delta_pressure').maskMoney({!!Lang::get("masks.percent")!!});
 	});
 </script>
 @else
