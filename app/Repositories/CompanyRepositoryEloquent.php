@@ -66,7 +66,7 @@ class CompanyRepositoryEloquent extends BaseRepository implements CompanyReposit
         $inputs['contact_type_id'] = $typeId->id;
         $inputs['limit_temperature'] = HelperRepository::money($inputs['limit_temperature']);
         $inputs['ideal_pressure'] = HelperRepository::money($inputs['ideal_pressure']);
-        $inputs['delta_pressure'] = HelperRepository::money(substr($inputs['delta_pressure'],0,-1));
+        $inputs['delta_pressure'] = HelperRepository::money(substr($inputs['delta_pressure'], 0, -1));
 
         return $inputs;
     }
