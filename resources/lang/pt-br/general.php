@@ -179,6 +179,8 @@ return [
     "DriverData" => "Dados do motorista",
     "InitialDate" => "Data Inicial",
     "FinalDate" => "Data Final",
+    "InitialTime" => "Hor&aacute;rio Inicial",
+    "EndTime" => "Hor&aacute;rio Final",
     
     
     // user

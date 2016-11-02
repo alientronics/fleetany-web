@@ -137,7 +137,9 @@
            <div class="mdl-layout-spacer"></div>
            <div class="mdl-cell mdl-cell--12-col">
            <form id="selectDates">
-           	{{Lang::get("general.InitialDate")}}: <input type="text" id="datetime_ini" value="{{$dateIni}}">
+           	{{Lang::get("general.InitialDate")}}: <input type="text" id="datetime_ini" size="7" value="{{$dateIni}}">
+           	{{Lang::get("general.InitialTime")}}: <input type="text" id="time_ini" size="7" value="{{$timeIni}}">
+           	{{Lang::get("general.EndTime")}}: <input type="text" id="time_end" size="7" value="{{$timeEnd}}">
            	<input type="submit">
            </form>
            </div>
@@ -169,19 +171,28 @@
   google.load("visualization", "1", {packages:["corechart"]});
   google.setOnLoadCallback(drawChart);
   function drawChart() {
-    var data = google.visualization.arrayToDataTable([
-      ['Id' 
-  	      @foreach($tireSensorData['positions'] as $position)
-    		,'{{$position}} - {{Lang::get("general.temperature")}}', '{{$position}} - {{Lang::get("general.pressure_googlechart")}}'
-  	      @endforeach
-            		],
 
+	var data = new google.visualization.DataTable();
+	data.addColumn('number', 'Id');
+	@foreach($tireSensorData['positions'] as $i => $position)
+	data.addColumn('number', '{{$position}} - {{Lang::get("general.temperature")}}');
+	data.addColumn('number', '{{$position}} - {{Lang::get("general.pressure_googlechart")}}');
+	@endforeach
+            		
+	data.addRows([
 		  @foreach($tireSensorData['data'] as $data)
 	  	      [{{$data}}],
           @endforeach
-            		
     ]);
-    var options = {interpolateNulls: true};
+    var options = {interpolateNulls: true, legend: 'bottom',
+
+	   series: {0: {targetAxisIndex:1},
+    	@foreach($tireSensorData['positions'] as $i => $position)
+		{{2 * $i + 1}} :{targetAxisIndex:0},
+		{{2 * $i + 2}} :{targetAxisIndex:1},
+		@endforeach
+       }
+    };
     var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
 
 	@if(!empty($tireSensorData['data']))
@@ -229,6 +240,16 @@
 		if(datetime_ini.length != 10) {
 			datetime_ini = '-';
 		}
+
+    	if($("#time_ini").val().indexOf(":") != 2 && $("#time_ini").val().indexOf(":") != 3) {
+    		$("#time_ini").val('{{date("H:i:s")}}');
+    	}
+    	if($("#time_end").val().indexOf(":") != 2 && $("#time_end").val().indexOf(":") != 3) {
+    		$("#time_end").val('23:59:59');
+    	}
+
+		datetime_end = datetime_ini + " " + $("#time_end").val();
+    	datetime_ini += " " + $("#time_ini").val();
             		
 		window.location.href = "{{url('/')}}/vehicle/{{$vehicle->id}}/" + datetime_ini + "/" + datetime_end;
     });
@@ -254,7 +275,9 @@
     }).call(this);
 		
 	$( document ).ready(function() {
-		$( "#datetime_ini" ).mask('{!!Lang::get("masks.datetime")!!}');
+		$("#datetime_ini").mask('{!!Lang::get("masks.datetime")!!}');
+    	$('#time_ini').mask('00:00:00');
+    	$('#time_end').mask('00:00:00');
 	});
 	
 </script>

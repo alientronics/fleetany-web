@@ -225,8 +225,8 @@ class VehicleController extends Controller
 
         if (empty($dateIni)) {
             $dateIni = date("Y-m-d H:i:s");
+            $dateEnd = date('Y-m-d 23:59:59');
         }
-        $dateEnd = date('Y-m-d H:i:s', strtotime("+1 days", strtotime($dateIni)));
         
         $tireSensorData['data'] = $this->fleetRepo->getTireSensorHistoricalData($partsIds, $dateIni, $dateEnd);
         $tireSensorData['columns'] = [];
@@ -235,9 +235,10 @@ class VehicleController extends Controller
             $tireSensorData = $this->fleetRepo->setColumnsChart($tireSensorData);
         }
 
+        $timeIni = substr($dateIni, 11);
+        $timeEnd = substr($dateEnd, 11);
         $dateIni = substr(HelperRepository::date($dateIni, 'app_locale'), 0, 10);
-        $dateEnd = HelperRepository::date(substr($dateEnd, 0, 10), 'app_locale');
-        
+  
         return view("vehicle.show", compact(
             'vehicle',
             'fleetData',
@@ -245,7 +246,8 @@ class VehicleController extends Controller
             'tireSensorData',
             'driverData',
             'dateIni',
-            'dateEnd'
+            'timeIni',
+            'timeEnd'
         ));
     }
     

@@ -179,6 +179,8 @@ return [
     "DriverData" => "Driver data",
     "InitialDate" => "Initial Date",
     "FinalDate" => "Final Date",
+    "InitialTime" => "Initial Time",
+    "EndTime" => "End Time",
     
     // user
     "Users"   => "Users",

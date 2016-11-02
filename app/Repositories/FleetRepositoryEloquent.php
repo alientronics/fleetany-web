@@ -195,7 +195,7 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
          
         $tireSensor = $tireSensor->get();
 
-        $historicalDataPos = [];
+        $historicalDataPos = $this->setHistoricalDataPositions($partsData);
         $maxDataCount = 0;
         if (!empty($tireSensor)) {
             foreach ($tireSensor as $data) {
@@ -222,6 +222,22 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
                     $historicalData[$i + 1] .= ", null";
                     $historicalData[$i + 1] .= ", null";
                 }
+            }
+        }
+        return $historicalData;
+    }
+    
+    private function setHistoricalDataPositions($partsData)
+    {
+        $historicalData = [];
+        $historicalDataTemp = [];
+        if (!empty($partsData)) {
+            foreach ($partsData as $part) {
+                $historicalDataTemp[] = $part['position'];
+            }
+            sort($historicalDataTemp);
+            foreach ($historicalDataTemp as $dataTemp) {
+                $historicalData[$dataTemp] = [];
             }
         }
         return $historicalData;
