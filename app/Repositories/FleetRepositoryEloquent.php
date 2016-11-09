@@ -182,7 +182,7 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
         
         $this->getFleetTireAndSensorParts($partsData, null, $partsIds);
         
-        $tireSensor = TireSensor::select('part_id', 'temperature', 'pressure')
+        $tireSensor = TireSensor::select('part_id', 'temperature', 'pressure', 'created_at')
             ->whereIn('part_id', $partsIds);
 
         if (!empty($dateIni) && $dateIni != '-') {
@@ -212,19 +212,29 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
     private function getHistoricalData($maxDataCount, $historicalDataPos)
     {
         $historicalData = [];
-        for ($i = 0; $i < $maxDataCount; $i++) {
-            $historicalData[$i + 1] = $i + 1;
-            foreach ($historicalDataPos as $data) {
-                if (!empty($data[$i])) {
-                    $historicalData[$i + 1] .= ", " . $data[$i]->temperature;
-                    $historicalData[$i + 1] .= ", " . $data[$i]->pressure;
-                } else {
-                    $historicalData[$i + 1] .= ", null";
-                    $historicalData[$i + 1] .= ", null";
+        $historicalOrderData = [];
+        $positionOrder = 0;
+        $countPoints = 0;
+        foreach ($historicalDataPos as $position => $historicalDataP) {
+            $positionOrder++;
+            foreach ($historicalDataP as $dataPos) {
+                $countPoints++;
+                $historicalData[$countPoints]['time'] = substr($dataPos->created_at, 11);
+                $historicalData[$countPoints][substr($dataPos->created_at, 11)] = "";
+                
+                for($i = 1; $i < $positionOrder; $i++) {
+                    $historicalData[$countPoints][substr($dataPos->created_at, 11)] .= ", null, null";
                 }
+                $historicalData[$countPoints][substr($dataPos->created_at, 11)] .= ", " . $dataPos->temperature;
+                $historicalData[$countPoints][substr($dataPos->created_at, 11)] .= ", " . $dataPos->pressure;
+                for($i = $positionOrder; $i < count($historicalDataPos); $i++) {
+                    $historicalData[$countPoints][substr($dataPos->created_at, 11)] .= ", null, null";
+                }
+            $historicalOrderData[substr($dataPos->created_at, 11)] = $historicalData[$countPoints];
             }
         }
-        return $historicalData;
+        asort($historicalOrderData);
+        return $historicalOrderData;
     }
     
     private function setHistoricalDataPositions($partsData)

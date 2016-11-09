@@ -173,25 +173,29 @@
   function drawChart() {
 
 	var data = new google.visualization.DataTable();
-	data.addColumn('number', 'Id');
+
+	data.addColumn('string', 'Id');
 	@foreach($tireSensorData['positions'] as $i => $position)
 	data.addColumn('number', '{{$position}} - {{Lang::get("general.temperature")}}');
 	data.addColumn('number', '{{$position}} - {{Lang::get("general.pressure_googlechart")}}');
 	@endforeach
             		
 	data.addRows([
-		  @foreach($tireSensorData['data'] as $data)
-	  	      [{{$data}}],
-          @endforeach
+	  @foreach($tireSensorData['data'] as $index => $data)
+  	      ['{{$data["time"]}}'{{$data[$index]}}],
+	  @endforeach
     ]);
     var options = {interpolateNulls: true, legend: 'bottom',
 
-	   series: {0: {targetAxisIndex:1},
-    	@foreach($tireSensorData['positions'] as $i => $position)
-		{{2 * $i + 1}} :{targetAxisIndex:0},
-		{{2 * $i + 2}} :{targetAxisIndex:1},
-		@endforeach
-       }
+        series: {0: {targetAxisIndex:1},
+            @foreach($tireSensorData['positions'] as $i => $position)
+            {{2 * $i + 1}} :{targetAxisIndex:0},
+            {{2 * $i + 2}} :{targetAxisIndex:1},
+            @endforeach
+        },
+        vAxis: {
+          scaleType: 'linear',
+        }
     };
     var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
 
