@@ -196,41 +196,37 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
         $tireSensor = $tireSensor->get();
 
         $historicalDataPos = $this->setHistoricalDataPositions($partsData);
-        $maxDataCount = 0;
         if (!empty($tireSensor)) {
             foreach ($tireSensor as $data) {
                 $historicalDataPos[$partsData[$data->part_id]['position']][] = $data;
-                if (count($historicalDataPos[$partsData[$data->part_id]['position']]) > $maxDataCount) {
-                    $maxDataCount = count($historicalDataPos[$partsData[$data->part_id]['position']]);
-                }
             }
         }
 
-        return $this->getHistoricalData($maxDataCount, $historicalDataPos);
+        return $this->getHistoricalData($historicalDataPos);
     }
     
-    private function getHistoricalData($maxDataCount, $historicalDataPos)
+    private function getHistoricalData($historicalDataPos)
     {
         $historicalData = [];
         $historicalOrderData = [];
         $positionOrder = 0;
         $countPoints = 0;
-        foreach ($historicalDataPos as $position => $historicalDataP) {
+        foreach ($historicalDataPos as $historicalDataP) {
             $positionOrder++;
             foreach ($historicalDataP as $dataPos) {
                 $countPoints++;
                 $historicalData[$countPoints]['time'] = substr($dataPos->created_at, 11);
                 $historicalData[$countPoints][substr($dataPos->created_at, 11)] = "";
                 
-                for($i = 1; $i < $positionOrder; $i++) {
+                for ($i = 1; $i < $positionOrder; $i++) {
                     $historicalData[$countPoints][substr($dataPos->created_at, 11)] .= ", null, null";
                 }
                 $historicalData[$countPoints][substr($dataPos->created_at, 11)] .= ", " . $dataPos->temperature;
                 $historicalData[$countPoints][substr($dataPos->created_at, 11)] .= ", " . $dataPos->pressure;
-                for($i = $positionOrder; $i < count($historicalDataPos); $i++) {
+                for ($i = $positionOrder; $i < count($historicalDataPos); $i++) {
                     $historicalData[$countPoints][substr($dataPos->created_at, 11)] .= ", null, null";
                 }
-            $historicalOrderData[substr($dataPos->created_at, 11)] = $historicalData[$countPoints];
+                $historicalOrderData[substr($dataPos->created_at, 11)] = $historicalData[$countPoints];
             }
         }
         asort($historicalOrderData);
