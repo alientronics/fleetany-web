@@ -40,6 +40,7 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
                 'parts.*',
                 'models.name as vehicle',
                 'types.name as part-type',
+                'types.name as part_type',
                 'parts.cost as cost'
             );
             $query = $query->leftJoin('vehicles', 'parts.vehicle_id', '=', 'vehicles.id');
@@ -64,21 +65,41 @@ class PartRepositoryEloquent extends BaseRepository implements PartRepository
             if (!empty($filters['number'])) {
                 $query = $query->where('parts.number', 'like', '%'.$filters['number'].'%');
             }
+            if (!empty($filters['position'])) {
+                $query = $query->where('parts.position', $filters['position']);
+            }
 
             $query = $query->where('parts.company_id', Auth::user()['company_id']);
-            if ($filters['sort'] == 'part_type') {
-                $sort = 'types.name';
-            } elseif ($filters['sort'] == 'vehicle') {
-                $sort = 'models.name';
-            } else {
-                $sort = 'parts.'.$filters['sort'];
-            }
+            
+            $sort = $this->getResultsSort($filters);
             $query = $query->orderBy($sort, $filters['order']);
             
             return $query;
         })->paginate($filters['paginate']);
         
+        return $this->setPositions($parts);
+    }
+    
+    private function setPositions($parts)
+    {
+        if (!empty($parts)) {
+            foreach ($parts as $index => $part) {
+                if ($part->part_type != "tire" && $part->part_type != "sensor") {
+                    $parts[$index]['position'] = "";
+                }
+            }
+        }
         return $parts;
+    }
+    
+    private function getResultsSort($filters)
+    {
+        if ($filters['sort'] == 'part_type') {
+            return 'types.name';
+        } elseif ($filters['sort'] == 'vehicle') {
+            return 'models.name';
+        }
+        return 'parts.'.$filters['sort'];
     }
     
     private function formatFilters($filters = [])

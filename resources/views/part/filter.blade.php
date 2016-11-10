@@ -14,6 +14,10 @@
     		{!!Form::label('number', Lang::get('general.part_number'), ['class' => 'mdl-textfield__label is-dirty'])!!}
          </div>
          <div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label mdl-search__div" data-upgraded="eP">
+     		{!!Form::text('position', $filters['position'], ['class' => 'mdl-textfield__input mdl-search__input'])!!}
+    		{!!Form::label('position', Lang::get('general.position'), ['class' => 'mdl-textfield__label is-dirty'])!!}
+         </div>
+         <div class="mdl-textfield mdl-js-textfield is-upgraded is-focused mdl-textfield--floating-label mdl-search__div" data-upgraded="eP">
      		{!!Form::text('vehicle', $filters['vehicle'], ['class' => 'mdl-textfield__input mdl-search__input'])!!}
     		{!!Form::label('vehicle', Lang::get('general.vehicle'), ['class' => 'mdl-textfield__label is-dirty'])!!}
          </div>

@@ -105,28 +105,46 @@ class PartControllerTest extends AcceptanceTestCase
     
     public function testSort()
     {
-        $this->visit('/part?id=&vehicle=&part-type=&cost=&sort=id-desc')
+        $this->visit('/part?id=&name=&number=&position=&vehicle=&part-type=&cost=&sort=id-desc')
             ->see('mode_edit</i>');
         
-        $this->visit('/part?id=&vehicle=&part-type=&cost=&sort=id-asc')
+        $this->visit('/part?id=&name=&number=&position=&vehicle=&part-type=&cost=&sort=id-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/part?id=&name=&number=&position=&vehicle=&part-type=&cost=&sort=name-desc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/part?id=&name=&number=&position=&vehicle=&part-type=&cost=&sort=name-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/part?id=&name=&number=&position=&vehicle=&part-type=&cost=&sort=number-desc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/part?id=&name=&number=&position=&vehicle=&part-type=&cost=&sort=number-asc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/part?id=&name=&number=&position=&vehicle=&part-type=&cost=&sort=position-desc')
+            ->see('mode_edit</i>');
+        
+        $this->visit('/part?id=&name=&number=&position=&vehicle=&part-type=&cost=&sort=position-asc')
             ->see('mode_edit</i>');
 
-        $this->visit('/part?id=&vehicle=&part-type=&cost=&sort=vehicle-desc')
+        $this->visit('/part?id=&name=&number=&position=&vehicle=&part-type=&cost=&sort=vehicle-desc')
             ->see('mode_edit</i>');
             
-        $this->visit('/part?id=&vehicle=&part-type=&cost=&sort=vehicle-asc')
+        $this->visit('/part?id=&name=&number=&position=&vehicle=&part-type=&cost=&sort=vehicle-asc')
             ->see('mode_edit</i>');
 
-        $this->visit('/part?id=&vehicle=&part-type=&cost=&sort=part-type-desc')
+        $this->visit('/part?id=&name=&number=&position=&vehicle=&part-type=&cost=&sort=part-type-desc')
             ->see('mode_edit</i>');
             
-        $this->visit('/part?id=&vehicle=&part-type=&cost=&sort=part-type-asc')
+        $this->visit('/part?id=&name=&number=&position=&vehicle=&part-type=&cost=&sort=part-type-asc')
             ->see('mode_edit</i>');
 
-        $this->visit('/part?id=&vehicle=&part-type=&cost=&sort=cost-desc')
+        $this->visit('/part?id=&name=&number=&position=&vehicle=&part-type=&cost=&sort=cost-desc')
             ->see('mode_edit</i>');
             
-        $this->visit('/part?id=&vehicle=&part-type=&cost=&sort=cost-asc')
+        $this->visit('/part?id=&name=&number=&position=&vehicle=&part-type=&cost=&sort=cost-asc')
             ->see('mode_edit</i>');
     }
 }

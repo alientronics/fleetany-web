@@ -26,6 +26,7 @@ class PartController extends Controller
         'id',
         'name',
         'number',
+        'position',
         'vehicle',
         'part-type',
         'cost'
