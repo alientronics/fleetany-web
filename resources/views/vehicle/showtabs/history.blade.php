@@ -84,7 +84,7 @@
 					
     		    	@if($value == 1)
     		    		<div class="@if(strlen($key + 1) > 1) vehicle-map-tire-number @else vehicle-map-tire-number-simple @endif">{{$key + 1}}</div>
-                        <div @if(empty($fleetData['tireData'][$vehicle->id][$key + 1]->pressure) && empty($fleetData['tireData'][$vehicle->id][$key + 1]->temperature)) style="display:none" @endif class="mdl-tooltip" id="tireData{{$key + 1}}_{{$vehicle->id}}" for="pos{{$key + 1}}">
+                        <div @if(empty($fleetData['tireData'][$vehicle->id][$key + 1]->pressure) && empty($fleetData['tireData'][$vehicle->id][$key + 1]->temperature)) style="display:none" @endif class="mdl-tooltip mdl-tooltip-blurry" id="tireData{{$key + 1}}_{{$vehicle->id}}" for="pos{{$key + 1}}">
                         @if(!empty($fleetData['tireData'][$vehicle->id][$key + 1]->pressure) || !empty($fleetData['tireData'][$vehicle->id][$key + 1]->temperature))
                         {{Lang::get("general.pressure")}}: {{$fleetData['tireData'][$vehicle->id][$key + 1]->pressure}} - {{Lang::get("general.temperature")}}: {{$fleetData['tireData'][$vehicle->id][$key + 1]->temperature}}
                         @endif
@@ -115,7 +115,7 @@
         		<span>]</span>
         	</div>
         	
-            <div @if(empty($gpsData->latitude) && empty($gpsData->longitude)) style="display:none" @endif class="mdl-tooltip" id="gpsData{{$vehicle->id}}" for="vehicle{{$vehicle->id}}">
+            <div @if(empty($gpsData->latitude) && empty($gpsData->longitude)) style="display:none" @endif class="mdl-tooltip mdl-tooltip-blurry" id="gpsData{{$vehicle->id}}" for="vehicle{{$vehicle->id}}">
             @if(!empty($gpsData->latitude) || !empty($gpsData->longitude))
             {{Lang::get("general.latitude")}}: {{$gpsData->latitude}} - {{Lang::get("general.longitude")}}: {{$gpsData->longitude}}
             @endif

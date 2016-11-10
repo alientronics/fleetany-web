@@ -526,3 +526,7 @@ _:-ms-input-placeholder, :root .demo-graph {
 	color: #FFF;
 }
 
+.mdl-tooltip-blurry {
+	will-change: opacity;
+}
+
