@@ -108,6 +108,7 @@ return [
     "lifecycle"    => "Lifecycle",
     "linked_part"  => "Linked Part",
     "date_and_time"  => "Date and Time",
+    "TireSensorDataNotFound" => "There is no data available for this tires and time frame chosen.",
     
     // Tire Sensor
     "SensorData"   => "Sensor Data",

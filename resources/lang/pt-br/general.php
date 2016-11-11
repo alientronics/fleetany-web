@@ -108,6 +108,7 @@ return [
     "lifecycle"    => "Ciclo de vida",
     "linked_part"  => "Parte Vinculada",
     "date_and_time"  => "Data e Hora",
+    "TireSensorDataNotFound" => "N&atilde;o h&aacute; dados para este per&iacute;odo e pneus selecionados.",
     
     // Tire Sensor
     "SensorData"   => "Dados de Sensor",

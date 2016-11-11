@@ -157,12 +157,17 @@
              <input type="checkbox" id="graph_weight" disabled>{{Lang::get("general.weight")}} <span style="color: #cccccc">({{Lang::get("general.availableSoon")}})</span><br/>
              <input type="checkbox" id="graph_speed" disabled>{{Lang::get("general.speed")}} <span style="color: #cccccc">({{Lang::get("general.availableSoon")}})</span><br/>
              <input type="checkbox" id="graph_altitude" disabled>{{Lang::get("general.altitude")}} <span style="color: #cccccc">({{Lang::get("general.availableSoon")}})</span><br/>
-             <input type="checkbox" id="graph_alarm" disabled>{{Lang::get("general.alarm")}} <span style="color: #cccccc">({{Lang::get("general.availableSoon")}})</span><br/>
+             <input type="checkbox" id="graph_alarm" disabled>{{Lang::get("general.alarm")}} <span style="color: #cccccc">({{Lang::get("general.availableSoon")}})</span><br/><br/><br/>
+       		 @if(empty($tireSensorData['data']))
+               <span style="color: #f00">{{Lang::get("general.TireSensorDataNotFound")}}</span>
+    		 @endif
            </div>
            <div class="mdl-layout-spacer"></div>
         </div>
 
+		@if(!empty($tireSensorData['data']))
         <div id="chart_div" style="width: 1500px; height: 500px;"></div>
+		@endif
         
     </div>
 </div>
