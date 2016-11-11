@@ -126,8 +126,8 @@
 
 	<div class="demo-charts mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid">
     	<div class="mdl-card__actions">
-          <a href="$cardLink" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-            Hist&oacute;rico
+          <a href="$cardLink" id="history" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+            {{Lang::get("general.History")}}
           </a>
     	</div>
     	
@@ -288,5 +288,21 @@
     	$('#time_ini').mask('00:00:00');
     	$('#time_end').mask('00:00:00');
 	});
+
+    $(window).bind("load", function() {
+    	var page = '{{Request::path()}}'
+		if(page.length > 15) {
+            // remove all is-active classes from tabs
+            $('a.mdl-tabs__tab').removeClass('is-active');
+            // activate desired tab
+            $('a[href="#tab1"]').addClass('is-active');
+            // remove all is-active classes from panels
+            $('.mdl-tabs__panel').removeClass('is-active');
+            // activate desired tab panel
+            $('#tab1').addClass('is-active');
+    		drawChart();   
+    		window.location.href='#history';     
+		}
+	});  
 	
 </script>
