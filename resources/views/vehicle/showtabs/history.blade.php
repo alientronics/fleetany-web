@@ -93,9 +93,9 @@
     		    	</div>
     		    	
 					@if($value == 1 && in_array($key + 1, $tireSensorData['positions']))
-					<input type="checkbox" id="graph_{{$key + 1}}" checked>
+					<input type="checkbox" id="graph_{{$key + 1}}" class="tireSelectCheckbox">
 					@elseif($value == 1)
-					<input type="checkbox" disabled id="graph_{{$key + 1}}">
+					<input type="checkbox" disabled id="graph_{{$key + 1}}" class="tireSelectCheckbox">
 					@endif
         		    	
         		    @if($col == 2)
@@ -161,12 +161,13 @@
        		 @if(empty($tireSensorData['data']))
                <span style="color: #f00">{{Lang::get("general.TireSensorDataNotFound")}}</span>
     		 @endif
+    		 <span id="selectTireMessage" style="color: #f00; display:none">{{Lang::get("general.SelectTireMessage")}}</span>
            </div>
            <div class="mdl-layout-spacer"></div>
         </div>
 
 		@if(!empty($tireSensorData['data']))
-        <div id="chart_div" style="width: 1500px; height: 500px;"></div>
+        <div id="chart_div" style="width: 1500px; height: 500px; display:none"></div>
 		@endif
         
     </div>
@@ -210,6 +211,14 @@
             	    
 	$(" @foreach($tireSensorData['columns'] as $key => $value)#graph_{{$key}}@if(next($tireSensorData['columns'])), @endif @endforeach ").click(function() {
 
+		if($('.tireSelectCheckbox:checked').length == 0){
+  	 	  $("#selectTireMessage").show();
+  	 	  $("#chart_div").hide();
+  		} else {
+    		$("#selectTireMessage").hide();
+     	  	$("#chart_div").show();
+		}
+            		
 		view = new google.visualization.DataView(data);
             		
 		@foreach($tireSensorData['columns'] as $key => $value)    		
@@ -224,6 +233,12 @@
       	chart.draw(view, options);
 	    @endif
 	});
+
+    if($('.tireSelectCheckbox:checked').length == 0){
+ 	  $("#selectTireMessage").show();
+ 	  $("#chart_div").hide();
+	}
+          	       
   }
 
             		
