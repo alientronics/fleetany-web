@@ -2,6 +2,7 @@
 
 return [
     'repair'   => 'repair',
+    'calibrationMaintenance' => 'calibration maintenance',
     'service'   => 'service',
     'car'   => 'car',
     'truck'   => 'truck',

@@ -39,6 +39,10 @@ class User extends BaseModel implements Transformable, AuthenticatableContract, 
             'company_id' => $company->id]);
         
         Type::forceCreate(['entity_key' => 'entry',
+            'name' => Lang::get('setup.calibrationMaintenance'),
+            'company_id' => $company->id]);
+        
+        Type::forceCreate(['entity_key' => 'entry',
             'name' => Lang::get('setup.service'),
             'company_id' => $company->id]);
 
