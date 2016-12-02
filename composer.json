@@ -45,6 +45,18 @@
             "type": "package",
             "package": {
                 "version": "dev-master",
+                "name": "alientronics/fleetany-web-reports",
+                "source": {
+                    "url": "https://github.com/alientronics/fleetany-web-reports.git",
+                    "type": "git",
+                    "reference": "master"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "version": "dev-master",
                 "name": "alientronics/fleetany-web-geofence",
                 "source": {
                     "url": "https://github.com/alientronics/fleetany-web-geofence.git",
@@ -101,6 +113,7 @@
         "alientronics/cached-eloquent-user": "dev-master",
         "alientronics/laravel-acl": "dev-master",
         "alientronics/fleetany-web-pages": "dev-master",
+        "alientronics/fleetany-web-reports": "dev-master",
         "alientronics/fleetany-web-geofence": "dev-master",
         "alientronics/fleetany-web-driver": "dev-master",
         "alientronics/fleetany-web-attributes": "dev-master",
@@ -127,6 +140,7 @@
             "vendor/alientronics/cached-eloquent-user/src/",
             "vendor/alientronics/laravel-acl/src/Kodeine/Acl/",
             "vendor/alientronics/fleetany-web-pages/src/",
+            "vendor/alientronics/fleetany-web-reports/src/",
             "vendor/alientronics/fleetany-web-geofence/src/",
             "vendor/alientronics/fleetany-web-driver/src/",
             "vendor/alientronics/fleetany-web-attributes/src/",
@@ -143,7 +157,8 @@
         ],
         "psr-4": {
             "Tests\\": "tests/",
-			"Alientronics\\FleetanyWebPages\\": "src/Alientronics/FleetanyWebPages"
+			"Alientronics\\FleetanyWebPages\\": "src/Alientronics/FleetanyWebPages",
+			"Alientronics\\FleetanyWebReports\\": "src/Alientronics/FleetanyWebReports"
         }
     },
     "scripts": {

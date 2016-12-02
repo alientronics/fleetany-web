@@ -27,10 +27,19 @@
           <div class="mdl-cell {{$sortFilter['class']}}">{{ $register->{$sortFilter['name']} }}</div>
           @endif
           @endforeach
-          
+            
+          @if(Request::is('web-reports*'))
+          <div class="mdl-cell mdl-cell--1-col">
+                @if(Request::is('web-reports/alerts/vehicles*'))
+                	{!!Form::buttonLink( url('/web-reports/alerts/vehicle/'.$register->id), 'primary' , 'search' , 'Visualizar' )!!}
+                @elseif($gridview['pageActive'] == 'alerts-types-report')
+                	{!!Form::buttonLink( url('/web-reports/alerts/vehicle/'.$vehicle_id.'/type/'.$register->id) , 'primary' , 'search' , 'Visualizar' )!!}
+                @endif
+          </div> 
+          @else              
           @permission('delete.'.$gridview['pageActive'].'|update.'.$gridview['pageActive'])
           <div class="mdl-cell mdl-cell--1-col">
-          		@if($gridview['pageActive'] == 'vehicle')
+                @if($gridview['pageActive'] == 'vehicle')
                 	{!!Form::buttonLink( route($gridview['pageActive'].'.show', $register->id) , 'primary' , 'search' , 'Visualizar' )!!}
                 @endif
                 @permission('update.'.$gridview['pageActive'])
@@ -42,10 +51,13 @@
                 @endpermission
           </div>
           @endpermission
+          @endif
         </div>
     </div>
     @endforeach
     
+    @if(isset($filters['pagination']))
 	@include('includes.pagination', ['paginator' => $registers->appends($filters['pagination'])]) 
+	@endif
 	
 </div>
