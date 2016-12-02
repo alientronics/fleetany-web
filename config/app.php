@@ -84,13 +84,22 @@ return [
     'geonames_username' => env('GEONAMES_USERNAME', 'SomeUsername'),
 
     /*
-    |--------------------------------------------------------------------------
-    | Fleetany Attributes API
-    |--------------------------------------------------------------------------
-    */
-
+     |--------------------------------------------------------------------------
+     | Fleetany Attributes API
+     |--------------------------------------------------------------------------
+     */
+    
     'attributes_api_url' => env('ATTRIBUTES_API_URL', null),
     'attributes_api_key' => env('ATTRIBUTES_API_KEY', null),
+    
+    /*
+     |--------------------------------------------------------------------------
+     | Fleetany Alerts API
+     |--------------------------------------------------------------------------
+     */
+    
+    'alerts_api_url' => env('ALERTS_API_URL', null),
+    'alerts_api_key' => env('ALERTS_API_KEY', null),
 
     /*
      |--------------------------------------------------------------------------
@@ -186,6 +195,7 @@ return [
         Thinmy\CachedEloquentUser\AuthServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
         "Alientronics\FleetanyWebPages\FleetanyWebPagesServiceProvider",
+        "Alientronics\FleetanyWebReports\FleetanyWebReportsServiceProvider",
         "Alientronics\FleetanyWebGeofence\FleetanyWebGeofenceServiceProvider",
         "Alientronics\FleetanyWebDriver\FleetanyWebDriverServiceProvider",
         "Alientronics\FleetanyWebAttributes\FleetanyWebAttributesServiceProvider",
