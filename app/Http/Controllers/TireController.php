@@ -33,6 +33,23 @@ class TireController extends Controller
         $this->tireSensorRepo = $tireSensorRepo;
     }
 
+    public function index()
+    {
+        $filters = $this->helper->getFilters($this->request->all(), [
+                                                'id',
+                                                'name',
+                                                'number',
+                                                'position',
+                                                'vehicle',
+                                                'part-type',
+                                                'cost'
+                                            ], $this->request);
+        $filters['part-type'] = 'tire';
+        $parts = $this->partRepo->results($filters);
+    
+        return view("part.index", compact('parts', 'filters'));
+    }
+
     public function positionSwap(Request $request)
     {
         $success = $this->partRepo->tiresPositionSwap($request->all());
