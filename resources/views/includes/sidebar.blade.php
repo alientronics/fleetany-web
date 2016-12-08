@@ -61,8 +61,27 @@
             @permission('view.role')
             <a class="@if (Request::is('role*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="{{URL::to('role')}}"><i class="material-icons" role="presentation">build</i>{{Lang::get('menu.Roles')}}</a>       
             @endpermission  
+            @if (class_exists('Alientronics\FleetanyWebReports\Controllers\ReportController'))
+            <a id="submenu-reports-link" class="@if (Request::is('report*')) mdl-color--grey mdl-color-text--white @endif mdl-navigation__link" href="#"><i class="material-icons" role="presentation">assignment</i>{{Lang::get('menu.Reports')}}</a>       
+            <!-- sub menu reports -->
+            <nav id="submenu-reports" class="mdl-navigation" style="display:none">
+             <a href="{{URL::asset("web-reports/alerts/vehicles")}}" class="mdl-navigation__link"><i class="material-icons">keyboard_arrow_right</i>{{Lang::get('webreports.VehiclesAlerts')}}</a>
+             <a href="{{URL::asset("web-reports/alerts/tires")}}" class="mdl-navigation__link"><i class="material-icons">keyboard_arrow_right</i>{{Lang::get('webreports.TiresAlerts')}}</a>
+             <a href="{{URL::asset("web-reports/history/vehicles")}}" class="mdl-navigation__link"><i class="material-icons">keyboard_arrow_right</i>{{Lang::get('webreports.VehiclesHistory')}}</a>
+            </nav>
+        	@endif
         @else
         	<a class="mdl-navigation__link" href="{{URL::asset("auth/login")}}"><i class="material-icons" role="presentation">home</i>{{Lang::get('menu.Login')}}</a>
         @endif
     </nav>
+    
+    
+<script>
+   $(document).ready(function() {
+     $("#submenu-reports-link").click(function() {
+       $('#submenu-reports').toggle('show');
+     });
+   });
+</script>
+
 </div>

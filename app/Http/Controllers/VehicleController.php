@@ -14,7 +14,7 @@ use App\Repositories\PartRepositoryEloquent;
 use Alientronics\FleetanyWebAttributes\Repositories\AttributeRepositoryEloquent;
 use App\Entities\Contact;
 use App\Repositories\FleetRepositoryEloquent;
-use App\Repositories\HelperRepository;
+use Alientronics\FleetanyWebReports\Controllers\ReportController;
 
 class VehicleController extends Controller
 {
@@ -208,43 +208,26 @@ class VehicleController extends Controller
         $driverData = empty($localizationData->driver_id) ? "" :
                             Contact::find($localizationData->driver_id);
 
-        $tireSensorData['positions'] = [];
-        $partsIds = [];
-        if (!empty($fleetData['tireData'])) {
-            foreach ($fleetData['tireData'] as $vehicleData) {
-                foreach ($vehicleData as $position => $tireData) {
-                    if (!empty($tireData->part_id)) {
-                        $tireSensorData['positions'][] = $position;
-                        $partsIds[] = $tireData->part_id;
-                    }
-                }
-            }
+        if (class_exists('Alientronics\FleetanyWebReports\Controllers\ReportController')) {
+            $objReportController = new ReportController($this->fleetRepo);
+            $vehicleHistory = $objReportController->vehicleHistory($fleetData, $dateIni, $dateEnd);
+            $tireSensorData = $vehicleHistory['tireSensorData'];
+            $dateIni = $vehicleHistory['dateIni'];
+            $timeIni = $vehicleHistory['timeIni'];
+            $timeEnd = $vehicleHistory['timeEnd'];
+        } else {
+            $tireSensorData = [];
+            $dateIni = "";
+            $timeIni = "";
+            $timeEnd = "";
         }
-
-        asort($tireSensorData['positions']);
-
-        if (empty($dateIni)) {
-            $dateIni = date("Y-m-d H:i:s");
-            $dateEnd = date('Y-m-d 23:59:59');
-        }
-        
-        $tireSensorData['data'] = $this->fleetRepo->getTireSensorHistoricalData($partsIds, $dateIni, $dateEnd);
-        $tireSensorData['columns'] = [];
-        
-        if (!empty($tireSensorData['positions'])) {
-            $tireSensorData = $this->fleetRepo->setColumnsChart($tireSensorData);
-        }
-
-        $timeIni = substr($dateIni, 11);
-        $timeEnd = substr($dateEnd, 11);
-        $dateIni = substr(HelperRepository::date($dateIni, 'app_locale'), 0, 10);
   
         return view("vehicle.show", compact(
             'vehicle',
             'fleetData',
             'localizationData',
-            'tireSensorData',
             'driverData',
+            'tireSensorData',
             'dateIni',
             'timeIni',
             'timeEnd'

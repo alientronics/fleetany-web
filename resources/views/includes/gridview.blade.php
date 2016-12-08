@@ -34,6 +34,8 @@
                 	{!!Form::buttonLink( url('/web-reports/alerts/vehicle/'.$register->id), 'primary' , 'search' , 'Visualizar' )!!}
                 @elseif(Request::is('web-reports/alerts/tires*'))
                 	{!!Form::buttonLink( url('/web-reports/alerts/tire/'.$register->id), 'primary' , 'search' , 'Visualizar' )!!}
+                @elseif(Request::is('web-reports/history/vehicles*'))
+                	{!!Form::buttonLink( route('vehicle.show', $register->id) , 'primary' , 'search' , 'Visualizar' )!!}
                 @elseif($gridview['pageActive'] == 'vehicle-alerts-types-report')
                 	{!!Form::buttonLink( url('/web-reports/alerts/vehicle/'.$entity_id.'/type/'.$register->id) , 'primary' , 'search' , 'Visualizar' )!!}
                 @elseif($gridview['pageActive'] == 'tire-alerts-types-report')

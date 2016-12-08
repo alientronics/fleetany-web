@@ -12,7 +12,10 @@
 
 {{--*/ $tabs = []; /*--}}
 {{--*/ $tabs[] = ["title" => "general.Current", "view" => "vehicle.showtabs.current"]; /*--}}
-{{--*/ $tabs[] = ["title" => "general.History", "view" => "vehicle.showtabs.history"]; /*--}}
+
+@if (class_exists('Alientronics\FleetanyWebReports\Controllers\ReportController'))
+{{--*/ $tabs[] = ["title" => "general.History", "view" => "fleetany-web-reports::vehicle-history-chart"]; /*--}}
+@endif
 
 @include('includes.tabs', [
 	'tabs' => $tabs
