@@ -78,9 +78,10 @@
     
 <script>
    $(document).ready(function() {
-     $("#submenu-reports-link").click(function() {
-       $('#submenu-reports').toggle('show');
-     });
+	 $('#submenu-reports-link').click(function(e) {
+	 	$('#submenu-reports').toggle();
+	 	$('.demo-drawer').animate({scrollTop: $(document).height()}, 'slow');
+	 });
    });
 </script>
 
