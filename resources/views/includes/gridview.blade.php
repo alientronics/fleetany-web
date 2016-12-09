@@ -28,18 +28,18 @@
           @endif
           @endforeach
             
-          @if(Request::is('web-reports*'))
+          @if(Request::is('reports*'))
           <div class="mdl-cell mdl-cell--1-col">
-                @if(Request::is('web-reports/alerts/vehicles*'))
-                	{!!Form::buttonLink( url('/web-reports/alerts/vehicle/'.$register->id), 'primary' , 'search' , 'Visualizar' )!!}
-                @elseif(Request::is('web-reports/alerts/tires*'))
-                	{!!Form::buttonLink( url('/web-reports/alerts/tire/'.$register->id), 'primary' , 'search' , 'Visualizar' )!!}
-                @elseif(Request::is('web-reports/history/vehicles*'))
+                @if(Request::is('reports/alerts/vehicles*'))
+                	{!!Form::buttonLink( url('/reports/alerts/vehicle/'.$register->id), 'primary' , 'search' , 'Visualizar' )!!}
+                @elseif(Request::is('reports/alerts/tires*'))
+                	{!!Form::buttonLink( url('/reports/alerts/tire/'.$register->id), 'primary' , 'search' , 'Visualizar' )!!}
+                @elseif(Request::is('reports/history/vehicles*'))
                 	{!!Form::buttonLink( route('vehicle.show', $register->id) , 'primary' , 'search' , 'Visualizar' )!!}
                 @elseif($gridview['pageActive'] == 'vehicle-alerts-types-report')
-                	{!!Form::buttonLink( url('/web-reports/alerts/vehicle/'.$entity_id.'/type/'.$register->id) , 'primary' , 'search' , 'Visualizar' )!!}
+                	{!!Form::buttonLink( url('/reports/alerts/vehicle/'.$entity_id.'/type/'.$register->id) , 'primary' , 'search' , 'Visualizar' )!!}
                 @elseif($gridview['pageActive'] == 'tire-alerts-types-report')
-                	{!!Form::buttonLink( url('/web-reports/alerts/tire/'.$entity_id.'/type/'.$register->id) , 'primary' , 'search' , 'Visualizar' )!!}
+                	{!!Form::buttonLink( url('/reports/alerts/tire/'.$entity_id.'/type/'.$register->id) , 'primary' , 'search' , 'Visualizar' )!!}
                 @endif
           </div> 
           @else              
