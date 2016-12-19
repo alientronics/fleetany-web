@@ -209,7 +209,7 @@ class VehicleController extends Controller
                             Contact::find($localizationData->driver_id);
 
         if (class_exists('Alientronics\FleetanyWebReports\Controllers\ReportController')) {
-            $vehicleHistory = $this->vehicleRepo->vehicleHistory($fleetData, $dateIni, $dateEnd);
+            $vehicleHistory = $this->fleetRepo->vehicleHistory($fleetData, $dateIni, $dateEnd);
             $tireSensorData = $vehicleHistory['tireSensorData'];
             $dateIni = $vehicleHistory['dateIni'];
             $timeIni = $vehicleHistory['timeIni'];
