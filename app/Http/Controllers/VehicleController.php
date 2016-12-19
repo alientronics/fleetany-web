@@ -15,6 +15,7 @@ use Alientronics\FleetanyWebAttributes\Repositories\AttributeRepositoryEloquent;
 use App\Entities\Contact;
 use App\Repositories\FleetRepositoryEloquent;
 use Alientronics\FleetanyWebReports\Controllers\ReportController;
+use App\Repositories\HelperRepository;
 
 class VehicleController extends Controller
 {
