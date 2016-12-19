@@ -228,7 +228,9 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
             $objTire->model = HelperRepository::manageEmptyValue($tire->partModel->name);
             $objTire->lifecycle = HelperRepository::manageEmptyValue($tire->lifecycle);
             $objTire->miliage = HelperRepository::manageEmptyValue($tire->miliage);
+            $objTire->part_id = $tire->id;
         } else {
+            $objTire->part_id = "";
             $objTire->position = "";
             $objTire->number = "";
             $objTire->model = "";
@@ -269,6 +271,43 @@ class VehicleRepositoryEloquent extends BaseRepository implements VehicleReposit
         }
     
             return $objTire;
+    }
+    
+    public function vehicleHistory($fleetData, $dateIni, $dateEnd)
+    {
+        $tireSensorData['positions'] = [];
+        $partsIds = [];
+        if (!empty($fleetData['tireData'])) {
+            foreach ($fleetData['tireData'] as $vehicleData) {
+                foreach ($vehicleData as $position => $tireData) {
+                    if (!empty($tireData->part_id)) {
+                        $tireSensorData['positions'][] = $position;
+                        $partsIds[] = $tireData->part_id;
+                    }
+                }
+            }
+        }
+        
+        asort($tireSensorData['positions']);
+        
+        if (empty($dateIni)) {
+            $dateIni = date("Y-m-d H:i:s");
+            $dateEnd = date('Y-m-d 23:59:59');
+        }
+        
+        $tireSensorData['data'] = $this->fleetRepo->getTireSensorHistoricalData($partsIds, $dateIni, $dateEnd);
+        $tireSensorData['columns'] = [];
+        
+        if (!empty($tireSensorData['positions'])) {
+            $tireSensorData = $this->fleetRepo->setColumnsChart($tireSensorData);
+        }
+        
+        $arrayReturn['timeIni'] = substr($dateIni, 11);
+        $arrayReturn['timeEnd'] = substr($dateEnd, 11);
+        $arrayReturn['dateIni'] = substr(HelperRepository::date($dateIni, 'app_locale'), 0, 10);
+        $arrayReturn['tireSensorData'] = $tireSensorData;
+        
+        return $arrayReturn;
     }
     
     protected function getTiresWarningAndDanger($sensorsIds)
