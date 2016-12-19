@@ -209,7 +209,7 @@ class VehicleController extends Controller
                             Contact::find($localizationData->driver_id);
 
         if (class_exists('Alientronics\FleetanyWebReports\Controllers\ReportController')) {
-            $vehicleHistory = $this->fleetRepo->vehicleHistory($fleetData, $dateIni, $dateEnd);
+            $vehicleHistory = $this->vehicleHistory($fleetData, $dateIni, $dateEnd);
             $tireSensorData = $vehicleHistory['tireSensorData'];
             $dateIni = $vehicleHistory['dateIni'];
             $timeIni = $vehicleHistory['timeIni'];
@@ -240,5 +240,42 @@ class VehicleController extends Controller
         return view("vehicle.map.details", compact(
             'data'
         ));
+    }
+    
+    private function vehicleHistory($fleetData, $dateIni, $dateEnd)
+    {
+        $tireSensorData['positions'] = [];
+        $partsIds = [];
+        if (!empty($fleetData['tireData'])) {
+            foreach ($fleetData['tireData'] as $vehicleData) {
+                foreach ($vehicleData as $position => $tireData) {
+                    if (!empty($tireData->part_id)) {
+                        $tireSensorData['positions'][] = $position;
+                        $partsIds[] = $tireData->part_id;
+                    }
+                }
+            }
+        }
+        
+        asort($tireSensorData['positions']);
+        
+        if (empty($dateIni)) {
+            $dateIni = date("Y-m-d H:i:s");
+            $dateEnd = date('Y-m-d 23:59:59');
+        }
+        
+        $tireSensorData['data'] = $this->fleetRepo->getTireSensorHistoricalData($partsIds, $dateIni, $dateEnd);
+        $tireSensorData['columns'] = [];
+        
+        if (!empty($tireSensorData['positions'])) {
+            $tireSensorData = $this->fleetRepo->setColumnsChart($tireSensorData);
+        }
+        
+        $arrayReturn['timeIni'] = substr($dateIni, 11);
+        $arrayReturn['timeEnd'] = substr($dateEnd, 11);
+        $arrayReturn['dateIni'] = substr(HelperRepository::date($dateIni, 'app_locale'), 0, 10);
+        $arrayReturn['tireSensorData'] = $tireSensorData;
+        
+        return $arrayReturn;
     }
 }
