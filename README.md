@@ -66,11 +66,13 @@ Mobile repositories
 
 ### [fleetany-mobile](https://github.com/alientronics/fleetany-mobile)
 [![Build Status](https://travis-ci.org/alientronics/fleetany-mobile.png?branch=master)](https://travis-ci.org/alientronics/fleetany-mobile)
+[![Code Climate](https://codeclimate.com/github/alientronics/fleetany-mobile/badges/gpa.svg)](https://codeclimate.com/github/alientronics/fleetany-mobile)
+[![Test Coverage](https://codeclimate.com/github/alientronics/fleetany-mobile/badges/coverage.svg)](https://codeclimate.com/github/alientronics/fleetany-mobile/coverage)
 
 ### [fleetany-api](https://github.com/alientronics/fleetany-api)
 [![Build Status](https://travis-ci.org/alientronics/fleetany-api.png?branch=master)](https://travis-ci.org/alientronics/fleetany-api)
 [![Code Climate](https://codeclimate.com/github/alientronics/fleetany-api/badges/gpa.svg)](https://codeclimate.com/github/alientronics/fleetany-api)
-[![Test Coverage](https://codeclimate.com/github/alientronics/fleetany-api/badges/coverage.svg)](https://codeclimate.com/github/alientronics/fleetany-alerts/api)
+[![Test Coverage](https://codeclimate.com/github/alientronics/fleetany-api/badges/coverage.svg)](https://codeclimate.com/github/alientronics/fleetany-api/coverage)
 
 License
 -------
