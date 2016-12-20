@@ -14,7 +14,11 @@ class CompanyTableSeeder extends Seeder
     {
         DB::table('companies')->delete();
         Company::create(
-                ['name' => 'Company']
+                ['name' => 'Company',
+                'delta_pressure' => 10,
+                'ideal_pressure' => 100,
+                'limit_temperature' => 80,
+                ]
             );
        
         
