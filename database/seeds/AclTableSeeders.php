@@ -429,6 +429,61 @@ class AclTableSeeder extends Seeder
         $roleExecutive->assignPermission($permAttributeExecutive);
         $roleAdmin->assignPermission($permAttributeAdmin);
         
+        //Report
+        //Permissions
+        $permReportStaff = Permission::create([
+            'name'        => 'report',
+            'slug'        => [
+                'create' => false,
+                'view'   => false,
+                'update' => false,
+                'delete' => false
+            ],
+            'description' => 'Administra permissoes do report para o nivel staff de usuario'
+        ]);
+        
+        $permReportOperational = Permission::create([
+            'name'        => 'report.operational',
+            'slug'        => [],
+            'inherit_id' => $permReportStaff->getKey(),
+            'description' => 'Administra permissoes do report para o nivel operational de usuario'
+        ]);
+        
+        $permReportManager = Permission::create([
+            'name'        => 'report.manager',
+            'slug'        => [],
+            'inherit_id' => $permReportOperational->getKey(),
+            'description' => 'Administra permissoes do report para o nivel manager de usuario'
+        ]);
+        
+        $permReportExecutive = Permission::create([
+            'name'        => 'report.executive',
+            'slug'        => [],
+            'inherit_id' => $permReportManager->getKey(),
+            'description' => 'Administra permissoes do report para o nivel executive de usuario'
+        ]);
+        
+        $permReportAdmin = Permission::create([
+            'name'        => 'report.admin',
+            'slug'        => [
+                'create' => true,
+                'view'   => true,
+                'update' => true,
+                'delete' => true
+            ],
+            'inherit_id' => $permReportExecutive->getKey(),
+            'description' => 'Administra permissoes do report para o nivel admin de usuario'
+        ]);
+        
+        
+        //Assign permissions to rules
+        $roleStaff->assignPermission($permReportStaff);
+        $roleOperational->assignPermission($permReportOperational);
+        $roleManager->assignPermission($permReportManager);
+        $roleExecutive->assignPermission($permReportExecutive);
+        $roleAdmin->assignPermission($permReportAdmin);
+        
+        
         //Role
         //Permissions
         $permRoleStaff = Permission::create([
