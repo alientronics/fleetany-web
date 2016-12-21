@@ -22,17 +22,17 @@
     	
 		@include ('includes.statistics.cardnumber', ['statistics' => $vehiclesStatistics,
 										'cardTitle' => Lang::get('general.Vehicles'),
-										'cardLink' => url('/').'/vehicles'
+										'cardLink' => url('/').'/vehicle'
 		])
 		
 		@include ('includes.statistics.cardnumber', ['statistics' => $servicesStatistics,
 										'cardTitle' => Lang::get('general.Services'),
-										'cardLink' => url('/').'/entries'
+										'cardLink' => url('/').'/entry'
 		])
 		
 		@include ('includes.statistics.cardnumber', ['statistics' => $tripsStatistics,
 										'cardTitle' => Lang::get('general.Trips'),
-										'cardLink' => url('/').'/trips'
+										'cardLink' => url('/').'/trip'
 		])
 		
 		@include ('includes.statistics.cardbarchart', ['statistics' => $lastsFuelCostStatistics, 
@@ -40,7 +40,7 @@
 														'y_desc' => 'Custo',
 														'name' => 'fuel_cost',
 														'cardTitle' => Lang::get('general.FuelCost'),
-														'cardLink' => url('/').'/trips'
+														'cardLink' => url('/').'/trip'
 		])
 
 		@include ('includes.statistics.cardbarchart', ['statistics' => $lastsServiceCostStatistics, 
@@ -48,7 +48,7 @@
 														'y_desc' => 'Custo',
 														'name' => 'service_cost',
 														'cardTitle' => Lang::get('general.ServiceCost'),
-														'cardLink' => url('/').'/entries'  
+														'cardLink' => url('/').'/entry'  
 		])
 		
 </div>
