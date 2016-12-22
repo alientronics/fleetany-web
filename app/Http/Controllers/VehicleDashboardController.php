@@ -38,6 +38,7 @@ class VehicleDashboardController extends VehicleController
     public function fleet()
     {
         $fleetData = $this->fleetRepo->getFleetData();
+        $fleetData = $this->getFleetSensorDatetimeData($fleetData);
         $vehicles = $fleetData['vehicles'];
         $tireData = $fleetData['tireData'];
         $gpsData = $fleetData['gpsData'];

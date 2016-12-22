@@ -209,6 +209,8 @@ class VehicleController extends Controller
         $driverData = empty($localizationData->driver_id) ? "" :
                             Contact::find($localizationData->driver_id);
 
+        $fleetData = $this->getFleetSensorDatetimeData($fleetData);
+       
         if (class_exists('Alientronics\FleetanyWebReports\Controllers\ReportController')) {
             $vehicleHistory = $this->vehicleHistory($fleetData, $dateIni, $dateEnd);
             $tireSensorData = $vehicleHistory['tireSensorData'];
@@ -278,5 +280,39 @@ class VehicleController extends Controller
         $arrayReturn['tireSensorData'] = $tireSensorData;
         
         return $arrayReturn;
+    }
+    
+    protected function getFleetSensorDatetimeData($fleetData)
+    {
+        if (!empty($fleetData['tireData'])) {
+            foreach ($fleetData['tireData'] as $idVehicle => $tireData) {
+                $lastDatetimeData = $this->getLastDatetimeData($tireData);
+                $fleetData['tireData'][$idVehicle]['isTireSensorOldData'] = HelperRepository::isOldDate(
+                    $lastDatetimeData,
+                    config('app.tiresensor_max_elapsed_time_minutes')
+                );
+                $fleetData['tireData'][$idVehicle]['lastDatetimeData'] = HelperRepository::date(
+                    $lastDatetimeData,
+                    'app_locale'
+                );
+            }
+        }
+        return $fleetData;
+    }
+    
+    private function getLastDatetimeData($tireData)
+    {
+        $lastData = "";
+        if (!empty($tireData)) {
+            foreach ($tireData as $position => $value) {
+                if (is_numeric($position) && !empty($value->created_at)) {
+                    $datetime = HelperRepository::date($value->created_at);
+                    if (empty($lastData) || $datetime > $lastData) {
+                        $lastData = $datetime;
+                    }
+                }
+            }
+        }
+        return $lastData;
     }
 }

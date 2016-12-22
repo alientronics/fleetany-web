@@ -112,6 +112,7 @@ return [
     'tires_danger_pressure_percentage' => env('TIRES_DANGER_PRESSURE_PERCENTAGE', 10),
     'tires_warning_temperature' => env('TIRES_WARNING_TEMPERATURE', 60),
     'tires_danger_temperature' => env('TIRES_DANGER_TEMPERATURE', 80),
+    'tiresensor_max_elapsed_time_minutes' => env('TIRESENSOR_MAX_ELAPSED_TIME_MINUTES', 5),
 
     /*
     |--------------------------------------------------------------------------

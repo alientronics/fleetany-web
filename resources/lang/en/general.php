@@ -110,6 +110,9 @@ return [
     "date_and_time"  => "Date and Time",
     "TireSensorDataNotFound" => "There is no data available for this tires and time frame chosen.",
     "SelectTireMessage" => "Please, select a tire for data to be displayed",
+    "LastData" => "Last Data",
+    "NoDataWasRecorded" => "No data was recorded",
+    "AccessHistory" => "Access history",
     
     // Tire Sensor
     "SensorData"   => "Sensor Data",

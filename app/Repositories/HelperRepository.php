@@ -133,6 +133,9 @@ class HelperRepository
         }
         
         $hour = "";
+        
+        $value = self::formatCarbonDate($value);
+            
         if (strlen($value) > 10) {
             $datetime = explode(" ", $value);
             $value = $datetime[0];
@@ -156,6 +159,15 @@ class HelperRepository
         return '';
     }
     
+    public static function formatCarbonDate($value)
+    {
+        if (is_a($value, 'Carbon')) {
+            $value = \Carbon\Carbon::parse($value->created_at);
+            $value = $value->format('Y-m-d H:i:s');
+        }
+        return $value;
+    }
+    
     public static function dataGetMask($value)
     {
         if (preg_match("/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/", $value)) {
@@ -169,5 +181,19 @@ class HelperRepository
     public static function manageEmptyValue($value)
     {
         return empty($value) ? '' : $value;
+    }
+    
+    public static function isOldDate($date, $intervalMinutes)
+    {
+        $now = new \DateTime(date("Y-m-d H:i:s"));
+        $date = new \DateTime($date);
+        
+        $diff = $now->diff($date);
+        $diffMinutes = ($diff->h * 60) + $diff->i + ($diff->days * 24 * 60);
+
+        if ($diffMinutes > $intervalMinutes) {
+            return true;
+        }
+        return false;
     }
 }

@@ -77,6 +77,7 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
                 $objTire->pressure = HelperRepository::manageEmptyValue($sensor->pressure);
                 $objTire->part_id = HelperRepository::manageEmptyValue($sensor->part_id);
                 $objTire->position = HelperRepository::manageEmptyValue($sensor->position);
+                $objTire->created_at = HelperRepository::manageEmptyValue($sensor->created_at);
                 
                 $objTire = $this->setTiresColor($tiresData, $sensor, $objTire);
                 
@@ -89,6 +90,7 @@ class FleetRepositoryEloquent extends VehicleRepositoryEloquent
         $objTire->temperature = "";
         $objTire->pressure = "";
         $objTire->color = "";
+        $objTire->created_at = "";
         $tireAndSensorData[0] = $objTire;
         
     
