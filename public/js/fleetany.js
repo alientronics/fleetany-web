@@ -187,6 +187,18 @@ window.onload=function(){
 								' - ' + jstrans_temperature + ": " + tire.temperature
 							)
 						});
+						
+						if(tires.isTireSensorOldData) {
+					    	$("#vehicleMap"+vehicle_id).addClass("mdl-color--grey-400");
+					    	$("#vehicleMap"+vehicle_id).removeClass("mdl-color--white");
+					    	$("#lastDatetimeDataMessage"+vehicle_id).css({ color: "#F00" });
+						} else {
+					    	$("#vehicleMap"+vehicle_id).addClass("mdl-color--white");
+					    	$("#vehicleMap"+vehicle_id).removeClass("mdl-color--grey-400");
+					    	$("#lastDatetimeDataMessage"+vehicle_id).css({ color: "" });
+						}
+						
+						$("#lastDatetimeDataMessage"+vehicle_id).html(jstrans_lastData+': '+tires.lastDatetimeData);
 					});
 			    	
 			    	$.each(results.gps, function (vehicle_id, gps) {

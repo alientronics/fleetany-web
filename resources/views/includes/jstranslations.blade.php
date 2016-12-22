@@ -6,4 +6,5 @@
 	var jstrans_temperature = "{!! Lang::get('general.temperature') !!}";
 	var jstrans_latitude = "{!! Lang::get('general.latitude') !!}";
 	var jstrans_longitude = "{!! Lang::get('general.longitude') !!}";
+	var jstrans_lastData = "{!! Lang::get('general.LastData') !!}";
 </script>

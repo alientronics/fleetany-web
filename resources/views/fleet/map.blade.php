@@ -1,4 +1,4 @@
-<div class="@if(!empty($tireData['isTireSensorOldData'])) mdl-color--grey-400 @else mdl-color--white @endif mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-grid">
+<div id="vehicleMap{{$vehicle->id}}" class="@if(!empty($tireData['isTireSensorOldData'])) mdl-color--grey-400 @else mdl-color--white @endif mdl-shadow--2dp mdl-cell mdl-cell--6-col mdl-grid">
 	<a href="{{url('/')}}/vehicle/{{$vehicle->id}}/edit">
     	<div class="mdl-button mdl-button--colored">
             {{Lang::get("general.fleet_number")}}: {{$vehicle->fleet}} - {{Lang::get("general.number")}}: {{$vehicle->number}}
@@ -112,7 +112,7 @@
         {{Lang::get("general.latitude")}}: {{$gpsData->latitude}} - {{Lang::get("general.longitude")}}: {{$gpsData->longitude}}
         @endif
         </div>
-        <span @if(!empty($tireData['isTireSensorOldData'])) style='color: #F00' @endif>
+        <span id="lastDatetimeDataMessage{{$vehicle->id}}" @if(!empty($tireData['isTireSensorOldData'])) style='color: #F00' @endif>
         	@if(!empty($tireData['lastDatetimeData']))
         	{{Lang::get("general.LastData")}}: {{$tireData['lastDatetimeData']}}
         	@elseif(isset($tireData['lastDatetimeData']))

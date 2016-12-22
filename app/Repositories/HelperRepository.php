@@ -191,7 +191,7 @@ class HelperRepository
         $diff = $now->diff($date);
         $diffMinutes = ($diff->h * 60) + $diff->i + ($diff->days * 24 * 60);
 
-        if ($diffMinutes > $intervalMinutes) {
+        if ($diff->invert == 1 && $diffMinutes > $intervalMinutes) {
             return true;
         }
         return false;

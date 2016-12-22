@@ -209,7 +209,7 @@ class VehicleController extends Controller
         $driverData = empty($localizationData->driver_id) ? "" :
                             Contact::find($localizationData->driver_id);
 
-        $fleetData = $this->getFleetSensorDatetimeData($fleetData);
+        $fleetData['tireData'] = $this->getFleetSensorDatetimeData($fleetData['tireData']);
        
         if (class_exists('Alientronics\FleetanyWebReports\Controllers\ReportController')) {
             $vehicleHistory = $this->vehicleHistory($fleetData, $dateIni, $dateEnd);
@@ -282,22 +282,24 @@ class VehicleController extends Controller
         return $arrayReturn;
     }
     
-    protected function getFleetSensorDatetimeData($fleetData)
+    protected function getFleetSensorDatetimeData($fleetTireData)
     {
-        if (!empty($fleetData['tireData'])) {
-            foreach ($fleetData['tireData'] as $idVehicle => $tireData) {
+        if (!empty($fleetTireData)) {
+            foreach ($fleetTireData as $idVehicle => $tireData) {
                 $lastDatetimeData = $this->getLastDatetimeData($tireData);
-                $fleetData['tireData'][$idVehicle]['isTireSensorOldData'] = HelperRepository::isOldDate(
-                    $lastDatetimeData,
-                    config('app.tiresensor_max_elapsed_time_minutes')
-                );
-                $fleetData['tireData'][$idVehicle]['lastDatetimeData'] = HelperRepository::date(
-                    $lastDatetimeData,
-                    'app_locale'
-                );
+                if (is_array($fleetTireData[$idVehicle])) {
+                    $fleetTireData[$idVehicle]['isTireSensorOldData'] = HelperRepository::isOldDate(
+                        $lastDatetimeData,
+                        config('app.tiresensor_max_elapsed_time_minutes')
+                    );
+                    $fleetTireData[$idVehicle]['lastDatetimeData'] = HelperRepository::date(
+                        $lastDatetimeData,
+                        'app_locale'
+                    );
+                }
             }
         }
-        return $fleetData;
+        return $fleetTireData;
     }
     
     private function getLastDatetimeData($tireData)
