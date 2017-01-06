@@ -14,7 +14,7 @@
 {{--*/ $tabs[] = ["title" => "general.Current", "view" => "vehicle.showtabs.current"]; /*--}}
 
 @if (class_exists('Alientronics\FleetanyWebReports\Controllers\ReportController'))
-{{--*/ $tabs[] = ["title" => "general.History", "view" => "fleetany-web-reports::vehicle-history-chart"]; /*--}}
+{{--*/ $tabs[] = ["title" => "general.History", "view" => "fleetany-web-reports::reports.vehicles.history-chart"]; /*--}}
 @endif
 
 @include('includes.tabs', [

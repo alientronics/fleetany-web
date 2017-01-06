@@ -69,6 +69,11 @@
              <a href="{{URL::asset("reports/alerts/vehicles")}}" class="mdl-navigation__link"><i class="material-icons">keyboard_arrow_right</i>{{Lang::get('webreports.VehiclesAlerts')}}</a>
              <a href="{{URL::asset("reports/alerts/tires")}}" class="mdl-navigation__link"><i class="material-icons">keyboard_arrow_right</i>{{Lang::get('webreports.TiresAlerts')}}</a>
              <a href="{{URL::asset("reports/history/vehicles")}}" class="mdl-navigation__link"><i class="material-icons">keyboard_arrow_right</i>{{Lang::get('webreports.VehiclesHistory')}}</a>
+             <a href="{{URL::asset("reports/vehicles")}}" class="mdl-navigation__link"><i class="material-icons">keyboard_arrow_right</i>{{Lang::get('webreports.Vehicles')}}</a>
+             <a href="{{URL::asset("reports/tires")}}" class="mdl-navigation__link"><i class="material-icons">keyboard_arrow_right</i>{{Lang::get('webreports.Tires')}}</a>
+             <a href="{{URL::asset("reports/sensors")}}" class="mdl-navigation__link"><i class="material-icons">keyboard_arrow_right</i>{{Lang::get('webreports.Sensors')}}</a>
+             <a href="{{URL::asset("reports/vehicles/maintenance")}}" class="mdl-navigation__link"><i class="material-icons">keyboard_arrow_right</i>{{Lang::get('webreports.VehiclesMaintenance')}}</a>
+             <a href="{{URL::asset("reports/tires/maintenance")}}" class="mdl-navigation__link"><i class="material-icons">keyboard_arrow_right</i>{{Lang::get('webreports.TiresMaintenance')}}</a>
             </nav>
         	@endpermission  
             @endif
