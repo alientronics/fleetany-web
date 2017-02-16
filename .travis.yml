@@ -6,6 +6,11 @@ php:
   - 5.6
   - 7.0
 
+matrix:
+  include:
+    - php: 7
+      env: PHPSTAN=1
+
 services:
   - mysql
 
@@ -20,7 +25,7 @@ before_install:
 
 install:
   - composer install --prefer-source --no-interaction
-  - composer require phpstan/phpstan
+  - if [[ $PHPSTAN = 1 ]]; then composer require phpstan/phpstan; fi
 
 before_script:
   - mysql -e 'create database fleetany;'
@@ -37,7 +42,7 @@ script:
   - vendor/bin/phploc app/ tests/
 
 after_script:
-  - vendor/bin/phpstan analyse --level=4 app tests
+  - if [[ $PHPSTAN = 1 ]]; then vendor/bin/phpstan analyse --level=2 app tests; fi
 
 notifications:
   email:
