@@ -19,8 +19,8 @@ before_install:
   - composer self-update
 
 install:
-  - composer require phpstan/phpstan
   - composer install --prefer-source --no-interaction
+  - composer require phpstan/phpstan
 
 before_script:
   - mysql -e 'create database fleetany;'
