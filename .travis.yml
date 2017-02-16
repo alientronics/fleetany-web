@@ -6,11 +6,6 @@ php:
   - 5.6
   - 7.0
 
-matrix:
-  include:
-    - php: 7
-      env: PHPSTAN=1
-
 services:
   - mysql
 
@@ -25,7 +20,6 @@ before_install:
 
 install:
   - composer install --prefer-source --no-interaction
-  - if [[ $PHPSTAN = 1 ]]; then composer require phpstan/phpstan; fi
 
 before_script:
   - mysql -e 'create database fleetany;'
@@ -33,16 +27,13 @@ before_script:
   - php artisan migrate:refresh --seed --force
 
 script:
-#  - phpunit --coverage-clover build/logs/clover.xml --stderr --configuration phpunit.xml --debug
-#  - ./vendor/bin/test-reporter
+  - phpunit --coverage-clover build/logs/clover.xml --stderr --configuration phpunit.xml --debug
+  - ./vendor/bin/test-reporter
   - vendor/bin/phpcs --standard=psr2 app/ tests/
   - vendor/bin/phpcpd --verbose app/ tests/
   - vendor/bin/phpmd app/ text codesize,unusedcode,naming,design
   - vendor/bin/phpmd tests/ text codesize,unusedcode,naming
   - vendor/bin/phploc app/ tests/
-
-after_script:
-  - if [[ $PHPSTAN = 1 ]]; then vendor/bin/phpstan analyse --level=2 app tests; fi
 
 notifications:
   email:
